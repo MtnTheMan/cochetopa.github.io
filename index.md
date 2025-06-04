@@ -1,6 +1,6 @@
 ---
 layout: home
-title: Home
+title: Welcome to Cochetopa
 description: >-
   Especializado en el desarrollo de API RESTs con Ruby on Rails. He participado
   en diversas etapas del ciclo de desarrollo de aplicaciones.

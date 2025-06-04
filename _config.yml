@@ -1,6 +1,20 @@
-title: AwesomeJT
-logo: /assets/images/logo.avif
-baseurl: /awesome-jekyll-theme
+title: "CochetopaCo"
+description: "A clean, versatile site powered by the Awesome Jekyll Theme"
+url: "https://www.cochetopa.co"
+baseurl: ""       # leave blank if serving from the apex domain
+author:
+  name: "Parker Hopkins (mtntheman)"
+  email: "parker.a.hopkins@gmail.com"
+
+theme: none       # Because Awesome Jekyll is included as local files, not a gem
+
+plugins:
+  - jekyll-seo-tag      # Already configured by the theme
+  - jekyll-archives     # For category archives (preconfigured by the theme)
+  - jekyll-polyglot     # For multi-language (if you need it)
+
+markdown: kramdown    # Default; ensure code fences and math support are enabled
+
 
 ##
 # Typewritter configuration.
