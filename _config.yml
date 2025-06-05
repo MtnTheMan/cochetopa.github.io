@@ -8,13 +8,7 @@ author:
 
 #theme: none       # Because Awesome Jekyll is included as local files, not a gem
 
-plugins:
-  - jekyll-seo-tag      # Already configured by the theme
-  - jekyll-archives     # For category archives (preconfigured by the theme)
-  - jekyll-polyglot     # For multi-language (if you need it)
-
 markdown: kramdown    # Default; ensure code fences and math support are enabled
-
 
 ##
 # Typewritter configuration.
