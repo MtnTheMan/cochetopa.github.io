@@ -6,7 +6,7 @@ author:
   name: "Parker Hopkins (mtntheman)"
   email: "parker.a.hopkins@gmail.com"
 
-theme: none       # Because Awesome Jekyll is included as local files, not a gem
+theme: minima       # Because Awesome Jekyll is included as local files, not a gem
 
 plugins:
   - jekyll-seo-tag      # Already configured by the theme
