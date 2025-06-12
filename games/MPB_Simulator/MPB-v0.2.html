@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>MPB: Mountain Pine Beetle Spread Simulation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <style>
+    body { margin: 0; padding: 0; }
+    #map { position: absolute; top: 120px; bottom: 0; width: 100%; }
+    #controls {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: #fff;
+      padding: 10px;
+      font-family: sans-serif;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    #controls label, #controls span { margin-right: 15px; }
+    #controls input { width: 60px; margin-left: 5px; }
+  </style>
+</head>
+<body>
+  <div id="controls">
+    <label>Repro Rate<input type="number" id="rate" value="2" min="1" /></label>
+    <label>Base Mort<input type="number" id="mort" value="0.2" step="0.05" min="0" max="1" /></label>
+    <label>Range (km)<input type="number" id="range" value="10" min="1" /></label>
+    <label>Gen/Year<input type="number" id="perYear" value="4" min="1" /></label>
+    <button id="reset">Reset</button>
+    <span>Gen: <strong id="gen">0</strong></span>
+    <span>Year: <strong id="year">0</strong></span>
+    <span>Pop: <strong id="pop">0</strong></span>
+    <span>Species: <strong id="speciesCounts">None</strong></span>
+  </div>
+  <div id="map"></div>
+
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+    // Initialize map with canvas for performance
+    var map = L.map('map', { preferCanvas: true }).setView([38, -117], 5);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 18,
+      attribution: '© OpenStreetMap'
+    }).addTo(map);
+
+    // Habitat polygon
+    var habitat = L.polygon([[31,-120],[31,-104],[45,-104],[45,-120]], {
+      color: 'green', fillColor: 'green', fillOpacity: 0.2
+    }).addTo(map);
+
+    // Sample tree species
+    var speciesData = [
+      { species: 'Ponderosa Pine', coords: [[33,-118],[33,-115],[38,-115],[38,-118]] },
+      { species: 'Douglas Fir',    coords: [[39,-120],[39,-110],[45,-110],[45,-120]] },
+      { species: 'Lodgepole Pine',  coords: [[31,-115],[31,-104],[40,-104],[40,-115]] }
+    ];
+    speciesData.forEach(function(s) {
+      s.layer = L.polygon(s.coords, { color: 'brown', fillColor: 'brown', fillOpacity: 0.1 })
+                 .addTo(map).bindPopup(s.species);
+    });
+
+    // State
+    var beetleObjs = [], generation = 0, years = 0, simInterval;
+
+    function updateControls(counts) {
+      document.getElementById('gen').innerText = generation;
+      document.getElementById('year').innerText = years;
+      document.getElementById('pop').innerText = beetleObjs.length;
+      document.getElementById('speciesCounts').innerText = counts && Object.keys(counts).length
+        ? Object.entries(counts).map(([k,v]) => `${k}: ${v}`).join(', ') : 'None';
+    }
+
+    document.getElementById('reset').addEventListener('click', function() {
+      clearInterval(simInterval);
+      beetleObjs.forEach(function(o) { map.removeLayer(o.marker); map.removeLayer(o.range); });
+      beetleObjs = []; generation = years = 0; updateControls();
+    });
+
+    // Dest point helper
+    function destPoint(latlng, d, brng) {
+      var R = 6371000, lat1 = latlng.lat*Math.PI/180, lon1 = latlng.lng*Math.PI/180;
+      var dR = d/R;
+      var lat2 = Math.asin(Math.sin(lat1)*Math.cos(dR) + Math.cos(lat1)*Math.sin(dR)*Math.cos(brng));
+      var lon2 = lon1 + Math.atan2(Math.sin(brng)*Math.sin(dR)*Math.cos(lat1),
+                 Math.cos(dR) - Math.sin(lat1)*Math.sin(lat2));
+      return L.latLng(lat2*180/Math.PI, lon2*180/Math.PI);
+    }
+
+    // Start on click
+    map.on('click', function(e) {
+      if (!habitat.getBounds().contains(e.latlng)) { alert('Click inside habitat'); return; }
+      document.getElementById('reset').click();
+      var m = L.circleMarker(e.latlng, { radius:4, color:'red', fillOpacity:1 }).addTo(map);
+      var r = L.circle(e.latlng, { radius: +document.getElementById('range').value*1000,
+                  color:'red', fillOpacity:0.03, weight:1 }).addTo(map);
+      beetleObjs.push({ marker: m, range: r });
+      updateControls();
+      simInterval = setInterval(simStep, 1000);
+    });
+
+    // Annual mortality event
+    function applyAnnualMortality(baseMort) {
+      var cap = 500;
+      var densityRatio = Math.min(beetleObjs.length / cap, 1);
+      var effMort = baseMort * (1 + densityRatio);
+      beetleObjs = beetleObjs.filter(function(o) {
+        if (Math.random() < effMort) { map.removeLayer(o.marker); map.removeLayer(o.range); return false; }
+        return true;
+      });
+    }
+
+    function simStep() {
+      var rate    = +document.getElementById('rate').value;
+      var range   = +document.getElementById('range').value * 1000;
+      var baseMort= +document.getElementById('mort').value;
+      var perYear = +document.getElementById('perYear').value;
+
+      // Reproduction each gen
+      var offspring = [];
+      beetleObjs.forEach(function(o) {
+        var pos = o.marker.getLatLng();
+        for (var i=0; i<rate; i++) {
+          var theta = Math.random()*2*Math.PI;
+          var pt = destPoint(pos, range, theta);
+          if (!habitat.getBounds().contains(pt)) continue;
+          var m2 = L.circleMarker(pt, { radius:3, color:'orange', fillOpacity:0.8 }).addTo(map);
+          var r2 = L.circle(pt, { radius: range, color:'orange', fillOpacity:0.01, weight:1 }).addTo(map);
+          offspring.push({ marker: m2, range: r2 });
+        }
+      });
+      beetleObjs = beetleObjs.concat(offspring);
+
+      // Cap population
+      if (beetleObjs.length > 1000) {
+        var rem = beetleObjs.splice(0, beetleObjs.length - 500);
+        rem.forEach(function(o){ map.removeLayer(o.marker); map.removeLayer(o.range); });
+      }
+
+      // Time flow
+      generation++;
+      if (generation % perYear === 0) {
+        years++;
+        applyAnnualMortality(baseMort);
+      }
+
+      // Species counting
+      var counts = {};
+      beetleObjs.forEach(function(o) {
+        speciesData.forEach(function(s) {
+          if (s.layer.getBounds().contains(o.marker.getLatLng())) {
+            counts[s.species] = (counts[s.species]||0) + 1;
+          }
+        });
+      });
+
+      updateControls(counts);
+    }
+  </script>
+</body>
+</html>
