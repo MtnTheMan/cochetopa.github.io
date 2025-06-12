@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>MPB: Mountain Pine Beetle Spread Simulation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <style>
+    body { margin: 0; padding: 0; }
+    #map { position: absolute; top: 100px; bottom: 0; width: 100%; }
+    #controls {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: #fff;
+      padding: 10px;
+      font-family: sans-serif;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+    }
+    #controls input { margin: 0 10px; width: 60px; }
+    #controls button { margin-left: 10px; }
+    #controls span { margin-left: 20px; }
+  </style>
+</head>
+<body>
+  <div id="controls">
+    <label>Reproduction Rate: <input type="number" id="rate" value="2" min="1" /></label>
+    <label>Infestation Range (km): <input type="number" id="range" value="10" min="1" /></label>
+    <button id="reset">Reset</button>
+    <span>Generation: <strong id="gen">0</strong></span>
+    <span>Beetles: <strong id="pop">0</strong></span>
+  </div>
+  <div id="map"></div>
+
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+    // Initialize map centered on Intermountain West region
+    var map = L.map('map').setView([38, -117], 5);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 18,
+      attribution: '© OpenStreetMap'
+    }).addTo(map);
+
+    // Define habitat polygon (approximate Intermountain West)
+    var habitatBounds = [[31, -120], [31, -104], [45, -104], [45, -120]];
+    var habitat = L.polygon(habitatBounds, {
+      color: 'green',
+      fillColor: 'green',
+      fillOpacity: 0.2
+    }).addTo(map);
+
+    // Simulation variables
+    var beetles = [],
+        generation = 0,
+        simInterval;
+
+    // Update UI counters
+    function updateControls() {
+      document.getElementById('gen').innerText = generation;
+      document.getElementById('pop').innerText = beetles.length;
+    }
+
+    // Reset simulation state
+    document.getElementById('reset').addEventListener('click', function() {
+      clearInterval(simInterval);
+      beetles.forEach(function(b) { map.removeLayer(b); });
+      beetles = [];
+      generation = 0;
+      updateControls();
+    });
+
+    // Convert distance and bearing to a new LatLng
+    function destPoint(latlng, distance, bearing) {
+      var R = 6371000;
+      var lat1 = latlng.lat * Math.PI / 180;
+      var lon1 = latlng.lng * Math.PI / 180;
+      var brng = bearing;
+      var dDivR = distance / R;
+      var lat2 = Math.asin(
+        Math.sin(lat1) * Math.cos(dDivR) +
+        Math.cos(lat1) * Math.sin(dDivR) * Math.cos(brng)
+      );
+      var lon2 = lon1 + Math.atan2(
+        Math.sin(brng) * Math.sin(dDivR) * Math.cos(lat1),
+        Math.cos(dDivR) - Math.sin(lat1) * Math.sin(lat2)
+      );
+      return L.latLng(lat2 * 180 / Math.PI, lon2 * 180 / Math.PI);
+    }
+
+    // Add initial beetle and start simulation
+    map.on('click', function(e) {
+      if (!habitat.getBounds().contains(e.latlng)) {
+        alert('Please click within the green habitat area.');
+        return;
+      }
+      document.getElementById('reset').click();
+      var initial = L.circle(e.latlng, {
+        radius: 50000,
+        color: 'red',
+        fillColor: 'red',
+        fillOpacity: 0.5
+      }).addTo(map);
+      beetles.push(initial);
+      updateControls();
+      startSim();
+    });
+
+    // Start stepping through generations
+    function startSim() {
+      simInterval = setInterval(simStep, 2000);
+    }
+
+    // One simulation step: reproduce
+    function simStep() {
+      var rate = parseInt(document.getElementById('rate').value, 10);
+      var range = parseFloat(document.getElementById('range').value) * 1000;
+      var newBeetles = [];
+      beetles.forEach(function(b) {
+        var latlng = b.getLatLng();
+        for (var i = 0; i < rate; i++) {
+          var angle = Math.random() * Math.PI * 2;
+          var pt = destPoint(latlng, range, angle);
+          if (habitat.getBounds().contains(pt)) {
+            var c = L.circle(pt, {
+              radius: 50000,
+              color: 'red',
+              fillColor: 'red',
+              fillOpacity: 0.5
+            }).addTo(map);
+            newBeetles.push(c);
+          }
+        }
+      });
+      beetles = beetles.concat(newBeetles);
+      generation++;
+      updateControls();
+    }
+  </script>
+</body>
+</html>
