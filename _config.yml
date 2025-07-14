@@ -22,6 +22,10 @@ typewriter_effect: true
 collections:
   projects:
     output: true
+  games:
+    output: true
+    permalink: /games/:path/
+
 
 ##
 # Contact Channels configuration

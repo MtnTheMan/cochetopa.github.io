@@ -2,30 +2,13 @@
 layout: default
 ---
 
-<section class="container mx-auto py-16">
-  <h1 class="text-4xl font-bold mb-6">{{ page.title }}</h1>
-
-  {% if page.description %}
-    <p class="mb-8">{{ page.description }}</p>
-  {% endif %}
-
-  <ul class="space-y-2">
-    {% for file in site.static_files %}
-      {% if file.path contains 'games/MPB_Simulator/' and file.extname == '.html' %}
-        <li>
-          <a
-            href="{{ file.relative_path | relative_url }}"
-            class="underline hover:text-sky-500"
-          >
-            {{ file.basename 
-               | replace: '-', ' '      /* e.g. “MPB-v0.1” → “MPB v0.1” */
-               | capitalize 
-            }}
-          </a>
-        </li>
-      {% endif %}
-    {% endfor %}
-  </ul>
-</section>
-
+<ul class="space-y-2">
+  {% for g in site.games %}
+    <li>
+      <a href="{{ g.url | relative_url }}" class="underline hover:text-sky-500">
+        {{ g.title }}
+      </a>
+    </li>
+  {% endfor %}
+</ul>
 
