@@ -1,12 +1,12 @@
 ---
-layout: default           # nest inside your default.html wrapper
+layout: default
 ---
 
 <section class="container mx-auto py-16">
   <h1 class="text-4xl font-bold mb-6">{{ page.title }}</h1>
 
   {% if page.description %}
-  <p class="mb-8">{{ page.description }}</p>
+    <p class="mb-8">{{ page.description }}</p>
   {% endif %}
 
   <ul class="space-y-2">
@@ -14,11 +14,11 @@ layout: default           # nest inside your default.html wrapper
       {% if file.path contains 'games/MPB_Simulator/' and file.extname == '.html' %}
         <li>
           <a
-            href="{{ file.url | relative_url }}"
+            href="{{ file.relative_path | relative_url }}"
             class="underline hover:text-sky-500"
           >
             {{ file.basename 
-               | replace: '-', ' '      /* MPB-v0.1 → “MPB v0.1” */
+               | replace: '-', ' '      /* e.g. “MPB-v0.1” → “MPB v0.1” */
                | capitalize 
             }}
           </a>
@@ -27,4 +27,5 @@ layout: default           # nest inside your default.html wrapper
     {% endfor %}
   </ul>
 </section>
+
 
