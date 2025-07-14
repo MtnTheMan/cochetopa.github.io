@@ -1,0 +1,14 @@
+<ul class="space-y-2">
+  {% for file in site.static_files %}
+    {% if file.relative_path contains 'games/MPB_Simulator/' and file.extname == '.html' %}
+      <li>
+        <a
+          href="{{ file.relative_path | relative_url }}"
+          class="underline hover:text-sky-500"
+        >
+          {{ file.basename | replace: '_', ' ' | capitalize }}
+        </a>
+      </li>
+    {% endif %}
+  {% endfor %}
+</ul>
