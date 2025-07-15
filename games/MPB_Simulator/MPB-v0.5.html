@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>MPB: Mountain Pine Beetle Spread Simulation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <style>
+    body { margin: 0; padding: 0; }
+    #map { position: absolute; top: 140px; bottom: 0; width: 100%; }
+    #controls {
+      position: absolute; top: 0; left: 0; right: 0;
+      background: #fff; padding: 10px; font-family: sans-serif;
+      z-index: 1000; display: flex; align-items: center; flex-wrap: wrap;
+    }
+    #controls label, #controls span { margin-right: 15px; }
+    #controls input { width: 60px; margin-left: 5px; }
+  </style>
+</head>
+<body>
+  <div id="controls">
+    <label>Repro Rate<input type="number" id="rate" value="2" min="1" /></label>
+    <label>Base Mort<input type="number" id="mort" value="0.2" step="0.05" min="0" max="1" /></label>
+    <label>Range (km)<input type="number" id="range" value="10" min="1" /></label>
+    <label>Gen/Year<input type="number" id="perYear" value="4" min="1" /></label>
+    <button id="reset">Reset</button>
+    <span>Gen: <strong id="gen">0</strong></span>
+    <span>Year: <strong id="year">0</strong></span>
+    <span>Pop: <strong id="pop">0</strong></span>
+  </div>
+  <div id="map"></div>
+
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/esri-leaflet/dist/esri-leaflet.js"></script>
+  <script>
+    // Map initialization
+    var map = L.map('map', { preferCanvas: true }).setView([38, -117], 5);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18}).addTo(map);
+
+    // Habitat boundary
+    var habitat = L.polygon([[31,-120],[31,-104],[45,-104],[45,-120]],{
+      color:'green',fillColor:'green',fillOpacity:0.2
+    }).addTo(map);
+
+    // Susceptible codes and susceptibility
+    var codes = [121,807,412,361,362,365,366,367,381];
+    var susceptibilityMap = {
+      807: 1.0, 121: 0.5, 412: 0.4,
+      361: 0.7, 362: 0.6, 365: 0.3,
+      366: 0.5, 367: 0.3, 381: 0.2
+    };
+
+    // Load TreeMap raster via ImageServer
+    var imageLayer = L.esri.imageMapLayer({
+      url: 'https://apps.fs.usda.gov/fsgisx05/rest/services/GTAC/TreeMap_v2016/ImageServer'
+    }).addTo(map);
+
+    // Simulation state
+    var beetleObjs = [], generation=0, years=0, simInterval;
+    
+    function updateControls() {
+      document.getElementById('gen').innerText = generation;
+      document.getElementById('year').innerText = years;
+      document.getElementById('pop').innerText = beetleObjs.length;
+    }
+
+    // Reset
+    document.getElementById('reset').addEventListener('click', function() {
+      clearInterval(simInterval);
+      beetleObjs.forEach(o=>{ map.removeLayer(o.marker); map.removeLayer(o.range); });
+      beetleObjs=[]; generation=years=0; updateControls();
+    });
+
+    function destPoint(latlng,d,brng){
+      var R=6371000,lat1=latlng.lat*Math.PI/180,lon1=latlng.lng*Math.PI/180;
+      var dR=d/R;
+      var lat2=Math.asin(Math.sin(lat1)*Math.cos(dR)+Math.cos(lat1)*Math.sin(dR)*Math.cos(brng));
+      var lon2=lon1+Math.atan2(Math.sin(brng)*Math.sin(dR)*Math.cos(lat1),
+                Math.cos(dR)-Math.sin(lat1)*Math.sin(lat2));
+      return L.latLng(lat2*180/Math.PI,lon2*180/Math.PI);
+    }
+
+    // Start simulation
+    map.on('click', function(e) {
+      if(!habitat.getBounds().contains(e.latlng)) return;
+      document.getElementById('reset').click();
+      var m = L.circleMarker(e.latlng,{radius:4,color:'red',fillOpacity:1}).addTo(map);
+      var r = L.circle(e.latlng,{radius:+document.getElementById('range').value*1000,
+                  color:'red',fillOpacity:0.03,weight:1}).addTo(map);
+      beetleObjs.push({marker:m,range:r}); updateControls();
+      simInterval = setInterval(simStep,1000);
+    });
+
+    // Annual mortality
+    function applyAnnualMortality(baseMort) {
+      var cap=500, density=Math.min(beetleObjs.length/cap,1);
+      var effMort=baseMort*(1+density);
+      beetleObjs = beetleObjs.filter(o=>{
+        if(Math.random()<effMort){ map.removeLayer(o.marker); map.removeLayer(o.range); return false; }
+        return true;
+      });
+    }
+
+    // Simulation step with raster lookup
+    function simStep() {
+      var rate=+document.getElementById('rate').value;
+      var range=+document.getElementById('range').value*1000;
+      var mort=+document.getElementById('mort').value;
+      var perYear=+document.getElementById('perYear').value;
+      var newBeetles = [];
+
+      beetleObjs.forEach(function(o) {
+        var pos = o.marker.getLatLng();
+        for(var i=0;i<rate;i++){
+          var theta = Math.random()*2*Math.PI;
+          var pt = destPoint(pos, range, theta);
+          if(!habitat.getBounds().contains(pt)) continue;
+
+          // Identify FORTYPCD value from raster
+          imageLayer.identify().at(pt).run(function(err, result) {
+            if(err || !result.values) return;
+            var code = result.values[0];
+            if(codes.indexOf(code) === -1) return;
+            var susc = susceptibilityMap[code] != null ? susceptibilityMap[code] : 0.3;
+            if(Math.random() > susc) return;
+
+            var m2 = L.circleMarker(pt,{radius:3,color:'orange',fillOpacity:0.8}).addTo(map);
+            var r2 = L.circle(pt,{radius:range,color:'orange',fillOpacity:0.01,weight:1}).addTo(map);
+            newBeetles.push({marker:m2,range:r2});
+          });
+        }
+      });
+
+      // Consolidate new beetles after async identifies
+      setTimeout(function() {
+        beetleObjs = beetleObjs.concat(newBeetles);
+        if(beetleObjs.length > 1000) {
+          var rem = beetleObjs.splice(0, beetleObjs.length - 500);
+          rem.forEach(o=>{ map.removeLayer(o.marker); map.removeLayer(o.range); });
+        }
+
+        generation++;
+        if(generation % perYear === 0) { years++; applyAnnualMortality(mort); }
+        updateControls();
+      }, 200);
+    }
+  </script>
+</body>
+</html>
