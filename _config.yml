@@ -1,5 +1,5 @@
 title: "CochetopaCo"
-description: "A clean, versatile site powered by the Awesome Jekyll Theme"
+description: "Hobbies and Side Projects"
 url: "https://www.cochetopa.co"
 baseurl: ""       # leave blank if serving from the apex domain
 author:
@@ -22,6 +22,10 @@ typewriter_effect: true
 collections:
   projects:
     output: true
+  games:
+    output: true
+    permalink: /games/:path/
+
 
 ##
 # Contact Channels configuration

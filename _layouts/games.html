@@ -1,0 +1,21 @@
+---
+layout: default           # nest inside your default.html wrapper
+---
+
+<section class="container mx-auto py-16">
+  <h1 class="text-4xl font-bold mb-6">{{ page.title }}</h1>
+
+  {% if page.description %}
+  <p class="mb-8">{{ page.description }}</p>
+  {% endif %}
+
+  <ul class="space-y-2">
+    {% for g in site.games %}
+      <li>
+        <a href="{{ g.url | relative_url }}" class="underline hover:text-sky-500">
+          {{ g.title }}
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+</section>
