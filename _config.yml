@@ -2,6 +2,7 @@ title: "CochetopaCo"
 description: "Hobbies and Side Projects"
 url: "https://www.cochetopa.co"
 baseurl: ""       # leave blank if serving from the apex domain
+logo: /assets/images/logo.avif
 author:
   name: "Parker Hopkins (mtntheman)"
   email: "parker.a.hopkins@gmail.com"
