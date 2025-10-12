@@ -2,6 +2,104 @@
 title: "BallCrusher v0.5"
 ---
 
+
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>One-Shot Brick Volley — v4</title>
+<style>
+  :root {
+    --bg: #0f1221; --panel: #151833; --accent: #5dd3ff;
+    --good: #77ff77; --warn: #ffcc66; --bad: #ff6b6b;
+    --text: #e7ecf2; --muted: #96a1b0;
+  }
+  html, body { margin:0; height:100%; background: radial-gradient(1200px 800px at 30% -10%, #1b2044 0%, var(--bg) 60%); color:var(--text); font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji"; }
+  .wrap {
+    max-width: 720px;  /* visually smaller like v1 */
+    margin: 0 auto;
+    padding: env(safe-area-inset-top) 12px env(safe-area-inset-bottom);
+    display: grid; grid-template-rows: auto 1fr auto; gap: 10px; height: 100dvh; box-sizing: border-box;
+  }
+  header, footer {
+    display:flex; align-items:center; justify-content:space-between;
+    background:linear-gradient(180deg, rgba(255,255,255,0.04), rgba(0,0,0,0.08));
+    border:1px solid rgba(255,255,255,0.08);
+    border-radius:12px; padding:8px 12px; backdrop-filter: blur(6px);
+  }
+  header .stat { display:inline-flex; align-items:center; gap:8px; padding:6px 10px; border-radius:8px; background:#101433; border:1px solid rgba(255,255,255,0.08); font-weight:600; }
+  header .stat .dot { width:8px; height:8px; border-radius:50%; background:var(--accent); }
+  header .btns { display:inline-flex; gap:8px; }
+  button { appearance:none; border:1px solid rgba(255,255,255,0.14); background:#111534; color:var(--text); padding:8px 12px; border-radius:10px; font-weight:600; cursor:pointer; }
+  button:hover { filter:brightness(1.06); } button:active { transform: translateY(0.5px); }
+  #gameCanvas {
+    width:100%; height:auto; display:block;
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.12)),
+                radial-gradient(900px 600px at 70% 10%, rgba(93,211,255,0.08), rgba(0,0,0,0) 60%);
+    border-radius:14px; border:1px solid rgba(255,255,255,0.08);
+    box-shadow:0 10px 40px rgba(0,0,0,0.35), inset 0 0 40px rgba(93,211,255,0.08);
+    touch-action:none;
+  }
+  .overlay { position:absolute; inset:0; display:grid; place-items:center; pointer-events:none; }
+  .card { pointer-events:auto; background:var(--panel); border:1px solid rgba(255,255,255,0.12); border-radius:14px; padding:18px; max-width:520px; box-shadow:0 10px 40px rgba(0,0,0,0.5); text-align:center; }
+  .title { font-weight:800; font-size:24px; letter-spacing:0.2px; margin:4px 0 2px; }
+  .subtitle { color:var(--muted); margin-bottom:14px; }
+  .kbd { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; background:#0e1230; border:1px solid rgba(255,255,255,0.12); padding:2px 6px; border-radius:6px; }
+  footer { justify-content:center; gap:16px; color:var(--muted); font-size:14px; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="stat"><span class="dot"></span> Level <span id="levelVal">1</span></div>
+      <div class="stat"><span class="dot" style="background:var(--good)"></span> Balls <span id="ballsVal">1</span></div>
+      <div class="stat"><span class="dot" style="background:var(--warn)"></span> Score <span id="scoreVal">0</span></div>
+      <div class="btns">
+        <button id="pauseBtn" aria-label="Pause">Pause</button>
+        <button id="restartBtn" aria-label="Restart">Restart</button>
+        <button id="muteBtn" aria-label="Mute">Mute</button>
+      </div>
+    </header>
+
+    <div style="position:relative;">
+      <canvas id="gameCanvas" width="600" height="960" aria-label="Brick volley game area"></canvas>
+
+      <div id="startOverlay" class="overlay">
+        <div class="card">
+          <div class="title">One-Shot Brick Volley</div>
+          <div class="subtitle">Drag to aim. Release to shoot. Pick up <strong>+1</strong> balls. Keep blocks off the bottom.</div>
+          <p style="margin:10px 0 14px;">
+            Desktop: click and drag. Mobile: touch and drag.
+            Press <span class="kbd">R</span> to restart, <span class="kbd">P</span> to pause.
+          </p>
+          <button id="startBtn">Play</button>
+        </div>
+      </div>
+
+      <div id="pauseOverlay" class="overlay" style="display:none;">
+        <div class="card">
+          <div class="title">Paused</div>
+          <div class="subtitle">Take a breather.</div>
+          <button id="resumeBtn">Resume</button>
+        </div>
+      </div>
+
+      <div id="gameOverOverlay" class="overlay" style="display:none;">
+        <div class="card">
+          <div class="title">Game Over</div>
+          <div class="subtitle">A block reached the bottom row.</div>
+          <p style="margin: 6px 0 14px;">
+            Score: <strong id="finalScore">0</strong> · Best: <strong id="bestScore">0</strong>
+          </p>
+          <button id="againBtn">Play Again</button>
+        </div>
+      </div>
+    </div>
+
+    <footer><div>Tip: corner clips can “stick” a ball; long volleys get faster.</div></footer>
+  </div>
+
 <script>
 (() => {
   // ---------- Canvas + DPI ----------
@@ -532,3 +630,8 @@ title: "BallCrusher v0.5"
   showStart();
 })();
 </script>
+</body>
+</html>
+
+
+
