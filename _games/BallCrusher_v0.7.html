@@ -323,19 +323,28 @@ title: "BallCrusher v0.7"
   }
 
   // ---------- Speed boosts ----------
-  function maybeBoostSpeed(nowMs){
-    if (state!=='FIRING') return;
-    const t = nowMs - volleyStartMs;
-    let target = 1;
-    if (t >= SPEED2_AFTER_MS) target = SPEED2_MULT;
-    else if (t >= SPEED1_AFTER_MS) target = SPEED1_MULT;
+  function maybeBoostSpeed(nowMs) {
+    if (state !== 'FIRING') return;
 
-    if (target > lastAppliedMultiplier){
-      const scale = target / lastAppliedMultiplier;
-      speedMultiplier = target;
-      for (const b of balls){ if (!b.stuck){ b.vx *= scale; b.vy *= scale; } }
-      lastAppliedMultiplier = target;
-      beep(target > SPEED1_MULT ? 1180 : 980, 0.08, 0.03);
+    const elapsed = nowMs - volleyStartMs;
+    let targetMult = 1;
+
+    if (elapsed >= SPEED3_AFTER_MS)      targetMult = SPEED3_MULT;
+    else if (elapsed >= SPEED2_AFTER_MS) targetMult = SPEED2_MULT;
+    else if (elapsed >= SPEED1_AFTER_MS) targetMult = SPEED1_MULT;
+
+    if (targetMult > lastAppliedMultiplier) {
+      const scale = targetMult / lastAppliedMultiplier;
+      speedMultiplier = targetMult;
+
+      // Scale velocities of currently-flying balls (stuck balls re-scale on release)
+      for (const b of balls) { if (!b.stuck) { b.vx *= scale; b.vy *= scale; } }
+
+      lastAppliedMultiplier = targetMult;
+
+      // Higher tone per tier: 1→980Hz, 2→1180Hz, 3→1450Hz
+      const tone = (targetMult >= SPEED3_MULT) ? 1450 : (targetMult >= SPEED2_MULT ? 1180 : 980);
+      beep(tone, 0.08, 0.03);
     }
   }
 
