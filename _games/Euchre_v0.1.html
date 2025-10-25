@@ -1,0 +1,1327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Euchre — Single-Player vs. Bots v0.1</title>
+<style>
+  :root{
+    --bg:#0d1117;
+    --panel:#161b22;
+    --ink:#e6edf3;
+    --muted:#94a3b8;
+    --accent:#21c55d;
+    --danger:#ef4444;
+    --gold:#f59e0b;
+    --card:#22262f;
+    --card-edge:#2b3240;
+    --green:#16a34a;
+    --red:#dc2626;
+    --blue:#3b82f6;
+    --violet:#8b5cf6;
+    --shadow: 0 10px 25px rgba(0,0,0,.35);
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    background:radial-gradient(1200px 900px at 60% -10%, #0f172a 0%, #0d1117 60%);
+    color:var(--ink);
+    font:16px/1.45 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji";
+  }
+
+  header{
+    display:flex;align-items:center;gap:12px;
+    padding:14px 16px;border-bottom:1px solid #1f2530;background:linear-gradient(#0f1420,#0c111a);
+    position:sticky;top:0;z-index:1000;
+  }
+  header h1{font-size:18px;margin:0;font-weight:700;letter-spacing:.3px}
+  header .spacer{flex:1}
+  header .btn{margin-left:8px}
+
+  .wrap{
+    display:grid;
+    grid-template-columns: 300px 1fr 320px;
+    grid-template-rows: auto 1fr;
+    gap:16px;
+    padding:16px;
+  }
+
+  /* Left: settings */
+  .panel{
+    background:var(--panel);
+    border:1px solid #1f2633;
+    border-radius:12px;
+    box-shadow:var(--shadow);
+  }
+  .panel h2{
+    margin:0;padding:12px 14px;border-bottom:1px solid #1f2633;font-size:15px;letter-spacing:.3px;color:#cbd5e1
+  }
+  .pad{padding:12px 14px}
+  .row{display:flex;gap:10px;align-items:center;margin:8px 0}
+  label{font-size:14px;color:#cbd5e1}
+  input[type="text"], select, input[type="number"]{
+    background:#0f1522;border:1px solid #283043;color:var(--ink);
+    border-radius:8px;padding:8px 10px;width:100%;
+  }
+  .check{display:flex;gap:10px;align-items:center;margin:10px 0}
+  .check input{transform:translateY(1px)}
+  .btn{
+    background:#1b2333;border:1px solid #2b3447;color:var(--ink);
+    padding:8px 12px;border-radius:10px;cursor:pointer;
+  }
+  .btn:hover{filter:brightness(1.08)}
+  .btn.primary{background:linear-gradient(180deg,#24d26a,#159a49);border-color:#107a3a;color:white}
+  .btn.warn{background:linear-gradient(180deg,#f97316,#ea580c);border-color:#c2410c;color:white}
+  .btn.ghost{background:transparent;border:1px solid #2b3447}
+  .btn.small{padding:6px 10px;border-radius:8px;font-size:13px}
+
+  /* Table area */
+  .table{
+    grid-column:2 / span 1;
+    grid-row:1 / span 2;
+    background:
+      radial-gradient(60% 50% at 50% 50%, rgba(33,197,93,.07), transparent 75%),
+      linear-gradient(180deg,#0c141b 0%, #0b1016 100%);
+    border:1px solid #19202b;border-radius:18px;position:relative;min-height:70vh;
+    box-shadow:var(--shadow);
+    overflow:hidden;
+  }
+  .felt{
+    position:absolute;inset:16px; border-radius:14px;
+    outline:1px solid #1a222e;
+  }
+
+  .seat{
+    position:absolute;display:flex;flex-direction:column;align-items:center;gap:8px;
+    width:28%;max-width:420px;min-width:260px;
+  }
+  .seat .name{font-weight:600;color:#cbd5e1}
+  .seat .ai{font-size:12px;color:#8ea0b5}
+  .badge{font-size:11px;padding:2px 8px;border-radius:999px;border:1px solid #2a3344;background:#121724;color:#9fb1c9}
+  .stash{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
+
+  /* Seat positions */
+  .north{top:6%;left:50%;transform:translateX(-50%)}
+  .south{bottom:6%;left:50%;transform:translateX(-50%)}
+  .east{right:3%;top:50%;transform:translateY(-50%)}
+  .west{left:3%;top:50%;transform:translateY(-50%)}
+
+  /* Center */
+  .center{
+    position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:46%;
+    min-width:520px;max-width:800px;
+    display:grid;grid-template-columns:repeat(3,1fr);gap:10px;align-items:center
+  }
+  .upcardWrap, .trumpWrap, .statusWrap{
+    background:#121824;border:1px solid #222a3a;border-radius:12px;padding:10px;min-height:72px
+  }
+  .status{font-size:14px;color:#d1dbe8;min-height:20px}
+  .upcardRow{display:flex;gap:10px;align-items:center}
+  .trumpRow{display:flex;gap:8px;flex-wrap:wrap}
+  .pill{
+    padding:7px 10px;border:1px solid #2b3447;background:#0e1522;border-radius:999px;
+    font-size:13px;cursor:pointer;color:#d9e2ef;
+  }
+  .pill.active{background:#17243a;border-color:#2e4a7a}
+  .pill.trump{display:flex;gap:6px;align-items:center}
+  .suitS,.suitH,.suitD,.suitC{font-weight:700}
+  .suitS{color:#8fb3ff}
+  .suitH{color:#ff7a8a}
+  .suitD{color:#ffb86b}
+  .suitC{color:#74e39a}
+
+  /* Cards */
+  .hand{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+  .card{
+    background:linear-gradient(180deg,#262c39,#1e2431);
+    border:1px solid var(--card-edge);
+    color:#e2e8f0;border-radius:10px;padding:10px 10px;min-width:48px;
+    display:inline-flex;align-items:center;justify-content:center;gap:4px;
+    font-weight:700;cursor:pointer;user-select:none;box-shadow:0 4px 10px rgba(0,0,0,.35);
+    position:relative;
+  }
+  .card[disabled]{opacity:.5;cursor:not-allowed}
+  .card .pip{font-size:13px;opacity:.9}
+  .card.small{padding:6px 8px;min-width:40px}
+  .card.trump{outline:2px solid #2dd46d}
+  .card.legal{box-shadow:0 0 0 2px #3b82f6 inset, 0 6px 18px rgba(0,0,0,.45)}
+  .card.played{transform:translateY(-2px);opacity:.95}
+
+  /* Trick pile */
+  .trick{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:10px;align-items:center;justify-items:center;
+    margin-top:10px
+  }
+  .trick .slot{width:80px;height:64px;border-radius:10px;border:1px dashed #2b3447;display:flex;align-items:center;justify-content:center;color:#6b7c92}
+  .slot .card{width:80px;justify-content:center}
+
+  /* Right: score & log */
+  .scorePanel{}
+  .score{
+    display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center
+  }
+  .score .team{font-weight:700}
+  .score .pts{font-variant-numeric:tabular-nums}
+  .meter{height:8px;background:#0f1522;border:1px solid #283043;border-radius:999px;overflow:hidden}
+  .meter > div{height:100%;background:linear-gradient(90deg,#22c55e,#06b6d4)}
+
+  .log{max-height:40vh;overflow:auto;padding:10px;background:#0f1522;border:1px solid #283043;border-radius:10px;font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;font-size:12px;color:#b6c6d8}
+
+  /* Modal */
+  dialog{
+    border:1px solid #283043;border-radius:12px;background:#0f1522;color:var(--ink);box-shadow:var(--shadow);
+    padding:0;max-width:560px;width:min(92vw,560px)
+  }
+  dialog::backdrop{background:rgba(0,0,0,.6)}
+  .modalHead{padding:12px 14px;border-bottom:1px solid #283043;font-weight:700}
+  .modalBody{padding:14px}
+  .modalFoot{padding:12px 14px;border-top:1px solid #283043;display:flex;justify-content:flex-end;gap:8px}
+
+  .muted{color:#94a3b8}
+  .tiny{font-size:12px}
+  .sep{height:1px;background:#1f2633;margin:10px 0}
+</style>
+</head>
+<body>
+<header>
+  <h1>Euchre — Solo vs. Bots</h1>
+  <span class="spacer"></span>
+  <button id="btnNewMatch" class="btn ghost small" title="Reset scores and redeal">New Match</button>
+  <button id="btnNextHand" class="btn primary small" title="Deal the next hand">Deal Hand</button>
+</header>
+
+<div class="wrap">
+  <!-- Settings -->
+  <section class="panel" aria-label="Settings">
+    <h2>Settings</h2>
+    <div class="pad">
+      <div class="row">
+        <label for="screenName" style="min-width:120px">Screen name</label>
+        <input id="screenName" type="text" placeholder="Your name" />
+      </div>
+      <div class="row">
+        <label for="difficulty" style="min-width:120px">Difficulty</label>
+        <select id="difficulty">
+          <option value="easy">Easy</option>
+          <option value="normal" selected>Normal</option>
+          <option value="hard">Hard</option>
+        </select>
+      </div>
+      <div class="row">
+        <label for="targetScore" style="min-width:120px">Target score</label>
+        <input id="targetScore" type="number" min="5" max="21" step="1" value="10"/>
+      </div>
+      <div class="sep"></div>
+      <div><strong>Table rules</strong></div>
+      <label class="check"><input id="ruleStickDealer" type="checkbox" checked/> Stick the Dealer</label>
+      <label class="check"><input id="ruleFarmersHand" type="checkbox" /> Farmer’s Hand redeal (3× 9/10)</label>
+      <label class="check"><input id="ruleRenegePenalty" type="checkbox" checked/> Renege penalty (auto-enforced)</label>
+      <label class="check"><input id="ruleShowLegal" type="checkbox" checked/> Highlight legal plays</label>
+      <div class="sep"></div>
+      <button id="btnSaveSettings" class="btn small">Save Settings</button>
+      <button id="btnDefaults" class="btn ghost small">Defaults</button>
+    </div>
+  </section>
+
+  <!-- Table -->
+  <section class="table" aria-label="Table">
+    <div class="felt"></div>
+
+    <div class="seat north">
+      <div class="name" id="nameN">North (Partner)</div>
+      <div class="ai badge" id="aiN">AI</div>
+      <div class="stash" id="handN"></div>
+    </div>
+    <div class="seat south">
+      <div class="name" id="nameS">You</div>
+      <div class="ai badge" id="aiS">Human</div>
+      <div class="stash" id="handS" aria-label="Your hand"></div>
+    </div>
+    <div class="seat east">
+      <div class="name" id="nameE">East</div>
+      <div class="ai badge" id="aiE">AI</div>
+      <div class="stash" id="handE"></div>
+    </div>
+    <div class="seat west">
+      <div class="name" id="nameW">West</div>
+      <div class="ai badge" id="aiW">AI</div>
+      <div class="stash" id="handW"></div>
+    </div>
+
+    <div class="center">
+      <div class="upcardWrap">
+        <div class="upcardRow">
+          <div id="upcardSpot" class="slot">Up-card</div>
+          <div id="kittyCount" class="badge">Kitty: 4</div>
+          <div id="dealerBadge" class="badge">Dealer: S</div>
+        </div>
+        <div class="row" style="margin-top:8px">
+          <button id="btnOrderUp" class="btn small" disabled>Order Up</button>
+          <button id="btnPass" class="btn small" disabled>Pass</button>
+          <span class="spacer"></span>
+          <label class="check tiny" title="Sit partner out if you call trump"><input id="optAlone" type="checkbox"/> Go alone</label>
+        </div>
+      </div>
+      <div class="trumpWrap">
+        <div class="trumpRow" id="trumpRow">
+          <button class="pill trump" data-suit="S">♠ <span>Spades</span></button>
+          <button class="pill trump" data-suit="H">♥ <span>Hearts</span></button>
+          <button class="pill trump" data-suit="D">♦ <span>Diamonds</span></button>
+          <button class="pill trump" data-suit="C">♣ <span>Clubs</span></button>
+        </div>
+        <div class="tiny muted" style="margin-top:6px">Second round naming appears here when the up-card is turned down.</div>
+      </div>
+      <div class="statusWrap">
+        <div id="status" class="status">Welcome. Click “Deal Hand” to begin.</div>
+        <div class="trick" style="margin-top:8px">
+          <div class="slot" id="slotW">—</div>
+          <div class="slot" id="slotN">—</div>
+          <div class="slot" id="slotE">—</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Score & Log -->
+  <section class="panel scorePanel">
+    <h2>Score</h2>
+    <div class="pad">
+      <div class="score">
+        <div class="team">You + Partner</div>
+        <div class="pts" id="scoreA">0</div>
+        <div class="meter"><div id="meterA" style="width:0%"></div></div>
+      </div>
+      <div class="score" style="margin-top:6px">
+        <div class="team">East + West</div>
+        <div class="pts" id="scoreB">0</div>
+        <div class="meter"><div id="meterB" style="width:0%"></div></div>
+      </div>
+      <div class="sep"></div>
+      <div class="tiny muted">Target: <span id="targetBadge">10</span> points • Dealer rotates clockwise</div>
+      <div class="sep"></div>
+      <div style="display:flex;gap:8px">
+        <button id="btnToggleLog" class="btn ghost small">Toggle Log</button>
+        <button id="btnHelp" class="btn ghost small">Help</button>
+      </div>
+      <div id="log" class="log" style="margin-top:10px;display:none"></div>
+    </div>
+  </section>
+</div>
+
+<!-- Modals -->
+<dialog id="modalHelp">
+  <div class="modalHead">How to play</div>
+  <div class="modalBody">
+    <p>Euchre is 4 players in 2 partnerships. Take 3+ tricks when you name trump. A sweep is 5 tricks.</p>
+    <ul>
+      <li>Deck: A K Q J 10 9 in each suit.</li>
+      <li>Trump order: Right Bower (J of trump), Left Bower (J of same color suit), A, K, Q, 10, 9.</li>
+      <li>You must follow suit if able. Left Bower counts as trump.</li>
+      <li>Scoring: makers 3–4 tricks: 1, makers 5: 2, defenders 3+: 2. Going alone and sweeping: 4.</li>
+      <li>Options: Stick the Dealer, Farmer’s Hand redeal, Renege penalty.</li>
+    </ul>
+  </div>
+  <div class="modalFoot">
+    <button class="btn" onclick="document.getElementById('modalHelp').close()">Close</button>
+  </div>
+</dialog>
+
+<dialog id="modalGameOver">
+  <div class="modalHead">Game Over</div>
+  <div class="modalBody">
+    <div id="gameOverText"></div>
+  </div>
+  <div class="modalFoot">
+    <button class="btn primary" id="btnResetAll">Start New Match</button>
+  </div>
+</dialog>
+
+<script>
+/* =========================
+   Euchre — Single File Game
+   ========================= */
+
+/* ---------- Utilities ---------- */
+const $$ = (sel, root=document) => Array.from(root.querySelectorAll(sel));
+const $  = (sel, root=document) => root.querySelector(sel);
+
+const SUITS = ["S","H","D","C"];
+const RANKS = ["9","T","J","Q","K","A"]; // display order for non-trump
+const RANK_ORDER_NONTRUMP = { "A":6,"K":5,"Q":4,"J":3,"T":2,"9":1 };
+
+function suitIcon(s){
+  return s==="S"?"♠":s==="H"?"♥":s==="D"?"♦":"♣";
+}
+function rankLabel(r){ return r==="T"?"10":r; }
+
+function cryptoRandomInt(maxExclusive){
+  // rejection sampling over Uint32 for unbiased 0..maxExclusive-1
+  const max = Math.floor(0x100000000 / maxExclusive) * maxExclusive - 1;
+  const buf = new Uint32Array(1);
+  while(true){
+    crypto.getRandomValues(buf);
+    if(buf[0] <= max) return buf[0] % maxExclusive;
+  }
+}
+
+function shuffle(array){
+  for(let i=array.length-1;i>0;i--){
+    const j = cryptoRandomInt(i+1);
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+
+function deepClone(o){ return JSON.parse(JSON.stringify(o)); }
+
+function log(msg){
+  const box = $("#log");
+  if(!box) return;
+  const line = document.createElement("div");
+  line.textContent = msg;
+  box.appendChild(line);
+  box.scrollTop = box.scrollHeight;
+}
+
+/* ---------- Cards & Rules ---------- */
+function buildDeck(){
+  const deck=[];
+  for(const s of SUITS){
+    for(const r of RANKS){
+      deck.push({suit:s, rank:r, id:s+":"+r});
+    }
+  }
+  return deck;
+}
+
+function isRightBower(card, trump){ return card.rank==="J" && card.suit===trump; }
+function leftOf(trump){ // same-color suit
+  if(trump==="S") return "C";
+  if(trump==="C") return "S";
+  if(trump==="H") return "D";
+  return "H";
+}
+function isLeftBower(card, trump){ return card.rank==="J" && card.suit===leftOf(trump); }
+
+/** normalizedSuit: returns "T" for trump (incl. both bowers) or the printed suit otherwise */
+function normalizedSuit(card, trump){
+  if(isRightBower(card,trump) || isLeftBower(card,trump)) return "T";
+  return card.suit;
+}
+
+function trumpRankValue(card, trump){
+  // Higher number means stronger
+  if(isRightBower(card,trump)) return 200;
+  if(isLeftBower(card,trump))  return 190;
+  const map = { "A":150, "K":140, "Q":130, "T":120, "9":110, "J":125 }; // J of trump only reaches here if not bower (which cannot happen)
+  return map[card.rank] ?? 0;
+}
+function plainRankValue(card){
+  return RANK_ORDER_NONTRUMP[card.rank] ?? 0;
+}
+
+function beats(a,b, leadSuit, trump){
+  // does card a beat card b given leadSuit (normalized) and trump?
+  const sa = normalizedSuit(a,trump);
+  const sb = normalizedSuit(b,trump);
+  if(sa==="T" && sb!=="T") return true;
+  if(sa!=="T" && sb==="T") return false;
+  if(sa==="T" && sb==="T"){
+    return trumpRankValue(a,trump) > trumpRankValue(b,trump);
+  }
+  // non-trump: only same as led suit can win
+  if(sa===leadSuit && sb!==leadSuit) return true;
+  if(sa!==leadSuit && sb===leadSuit) return false;
+  if(sa===leadSuit && sb===leadSuit){
+    return plainRankValue(a) > plainRankValue(b);
+  }
+  // neither matches lead or trump, b holds
+  return false;
+}
+
+function trickWinner(trick, leadSuit, trump){
+  // trick: [{card, seat}, ...]
+  let winner = trick[0];
+  for(let i=1;i<trick.length;i++){
+    if(beats(trick[i].card, winner.card, leadSuit, trump)){
+      winner = trick[i];
+    }
+  }
+  return winner;
+}
+
+function sortHandForDisplay(hand, trump){
+  // Group by suit with trump first; within suit: trump order, then A K Q J 10 9
+  const groups = {T:[], S:[], H:[], D:[], C:[]};
+  for(const c of hand){
+    const ns = normalizedSuit(c,trump);
+    groups[ns].push(c);
+  }
+  const sortTrump = (a,b)=> trumpRankValue(b,trump)-trumpRankValue(a,trump);
+  const sortPlain = (s)=>(a,b)=> plainRankValue(b)-plainRankValue(a);
+  const result = [];
+  if(groups.T.length) result.push(...groups.T.sort(sortTrump));
+  for(const s of SUITS){
+    if(groups[s].length) result.push(...groups[s].sort(sortPlain(s)));
+  }
+  return result;
+}
+
+/* ---------- Game State ---------- */
+const Seats = ["S","W","N","E"]; // clockwise
+const SeatIndex = {S:0,W:1,N:2,E:3};
+
+const Game = {
+  targetScore:10,
+  scores:{A:0,B:0}, // A = S+N, B = E+W
+  dealerIdx:0, // index into Seats
+  round: null,
+  deck: [],
+  hands: {S:[],W:[],N:[],E:[]},
+  kitty: [],
+  upcard: null,
+  trump: null,
+  makerSeat: null,
+  makerTeam: null, // "A" or "B"
+  goingAlone: false,
+  aloneSeat: null, // seat that sits out partner (if any)
+  trick: [],
+  leader: "W", // first leader each hand: left of dealer
+  trickCount:{A:0,B:0},
+  phase: "idle", // idle | first_call | second_call | dealer_pickup_discard | play
+  turn: "W",
+  passCount:0,
+  firstCallSuit:null,
+  turnOrderCache: null,
+  options:{
+    stickDealer:true,
+    farmersHand:false,
+    renegePenalty:true,
+    showLegal:true
+  },
+  difficulty:"normal",
+  names:{S:"You",W:"West",N:"Partner",E:"East"},
+  screenName:"You",
+};
+
+function teamOf(seat){ return (seat==="S"||seat==="N")? "A":"B"; }
+function leftOfDealer(dealer){ // returns seat to act first for call
+  const idx = (SeatIndex[dealer]+1)%4;
+  return Seats[idx];
+}
+function nextSeat(seat){
+  const idx = (SeatIndex[seat]+1)%4;
+  return Seats[idx];
+}
+
+/* ---------- AI Heuristics ---------- */
+
+function handStrengthForSuit(hand, suit, phase, upcard){
+  // score trump quality for the seat choosing that suit now
+  // weights tuned by hand; simple yet effective
+  let score = 0;
+  for(const c of hand){
+    if(isRightBower(c,suit)) score += 9.5;
+    else if(isLeftBower(c,suit)) score += 8.5;
+    else if(c.suit===suit){
+      if(c.rank==="A") score += 6.0;
+      else if(c.rank==="K") score += 4.5;
+      else if(c.rank==="Q") score += 3.0;
+      else if(c.rank==="T") score += 1.5;
+      else if(c.rank==="9") score += 1.0;
+      else if(c.rank==="J") score += 3.5; // trump J that isn't bower cannot happen
+    }else{
+      // side aces are useful
+      if(c.rank==="A") score += 1.1;
+    }
+  }
+  // small bonus if holding 3+ in trump suit
+  const trCount = hand.reduce((n,c)=> n + (normalizedSuit(c,suit)==="T"?1:0),0);
+  if(trCount>=4) score += 2.5;
+  else if(trCount===3) score += 1.3;
+
+  // if upcard round and upcard matches this suit, give small bump for taking it as dealer
+  if(phase==="first" && upcard && upcard.suit===suit) score += 0.6;
+  return score;
+}
+
+// Thresholds per difficulty
+const CALL_THRESHOLDS = {
+  easy:   {first: 11.2, second: 12.4, dealerBonus: -0.5, alone: 21.0},
+  normal: {first: 10.4, second: 11.6, dealerBonus: -0.7, alone: 20.0},
+  hard:   {first:  9.6, second: 10.8, dealerBonus: -0.9, alone: 18.8}
+};
+
+function aiChooseCall(seat, phase, upcardSuit, isDealer){
+  const hand = Game.hands[seat];
+  const diff = CALL_THRESHOLDS[Game.difficulty] || CALL_THRESHOLDS.normal;
+
+  if(phase==="first"){
+    const s = upcardSuit;
+    let score = handStrengthForSuit(hand, s, "first", Game.upcard);
+    if(isDealer) score += diff.dealerBonus; // dealer can see benefit of taking the upcard
+    if(score >= diff.first){
+      // consider going alone if very strong
+      const tryAlone = score >= diff.alone && countTrumpLike(hand, s) >= 4;
+      return {action:"order", suit:s, alone: tryAlone};
+    }
+    return {action:"pass"};
+  }else{
+    // cannot pick the turned suit
+    let best={suit:null,score:-1};
+    for(const s of SUITS){
+      if(s===upcardSuit) continue;
+      const sc = handStrengthForSuit(hand, s, "second");
+      if(sc > best.score) best = {suit:s, score:sc};
+    }
+    if(best.suit && best.score >= diff.second){
+      const tryAlone = best.score >= diff.alone && countTrumpLike(hand, best.suit) >= 4;
+      return {action:"name", suit:best.suit, alone: tryAlone};
+    }
+    return {action:"pass"};
+  }
+}
+
+function countTrumpLike(hand, suit){
+  return hand.reduce((n,c)=> n + (normalizedSuit(c,suit)==="T"?1:0),0);
+}
+
+function aiChooseDiscardForDealer(seat, trump){
+  // discard lowest value non-trump; keep side aces if possible
+  const hand = Game.hands[seat];
+  let idx = -1, score = Infinity;
+  for(let i=0;i<hand.length;i++){
+    const c = hand[i];
+    const ns = normalizedSuit(c,trump);
+    let s = 0;
+    if(ns==="T"){
+      s = 100 + (200 - trumpRankValue(c,trump)); // trump is valuable
+    }else{
+      s = 50 - plainRankValue(c);
+      if(c.rank==="A") s -= 25; // keep side aces
+    }
+    if(s < score){ score=s; idx=i; }
+  }
+  return idx>=0? idx: 0;
+}
+
+function aiLeadCard(seat){
+  const hand = Game.hands[seat];
+  const trump = Game.trump;
+  // Simple strategy: lead highest trump if holding 3+, else lead side ace, else weakest card
+  const tr = hand.filter(c=> normalizedSuit(c,trump)==="T");
+  if(tr.length>=3){
+    const sorted = sortHandForDisplay(tr, trump);
+    return sorted[0]; // strongest trump
+  }
+  const sideA = hand.find(c=> normalizedSuit(c,trump)!=="T" && c.rank==="A");
+  if(sideA) return sideA;
+  // otherwise lowest non-trump, else lowest trump
+  const non = hand.filter(c=> normalizedSuit(c,trump)!=="T");
+  const pickFrom = non.length? non : tr;
+  const sortedLow = sortHandForDisplay(pickFrom, trump).reverse();
+  return sortedLow[0];
+}
+
+function aiFollowCard(seat, leadSuit){
+  const hand = Game.hands[seat];
+  const trump = Game.trump;
+  const trick = Game.trick;
+  const legal = legalMoves(hand, leadSuit, trump);
+
+  // If cannot win, slough lowest
+  const currentWinner = trickWinner(trick, leadSuit, trump);
+  let winningOptions = legal.filter(c=> beats({card:c}, currentWinner.card, leadSuit, trump));
+
+  if(winningOptions.length){
+    // choose the lowest winning card unless partner is already winning
+    const partnerSeat = partnerOf(seat);
+    if(currentWinner.seat === partnerSeat && Game.difficulty!=="easy"){
+      // protect partner's win: play lowest legal that doesn't win
+      const lowest = sortHandForDisplay(legal, trump).reverse();
+      for(const c of lowest){
+        if(!beats({card:c}, currentWinner.card, leadSuit, trump)) return c;
+      }
+      return lowest[0];
+    }else{
+      // take trick cheaply
+      const sorted = sortHandForDisplay(winningOptions, trump).reverse();
+      return sorted[0];
+    }
+  }else{
+    const lowest = sortHandForDisplay(legal, trump).reverse();
+    return lowest[0];
+  }
+}
+
+function partnerOf(seat){
+  return seat==="S"?"N": seat==="N"?"S": seat==="E"?"W":"E";
+}
+
+/* ---------- Dealing & Phases ---------- */
+function dealNewHand(){
+  Game.round = (Game.round??0)+1;
+  Game.trump=null;
+  Game.makerSeat=null;
+  Game.makerTeam=null;
+  Game.goingAlone=false;
+  Game.aloneSeat=null;
+  Game.trick=[];
+  Game.trickCount={A:0,B:0};
+  Game.firstCallSuit=null;
+  Game.passCount=0;
+
+  Game.deck = shuffle(buildDeck());
+  Game.hands = {S:[],W:[],N:[],E:[]};
+  // 3–2 or 2–3 randomized
+  let packet = cryptoRandomInt(2)===0 ? [3,2] : [2,3];
+  let idx = Game.dealerIdx;
+  for(const p of packet){
+    for(let r=0;r<4;r++){
+      const seat = Seats[idx%4];
+      Game.hands[seat].push(...Game.deck.splice(0,p));
+      idx++;
+    }
+  }
+  Game.upcard = Game.deck.splice(0,1)[0];
+  Game.kitty = Game.deck.splice(0,4);
+  Game.leader = leftOfDealer(Seats[Game.dealerIdx]);
+  Game.turn = Game.leader;
+  Game.phase = "first_call";
+  Game.turnOrderCache = null;
+
+  // Farmer's hand option: check after deal, before first call
+  if(Game.options.farmersHand){
+    const farmerSeats = Seats.filter(seat=>{
+      const lows = Game.hands[seat].filter(c=> c.rank==="9" || c.rank==="T");
+      return lows.length>=3;
+    });
+    if(farmerSeats.length){
+      // If human is eligible, ask
+      if(farmerSeats.includes("S")){
+        setStatus("Farmer’s Hand available. Redeal?");
+        showFarmerModal().then(ans=>{
+          if(ans){
+            log("Redeal: Farmer’s Hand invoked by You.");
+            nextDealer(); // usually redeal keeps same dealer; common house choice is same dealer; we will keep same dealer
+            dealNewHand();
+            renderAll();
+          }else{
+            startFirstCall();
+          }
+        });
+        renderAll();
+        return;
+      }else{
+        log(`Redeal: Farmer’s Hand invoked by ${farmerSeats[0]}.`);
+        // Bot requests redeal automatically
+        dealNewHand();
+        renderAll();
+        return;
+      }
+    }
+  }
+
+  startFirstCall();
+  renderAll();
+}
+
+function startFirstCall(){
+  Game.phase = "first_call";
+  Game.firstCallSuit = Game.upcard.suit;
+  setStatus(`${Game.turn} to act: Order ${suitIcon(Game.upcard.suit)} up or Pass`);
+  updateActionButtons();
+  botMaybeAct();
+}
+
+function allPassedFirstRound(){
+  Game.phase = "second_call";
+  Game.turn = Game.leader; // round restarts
+  setStatus("Second round of calling: choose trump (cannot be the turned suit).");
+  updateActionButtons();
+  botMaybeAct();
+}
+
+function allPassedSecondRound(){
+  if(Game.options.stickDealer){
+    // Force dealer to name trump
+    Game.phase = "second_call";
+    Game.turn = Seats[Game.dealerIdx];
+    setStatus("Stick the Dealer: dealer must choose trump.");
+    updateActionButtons();
+    botMaybeAct();
+  }else{
+    // Redeal with next dealer
+    setStatus("Everyone passed. Redealing.");
+    log("All passed both rounds; redeal.");
+    nextDealer();
+    dealNewHand();
+    renderAll();
+  }
+}
+
+function pickTrump(seat, suit, alone){
+  Game.trump = suit;
+  Game.makerSeat = seat;
+  Game.makerTeam = teamOf(seat);
+  Game.goingAlone = !!alone;
+  Game.aloneSeat = alone ? seat : null;
+
+  log(`${seat} names ${suitIcon(suit)} as trump${alone?" and goes alone":""}.`);
+  // If first round and not dealer, dealer must pick up then discard
+  if(Game.phase==="first_call"){
+    const dealer = Seats[Game.dealerIdx];
+    // dealer picks up upcard and discards one
+    Game.hands[dealer].push(Game.upcard);
+    if(seat===dealer){
+      Game.phase = "dealer_pickup_discard";
+      setStatus(`${dealer} to discard a card after pickup.`);
+      if(dealer==="S"){
+        // human discard via click
+      }else{
+        const di = aiChooseDiscardForDealer(dealer, Game.trump);
+        const removed = Game.hands[dealer].splice(di,1)[0];
+        log(`${dealer} discards ${cardText(removed)}.`);
+        startPlay();
+      }
+    }else{
+      // dealer AI discards
+      if(dealer==="S"){
+        Game.phase = "dealer_pickup_discard";
+        setStatus("You must discard one card after dealer pickup.");
+      }else{
+        const di = aiChooseDiscardForDealer(dealer, Game.trump);
+        const removed = Game.hands[dealer].splice(di,1)[0];
+        log(`${dealer} discards ${cardText(removed)}.`);
+        startPlay();
+      }
+    }
+  }else{
+    startPlay();
+  }
+  renderAll();
+}
+
+function startPlay(){
+  Game.phase = "play";
+  Game.turn = Game.leader;
+  Game.trick = [];
+  // Sit-out partner if going alone
+  if(Game.goingAlone){
+    const p = partnerOf(Game.aloneSeat);
+    log(`${p} sits out this hand.`);
+  }
+  setStatus(`${Game.turn} to lead.`);
+  botMaybeAct();
+}
+
+function nextDealer(){
+  Game.dealerIdx = (Game.dealerIdx+1)%4;
+}
+
+/* ---------- UI & Interaction ---------- */
+function renderAll(){
+  // Names
+  $("#nameS").textContent = Game.screenName || "You";
+  $("#nameN").textContent = "Partner";
+  $("#nameE").textContent = "East";
+  $("#nameW").textContent = "West";
+  $("#aiS").textContent = "Human";
+  $("#aiN").textContent = "AI";
+  $("#aiE").textContent = "AI";
+  $("#aiW").textContent = "AI";
+
+  // Dealer badge
+  $("#dealerBadge").textContent = "Dealer: " + Seats[Game.dealerIdx];
+  $("#kittyCount").textContent = "Kitty: " + Game.kitty.length;
+
+  // Upcard
+  const up = $("#upcardSpot");
+  up.innerHTML = Game.upcard ? cardHTML(Game.upcard, true) : "—";
+
+  // Hands
+  renderSeat("S", "#handS");
+  renderSeat("N", "#handN", true);
+  renderSeat("E", "#handE", true);
+  renderSeat("W", "#handW", true);
+
+  // Trump buttons visibility for second round only
+  $$(".pill.trump").forEach(b=>{
+    if(Game.phase==="second_call") b.removeAttribute("disabled");
+    else b.setAttribute("disabled","disabled");
+  });
+
+  // Action buttons state
+  updateActionButtons();
+
+  // Trick slots
+  // Layout: West, North, East in row; South is shown in the center piles via status panel
+  fillTrickSlots();
+
+  // Score
+  updateScoreDisplay();
+
+  // Highlight legal plays if enabled
+  if(Game.phase==="play" && Game.turn==="S" && Game.options.showLegal){
+    const leadSuit = Game.trick.length? normalizedSuit(Game.trick[0].card, Game.trump) : null;
+    const legal = legalMoves(Game.hands.S, leadSuit, Game.trump);
+    // mark legal
+    $$("#handS .card").forEach(el=>{
+      const cid = el.dataset.id;
+      const c = Game.hands.S.find(x=>x.id===cid);
+      if(c && legal.some(l=>l.id===cid)){
+        el.classList.add("legal");
+        el.removeAttribute("disabled");
+      }else{
+        el.classList.remove("legal");
+        el.setAttribute("disabled","disabled");
+      }
+    });
+  }
+}
+
+function renderSeat(seat, selector, hideHand=false){
+  const cont = $(selector);
+  cont.innerHTML = "";
+  const hand = sortHandForDisplay(Game.hands[seat], Game.trump);
+  const sittingOut = Game.goingAlone && partnerOf(Game.aloneSeat)===seat;
+  if(sittingOut){
+    const tag = document.createElement("div");
+    tag.className = "badge";
+    tag.textContent = "Sitting out";
+    cont.appendChild(tag);
+    return;
+  }
+
+  for(const card of hand){
+    const btn = document.createElement("button");
+    btn.className = "card small";
+    btn.dataset.id = card.id;
+    btn.innerHTML = hideHand && seat!=="S" ? "🂠" : cardHTML(card);
+    if(Game.trump && normalizedSuit(card, Game.trump)==="T") btn.classList.add("trump");
+
+    if(seat==="S"){
+      btn.addEventListener("click", ()=> onCardClicked(card));
+      if(Game.phase!=="play" || Game.turn!=="S"){
+        btn.setAttribute("disabled","disabled");
+      }
+    }else{
+      btn.setAttribute("disabled","disabled");
+    }
+    cont.appendChild(btn);
+  }
+}
+
+function cardHTML(c, compact=false){
+  const r = rankLabel(c.rank);
+  const s = suitIcon(c.suit);
+  return `<span class="pip">${r}</span><span class="pip ${"suit"+c.suit}">${s}</span>`;
+}
+function cardText(c){ return rankLabel(c.rank)+suitIcon(c.suit); }
+
+function setStatus(text){ $("#status").textContent = text; }
+
+function updateActionButtons(){
+  const bOrder = $("#btnOrderUp");
+  const bPass = $("#btnPass");
+  const lone = $("#optAlone");
+  if(Game.phase==="first_call" && Game.turn==="S"){
+    bOrder.removeAttribute("disabled");
+    bPass.removeAttribute("disabled");
+    lone.removeAttribute("disabled");
+  }else{
+    bOrder.setAttribute("disabled","disabled");
+    bPass.setAttribute("disabled","disabled");
+    lone.setAttribute("disabled","disabled");
+  }
+}
+
+function fillTrickSlots(){
+  const order = ["W","N","E"]; // three slots on status panel
+  for(const seat of order){
+    const slot = $("#slot"+seat);
+    slot.innerHTML = "—";
+  }
+  for(const play of Game.trick){
+    if(play.seat==="S"){
+      // show in status area text
+    }else{
+      const slot = $("#slot"+play.seat);
+      const el = document.createElement("div");
+      el.className = "card";
+      el.innerHTML = cardHTML(play.card);
+      slot.innerHTML="";
+      slot.appendChild(el);
+    }
+  }
+}
+
+/* ---------- Legal Moves ---------- */
+function legalMoves(hand, leadSuit, trump){
+  if(!leadSuit) return hand.slice();
+  const must = hand.filter(c => normalizedSuit(c,trump)===leadSuit);
+  return must.length? must : hand.slice();
+}
+
+/* ---------- Turn Engine ---------- */
+function onCardClicked(card){
+  if(Game.phase==="dealer_pickup_discard" && Seats[Game.dealerIdx]==="S"){
+    // discard
+    const idx = Game.hands.S.findIndex(x=>x.id===card.id);
+    if(idx>=0){
+      Game.hands.S.splice(idx,1);
+      log(`S discards ${cardText(card)}.`);
+      startPlay();
+      renderAll();
+    }
+    return;
+  }
+
+  if(Game.phase!=="play" || Game.turn!=="S") return;
+
+  const leadSuit = Game.trick.length? normalizedSuit(Game.trick[0].card, Game.trump) : null;
+  const legal = legalMoves(Game.hands.S, leadSuit, Game.trump);
+  if(!legal.some(c=>c.id===card.id)){
+    if(Game.options.renegePenalty){
+      // block illegal play
+      setStatus("You must follow suit.");
+      return;
+    }
+  }
+  playCard("S", card);
+}
+
+function playCard(seat, card){
+  // remove from hand
+  const hand = Game.hands[seat];
+  const idx = hand.findIndex(c=> c.id===card.id);
+  if(idx<0) return;
+  hand.splice(idx,1);
+
+  Game.trick.push({seat, card});
+  renderAll();
+
+  // If four cards in trick, resolve
+  const expectedTrickCount = Game.goingAlone ? 3 : 4; // one seat sits out
+  if(Game.trick.length === expectedTrickCount){
+    const leadSuit = normalizedSuit(Game.trick[0].card, Game.trump);
+    const win = trickWinner(Game.trick, leadSuit, Game.trump);
+    const team = teamOf(win.seat);
+    Game.trickCount[team] += 1;
+
+    setTimeout(()=>{
+      setStatus(`${win.seat} wins the trick.`);
+      Game.trick = [];
+      Game.leader = win.seat;
+      Game.turn = win.seat;
+      // Next trick or end of hand
+      const cardsLeft = Game.hands.S.length
+        + Game.hands.N.length
+        + Game.hands.E.length
+        + Game.hands.W.length;
+
+      if(cardsLeft=== (Game.goingAlone? 3*4 : 4*4) - (Game.goingAlone?1:0) ){ /* after first trick */ }
+
+      const remaining = Game.hands.S.length; // each seat has same (except sitter)
+      if(remaining===0){
+        // Hand complete
+        endHand();
+      }else{
+        setStatus(`${Game.turn} to lead.`);
+        renderAll();
+        botMaybeAct();
+      }
+    }, 700);
+  }else{
+    // Next turn seat (skip sitter if any)
+    Game.turn = nextActiveSeat(seat);
+    setStatus(`${Game.turn} to play.`);
+    renderAll();
+    botMaybeAct();
+  }
+}
+
+function nextActiveSeat(seat){
+  let s = nextSeat(seat);
+  if(Game.goingAlone && partnerOf(Game.aloneSeat)===s) s = nextSeat(s);
+  return s;
+}
+
+/* ---------- End Hand & Scoring ---------- */
+function endHand(){
+  // Score hand
+  const makers = Game.makerTeam;
+  const defenders = makers==="A"?"B":"A";
+  const m = Game.trickCount[makers];
+  const d = Game.trickCount[defenders];
+
+  let awardA=0, awardB=0, desc="";
+  if(m>=3 && m<=4){
+    desc = "Makers take the hand: +1";
+    if(makers==="A") awardA=1; else awardB=1;
+  }else if(m===5 || (Game.goingAlone && m===5)){
+    if(Game.goingAlone && teamOf(Game.aloneSeat)===makers){
+      desc = "Alone sweep: +4";
+      if(makers==="A") awardA=4; else awardB=4;
+    }else{
+      desc = "Makers sweep: +2";
+      if(makers==="A") awardA=2; else awardB=2;
+    }
+  }else{
+    // Euchred
+    desc = "Euchre: defenders +2";
+    if(defenders==="A") awardA=2; else awardB=2;
+  }
+
+  Game.scores.A += awardA;
+  Game.scores.B += awardB;
+  setStatus(desc + ` (A ${Game.trickCount.A} – B ${Game.trickCount.B})`);
+  log(`[Score] A:${Game.scores.A}  B:${Game.scores.B}  • ${desc}`);
+
+  renderAll();
+
+  // Check for game over
+  if(Game.scores.A >= Game.targetScore || Game.scores.B >= Game.targetScore){
+    const winTeam = Game.scores.A>Game.scores.B? "You + Partner":"East + West";
+    $("#gameOverText").innerHTML = `<p><strong>${winTeam}</strong> win ${Game.scores.A}–${Game.scores.B}.</p>`;
+    $("#modalGameOver").showModal();
+    return;
+  }
+
+  // Next dealer and allow next hand
+  nextDealer();
+}
+
+function updateScoreDisplay(){
+  $("#scoreA").textContent = Game.scores.A;
+  $("#scoreB").textContent = Game.scores.B;
+  const tgt = Math.max(5, Game.targetScore||10);
+  $("#meterA").style.width = Math.min(100, (Game.scores.A/tgt)*100) + "%";
+  $("#meterB").style.width = Math.min(100, (Game.scores.B/tgt)*100) + "%";
+  $("#targetBadge").textContent = tgt;
+}
+
+/* ---------- Human Controls: Call Rounds ---------- */
+$("#btnOrderUp").addEventListener("click", ()=>{
+  if(Game.phase!=="first_call" || Game.turn!=="S") return;
+  const alone = $("#optAlone").checked;
+  pickTrump("S", Game.upcard.suit, alone);
+});
+$("#btnPass").addEventListener("click", ()=>{
+  if(!(Game.phase==="first_call" && Game.turn==="S") && !(Game.phase==="second_call" && Game.turn==="S")) return;
+  passAction();
+});
+
+$$(".pill.trump").forEach(btn=>{
+  btn.addEventListener("click", ()=>{
+    const suit = btn.dataset.suit;
+    if(Game.phase!=="second_call" || Game.turn!=="S") return;
+    if(suit===Game.firstCallSuit){ setStatus("Cannot choose the turned suit."); return; }
+    const alone = $("#optAlone").checked;
+    pickTrump("S", suit, alone);
+  });
+});
+
+function passAction(){
+  Game.passCount++;
+  if(Game.phase==="first_call"){
+    if(Game.turn===Seats[Game.dealerIdx] && Game.passCount===4){
+      log("All passed in first round.");
+      Game.passCount=0;
+      allPassedFirstRound();
+      renderAll();
+      return;
+    }else{
+      Game.turn = nextSeat(Game.turn);
+      setStatus(`${Game.turn} to act.`);
+      renderAll();
+      botMaybeAct();
+    }
+  }else if(Game.phase==="second_call"){
+    if(Game.turn===Seats[Game.dealerIdx] && Game.passCount===4){
+      log("All passed in second round.");
+      Game.passCount=0;
+      allPassedSecondRound();
+      renderAll();
+      return;
+    }else{
+      Game.turn = nextSeat(Game.turn);
+      setStatus(`${Game.turn} to act.`);
+      renderAll();
+      botMaybeAct();
+    }
+  }
+}
+
+/* ---------- Bots Acting ---------- */
+function botMaybeAct(){
+  if(Game.turn==="S") return;
+
+  const actDelay = Game.difficulty==="hard" ? 600 : Game.difficulty==="easy" ? 350 : 450;
+
+  if(Game.phase==="first_call"){
+    setTimeout(()=>{
+      const seat = Game.turn;
+      const isDealer = seat===Seats[Game.dealerIdx];
+      const choice = aiChooseCall(seat, "first", Game.upcard.suit, isDealer);
+      if(choice.action==="order"){
+        log(`${seat} orders up.`);
+        pickTrump(seat, Game.upcard.suit, choice.alone);
+      }else{
+        log(`${seat} passes.`);
+        passAction();
+      }
+    }, actDelay);
+  }else if(Game.phase==="second_call"){
+    setTimeout(()=>{
+      const seat = Game.turn;
+      const choice = aiChooseCall(seat, "second", Game.upcard.suit, false);
+      if(choice.action==="name"){
+        log(`${seat} chooses ${suitIcon(choice.suit)}.`);
+        pickTrump(seat, choice.suit, choice.alone);
+      }else{
+        log(`${seat} passes.`);
+        passAction();
+      }
+    }, actDelay);
+  }else if(Game.phase==="dealer_pickup_discard"){
+    const dealer = Seats[Game.dealerIdx];
+    if(dealer!== "S"){
+      setTimeout(()=>{
+        const di = aiChooseDiscardForDealer(dealer, Game.trump);
+        const removed = Game.hands[dealer].splice(di,1)[0];
+        log(`${dealer} discards ${cardText(removed)}.`);
+        startPlay();
+        renderAll();
+      }, actDelay);
+    }
+  }else if(Game.phase==="play"){
+    setTimeout(()=>{
+      const seat = Game.turn;
+      if(Game.goingAlone && partnerOf(Game.aloneSeat)===seat){
+        // skip sitter if we ever land here
+        Game.turn = nextActiveSeat(seat);
+        botMaybeAct();
+        return;
+      }
+      const leadSuit = Game.trick.length? normalizedSuit(Game.trick[0].card, Game.trump) : null;
+      let card;
+      if(!leadSuit){
+        card = aiLeadCard(seat);
+      }else{
+        card = aiFollowCard(seat, leadSuit);
+      }
+      playCard(seat, card);
+    }, actDelay);
+  }
+}
+
+/* ---------- Farmer’s Hand Modal ---------- */
+function showFarmerModal(){
+  return new Promise(resolve=>{
+    const dlg = document.createElement("dialog");
+    dlg.innerHTML = `
+      <div class="modalHead">Farmer’s Hand</div>
+      <div class="modalBody">
+        <p>You hold at least three 9s/10s. Redeal?</p>
+      </div>
+      <div class="modalFoot">
+        <button class="btn ghost" id="fhNo">Keep Hand</button>
+        <button class="btn warn" id="fhYes">Redeal</button>
+      </div>`;
+    document.body.appendChild(dlg);
+    dlg.showModal();
+    dlg.querySelector("#fhNo").addEventListener("click", ()=>{ dlg.close(); dlg.remove(); resolve(false); });
+    dlg.querySelector("#fhYes").addEventListener("click", ()=>{ dlg.close(); dlg.remove(); resolve(true);  });
+  });
+}
+
+/* ---------- Settings persistence ---------- */
+function loadSettings(){
+  try{
+    const saved = JSON.parse(localStorage.getItem("euchre_settings")||"{}");
+    Game.screenName = saved.screenName || "You";
+    Game.difficulty = saved.difficulty || "normal";
+    Game.targetScore = saved.targetScore || 10;
+    Game.options.stickDealer = saved.stickDealer ?? true;
+    Game.options.farmersHand = saved.farmersHand ?? false;
+    Game.options.renegePenalty = saved.renegePenalty ?? true;
+    Game.options.showLegal = saved.showLegal ?? true;
+
+    $("#screenName").value = Game.screenName;
+    $("#difficulty").value = Game.difficulty;
+    $("#targetScore").value = Game.targetScore;
+    $("#ruleStickDealer").checked = Game.options.stickDealer;
+    $("#ruleFarmersHand").checked = Game.options.farmersHand;
+    $("#ruleRenegePenalty").checked = Game.options.renegePenalty;
+    $("#ruleShowLegal").checked = Game.options.showLegal;
+  }catch{}
+}
+function saveSettings(){
+  Game.screenName = $("#screenName").value.trim() || "You";
+  Game.names.S = Game.screenName;
+  Game.difficulty = $("#difficulty").value;
+  Game.targetScore = parseInt($("#targetScore").value,10) || 10;
+  Game.options.stickDealer = $("#ruleStickDealer").checked;
+  Game.options.farmersHand = $("#ruleFarmersHand").checked;
+  Game.options.renegePenalty = $("#ruleRenegePenalty").checked;
+  Game.options.showLegal = $("#ruleShowLegal").checked;
+
+  localStorage.setItem("euchre_settings", JSON.stringify({
+    screenName: Game.screenName,
+    difficulty: Game.difficulty,
+    targetScore: Game.targetScore,
+    stickDealer: Game.options.stickDealer,
+    farmersHand: Game.options.farmersHand,
+    renegePenalty: Game.options.renegePenalty,
+    showLegal: Game.options.showLegal
+  }));
+  renderAll();
+}
+
+/* ---------- Controls ---------- */
+$("#btnSaveSettings").addEventListener("click", saveSettings);
+$("#btnDefaults").addEventListener("click", ()=>{
+  $("#screenName").value = "You";
+  $("#difficulty").value = "normal";
+  $("#targetScore").value = 10;
+  $("#ruleStickDealer").checked = true;
+  $("#ruleFarmersHand").checked = false;
+  $("#ruleRenegePenalty").checked = true;
+  $("#ruleShowLegal").checked = true;
+  saveSettings();
+});
+$("#btnToggleLog").addEventListener("click", ()=>{
+  const logEl = $("#log");
+  logEl.style.display = logEl.style.display==="none" ? "block":"none";
+});
+$("#btnHelp").addEventListener("click", ()=> $("#modalHelp").showModal());
+
+$("#btnNextHand").addEventListener("click", ()=>{
+  dealNewHand();
+});
+$("#btnNewMatch").addEventListener("click", ()=>{
+  if(confirm("Reset scores and redeal?")){
+    Game.scores={A:0,B:0};
+    Game.dealerIdx = 0;
+    dealNewHand();
+  }
+});
+$("#btnResetAll")?.addEventListener("click", ()=>{
+  $("#modalGameOver").close();
+  Game.scores={A:0,B:0};
+  Game.dealerIdx=0;
+  dealNewHand();
+});
+
+/* ---------- Init ---------- */
+loadSettings();
+renderAll();
+
+/* Optional: first auto-deal for convenience */
+setTimeout(()=> setStatus("Ready. Click Deal Hand to start."), 50);
+
+</script>
+</body>
+</html>
