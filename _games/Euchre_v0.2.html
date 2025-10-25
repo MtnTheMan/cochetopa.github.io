@@ -1,0 +1,1178 @@
+---
+title: "Euchre v0.2"
+---
+
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Euchre – Single Player vs Bots</title>
+<style>
+  :root{
+    --bg:#0b1220;
+    --felt:#144c3d;
+    --felt-2:#0e3a2e;
+    --panel:#111827;
+    --panel-2:#0e1525;
+    --ink:#e6eaf2;
+    --muted:#9aa7bd;
+    --accent:#37c085;
+    --danger:#ff6b6b;
+    --gold:#f5c451;
+    --shadow: rgba(0,0,0,.25);
+    --card:#fdfdfd;
+    --card-edge:#e9eef5;
+    --red:#d12b4a;
+  }
+  html,body{height:100%}
+  body{
+    margin:0; background: radial-gradient(1200px 600px at 30% -10%, var(--felt), var(--bg) 60%) no-repeat fixed;
+    color:var(--ink); font: 16px/1.45 system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
+  }
+  /* Layout */
+  .app{
+    display:grid;
+    grid-template-rows: auto 1fr auto;
+    min-height:100%;
+  }
+  header{
+    display:flex; align-items:center; gap:.75rem; padding:.6rem .9rem;
+    background: linear-gradient(180deg, var(--panel), var(--panel-2));
+    box-shadow: 0 2px 10px var(--shadow); position:sticky; top:0; z-index:5;
+  }
+  header h1{font-size:1.05rem; margin:0; font-weight:600; letter-spacing:.2px}
+  .spacer{flex:1}
+  .toolbar button, .toolbar select{
+    background:#1b263b; color:var(--ink); border:1px solid #2a3958; border-radius:.5rem; padding:.45rem .65rem;
+    font-weight:600; cursor:pointer;
+  }
+  .toolbar button:hover{filter:brightness(1.1)}
+  .toolbar .primary{background:var(--accent); border-color:#2aa06c; color:#072b1f}
+  .toolbar .warn{background:var(--danger); border-color:#e64a4a}
+  .toolbar .ghost{background:transparent; border-color:#2a3958}
+  .toolbar .chip{border-radius:999px}
+  /* Table */
+  .table{
+    display:grid; place-items:center; padding: .8rem;
+    grid-template-areas:
+      "north"
+      "center"
+      "south";
+    gap:.6rem;
+    max-width:1200px; margin:0 auto; width:100%;
+  }
+  @media(min-width:900px){
+    .table{
+      grid-template-areas:
+        ". north ."
+        "west center east"
+        ". south .";
+      grid-template-columns: 1fr auto 1fr;
+      grid-template-rows: auto auto auto;
+    }
+  }
+  .seat{display:flex; flex-direction:column; align-items:center; gap:.35rem;}
+  .seat .name{font-weight:700; font-size:.95rem}
+  .seat .badges{display:flex; gap:.35rem; flex-wrap:wrap}
+  .badge{font-size:.72rem; color:#0b271f; background:var(--gold); border-radius:.4rem; padding:.15rem .4rem}
+  .dealer{outline:2px dashed var(--gold); outline-offset:5px; border-radius:.6rem; padding:.2rem .4rem}
+  .trump{font-weight:700}
+  .pile{
+    display:grid; grid-template-columns: repeat(2, 1fr); gap:.6rem; padding:.6rem .8rem;
+    background:linear-gradient(180deg,var(--felt-2),var(--felt)); border-radius:.8rem; box-shadow: inset 0 0 0 1px #0e251f, 0 10px 30px var(--shadow);
+  }
+  .trick{display:grid; grid-template-columns: repeat(2, 1fr); gap:.6rem;}
+  .info{
+    display:flex; gap:.8rem; align-items:center; flex-wrap:wrap; justify-content:center; font-size:.95rem;
+  }
+  .score{
+    display:flex; gap:.6rem; align-items:center; background:#0f192e; padding:.35rem .6rem; border-radius:.5rem; border:1px solid #1b2b4a;
+  }
+  .log{max-height:28vh; overflow:auto; font-size:.9rem; padding:.5rem .75rem; background:#0f1627; border:1px solid #1b2745; border-radius:.6rem}
+  /* Cards */
+  .hand{display:flex; align-items:center; justify-content:center; gap:.4rem; flex-wrap:nowrap; overflow:auto; padding:.4rem}
+  .card{
+    width:64px; height:94px; background:var(--card); color:#111; border:1px solid var(--card-edge);
+    border-radius:.5rem; box-shadow:0 8px 20px var(--shadow); display:flex; align-items:center; justify-content:center;
+    position:relative; user-select:none; transition:transform .08s ease;
+    font-weight:800; letter-spacing:.2px;
+  }
+  @media(min-width:450px){ .card{ width:72px; height:104px } }
+  @media(min-width:900px){ .card{ width:82px; height:120px } }
+  .card .small{
+    position:absolute; top:6px; left:6px; font-size:.9rem; font-weight:800;
+  }
+  .card .suit{font-size:1.4rem}
+  .card.red{color:var(--red)}
+  .card.playable{cursor:pointer}
+  .card.playable:hover{transform:translateY(-6px)}
+  .card.dim{opacity:.5}
+  .facedown{
+    background: repeating-linear-gradient(135deg, #20314f, #20314f 6px, #18253f 6px, #18253f 12px);
+    border-color:#142038; color:transparent;
+  }
+  .slot{width:82px; height:120px; border-radius:.5rem; outline:2px dashed rgba(255,255,255,.15)}
+  .upcard-wrap{display:flex; align-items:center; gap:.6rem}
+  .kitty-left{display:flex; gap:.3rem}
+  /* Modals */
+  dialog{
+    border:none; border-radius:12px; padding:0; background:#0f172a; color:var(--ink);
+    box-shadow:0 30px 80px rgba(0,0,0,.5); width:min(720px, 92vw);
+  }
+  .modal-body{padding:1rem 1rem 1.1rem 1rem}
+  .modal-head{padding: .9rem 1rem; background:#0c1324; border-bottom:1px solid #1a2644; display:flex; align-items:center; justify-content:space-between}
+  .modal-head h3{margin:0; font-size:1.05rem}
+  .grid{display:grid; gap:.8rem}
+  .grid.two{grid-template-columns:1fr}
+  @media(min-width:720px){ .grid.two{grid-template-columns:1fr 1fr} }
+  label{display:flex; flex-direction:column; gap:.3rem; font-size:.92rem}
+  input[type="text"], select, .switch{
+    background:#0e1a33; border:1px solid #20345e; color:var(--ink); border-radius:.5rem; padding:.55rem .6rem; font-size:.95rem;
+  }
+  .switch{display:flex; align-items:center; gap:.6rem; padding:.5rem .6rem}
+  .switch input{accent-color:var(--accent)}
+  .modal-actions{display:flex; justify-content:flex-end; gap:.5rem; padding:0 1rem 1rem}
+  .btn{background:#1b263b; color:var(--ink); border:1px solid #2a3958; border-radius:.6rem; padding:.55rem .8rem; font-weight:700; cursor:pointer}
+  .btn.primary{background:var(--accent); border-color:#2aa06c; color:#062a20}
+  .btn.ghost{background:transparent}
+  .sr{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0)}
+</style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <h1>Euchre</h1>
+    <div class="spacer"></div>
+    <div class="toolbar">
+      <button class="chip" id="settingsBtn" title="Settings">⚙️ Settings</button>
+      <button class="chip ghost" id="helpBtn" title="Rules">📖 Rules</button>
+      <button class="chip" id="newGameBtn" title="New Game">🂡 New Game</button>
+    </div>
+  </header>
+
+  <main class="table">
+    <!-- North -->
+    <section class="seat" id="seat-1" style="grid-area:north">
+      <div class="name" id="name-1">Bot Alex</div>
+      <div class="badges">
+        <span class="badge" id="badge-1" hidden>Alone</span>
+      </div>
+      <div class="hand" id="hand-1"></div>
+    </section>
+
+    <!-- Center -->
+    <section style="grid-area:center">
+      <div class="info" style="margin-bottom:.6rem;">
+        <div class="score" id="score-box">
+          <span id="score-teamNS">You+North: 0</span> |
+          <span id="score-teamEW">East+West: 0</span>
+        </div>
+        <div class="score">
+          <span>Dealer: <strong id="dealerName">—</strong></span> |
+          <span>Hand: <strong id="handNo">0</strong></span> |
+          <span>Trump: <strong class="trump" id="trumpShow">—</strong></span>
+        </div>
+      </div>
+
+      <div class="pile">
+        <div class="upcard-wrap">
+          <div class="kitty-left" id="kittyLeft">
+            <div class="card facedown"></div>
+            <div class="card facedown"></div>
+            <div class="card facedown"></div>
+          </div>
+          <div>
+            <div style="font-size:.85rem; color:var(--muted)">Up-card</div>
+            <div id="upcard" class="card slot"></div>
+          </div>
+        </div>
+
+        <div>
+          <div style="font-size:.85rem; color:var(--muted); margin-bottom:.25rem">Current Trick</div>
+          <div class="trick" id="trick">
+            <div id="trick-1" class="slot"></div>
+            <div id="trick-2" class="slot"></div>
+            <div id="trick-3" class="slot"></div>
+            <div id="trick-4" class="slot"></div>
+          </div>
+        </div>
+      </div>
+
+      <div id="actionBar" style="display:flex; gap:.5rem; justify-content:center; margin:.7rem 0 .2rem;">
+        <!-- dynamic buttons for bidding and discarding -->
+      </div>
+
+      <div class="log" id="log" aria-live="polite"></div>
+    </section>
+
+    <!-- South (Player) -->
+    <section class="seat" id="seat-0" style="grid-area:south">
+      <div class="name" id="name-0">You</div>
+      <div class="badges">
+        <span class="badge" id="badge-0" hidden>Alone</span>
+      </div>
+      <div class="hand" id="hand-0" aria-label="Your hand"></div>
+    </section>
+
+    <!-- West -->
+    <section class="seat" id="seat-3" style="grid-area:west">
+      <div class="name" id="name-3">Bot Blair</div>
+      <div class="badges">
+        <span class="badge" id="badge-3" hidden>Alone</span>
+      </div>
+      <div class="hand" id="hand-3"></div>
+    </section>
+
+    <!-- East -->
+    <section class="seat" id="seat-2" style="grid-area:east">
+      <div class="name" id="name-2">Bot Casey</div>
+      <div class="badges">
+        <span class="badge" id="badge-2" hidden>Alone</span>
+      </div>
+      <div class="hand" id="hand-2"></div>
+    </section>
+  </main>
+
+  <footer style="padding:.6rem .9rem; background:#0c1221; border-top:1px solid #1a2746; display:flex; gap:.6rem; flex-wrap:wrap; align-items:center; justify-content:center">
+    <small style="color:var(--muted)">Euchre vs Bots. Your device uses Web Crypto shuffling when available.</small>
+  </footer>
+</div>
+
+<!-- SETTINGS MODAL -->
+<dialog id="settingsDlg">
+  <div class="modal-head">
+    <h3>Game Settings</h3>
+    <button class="btn ghost" data-close="settingsDlg">Close</button>
+  </div>
+  <div class="modal-body grid two">
+    <label>
+      Screen name
+      <input type="text" id="playerNameInput" placeholder="Your name">
+    </label>
+
+    <label>
+      AI difficulty
+      <select id="difficulty">
+        <option value="easy">Easy</option>
+        <option value="medium" selected>Medium</option>
+        <option value="hard">Hard</option>
+      </select>
+    </label>
+
+    <label class="switch">
+      <input type="checkbox" id="ruleStickDealer" checked>
+      Stick the dealer
+    </label>
+
+    <label class="switch">
+      <input type="checkbox" id="ruleFarmersHand">
+      Farmer’s hand allows redeal
+    </label>
+
+    <label class="switch">
+      <input type="checkbox" id="ruleRenegesPenalty">
+      Allow reneges and apply 2-point penalty to offenders’ team
+    </label>
+
+    <label class="switch">
+      <input type="checkbox" id="enforceFollowSuit" checked>
+      Enforce follow-suit during play
+    </label>
+
+    <label class="switch">
+      <input type="checkbox" id="useCrypto" checked>
+      Prefer Web Crypto shuffle
+    </label>
+
+  </div>
+  <div class="modal-actions">
+    <button class="btn" data-close="settingsDlg">Cancel</button>
+    <button class="btn primary" id="saveSettingsBtn">Save</button>
+  </div>
+</dialog>
+
+<!-- RULES MODAL -->
+<dialog id="rulesDlg">
+  <div class="modal-head">
+    <h3>Euchre: Quick Rules</h3>
+    <button class="btn ghost" data-close="rulesDlg">Close</button>
+  </div>
+  <div class="modal-body" style="max-height:60vh; overflow:auto">
+    <p>Deck: 24 cards, A K Q J 10 9 in each suit. Four players in fixed partnerships, five cards each, next card turned face-up as up-card; the other three form the kitty.</p>
+    <p>Make trump in two rounds. First: anyone may order the up-card’s suit, which makes the dealer pick it up and discard one. Second: if all pass, anyone may name a different suit. If all pass again and Stick the Dealer is on, the dealer must choose.</p>
+    <p>Trump rank: Right Bower (J of trump), Left Bower (J of same-color suit), then A K Q 10 9 of trump. The Left Bower counts as trump for following suit.</p>
+    <p>Play five tricks. Follow suit if able. Highest trump takes the trick, otherwise highest of the led suit. Maker’s side needs 3+ tricks.</p>
+    <p>Scoring: Makers 3–4 tricks = 1 point, sweep = 2. Defenders’ euchre = 2. Going alone and sweeping = 4.</p>
+    <p>Optional table rules here: Stick the Dealer, Farmer’s Hand redeal, Reneges penalty.</p>
+  </div>
+  <div class="modal-actions">
+    <button class="btn primary" data-close="rulesDlg">Got it</button>
+  </div>
+</dialog>
+
+<script>
+/* ========= Utilities ========= */
+const SUITS = ["♠","♥","♦","♣"]; // Spades, Hearts, Diamonds, Clubs
+const SUIT_NAMES = { "♠":"Spades","♥":"Hearts","♦":"Diamonds","♣":"Clubs" };
+const RANKS = ["9","10","J","Q","K","A"];
+const RANK_VALUE = { "9":1, "10":2, "J":3, "Q":4, "K":5, "A":6 };
+
+function log(msg){
+  const pad = document.getElementById("log");
+  const p = document.createElement("div");
+  p.textContent = msg;
+  pad.prepend(p);
+}
+
+function samp(arr){ return arr[Math.floor(Math.random()*arr.length)] }
+
+/* Crypto-grade RNG with fallback to xoshiro128** */
+class RNG {
+  constructor(useCrypto=true){
+    this.useCrypto = useCrypto && !!(window.crypto && window.crypto.getRandomValues);
+    this.state = Uint32Array.from([Date.now()>>>0, (performance.now()*1000)>>>0, (Math.random()*2**32)>>>0, (Math.random()*2**32)>>>0]);
+  }
+  nextUint32(){
+    if(this.useCrypto){
+      const x = new Uint32Array(1);
+      crypto.getRandomValues(x);
+      return x[0]>>>0;
+    }
+    // xoshiro128**
+    let s = this.state;
+    const result = rotl(s[1] * 5 >>> 0, 7) * 9 >>> 0;
+    const t = s[1] << 9 >>> 0;
+    s[2] ^= s[0]; s[3] ^= s[1]; s[1] ^= s[2]; s[0] ^= s[3];
+    s[2] ^= t;
+    s[3] = rotl(s[3], 11);
+    return result >>> 0;
+    function rotl(x,k){ return (x << k) | (x >>> (32 - k)) }
+  }
+  random(){ return (this.nextUint32() >>> 0) / 2**32 }
+}
+
+function shuffle(deck, rng){
+  for(let i=deck.length-1;i>0;i--){
+    const j = Math.floor(rng.random()*(i+1));
+    [deck[i], deck[j]] = [deck[j], deck[i]];
+  }
+  return deck;
+}
+
+/* ========= Cards and Ranking ========= */
+function createDeck(){
+  const d = [];
+  for(const s of SUITS){
+    for(const r of RANKS){
+      d.push({suit:s, rank:r, id:`${r}${s}`});
+    }
+  }
+  return d;
+}
+
+function isSameColor(a,b){ return (a==="♠"||a==="♣") ? (b==="♠"||b==="♣") : (b==="♥"||b==="♦") }
+
+function isLeftBower(card, trump){
+  return card.rank==="J" && isSameColor(card.suit, trump) && card.suit !== trump;
+}
+function isRightBower(card, trump){
+  return card.rank==="J" && card.suit===trump;
+}
+function isTrump(card, trump){
+  return isRightBower(card, trump) || isLeftBower(card, trump) || card.suit===trump;
+}
+function effectiveSuit(card, trump){
+  return isLeftBower(card, trump) ? trump : card.suit;
+}
+
+/* Return a numeric weight to compare trick cards. Larger is stronger. */
+function cardStrength(card, trump, ledSuit){
+  const eff = effectiveSuit(card, trump);
+  let base = 0;
+  if(isRightBower(card, trump)) return 1000;
+  if(isLeftBower(card, trump)) return 999;
+  if(eff===trump){
+    base = 900 + RANK_VALUE[card.rank]; // A trump 906, K 905, ...
+  } else if(eff===ledSuit){
+    base = 100 + RANK_VALUE[card.rank];
+  } else {
+    base = RANK_VALUE[card.rank]; // off-suit with no power
+  }
+  return base;
+}
+
+/* ========= DOM: Cards ========= */
+function renderCard(card, opts={}){
+  const el = document.createElement("div");
+  el.className = "card";
+  if(!card){ el.classList.add("slot"); return el; }
+  const red = (card.suit==="♥"||card.suit==="♦");
+  if(opts.facedown){ el.classList.add("facedown") }
+  if(red) el.classList.add("red");
+  if(opts.dim) el.classList.add("dim");
+  if(opts.playable) el.classList.add("playable");
+  el.dataset.cardId = card.id;
+  const small = document.createElement("div");
+  small.className="small";
+  small.textContent = card.rank + card.suit;
+  const mid = document.createElement("div");
+  mid.className="suit";
+  mid.textContent = card.suit;
+  el.appendChild(small);
+  el.appendChild(mid);
+  return el;
+}
+
+/* ========= Game State ========= */
+const SEATS = [0,1,2,3]; // 0 You, 1 North (partner), 2 East, 3 West
+const PARTNER = {0:1, 1:0, 2:3, 3:2};
+const TEAM = {0:"NS", 1:"NS", 2:"EW", 3:"EW"};
+
+const state = {
+  rng: new RNG(true),
+  useCrypto:true,
+  hands: [[],[],[],[]],
+  dealer: 0,
+  leader: 0,
+  upcard: null,
+  kitty: [],
+  trump: null,
+  maker: null,
+  alone: {0:false,1:false,2:false,3:false},
+  trick: [], // [{seat, card}]
+  taken: {NS:0, EW:0},
+  score: {NS:0, EW:0},
+  phase: "deal", // deal, bid1, bid2, discard, play, score
+  passCount: 0,
+  upSuit: null,
+  handNo: 0,
+  playerName: "You",
+  difficulty: "medium",
+  rules: {
+    stickDealer: true,
+    farmersHand: false,
+    renegesPenalty: false,
+    enforceFollowSuit: true
+  },
+  renegedTeam: null
+};
+
+function saveSettings(){
+  localStorage.setItem("euchreSettings", JSON.stringify({
+    playerName: state.playerName,
+    difficulty: state.difficulty,
+    rules: state.rules,
+    useCrypto: state.useCrypto
+  }));
+}
+function loadSettings(){
+  const s = localStorage.getItem("euchreSettings");
+  if(!s) return;
+  try{
+    const data = JSON.parse(s);
+    state.playerName = data.playerName || state.playerName;
+    state.difficulty = data.difficulty || state.difficulty;
+    state.rules = Object.assign(state.rules, data.rules||{});
+    state.useCrypto = !!data.useCrypto;
+    state.rng = new RNG(state.useCrypto);
+  }catch(e){}
+}
+
+/* ========= Dealing, Bidding, Flow ========= */
+function dealHand(){
+  state.phase = "deal";
+  state.trump = null;
+  state.maker = null;
+  state.alone = {0:false,1:false,2:false,3:false};
+  state.trick = [];
+  state.taken = {NS:0, EW:0};
+  state.renegedTeam = null;
+  state.handNo++;
+  // rotate dealer
+  state.dealer = (state.dealer + 1) % 4;
+  state.leader = (state.dealer + 1) % 4;
+
+  // deck
+  const deck = createDeck();
+  state.rng = new RNG(state.useCrypto);
+  shuffle(deck, state.rng);
+
+  // deal 5 each in 3–2 or 2–3 packets
+  const patternA = [3,2]; const patternB = [2,3];
+  let ptr = 0;
+  for(const seat of SEATS){
+    state.hands[seat] = [];
+  }
+  let patt = Math.random()<0.5 ? patternA : patternB;
+  for(let round=0; round<2; round++){
+    for(let i=0;i<4;i++){
+      const seat = (state.dealer + 1 + i) % 4;
+      for(let k=0;k<patt[round];k++){
+        state.hands[seat].push(deck[ptr++]);
+      }
+    }
+  }
+  // everyone should have 5 now
+  // upcard and kitty
+  state.upcard = deck[ptr++];
+  state.upSuit = state.upcard.suit;
+  state.kitty = [deck[ptr++], deck[ptr++], deck[ptr++]];
+
+  // sort hands for display
+  for(const s of SEATS){
+    sortHandForDisplay(state.hands[s], state.trump);
+  }
+
+  renderAll();
+  log(`Dealer: ${seatName(state.dealer)}. Up-card is ${state.upcard.rank}${state.upcard.suit} (${SUIT_NAMES[state.upSuit]}).`);
+
+  // Farmer’s hand auto-request
+  if(state.rules.farmersHand){
+    for(const seat of SEATS){
+      if(hasFarmersHand(state.hands[seat])){
+        if(seat===0){
+          log("You qualify for Farmer’s Hand. Redeal requested.");
+        }else{
+          log(`${seatName(seat)} requests Farmer’s Hand redeal.`);
+        }
+        // Soft pause to show upcard, then redeal
+        setTimeout(()=>dealHand(), 700);
+        return;
+      }
+    }
+  }
+
+  // proceed to bid round 1
+  state.phase = "bid1";
+  state.passCount = 0;
+  promptBidding();
+}
+
+function hasFarmersHand(hand){
+  // 3 or more cards that are 9s or 10s
+  let c = 0;
+  for(const card of hand){
+    if(card.rank==="9" || card.rank==="10") c++;
+  }
+  return c>=3;
+}
+
+function seatName(seat){
+  const el = document.getElementById(`name-${seat}`);
+  return el?.textContent || `Seat ${seat}`;
+}
+
+function promptBidding(){
+  renderAll();
+  const btns = document.getElementById("actionBar");
+  btns.innerHTML = "";
+  if(state.phase==="bid1"){
+    // upcard suit offered
+    if(turnSeat()===0){
+      // Player decision: Order Up or Pass
+      const goAloneCB = document.createElement("label");
+      goAloneCB.className = "switch";
+      goAloneCB.innerHTML = `<input type="checkbox" id="goAloneCB"> Go alone if you call`;
+      btns.appendChild(goAloneCB);
+
+      const orderBtn = document.createElement("button");
+      orderBtn.className = "btn primary";
+      orderBtn.textContent = `Order it up (${SUIT_NAMES[state.upSuit]})`;
+      orderBtn.onclick = ()=>{
+        selectMaker(0, state.upSuit, true, document.getElementById("goAloneCB").checked);
+      };
+      btns.appendChild(orderBtn);
+
+      const passBtn = document.createElement("button");
+      passBtn.className = "btn";
+      passBtn.textContent = "Pass";
+      passBtn.onclick = ()=>playerPass();
+      btns.appendChild(passBtn);
+    }else{
+      // Bot turn
+      setTimeout(()=>botBidRound1(turnSeat()), 500);
+    }
+  } else if(state.phase==="bid2"){
+    if(turnSeat()===0){
+      const goAloneCB = document.createElement("label");
+      goAloneCB.className = "switch";
+      goAloneCB.innerHTML = `<input type="checkbox" id="goAloneCB"> Go alone if you call`;
+      btns.appendChild(goAloneCB);
+
+      const wrap = document.createElement("div");
+      wrap.style.display="flex"; wrap.style.gap=".4rem"; wrap.style.flexWrap="wrap"; wrap.style.justifyContent="center";
+      for(const s of SUITS){
+        if(s===state.upSuit) continue;
+        const b = document.createElement("button");
+        b.className="btn";
+        b.textContent=SUIT_NAMES[s];
+        b.onclick=()=>selectMaker(0, s, false, document.getElementById("goAloneCB").checked);
+        wrap.appendChild(b);
+      }
+      btns.appendChild(wrap);
+
+      const passBtn = document.createElement("button");
+      passBtn.className="btn";
+      passBtn.textContent="Pass";
+      passBtn.onclick=()=>playerPass();
+      btns.appendChild(passBtn);
+    }else{
+      setTimeout(()=>botBidRound2(turnSeat()), 500);
+    }
+  }
+}
+
+function playerPass(){
+  state.passCount++;
+  advanceTurn();
+  if(state.phase==="bid1" && state.passCount>=4){
+    // move to round 2
+    state.phase="bid2"; state.passCount=0;
+  } else if(state.phase==="bid2" && state.passCount>=4){
+    // all passed second round
+    if(state.rules.stickDealer){
+      const dealer = state.dealer;
+      // Dealer must choose a non-up suit. Bot decides for bot dealer, prompt if player.
+      if(dealer===0){
+        // prompt suit pick
+        const btns = document.getElementById("actionBar");
+        btns.innerHTML="";
+        const t = document.createElement("div");
+        t.textContent="Stick the dealer is on. You must choose trump.";
+        btns.appendChild(t);
+        const goAloneCB = document.createElement("label");
+        goAloneCB.className = "switch";
+        goAloneCB.innerHTML = `<input type="checkbox" id="goAloneCB"> Go alone`;
+        btns.appendChild(goAloneCB);
+        for(const s of SUITS){
+          if(s===state.upSuit) continue;
+          const b=document.createElement("button");
+          b.className="btn primary";
+          b.textContent=SUIT_NAMES[s];
+          b.onclick=()=>selectMaker(0, s, false, document.getElementById("goAloneCB").checked);
+          btns.appendChild(b);
+        }
+      }else{
+        const suit = botChooseTrump(dealer, true);
+        selectMaker(dealer, suit, false, botConsiderAlone(dealer, suit));
+      }
+      return;
+    }else{
+      log("All players passed. Redeal.");
+      setTimeout(()=>dealHand(), 600);
+      return;
+    }
+  }
+  promptBidding();
+}
+
+function botBidRound1(seat){
+  // Consider ordering up upSuit
+  const want = botWantsUpSuit(seat);
+  if(want){
+    selectMaker(seat, state.upSuit, true, botConsiderAlone(seat, state.upSuit));
+  }else{
+    log(`${seatName(seat)} passes.`);
+    state.passCount++;
+    advanceTurn();
+    if(state.phase==="bid1" && state.passCount>=4){
+      state.phase="bid2"; state.passCount=0;
+    }
+    promptBidding();
+  }
+}
+
+function botBidRound2(seat){
+  const suit = botChooseTrump(seat, false);
+  if(suit){
+    selectMaker(seat, suit, false, botConsiderAlone(seat, suit));
+  }else{
+    log(`${seatName(seat)} passes.`);
+    state.passCount++;
+    advanceTurn();
+    if(state.phase==="bid2" && state.passCount>=4){
+      if(state.rules.stickDealer){
+        const dealer = state.dealer;
+        const forcedSuit = botChooseTrump(dealer, true) || SUITS.find(s=>s!==state.upSuit);
+        selectMaker(dealer, forcedSuit, false, botConsiderAlone(dealer, forcedSuit));
+      }else{
+        log("All players passed. Redeal.");
+        setTimeout(()=>dealHand(), 600);
+      }
+    }else{
+      promptBidding();
+    }
+  }
+}
+
+function handStrengthForSuit(hand, suit, isRound1){
+  // Score: trumps count a lot; bowers get big bonus; aces off-suit modest.
+  let score = 0;
+  for(const c of hand){
+    if(isRightBower(c, suit)) score += 8;
+    else if(isLeftBower(c, suit)) score += 7;
+    else if(c.suit===suit) score += (c.rank==="A"?5:(c.rank==="K"?3:(c.rank==="Q"?2:1)));
+    else if(c.rank==="A") score += 1.5;
+  }
+  // Voids helpful for round 2 calling
+  if(!isRound1){
+    const suits = new Set(SUITS);
+    for(const c of hand) suits.delete(c.suit);
+    score += Math.max(0, suits.size-1)*0.5;
+  }
+  return score;
+}
+function botWantsUpSuit(seat){
+  const hand = state.hands[seat];
+  const s = state.upSuit;
+  const score = handStrengthForSuit(hand, s, true);
+  const diff = state.difficulty;
+  const threshold = diff==="hard" ? 9.0 : (diff==="medium" ? 8.0 : 7.2);
+  // slight dealer bias
+  const dealerBias = seat===state.dealer ? 0.6 : 0;
+  return (score + dealerBias) >= threshold;
+}
+function botChooseTrump(seat, forced){
+  let best = null, bestScore = -1;
+  for(const s of SUITS){
+    if(s===state.upSuit) continue;
+    const sc = handStrengthForSuit(state.hands[seat], s, false);
+    if(sc>bestScore){ bestScore=sc; best=s; }
+  }
+  const diff = state.difficulty;
+  const threshold = forced ? 0 : (diff==="hard"?8.6:(diff==="medium"?7.8:7.2));
+  return bestScore>=threshold ? best : (forced? best : null);
+}
+function botConsiderAlone(seat, suit){
+  const hand = state.hands[seat];
+  let trumpCount = hand.filter(c=>isTrump(c, suit)).length;
+  const hasBothBowers = hand.some(c=>isRightBower(c, suit)) && hand.some(c=>isLeftBower(c, suit));
+  const hasAceTrump = hand.some(c=>c.suit===suit && c.rank==="A");
+  if(state.difficulty==="hard"){
+    return (hasBothBowers && (hasAceTrump || trumpCount>=4)) || (trumpCount===5);
+  }else if(state.difficulty==="medium"){
+    return hasBothBowers && trumpCount>=3;
+  }else{
+    return trumpCount===5;
+  }
+}
+
+function selectMaker(seat, suit, dealerPicksUp, goAlone){
+  state.maker = seat;
+  state.trump = suit;
+  state.alone = {0:false,1:false,2:false,3:false};
+  if(goAlone){
+    state.alone[seat] = true;
+  }
+  log(`${seatName(seat)} makes ${SUIT_NAMES[suit]}${goAlone? " and goes alone":""}.`);
+  // If ordered up, dealer picks up and discards
+  if(dealerPicksUp){
+    // add upcard to dealer hand and force discard
+    state.hands[state.dealer].push(state.upcard);
+    sortHandForDisplay(state.hands[state.dealer], state.trump);
+    state.phase="discard";
+    renderAll();
+    if(state.dealer===0){
+      // prompt player to discard
+      promptDiscard();
+    }else{
+      setTimeout(()=>botDiscard(state.dealer), 600);
+    }
+  }else{
+    // move to play
+    state.phase="play";
+    state.leader = (state.dealer+1)%4; // already set, but reset
+    renderAll();
+    setTimeout(()=>maybeAutoPlay(), 400);
+  }
+}
+
+function promptDiscard(){
+  const bar = document.getElementById("actionBar");
+  bar.innerHTML="";
+  const t = document.createElement("div");
+  t.textContent = "Choose a card to discard.";
+  bar.appendChild(t);
+  // click handler on player hand will manage it
+}
+
+function botDiscard(seat){
+  // Drop lowest non-trump if possible; else lowest trump that is not a bower
+  const hand = state.hands[seat];
+  let idx = -1, worstScore = 1e9;
+  for(let i=0;i<hand.length;i++){
+    const c = hand[i];
+    const isTr = isTrump(c, state.trump);
+    const bow = isRightBower(c, state.trump) || isLeftBower(c, state.trump);
+    const score = (isTr ? 100 : 0) + (bow ? 200 : 0) + RANK_VALUE[c.rank]*2;
+    if(!isTr && score<worstScore){ worstScore=score; idx=i; }
+  }
+  if(idx<0){
+    for(let i=0;i<hand.length;i++){
+      const c = hand[i];
+      if(isRightBower(c, state.trump) || isLeftBower(c, state.trump)) continue;
+      const score = 100 + RANK_VALUE[c.rank]*2;
+      if(score<worstScore){ worstScore=score; idx=i; }
+    }
+  }
+  const [discard] = hand.splice(idx,1);
+  log(`${seatName(seat)} discards ${discard.rank}${discard.suit}.`);
+  sortHandForDisplay(hand, state.trump);
+  state.phase="play";
+  renderAll();
+  setTimeout(()=>maybeAutoPlay(), 400);
+}
+
+/* ========= Play Phase ========= */
+function maybeAutoPlay(){
+  if(state.phase!=="play") return;
+  if(state.leader!==0 && seatActive(state.leader)){
+    setTimeout(()=>botPlay(state.leader), 450);
+  } else {
+    // player to act, highlight playable
+    renderAll(true);
+  }
+}
+
+function seatActive(seat){
+  // If someone goes alone, their partner sits out
+  return !(state.alone[0] && PARTNER[0]===seat) &&
+         !(state.alone[1] && PARTNER[1]===seat) &&
+         !(state.alone[2] && PARTNER[2]===seat) &&
+         !(state.alone[3] && PARTNER[3]===seat);
+}
+
+function legalPlays(hand, ledSuit, trump){
+  if(!ledSuit) return [...hand];
+  const haveLed = hand.some(c=>effectiveSuit(c, trump)===ledSuit);
+  if(!haveLed){
+    // If renegs allowed, everything is legal but track penalty later
+    return [...hand];
+  }
+  return hand.filter(c=>effectiveSuit(c, trump)===ledSuit);
+}
+
+function onPlayerCardClick(cardId){
+  if(state.phase==="discard" && state.dealer===0){
+    const hand = state.hands[0];
+    const idx = hand.findIndex(c=>c.id===cardId);
+    if(idx>=0){
+      const [discard]=hand.splice(idx,1);
+      log(`You discard ${discard.rank}${discard.suit}.`);
+      sortHandForDisplay(hand, state.trump);
+      state.phase="play";
+      renderAll();
+      setTimeout(()=>maybeAutoPlay(), 300);
+    }
+    return;
+  }
+  if(state.phase!=="play") return;
+  if(turnSeat()!==0) return;
+
+  // handle play
+  const hand = state.hands[0];
+  const idx = hand.findIndex(c=>c.id===cardId);
+  if(idx<0) return;
+  const ledSuit = state.trick.length? effectiveSuit(state.trick[0].card, state.trump) : null;
+  const legals = legalPlays(hand, ledSuit, state.trump);
+  const chosen = hand[idx];
+  const isLegal = legals.some(c=>c.id===chosen.id);
+  if(!isLegal && state.rules.enforceFollowSuit){
+    log("You must follow suit.");
+    return;
+  }
+  // Reneges penalty tracking
+  if(!isLegal && !state.renegedTeam && state.rules.renegesPenalty){
+    const team = TEAM[0];
+    state.renegedTeam = team;
+    log("Renege flagged for your team. 2-point penalty will apply at hand end.");
+  }
+
+  hand.splice(idx,1);
+  pushTrick(0, chosen);
+}
+
+function botPlay(seat){
+  const hand = state.hands[seat];
+  const ledSuit = state.trick.length? effectiveSuit(state.trick[0].card, state.trump) : null;
+  const legals = legalPlays(hand, ledSuit, state.trump);
+  let choice = null;
+  if(state.difficulty==="easy"){
+    choice = samp(legals.length?legals:hand);
+  } else {
+    choice = botHeuristicPlay(seat, hand, legals, ledSuit);
+  }
+  // reneges penalty if they ignore follow suit and allowed
+  if(ledSuit && legals.length>0 && !legals.some(c=>c.id===choice.id) && state.rules.renegesPenalty && !state.renegedTeam){
+    state.renegedTeam = TEAM[seat];
+    log(`Renege flagged on ${TEAM[seat]} team.`);
+  }
+  const idx = hand.findIndex(c=>c.id===choice.id);
+  hand.splice(idx,1);
+  pushTrick(seat, choice);
+}
+
+function botHeuristicPlay(seat, hand, legals, ledSuit){
+  const inLead = state.trick.length===0;
+  const cards = (legals.length?legals:hand).slice();
+  // rank candidates by winning chance heuristic
+  let best = null, bestScore = -1;
+  for(const c of cards){
+    let score = 0;
+    if(inLead){
+      // lead with strong trump to pull, or safe ace off-suit
+      if(isTrump(c, state.trump)){
+        score += 60 + (isRightBower(c,state.trump)?25:isLeftBower(c,state.trump)?20:RANK_VALUE[c.rank]*3);
+      }else{
+        score += (c.rank==="A"?40:10) + RANK_VALUE[c.rank];
+      }
+    }else{
+      // following: try to win cheaply if partner not currently winning
+      const currentWinner = trickWinnerSeat();
+      const partnerWinning = currentWinner!==null && TEAM[currentWinner]===TEAM[seat];
+      const str = cardStrength(c, state.trump, ledSuit);
+      // prefer winning if not partner winning
+      score += partnerWinning ? (str*0.5) : (str*1.1);
+      // lower score for overkill
+      if(isTrump(c,state.trump) && partnerWinning) score -= 25;
+    }
+    // minor preference to keep bowers
+    if(isRightBower(c,state.trump) || isLeftBower(c,state.trump)) score -= 5;
+    if(score>bestScore){ bestScore=score; best=c; }
+  }
+  return best || cards[0];
+}
+
+function pushTrick(seat, card){
+  state.trick.push({seat, card});
+  renderAll();
+  if(state.trick.length<seatsInHand()){
+    // next turn
+    advanceTurn();
+    maybeAutoPlay();
+  }else{
+    // evaluate trick
+    const winner = trickWinnerSeat(true);
+    const team = TEAM[winner];
+    if(team==="NS") state.taken.NS++; else state.taken.EW++;
+    log(`${seatName(winner)} takes the trick.`);
+    state.trick = [];
+    state.leader = winner;
+    renderAll();
+
+    // trick over: check if 5 tricks done
+    if(state.taken.NS + state.taken.EW >=5){
+      scoreHand();
+    }else{
+      setTimeout(()=>maybeAutoPlay(), 500);
+    }
+  }
+}
+
+function seatsInHand(){
+  // 4, except when someone goes alone: partner sits out
+  const a = state.alone;
+  if(a[0]||a[1]||a[2]||a[3]) return 3;
+  return 4;
+}
+
+function trickWinnerSeat(verbose=false){
+  if(state.trick.length===0) return null;
+  const led = effectiveSuit(state.trick[0].card, state.trump);
+  let bestSeat = state.trick[0].seat;
+  let bestVal = cardStrength(state.trick[0].card, state.trump, led);
+  for(let i=1;i<state.trick.length;i++){
+    const {seat, card} = state.trick[i];
+    const val = cardStrength(card, state.trump, led);
+    if(val>bestVal){ bestVal=val; bestSeat=seat; }
+  }
+  return bestSeat;
+}
+
+function advanceTurn(){
+  do{
+    state.leader = (state.leader + 1) % 4;
+  } while(!seatActive(state.leader) && state.phase!=="bid1" && state.phase!=="bid2");
+}
+
+function turnSeat(){ return state.leader }
+
+/* ========= Scoring ========= */
+function scoreHand(){
+  // renege penalty dominates
+  if(state.rules.renegesPenalty && state.renegedTeam){
+    const offenders = state.renegedTeam;
+    const winners = offenders==="NS" ? "EW" : "NS";
+    state.score[winners] += 2;
+    log(`Renege penalty: ${winners} +2 points.`);
+    endHand();
+    return;
+  }
+
+  const makerTeam = TEAM[state.maker];
+  const makersTricks = makerTeam==="NS" ? state.taken.NS : state.taken.EW;
+  const defendersTricks = makerTeam==="NS" ? state.taken.EW : state.taken.NS;
+  if(makersTricks>=3){
+    if(makersTricks===5){
+      const aloneSweep = state.alone[state.maker];
+      const pts = aloneSweep ? 4 : 2;
+      state.score[makerTeam]+=pts;
+      log(`Sweep by ${makerTeam}. ${pts} points.`);
+    }else{
+      state.score[makerTeam]+=1;
+      log(`Maker team ${makerTeam} scores 1 point.`);
+    }
+  }else{
+    // euchred
+    const other = makerTeam==="NS" ? "EW" : "NS";
+    state.score[other]+=2;
+    log(`Euchre. ${other} +2 points.`);
+  }
+  endHand();
+}
+
+function endHand(){
+  renderScores();
+  // next hand after pause
+  setTimeout(()=>dealHand(), 1100);
+}
+
+/* ========= Sorting & Display ========= */
+function sortHandForDisplay(hand, trump){
+  const suitOrder = trump ? [trump, ...SUITS.filter(s=>s!==trump)] : SUITS.slice();
+  hand.sort((a,b)=>{
+    // trump first, then by suit order, then rank
+    const aTr = isTrump(a, trump)?1:0, bTr = isTrump(b, trump)?1:0;
+    if(aTr!==bTr) return bTr - aTr;
+    const sa = effectiveSuit(a, trump), sb = effectiveSuit(b, trump);
+    const su = suitOrder.indexOf(sa) - suitOrder.indexOf(sb);
+    if(su!==0) return su;
+    // within trump, bowers highest
+    const aw = cardStrength(a, trump, sa); const bw = cardStrength(b, trump, sb);
+    return bw - aw;
+  });
+}
+
+function renderAll(highlightPlayer=false){
+  // names
+  document.getElementById("name-0").textContent = state.playerName || "You";
+  document.getElementById("dealerName").textContent = seatName(state.dealer);
+  document.getElementById("handNo").textContent = state.handNo.toString();
+  document.getElementById("trumpShow").textContent = state.trump ? `${SUIT_NAMES[state.trump]} ${state.trump}` : "—";
+
+  // hands
+  for(const seat of SEATS){
+    const wrap = document.getElementById(`hand-${seat}`);
+    wrap.innerHTML="";
+    const active = seatActive(seat);
+    if(seat!==0){
+      const count = state.hands[seat].length;
+      for(let i=0;i<count;i++){
+        const facedown = state.phase!=="play" || (seat!==0);
+        wrap.appendChild(renderCard(null,{})).classList.add("facedown");
+      }
+    }else{
+      const ledSuit = state.trick.length? effectiveSuit(state.trick[0].card, state.trump) : null;
+      const hand = state.hands[0];
+      const legals = legalPlays(hand, ledSuit, state.trump);
+      for(const c of hand){
+        const playable = highlightPlayer && (state.phase==="play" ? legals.some(x=>x.id===c.id) : state.phase==="discard" && state.dealer===0);
+        const el = renderCard(c, {playable});
+        if(state.phase==="play" && highlightPlayer && !playable) el.classList.add("dim");
+        el.onclick = ()=>onPlayerCardClick(c.id);
+        wrap.appendChild(el);
+      }
+    }
+    // badges
+    const badge = document.getElementById(`badge-${seat}`);
+    badge.hidden = !state.alone[seat];
+    // dealer outline
+    const seatEl = document.getElementById(`seat-${seat}`);
+    if(seatEl){
+      if(seat===state.dealer) seatEl.classList.add("dealer");
+      else seatEl.classList.remove("dealer");
+    }
+  }
+
+  // upcard
+  const up = document.getElementById("upcard");
+  up.replaceWith(renderCard(state.upcard));
+  // trick
+  for(let i=0;i<4;i++){
+    const slot = document.getElementById(`trick-${i+1}`);
+    slot.innerHTML="";
+  }
+  const order = trickDisplayOrder();
+  for(let i=0;i<state.trick.length;i++){
+    const {seat, card} = state.trick[i];
+    const slotId = `trick-${order.indexOf(seat)+1}`;
+    const slot = document.getElementById(slotId);
+    slot.replaceWith(renderCard(card));
+    document.getElementById(slotId)?.classList?.add("slot"); // in case
+  }
+
+  renderScores();
+}
+
+function trickDisplayOrder(){
+  // top-left-right-bottom mapping: 1,2,3,0 for display
+  return [1,2,3,0];
+}
+
+function renderScores(){
+  document.getElementById("score-teamNS").textContent = `${state.playerName}+${document.getElementById("name-1").textContent.split(" ")[1] ? document.getElementById("name-1").textContent : "North"}: ${state.score.NS}`;
+  document.getElementById("score-teamEW").textContent = `East+West: ${state.score.EW}`;
+}
+
+/* ========= Controls & Modals ========= */
+document.getElementById("settingsBtn").onclick = ()=>{
+  const dlg = document.getElementById("settingsDlg");
+  document.getElementById("playerNameInput").value = state.playerName;
+  document.getElementById("difficulty").value = state.difficulty;
+  document.getElementById("ruleStickDealer").checked = state.rules.stickDealer;
+  document.getElementById("ruleFarmersHand").checked = state.rules.farmersHand;
+  document.getElementById("ruleRenegesPenalty").checked = state.rules.renegesPenalty;
+  document.getElementById("enforceFollowSuit").checked = state.rules.enforceFollowSuit;
+  document.getElementById("useCrypto").checked = state.useCrypto;
+  dlg.showModal();
+};
+document.getElementById("helpBtn").onclick = ()=>document.getElementById("rulesDlg").showModal();
+document.getElementById("newGameBtn").onclick = ()=>{
+  state.score = {NS:0, EW:0};
+  state.dealer = 3; // so first deal sets 0
+  dealHand();
+};
+document.getElementById("saveSettingsBtn").onclick = ()=>{
+  state.playerName = document.getElementById("playerNameInput").value.trim() || "You";
+  state.difficulty = document.getElementById("difficulty").value;
+  state.rules.stickDealer = document.getElementById("ruleStickDealer").checked;
+  state.rules.farmersHand = document.getElementById("ruleFarmersHand").checked;
+  state.rules.renegesPenalty = document.getElementById("ruleRenegesPenalty").checked;
+  state.rules.enforceFollowSuit = document.getElementById("enforceFollowSuit").checked;
+  state.useCrypto = document.getElementById("useCrypto").checked;
+  state.rng = new RNG(state.useCrypto);
+  saveSettings();
+  closeModal("settingsDlg");
+  renderAll();
+};
+document.querySelectorAll("[data-close]").forEach(btn=>{
+  btn.onclick = ()=>closeModal(btn.dataset.close);
+});
+function closeModal(id){
+  document.getElementById(id).close();
+}
+
+/* ========= Boot ========= */
+loadSettings();
+// Default bot names
+document.getElementById("name-1").textContent = "Bot Alex";
+document.getElementById("name-2").textContent = "Bot Casey";
+document.getElementById("name-3").textContent = "Bot Blair";
+document.getElementById("name-0").textContent = state.playerName;
+
+state.dealer = 3; // so first hand deals to 0's left
+dealHand();
+</script>
+</body>
+</html>
