@@ -1,3 +1,1481 @@
 <!doctype html>
 <html lang="en">
 <head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Euchre v0.3 – Single Player vs Bots</title>
+<style>
+  :root{
+    --bg:#0b1220;
+    --felt:#144c3d;
+    --felt-2:#0e3a2e;
+    --panel:#111827;
+    --panel-2:#0e1525;
+    --ink:#e6eaf2;
+    --muted:#9aa7bd;
+    --accent:#37c085;
+    --danger:#ff6b6b;
+    --gold:#f5c451;
+    --shadow: rgba(0,0,0,.25);
+    --card:#fdfdfd;
+    --card-edge:#e9eef5;
+    --red:#d12b4a;
+
+    /* Responsive card sizing */
+    --cw: clamp(52px, 14vw, 86px);
+    --ch: calc(var(--cw) * 1.44);
+    --cw-mini: clamp(20px, 5.2vw, 34px);
+    --ch-mini: calc(var(--cw-mini) * 1.44);
+  }
+
+  html,body{height:100%}
+  body{
+    margin:0;
+    background: radial-gradient(1200px 600px at 30% -10%, var(--felt), var(--bg) 60%) no-repeat fixed;
+    color:var(--ink);
+    font: 16px/1.45 system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .app{
+    display:grid;
+    grid-template-rows: auto 1fr auto;
+    min-height:100%;
+  }
+
+  header{
+    display:flex; align-items:center; gap:.75rem;
+    padding: calc(.6rem + env(safe-area-inset-top)) .9rem .6rem .9rem;
+    background: linear-gradient(180deg, var(--panel), var(--panel-2));
+    box-shadow: 0 2px 10px var(--shadow);
+    position:sticky; top:0; z-index:20;
+  }
+  header h1{font-size:1.05rem; margin:0; font-weight:700; letter-spacing:.2px}
+  .spacer{flex:1}
+
+  .toolbar{
+    display:flex; gap:.45rem; align-items:center;
+  }
+  .toolbar button{
+    background:#1b263b; color:var(--ink);
+    border:1px solid #2a3958; border-radius:.6rem;
+    padding:.48rem .7rem;
+    font-weight:700;
+    cursor:pointer;
+    touch-action: manipulation;
+  }
+  .toolbar button:hover{filter:brightness(1.08)}
+  .toolbar .ghost{background:transparent}
+  .toolbar .chip{border-radius:999px}
+
+  /* Table layout */
+  .table{
+    display:grid;
+    padding: .8rem;
+    gap:.7rem;
+    max-width:1200px; margin:0 auto; width:100%;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "north north"
+      "center center"
+      "west  east"
+      "south south";
+    align-content:start;
+  }
+
+  @media(min-width:900px){
+    .table{
+      grid-template-columns: 1fr auto 1fr;
+      grid-template-areas:
+        ". north ."
+        "west center east"
+        ". south .";
+      gap:.8rem;
+      align-items:center;
+    }
+  }
+
+  .seat{
+    display:flex; flex-direction:column; align-items:center; gap:.35rem;
+    min-width:0;
+  }
+  .seat .name{
+    font-weight:800; font-size:.95rem;
+    display:flex; align-items:center; gap:.45rem;
+  }
+  .turn-dot{
+    width:.55rem; height:.55rem; border-radius:999px;
+    background: rgba(255,255,255,.18);
+    box-shadow:none;
+  }
+  .seat.turn .turn-dot{
+    background: var(--accent);
+    box-shadow: 0 0 0 3px rgba(55,192,133,.18);
+  }
+
+  .badge{
+    font-size:.72rem; color:#0b271f; background:var(--gold);
+    border-radius:.45rem; padding:.16rem .45rem;
+  }
+  .dealer{
+    outline:2px dashed var(--gold);
+    outline-offset:5px;
+    border-radius:.6rem;
+    padding:.15rem .35rem;
+  }
+
+  .hand{
+    width:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:.45rem;
+    overflow:auto;
+    padding:.35rem;
+    -webkit-overflow-scrolling: touch;
+  }
+  .hand.player{
+    justify-content:flex-start;
+    scroll-snap-type: x proximity;
+  }
+
+  /* Cards */
+  .card{
+    width: var(--cw);
+    height: var(--ch);
+    background:var(--card);
+    color:#111;
+    border:1px solid var(--card-edge);
+    border-radius:.55rem;
+    box-shadow:0 8px 20px var(--shadow);
+    display:flex; align-items:center; justify-content:center;
+    position:relative;
+    user-select:none;
+    transition: transform .08s ease, filter .08s ease;
+    font-weight:900;
+    letter-spacing:.2px;
+    touch-action: manipulation;
+    scroll-snap-align: center;
+  }
+  .card.red{color:var(--red)}
+
+  .card .small{
+    position:absolute; top:6px; left:6px;
+    font-size:.9rem; font-weight:900;
+  }
+  .card .suit{font-size:1.45rem}
+
+  .card.playable{cursor:pointer}
+  .card.playable:hover{transform:translateY(-6px)}
+  .card.dim{opacity:.45; filter:saturate(.8)}
+  .card:active{transform:translateY(-2px)}
+
+  .card.mini{
+    width: var(--cw-mini);
+    height: var(--ch-mini);
+    border-radius:.38rem;
+    box-shadow:0 5px 12px rgba(0,0,0,.18);
+  }
+  .card.mini .small, .card.mini .suit{display:none}
+
+  .facedown{
+    background: repeating-linear-gradient(135deg, #20314f, #20314f 6px, #18253f 6px, #18253f 12px);
+    border-color:#142038;
+    color:transparent;
+  }
+
+  /* Center panel */
+  .center{
+    grid-area:center;
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    gap:.65rem;
+  }
+
+  .info{
+    display:flex; gap:.6rem; align-items:center; flex-wrap:wrap;
+    justify-content:center;
+    font-size:.95rem;
+  }
+  .pill{
+    display:flex; gap:.55rem; align-items:center;
+    background:#0f192e;
+    padding:.38rem .65rem;
+    border-radius:.6rem;
+    border:1px solid #1b2b4a;
+  }
+  .trump{font-weight:900}
+
+  .pile{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap:.7rem;
+    padding:.7rem .85rem;
+    background:linear-gradient(180deg,var(--felt-2),var(--felt));
+    border-radius:.9rem;
+    box-shadow: inset 0 0 0 1px #0e251f, 0 10px 30px var(--shadow);
+  }
+  @media(max-width:520px){
+    .pile{grid-template-columns: 1fr}
+  }
+
+  .upcard-wrap{
+    display:flex; align-items:center; justify-content:center; gap:.7rem; flex-wrap:wrap;
+  }
+  .kitty-left{display:flex; gap:.3rem}
+
+  .slot{
+    width: var(--cw);
+    height: var(--ch);
+    border-radius:.55rem;
+    outline:2px dashed rgba(255,255,255,.16);
+    display:grid;
+    place-items:center;
+    overflow:hidden;
+  }
+  .slot .card{width:100%; height:100%}
+
+  .trick{
+    display:grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap:.55rem;
+    justify-items:center;
+  }
+
+  /* Action bar */
+  .actionBar{
+    display:flex;
+    flex-direction:column;
+    gap:.45rem;
+    justify-content:center;
+    align-items:center;
+    padding:.55rem .55rem;
+    border-radius:.8rem;
+    background:#0f1627;
+    border:1px solid #1b2745;
+  }
+  .actionRow{
+    display:flex; gap:.45rem; flex-wrap:wrap;
+    justify-content:center;
+  }
+  .statusText{
+    color:var(--muted);
+    font-weight:700;
+    font-size:.92rem;
+    text-align:center;
+  }
+
+  /* Sticky action bar on small screens */
+  @media(max-width:720px){
+    .actionBar{
+      position: sticky;
+      bottom: calc(.55rem + env(safe-area-inset-bottom));
+      z-index:15;
+      box-shadow: 0 12px 28px rgba(0,0,0,.35);
+    }
+  }
+
+  .btn{
+    background:#1b263b; color:var(--ink);
+    border:1px solid #2a3958; border-radius:.7rem;
+    padding:.6rem .85rem;
+    font-weight:800;
+    cursor:pointer;
+    touch-action: manipulation;
+  }
+  .btn.primary{background:var(--accent); border-color:#2aa06c; color:#062a20}
+  .btn.ghost{background:transparent}
+  .btn.warn{background:var(--danger); border-color:#e64a4a; color:#2b0606}
+
+  .switch{
+    display:flex; align-items:center; gap:.55rem;
+    padding:.45rem .6rem;
+    background:#0e1a33;
+    border:1px solid #20345e;
+    border-radius:.6rem;
+    font-weight:700;
+  }
+  .switch input{accent-color:var(--accent)}
+
+  .log{
+    max-height:28vh;
+    overflow:auto;
+    font-size:.92rem;
+    padding:.6rem .75rem;
+    background:#0f1627;
+    border:1px solid #1b2745;
+    border-radius:.7rem;
+  }
+
+  footer{
+    padding: .6rem .9rem calc(.6rem + env(safe-area-inset-bottom)) .9rem;
+    background:#0c1221;
+    border-top:1px solid #1a2746;
+    display:flex;
+    gap:.6rem;
+    flex-wrap:wrap;
+    align-items:center;
+    justify-content:center;
+  }
+  footer small{color:var(--muted)}
+
+  /* Dialogs */
+  dialog{
+    border:none; border-radius:12px; padding:0;
+    background:#0f172a; color:var(--ink);
+    box-shadow:0 30px 80px rgba(0,0,0,.5);
+    width:min(720px, 92vw);
+  }
+  .modal-head{
+    padding:.9rem 1rem;
+    background:#0c1324;
+    border-bottom:1px solid #1a2644;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .modal-head h3{margin:0; font-size:1.05rem}
+  .modal-body{padding:1rem}
+  .grid{display:grid; gap:.85rem}
+  .grid.two{grid-template-columns:1fr}
+  @media(min-width:720px){ .grid.two{grid-template-columns:1fr 1fr} }
+  label{display:flex; flex-direction:column; gap:.35rem; font-size:.95rem; font-weight:700}
+  input[type="text"], select{
+    background:#0e1a33; border:1px solid #20345e;
+    color:var(--ink); border-radius:.6rem;
+    padding:.6rem .65rem; font-size:1rem;
+  }
+  .modal-actions{
+    display:flex; justify-content:flex-end; gap:.5rem;
+    padding:0 1rem 1rem;
+  }
+
+  .sr{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0)}
+</style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <h1>Euchre v0.3</h1>
+    <div class="spacer"></div>
+    <div class="toolbar">
+      <button class="chip" id="settingsBtn" title="Settings">⚙️ Settings</button>
+      <button class="chip ghost" id="helpBtn" title="Rules">📖 Rules</button>
+      <button class="chip" id="newGameBtn" title="New Game">🂡 New Game</button>
+    </div>
+  </header>
+
+  <main class="table">
+    <!-- North -->
+    <section class="seat" id="seat-1" style="grid-area:north">
+      <div class="name" id="name-1"><span class="turn-dot"></span> Bot North <span class="badge" id="badge-1" hidden>Alone</span></div>
+      <div class="hand" id="hand-1" aria-label="North hand"></div>
+    </section>
+
+    <!-- West -->
+    <section class="seat" id="seat-3" style="grid-area:west">
+      <div class="name" id="name-3"><span class="turn-dot"></span> Bot West <span class="badge" id="badge-3" hidden>Alone</span></div>
+      <div class="hand" id="hand-3" aria-label="West hand"></div>
+    </section>
+
+    <!-- East -->
+    <section class="seat" id="seat-2" style="grid-area:east">
+      <div class="name" id="name-2"><span class="turn-dot"></span> Bot East <span class="badge" id="badge-2" hidden>Alone</span></div>
+      <div class="hand" id="hand-2" aria-label="East hand"></div>
+    </section>
+
+    <!-- Center -->
+    <section class="center">
+      <div class="info">
+        <div class="pill" id="scorePill">
+          <span id="score-teamNS">NS: 0</span>
+          <span style="opacity:.6">|</span>
+          <span id="score-teamEW">EW: 0</span>
+        </div>
+        <div class="pill">
+          <span>Dealer: <strong id="dealerName">—</strong></span>
+          <span style="opacity:.6">|</span>
+          <span>Hand: <strong id="handNo">0</strong></span>
+          <span style="opacity:.6">|</span>
+          <span>Trump: <strong class="trump" id="trumpShow">—</strong></span>
+        </div>
+      </div>
+
+      <div class="pile">
+        <div>
+          <div style="font-size:.88rem; color:var(--muted); font-weight:800; margin-bottom:.35rem; text-align:center">Up-card</div>
+          <div class="upcard-wrap">
+            <div class="kitty-left" id="kittyLeft" aria-label="Kitty"></div>
+            <div id="upcardSlot" class="slot" aria-label="Up-card slot"></div>
+          </div>
+        </div>
+
+        <div>
+          <div style="font-size:.88rem; color:var(--muted); font-weight:800; margin-bottom:.35rem; text-align:center">Current Trick</div>
+          <div class="trick" id="trick">
+            <div id="trick-1" class="slot" aria-label="North trick slot"></div>
+            <div id="trick-2" class="slot" aria-label="East trick slot"></div>
+            <div id="trick-3" class="slot" aria-label="West trick slot"></div>
+            <div id="trick-4" class="slot" aria-label="You trick slot"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="actionBar" id="actionBar">
+        <div class="statusText" id="statusText">Dealing…</div>
+        <div class="actionRow" id="actionRow"></div>
+      </div>
+
+      <div class="log" id="log" aria-live="polite"></div>
+    </section>
+
+    <!-- South (Player) -->
+    <section class="seat" id="seat-0" style="grid-area:south">
+      <div class="name" id="name-0"><span class="turn-dot"></span> You <span class="badge" id="badge-0" hidden>Alone</span></div>
+      <div class="hand player" id="hand-0" aria-label="Your hand"></div>
+    </section>
+  </main>
+
+  <footer>
+    <small>Tip: When it is your turn, use the buttons above the log. During play, tap a highlighted card.</small>
+  </footer>
+</div>
+
+<!-- SETTINGS MODAL -->
+<dialog id="settingsDlg">
+  <div class="modal-head">
+    <h3>Game Settings</h3>
+    <button class="btn ghost" data-close="settingsDlg">Close</button>
+  </div>
+  <div class="modal-body">
+    <div class="grid two">
+      <label>
+        Screen name
+        <input type="text" id="playerNameInput" placeholder="Your name">
+      </label>
+
+      <label>
+        AI difficulty
+        <select id="difficulty">
+          <option value="easy">Easy</option>
+          <option value="medium" selected>Medium</option>
+          <option value="hard">Hard</option>
+        </select>
+      </label>
+
+      <div class="switch">
+        <input type="checkbox" id="ruleStickDealer" checked>
+        <span>Stick the dealer</span>
+      </div>
+
+      <div class="switch">
+        <input type="checkbox" id="ruleFarmersHand">
+        <span>Farmer’s hand redeal</span>
+      </div>
+
+      <div class="switch">
+        <input type="checkbox" id="ruleRenegesPenalty">
+        <span>Reneges penalty, +2 to other team</span>
+      </div>
+
+      <div class="switch">
+        <input type="checkbox" id="enforceFollowSuit" checked>
+        <span>Enforce follow-suit</span>
+      </div>
+
+      <div class="switch">
+        <input type="checkbox" id="useCrypto" checked>
+        <span>Prefer Web Crypto shuffle</span>
+      </div>
+    </div>
+  </div>
+  <div class="modal-actions">
+    <button class="btn" data-close="settingsDlg">Cancel</button>
+    <button class="btn primary" id="saveSettingsBtn">Save</button>
+  </div>
+</dialog>
+
+<!-- RULES MODAL -->
+<dialog id="rulesDlg">
+  <div class="modal-head">
+    <h3>Euchre: Quick Rules</h3>
+    <button class="btn ghost" data-close="rulesDlg">Close</button>
+  </div>
+  <div class="modal-body" style="max-height:60vh; overflow:auto">
+    <p>Deck: 24 cards, A K Q J 10 9 in each suit. Four players in partnerships: you are South, partner is North.</p>
+    <p>Make trump in two rounds. Round 1: order up the up-card suit or pass. Round 2: name a different suit or pass. With Stick the Dealer on, the dealer must choose if everybody passes twice.</p>
+    <p>Trump rank: Right Bower (J of trump), Left Bower (J of the same-color suit), then A K Q 10 9 of trump. The Left Bower counts as trump for following suit.</p>
+    <p>Play five tricks. Follow suit if you can. Highest trump wins, otherwise highest of the led suit wins.</p>
+    <p>Scoring: Makers 3 to 4 tricks: 1 point. Makers sweep: 2 points. Defenders euchre the makers: 2 points. Alone sweep: 4 points.</p>
+  </div>
+  <div class="modal-actions">
+    <button class="btn primary" data-close="rulesDlg">Got it</button>
+  </div>
+</dialog>
+
+<script>
+/* Euchre v0.3
+   Key fixes:
+   - No replaceWith on upcard or trick slots, keeps IDs stable.
+   - Mobile grid includes West/East seats, responsive sizing, sticky action bar.
+*/
+
+(function(){
+  /* ========= Crash visibility ========= */
+  window.addEventListener("error", (e)=>{
+    safeLog("⚠️ JS error: " + (e?.message || "unknown"));
+  });
+
+  /* ========= Utilities ========= */
+  const SUITS = ["♠","♥","♦","♣"];
+  const SUIT_NAMES = { "♠":"Spades","♥":"Hearts","♦":"Diamonds","♣":"Clubs" };
+  const RANKS = ["9","10","J","Q","K","A"];
+  const RANK_VALUE = { "9":1, "10":2, "J":3, "Q":4, "K":5, "A":6 };
+
+  function $(id){ return document.getElementById(id); }
+
+  function safeLog(msg){
+    const pad = $("log");
+    if(!pad) return;
+    const p = document.createElement("div");
+    p.textContent = msg;
+    pad.prepend(p);
+  }
+
+  function samp(arr){ return arr[Math.floor(Math.random()*arr.length)] }
+
+  /* Crypto-grade RNG with fallback to xoshiro128** */
+  class RNG {
+    constructor(useCrypto=true){
+      this.useCrypto = useCrypto && !!(window.crypto && window.crypto.getRandomValues);
+      this.state = Uint32Array.from([
+        Date.now()>>>0,
+        (performance.now()*1000)>>>0,
+        (Math.random()*2**32)>>>0,
+        (Math.random()*2**32)>>>0
+      ]);
+    }
+    nextUint32(){
+      if(this.useCrypto){
+        const x = new Uint32Array(1);
+        crypto.getRandomValues(x);
+        return x[0]>>>0;
+      }
+      let s = this.state;
+      const result = rotl((s[1] * 5)>>>0, 7);
+      const out = (result * 9)>>>0;
+      const t = (s[1] << 9)>>>0;
+      s[2] ^= s[0]; s[3] ^= s[1]; s[1] ^= s[2]; s[0] ^= s[3];
+      s[2] ^= t;
+      s[3] = rotl(s[3], 11);
+      return out>>>0;
+
+      function rotl(x,k){ return ((x << k) | (x >>> (32 - k)))>>>0; }
+    }
+    random(){ return (this.nextUint32()>>>0) / 2**32; }
+  }
+
+  function shuffle(deck, rng){
+    for(let i=deck.length-1;i>0;i--){
+      const j = Math.floor(rng.random()*(i+1));
+      [deck[i], deck[j]] = [deck[j], deck[i]];
+    }
+    return deck;
+  }
+
+  /* ========= Cards and Ranking ========= */
+  function createDeck(){
+    const d = [];
+    for(const s of SUITS){
+      for(const r of RANKS){
+        d.push({suit:s, rank:r, id:`${r}${s}`});
+      }
+    }
+    return d;
+  }
+
+  function isSameColor(a,b){
+    const aBlack = (a==="♠"||a==="♣");
+    const bBlack = (b==="♠"||b==="♣");
+    return aBlack===bBlack;
+  }
+
+  function isLeftBower(card, trump){
+    return card.rank==="J" && isSameColor(card.suit, trump) && card.suit !== trump;
+  }
+  function isRightBower(card, trump){
+    return card.rank==="J" && card.suit===trump;
+  }
+  function isTrump(card, trump){
+    return isRightBower(card, trump) || isLeftBower(card, trump) || card.suit===trump;
+  }
+  function effectiveSuit(card, trump){
+    return isLeftBower(card, trump) ? trump : card.suit;
+  }
+
+  function cardStrength(card, trump, ledSuit){
+    const eff = effectiveSuit(card, trump);
+    if(isRightBower(card, trump)) return 1000;
+    if(isLeftBower(card, trump)) return 999;
+
+    if(eff===trump) return 900 + RANK_VALUE[card.rank];
+    if(eff===ledSuit) return 100 + RANK_VALUE[card.rank];
+    return RANK_VALUE[card.rank];
+  }
+
+  /* ========= DOM: Cards ========= */
+  function renderCard(card, opts={}){
+    const el = document.createElement("div");
+    el.className = "card";
+    if(!card){
+      // facedown placeholder, use renderBackCard instead
+      return el;
+    }
+    const red = (card.suit==="♥"||card.suit==="♦");
+    if(red) el.classList.add("red");
+    if(opts.dim) el.classList.add("dim");
+    if(opts.playable) el.classList.add("playable");
+    el.dataset.cardId = card.id;
+
+    const small = document.createElement("div");
+    small.className="small";
+    small.textContent = card.rank + card.suit;
+
+    const mid = document.createElement("div");
+    mid.className="suit";
+    mid.textContent = card.suit;
+
+    el.appendChild(small);
+    el.appendChild(mid);
+    return el;
+  }
+
+  function renderBackCard(mini=true){
+    const el = document.createElement("div");
+    el.className = "card facedown" + (mini ? " mini" : "");
+    el.setAttribute("aria-hidden","true");
+    return el;
+  }
+
+  /* ========= Game State ========= */
+  const SEATS = [0,1,2,3]; // 0 You, 1 North, 2 East, 3 West
+  const PARTNER = {0:1, 1:0, 2:3, 3:2};
+  const TEAM = {0:"NS", 1:"NS", 2:"EW", 3:"EW"};
+
+  const state = {
+    rng: new RNG(true),
+    useCrypto:true,
+    hands: [[],[],[],[]],
+    dealer: 0,
+    leader: 0,
+    upcard: null,
+    kitty: [],
+    trump: null,
+    maker: null,
+    alone: {0:false,1:false,2:false,3:false},
+    trick: [], // [{seat, card}]
+    taken: {NS:0, EW:0},
+    score: {NS:0, EW:0},
+    phase: "deal", // deal, bid1, bid2, discard, play
+    passCount: 0,
+    upSuit: null,
+    handNo: 0,
+    playerName: "You",
+    difficulty: "medium",
+    rules: {
+      stickDealer: true,
+      farmersHand: false,
+      renegesPenalty: false,
+      enforceFollowSuit: true
+    },
+    renegedTeam: null
+  };
+
+  function seatName(seat){
+    const el = $(`name-${seat}`);
+    return el?.textContent?.replace(/\s+/g," ").trim() || `Seat ${seat}`;
+  }
+
+  function saveSettings(){
+    localStorage.setItem("euchreSettings_v03", JSON.stringify({
+      playerName: state.playerName,
+      difficulty: state.difficulty,
+      rules: state.rules,
+      useCrypto: state.useCrypto
+    }));
+  }
+
+  function loadSettings(){
+    const s = localStorage.getItem("euchreSettings_v03");
+    if(!s) return;
+    try{
+      const data = JSON.parse(s);
+      state.playerName = data.playerName || state.playerName;
+      state.difficulty = data.difficulty || state.difficulty;
+      state.rules = Object.assign(state.rules, data.rules||{});
+      state.useCrypto = !!data.useCrypto;
+      state.rng = new RNG(state.useCrypto);
+    }catch(e){}
+  }
+
+  /* ========= Dealing and Flow ========= */
+  function hasFarmersHand(hand){
+    let c = 0;
+    for(const card of hand){
+      if(card.rank==="9" || card.rank==="10") c++;
+    }
+    return c>=3;
+  }
+
+  function sortHandForDisplay(hand, trump){
+    const suitOrder = trump ? [trump, ...SUITS.filter(s=>s!==trump)] : SUITS.slice();
+    hand.sort((a,b)=>{
+      const aTr = trump && isTrump(a, trump) ? 1 : 0;
+      const bTr = trump && isTrump(b, trump) ? 1 : 0;
+      if(aTr!==bTr) return bTr - aTr;
+
+      const sa = effectiveSuit(a, trump);
+      const sb = effectiveSuit(b, trump);
+      const su = suitOrder.indexOf(sa) - suitOrder.indexOf(sb);
+      if(su!==0) return su;
+
+      const aw = cardStrength(a, trump, sa);
+      const bw = cardStrength(b, trump, sb);
+      return bw - aw;
+    });
+  }
+
+  function dealHand(){
+    state.phase = "deal";
+    state.trump = null;
+    state.maker = null;
+    state.alone = {0:false,1:false,2:false,3:false};
+    state.trick = [];
+    state.taken = {NS:0, EW:0};
+    state.renegedTeam = null;
+    state.handNo++;
+
+    state.dealer = (state.dealer + 1) % 4;
+    state.leader = (state.dealer + 1) % 4;
+
+    const deck = createDeck();
+    state.rng = new RNG(state.useCrypto);
+    shuffle(deck, state.rng);
+
+    const patternA = [3,2], patternB = [2,3];
+    const patt = (state.rng.random() < 0.5) ? patternA : patternB;
+
+    for(const seat of SEATS) state.hands[seat] = [];
+    let ptr = 0;
+
+    for(let round=0; round<2; round++){
+      for(let i=0;i<4;i++){
+        const seat = (state.dealer + 1 + i) % 4;
+        for(let k=0;k<patt[round];k++){
+          state.hands[seat].push(deck[ptr++]);
+        }
+      }
+    }
+
+    state.upcard = deck[ptr++];
+    state.upSuit = state.upcard.suit;
+    state.kitty = [deck[ptr++], deck[ptr++], deck[ptr++]];
+
+    for(const s of SEATS) sortHandForDisplay(state.hands[s], state.trump);
+
+    renderAll();
+    safeLog(`Dealer: ${seatName(state.dealer)}. Up-card: ${state.upcard.rank}${state.upcard.suit} (${SUIT_NAMES[state.upSuit]}).`);
+
+    if(state.rules.farmersHand){
+      for(const seat of SEATS){
+        if(hasFarmersHand(state.hands[seat])){
+          safeLog(`${seat===0 ? "You" : seatName(seat)} qualifies for Farmer’s Hand. Redeal.`);
+          setTimeout(dealHand, 650);
+          return;
+        }
+      }
+    }
+
+    state.phase = "bid1";
+    state.passCount = 0;
+    promptBidding();
+  }
+
+  /* ========= Bidding ========= */
+  function promptBidding(){
+    renderAll();
+    clearActions();
+
+    if(state.phase==="bid1"){
+      setStatus(turnSeat()===0
+        ? `Your turn: order up ${SUIT_NAMES[state.upSuit]} or pass.`
+        : `${seatName(turnSeat())} is deciding…`
+      );
+
+      if(turnSeat()===0){
+        addGoAloneSwitch("Go alone if you call");
+        addButton(`Order it up (${SUIT_NAMES[state.upSuit]})`, "primary", ()=>{
+          selectMaker(0, state.upSuit, true, isGoAloneChecked());
+        });
+        addButton("Pass", "", playerPass);
+      }else{
+        setTimeout(()=>botBidRound1(turnSeat()), 520);
+      }
+      return;
+    }
+
+    if(state.phase==="bid2"){
+      setStatus(turnSeat()===0
+        ? "Your turn: name trump or pass."
+        : `${seatName(turnSeat())} is deciding…`
+      );
+
+      if(turnSeat()===0){
+        addGoAloneSwitch("Go alone if you call");
+        const row = newRow();
+        for(const s of SUITS){
+          if(s===state.upSuit) continue;
+          addButton(SUIT_NAMES[s], "", ()=>{
+            selectMaker(0, s, false, isGoAloneChecked());
+          }, row);
+        }
+        addButton("Pass", "", playerPass);
+      }else{
+        setTimeout(()=>botBidRound2(turnSeat()), 520);
+      }
+    }
+  }
+
+  function playerPass(){
+    safeLog("You pass.");
+    state.passCount++;
+    advanceTurnBidding();
+
+    if(state.phase==="bid1" && state.passCount>=4){
+      state.phase="bid2";
+      state.passCount=0;
+    } else if(state.phase==="bid2" && state.passCount>=4){
+      if(state.rules.stickDealer){
+        const dealer = state.dealer;
+        if(dealer===0){
+          setStatus("Stick the dealer is on: you must choose trump.");
+          clearActions();
+          addGoAloneSwitch("Go alone");
+          const row = newRow();
+          for(const s of SUITS){
+            if(s===state.upSuit) continue;
+            addButton(SUIT_NAMES[s], "primary", ()=>{
+              selectMaker(0, s, false, isGoAloneChecked());
+            }, row);
+          }
+          return;
+        }else{
+          const suit = botChooseTrump(dealer, true) || SUITS.find(s=>s!==state.upSuit);
+          selectMaker(dealer, suit, false, botConsiderAlone(dealer, suit));
+          return;
+        }
+      }else{
+        safeLog("All passed. Redeal.");
+        setTimeout(dealHand, 650);
+        return;
+      }
+    }
+
+    promptBidding();
+  }
+
+  function handStrengthForSuit(hand, suit, isRound1){
+    let score = 0;
+    for(const c of hand){
+      if(isRightBower(c, suit)) score += 8;
+      else if(isLeftBower(c, suit)) score += 7;
+      else if(c.suit===suit) score += (c.rank==="A"?5:(c.rank==="K"?3:(c.rank==="Q"?2:1)));
+      else if(c.rank==="A") score += 1.5;
+    }
+    if(!isRound1){
+      const suits = new Set(SUITS);
+      for(const c of hand) suits.delete(c.suit);
+      score += Math.max(0, suits.size-1)*0.5;
+    }
+    return score;
+  }
+
+  function botWantsUpSuit(seat){
+    const score = handStrengthForSuit(state.hands[seat], state.upSuit, true);
+    const diff = state.difficulty;
+    const threshold = diff==="hard" ? 9.0 : (diff==="medium" ? 8.0 : 7.2);
+    const dealerBias = seat===state.dealer ? 0.6 : 0;
+    return (score + dealerBias) >= threshold;
+  }
+
+  function botChooseTrump(seat, forced){
+    let best=null, bestScore=-1;
+    for(const s of SUITS){
+      if(s===state.upSuit) continue;
+      const sc = handStrengthForSuit(state.hands[seat], s, false);
+      if(sc>bestScore){ bestScore=sc; best=s; }
+    }
+    const diff = state.difficulty;
+    const threshold = forced ? 0 : (diff==="hard"?8.6:(diff==="medium"?7.8:7.2));
+    return bestScore>=threshold ? best : (forced ? best : null);
+  }
+
+  function botConsiderAlone(seat, suit){
+    const hand = state.hands[seat];
+    const trumpCount = hand.filter(c=>isTrump(c, suit)).length;
+    const hasBothBowers = hand.some(c=>isRightBower(c, suit)) && hand.some(c=>isLeftBower(c, suit));
+    const hasAceTrump = hand.some(c=>c.suit===suit && c.rank==="A");
+    if(state.difficulty==="hard"){
+      return (hasBothBowers && (hasAceTrump || trumpCount>=4)) || (trumpCount===5);
+    }
+    if(state.difficulty==="medium"){
+      return hasBothBowers && trumpCount>=3;
+    }
+    return trumpCount===5;
+  }
+
+  function botBidRound1(seat){
+    if(state.phase!=="bid1") return;
+    if(botWantsUpSuit(seat)){
+      selectMaker(seat, state.upSuit, true, botConsiderAlone(seat, state.upSuit));
+    }else{
+      safeLog(`${seatName(seat)} passes.`);
+      state.passCount++;
+      advanceTurnBidding();
+      if(state.passCount>=4){
+        state.phase="bid2";
+        state.passCount=0;
+      }
+      promptBidding();
+    }
+  }
+
+  function botBidRound2(seat){
+    if(state.phase!=="bid2") return;
+    const suit = botChooseTrump(seat, false);
+    if(suit){
+      selectMaker(seat, suit, false, botConsiderAlone(seat, suit));
+    }else{
+      safeLog(`${seatName(seat)} passes.`);
+      state.passCount++;
+      advanceTurnBidding();
+
+      if(state.passCount>=4){
+        if(state.rules.stickDealer){
+          const dealer = state.dealer;
+          const forcedSuit = botChooseTrump(dealer, true) || SUITS.find(s=>s!==state.upSuit);
+          selectMaker(dealer, forcedSuit, false, botConsiderAlone(dealer, forcedSuit));
+        }else{
+          safeLog("All passed. Redeal.");
+          setTimeout(dealHand, 650);
+        }
+      }else{
+        promptBidding();
+      }
+    }
+  }
+
+  function selectMaker(seat, suit, dealerPicksUp, goAlone){
+    state.maker = seat;
+    state.trump = suit;
+    state.alone = {0:false,1:false,2:false,3:false};
+    if(goAlone) state.alone[seat] = true;
+
+    safeLog(`${seatName(seat)} makes ${SUIT_NAMES[suit]}${goAlone ? ", alone" : ""}.`);
+
+    if(dealerPicksUp){
+      state.hands[state.dealer].push(state.upcard);
+      sortHandForDisplay(state.hands[state.dealer], state.trump);
+      state.phase = "discard";
+      renderAll();
+
+      if(state.dealer===0){
+        setStatus("You are dealer: tap a card to discard.");
+        clearActions();
+        addButton("How to discard", "ghost", ()=>{
+          safeLog("Dealer discard: tap one of your cards to throw away.");
+        });
+      }else{
+        setStatus(`${seatName(state.dealer)} is discarding…`);
+        setTimeout(()=>botDiscard(state.dealer), 650);
+      }
+    }else{
+      state.phase = "play";
+      state.leader = (state.dealer + 1) % 4;
+      renderAll();
+      setTimeout(maybeAutoPlay, 450);
+    }
+  }
+
+  function botDiscard(seat){
+    const hand = state.hands[seat];
+    let idx=-1, worst=1e9;
+
+    for(let i=0;i<hand.length;i++){
+      const c = hand[i];
+      const tr = isTrump(c, state.trump);
+      const bow = isRightBower(c, state.trump) || isLeftBower(c, state.trump);
+      const score = (tr ? 100 : 0) + (bow ? 200 : 0) + RANK_VALUE[c.rank]*2;
+      if(!tr && score<worst){ worst=score; idx=i; }
+    }
+    if(idx<0){
+      for(let i=0;i<hand.length;i++){
+        const c = hand[i];
+        if(isRightBower(c, state.trump) || isLeftBower(c, state.trump)) continue;
+        const score = 100 + RANK_VALUE[c.rank]*2;
+        if(score<worst){ worst=score; idx=i; }
+      }
+    }
+    const [discard] = hand.splice(idx,1);
+    safeLog(`${seatName(seat)} discards ${discard.rank}${discard.suit}.`);
+    sortHandForDisplay(hand, state.trump);
+
+    state.phase="play";
+    renderAll();
+    setTimeout(maybeAutoPlay, 450);
+  }
+
+  /* ========= Play Phase ========= */
+  function seatActive(seat){
+    const a = state.alone;
+    return !(a[0] && PARTNER[0]===seat) &&
+           !(a[1] && PARTNER[1]===seat) &&
+           !(a[2] && PARTNER[2]===seat) &&
+           !(a[3] && PARTNER[3]===seat);
+  }
+
+  function seatsInHand(){
+    const a = state.alone;
+    if(a[0]||a[1]||a[2]||a[3]) return 3;
+    return 4;
+  }
+
+  function legalPlays(hand, ledSuit, trump){
+    if(!ledSuit) return [...hand];
+    const haveLed = hand.some(c=>effectiveSuit(c, trump)===ledSuit);
+    if(!haveLed) return [...hand];
+    return hand.filter(c=>effectiveSuit(c, trump)===ledSuit);
+  }
+
+  function maybeAutoPlay(){
+    if(state.phase!=="play") return;
+
+    if(turnSeat()===0){
+      const ledSuit = state.trick.length ? effectiveSuit(state.trick[0].card, state.trump) : null;
+      if(!ledSuit) setStatus("Your turn: lead a card.");
+      else setStatus("Your turn: follow suit if you can, tap a highlighted card.");
+      renderAll(true);
+      return;
+    }
+
+    if(!seatActive(turnSeat())){
+      advanceTurnPlay();
+      setTimeout(maybeAutoPlay, 120);
+      return;
+    }
+
+    setStatus(`${seatName(turnSeat())} is playing…`);
+    setTimeout(()=>botPlay(turnSeat()), 520);
+  }
+
+  function onPlayerCardSelect(cardId){
+    // dealer discard
+    if(state.phase==="discard" && state.dealer===0){
+      const hand = state.hands[0];
+      const idx = hand.findIndex(c=>c.id===cardId);
+      if(idx<0) return;
+      const [discard] = hand.splice(idx,1);
+      safeLog(`You discard ${discard.rank}${discard.suit}.`);
+      sortHandForDisplay(hand, state.trump);
+      state.phase="play";
+      renderAll();
+      setTimeout(maybeAutoPlay, 380);
+      return;
+    }
+
+    if(state.phase!=="play") return;
+    if(turnSeat()!==0) return;
+
+    const hand = state.hands[0];
+    const idx = hand.findIndex(c=>c.id===cardId);
+    if(idx<0) return;
+
+    const ledSuit = state.trick.length ? effectiveSuit(state.trick[0].card, state.trump) : null;
+    const legals = legalPlays(hand, ledSuit, state.trump);
+    const chosen = hand[idx];
+    const isLegal = legals.some(c=>c.id===chosen.id);
+
+    if(!isLegal && state.rules.enforceFollowSuit){
+      safeLog("You must follow suit.");
+      return;
+    }
+
+    if(!isLegal && !state.renegedTeam && state.rules.renegesPenalty){
+      state.renegedTeam = TEAM[0];
+      safeLog("Renege flagged on your team, +2 to the other team at hand end.");
+    }
+
+    hand.splice(idx,1);
+    pushTrick(0, chosen);
+  }
+
+  function botPlay(seat){
+    const hand = state.hands[seat];
+    const ledSuit = state.trick.length ? effectiveSuit(state.trick[0].card, state.trump) : null;
+    const legals = legalPlays(hand, ledSuit, state.trump);
+
+    let choice;
+    if(state.difficulty==="easy"){
+      choice = samp(legals.length ? legals : hand);
+    }else{
+      choice = botHeuristicPlay(seat, hand, legals, ledSuit);
+    }
+
+    if(ledSuit && legals.length>0 && !legals.some(c=>c.id===choice.id) && state.rules.renegesPenalty && !state.renegedTeam){
+      state.renegedTeam = TEAM[seat];
+      safeLog(`Renege flagged on ${TEAM[seat]} team.`);
+    }
+
+    const idx = hand.findIndex(c=>c.id===choice.id);
+    hand.splice(idx,1);
+    pushTrick(seat, choice);
+  }
+
+  function botHeuristicPlay(seat, hand, legals, ledSuit){
+    const inLead = state.trick.length===0;
+    const cards = (legals.length ? legals : hand).slice();
+
+    let best=null, bestScore=-1;
+    for(const c of cards){
+      let score = 0;
+
+      if(inLead){
+        if(isTrump(c, state.trump)){
+          score += 60 + (isRightBower(c,state.trump)?25:isLeftBower(c,state.trump)?20:RANK_VALUE[c.rank]*3);
+        }else{
+          score += (c.rank==="A" ? 40 : 10) + RANK_VALUE[c.rank];
+        }
+      }else{
+        const currentWinner = trickWinnerSeat();
+        const partnerWinning = (currentWinner!==null && TEAM[currentWinner]===TEAM[seat]);
+        const str = cardStrength(c, state.trump, ledSuit);
+        score += partnerWinning ? (str*0.5) : (str*1.1);
+        if(isTrump(c,state.trump) && partnerWinning) score -= 25;
+      }
+
+      if(isRightBower(c,state.trump) || isLeftBower(c,state.trump)) score -= 5;
+
+      if(score>bestScore){ bestScore=score; best=c; }
+    }
+    return best || cards[0];
+  }
+
+  function pushTrick(seat, card){
+    state.trick.push({seat, card});
+    renderAll();
+
+    if(state.trick.length < seatsInHand()){
+      advanceTurnPlay();
+      setTimeout(maybeAutoPlay, 160);
+      return;
+    }
+
+    const winner = trickWinnerSeat();
+    const team = TEAM[winner];
+    if(team==="NS") state.taken.NS++; else state.taken.EW++;
+    safeLog(`${seatName(winner)} takes the trick.`);
+
+    state.trick = [];
+    state.leader = winner;
+    renderAll();
+
+    if(state.taken.NS + state.taken.EW >= 5){
+      scoreHand();
+    }else{
+      setTimeout(maybeAutoPlay, 520);
+    }
+  }
+
+  function trickWinnerSeat(){
+    if(state.trick.length===0) return null;
+    const led = effectiveSuit(state.trick[0].card, state.trump);
+    let bestSeat = state.trick[0].seat;
+    let bestVal = cardStrength(state.trick[0].card, state.trump, led);
+    for(let i=1;i<state.trick.length;i++){
+      const {seat, card} = state.trick[i];
+      const val = cardStrength(card, state.trump, led);
+      if(val>bestVal){ bestVal=val; bestSeat=seat; }
+    }
+    return bestSeat;
+  }
+
+  /* ========= Turn advance helpers ========= */
+  function turnSeat(){ return state.leader; }
+
+  function advanceTurnBidding(){
+    state.leader = (state.leader + 1) % 4;
+  }
+
+  function advanceTurnPlay(){
+    do{
+      state.leader = (state.leader + 1) % 4;
+    } while(!seatActive(state.leader));
+  }
+
+  /* ========= Scoring ========= */
+  function scoreHand(){
+    if(state.rules.renegesPenalty && state.renegedTeam){
+      const offenders = state.renegedTeam;
+      const winners = offenders==="NS" ? "EW" : "NS";
+      state.score[winners] += 2;
+      safeLog(`Renege penalty: ${winners} +2.`);
+      endHand();
+      return;
+    }
+
+    const makerTeam = TEAM[state.maker];
+    const makersTricks = makerTeam==="NS" ? state.taken.NS : state.taken.EW;
+
+    if(makersTricks>=3){
+      if(makersTricks===5){
+        const pts = state.alone[state.maker] ? 4 : 2;
+        state.score[makerTeam] += pts;
+        safeLog(`Sweep by ${makerTeam}, +${pts}.`);
+      }else{
+        state.score[makerTeam] += 1;
+        safeLog(`Maker team ${makerTeam}, +1.`);
+      }
+    }else{
+      const other = makerTeam==="NS" ? "EW" : "NS";
+      state.score[other] += 2;
+      safeLog(`Euchre, ${other} +2.`);
+    }
+
+    endHand();
+  }
+
+  function endHand(){
+    renderAll();
+    setStatus("Next hand…");
+    setTimeout(dealHand, 1100);
+  }
+
+  /* ========= UI Actions ========= */
+  function clearActions(){
+    $("actionRow").innerHTML = "";
+  }
+
+  function setStatus(text){
+    $("statusText").textContent = text;
+  }
+
+  function newRow(){
+    const row = $("actionRow");
+    return row;
+  }
+
+  function addButton(text, kind, fn, row){
+    const r = row || $("actionRow");
+    const b = document.createElement("button");
+    b.className = "btn" + (kind ? " " + kind : "");
+    b.textContent = text;
+    b.addEventListener("click", fn);
+    b.addEventListener("pointerup", (e)=>{ e.preventDefault(); fn(); });
+    r.appendChild(b);
+  }
+
+  function addGoAloneSwitch(labelText){
+    const r = $("actionRow");
+    const wrap = document.createElement("label");
+    wrap.className = "switch";
+    wrap.innerHTML = `<input type="checkbox" id="goAloneCB"><span>${labelText}</span>`;
+    r.appendChild(wrap);
+  }
+
+  function isGoAloneChecked(){
+    const cb = $("goAloneCB");
+    return cb ? cb.checked : false;
+  }
+
+  /* ========= Rendering ========= */
+  function renderAll(highlightPlayer=false){
+    // Seat names
+    $("name-0").innerHTML = `<span class="turn-dot"></span> ${escapeHtml(state.playerName || "You")} <span class="badge" id="badge-0" ${state.alone[0] ? "" : "hidden"}>Alone</span>`;
+    $("name-1").innerHTML = `<span class="turn-dot"></span> Bot North <span class="badge" id="badge-1" ${state.alone[1] ? "" : "hidden"}>Alone</span>`;
+    $("name-2").innerHTML = `<span class="turn-dot"></span> Bot East <span class="badge" id="badge-2" ${state.alone[2] ? "" : "hidden"}>Alone</span>`;
+    $("name-3").innerHTML = `<span class="turn-dot"></span> Bot West <span class="badge" id="badge-3" ${state.alone[3] ? "" : "hidden"}>Alone</span>`;
+
+    // Dealer label and trump
+    $("dealerName").textContent = seatName(state.dealer);
+    $("handNo").textContent = String(state.handNo);
+    $("trumpShow").textContent = state.trump ? `${SUIT_NAMES[state.trump]} ${state.trump}` : "—";
+
+    // Turn indicators
+    for(const seat of SEATS){
+      const seatEl = $(`seat-${seat}`);
+      if(!seatEl) continue;
+      if(seat===state.dealer) seatEl.classList.add("dealer");
+      else seatEl.classList.remove("dealer");
+
+      if(seat===turnSeat() && (state.phase==="bid1" || state.phase==="bid2" || state.phase==="play" || state.phase==="discard")){
+        seatEl.classList.add("turn");
+      }else{
+        seatEl.classList.remove("turn");
+      }
+    }
+
+    // Hands
+    renderHands(highlightPlayer);
+
+    // Kitty backs
+    const kitty = $("kittyLeft");
+    kitty.innerHTML = "";
+    for(let i=0;i<3;i++) kitty.appendChild(renderBackCard(true));
+
+    // Upcard slot
+    const upSlot = $("upcardSlot");
+    upSlot.innerHTML = "";
+    if(state.upcard){
+      upSlot.appendChild(renderCard(state.upcard));
+    }
+
+    // Trick slots
+    renderTrickSlots();
+
+    // Score
+    renderScores();
+  }
+
+  function renderHands(highlightPlayer){
+    // Bots: render mini facedown backs equal to hand count
+    for(const seat of [1,2,3]){
+      const wrap = $(`hand-${seat}`);
+      wrap.innerHTML = "";
+      const count = state.hands[seat].length;
+      for(let i=0;i<count;i++){
+        wrap.appendChild(renderBackCard(true));
+      }
+      if(!seatActive(seat)){
+        wrap.style.opacity = ".45";
+      }else{
+        wrap.style.opacity = "1";
+      }
+    }
+
+    // Player
+    const pwrap = $("hand-0");
+    pwrap.innerHTML = "";
+
+    const ledSuit = state.trick.length ? effectiveSuit(state.trick[0].card, state.trump) : null;
+    const hand = state.hands[0];
+    const legals = (state.phase==="play") ? legalPlays(hand, ledSuit, state.trump) : hand;
+
+    for(const c of hand){
+      const playable =
+        (state.phase==="play" && highlightPlayer && turnSeat()===0 && legals.some(x=>x.id===c.id)) ||
+        (state.phase==="discard" && state.dealer===0);
+
+      const el = renderCard(c, {playable});
+      if(state.phase==="play" && highlightPlayer && turnSeat()===0 && !playable) el.classList.add("dim");
+
+      // Touch and click support
+      el.addEventListener("click", ()=>onPlayerCardSelect(c.id));
+      el.addEventListener("pointerup", (e)=>{ e.preventDefault(); onPlayerCardSelect(c.id); });
+
+      pwrap.appendChild(el);
+    }
+  }
+
+  function renderTrickSlots(){
+    // Order mapping: trick-1 North, trick-2 East, trick-3 West, trick-4 You
+    const map = {1:"trick-1", 2:"trick-2", 3:"trick-3", 0:"trick-4"};
+
+    for(const id of ["trick-1","trick-2","trick-3","trick-4"]){
+      const slot = $(id);
+      slot.innerHTML = "";
+    }
+
+    for(const play of state.trick){
+      const slotId = map[play.seat];
+      const slot = $(slotId);
+      if(!slot) continue;
+      slot.appendChild(renderCard(play.card));
+    }
+  }
+
+  function renderScores(){
+    const ns = state.score.NS;
+    const ew = state.score.EW;
+    $("score-teamNS").textContent = `NS (${state.playerName}+North): ${ns}`;
+    $("score-teamEW").textContent = `EW (East+West): ${ew}`;
+  }
+
+  function escapeHtml(s){
+    return String(s).replace(/[&<>"']/g, (c)=>({
+      "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
+    }[c]));
+  }
+
+  /* ========= Controls and Modals ========= */
+  function closeModal(id){
+    const dlg = $(id);
+    if(dlg && dlg.open) dlg.close();
+  }
+
+  document.querySelectorAll("[data-close]").forEach(btn=>{
+    btn.addEventListener("click", ()=>closeModal(btn.dataset.close));
+  });
+
+  $("settingsBtn").addEventListener("click", ()=>{
+    $("playerNameInput").value = state.playerName;
+    $("difficulty").value = state.difficulty;
+    $("ruleStickDealer").checked = state.rules.stickDealer;
+    $("ruleFarmersHand").checked = state.rules.farmersHand;
+    $("ruleRenegesPenalty").checked = state.rules.renegesPenalty;
+    $("enforceFollowSuit").checked = state.rules.enforceFollowSuit;
+    $("useCrypto").checked = state.useCrypto;
+
+    const dlg = $("settingsDlg");
+    if(dlg && dlg.showModal) dlg.showModal();
+    else alert("Settings dialog is not supported in this browser.");
+  });
+
+  $("helpBtn").addEventListener("click", ()=>{
+    const dlg = $("rulesDlg");
+    if(dlg && dlg.showModal) dlg.showModal();
+    else alert("Rules dialog is not supported in this browser.");
+  });
+
+  $("newGameBtn").addEventListener("click", ()=>{
+    state.score = {NS:0, EW:0};
+    state.dealer = 3; // so first deal sets dealer to 0
+    safeLog("New game started.");
+    dealHand();
+  });
+
+  $("saveSettingsBtn").addEventListener("click", ()=>{
+    state.playerName = $("playerNameInput").value.trim() || "You";
+    state.difficulty = $("difficulty").value;
+    state.rules.stickDealer = $("ruleStickDealer").checked;
+    state.rules.farmersHand = $("ruleFarmersHand").checked;
+    state.rules.renegesPenalty = $("ruleRenegesPenalty").checked;
+    state.rules.enforceFollowSuit = $("enforceFollowSuit").checked;
+    state.useCrypto = $("useCrypto").checked;
+    state.rng = new RNG(state.useCrypto);
+
+    saveSettings();
+    closeModal("settingsDlg");
+    renderAll();
+    safeLog("Settings saved.");
+  });
+
+  /* ========= Boot ========= */
+  loadSettings();
+  // initial dealer set so first deal makes dealer 0
+  state.dealer = 3;
+  safeLog("Welcome. First, decide trump using the buttons, then tap highlighted cards to play.");
+  dealHand();
+
+})();
+</script>
+</body>
+</html>
