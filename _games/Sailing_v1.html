@@ -1,0 +1,946 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SailTutor: World Wind Sailing (One-File HTML)</title>
+
+  <!-- Leaflet (map tiles) -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""
+  />
+  <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""
+  ></script>
+
+  <style>
+    :root{
+      --panel-bg: rgba(10, 14, 18, 0.78);
+      --panel-border: rgba(255,255,255,0.12);
+      --text: rgba(255,255,255,0.92);
+      --muted: rgba(255,255,255,0.70);
+      --accent: rgba(99, 206, 255, 0.95);
+      --good: rgba(120, 255, 180, 0.95);
+      --warn: rgba(255, 220, 120, 0.95);
+      --bad: rgba(255, 120, 140, 0.95);
+    }
+    html, body {
+      height: 100%;
+      margin: 0;
+      background: #061018;
+      overflow: hidden;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      color: var(--text);
+    }
+    #map {
+      position: absolute;
+      inset: 0;
+    }
+    #overlay {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+    #hud {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      width: min(420px, calc(100vw - 24px));
+      background: var(--panel-bg);
+      border: 1px solid var(--panel-border);
+      border-radius: 14px;
+      padding: 12px 12px 10px 12px;
+      box-shadow: 0 10px 28px rgba(0,0,0,0.35);
+      backdrop-filter: blur(8px);
+    }
+    #hud h1{
+      font-size: 14px;
+      margin: 0 0 8px 0;
+      letter-spacing: 0.2px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    #hud h1 span.badge{
+      font-size: 11px;
+      font-weight: 700;
+      color: rgba(0,0,0,0.85);
+      background: var(--accent);
+      padding: 2px 8px;
+      border-radius: 999px;
+    }
+    #hud .row{
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      align-items: center;
+      margin: 8px 0;
+    }
+    #hud .label{
+      font-size: 12px;
+      color: var(--muted);
+    }
+    #hud .value{
+      font-size: 12px;
+      color: var(--text);
+      font-variant-numeric: tabular-nums;
+      text-align: right;
+      white-space: nowrap;
+    }
+    #hud .controlRow{
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 8px;
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid var(--panel-border);
+    }
+    #hud .sliderWrap{
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      align-items: center;
+    }
+    #hud input[type="range"]{
+      width: 100%;
+    }
+    #hud .btnRow{
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    #hud button, #hud label.toggle{
+      border: 1px solid var(--panel-border);
+      background: rgba(255,255,255,0.06);
+      color: var(--text);
+      border-radius: 12px;
+      padding: 8px 10px;
+      font-size: 12px;
+      cursor: pointer;
+      user-select: none;
+    }
+    #hud button:hover, #hud label.toggle:hover{
+      background: rgba(255,255,255,0.10);
+    }
+    #hud label.toggle{
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+    }
+    #hud input[type="checkbox"]{
+      transform: translateY(1px);
+      accent-color: rgba(99, 206, 255, 0.95);
+    }
+    #message{
+      margin-top: 10px;
+      font-size: 12px;
+      line-height: 1.35;
+      color: rgba(255,255,255,0.84);
+      padding: 8px 10px;
+      border-radius: 12px;
+      border: 1px solid var(--panel-border);
+      background: rgba(0,0,0,0.18);
+    }
+    #hint {
+      position: absolute;
+      right: 12px;
+      top: 12px;
+      width: min(360px, calc(100vw - 24px));
+      background: var(--panel-bg);
+      border: 1px solid var(--panel-border);
+      border-radius: 14px;
+      padding: 12px;
+      box-shadow: 0 10px 28px rgba(0,0,0,0.35);
+      backdrop-filter: blur(8px);
+    }
+    #hint .title{
+      font-size: 13px;
+      font-weight: 800;
+      margin: 0 0 6px 0;
+    }
+    #hint .text{
+      font-size: 12px;
+      line-height: 1.35;
+      color: rgba(255,255,255,0.82);
+      margin: 0;
+    }
+    #hint .tiny{
+      margin-top: 8px;
+      font-size: 11px;
+      color: rgba(255,255,255,0.70);
+    }
+    .k {
+      display: inline-block;
+      padding: 1px 6px;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.22);
+      background: rgba(255,255,255,0.06);
+      font-weight: 700;
+      font-size: 11px;
+      letter-spacing: 0.2px;
+      color: rgba(255,255,255,0.92);
+    }
+  </style>
+</head>
+
+<body>
+  <div id="map"></div>
+  <canvas id="overlay"></canvas>
+
+  <div id="hud">
+    <h1>
+      SailTutor
+      <span class="badge">World map + wind</span>
+    </h1>
+
+    <div class="row">
+      <div class="label">Position</div>
+      <div class="value" id="posValue">–</div>
+    </div>
+    <div class="row">
+      <div class="label">Heading, boat speed</div>
+      <div class="value" id="spdValue">–</div>
+    </div>
+    <div class="row">
+      <div class="label">True wind</div>
+      <div class="value" id="windValue">–</div>
+    </div>
+    <div class="row">
+      <div class="label">Point of sail, trim</div>
+      <div class="value" id="sailValue">–</div>
+    </div>
+
+    <div class="controlRow">
+      <div class="sliderWrap">
+        <div>
+          <div class="label">Simulation speed (wind impact)</div>
+          <input id="simSpeed" type="range" min="0.5" max="8" step="0.1" value="1" />
+        </div>
+        <div class="value" id="simSpeedValue">1.0×</div>
+      </div>
+
+      <div class="btnRow">
+        <button id="resetBtn" type="button">Reset start</button>
+        <button id="centerBtn" type="button">Center on boat</button>
+        <label class="toggle" title="Uses Open-Meteo. If off, wind is simulated.">
+          <input id="liveWind" type="checkbox" checked />
+          Live wind
+        </label>
+        <label class="toggle" title="Map will stop following the boat while you explore.">
+          <input id="followBoat" type="checkbox" checked />
+          Follow boat
+        </label>
+      </div>
+    </div>
+
+    <div id="message">Loading…</div>
+  </div>
+
+  <div id="hint">
+    <div class="title">How to sail this</div>
+    <p class="text">
+      Steer with <span class="k">A</span> and <span class="k">D</span>, you are turning the rudder.
+      Trim the jib with <span class="k">W</span> and <span class="k">S</span>.
+      Hold <span class="k">Q</span> and use <span class="k">W</span> or <span class="k">S</span> to trim the mainsail.
+      Watch the wind arrow and the “point of sail” label. If you point too close into the wind, you will stall and you will need to bear away, then trim in.
+    </p>
+    <div class="tiny">
+      Tip: a fast learning loop is: bear away to build speed, trim in until the trim meter looks good, then steer back upwind gently.
+    </div>
+  </div>
+
+  <script>
+    // -----------------------------
+    // Utilities
+    // -----------------------------
+    const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+    const lerp = (a, b, t) => a + (b - a) * t;
+
+    function wrapLon(lon){
+      // Wrap to [-180, 180)
+      let x = ((lon + 180) % 360 + 360) % 360 - 180;
+      if (x === -180) x = 180;
+      return x;
+    }
+    function wrapDeg(d){
+      d = ((d % 360) + 360) % 360;
+      return d;
+    }
+    function shortestAngleDeg(a, b){
+      // returns signed angle from a to b in [-180, 180]
+      let d = wrapDeg(b) - wrapDeg(a);
+      if (d > 180) d -= 360;
+      if (d < -180) d += 360;
+      return d;
+    }
+    function degToRad(d){ return d * Math.PI / 180; }
+    function radToDeg(r){ return r * 180 / Math.PI; }
+
+    function metersPerDegLat(){
+      return 111320; // decent approximation
+    }
+    function metersPerDegLon(latDeg){
+      return 111320 * Math.cos(degToRad(latDeg));
+    }
+
+    function knotsFromMS(ms){ return ms * 1.943844; }
+
+    // -----------------------------
+    // Start state requested by user
+    // -----------------------------
+    const START = {
+      lat: 26.54452991405306,
+      lon: -76.96058514949952,
+      headingDeg: 0 // traveling north
+    };
+
+    // -----------------------------
+    // Leaflet map
+    // -----------------------------
+    const map = L.map("map", {
+      worldCopyJump: true,
+      zoomControl: true,
+      preferCanvas: true
+    }).setView([START.lat, START.lon], 5);
+
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      maxZoom: 19,
+      attribution: "&copy; OpenStreetMap contributors"
+    }).addTo(map);
+
+    // -----------------------------
+    // Overlay canvas for boat + wind
+    // -----------------------------
+    const overlay = document.getElementById("overlay");
+    const ctx = overlay.getContext("2d");
+
+    function resize(){
+      const r = map.getContainer().getBoundingClientRect();
+      overlay.width = Math.floor(r.width * devicePixelRatio);
+      overlay.height = Math.floor(r.height * devicePixelRatio);
+      overlay.style.width = `${r.width}px`;
+      overlay.style.height = `${r.height}px`;
+      ctx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
+    }
+    window.addEventListener("resize", resize);
+    resize();
+
+    // -----------------------------
+    // Controls
+    // -----------------------------
+    const keys = new Set();
+    window.addEventListener("keydown", (e) => {
+      const k = e.key.toLowerCase();
+      if (["w","a","s","d","q"," "].includes(k)) e.preventDefault();
+      keys.add(k);
+    });
+    window.addEventListener("keyup", (e) => {
+      keys.delete(e.key.toLowerCase());
+    });
+
+    // -----------------------------
+    // Wind: live via Open-Meteo, fallback to simulated field
+    // -----------------------------
+    const windState = {
+      usingLive: true,
+      lastFetchMs: 0,
+      ok: false,
+      speedMS: 7.0,      // true wind speed
+      fromDeg: 90.0,     // meteorological: direction wind is coming FROM
+      source: "Simulated"
+    };
+
+    async function fetchLiveWind(lat, lon){
+      const url =
+        "https://api.open-meteo.com/v1/forecast"
+        + `?latitude=${encodeURIComponent(lat)}`
+        + `&longitude=${encodeURIComponent(lon)}`
+        + "&current=wind_speed_10m,wind_direction_10m"
+        + "&wind_speed_unit=ms";
+
+      const res = await fetch(url, { cache: "no-store" });
+      if (!res.ok) throw new Error(`Wind fetch failed: ${res.status}`);
+      const data = await res.json();
+
+      const cur = data && data.current;
+      if (!cur || typeof cur.wind_speed_10m !== "number" || typeof cur.wind_direction_10m !== "number") {
+        throw new Error("Wind fetch returned unexpected data");
+      }
+
+      windState.speedMS = cur.wind_speed_10m;
+      windState.fromDeg = wrapDeg(cur.wind_direction_10m);
+      windState.ok = true;
+      windState.source = "Open-Meteo current wind";
+    }
+
+    function simulatedWind(lat, lon, tSec){
+      // A simple, smooth global wind field:
+      // Trade winds easterly in tropics, westerlies mid-lat, polar easterlies,
+      // with gentle longitudinal and time variation.
+      const absLat = Math.abs(lat);
+      let baseFrom;
+
+      if (absLat < 25) baseFrom = 70;              // trades: from ENE
+      else if (absLat < 55) baseFrom = 250;        // westerlies: from WSW
+      else baseFrom = 110;                         // polar easterlies: from ESE
+
+      const wave1 = 25 * Math.sin(degToRad(lon * 1.2) + tSec * 0.0007);
+      const wave2 = 18 * Math.sin(degToRad(lat * 2.0) - tSec * 0.0009);
+      const fromDeg = wrapDeg(baseFrom + wave1 + wave2);
+
+      const speed = 6.0
+        + 3.0 * Math.cos(degToRad(absLat * 2.0))
+        + 2.0 * Math.sin(degToRad(lon * 0.7) + tSec * 0.0012);
+
+      return { speedMS: clamp(speed, 1.5, 16.0), fromDeg, source: "Simulated wind field" };
+    }
+
+    // -----------------------------
+    // Boat physics and sail logic
+    // -----------------------------
+    const boat = {
+      lat: START.lat,
+      lon: START.lon,
+      headingDeg: START.headingDeg,
+      speedMS: 0.0,
+
+      rudderDeg: 0.0,      // -30..30
+      jibTrimDeg: 25.0,    // 5..85 (0 is centered tight)
+      mainTrimDeg: 30.0,   // 5..85
+
+      // For nicer motion
+      turnRateDegPerSec: 0.0,
+      targetRudderDeg: 0.0
+    };
+
+    function resetBoat(){
+      boat.lat = START.lat;
+      boat.lon = START.lon;
+      boat.headingDeg = START.headingDeg;
+      boat.speedMS = 0.0;
+      boat.rudderDeg = 0.0;
+      boat.targetRudderDeg = 0.0;
+      boat.turnRateDegPerSec = 0.0;
+      boat.jibTrimDeg = 25.0;
+      boat.mainTrimDeg = 30.0;
+      map.setView([boat.lat, boat.lon], map.getZoom(), { animate: false });
+    }
+
+    function pointOfSailLabel(trueWindAngleDeg){
+      // trueWindAngleDeg: angle between boat heading and wind-from direction, 0..180
+      if (trueWindAngleDeg < 35) return "In irons";
+      if (trueWindAngleDeg < 60) return "Close-hauled";
+      if (trueWindAngleDeg < 85) return "Close reach";
+      if (trueWindAngleDeg < 110) return "Beam reach";
+      if (trueWindAngleDeg < 150) return "Broad reach";
+      return "Run";
+    }
+
+    function idealTrimForApparent(appAngleDeg){
+      // appAngleDeg: 0..180, 0 is headwind, 180 is tailwind
+      // Tight upwind, eased downwind.
+      // This is a teaching approximation, not a full polar model.
+      if (appAngleDeg < 35) return 12;
+      if (appAngleDeg < 60) return lerp(12, 22, (appAngleDeg - 35) / 25);
+      if (appAngleDeg < 110) return lerp(22, 40, (appAngleDeg - 60) / 50);
+      if (appAngleDeg < 160) return lerp(40, 78, (appAngleDeg - 110) / 50);
+      return 82;
+    }
+
+    function trimEfficiency(trimDeg, idealDeg){
+      const err = (trimDeg - idealDeg);
+      // Smooth bell curve, 1.0 best, ~0.2 very bad
+      const e = Math.exp(-(err*err) / (2 * 16 * 16));
+      return clamp(e, 0.05, 1.0);
+    }
+
+    // -----------------------------
+    // UI hooks
+    // -----------------------------
+    const posValue = document.getElementById("posValue");
+    const spdValue = document.getElementById("spdValue");
+    const windValue = document.getElementById("windValue");
+    const sailValue = document.getElementById("sailValue");
+    const message = document.getElementById("message");
+
+    const simSpeedSlider = document.getElementById("simSpeed");
+    const simSpeedValue = document.getElementById("simSpeedValue");
+    const resetBtn = document.getElementById("resetBtn");
+    const centerBtn = document.getElementById("centerBtn");
+    const liveWindChk = document.getElementById("liveWind");
+    const followBoatChk = document.getElementById("followBoat");
+
+    resetBtn.addEventListener("click", resetBoat);
+    centerBtn.addEventListener("click", () => map.setView([boat.lat, boat.lon], map.getZoom(), { animate: true }));
+    liveWindChk.addEventListener("change", () => windState.usingLive = !!liveWindChk.checked);
+
+    windState.usingLive = !!liveWindChk.checked;
+
+    // Pause following when user drags, resume via checkbox or Center button
+    let userPanning = false;
+    map.on("dragstart", () => { userPanning = true; });
+    map.on("dragend", () => { userPanning = false; });
+
+    // -----------------------------
+    // Main loop
+    // -----------------------------
+    let lastT = performance.now();
+
+    function update(dt, tNow){
+      const simSpeed = parseFloat(simSpeedSlider.value);
+      simSpeedValue.textContent = `${simSpeed.toFixed(1)}×`;
+
+      // Controls: rudder A/D, jib W/S, main W/S while holding Q
+      let rudderInput = 0;
+      if (keys.has("a")) rudderInput -= 1;
+      if (keys.has("d")) rudderInput += 1;
+
+      const qHeld = keys.has("q");
+      let trimInput = 0;
+      if (keys.has("w")) trimInput += 1;
+      if (keys.has("s")) trimInput -= 1;
+
+      // Rudder target changes, then smooth toward it
+      const rudderMax = 28;
+      boat.targetRudderDeg = clamp(boat.targetRudderDeg + rudderInput * 75 * dt, -rudderMax, rudderMax);
+
+      // Auto-center rudder when no input
+      if (rudderInput === 0){
+        boat.targetRudderDeg *= Math.pow(0.001, dt); // decays toward 0
+      }
+
+      boat.rudderDeg = lerp(boat.rudderDeg, boat.targetRudderDeg, 1 - Math.pow(0.0008, dt));
+
+      // Trimming: W/S normally jib, hold Q to adjust main
+      if (trimInput !== 0){
+        const rate = 38; // deg/s
+        if (qHeld){
+          boat.mainTrimDeg = clamp(boat.mainTrimDeg + trimInput * rate * dt, 5, 85);
+        } else {
+          boat.jibTrimDeg = clamp(boat.jibTrimDeg + trimInput * rate * dt, 5, 85);
+        }
+      }
+
+      // Wind update
+      const tSec = tNow / 1000;
+      const shouldFetch = windState.usingLive && (tNow - windState.lastFetchMs > 25000);
+
+      if (shouldFetch){
+        windState.lastFetchMs = tNow;
+        fetchLiveWind(boat.lat, boat.lon).catch(() => {
+          windState.ok = false;
+          windState.source = "Simulated wind field (live wind unavailable)";
+        });
+      }
+
+      if (!windState.usingLive || !windState.ok){
+        const w = simulatedWind(boat.lat, boat.lon, tSec);
+        windState.speedMS = w.speedMS;
+        windState.fromDeg = w.fromDeg;
+        windState.source = w.source;
+      }
+
+      // Convert true wind "from" to wind vector "to"
+      const windToDeg = wrapDeg(windState.fromDeg + 180);
+      const windToRad = degToRad(windToDeg);
+
+      const windVx = windState.speedMS * Math.sin(windToRad); // east
+      const windVy = windState.speedMS * Math.cos(windToRad); // north
+
+      // Boat velocity vector
+      const headRad = degToRad(boat.headingDeg);
+      const boatVx = boat.speedMS * Math.sin(headRad);
+      const boatVy = boat.speedMS * Math.cos(headRad);
+
+      // Apparent wind at boat = true wind - boat velocity (vector)
+      const appVx = windVx - boatVx;
+      const appVy = windVy - boatVy;
+      const appSpeed = Math.hypot(appVx, appVy);
+
+      // Apparent wind direction "to" in degrees
+      const appToDeg = wrapDeg(radToDeg(Math.atan2(appVx, appVy)));
+
+      // Apparent wind "from" is opposite
+      const appFromDeg = wrapDeg(appToDeg + 180);
+
+      // Angles relative to boat heading for sailing decisions
+      const trueWindAngle = Math.abs(shortestAngleDeg(boat.headingDeg, windState.fromDeg)); // 0..180
+      const appWindAngle = Math.abs(shortestAngleDeg(boat.headingDeg, appFromDeg));        // 0..180
+
+      const posLabel = pointOfSailLabel(trueWindAngle);
+
+      // In-irons stall model: hard stall if too close to wind
+      const noGo = 35;
+      const stall = (trueWindAngle < noGo) ? (1 - (trueWindAngle / noGo)) : 0;
+
+      // Trim efficiency: compare current trim to ideal for apparent wind
+      const ideal = idealTrimForApparent(appWindAngle);
+      const jibEff = trimEfficiency(boat.jibTrimDeg, ideal);
+      const mainEff = trimEfficiency(boat.mainTrimDeg, ideal);
+
+      // Sail side: wind from which side relative to heading
+      // Positive means wind-from is to starboard, negative means port
+      const relWindSigned = shortestAngleDeg(boat.headingDeg, windState.fromDeg);
+
+      // A simple drive model: best on reaches, weaker downwind and upwind
+      // We scale by apparent wind and trim, plus a point-of-sail factor.
+      const a = clamp(appWindAngle, 0, 180);
+      const reachFactor = Math.sin(degToRad(clamp(a, 0, 180))); // peaks at 90
+      const downwindPenalty = (a > 150) ? lerp(1.0, 0.65, (a - 150) / 30) : 1.0;
+      const upwindPenalty = (a < 60) ? lerp(0.70, 1.0, (a - 35) / 25) : 1.0;
+
+      const trimCombo = 0.55 * jibEff + 0.45 * mainEff;
+      const baseDrive = appSpeed * 0.55 * reachFactor * downwindPenalty * upwindPenalty * trimCombo;
+
+      // Stall reduces drive harshly
+      const drive = baseDrive * (1 - clamp(stall * 1.25, 0, 1));
+
+      // Rudder drag and turning
+      const rudderDrag = 1 - 0.22 * Math.min(1, Math.abs(boat.rudderDeg) / rudderMax);
+
+      // Acceleration and drag
+      const targetSpeed = (drive * rudderDrag) * 1.35;
+      const accel = (targetSpeed - boat.speedMS) * 0.55; // m/s^2 style
+      const simDt = dt * simSpeed;
+
+      boat.speedMS = clamp(boat.speedMS + accel * simDt, 0, 14.5);
+
+      // Heading change depends on rudder and speed
+      const turnPower = (boat.speedMS / 6.5);
+      const desiredTurn = boat.rudderDeg * 1.55 * clamp(turnPower, 0, 2.4);
+      boat.turnRateDegPerSec = lerp(boat.turnRateDegPerSec, desiredTurn, 1 - Math.pow(0.002, dt));
+      boat.headingDeg = wrapDeg(boat.headingDeg + boat.turnRateDegPerSec * simDt);
+
+      // Position update in degrees
+      const dx = boat.speedMS * simDt; // meters along heading per step
+      const north = dx * Math.cos(degToRad(boat.headingDeg));
+      const east  = dx * Math.sin(degToRad(boat.headingDeg));
+
+      const dLat = north / metersPerDegLat();
+      const dLon = east / Math.max(1e-6, metersPerDegLon(boat.lat));
+
+      boat.lat = clamp(boat.lat + dLat, -84.5, 84.5); // Mercator comfort
+      boat.lon = wrapLon(boat.lon + dLon);
+
+      // Follow boat
+      if (followBoatChk.checked && !userPanning){
+        map.setView([boat.lat, boat.lon], map.getZoom(), { animate: false });
+      }
+
+      // HUD
+      posValue.textContent = `${boat.lat.toFixed(5)}, ${boat.lon.toFixed(5)}`;
+      spdValue.textContent = `${boat.headingDeg.toFixed(0)}° , ${knotsFromMS(boat.speedMS).toFixed(1)} kn`;
+      windValue.textContent = `${windState.speedMS.toFixed(1)} m/s from ${windState.fromDeg.toFixed(0)}°`;
+      sailValue.textContent =
+        `${posLabel} , jib ${boat.jibTrimDeg.toFixed(0)}° main ${boat.mainTrimDeg.toFixed(0)}°`;
+
+      // Coaching message
+      const trimScore = (0.5 * jibEff + 0.5 * mainEff);
+      let coach = "";
+
+      if (trueWindAngle < noGo + 3){
+        coach = "You are pointing too close into the wind, the sails cannot generate drive here. Bear away a little, build speed, then trim in and head up gently.";
+      } else if (trimScore > 0.82){
+        coach = "Trim looks solid. Try steering a touch upwind until you feel speed start to fade, then bear away slightly to keep the flow attached.";
+      } else if (trimScore > 0.55){
+        coach = "You are close. Adjust trim until the trim meter improves. Upwind wants tighter sails, reaching wants a moderate ease, downwind wants a big ease.";
+      } else {
+        coach = "Trim is fighting the wind. Change sail trim more boldly, then steer to a comfortable reach to regain speed.";
+      }
+
+      const trimPct = Math.round(trimScore * 100);
+      const color =
+        (trimPct >= 80) ? "var(--good)" :
+        (trimPct >= 55) ? "var(--warn)" : "var(--bad)";
+
+      message.innerHTML =
+        `<div style="display:flex;justify-content:space-between;gap:10px;align-items:center;">
+          <div style="font-weight:700;color:${color};">Trim meter: ${trimPct}%</div>
+          <div style="color:rgba(255,255,255,0.70);font-size:11px;">${windState.source}</div>
+        </div>
+        <div style="margin-top:6px;">${coach}</div>`;
+
+      // Draw overlay (boat + wind)
+      drawOverlay({
+        trueWindFromDeg: windState.fromDeg,
+        appWindFromDeg: appFromDeg,
+        appWindAngleDeg: appWindAngle,
+        appSpeedMS: appSpeed,
+        idealTrimDeg: ideal,
+        jibEff, mainEff,
+        relWindSigned
+      });
+    }
+
+    function drawOverlay(info){
+      const w = overlay.clientWidth;
+      const h = overlay.clientHeight;
+
+      ctx.clearRect(0, 0, w, h);
+
+      // Soft vignette for readability
+      const g = ctx.createRadialGradient(w/2, h/2, 80, w/2, h/2, Math.max(w,h)*0.65);
+      g.addColorStop(0, "rgba(0,0,0,0.00)");
+      g.addColorStop(1, "rgba(0,0,0,0.18)");
+      ctx.fillStyle = g;
+      ctx.fillRect(0, 0, w, h);
+
+      // Wind arrow widget (top center)
+      const wx = w/2;
+      const wy = 92;
+      drawWindWidget(wx, wy, info.trueWindFromDeg, windState.speedMS, "TRUE WIND");
+
+      // Apparent wind arrow widget (slightly lower)
+      drawWindWidget(wx, wy + 64, info.appWindFromDeg, info.appSpeedMS, "APPARENT");
+
+      // Boat at screen center
+      const cx = w/2;
+      const cy = h/2;
+
+      drawBoat(cx, cy, boat.headingDeg, boat.rudderDeg, boat.jibTrimDeg, boat.mainTrimDeg, info.relWindSigned, info.idealTrimDeg, info.jibEff, info.mainEff);
+    }
+
+    function drawWindWidget(x, y, fromDeg, speedMS, label){
+      // Draw direction wind is coming FROM, arrow points toward boat (opposite)
+      const toDeg = wrapDeg(fromDeg + 180);
+      const ang = degToRad(toDeg);
+
+      ctx.save();
+      ctx.translate(x, y);
+
+      // Backplate
+      ctx.fillStyle = "rgba(0,0,0,0.28)";
+      ctx.strokeStyle = "rgba(255,255,255,0.14)";
+      ctx.lineWidth = 1;
+      roundRect(ctx, -96, -20, 192, 40, 12);
+      ctx.fill();
+      ctx.stroke();
+
+      // Label
+      ctx.fillStyle = "rgba(255,255,255,0.75)";
+      ctx.font = "11px system-ui, -apple-system, Segoe UI, Roboto, Arial";
+      ctx.textAlign = "left";
+      ctx.textBaseline = "middle";
+      ctx.fillText(label, -86, 0);
+
+      // Speed
+      ctx.textAlign = "right";
+      ctx.fillText(`${speedMS.toFixed(1)} m/s`, 86, 0);
+
+      // Arrow
+      ctx.rotate(ang);
+      ctx.strokeStyle = "rgba(99, 206, 255, 0.95)";
+      ctx.fillStyle = "rgba(99, 206, 255, 0.95)";
+      ctx.lineWidth = 2;
+
+      const len = 34;
+      ctx.beginPath();
+      ctx.moveTo(0, 0);
+      ctx.lineTo(0, -len);
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.moveTo(0, -len);
+      ctx.lineTo(-6, -len + 10);
+      ctx.lineTo(6, -len + 10);
+      ctx.closePath();
+      ctx.fill();
+
+      ctx.restore();
+    }
+
+    function drawBoat(x, y, headingDeg, rudderDeg, jibTrimDeg, mainTrimDeg, relWindSigned, idealTrimDeg, jibEff, mainEff){
+      // Boat size
+      const L = 88;
+      const B = 26;
+
+      // Determine which side sails fly to: leeward side
+      // If wind-from is to starboard (positive), leeward is port (negative), and vice versa.
+      const leewardSign = (relWindSigned >= 0) ? -1 : 1;
+
+      // Sails angles (relative to centerline), signed to leeward
+      const jibAng = degToRad(leewardSign * jibTrimDeg);
+      const mainAng = degToRad(leewardSign * mainTrimDeg);
+
+      ctx.save();
+      ctx.translate(x, y);
+      ctx.rotate(degToRad(headingDeg));
+
+      // Wake
+      ctx.save();
+      ctx.globalAlpha = 0.35;
+      ctx.fillStyle = "rgba(200,240,255,0.40)";
+      ctx.beginPath();
+      ctx.ellipse(0, L*0.55, B*0.65, L*0.55, 0, 0, Math.PI*2);
+      ctx.fill();
+      ctx.restore();
+
+      // Hull shadow
+      ctx.save();
+      ctx.globalAlpha = 0.35;
+      ctx.fillStyle = "rgba(0,0,0,0.55)";
+      ctx.beginPath();
+      ctx.ellipse(2, 4, B*0.7, L*0.52, 0, 0, Math.PI*2);
+      ctx.fill();
+      ctx.restore();
+
+      // Hull
+      ctx.fillStyle = "rgba(240,245,250,0.92)";
+      ctx.strokeStyle = "rgba(20,30,40,0.55)";
+      ctx.lineWidth = 1.5;
+
+      ctx.beginPath();
+      ctx.moveTo(0, -L*0.56);
+      ctx.quadraticCurveTo(B*0.62, -L*0.28, B*0.55, 0);
+      ctx.quadraticCurveTo(B*0.50, L*0.48, 0, L*0.56);
+      ctx.quadraticCurveTo(-B*0.50, L*0.48, -B*0.55, 0);
+      ctx.quadraticCurveTo(-B*0.62, -L*0.28, 0, -L*0.56);
+      ctx.closePath();
+      ctx.fill();
+      ctx.stroke();
+
+      // Deck line
+      ctx.strokeStyle = "rgba(20,30,40,0.20)";
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(0, -L*0.44);
+      ctx.lineTo(0, L*0.40);
+      ctx.stroke();
+
+      // Mast
+      ctx.strokeStyle = "rgba(25,35,45,0.75)";
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      ctx.moveTo(0, -L*0.18);
+      ctx.lineTo(0, L*0.16);
+      ctx.stroke();
+
+      // Boom
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(0, L*0.10);
+      ctx.lineTo(0 + Math.sin(mainAng) * (B*0.95), L*0.10 + Math.cos(mainAng) * (B*0.95));
+      ctx.stroke();
+
+      // Sails: shade by efficiency
+      const sailAlphaMain = lerp(0.18, 0.40, mainEff);
+      const sailAlphaJib  = lerp(0.16, 0.36, jibEff);
+
+      // Main sail
+      ctx.save();
+      ctx.globalAlpha = 1.0;
+      ctx.fillStyle = `rgba(255,255,255,${sailAlphaMain.toFixed(3)})`;
+      ctx.strokeStyle = "rgba(255,255,255,0.55)";
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      const mastX = 0, mastY = -L*0.18;
+      const boomX = 0, boomY = L*0.10;
+      const tipX = boomX + Math.sin(mainAng) * (B*1.70);
+      const tipY = boomY + Math.cos(mainAng) * (B*1.70);
+      ctx.moveTo(mastX, mastY);
+      ctx.lineTo(0, L*0.14);
+      ctx.lineTo(tipX, tipY);
+      ctx.closePath();
+      ctx.fill();
+      ctx.stroke();
+      ctx.restore();
+
+      // Jib sail (foretriangle)
+      ctx.save();
+      ctx.fillStyle = `rgba(255,255,255,${sailAlphaJib.toFixed(3)})`;
+      ctx.strokeStyle = "rgba(255,255,255,0.55)";
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      const foreX = 0, foreY = -L*0.50;
+      const tackX = 0, tackY = -L*0.16;
+      const clewX = tackX + Math.sin(jibAng) * (B*1.45);
+      const clewY = tackY + Math.cos(jibAng) * (B*1.45);
+      ctx.moveTo(foreX, foreY);
+      ctx.lineTo(tackX, tackY);
+      ctx.lineTo(clewX, clewY);
+      ctx.closePath();
+      ctx.fill();
+      ctx.stroke();
+      ctx.restore();
+
+      // Rudder indicator
+      ctx.save();
+      ctx.translate(0, L*0.57);
+      ctx.rotate(degToRad(rudderDeg));
+      ctx.strokeStyle = "rgba(20,30,40,0.75)";
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      ctx.moveTo(0, -6);
+      ctx.lineTo(0, 10);
+      ctx.stroke();
+      ctx.restore();
+
+      // Small trim cue: ideal vs current
+      const ideal = idealTrimDeg;
+      const avgTrim = 0.55 * jibTrimDeg + 0.45 * mainTrimDeg;
+      const trimErr = Math.abs(avgTrim - ideal);
+
+      ctx.save();
+      const meterW = 84;
+      const meterH = 8;
+      ctx.translate(0, -L*0.70);
+      ctx.fillStyle = "rgba(0,0,0,0.28)";
+      ctx.strokeStyle = "rgba(255,255,255,0.14)";
+      ctx.lineWidth = 1;
+      roundRect(ctx, -meterW/2, -meterH/2, meterW, meterH, 6);
+      ctx.fill();
+      ctx.stroke();
+
+      // Fill bar based on error
+      const score = clamp(Math.exp(-(trimErr*trimErr)/(2*16*16)), 0, 1);
+      const fillW = meterW * score;
+
+      let col;
+      if (score > 0.82) col = "rgba(120,255,180,0.90)";
+      else if (score > 0.55) col = "rgba(255,220,120,0.90)";
+      else col = "rgba(255,120,140,0.90)";
+
+      ctx.fillStyle = col;
+      roundRect(ctx, -meterW/2, -meterH/2, fillW, meterH, 6);
+      ctx.fill();
+      ctx.restore();
+
+      ctx.restore();
+    }
+
+    function roundRect(c, x, y, w, h, r){
+      const rr = Math.min(r, w/2, h/2);
+      c.beginPath();
+      c.moveTo(x + rr, y);
+      c.lineTo(x + w - rr, y);
+      c.quadraticCurveTo(x + w, y, x + w, y + rr);
+      c.lineTo(x + w, y + h - rr);
+      c.quadraticCurveTo(x + w, y + h, x + w - rr, y + h);
+      c.lineTo(x + rr, y + h);
+      c.quadraticCurveTo(x, y + h, x, y + h - rr);
+      c.lineTo(x, y + rr);
+      c.quadraticCurveTo(x, y, x + rr, y);
+      c.closePath();
+    }
+
+    // Kickstart
+    resetBoat();
+    message.textContent = "Sailing: press A or D to steer, press W or S to trim the jib, hold Q and press W or S to trim the main. Use the slider to speed up the simulation.";
+
+    function frame(now){
+      const dt = clamp((now - lastT) / 1000, 0, 0.05);
+      lastT = now;
+      update(dt, now);
+      requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  </script>
+</body>
+</html>
