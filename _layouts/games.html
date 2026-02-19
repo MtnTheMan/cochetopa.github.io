@@ -11,9 +11,10 @@ layout: default           # nest inside the default.html wrapper
 
   <ul class="space-y-2">
     {% for g in site.games %}
+      {% assign game_title = g.title | default: g.url | split: '/' | last | replace: '.html', '' %}
       <li>
         <a href="{{ g.url | relative_url }}" class="underline hover:text-sky-500">
-          {{ g.title }}
+          {{ game_title }}
         </a>
       </li>
     {% endfor %}
