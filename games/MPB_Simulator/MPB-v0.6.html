@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>MPB v0.6: Mountain Pine Beetle Landscape Model</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <style>
+    html, body { height: 100%; margin: 0; }
+    body { font-family: Arial, Helvetica, sans-serif; color: #172018; }
+    #app { height: 100%; display: grid; grid-template-rows: auto 1fr; }
+    #controls {
+      z-index: 1000;
+      background: #f7faf5;
+      border-bottom: 1px solid #c8d8c2;
+      padding: 10px 12px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 14px;
+      align-items: center;
+      box-sizing: border-box;
+    }
+    #controls label { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; white-space: nowrap; }
+    #controls input, #controls select {
+      width: 70px;
+      border: 1px solid #aab9a6;
+      border-radius: 4px;
+      padding: 4px 5px;
+      background: #fff;
+      color: #172018;
+    }
+    #controls select { width: 150px; }
+    #controls button {
+      border: 1px solid #6f8d68;
+      border-radius: 4px;
+      padding: 5px 9px;
+      background: #fff;
+      color: #172018;
+      cursor: pointer;
+    }
+    #controls button:hover { background: #e6f0e2; }
+    #controls button.active { background: #276c43; color: #fff; border-color: #276c43; }
+    .stat { font-size: 13px; white-space: nowrap; }
+    .stat strong { font-variant-numeric: tabular-nums; }
+    #status { flex-basis: 100%; font-size: 12px; color: #4a5a47; }
+    #map { min-height: 420px; }
+    .legend {
+      background: rgba(255,255,255,0.94);
+      border: 1px solid #c8d8c2;
+      border-radius: 6px;
+      padding: 8px 10px;
+      line-height: 1.35;
+      font-size: 12px;
+      box-shadow: 0 1px 8px rgba(0,0,0,0.15);
+    }
+    .legend-row { display: flex; align-items: center; gap: 6px; margin-top: 4px; }
+    .swatch { width: 12px; height: 12px; border-radius: 50%; display: inline-block; }
+    @media (max-width: 720px) {
+      #controls { gap: 8px; }
+      #controls label { flex: 1 1 135px; justify-content: space-between; }
+      #controls input, #controls select { width: 78px; }
+      #status { flex-basis: auto; }
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <div id="controls">
+      <label>Adults/gen <input type="number" id="rate" value="3" min="1" max="8" /></label>
+      <label>Flight km <input type="number" id="range" value="6" min="1" max="30" step="1" /></label>
+      <label>Annual mort <input type="number" id="mort" value="0.18" min="0" max="0.8" step="0.02" /></label>
+      <label>Gen/year <input type="number" id="perYear" value="1" min="1" max="4" /></label>
+      <label>Weather <input type="number" id="weather" value="1.05" min="0.6" max="1.5" step="0.05" /></label>
+      <label>Host layer
+        <select id="hostLayer">
+          <option value="lodgepole_pine">Lodgepole pine</option>
+          <option value="ponderosa_pine">Ponderosa pine</option>
+          <option value="limber_pine">Limber pine</option>
+          <option value="whitebark_pine">Whitebark pine</option>
+          <option value="western_white_pine">Western white pine</option>
+          <option value="southwestern_white_pine">SW white pine</option>
+        </select>
+      </label>
+      <button id="step">Step</button>
+      <button id="run">Run</button>
+      <button id="reset">Reset</button>
+      <span class="stat">Gen <strong id="gen">0</strong></span>
+      <span class="stat">Year <strong id="year">0</strong></span>
+      <span class="stat">Outbreaks <strong id="pop">0</strong></span>
+      <span class="stat">New <strong id="newCount">0</strong></span>
+      <span class="stat">Host BA <strong id="hostBa">0</strong></span>
+      <span class="stat">Map cells <strong id="cacheCount">0</strong></span>
+      <div id="status">Click a pine landscape to seed an outbreak. Host suitability is sampled from USFS IIPP tree-species basal-area rasters.</div>
+    </div>
+    <div id="map"></div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/esri-leaflet/dist/esri-leaflet.js"></script>
+  <script>
+    const SPECIES_URL = 'https://imagery.geoplatform.gov/iipp/rest/services/Vegetation/USFS_EDW_FHP_TreeSpeciesMetrics_BasalArea/ImageServer';
+    const HOSTS = [
+      { key: 'lodgepole_pine', label: 'Lodgepole pine', weight: 1.00 },
+      { key: 'ponderosa_pine', label: 'Ponderosa pine', weight: 0.58 },
+      { key: 'limber_pine', label: 'Limber pine', weight: 0.45 },
+      { key: 'whitebark_pine', label: 'Whitebark pine', weight: 0.42 },
+      { key: 'western_white_pine', label: 'Western white pine', weight: 0.36 },
+      { key: 'southwestern_white_pine', label: 'SW white pine', weight: 0.32 }
+    ];
+    const MAX_BEETLES = 650;
+    const MAX_PARENTS_PER_STEP = 90;
+    const MAX_NEW_PER_STEP = 140;
+
+    const map = L.map('map', { preferCanvas: true }).setView([38.55, -106.75], 8);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 18,
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    const habitat = L.rectangle([[31, -125], [49, -102]], {
+      color: '#276c43',
+      weight: 1,
+      fillColor: '#276c43',
+      fillOpacity: 0.04
+    }).addTo(map);
+
+    let hostOverlay = L.esri.imageMapLayer({
+      url: SPECIES_URL,
+      opacity: 0.42,
+      renderingRule: { rasterFunction: 'lodgepole_pine' },
+      mosaicRule: { where: "variable='lodgepole_pine' AND year=2011" }
+    }).addTo(map);
+
+    const beetleLayer = L.layerGroup().addTo(map);
+    const rangeLayer = L.layerGroup().addTo(map);
+    const cells = new Map();
+    let beetles = [];
+    let generation = 0;
+    let years = 0;
+    let lastNew = 0;
+    let lastAvgHostBa = 0;
+    let running = false;
+    let stepping = false;
+    let timer = null;
+
+    const els = {
+      rate: document.getElementById('rate'),
+      range: document.getElementById('range'),
+      mort: document.getElementById('mort'),
+      perYear: document.getElementById('perYear'),
+      weather: document.getElementById('weather'),
+      hostLayer: document.getElementById('hostLayer'),
+      step: document.getElementById('step'),
+      run: document.getElementById('run'),
+      reset: document.getElementById('reset'),
+      gen: document.getElementById('gen'),
+      year: document.getElementById('year'),
+      pop: document.getElementById('pop'),
+      newCount: document.getElementById('newCount'),
+      hostBa: document.getElementById('hostBa'),
+      cacheCount: document.getElementById('cacheCount'),
+      status: document.getElementById('status')
+    };
+
+    const legend = L.control({ position: 'bottomright' });
+    legend.onAdd = function() {
+      const div = L.DomUtil.create('div', 'legend');
+      div.innerHTML = '<strong>Outbreak intensity</strong>' +
+        '<div class="legend-row"><span class="swatch" style="background:#ffd166"></span>New / weak host</div>' +
+        '<div class="legend-row"><span class="swatch" style="background:#f77f00"></span>Established</div>' +
+        '<div class="legend-row"><span class="swatch" style="background:#b00020"></span>High host pressure</div>';
+      return div;
+    };
+    legend.addTo(map);
+
+    function clamp(value, min, max) {
+      return Math.max(min, Math.min(max, value));
+    }
+
+    function updateControls() {
+      els.gen.textContent = generation;
+      els.year.textContent = years;
+      els.pop.textContent = beetles.length;
+      els.newCount.textContent = lastNew;
+      els.hostBa.textContent = lastAvgHostBa.toFixed(1);
+      els.cacheCount.textContent = cells.size;
+      els.run.textContent = running ? 'Pause' : 'Run';
+      els.run.classList.toggle('active', running);
+    }
+
+    function setStatus(text) {
+      els.status.textContent = text;
+    }
+
+    function destPoint(latlng, distanceMeters, bearing) {
+      const radius = 6371000;
+      const lat1 = latlng.lat * Math.PI / 180;
+      const lon1 = latlng.lng * Math.PI / 180;
+      const dR = distanceMeters / radius;
+      const lat2 = Math.asin(Math.sin(lat1) * Math.cos(dR) + Math.cos(lat1) * Math.sin(dR) * Math.cos(bearing));
+      const lon2 = lon1 + Math.atan2(
+        Math.sin(bearing) * Math.sin(dR) * Math.cos(lat1),
+        Math.cos(dR) - Math.sin(lat1) * Math.sin(lat2)
+      );
+      return L.latLng(lat2 * 180 / Math.PI, lon2 * 180 / Math.PI);
+    }
+
+    function cellKey(latlng) {
+      return `${latlng.lat.toFixed(2)},${latlng.lng.toFixed(2)}`;
+    }
+
+    async function identifyBasalArea(latlng, species) {
+      const params = new URLSearchParams({
+        f: 'json',
+        geometry: JSON.stringify({ x: latlng.lng, y: latlng.lat, spatialReference: { wkid: 4326 } }),
+        geometryType: 'esriGeometryPoint',
+        returnGeometry: 'false',
+        mosaicRule: JSON.stringify({ where: `variable='${species}' AND year=2011` }),
+        renderingRule: JSON.stringify({ rasterFunction: species })
+      });
+      const response = await fetch(`${SPECIES_URL}/identify?${params.toString()}`);
+      if (!response.ok) throw new Error(`Species service ${response.status}`);
+      const data = await response.json();
+      const direct = Number(data.value);
+      if (Number.isFinite(direct)) return direct;
+      const values = data.properties && Array.isArray(data.properties.Values) ? data.properties.Values : [];
+      const parsed = values.map(Number).filter(Number.isFinite);
+      return parsed.length ? Math.max(...parsed) : 0;
+    }
+
+    async function scoreSite(latlng) {
+      const key = cellKey(latlng);
+      if (cells.has(key)) return cells.get(key);
+      const hostValues = await Promise.all(HOSTS.map(async host => {
+        try {
+          return { host, ba: await identifyBasalArea(latlng, host.key) };
+        } catch (error) {
+          return { host, ba: 0 };
+        }
+      }));
+      const weightedBa = hostValues.reduce((sum, item) => sum + item.ba * item.host.weight, 0);
+      const best = hostValues.reduce((a, b) => b.ba * b.host.weight > a.ba * a.host.weight ? b : a, hostValues[0]);
+      const suitability = clamp(weightedBa / 160, 0, 1);
+      const score = { key, weightedBa, suitability, bestHost: best.host.label, bestBa: best.ba };
+      cells.set(key, score);
+      return score;
+    }
+
+    function nearbyPressure(latlng, radiusMeters) {
+      let count = 0;
+      beetles.forEach(beetle => {
+        if (latlng.distanceTo(beetle.latlng) <= radiusMeters) count++;
+      });
+      return clamp(count / 18, 0, 1);
+    }
+
+    function markerColor(suitability) {
+      if (suitability > 0.72) return '#b00020';
+      if (suitability > 0.35) return '#f77f00';
+      return '#ffd166';
+    }
+
+    function addBeetle(latlng, score, founding) {
+      const color = founding ? '#d00000' : markerColor(score.suitability);
+      const marker = L.circleMarker(latlng, {
+        radius: founding ? 6 : 4,
+        color,
+        weight: 1,
+        fillColor: color,
+        fillOpacity: founding ? 0.95 : 0.75
+      }).bindTooltip(`${score.bestHost || 'Unknown host'}<br>Weighted BA ${score.weightedBa.toFixed(1)}`).addTo(beetleLayer);
+      const range = L.circle(latlng, {
+        radius: Number(els.range.value) * 1000,
+        color,
+        weight: 1,
+        fillColor: color,
+        fillOpacity: founding ? 0.025 : 0.01,
+        opacity: 0.35
+      }).addTo(rangeLayer);
+      beetles.push({ latlng, marker, range, score, age: 0, vigor: 0.55 + score.suitability });
+    }
+
+    function removeBeetle(beetle) {
+      beetleLayer.removeLayer(beetle.marker);
+      rangeLayer.removeLayer(beetle.range);
+    }
+
+    function sampleParents() {
+      if (beetles.length <= MAX_PARENTS_PER_STEP) return beetles.slice();
+      const shuffled = beetles.slice().sort(() => Math.random() - 0.5);
+      return shuffled.slice(0, MAX_PARENTS_PER_STEP);
+    }
+
+    function prunePopulation() {
+      if (beetles.length <= MAX_BEETLES) return;
+      beetles.sort((a, b) => (b.vigor - b.age * 0.02) - (a.vigor - a.age * 0.02));
+      const removed = beetles.splice(MAX_BEETLES);
+      removed.forEach(removeBeetle);
+    }
+
+    function applyAnnualMortality() {
+      const baseMort = Number(els.mort.value);
+      const landscapeDensity = clamp(beetles.length / MAX_BEETLES, 0, 1);
+      beetles = beetles.filter(beetle => {
+        const hostRefuge = beetle.score.suitability * 0.10;
+        const agePenalty = clamp(beetle.age * 0.015, 0, 0.16);
+        const mortality = clamp(baseMort + landscapeDensity * 0.20 + agePenalty - hostRefuge, 0.02, 0.92);
+        if (Math.random() < mortality) {
+          removeBeetle(beetle);
+          return false;
+        }
+        beetle.vigor = clamp(beetle.vigor + beetle.score.suitability * 0.12 - landscapeDensity * 0.08, 0.1, 1.7);
+        return true;
+      });
+    }
+
+    async function simStep() {
+      if (stepping || beetles.length === 0) return;
+      stepping = true;
+      els.step.disabled = true;
+      setStatus('Sampling host basal area for candidate attacks...');
+      const rate = Number(els.rate.value);
+      const rangeMeters = Number(els.range.value) * 1000;
+      const weather = Number(els.weather.value);
+      const perYear = Number(els.perYear.value);
+      const parents = sampleParents();
+      const recruits = [];
+      let hostSum = 0;
+      let sampled = 0;
+
+      for (const parent of parents) {
+        parent.age += 1;
+        for (let i = 0; i < rate; i++) {
+          if (recruits.length >= MAX_NEW_PER_STEP) break;
+          const distance = Math.sqrt(Math.random()) * rangeMeters;
+          const candidate = destPoint(parent.latlng, distance, Math.random() * Math.PI * 2);
+          if (!habitat.getBounds().contains(candidate)) continue;
+          const score = await scoreSite(candidate);
+          sampled++;
+          hostSum += score.weightedBa;
+          if (score.suitability <= 0.01) continue;
+          const crowding = nearbyPressure(candidate, Math.max(1200, rangeMeters * 0.32));
+          const parentBoost = clamp(parent.vigor / 1.6, 0.3, 1.15);
+          const establish = clamp(0.03 + score.suitability * 0.70 * weather * parentBoost - crowding * 0.18, 0.01, 0.88);
+          if (Math.random() < establish) recruits.push({ latlng: candidate, score });
+        }
+      }
+
+      recruits.forEach(item => addBeetle(item.latlng, item.score, false));
+      lastNew = recruits.length;
+      lastAvgHostBa = sampled ? hostSum / sampled : 0;
+      generation++;
+      if (generation % perYear === 0) {
+        years++;
+        applyAnnualMortality();
+      }
+      prunePopulation();
+      updateControls();
+      setStatus(recruits.length
+        ? `Generation ${generation}: ${recruits.length} new attacks established from ${sampled} sampled host cells.`
+        : `Generation ${generation}: no new attacks established from ${sampled} sampled host cells.`);
+      els.step.disabled = false;
+      stepping = false;
+    }
+
+    function resetSimulation() {
+      running = false;
+      clearInterval(timer);
+      timer = null;
+      beetles.forEach(removeBeetle);
+      beetles = [];
+      generation = 0;
+      years = 0;
+      lastNew = 0;
+      lastAvgHostBa = 0;
+      updateControls();
+      setStatus('Click a pine landscape to seed an outbreak. Cached species cells are retained for faster reruns.');
+    }
+
+    map.on('click', async function(e) {
+      if (!habitat.getBounds().contains(e.latlng)) return;
+      resetSimulation();
+      setStatus('Sampling host map at outbreak origin...');
+      const score = await scoreSite(e.latlng);
+      addBeetle(e.latlng, score, true);
+      lastAvgHostBa = score.weightedBa;
+      updateControls();
+      setStatus(`Seeded on ${score.bestHost}; weighted host BA ${score.weightedBa.toFixed(1)}.`);
+    });
+
+    els.step.addEventListener('click', simStep);
+    els.run.addEventListener('click', function() {
+      running = !running;
+      updateControls();
+      if (running) {
+        timer = setInterval(() => { simStep(); }, 1200);
+        simStep();
+      } else {
+        clearInterval(timer);
+        timer = null;
+      }
+    });
+    els.reset.addEventListener('click', resetSimulation);
+    els.hostLayer.addEventListener('change', function() {
+      map.removeLayer(hostOverlay);
+      const species = els.hostLayer.value;
+      hostOverlay = L.esri.imageMapLayer({
+        url: SPECIES_URL,
+        opacity: 0.42,
+        renderingRule: { rasterFunction: species },
+        mosaicRule: { where: `variable='${species}' AND year=2011` }
+      }).addTo(map);
+    });
+
+    updateControls();
+  </script>
+</body>
+</html>
