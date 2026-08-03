@@ -210,7 +210,7 @@
   <!--
     v0.10 DESIGN NOTE (not implemented in v0.9)
 
-    Goal: make the six-species reference map faster, more predictable, and less
+    Goal: make the host-species reference map faster, more predictable, and less
     dependent on live USFS ImageServer rendering while retaining the underlying
     30 m product as the documented source.
 
@@ -225,13 +225,14 @@
     * Preserve NoData separately from a real zero. Record the source service,
       2011 slice IDs, aggregation rule, projection, creation date, license, and
       attribution beside the derived files.
-    * Keep six numeric bands/layers so model weights and thresholds can still be
-      changed later. Do not bake the current susceptibility weights into the
-      source rasters.
+    * Keep every included species as its own numeric band/layer so model weights
+      and thresholds can still be changed later. Do not bake the current
+      susceptibility weights into the source rasters.
     * Compare a multiband cloud-optimized GeoTIFF with internal overviews against
-      six pre-rendered web pyramids (or a compact tile archive). Select the format
-      only after measuring repository size, CDN range support, transfer, decode
-      time, and phone memory use for the actual western-U.S. extent.
+      one pre-rendered web pyramid per species (or a compact tile archive). Select
+      the format only after measuring repository size, CDN range support,
+      transfer, decode time, and phone memory use for the actual western-U.S.
+      extent.
     * Build overviews from the 120 m base using an explicitly documented rule.
       Use maximum for host-presence overviews; reserve bilinear interpolation for
       display only, never for simulation values.
@@ -239,9 +240,35 @@
     Possible combined display:
     * Give each species a stable hue, use intensity/opacity for basal-area
       strength, and define how mixed or tied cells appear. Retain a way to isolate
-      one species and keep all six numeric values available to the simulator.
-    * Generate the composite from the six independently aggregated bands rather
+      one species and keep every numeric value available to the simulator.
+    * Generate the composite from the independently aggregated species bands rather
       than collapsing the data before aggregation.
+
+    Proposed host-species expansion:
+    * Add sugar pine (sugar_pine, 2011 slice 535) as the seventh core host. It is a
+      major, well-established MPB host and fills meaningful Sierra Nevada,
+      Klamath, and southern Cascade mixed-conifer gaps.
+    * Add Rocky Mountain bristlecone pine
+      (Rocky_Mountain_bristlecone_pine, slice 454) as a lower-susceptibility,
+      high-elevation specialist. Successful MPB reproduction is documented, but
+      it should not receive the same weight as lodgepole pine without calibration.
+    * Evaluate foxtail pine (247), common pinyon (191), singleleaf pinyon (498),
+      and Coulter pine (198) as optional experimental hosts. Their narrower ranges,
+      stronger defenses, or more conditional MPB ecology require species-specific
+      susceptibility plus climate/elevation gates.
+    * Reserve jack pine (287) for a future boreal/eastward range-expansion model;
+      most of its relevant range lies outside the current western-U.S. study area.
+    * Do not treat Great Basin bristlecone pine (269) as an ordinary positive host;
+      retain it, if useful, as a resistant comparison. Do not add Jeffrey pine
+      (289) until the model can distinguish mountain pine beetle from Jeffrey pine
+      beetle attribution.
+    * Adding hosts changes weightedBa and the fixed weightedBa/160 suitability
+      scale. Recalibrate susceptibility weights, MIN_HOST_INDEX, and normalization
+      against the expanded layer set instead of merely appending new values.
+    * A 120 m maximum product is suitable for presence-oriented display, but do
+      not sum independently maximized species bands for simulation suitability:
+      their maxima may come from different 30 m pixels. Retain 30 m sampling or
+      derive a separate area-preserving numerical product for the model.
 
     Population output and history:
     * Replace the top-line Host statistic with Estimated population once an
