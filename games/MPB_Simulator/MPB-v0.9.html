@@ -206,6 +206,54 @@
     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
     crossorigin=""
   ></script>
+
+  <!--
+    v0.10 DESIGN NOTE (not implemented in v0.9)
+
+    Goal: make the six-species reference map faster, more predictable, and less
+    dependent on live USFS ImageServer rendering while retaining the underlying
+    30 m product as the documented source.
+
+    Preferred derived-data experiment:
+    * Build a 120 m product by reducing each 4 by 4 block of 30 m pixels with
+      MAXIMUM, independently for each species. This preserves the strongest
+      mapped host signal rather than diluting it with a mean. Pixel count falls
+      to 1/16 per species before compression and pyramid overhead.
+    * Label the derived layer as a presence-oriented reference product. A maximum
+      aggregate is intentionally biased toward strong local values and must not
+      be used to estimate mean basal area, forest area, or landscape totals.
+    * Preserve NoData separately from a real zero. Record the source service,
+      2011 slice IDs, aggregation rule, projection, creation date, license, and
+      attribution beside the derived files.
+    * Keep six numeric bands/layers so model weights and thresholds can still be
+      changed later. Do not bake the current susceptibility weights into the
+      source rasters.
+    * Compare a multiband cloud-optimized GeoTIFF with internal overviews against
+      six pre-rendered web pyramids (or a compact tile archive). Select the format
+      only after measuring repository size, CDN range support, transfer, decode
+      time, and phone memory use for the actual western-U.S. extent.
+    * Build overviews from the 120 m base using an explicitly documented rule.
+      Use maximum for host-presence overviews; reserve bilinear interpolation for
+      display only, never for simulation values.
+
+    Possible combined display:
+    * Give each species a stable hue, use intensity/opacity for basal-area
+      strength, and define how mixed or tied cells appear. Retain a way to isolate
+      one species and keep all six numeric values available to the simulator.
+    * Generate the composite from the six independently aggregated bands rather
+      than collapsing the data before aggregation.
+
+    Lower-cost alternative if hosted rasters are deferred:
+    * When Run starts, snapshot and visibly lock the current map bounds and zoom.
+      Keep that study extent fixed until Pause, Reset, or Choose origin. This
+      prevents navigation from requesting unrelated reference imagery and makes
+      it clear which landscape the run represents.
+
+    Before implementing, compare both approaches with real storage and request
+    measurements. Any implementation described here should ship as v0.10, not as
+    a silent behavioral change to v0.9.
+  -->
+
   <script>
     const SPECIES_URL = 'https://imagery.geoplatform.gov/iipp/rest/services/Vegetation/USFS_EDW_FHP_TreeSpeciesMetrics_BasalArea/ImageServer';
     const ELEVATION_URL = 'https://api.open-meteo.com/v1/elevation';
