@@ -1,0 +1,89 @@
+/*
+ * Canvas-only presentation for the alpha renderer. Integration may use either
+ * the class hooks or the data attributes below; no root-page layout is assumed.
+ */
+
+.stand-render-surface,
+[data-render-surface] {
+  position: relative;
+  isolation: isolate;
+  inline-size: 100%;
+  block-size: 100%;
+  min-inline-size: 0;
+  min-block-size: 0;
+  overflow: hidden;
+  contain: paint;
+  background:
+    radial-gradient(circle at 22% 12%, rgb(255 250 224 / 44%), transparent 48%),
+    linear-gradient(165deg, #edf0df 0%, #f2eddb 58%, #ded7c3 100%);
+}
+
+.stand-render-surface::after,
+[data-render-surface]::after {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  content: "";
+  opacity: 0.16;
+  background-image:
+    repeating-linear-gradient(
+      7deg,
+      transparent 0 9px,
+      rgb(72 69 51 / 7%) 9.5px 10px,
+      transparent 10.5px 19px
+    ),
+    radial-gradient(circle at 18% 72%, rgb(74 82 64 / 10%) 0 0.6px, transparent 0.9px),
+    radial-gradient(circle at 79% 24%, rgb(99 83 56 / 8%) 0 0.5px, transparent 0.8px);
+  background-size: auto, 31px 29px, 37px 41px;
+  mix-blend-mode: multiply;
+}
+
+canvas.stand-render-canvas,
+canvas.landscape-canvas,
+canvas#world-canvas,
+canvas[data-landscape-canvas] {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  min-inline-size: 0;
+  min-block-size: 0;
+  border: 0;
+  outline-offset: -3px;
+  image-rendering: auto;
+  touch-action: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+}
+
+canvas.stand-render-canvas:focus-visible,
+canvas.landscape-canvas:focus-visible,
+canvas#world-canvas:focus-visible,
+canvas[data-landscape-canvas]:focus-visible {
+  outline: 2px solid rgb(47 48 40 / 74%);
+}
+
+canvas.stand-render-canvas[data-mode="plant"],
+canvas.landscape-canvas[data-mode="plant"],
+canvas#world-canvas[data-mode="plant"],
+canvas[data-landscape-canvas][data-mode="plant"] {
+  cursor: crosshair;
+}
+
+canvas.stand-render-canvas[data-mode="pan"],
+canvas.landscape-canvas[data-mode="pan"],
+canvas#world-canvas[data-mode="pan"],
+canvas[data-landscape-canvas][data-mode="pan"] {
+  cursor: grabbing;
+}
+
+@media (prefers-contrast: more) {
+  canvas.stand-render-canvas:focus-visible,
+  canvas.landscape-canvas:focus-visible,
+  canvas#world-canvas:focus-visible,
+  canvas[data-landscape-canvas]:focus-visible {
+    outline-width: 3px;
+    outline-color: #1f211b;
+  }
+}

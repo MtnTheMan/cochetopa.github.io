@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en" data-phase="boot">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="light" />
+    <meta
+      name="description"
+      content="Stand v0.0.1 Alpha: grow a sugar-maple stand from one founding samara."
+    />
+    <title>Stand — v0.0.1 Alpha</title>
+    <link rel="stylesheet" href="./styles/base.css" />
+    <link rel="stylesheet" href="./styles/render.css" />
+    <link rel="stylesheet" href="./styles/ui.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#interface-root">Skip to game controls</a>
+
+    <main id="stand-app" aria-label="Stand v0.0.1 Alpha">
+      <canvas
+        id="world-canvas"
+        tabindex="0"
+        aria-label="Interactive forest landscape. Use the on-screen controls or pointer gestures to inspect and guide regeneration."
+      >
+        Stand v0.0.1 Alpha needs a browser with Canvas 2D support.
+      </canvas>
+
+      <div id="interface-root" aria-label="Game status and controls"></div>
+
+      <nav id="camera-controls" aria-label="Camera controls">
+        <button type="button" data-camera-action="zoom-out" aria-label="Zoom out" title="Zoom out">−</button>
+        <button type="button" data-camera-action="zoom-in" aria-label="Zoom in" title="Zoom in">+</button>
+        <button
+          type="button"
+          data-camera-action="rotate-left"
+          aria-label="Rotate view left"
+          title="Rotate view left"
+        >
+          ↶
+        </button>
+        <button
+          type="button"
+          data-camera-action="rotate-right"
+          aria-label="Rotate view right"
+          title="Rotate view right"
+        >
+          ↷
+        </button>
+        <button type="button" data-camera-action="recenter" aria-label="Recenter view" title="Recenter view">⌾</button>
+      </nav>
+
+      <div id="boot-status" role="status" aria-live="polite">
+        <span class="boot-mark" aria-hidden="true"></span>
+        <span data-boot-message>Preparing the forest…</span>
+      </div>
+
+      <p id="app-live" class="visually-hidden" aria-live="polite" aria-atomic="true"></p>
+    </main>
+
+    <noscript>
+      <p class="noscript-message">Stand v0.0.1 Alpha requires JavaScript to run.</p>
+    </noscript>
+    <script type="module" src="./src/app.js"></script>
+  </body>
+</html>
