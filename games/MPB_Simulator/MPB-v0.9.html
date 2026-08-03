@@ -243,6 +243,22 @@
     * Generate the composite from the six independently aggregated bands rather
       than collapsing the data before aggregation.
 
+    Population output and history:
+    * Replace the top-line Host statistic with Estimated population once an
+      origin has been seeded. Keep host index and dominant-host details in cell
+      and outbreak tooltips because host suitability still drives establishment.
+    * Record a time series beginning with the initial dropped beetle and append a
+      point after every generation: generation, year, estimated current beetles,
+      new establishments, active outbreak cells, cumulative mortality, and peak
+      population. Show the trend with a compact sparkline or expandable chart.
+    * Do not relabel beetles.length as a literal beetle count. In v0.9 each entry
+      represents an established outbreak point/cell, not one insect. A defensible
+      population estimate needs an explicit abundance per cell, reproduction,
+      mortality, carrying-capacity rule, units, and uncertainty. Label the result
+      as an estimate and avoid false precision.
+    * Reset the series only on Reset or a confirmed new origin. Panning, zooming,
+      changing the reference layer, and pausing or resuming must preserve it.
+
     Lower-cost alternative if hosted rasters are deferred:
     * When Run starts, snapshot and visibly lock the current map bounds and zoom.
       Keep that study extent fixed until Pause, Reset, or Choose origin. This
