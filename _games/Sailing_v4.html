@@ -1,0 +1,1577 @@
+---
+title: "Sailing v4 (Current)"
+---
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#061018" />
+  <title>SailTutor v4</title>
+
+  <!-- Leaflet (map tiles) -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""
+  />
+  <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""
+  ></script>
+
+  <!-- Land mask + geometry helpers (for coastline collision) -->
+  <script src="https://unpkg.com/topojson-client@3/dist/topojson-client.min.js"></script>
+  <script src="https://unpkg.com/@turf/turf@6/turf.min.js"></script>
+
+  <style>
+    :root{
+      --panel-bg: rgba(10, 14, 18, 0.78);
+      --panel-border: rgba(255,255,255,0.12);
+      --text: rgba(255,255,255,0.92);
+      --muted: rgba(255,255,255,0.70);
+      --accent: rgba(99, 206, 255, 0.95);
+      --good: rgba(120, 255, 180, 0.95);
+      --warn: rgba(255, 220, 120, 0.95);
+      --bad: rgba(255, 120, 140, 0.95);
+      --edge-top: max(10px, env(safe-area-inset-top));
+      --edge-right: max(10px, env(safe-area-inset-right));
+      --edge-bottom: max(10px, env(safe-area-inset-bottom));
+      --edge-left: max(10px, env(safe-area-inset-left));
+      --touch-dock-space: 0px;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      background: #061018;
+      overflow: hidden;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      color: var(--text);
+      position: relative;
+    }
+
+    #map {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+    #overlay {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    #hud {
+      position: absolute;
+      top: var(--edge-top);
+      left: var(--edge-left);
+      width: min(460px, calc(100vw - 20px - env(safe-area-inset-left) - env(safe-area-inset-right)));
+      max-height: calc(100vh - var(--edge-top) - var(--edge-bottom) - var(--touch-dock-space));
+      max-height: calc(100dvh - var(--edge-top) - var(--edge-bottom) - var(--touch-dock-space));
+      overflow: auto;
+      overscroll-behavior: contain;
+      background: var(--panel-bg);
+      border: 1px solid var(--panel-border);
+      border-radius: 14px;
+      padding: 12px 12px 10px 12px;
+      box-shadow: 0 10px 28px rgba(0,0,0,0.35);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      pointer-events: auto;
+    }
+    #hud h1{
+      font-size: 14px;
+      margin: 0 0 8px 0;
+      letter-spacing: 0.2px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    #hud h1 span.badge{
+      font-size: 11px;
+      font-weight: 800;
+      color: rgba(0,0,0,0.85);
+      background: var(--accent);
+      padding: 2px 8px;
+      border-radius: 999px;
+    }
+    #hud .row{
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      align-items: center;
+      margin: 8px 0;
+    }
+    #hud .label{
+      font-size: 12px;
+      color: var(--muted);
+    }
+    #hud .value{
+      font-size: 12px;
+      color: var(--text);
+      font-variant-numeric: tabular-nums;
+      text-align: right;
+      white-space: nowrap;
+    }
+    #hud .controlRow{
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 8px;
+      padding-top: 8px;
+    }
+    #hud .sliderWrap{
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      align-items: center;
+    }
+    #hud input[type="range"]{
+      width: 100%;
+    }
+    #hud .btnRow{
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    #hud button, #hud label.toggle{
+      border: 1px solid var(--panel-border);
+      background: rgba(255,255,255,0.06);
+      color: var(--text);
+      border-radius: 12px;
+      padding: 8px 10px;
+      min-height: 44px;
+      font-size: 12px;
+      cursor: pointer;
+      user-select: none;
+    }
+    #hud button:hover, #hud label.toggle:hover{
+      background: rgba(255,255,255,0.10);
+    }
+    #hud label.toggle{
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+    }
+    #hud input[type="checkbox"]{
+      transform: translateY(1px);
+      accent-color: rgba(99, 206, 255, 0.95);
+    }
+
+    #hud .teleportTitle{
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 6px;
+    }
+    #hud .teleportRow{
+      display: grid;
+      grid-template-columns: 1fr 1fr auto;
+      gap: 8px;
+      align-items: center;
+    }
+    #hud input[type="text"]{
+      width: 100%;
+      border: 1px solid var(--panel-border);
+      background: rgba(0,0,0,0.18);
+      color: var(--text);
+      border-radius: 12px;
+      padding: 8px 10px;
+      font-size: 12px;
+      outline: none;
+      box-sizing: border-box;
+    }
+    #hud input[type="number"]{
+      width: 100%;
+      min-height: 44px;
+      border: 1px solid var(--panel-border);
+      background: rgba(0,0,0,0.18);
+      color: var(--text);
+      border-radius: 12px;
+      padding: 8px 10px;
+      font-size: 12px;
+      outline: none;
+    }
+    #hud input[type="text"]:focus,
+    #hud input[type="number"]:focus{
+      border-color: rgba(99,206,255,0.55);
+    }
+    #hud .teleportHint{
+      font-size: 11px;
+      color: rgba(255,255,255,0.70);
+      line-height: 1.25;
+      margin-top: 2px;
+    }
+
+    #message{
+      margin-top: 10px;
+      font-size: 12px;
+      line-height: 1.35;
+      color: rgba(255,255,255,0.84);
+      padding: 8px 10px;
+      border-radius: 12px;
+      border: 1px solid var(--panel-border);
+      background: rgba(0,0,0,0.18);
+    }
+
+    #notice{
+      margin-top: 8px;
+      padding: 8px 10px;
+      border: 1px solid rgba(99,206,255,0.35);
+      border-radius: 10px;
+      background: rgba(99,206,255,0.10);
+      color: var(--text);
+      font-size: 12px;
+      line-height: 1.3;
+    }
+    #notice[hidden]{ display: none; }
+
+    details.disclosure{
+      margin-top: 8px;
+      border-top: 1px solid var(--panel-border);
+    }
+    details.disclosure > summary{
+      min-height: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 7px 2px 0;
+      cursor: pointer;
+      color: var(--text);
+      font-size: 12px;
+      font-weight: 800;
+      list-style: none;
+    }
+    details.disclosure > summary::-webkit-details-marker{ display: none; }
+    details.disclosure > summary::after{
+      content: "+";
+      color: var(--accent);
+      font-size: 18px;
+      line-height: 1;
+    }
+    details.disclosure[open] > summary::after{ content: "−"; }
+
+    #hint {
+      padding-bottom: 2px;
+    }
+    #hint .title{
+      font-size: 13px;
+      font-weight: 800;
+      margin: 0 0 6px 0;
+    }
+    #hint .text{
+      font-size: 12px;
+      line-height: 1.35;
+      color: rgba(255,255,255,0.82);
+      margin: 0;
+    }
+    #hint .tiny{
+      margin-top: 8px;
+      font-size: 11px;
+      color: rgba(255,255,255,0.70);
+      line-height: 1.25;
+    }
+    .k {
+      display: inline-block;
+      padding: 1px 6px;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.22);
+      background: rgba(255,255,255,0.06);
+      font-weight: 700;
+      font-size: 11px;
+      letter-spacing: 0.2px;
+      color: rgba(255,255,255,0.92);
+    }
+
+    .sr-only{
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    #touchControls{
+      display: none;
+      position: absolute;
+      left: var(--edge-left);
+      right: var(--edge-right);
+      bottom: var(--edge-bottom);
+      z-index: 1200;
+      gap: 8px;
+      padding: 8px;
+      border: 1px solid var(--panel-border);
+      border-radius: 14px;
+      background: rgba(10,14,18,0.88);
+      box-shadow: 0 10px 28px rgba(0,0,0,0.35);
+      backdrop-filter: blur(8px);
+      pointer-events: auto;
+    }
+    #touchControls .touchGroup{
+      display: grid;
+      gap: 6px;
+    }
+    #touchControls .steerGroup{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    #touchControls .trimGroup{ grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    #touchControls button{
+      min-width: 0;
+      min-height: 48px;
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 11px;
+      padding: 6px 8px;
+      background: rgba(255,255,255,0.08);
+      color: var(--text);
+      font: 700 12px/1.15 system-ui, -apple-system, Segoe UI, sans-serif;
+      touch-action: none;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    #touchControls button[aria-pressed="true"]{
+      border-color: rgba(99,206,255,0.72);
+      background: rgba(99,206,255,0.24);
+      transform: translateY(1px);
+    }
+
+    button:focus-visible,
+    input:focus-visible,
+    summary:focus-visible{
+      outline: 3px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    @media (max-width: 720px), (pointer: coarse), (max-width: 900px) and (max-height: 520px){
+      :root{ --touch-dock-space: 128px; }
+      #touchControls{ display: grid; }
+      #hud{
+        right: var(--edge-right);
+        width: auto;
+        padding: 9px;
+      }
+      #hud h1{ margin-bottom: 4px; }
+      #hud .row{ margin: 4px 0; }
+      .leaflet-bottom{ bottom: var(--touch-dock-space); }
+    }
+
+    @media (min-width: 601px) and (max-width: 900px) and (max-height: 520px),
+           (pointer: coarse) and (min-width: 601px) and (max-height: 520px){
+      :root{ --touch-dock-space: 76px; }
+      #touchControls{
+        grid-template-columns: minmax(180px, 0.8fr) minmax(340px, 1.4fr);
+      }
+      #hud{
+        width: min(430px, calc(100vw - 20px - env(safe-area-inset-left) - env(safe-area-inset-right)));
+        padding: 8px;
+      }
+      #hud .row{ margin: 3px 0; }
+      #message{ margin-top: 7px; padding: 6px 8px; }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="map"></div>
+  <canvas id="overlay" aria-hidden="true"></canvas>
+
+  <div id="hud">
+    <h1>
+      SailTutor
+      <span class="badge">v4 · Current</span>
+    </h1>
+
+    <div class="row">
+      <div class="label">Position</div>
+      <div class="value" id="posValue">–</div>
+    </div>
+    <div class="row">
+      <div class="label">Heading, boat speed</div>
+      <div class="value" id="spdValue">–</div>
+    </div>
+    <div class="row">
+      <div class="label">True wind</div>
+      <div class="value" id="windValue">–</div>
+    </div>
+    <div class="row">
+      <div class="label">Point of sail, trim</div>
+      <div class="value" id="sailValue">–</div>
+    </div>
+
+    <details id="options" class="disclosure">
+      <summary>Options</summary>
+      <div class="controlRow">
+        <div class="sliderWrap">
+          <div>
+            <label class="label" for="simSpeed">Time scale</label>
+            <input id="simSpeed" type="range" min="0.2" max="100" step="0.2" value="1" />
+          </div>
+          <div class="value" id="simSpeedValue">1.0×</div>
+        </div>
+
+        <div class="btnRow">
+          <button id="resetBtn" type="button">Reset start</button>
+          <button id="centerBtn" type="button">Center on boat</button>
+          <label class="toggle" title="Uses Open-Meteo. If off, wind is simulated.">
+            <input id="liveWind" type="checkbox" checked />
+            Live wind
+          </label>
+          <label class="toggle" title="Keep the map centered on the boat.">
+            <input id="followBoat" type="checkbox" checked />
+            Follow boat
+          </label>
+          <label class="toggle" title="When enabled, clicking the map drops the boat at that location.">
+            <input id="dropMode" type="checkbox" />
+            Drop on click
+          </label>
+        </div>
+
+        <div class="teleportTitle">Move boat</div>
+        <form id="teleportForm" class="teleportRow">
+          <label class="sr-only" for="latInput">Latitude</label>
+          <input id="latInput" type="number" inputmode="decimal" min="-84.5" max="84.5" step="any" placeholder="Latitude" required />
+          <label class="sr-only" for="lonInput">Longitude</label>
+          <input id="lonInput" type="number" inputmode="decimal" min="-180" max="180" step="any" placeholder="Longitude" required />
+          <button id="teleportBtn" type="submit">Teleport</button>
+        </form>
+      </div>
+    </details>
+
+    <div id="notice" role="status" aria-live="polite" hidden></div>
+    <div id="message">Loading…</div>
+
+    <details id="hint" class="disclosure">
+      <summary>Help</summary>
+      <p class="text">
+        Steer with <span class="k">A</span>/<span class="k">D</span>. Ease or trim the jib with
+        <span class="k">W</span>/<span class="k">S</span>; hold <span class="k">Q</span> for the mainsail.
+        Bear away if you stall in irons, then use the trim meter to recover speed.
+      </p>
+    </details>
+  </div>
+
+  <div id="touchControls" aria-label="Touch sailing controls">
+    <div class="touchGroup steerGroup" role="group" aria-label="Steering">
+      <button type="button" data-control="port" aria-pressed="false">◀ Port</button>
+      <button type="button" data-control="starboard" aria-pressed="false">Starboard ▶</button>
+    </div>
+    <div class="touchGroup trimGroup" role="group" aria-label="Sail trim">
+      <button type="button" data-control="jib-in" aria-pressed="false">Jib<br>Trim in</button>
+      <button type="button" data-control="jib-ease" aria-pressed="false">Jib<br>Ease</button>
+      <button type="button" data-control="main-in" aria-pressed="false">Main<br>Trim in</button>
+      <button type="button" data-control="main-ease" aria-pressed="false">Main<br>Ease</button>
+    </div>
+  </div>
+
+  <script>
+    // -----------------------------
+    // Utilities
+    // -----------------------------
+    const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+    const lerp = (a, b, t) => a + (b - a) * t;
+
+    function wrapLon(lon){
+      let x = ((lon + 180) % 360 + 360) % 360 - 180;
+      if (x === -180) x = 180;
+      return x;
+    }
+    function wrapDeg(d){
+      d = ((d % 360) + 360) % 360;
+      return d;
+    }
+    function shortestAngleDeg(a, b){
+      let d = wrapDeg(b) - wrapDeg(a);
+      if (d > 180) d -= 360;
+      if (d < -180) d += 360;
+      return d;
+    }
+    function degToRad(d){ return d * Math.PI / 180; }
+    function radToDeg(r){ return r * 180 / Math.PI; }
+
+    function metersPerDegLat(){
+      return 111320;
+    }
+    function metersPerDegLon(latDeg){
+      return 111320 * Math.cos(degToRad(latDeg));
+    }
+    function knotsFromMS(ms){ return ms * 1.943844; }
+
+    function dot(ax, ay, bx, by){ return ax*bx + ay*by; }
+    function safeNorm(x,y){
+      const m = Math.hypot(x,y);
+      if (m < 1e-9) return {x:0, y:0, m:0};
+      return {x:x/m, y:y/m, m};
+    }
+
+    // -----------------------------
+    // Start state requested by user
+    // -----------------------------
+    const START = {
+      lat: 26.54452991405306,
+      lon: -76.96058514949952,
+      headingDeg: 0
+    };
+
+    // -----------------------------
+    // Leaflet map
+    // -----------------------------
+    const map = L.map("map", {
+      worldCopyJump: true,
+      zoomControl: false,
+      preferCanvas: true
+    }).setView([START.lat, START.lon], 5);
+
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      maxZoom: 19,
+      attribution: "&copy; OpenStreetMap contributors"
+    }).addTo(map);
+    L.control.zoom({ position: "bottomright" }).addTo(map);
+
+    // -----------------------------
+    // Overlay canvas for boat + wind
+    // -----------------------------
+    const overlay = document.getElementById("overlay");
+    const ctx = overlay.getContext("2d");
+    let overlayGradient = null;
+
+    function resize(){
+      const r = map.getContainer().getBoundingClientRect();
+      const cssWidth = Math.max(1, Math.floor(r.width));
+      const cssHeight = Math.max(1, Math.floor(r.height));
+      const dpr = clamp(window.devicePixelRatio || 1, 1, 2);
+      overlay.style.width = `${cssWidth}px`;
+      overlay.style.height = `${cssHeight}px`;
+      overlay.width = Math.max(1, Math.round(cssWidth * dpr));
+      overlay.height = Math.max(1, Math.round(cssHeight * dpr));
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      overlayGradient = ctx.createRadialGradient(
+        cssWidth / 2, cssHeight / 2, 80,
+        cssWidth / 2, cssHeight / 2, Math.max(cssWidth, cssHeight) * 0.65
+      );
+      overlayGradient.addColorStop(0, "rgba(0,0,0,0.00)");
+      overlayGradient.addColorStop(1, "rgba(0,0,0,0.18)");
+    }
+    window.addEventListener("resize", resize, { passive: true });
+    if (window.visualViewport){
+      window.visualViewport.addEventListener("resize", resize, { passive: true });
+    }
+    resize();
+
+    // -----------------------------
+    // Controls
+    // -----------------------------
+    const keys = new Set();
+    const gameKeys = new Set(["w", "a", "s", "d", "q"]);
+    const touchPointers = new Map();
+    const touchButtons = Array.from(document.querySelectorAll("#touchControls [data-control]"));
+
+    function isInteractiveTarget(target){
+      return target instanceof Element
+        && Boolean(target.closest("input, button, select, textarea, summary, [contenteditable='true']"));
+    }
+
+    window.addEventListener("keydown", (e) => {
+      const k = e.key.toLowerCase();
+      if (!gameKeys.has(k) || e.ctrlKey || e.metaKey || e.altKey || isInteractiveTarget(e.target)) return;
+      e.preventDefault();
+      keys.add(k);
+    });
+    window.addEventListener("keyup", (e) => {
+      const k = e.key.toLowerCase();
+      if (gameKeys.has(k)) keys.delete(k);
+    });
+
+    function touchControlActive(control){
+      return Array.from(touchPointers.values()).includes(control);
+    }
+
+    function refreshTouchButton(control){
+      for (const button of touchButtons){
+        if (button.dataset.control === control){
+          button.setAttribute("aria-pressed", String(touchControlActive(control)));
+        }
+      }
+    }
+
+    function releaseTouchPointer(event){
+      const control = touchPointers.get(event.pointerId);
+      if (!control) return;
+      touchPointers.delete(event.pointerId);
+      refreshTouchButton(control);
+    }
+
+    for (const button of touchButtons){
+      button.addEventListener("pointerdown", (event) => {
+        event.preventDefault();
+        const control = button.dataset.control;
+        touchPointers.set(event.pointerId, control);
+        try { button.setPointerCapture(event.pointerId); } catch {}
+        refreshTouchButton(control);
+      });
+      button.addEventListener("pointerup", releaseTouchPointer);
+      button.addEventListener("pointercancel", releaseTouchPointer);
+      button.addEventListener("lostpointercapture", releaseTouchPointer);
+      button.addEventListener("contextmenu", event => event.preventDefault());
+    }
+
+    function clearHeldControls(){
+      keys.clear();
+      touchPointers.clear();
+      for (const button of touchButtons) button.setAttribute("aria-pressed", "false");
+    }
+
+    window.addEventListener("blur", clearHeldControls);
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) clearHeldControls();
+    });
+
+    // -----------------------------
+    // Coastlines (land mask)
+    // -----------------------------
+    const landState = {
+      ready: false,
+      feature: null,
+      source: "Land mask not loaded",
+      lastErr: ""
+    };
+
+    async function loadLandMask(){
+      try{
+        landState.source = "Loading land mask…";
+        const res = await fetch("https://unpkg.com/world-atlas@2/land-110m.json", { cache: "force-cache" });
+        if (!res.ok) throw new Error(`land fetch failed: ${res.status}`);
+        const topo = await res.json();
+        const landObject = topo.objects.land;
+        const feat = landObject.type === "GeometryCollection"
+          ? {
+              type: "Feature",
+              properties: {},
+              geometry: topojson.merge(topo, landObject.geometries)
+            }
+          : topojson.feature(topo, landObject);
+        landState.feature = feat;
+        landState.ready = true;
+        landState.source = "Land mask: Natural Earth 110m";
+      } catch (e){
+        landState.ready = false;
+        landState.feature = null;
+        landState.lastErr = (e && e.message) ? e.message : String(e);
+        landState.source = "Land mask unavailable, collisions off";
+      }
+    }
+
+    function isLand(lat, lon){
+      if (!landState.ready || !landState.feature) return false;
+      try{
+        const pt = turf.point([wrapLon(lon), lat]);
+        return turf.booleanPointInPolygon(pt, landState.feature);
+      } catch {
+        return false;
+      }
+    }
+
+    function snapToNearestWater(lat, lon){
+      if (!isLand(lat, lon)) return { lat, lon, snapped: false };
+
+      const radii = [0.002, 0.004, 0.008, 0.016, 0.03, 0.06, 0.10, 0.16, 0.25];
+      const angles = 24;
+
+      for (const r of radii){
+        for (let i = 0; i < angles; i++){
+          const a = (i / angles) * Math.PI * 2;
+          const dLat = r * Math.sin(a);
+          const dLon = r * Math.cos(a) / Math.max(0.2, Math.cos(degToRad(lat)));
+          const la = clamp(lat + dLat, -84.5, 84.5);
+          const lo = wrapLon(lon + dLon);
+          if (!isLand(la, lo)){
+            return { lat: la, lon: lo, snapped: true };
+          }
+        }
+      }
+      return { lat, lon, snapped: false };
+    }
+
+    // -----------------------------
+    // Wind: live via Open-Meteo, fallback to simulated field
+    // -----------------------------
+    const windState = {
+      usingLive: true,
+      lastFetchMs: -Infinity,
+      ok: false,
+      speedMS: 7.0,
+      fromDeg: 90.0,
+      source: "Simulated"
+    };
+    let windRequestId = 0;
+
+    async function fetchLiveWind(lat, lon){
+      const url =
+        "https://api.open-meteo.com/v1/forecast"
+        + `?latitude=${encodeURIComponent(lat)}`
+        + `&longitude=${encodeURIComponent(lon)}`
+        + "&current=wind_speed_10m,wind_direction_10m"
+        + "&wind_speed_unit=ms";
+
+      const res = await fetch(url, { cache: "no-store" });
+      if (!res.ok) throw new Error(`Wind fetch failed: ${res.status}`);
+      const data = await res.json();
+
+      const cur = data && data.current;
+      if (!cur || typeof cur.wind_speed_10m !== "number" || typeof cur.wind_direction_10m !== "number") {
+        throw new Error("Wind fetch returned unexpected data");
+      }
+
+      return {
+        speedMS: cur.wind_speed_10m,
+        fromDeg: wrapDeg(cur.wind_direction_10m),
+        source: "Open-Meteo current wind"
+      };
+    }
+
+    function invalidateWindForPosition(){
+      windRequestId += 1;
+      windState.lastFetchMs = -Infinity;
+      windState.ok = false;
+    }
+
+    async function requestLiveWind(lat, lon){
+      const requestId = ++windRequestId;
+      try{
+        const result = await fetchLiveWind(lat, lon);
+        if (requestId !== windRequestId || !windState.usingLive) return;
+        windState.speedMS = result.speedMS;
+        windState.fromDeg = result.fromDeg;
+        windState.source = result.source;
+        windState.ok = true;
+      } catch {
+        if (requestId !== windRequestId) return;
+        windState.ok = false;
+        windState.source = "Simulated wind field (live wind unavailable)";
+      }
+    }
+
+    function simulatedWind(lat, lon, tSec){
+      const absLat = Math.abs(lat);
+      let baseFrom;
+
+      if (absLat < 25) baseFrom = 70;
+      else if (absLat < 55) baseFrom = 250;
+      else baseFrom = 110;
+
+      const wave1 = 25 * Math.sin(degToRad(lon * 1.2) + tSec * 0.0007);
+      const wave2 = 18 * Math.sin(degToRad(lat * 2.0) - tSec * 0.0009);
+      const fromDeg = wrapDeg(baseFrom + wave1 + wave2);
+
+      const speed = 6.0
+        + 3.0 * Math.cos(degToRad(absLat * 2.0))
+        + 2.0 * Math.sin(degToRad(lon * 0.7) + tSec * 0.0012);
+
+      return { speedMS: clamp(speed, 1.5, 16.0), fromDeg, source: "Simulated wind field" };
+    }
+
+    // -----------------------------
+    // Boat physics (v4, preserving the v3 model)
+    // -----------------------------
+    const boat = {
+      lat: START.lat,
+      lon: START.lon,
+      headingDeg: START.headingDeg,
+
+      // world velocity in m/s (east, north)
+      vxE: 0.0,
+      vyN: 0.0,
+
+      rudderDeg: 0.0,
+      jibTrimDeg: 25.0,
+      mainTrimDeg: 30.0,
+
+      turnRateDegPerSec: 0.0,
+      targetRudderDeg: 0.0,
+
+      lastCollisionMs: -Infinity,
+      lastSnapMs: -Infinity
+    };
+
+    function centerMapOnBoat(animate = false){
+      const zoom = map.getZoom();
+      let offsetX = 0;
+      if (window.innerWidth > window.innerHeight){
+        const hudRect = document.getElementById("hud").getBoundingClientRect();
+        const viewportCenter = window.innerWidth / 2;
+        offsetX = clamp(hudRect.right + 58 - viewportCenter, 0, window.innerWidth * 0.32);
+      }
+
+      if (offsetX <= 0){
+        map.setView([boat.lat, boat.lon], zoom, { animate });
+        return;
+      }
+
+      const boatPoint = map.project([boat.lat, boat.lon], zoom);
+      const visibleCenter = map.unproject(boatPoint.subtract(L.point(offsetX, 0)), zoom);
+      map.setView(visibleCenter, zoom, { animate });
+    }
+
+    function resetBoat(){
+      boat.lat = START.lat;
+      boat.lon = START.lon;
+      boat.headingDeg = START.headingDeg;
+      boat.vxE = 0.0;
+      boat.vyN = 0.0;
+      boat.rudderDeg = 0.0;
+      boat.targetRudderDeg = 0.0;
+      boat.turnRateDegPerSec = 0.0;
+      boat.jibTrimDeg = 25.0;
+      boat.mainTrimDeg = 30.0;
+      boat.lastCollisionMs = -Infinity;
+      boat.lastSnapMs = -Infinity;
+      invalidateWindForPosition();
+      centerMapOnBoat(false);
+    }
+
+    function setBoatPosition(lat, lon, opts = {}){
+      const { keepHeading = true, zeroVelocity = true, rejectLand = false } = opts;
+      const la = Number(lat);
+      const lo = Number(lon);
+
+      if (!Number.isFinite(la) || !Number.isFinite(lo)){
+        return { ok: false, reason: "Enter valid latitude and longitude values." };
+      }
+      if (la < -84.5 || la > 84.5 || lo < -180 || lo > 180){
+        return { ok: false, reason: "Latitude must be −84.5 to 84.5 and longitude −180 to 180." };
+      }
+      if (!landState.ready){
+        return {
+          ok: false,
+          reason: landState.lastErr
+            ? "Coastline data is unavailable, so this move cannot be checked safely."
+            : "Coastline data is still loading. Try again in a moment."
+        };
+      }
+
+      let final = { lat: la, lon: lo, snapped: false };
+      if (landState.ready && isLand(la, lo)){
+        if (rejectLand){
+          return { ok: false, reason: "That point is inland. Choose a location on the water." };
+        }
+        final = snapToNearestWater(la, lo);
+        if (!final.snapped || isLand(final.lat, final.lon)){
+          return { ok: false, reason: "That point is inland. Choose water closer to the coast." };
+        }
+      }
+
+      boat.lat = final.lat;
+      boat.lon = final.lon;
+      boat.lastSnapMs = final.snapped ? performance.now() : -Infinity;
+
+      if (!keepHeading) boat.headingDeg = 0;
+      if (zeroVelocity){
+        boat.vxE = 0;
+        boat.vyN = 0;
+        boat.turnRateDegPerSec = 0;
+      }
+      invalidateWindForPosition();
+
+      if (followBoatChk.checked){
+        centerMapOnBoat(false);
+      }
+      return { ok: true, snapped: final.snapped };
+    }
+
+    function pointOfSailLabel(trueWindAngleDeg){
+      if (trueWindAngleDeg < 35) return "In irons";
+      if (trueWindAngleDeg < 60) return "Close-hauled";
+      if (trueWindAngleDeg < 85) return "Close reach";
+      if (trueWindAngleDeg < 110) return "Beam reach";
+      if (trueWindAngleDeg < 150) return "Broad reach";
+      return "Run";
+    }
+
+    function idealTrimForApparent(appAngleDeg){
+      if (appAngleDeg < 35) return 10;
+      if (appAngleDeg < 60) return lerp(10, 20, (appAngleDeg - 35) / 25);
+      if (appAngleDeg < 110) return lerp(20, 40, (appAngleDeg - 60) / 50);
+      if (appAngleDeg < 160) return lerp(40, 78, (appAngleDeg - 110) / 50);
+      return 84;
+    }
+
+    function trimEfficiency(trimDeg, idealDeg){
+      const err = (trimDeg - idealDeg);
+      const e = Math.exp(-(err*err) / (2 * 16 * 16));
+      return clamp(e, 0.05, 1.0);
+    }
+
+    // -----------------------------
+    // UI hooks
+    // -----------------------------
+    const posValue = document.getElementById("posValue");
+    const spdValue = document.getElementById("spdValue");
+    const windValue = document.getElementById("windValue");
+    const sailValue = document.getElementById("sailValue");
+    const message = document.getElementById("message");
+
+    const simSpeedSlider = document.getElementById("simSpeed");
+    const simSpeedValue = document.getElementById("simSpeedValue");
+    const resetBtn = document.getElementById("resetBtn");
+    const centerBtn = document.getElementById("centerBtn");
+    const liveWindChk = document.getElementById("liveWind");
+    const followBoatChk = document.getElementById("followBoat");
+    const dropModeChk = document.getElementById("dropMode");
+
+    const latInput = document.getElementById("latInput");
+    const lonInput = document.getElementById("lonInput");
+    const teleportForm = document.getElementById("teleportForm");
+    const notice = document.getElementById("notice");
+    let noticeTimer = 0;
+
+    function showNotice(text, duration = 2600){
+      window.clearTimeout(noticeTimer);
+      notice.textContent = text;
+      notice.hidden = false;
+      noticeTimer = window.setTimeout(() => {
+        notice.hidden = true;
+        notice.textContent = "";
+      }, duration);
+    }
+
+    resetBtn.addEventListener("click", () => {
+      resetBoat();
+      showNotice("Boat reset to the starting point.");
+    });
+    centerBtn.addEventListener("click", () => centerMapOnBoat(true));
+    liveWindChk.addEventListener("change", () => {
+      windState.usingLive = Boolean(liveWindChk.checked);
+      invalidateWindForPosition();
+    });
+    followBoatChk.addEventListener("change", () => {
+      if (followBoatChk.checked){
+        centerMapOnBoat(false);
+      }
+    });
+    simSpeedSlider.addEventListener("input", () => {
+      const value = Number(simSpeedSlider.value);
+      simSpeedValue.textContent = `${value.toFixed(1)}×`;
+    });
+    windState.usingLive = !!liveWindChk.checked;
+
+    teleportForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const result = setBoatPosition(latInput.valueAsNumber, lonInput.valueAsNumber, {
+        keepHeading: true,
+        zeroVelocity: true,
+        rejectLand: true
+      });
+      if (!result.ok){
+        showNotice(result.reason, 4200);
+        return;
+      }
+      showNotice(result.snapped ? "Boat moved to nearby water." : "Boat moved.");
+    });
+
+    map.on("click", (e) => {
+      if (dropModeChk.checked){
+        const result = setBoatPosition(e.latlng.lat, e.latlng.lng, { keepHeading: true, zeroVelocity: true });
+        if (!result.ok) showNotice(result.reason, 4200);
+        else if (result.snapped) showNotice("Boat moved to nearby water.");
+      }
+    });
+
+    let userPanning = false;
+    map.on("dragstart", () => {
+      userPanning = true;
+      if (followBoatChk.checked){
+        followBoatChk.checked = false;
+        showNotice("Follow Boat turned off while you explore.");
+      }
+    });
+    map.on("dragend", () => { userPanning = false; });
+
+    // -----------------------------
+    // Coastline collision response
+    // -----------------------------
+    function resolveCoastCollision(prevLat, prevLon){
+      if (!landState.ready) {
+        boat.lat = prevLat;
+        boat.lon = prevLon;
+        boat.vxE *= 0.35;
+        boat.vyN *= 0.35;
+        boat.lastCollisionMs = performance.now();
+        return;
+      }
+
+      const probeM = 450;
+      const epsLat = probeM / metersPerDegLat();
+      const epsLon = probeM / Math.max(1e-6, metersPerDegLon(boat.lat));
+
+      const waterN = !isLand(boat.lat + epsLat, boat.lon);
+      const waterS = !isLand(boat.lat - epsLat, boat.lon);
+      const waterE = !isLand(boat.lat, boat.lon + epsLon);
+      const waterW = !isLand(boat.lat, boat.lon - epsLon);
+
+      let nx = (waterE ? 1 : 0) - (waterW ? 1 : 0);
+      let ny = (waterN ? 1 : 0) - (waterS ? 1 : 0);
+
+      let n = safeNorm(nx, ny);
+      if (n.m < 1e-6){
+        const vn = safeNorm(-boat.vxE, -boat.vyN);
+        n = (vn.m < 1e-6) ? {x: 0, y: -1, m: 1} : vn;
+      }
+
+      const vdotn = boat.vxE * n.x + boat.vyN * n.y;
+      boat.vxE = (boat.vxE - 2 * vdotn * n.x) * 0.55;
+      boat.vyN = (boat.vyN - 2 * vdotn * n.y) * 0.55;
+
+      boat.lat = prevLat;
+      boat.lon = prevLon;
+
+      const pushM = 220;
+      for (let i = 0; i < 10; i++){
+        const dLat = (n.y * pushM) / metersPerDegLat();
+        const dLon = (n.x * pushM) / Math.max(1e-6, metersPerDegLon(boat.lat));
+        boat.lat = clamp(boat.lat + dLat, -84.5, 84.5);
+        boat.lon = wrapLon(boat.lon + dLon);
+        if (!isLand(boat.lat, boat.lon)) break;
+      }
+
+      const sp = Math.hypot(boat.vxE, boat.vyN);
+      if (sp > 0.25){
+        const velDir = wrapDeg(radToDeg(Math.atan2(boat.vxE, boat.vyN)));
+        boat.headingDeg = wrapDeg(boat.headingDeg + shortestAngleDeg(boat.headingDeg, velDir) * 0.25);
+      }
+
+      boat.lastCollisionMs = performance.now();
+    }
+
+    // -----------------------------
+    // Main loop (v4 keeps v3 physics and reduces per-frame UI/map work)
+    // -----------------------------
+    let lastT = performance.now();
+    let cached = {
+      appFromDeg: 0,
+      appSpeedMS: 0,
+      appWindAngleDeg: 0,
+      trueWindAngleDeg: 0,
+      idealTrimDeg: 0,
+      jibEff: 0,
+      mainEff: 0,
+      relWindSigned: 0,
+      posLabel: "–"
+    };
+    let lastHudUpdateMs = -Infinity;
+    let lastFollowUpdateMs = -Infinity;
+    const HUD_UPDATE_INTERVAL_MS = 100;
+    const FOLLOW_UPDATE_INTERVAL_MS = 100;
+
+    function update(dtReal, tNow){
+      const simSpeed = Number(simSpeedSlider.value);
+
+      const portHeld = keys.has("a") || touchControlActive("port");
+      const starboardHeld = keys.has("d") || touchControlActive("starboard");
+      const rudderInput = (starboardHeld ? 1 : 0) - (portHeld ? 1 : 0);
+
+      const qHeld = keys.has("q");
+      const keyboardTrimInput = (keys.has("w") ? 1 : 0) - (keys.has("s") ? 1 : 0);
+      let jibTrimInput = qHeld ? 0 : keyboardTrimInput;
+      let mainTrimInput = qHeld ? keyboardTrimInput : 0;
+      jibTrimInput += (touchControlActive("jib-ease") ? 1 : 0) - (touchControlActive("jib-in") ? 1 : 0);
+      mainTrimInput += (touchControlActive("main-ease") ? 1 : 0) - (touchControlActive("main-in") ? 1 : 0);
+      jibTrimInput = clamp(jibTrimInput, -1, 1);
+      mainTrimInput = clamp(mainTrimInput, -1, 1);
+
+      const rudderMax = 28;
+      boat.targetRudderDeg = clamp(boat.targetRudderDeg + rudderInput * 85 * dtReal, -rudderMax, rudderMax);
+
+      if (rudderInput === 0){
+        boat.targetRudderDeg *= Math.pow(0.001, dtReal);
+      }
+      boat.rudderDeg = lerp(boat.rudderDeg, boat.targetRudderDeg, 1 - Math.pow(0.0008, dtReal));
+
+      const trimRate = 44;
+      if (jibTrimInput !== 0){
+        boat.jibTrimDeg = clamp(boat.jibTrimDeg + jibTrimInput * trimRate * dtReal, 5, 85);
+      }
+      if (mainTrimInput !== 0){
+        boat.mainTrimDeg = clamp(boat.mainTrimDeg + mainTrimInput * trimRate * dtReal, 5, 85);
+      }
+
+      const tSec = tNow / 1000;
+      const shouldFetch = windState.usingLive && (tNow - windState.lastFetchMs > 25000);
+
+      if (shouldFetch){
+        windState.lastFetchMs = tNow;
+        requestLiveWind(boat.lat, boat.lon);
+      }
+
+      if (!windState.usingLive || !windState.ok){
+        const w = simulatedWind(boat.lat, boat.lon, tSec);
+        windState.speedMS = w.speedMS;
+        windState.fromDeg = w.fromDeg;
+        windState.source = w.source;
+      }
+
+      const windToDeg = wrapDeg(windState.fromDeg + 180);
+      const windToRad = degToRad(windToDeg);
+      const windVx = windState.speedMS * Math.sin(windToRad);
+      const windVy = windState.speedMS * Math.cos(windToRad);
+
+      let simTime = dtReal * simSpeed;
+      simTime = clamp(simTime, 0, 6.5);
+
+      const maxSubSteps = 180;
+      const baseStep = clamp(simTime / Math.max(1, maxSubSteps), 0.010, 0.05);
+      let remaining = simTime;
+
+      const turnScale = 1 / Math.max(1, simSpeed);
+      const previousLat = boat.lat;
+      const previousLon = boat.lon;
+
+      while (remaining > 1e-9){
+        const step = Math.min(baseStep, remaining);
+        physicsStep(step, turnScale, windVx, windVy);
+        remaining -= step;
+      }
+
+      if (landState.ready && isLand(boat.lat, boat.lon)){
+        resolveCoastCollision(previousLat, previousLon);
+      }
+
+      if (followBoatChk.checked && !userPanning && tNow - lastFollowUpdateMs >= FOLLOW_UPDATE_INTERVAL_MS){
+        centerMapOnBoat(false);
+        lastFollowUpdateMs = tNow;
+      }
+
+      if (tNow - lastHudUpdateMs >= HUD_UPDATE_INTERVAL_MS){
+        const boatSpeed = Math.hypot(boat.vxE, boat.vyN);
+        posValue.textContent = `${boat.lat.toFixed(5)}, ${boat.lon.toFixed(5)}`;
+        spdValue.textContent = `${boat.headingDeg.toFixed(0)}° , ${knotsFromMS(boatSpeed).toFixed(1)} kn`;
+        windValue.textContent = `${windState.speedMS.toFixed(1)} m/s from ${windState.fromDeg.toFixed(0)}°`;
+        sailValue.textContent = `${cached.posLabel} , jib ${boat.jibTrimDeg.toFixed(0)}° main ${boat.mainTrimDeg.toFixed(0)}°`;
+
+        const trimScore = (0.5 * cached.jibEff + 0.5 * cached.mainEff);
+        const trimPct = Math.round(trimScore * 100);
+        let coach = "";
+        const noGo = 35;
+        if (cached.trueWindAngleDeg < noGo + 3){
+          coach = "Too close to the wind. Bear away and rebuild speed.";
+        } else if (trimScore > 0.82){
+          coach = "Trim looks solid.";
+        } else if (trimScore > 0.55){
+          coach = "Close: tighten upwind and ease downwind.";
+        } else {
+          coach = "Trim is off. Adjust the sails and find a reach.";
+        }
+
+        const color =
+          (trimPct >= 80) ? "var(--good)" :
+          (trimPct >= 55) ? "var(--warn)" : "var(--bad)";
+        const hitAgo = tNow - boat.lastCollisionMs;
+        const snapAgo = tNow - boat.lastSnapMs;
+        let extra = "";
+        if (hitAgo >= 0 && hitAgo < 1200){
+          extra = `<div style="margin-top:6px;color:rgba(255,220,120,0.92);font-weight:700;">Coastline hit: reflected</div>`;
+        } else if (snapAgo >= 0 && snapAgo < 1600){
+          extra = `<div style="margin-top:6px;color:rgba(120,255,180,0.92);font-weight:700;">Moved to nearby water</div>`;
+        }
+
+        message.innerHTML =
+          `<div style="display:flex;justify-content:space-between;gap:10px;align-items:center;">
+            <div style="font-weight:800;color:${color};">Trim: ${trimPct}%</div>
+            <div style="color:rgba(255,255,255,0.70);font-size:11px;">${windState.source} • ${landState.source}</div>
+          </div>
+          <div style="margin-top:6px;">${coach}</div>
+          ${extra}`;
+        lastHudUpdateMs = tNow;
+      }
+
+      drawOverlay({
+        trueWindFromDeg: windState.fromDeg,
+        appWindFromDeg: cached.appFromDeg,
+        appWindAngleDeg: cached.appWindAngleDeg,
+        appSpeedMS: cached.appSpeedMS,
+        idealTrimDeg: cached.idealTrimDeg,
+        jibEff: cached.jibEff,
+        mainEff: cached.mainEff,
+        relWindSigned: cached.relWindSigned
+      });
+    }
+
+    function physicsStep(dt, turnScale, windVx, windVy){
+      const rudderMax = 28;
+
+      const headRad = degToRad(boat.headingDeg);
+      const fx = Math.sin(headRad);
+      const fy = Math.cos(headRad);
+      const sx = Math.cos(headRad);
+      const sy = -Math.sin(headRad);
+
+      let vf = dot(boat.vxE, boat.vyN, fx, fy);
+      let vs = dot(boat.vxE, boat.vyN, sx, sy);
+
+      const appVx = windVx - boat.vxE;
+      const appVy = windVy - boat.vyN;
+      const appSpeed = Math.hypot(appVx, appVy);
+
+      const appToDeg = wrapDeg(radToDeg(Math.atan2(appVx, appVy)));
+      const appFromDeg = wrapDeg(appToDeg + 180);
+
+      const trueWindAngle = Math.abs(shortestAngleDeg(boat.headingDeg, windState.fromDeg));
+      const appWindAngle  = Math.abs(shortestAngleDeg(boat.headingDeg, appFromDeg));
+      const posLabel = pointOfSailLabel(trueWindAngle);
+
+      const noGo = 35;
+      const stall = (trueWindAngle < noGo) ? (1 - (trueWindAngle / noGo)) : 0;
+
+      const ideal = idealTrimForApparent(appWindAngle);
+      const jibEff = trimEfficiency(boat.jibTrimDeg, ideal);
+      const mainEff = trimEfficiency(boat.mainTrimDeg, ideal);
+      const trimCombo = 0.55 * jibEff + 0.45 * mainEff;
+
+      const relWindSigned = shortestAngleDeg(boat.headingDeg, windState.fromDeg);
+
+      const a = clamp(appWindAngle, 0, 180);
+
+      // Lift-style drive peaks on a beam reach, weaker upwind and downwind
+      const liftFactor = Math.sin(degToRad(a)); // 0 at 0/180, 1 at 90
+
+      // Drag-style drive for running and broad reaching (keeps you moving downwind)
+      const dragFactor = Math.pow(clamp((a - 105) / 75, 0, 1), 0.85); // ~0 until ~105°, 1 at 180°
+
+      // Realistic-ish emphasis: lift dominates on reaches, drag contributes downwind
+      const liftK = 0.80;
+      const dragK = 0.55;
+
+      // Upwind penalty is handled by no-go + lift behavior, keep a small extra softening
+      const upwindSoft = (a < 60) ? lerp(0.80, 1.0, (a - 35) / 25) : 1.0;
+
+      // Stall affects lift strongly; drag remains partially available even near dead downwind, but not in irons
+      const stallLift = clamp(stall * 1.25, 0, 1);
+      const stallDrag = clamp(stall * 1.05, 0, 1);
+      const drive = (appSpeed * liftK * liftFactor * upwindSoft * trimCombo * (1 - stallLift))
+                  + (appSpeed * dragK * dragFactor * trimCombo * (1 - stallDrag));
+
+      // Convert drive to forward acceleration, with reasonable cap
+      const signedRudder = boat.rudderDeg / rudderMax;
+      const rudderNorm = Math.abs(signedRudder);
+      const rudderPenalty = 1 - 0.18 * Math.pow(rudderNorm, 1.15);
+
+      const thrustA = clamp(drive * 0.42, 0, 4.2);
+      vf += thrustA * rudderPenalty * dt;
+
+      // Drag and "keel" behavior
+      const dragF = 0.045 + 0.010 * Math.abs(vf);
+      const dragS = 1.20 + 0.32 * Math.abs(vs);
+
+      vf -= vf * dragF * dt;
+      vs -= vs * dragS * dt;
+
+      boat.vxE = fx * vf + sx * vs;
+      boat.vyN = fy * vf + sy * vs;
+
+      // Steering: allow turning even at low speed, keep turn rate stable vs simSpeed via turnScale
+      const forwardSpeed = Math.max(0, vf);
+      const minYaw = 9.0; // deg/s at very low speed (always steerable)
+      const speedYaw = 42.0 * clamp(forwardSpeed / 6.0, 0, 2.2);
+      const desiredYaw = signedRudder * (minYaw + speedYaw) * turnScale;
+
+      const turnResponse = 1 - Math.exp(-7.0 * dt);
+      boat.turnRateDegPerSec = lerp(boat.turnRateDegPerSec, desiredYaw, turnResponse);
+
+      // Damping prevents runaway oscillation
+      boat.turnRateDegPerSec *= Math.exp(-0.12 * dt);
+
+      boat.headingDeg = wrapDeg(boat.headingDeg + boat.turnRateDegPerSec * dt);
+
+      const dNorth = boat.vyN * dt;
+      const dEast  = boat.vxE * dt;
+
+      const dLat = dNorth / metersPerDegLat();
+      const dLon = dEast  / Math.max(1e-6, metersPerDegLon(boat.lat));
+
+      boat.lat = clamp(boat.lat + dLat, -84.5, 84.5);
+      boat.lon = wrapLon(boat.lon + dLon);
+
+      cached = {
+        appFromDeg,
+        appSpeedMS: appSpeed,
+        appWindAngleDeg: appWindAngle,
+        trueWindAngleDeg: trueWindAngle,
+        idealTrimDeg: ideal,
+        jibEff,
+        mainEff,
+        relWindSigned,
+        posLabel
+      };
+    }
+
+    // -----------------------------
+    // Drawing overlay
+    // -----------------------------
+    function drawOverlay(info){
+      const w = overlay.clientWidth;
+      const h = overlay.clientHeight;
+
+      ctx.clearRect(0, 0, w, h);
+
+      ctx.fillStyle = overlayGradient || "rgba(0,0,0,0.10)";
+      ctx.fillRect(0, 0, w, h);
+
+      const wx = w/2;
+      const wy = 92;
+      drawWindWidget(wx, wy, info.trueWindFromDeg, windState.speedMS, "TRUE WIND");
+      drawWindWidget(wx, wy + 64, info.appWindFromDeg, info.appSpeedMS, "APPARENT");
+
+      const boatPoint = map.latLngToContainerPoint([boat.lat, boat.lon]);
+      const cx = boatPoint.x;
+      const cy = boatPoint.y;
+      drawBoat(cx, cy, boat.headingDeg, boat.rudderDeg, boat.jibTrimDeg, boat.mainTrimDeg, info.relWindSigned, info.idealTrimDeg, info.jibEff, info.mainEff);
+
+      const sp = Math.hypot(boat.vxE, boat.vyN);
+      if (sp > 0.15){
+        const dir = Math.atan2(boat.vxE, boat.vyN);
+        ctx.save();
+        ctx.translate(cx, cy);
+        ctx.rotate(dir);
+        ctx.strokeStyle = "rgba(120,255,180,0.70)";
+        ctx.fillStyle = "rgba(120,255,180,0.70)";
+        ctx.lineWidth = 2;
+        const len = clamp(26 + sp * 6, 26, 70);
+        ctx.beginPath();
+        ctx.moveTo(0, 26);
+        ctx.lineTo(0, 26 - len);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(0, 26 - len);
+        ctx.lineTo(-6, 26 - len + 10);
+        ctx.lineTo(6, 26 - len + 10);
+        ctx.closePath();
+        ctx.fill();
+        ctx.restore();
+      }
+    }
+
+    function drawWindWidget(x, y, fromDeg, speedMS, label){
+      const toDeg = wrapDeg(fromDeg + 180);
+      const ang = degToRad(toDeg);
+
+      ctx.save();
+      ctx.translate(x, y);
+
+      ctx.fillStyle = "rgba(0,0,0,0.28)";
+      ctx.strokeStyle = "rgba(255,255,255,0.14)";
+      ctx.lineWidth = 1;
+      roundRect(ctx, -96, -20, 192, 40, 12);
+      ctx.fill();
+      ctx.stroke();
+
+      ctx.fillStyle = "rgba(255,255,255,0.75)";
+      ctx.font = "11px system-ui, -apple-system, Segoe UI, Roboto, Arial";
+      ctx.textAlign = "left";
+      ctx.textBaseline = "middle";
+      ctx.fillText(label, -86, 0);
+
+      ctx.textAlign = "right";
+      ctx.fillText(`${speedMS.toFixed(1)} m/s`, 86, 0);
+
+      ctx.rotate(ang);
+      ctx.strokeStyle = "rgba(99, 206, 255, 0.95)";
+      ctx.fillStyle = "rgba(99, 206, 255, 0.95)";
+      ctx.lineWidth = 2;
+
+      const len = 34;
+      ctx.beginPath();
+      ctx.moveTo(0, 0);
+      ctx.lineTo(0, -len);
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.moveTo(0, -len);
+      ctx.lineTo(-6, -len + 10);
+      ctx.lineTo(6, -len + 10);
+      ctx.closePath();
+      ctx.fill();
+
+      ctx.restore();
+    }
+
+    function drawBoat(x, y, headingDeg, rudderDeg, jibTrimDeg, mainTrimDeg, relWindSigned, idealTrimDeg, jibEff, mainEff){
+      const L = 88;
+      const B = 26;
+
+      const leewardSign = (relWindSigned >= 0) ? -1 : 1;
+      const jibAng = degToRad(leewardSign * jibTrimDeg);
+      const mainAng = degToRad(leewardSign * mainTrimDeg);
+
+      ctx.save();
+      ctx.translate(x, y);
+      ctx.rotate(degToRad(headingDeg));
+
+      ctx.save();
+      ctx.globalAlpha = 0.35;
+      ctx.fillStyle = "rgba(200,240,255,0.40)";
+      ctx.beginPath();
+      ctx.ellipse(0, L*0.55, B*0.65, L*0.55, 0, 0, Math.PI*2);
+      ctx.fill();
+      ctx.restore();
+
+      ctx.save();
+      ctx.globalAlpha = 0.35;
+      ctx.fillStyle = "rgba(0,0,0,0.55)";
+      ctx.beginPath();
+      ctx.ellipse(2, 4, B*0.7, L*0.52, 0, 0, Math.PI*2);
+      ctx.fill();
+      ctx.restore();
+
+      ctx.fillStyle = "rgba(240,245,250,0.92)";
+      ctx.strokeStyle = "rgba(20,30,40,0.55)";
+      ctx.lineWidth = 1.5;
+
+      ctx.beginPath();
+      ctx.moveTo(0, -L*0.56);
+      ctx.quadraticCurveTo(B*0.62, -L*0.28, B*0.55, 0);
+      ctx.quadraticCurveTo(B*0.50, L*0.48, 0, L*0.56);
+      ctx.quadraticCurveTo(-B*0.50, L*0.48, -B*0.55, 0);
+      ctx.quadraticCurveTo(-B*0.62, -L*0.28, 0, -L*0.56);
+      ctx.closePath();
+      ctx.fill();
+      ctx.stroke();
+
+      ctx.strokeStyle = "rgba(20,30,40,0.20)";
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(0, -L*0.44);
+      ctx.lineTo(0, L*0.40);
+      ctx.stroke();
+
+      ctx.strokeStyle = "rgba(25,35,45,0.75)";
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      ctx.moveTo(0, -L*0.18);
+      ctx.lineTo(0, L*0.16);
+      ctx.stroke();
+
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(0, L*0.10);
+      ctx.lineTo(0 + Math.sin(mainAng) * (B*0.95), L*0.10 + Math.cos(mainAng) * (B*0.95));
+      ctx.stroke();
+
+      const sailAlphaMain = lerp(0.18, 0.40, mainEff);
+      const sailAlphaJib  = lerp(0.16, 0.36, jibEff);
+
+      ctx.save();
+      ctx.fillStyle = `rgba(255,255,255,${sailAlphaMain.toFixed(3)})`;
+      ctx.strokeStyle = "rgba(255,255,255,0.55)";
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      const mastX = 0, mastY = -L*0.18;
+      const boomX = 0, boomY = L*0.10;
+      const tipX = boomX + Math.sin(mainAng) * (B*1.70);
+      const tipY = boomY + Math.cos(mainAng) * (B*1.70);
+      ctx.moveTo(mastX, mastY);
+      ctx.lineTo(0, L*0.14);
+      ctx.lineTo(tipX, tipY);
+      ctx.closePath();
+      ctx.fill();
+      ctx.stroke();
+      ctx.restore();
+
+      ctx.save();
+      ctx.fillStyle = `rgba(255,255,255,${sailAlphaJib.toFixed(3)})`;
+      ctx.strokeStyle = "rgba(255,255,255,0.55)";
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      const foreX = 0, foreY = -L*0.50;
+      const tackX = 0, tackY = -L*0.16;
+      const clewX = tackX + Math.sin(jibAng) * (B*1.45);
+      const clewY = tackY + Math.cos(jibAng) * (B*1.45);
+      ctx.moveTo(foreX, foreY);
+      ctx.lineTo(tackX, tackY);
+      ctx.lineTo(clewX, clewY);
+      ctx.closePath();
+      ctx.fill();
+      ctx.stroke();
+      ctx.restore();
+
+      // Rudder indicator (visual direction aligned with turn input)
+      ctx.save();
+      ctx.translate(0, L*0.57);
+      ctx.rotate(degToRad(-rudderDeg));
+      ctx.strokeStyle = "rgba(20,30,40,0.75)";
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      ctx.moveTo(0, -6);
+      ctx.lineTo(0, 10);
+      ctx.stroke();
+      ctx.restore();
+
+      const ideal = idealTrimDeg;
+      const avgTrim = 0.55 * jibTrimDeg + 0.45 * mainTrimDeg;
+      const trimErr = Math.abs(avgTrim - ideal);
+
+      ctx.save();
+      const meterW = 84;
+      const meterH = 8;
+      ctx.translate(0, -L*0.70);
+      ctx.fillStyle = "rgba(0,0,0,0.28)";
+      ctx.strokeStyle = "rgba(255,255,255,0.14)";
+      ctx.lineWidth = 1;
+      roundRect(ctx, -meterW/2, -meterH/2, meterW, meterH, 6);
+      ctx.fill();
+      ctx.stroke();
+
+      const score = clamp(Math.exp(-(trimErr*trimErr)/(2*16*16)), 0, 1);
+      const fillW = meterW * score;
+
+      let col;
+      if (score > 0.82) col = "rgba(120,255,180,0.90)";
+      else if (score > 0.55) col = "rgba(255,220,120,0.90)";
+      else col = "rgba(255,120,140,0.90)";
+
+      ctx.fillStyle = col;
+      roundRect(ctx, -meterW/2, -meterH/2, fillW, meterH, 6);
+      ctx.fill();
+      ctx.restore();
+
+      ctx.restore();
+    }
+
+    function roundRect(c, x, y, w, h, r){
+      const rr = Math.min(r, w/2, h/2);
+      c.beginPath();
+      c.moveTo(x + rr, y);
+      c.lineTo(x + w - rr, y);
+      c.quadraticCurveTo(x + w, y, x + w, y + rr);
+      c.lineTo(x + w, y + h - rr);
+      c.quadraticCurveTo(x + w, y + h, x + w - rr, y + h);
+      c.lineTo(x + rr, y + h);
+      c.quadraticCurveTo(x, y + h, x, y + h - rr);
+      c.lineTo(x, y + rr);
+      c.quadraticCurveTo(x, y, x + rr, y);
+      c.closePath();
+    }
+
+    // -----------------------------
+    // Kickstart
+    // -----------------------------
+    resetBoat();
+    message.textContent =
+      "Loading sailing conditions…";
+
+    loadLandMask();
+
+    function frame(now){
+      const dt = clamp((now - lastT) / 1000, 0, 0.05);
+      lastT = now;
+      update(dt, now);
+      requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  </script>
+</body>
+</html>
