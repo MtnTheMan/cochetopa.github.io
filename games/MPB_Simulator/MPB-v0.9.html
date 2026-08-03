@@ -1,0 +1,1302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>MPB v0.9: Mountain Pine Beetle Landscape Lab</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#f7faf5" />
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""
+  />
+  <style>
+    :root { color-scheme: light; }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; margin: 0; }
+    body { font-family: Arial, Helvetica, sans-serif; color: #182018; background: #f7faf5; }
+    button, input, select { font: inherit; }
+    #app {
+      height: 100vh;
+      height: 100dvh;
+      display: grid;
+      grid-template-rows: auto minmax(0, 1fr);
+    }
+    #controls {
+      z-index: 1000;
+      background: #f7faf5;
+      border-bottom: 1px solid #c6d6c1;
+      padding: 9px 12px 8px;
+    }
+    #primary-row,
+    #actions,
+    .stats,
+    #status-row,
+    .settings-grid {
+      display: flex;
+      align-items: center;
+    }
+    #primary-row { flex-wrap: wrap; gap: 8px 12px; }
+    #brand { display: inline-flex; align-items: baseline; gap: 7px; font-weight: 800; white-space: nowrap; }
+    #brand small {
+      border: 1px solid #9ab494;
+      border-radius: 999px;
+      padding: 1px 6px;
+      color: #315a36;
+      font-size: 10px;
+      letter-spacing: 0.04em;
+    }
+    #actions { gap: 7px; }
+    button {
+      min-height: 34px;
+      border: 1px solid #6f8d68;
+      border-radius: 6px;
+      padding: 6px 10px;
+      background: #fff;
+      color: #182018;
+      cursor: pointer;
+    }
+    button:hover { background: #e6f0e2; }
+    button.primary,
+    button.active { background: #276c43; color: #fff; border-color: #276c43; }
+    button:disabled { opacity: 0.52; cursor: not-allowed; }
+    .stats { margin-left: auto; flex-wrap: wrap; gap: 4px 11px; }
+    .stat { font-size: 12px; white-space: nowrap; color: #455143; }
+    .stat strong { color: #182018; font-variant-numeric: tabular-nums; }
+    #status-row { gap: 10px; margin-top: 7px; }
+    #status { min-width: 0; flex: 1 1 auto; font-size: 12px; color: #445442; line-height: 1.35; }
+    #layer-status {
+      flex: 0 0 auto;
+      border-radius: 999px;
+      padding: 3px 8px;
+      background: #e8efe5;
+      color: #42533f;
+      font-size: 11px;
+      white-space: nowrap;
+    }
+    #layer-status[data-state="ready"] { background: #dcefdc; color: #1f5b2b; }
+    #layer-status[data-state="loading"] { background: #fff0c7; color: #6a5000; }
+    #layer-status[data-state="error"] { background: #f8dede; color: #7b2020; }
+    details { margin-top: 5px; color: #465744; font-size: 12px; }
+    summary { width: max-content; cursor: pointer; font-weight: 700; }
+    .settings-grid { flex-wrap: wrap; gap: 7px 13px; margin-top: 7px; }
+    label { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+    input[type="number"], select {
+      width: 72px;
+      min-height: 32px;
+      border: 1px solid #aab9a6;
+      border-radius: 5px;
+      padding: 4px 5px;
+      background: #fff;
+      color: #182018;
+    }
+    select { width: 148px; }
+    .toggle { gap: 7px; }
+    .toggle input { width: 18px; height: 18px; margin: 0; accent-color: #276c43; }
+    #reference-note { margin: 6px 0 0; max-width: 1000px; font-size: 11px; line-height: 1.35; }
+    #map { min-height: 260px; }
+    #map.choosing-origin { cursor: crosshair; }
+    .legend {
+      max-width: min(240px, calc(100vw - 24px));
+      background: rgba(255,255,255,0.96);
+      border: 1px solid #c6d6c1;
+      border-radius: 7px;
+      padding: 8px 10px;
+      line-height: 1.3;
+      font-size: 11px;
+      box-shadow: 0 1px 8px rgba(0,0,0,0.15);
+    }
+    .legend-row { display: flex; align-items: center; gap: 6px; margin-top: 4px; }
+    .swatch { width: 11px; height: 11px; border-radius: 50%; display: inline-block; flex: 0 0 auto; }
+    .swatch.sample { border-radius: 2px; }
+    @media (max-width: 760px) {
+      #controls {
+        max-height: 46dvh;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        padding: max(7px, env(safe-area-inset-top)) 8px 7px;
+      }
+      #brand { flex: 1 1 100%; }
+      #actions { flex: 1 1 100%; }
+      #actions button { flex: 1 1 auto; }
+      .stats { margin-left: 0; flex: 1 1 100%; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 3px 8px; }
+      #status-row { align-items: flex-start; flex-wrap: wrap; gap: 5px 8px; }
+      #status { flex-basis: 100%; font-size: 11px; }
+      #layer-status { font-size: 10px; }
+      .settings-grid { align-items: stretch; gap: 6px 9px; }
+      .settings-grid label:not(.toggle) { flex: 1 1 138px; justify-content: space-between; }
+      input[type="number"], select { width: 82px; }
+      .toggle { flex: 1 1 100%; }
+      .legend { padding: 6px 8px; }
+    }
+    @media (pointer: coarse) {
+      button, input[type="number"], select { min-height: 44px; }
+      input[type="number"], select { font-size: 16px; }
+    }
+    @media (max-height: 520px) {
+      #controls { padding-top: 5px; padding-bottom: 5px; }
+      #status-row { margin-top: 4px; }
+      details { margin-top: 3px; }
+      #map { min-height: 0; }
+      .legend {
+        width: min(260px, calc(100vw - 72px));
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 2px 8px;
+      }
+      .legend strong { grid-column: 1 / -1; }
+      .legend-row { margin-top: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <section id="controls" aria-label="Simulation controls">
+      <div id="primary-row">
+        <div id="brand">MPB Landscape Lab <small>v0.9</small></div>
+        <div id="actions">
+          <button type="button" id="chooseOrigin" class="primary active" aria-pressed="true">Tap map for origin</button>
+          <button type="button" id="step" disabled>Step</button>
+          <button type="button" id="run" disabled>Run</button>
+          <button type="button" id="reset">Reset</button>
+        </div>
+        <div class="stats" aria-label="Simulation results">
+          <span class="stat">Gen <strong id="gen">0</strong></span>
+          <span class="stat">Year <strong id="year">0</strong></span>
+          <span class="stat">Outbreaks <strong id="pop">0</strong></span>
+          <span class="stat">New <strong id="newCount">0</strong></span>
+          <span class="stat">Host <strong id="hostBa">0.0</strong></span>
+          <span class="stat">Climate <strong id="climateScore">0.00</strong></span>
+          <span class="stat">Samples <strong id="cacheCount">0</strong></span>
+        </div>
+      </div>
+      <div id="status-row">
+        <div id="status" role="status" aria-live="polite">Tap the map to choose an outbreak origin.</div>
+        <span id="layer-status" data-state="loading" aria-live="polite">Tree reference: loading</span>
+      </div>
+      <details id="settings">
+        <summary>Settings</summary>
+        <div class="settings-grid">
+          <label>Attempts/gen <input type="number" id="rate" value="3" min="1" max="8" /></label>
+          <label>Flight km <input type="number" id="range" value="6" min="1" max="30" step="1" /></label>
+          <label>Annual mort <input type="number" id="mort" value="0.18" min="0" max="0.8" step="0.02" /></label>
+          <label>Gen/year <input type="number" id="perYear" value="1" min="1" max="4" /></label>
+          <label>Climate weight <input type="number" id="climateWeight" value="0.35" min="0" max="0.8" step="0.05" /></label>
+          <label>Reference species
+            <select id="hostLayer">
+              <option value="lodgepole_pine">Lodgepole pine</option>
+              <option value="ponderosa_pine">Ponderosa pine</option>
+              <option value="limber_pine">Limber pine</option>
+              <option value="whitebark_pine">Whitebark pine</option>
+              <option value="western_white_pine">Western white pine</option>
+              <option value="southwestern_white_pine">SW white pine</option>
+            </select>
+          </label>
+          <label class="toggle"><input type="checkbox" id="showHostLayer" checked /> Show tree reference</label>
+        </div>
+        <p id="reference-note">The optional display is the 2011 USFS modeled basal-area raster and is hidden below zoom 4. Model samples are shown as squares and remain independent of the current map view.</p>
+      </details>
+    </section>
+    <div id="map" class="choosing-origin" aria-label="Outbreak map. Use the origin button, then tap the map to choose a starting area."></div>
+  </div>
+
+  <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""
+  ></script>
+  <script>
+    const SPECIES_URL = 'https://imagery.geoplatform.gov/iipp/rest/services/Vegetation/USFS_EDW_FHP_TreeSpeciesMetrics_BasalArea/ImageServer';
+    const ELEVATION_URL = 'https://api.open-meteo.com/v1/elevation';
+    const CLIMATE_URL = 'https://climate-api.open-meteo.com/v1/climate';
+    const HOSTS = [
+      { key: 'lodgepole_pine', label: 'Lodgepole pine', weight: 1.00, sliceId: 308 },
+      { key: 'ponderosa_pine', label: 'Ponderosa pine', weight: 0.58, sliceId: 421 },
+      { key: 'limber_pine', label: 'Limber pine', weight: 0.45, sliceId: 300 },
+      { key: 'whitebark_pine', label: 'Whitebark pine', weight: 0.42, sliceId: 636 },
+      { key: 'western_white_pine', label: 'Western white pine', weight: 0.36, sliceId: 615 },
+      { key: 'southwestern_white_pine', label: 'SW white pine', weight: 0.32, sliceId: 522 }
+    ];
+    const MAX_BEETLES = 650;
+    const MAX_PARENTS_PER_STEP = 30;
+    const MAX_CANDIDATE_CELLS_PER_STEP = 24;
+    const MAX_NEW_PER_STEP = 24;
+    const MAX_VISIBLE_SAMPLE_CELLS = 144;
+    const HOST_REQUEST_CONCURRENCY = 3;
+    const MIN_HOST_INDEX = 1.6;
+    const OVERLAY_MIN_ZOOM = 4;
+    const SEED_SEARCH_RADIUS_METERS = 900;
+    const REQUEST_TIMEOUT_MS = 14000;
+
+    const map = L.map('map', { preferCanvas: true }).setView([39.35, -106.18], 8);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 18,
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+    map.attributionControl.addAttribution(
+      '<a href="https://imagery.geoplatform.gov/iipp/rest/services/Vegetation/USFS_EDW_FHP_TreeSpeciesMetrics_BasalArea/ImageServer" target="_blank" rel="noopener">USFS tree data</a>'
+    );
+
+    map.createPane('treeReferencePane');
+    map.getPane('treeReferencePane').style.zIndex = 250;
+    map.getPane('treeReferencePane').style.pointerEvents = 'none';
+    map.createPane('samplePane');
+    map.getPane('samplePane').style.zIndex = 410;
+    map.createPane('modelPane');
+    map.getPane('modelPane').style.zIndex = 430;
+
+    // Keep the simulation within the service's western-U.S. study area without
+    // drawing a large rectangle that can be mistaken for an imagery tile.
+    const habitatBounds = L.latLngBounds([[31, -125], [49, -102]]);
+
+    let hostOverlay = null;
+    const beetleLayer = L.layerGroup().addTo(map);
+    const rangeLayer = L.layerGroup().addTo(map);
+    const sampleLayer = L.layerGroup().addTo(map);
+    const cells = new Map();
+    const sampleMarkers = new Map();
+    const identifyFallbackHosts = new Set();
+    let climateBaseline = null;
+    let beetles = [];
+    let generation = 0;
+    let years = 0;
+    let lastNew = 0;
+    let lastAvgHostBa = 0;
+    let lastAvgClimate = 0;
+    let running = false;
+    let stepping = false;
+    let timer = null;
+    let operationEpoch = 0;
+    let activeController = null;
+    let choosingOrigin = true;
+    let overlayRequestToken = 0;
+    let overlayController = null;
+    let overlayPendingKey = null;
+    let originRangeGuide = null;
+    let originSelectionSnapshot = null;
+
+    const els = {
+      rate: document.getElementById('rate'),
+      range: document.getElementById('range'),
+      mort: document.getElementById('mort'),
+      perYear: document.getElementById('perYear'),
+      climateWeight: document.getElementById('climateWeight'),
+      hostLayer: document.getElementById('hostLayer'),
+      showHostLayer: document.getElementById('showHostLayer'),
+      chooseOrigin: document.getElementById('chooseOrigin'),
+      step: document.getElementById('step'),
+      run: document.getElementById('run'),
+      reset: document.getElementById('reset'),
+      gen: document.getElementById('gen'),
+      year: document.getElementById('year'),
+      pop: document.getElementById('pop'),
+      newCount: document.getElementById('newCount'),
+      hostBa: document.getElementById('hostBa'),
+      climateScore: document.getElementById('climateScore'),
+      cacheCount: document.getElementById('cacheCount'),
+      status: document.getElementById('status'),
+      layerStatus: document.getElementById('layer-status')
+    };
+
+    const legend = L.control({ position: 'bottomright' });
+    legend.onAdd = function() {
+      const div = L.DomUtil.create('div', 'legend');
+      div.innerHTML = '<strong>Model output</strong>' +
+        '<div class="legend-row"><span class="swatch sample" style="background:#8f9791"></span>Sampled: little/no host</div>' +
+        '<div class="legend-row"><span class="swatch sample" style="background:#287a43"></span>Sampled: suitable host</div>' +
+        '<div class="legend-row"><span class="swatch" style="background:#f77f00"></span>Outbreak (darker = more suitable)</div>' +
+        '<div class="legend-row"><span class="swatch" style="background:#d00000"></span>Origin</div>';
+      return div;
+    };
+    legend.addTo(map);
+
+    function clamp(value, min, max) {
+      return Math.max(min, Math.min(max, value));
+    }
+
+    function numericValue(element, fallback, min, max) {
+      const parsed = Number(element.value);
+      return clamp(Number.isFinite(parsed) ? parsed : fallback, min, max);
+    }
+
+    function currentClimateWeight() {
+      return numericValue(els.climateWeight, 0.35, 0, 0.8);
+    }
+
+    class HostServiceError extends Error {
+      constructor(message) {
+        super(message);
+        this.name = 'HostServiceError';
+      }
+    }
+
+    function startOperation() {
+      if (activeController) activeController.abort();
+      const controller = new AbortController();
+      activeController = controller;
+      operationEpoch += 1;
+      return { epoch: operationEpoch, controller, signal: controller.signal };
+    }
+
+    function cancelActiveOperation() {
+      operationEpoch += 1;
+      if (activeController) activeController.abort();
+      activeController = null;
+    }
+
+    function operationIsActive(context) {
+      return context.epoch === operationEpoch && !context.signal.aborted;
+    }
+
+    function assertActive(context) {
+      if (!operationIsActive(context)) throw new DOMException('Operation cancelled', 'AbortError');
+    }
+
+    function isAbortError(error) {
+      return error && error.name === 'AbortError';
+    }
+
+    async function fetchJson(url, signal, label) {
+      const requestController = new AbortController();
+      let timedOut = false;
+      const abortFromParent = () => requestController.abort();
+      if (signal.aborted) requestController.abort();
+      else signal.addEventListener('abort', abortFromParent, { once: true });
+      const timeout = setTimeout(() => {
+        timedOut = true;
+        requestController.abort();
+      }, REQUEST_TIMEOUT_MS);
+      try {
+        const response = await fetch(url, { signal: requestController.signal });
+        if (!response.ok) throw new Error(`${label} ${response.status}`);
+        const data = await response.json();
+        if (data.error) throw new Error(data.reason || data.error.message || `${label} error`);
+        return data;
+      } catch (error) {
+        if (timedOut && !signal.aborted) throw new Error(`${label} timed out`);
+        throw error;
+      } finally {
+        clearTimeout(timeout);
+        signal.removeEventListener('abort', abortFromParent);
+      }
+    }
+
+    function setStatus(text) {
+      els.status.textContent = text;
+    }
+
+    function setLayerStatus(text, state = '') {
+      els.layerStatus.textContent = text;
+      els.layerStatus.dataset.state = state;
+    }
+
+    function setOriginMode(active) {
+      choosingOrigin = active;
+      els.chooseOrigin.textContent = active ? 'Tap map for origin' : 'Choose origin';
+      els.chooseOrigin.classList.toggle('primary', active);
+      els.chooseOrigin.classList.toggle('active', active);
+      els.chooseOrigin.setAttribute('aria-pressed', String(active));
+      map.getContainer().classList.toggle('choosing-origin', active);
+      updateControls();
+    }
+
+    function removeHostOverlay() {
+      overlayRequestToken += 1;
+      if (overlayController) overlayController.abort();
+      overlayController = null;
+      overlayPendingKey = null;
+      if (hostOverlay) {
+        if (map.hasLayer(hostOverlay)) map.removeLayer(hostOverlay);
+        if (hostOverlay._mpbObjectUrl) URL.revokeObjectURL(hostOverlay._mpbObjectUrl);
+      }
+      hostOverlay = null;
+    }
+
+    function clearMismatchedHostOverlay(viewKey) {
+      if (!hostOverlay || hostOverlay._mpbViewKey === viewKey) return;
+      if (map.hasLayer(hostOverlay)) map.removeLayer(hostOverlay);
+      if (hostOverlay._mpbObjectUrl) URL.revokeObjectURL(hostOverlay._mpbObjectUrl);
+      hostOverlay = null;
+    }
+
+    async function syncHostOverlay() {
+      if (!els.showHostLayer.checked) {
+        removeHostOverlay();
+        setLayerStatus('Tree reference: off');
+        return;
+      }
+      if (map.getZoom() < OVERLAY_MIN_ZOOM) {
+        removeHostOverlay();
+        setLayerStatus(`Tree reference: zoom to ${OVERLAY_MIN_ZOOM}+`);
+        return;
+      }
+
+      const species = els.hostLayer.value;
+      const bounds = map.getBounds();
+      const size = map.getSize();
+      const northWest = map.options.crs.project(bounds.getNorthWest());
+      const southEast = map.options.crs.project(bounds.getSouthEast());
+      const viewKey = [
+        species,
+        map.getZoom(),
+        bounds.getWest().toFixed(5),
+        bounds.getSouth().toFixed(5),
+        bounds.getEast().toFixed(5),
+        bounds.getNorth().toFixed(5),
+        size.x,
+        size.y
+      ].join('|');
+      if ((hostOverlay && hostOverlay._mpbViewKey === viewKey) || overlayPendingKey === viewKey) return;
+
+      if (overlayController) overlayController.abort();
+      overlayController = new AbortController();
+      overlayPendingKey = viewKey;
+      const controller = overlayController;
+      const requestToken = ++overlayRequestToken;
+      const rules = buildHostRules(species);
+      const params = new URLSearchParams({
+        f: 'image',
+        bbox: `${northWest.x},${southEast.y},${southEast.x},${northWest.y}`,
+        size: `${Math.max(1, Math.round(size.x))},${Math.max(1, Math.round(size.y))}`,
+        format: 'png32',
+        transparent: 'true',
+        bboxSR: '3857',
+        imageSR: '3857',
+        adjustAspectRatio: 'false',
+        interpolation: 'RSP_BilinearInterpolation',
+        noData: '0',
+        mosaicRule: JSON.stringify(rules.mosaicRule),
+        renderingRule: JSON.stringify(rules.renderingRule)
+      });
+      setLayerStatus('Tree reference: loading', 'loading');
+
+      let timedOut = false;
+      const timeout = setTimeout(() => {
+        timedOut = true;
+        controller.abort();
+      }, REQUEST_TIMEOUT_MS);
+      try {
+        const response = await fetch(`${SPECIES_URL}/exportImage?${params.toString()}`, {
+          signal: controller.signal
+        });
+        if (!response.ok) throw new Error(`Tree display ${response.status}`);
+        const blob = await response.blob();
+        if (!blob.type.startsWith('image/')) throw new Error('Tree display returned no image');
+        if (requestToken !== overlayRequestToken || controller.signal.aborted) return;
+
+        const objectUrl = URL.createObjectURL(blob);
+        const nextOverlay = L.imageOverlay(objectUrl, bounds, {
+          opacity: 0,
+          pane: 'treeReferencePane',
+          interactive: false
+        });
+        nextOverlay._mpbObjectUrl = objectUrl;
+        nextOverlay._mpbViewKey = viewKey;
+        nextOverlay.once('load', () => {
+          if (requestToken !== overlayRequestToken) {
+            if (map.hasLayer(nextOverlay)) map.removeLayer(nextOverlay);
+            URL.revokeObjectURL(objectUrl);
+            return;
+          }
+          const previous = hostOverlay;
+          hostOverlay = nextOverlay;
+          nextOverlay.setOpacity(0.46);
+          if (previous && previous !== nextOverlay) {
+            if (map.hasLayer(previous)) map.removeLayer(previous);
+            if (previous._mpbObjectUrl) URL.revokeObjectURL(previous._mpbObjectUrl);
+          }
+          overlayController = null;
+          overlayPendingKey = null;
+          setLayerStatus('Tree reference: ready', 'ready');
+        });
+        nextOverlay.once('error', () => {
+          if (map.hasLayer(nextOverlay)) map.removeLayer(nextOverlay);
+          URL.revokeObjectURL(objectUrl);
+          if (requestToken === overlayRequestToken) {
+            clearMismatchedHostOverlay(viewKey);
+            overlayController = null;
+            overlayPendingKey = null;
+            setLayerStatus('Tree display unavailable', 'error');
+          }
+        });
+        nextOverlay.addTo(map);
+      } catch (error) {
+        if (requestToken === overlayRequestToken && !controller.signal.aborted) {
+          clearMismatchedHostOverlay(viewKey);
+          overlayController = null;
+          overlayPendingKey = null;
+          setLayerStatus('Tree display unavailable', 'error');
+        } else if (requestToken === overlayRequestToken && timedOut) {
+          clearMismatchedHostOverlay(viewKey);
+          overlayController = null;
+          overlayPendingKey = null;
+          setLayerStatus('Tree display timed out', 'error');
+        }
+      } finally {
+        clearTimeout(timeout);
+      }
+    }
+
+    function updateControls() {
+      els.gen.textContent = generation;
+      els.year.textContent = years;
+      els.pop.textContent = beetles.length;
+      els.newCount.textContent = lastNew;
+      els.hostBa.textContent = lastAvgHostBa.toFixed(1);
+      els.climateScore.textContent = lastAvgClimate.toFixed(2);
+      els.cacheCount.textContent = cells.size;
+      els.run.textContent = running ? 'Pause' : 'Run';
+      els.run.classList.toggle('active', running);
+      els.step.disabled = stepping || choosingOrigin || beetles.length === 0;
+      els.run.disabled = choosingOrigin || beetles.length === 0;
+    }
+
+    function cellKey(latlng) {
+      return `${latlng.lat.toFixed(2)},${latlng.lng.toFixed(2)}`;
+    }
+
+    function destPoint(latlng, distanceMeters, bearing) {
+      const radius = 6371000;
+      const lat1 = latlng.lat * Math.PI / 180;
+      const lon1 = latlng.lng * Math.PI / 180;
+      const dR = distanceMeters / radius;
+      const lat2 = Math.asin(Math.sin(lat1) * Math.cos(dR) + Math.cos(lat1) * Math.sin(dR) * Math.cos(bearing));
+      const lon2 = lon1 + Math.atan2(
+        Math.sin(bearing) * Math.sin(dR) * Math.cos(lat1),
+        Math.cos(dR) - Math.sin(lat1) * Math.sin(lat2)
+      );
+      return L.latLng(lat2 * 180 / Math.PI, lon2 * 180 / Math.PI);
+    }
+
+    function buildHostRules(species) {
+      return {
+        renderingRule: { rasterFunction: species },
+        mosaicRule: {
+          where: `variable='${species}' AND year=2011`,
+          mosaicMethod: 'esriMosaicNorthwest',
+          ascending: true,
+          mosaicOperation: 'MT_MAX',
+          multidimensionalDefinition: [{
+            variableName: species,
+            dimensionName: 'year',
+            values: [2011],
+            isSlice: true
+          }]
+        }
+      };
+    }
+
+    async function identifyBasalArea(latlng, host, signal) {
+      const rules = buildHostRules(host.key);
+      const params = new URLSearchParams({
+        f: 'json',
+        geometry: JSON.stringify({
+          x: latlng.lng,
+          y: latlng.lat,
+          spatialReference: { wkid: 4326 }
+        }),
+        geometryType: 'esriGeometryPoint',
+        returnGeometry: 'false',
+        mosaicRule: JSON.stringify(rules.mosaicRule),
+        renderingRule: JSON.stringify(rules.renderingRule)
+      });
+      const data = await fetchJson(
+        `${SPECIES_URL}/identify?${params.toString()}`,
+        signal,
+        'Species service'
+      );
+      const value = Number(data.value);
+      if (Number.isFinite(value)) return Math.max(0, value);
+      const values = data.properties && Array.isArray(data.properties.Values)
+        ? data.properties.Values.map(Number).filter(Number.isFinite)
+        : [];
+      return values.length ? Math.max(0, ...values) : 0;
+    }
+
+    async function sampleBasalAreasByIdentify(latlngs, host, signal) {
+      const values = new Array(latlngs.length);
+      let nextIndex = 0;
+      async function runner() {
+        while (nextIndex < latlngs.length) {
+          const index = nextIndex++;
+          values[index] = await identifyBasalArea(latlngs[index], host, signal);
+        }
+      }
+      await Promise.all(
+        Array.from({ length: Math.min(4, latlngs.length) }, () => runner())
+      );
+      return values;
+    }
+
+    async function sampleBasalAreas(latlngs, host, signal) {
+      if (identifyFallbackHosts.has(host.key)) {
+        return sampleBasalAreasByIdentify(latlngs, host, signal);
+      }
+      const params = new URLSearchParams({
+        f: 'json',
+        geometry: JSON.stringify({
+          points: latlngs.map(latlng => [latlng.lng, latlng.lat]),
+          spatialReference: { wkid: 4326 }
+        }),
+        geometryType: 'esriGeometryMultipoint',
+        returnFirstValueOnly: 'false',
+        sliceId: String(host.sliceId)
+      });
+      let data;
+      try {
+        data = await fetchJson(
+          `${SPECIES_URL}/getSamples?${params.toString()}`,
+          signal,
+          'Species service'
+        );
+      } catch (error) {
+        if (isAbortError(error)) throw error;
+        if (!/invalid or missing input parameters/i.test(error.message || '')) throw error;
+        identifyFallbackHosts.add(host.key);
+        return sampleBasalAreasByIdentify(latlngs, host, signal);
+      }
+      const values = new Array(latlngs.length).fill(0);
+      const samples = Array.isArray(data.samples) ? data.samples : [];
+      samples.forEach(sample => {
+        const locationId = Number(sample.locationId);
+        const value = Number(sample.value);
+        if (Number.isInteger(locationId) && locationId >= 0 && locationId < values.length && Number.isFinite(value)) {
+          values[locationId] = Math.max(values[locationId], value);
+        }
+      });
+      return values;
+    }
+
+    async function fetchElevation(latlng, signal) {
+      const params = new URLSearchParams({
+        latitude: latlng.lat.toFixed(5),
+        longitude: latlng.lng.toFixed(5)
+      });
+      const data = await fetchJson(`${ELEVATION_URL}?${params.toString()}`, signal, 'Elevation service');
+      const elevation = Array.isArray(data.elevation) ? Number(data.elevation[0]) : Number(data.elevation);
+      if (!Number.isFinite(elevation)) throw new Error('Elevation service returned no value');
+      return elevation;
+    }
+
+    async function fetchElevations(latlngs, signal) {
+      const params = new URLSearchParams({
+        latitude: latlngs.map(latlng => latlng.lat.toFixed(5)).join(','),
+        longitude: latlngs.map(latlng => latlng.lng.toFixed(5)).join(',')
+      });
+      const data = await fetchJson(`${ELEVATION_URL}?${params.toString()}`, signal, 'Elevation service');
+      const values = Array.isArray(data.elevation) ? data.elevation : [data.elevation];
+      if (values.length !== latlngs.length) throw new Error('Elevation service returned incomplete data');
+      return values.map(value => {
+        const elevation = Number(value);
+        if (!Number.isFinite(elevation)) throw new Error('Elevation service returned no value');
+        return elevation;
+      });
+    }
+
+    function mean(values) {
+      const clean = values.filter(Number.isFinite);
+      return clean.length ? clean.reduce((sum, value) => sum + value, 0) / clean.length : null;
+    }
+
+    async function fetchClimateBaseline(latlng, signal) {
+      const params = new URLSearchParams({
+        latitude: latlng.lat.toFixed(4),
+        longitude: latlng.lng.toFixed(4),
+        start_date: '2011-01-01',
+        end_date: '2011-12-31',
+        daily: 'temperature_2m_mean,temperature_2m_min,precipitation_sum',
+        models: 'MRI_AGCM3_2_S'
+      });
+      const data = await fetchJson(`${CLIMATE_URL}?${params.toString()}`, signal, 'Climate service');
+      const daily = data.daily || {};
+      const times = daily.time || [];
+      const meanTemps = daily.temperature_2m_mean || [];
+      const minTemps = daily.temperature_2m_min || [];
+      const precip = daily.precipitation_sum || [];
+      const summerMeans = [];
+      const winterMins = [];
+      times.forEach((date, index) => {
+        const month = Number(date.slice(5, 7));
+        if (month >= 6 && month <= 8) summerMeans.push(Number(meanTemps[index]));
+        if (month === 12 || month <= 2) winterMins.push(Number(minTemps[index]));
+      });
+      const winterClean = winterMins.filter(Number.isFinite);
+      const annualPrecip = precip.map(Number).filter(Number.isFinite).reduce((sum, value) => sum + value, 0);
+      const reportedElevation = Number(data.elevation);
+      const summerMean = mean(summerMeans);
+      return {
+        lat: latlng.lat,
+        lng: latlng.lng,
+        elevation: Number.isFinite(reportedElevation) ? reportedElevation : await fetchElevation(latlng, signal),
+        summerMean: summerMean == null ? 16 : summerMean,
+        winterMin: winterClean.length ? Math.min(...winterClean) : -20,
+        annualPrecip: annualPrecip || 520,
+        source: 'Open-Meteo climate 2011 MRI_AGCM3_2_S',
+        fallback: false
+      };
+    }
+
+    function climateAt(latlng, elevation) {
+      const base = climateBaseline || {
+        lat: latlng.lat,
+        elevation: elevation,
+        summerMean: 16,
+        winterMin: -20,
+        annualPrecip: 520,
+        source: 'fallback'
+      };
+      const elevDelta = elevation - base.elevation;
+      const latDelta = latlng.lat - base.lat;
+      const summerMean = base.summerMean - elevDelta * 0.0065 - latDelta * 0.18;
+      const winterMin = base.winterMin - elevDelta * 0.0050 - latDelta * 0.28;
+      const annualPrecip = clamp(base.annualPrecip + elevDelta * 0.08, 120, 1400);
+      const summerScore = clamp((summerMean - 8) / 10, 0, 1) * clamp((24 - summerMean) / 6, 0, 1);
+      const winterSurvival = clamp((winterMin + 36) / 18, 0, 1);
+      const droughtStress = 1 - clamp((annualPrecip - 250) / 850, 0, 1);
+      const elevationBand = clamp((3600 - elevation) / 1500, 0, 1) * clamp((elevation - 900) / 900, 0.15, 1);
+      const score = clamp(summerScore * 0.40 + winterSurvival * 0.35 + droughtStress * 0.15 + elevationBand * 0.10, 0, 1);
+      return { summerMean, winterMin, annualPrecip, elevation, score };
+    }
+
+    async function allSettledWithConcurrency(items, limit, worker, context) {
+      const results = new Array(items.length);
+      let nextIndex = 0;
+      async function runner() {
+        while (nextIndex < items.length) {
+          assertActive(context);
+          const index = nextIndex++;
+          try {
+            results[index] = { status: 'fulfilled', value: await worker(items[index], index) };
+          } catch (error) {
+            if (isAbortError(error)) throw error;
+            results[index] = { status: 'rejected', reason: error };
+          }
+        }
+      }
+      const runnerCount = Math.min(limit, items.length);
+      await Promise.all(Array.from({ length: runnerCount }, () => runner()));
+      return results;
+    }
+
+    async function scoreSitesRaw(latlngs, context) {
+      const scoresByKey = new Map();
+      const missingByKey = new Map();
+      latlngs.forEach(latlng => {
+        const key = cellKey(latlng);
+        if (cells.has(key)) scoresByKey.set(key, cells.get(key));
+        else if (!missingByKey.has(key)) missingByKey.set(key, latlng);
+      });
+
+      const missing = Array.from(missingByKey, ([key, latlng]) => ({ key, latlng }));
+      if (missing.length) {
+        const points = missing.map(item => item.latlng);
+        const settledHosts = await allSettledWithConcurrency(
+          HOSTS,
+          HOST_REQUEST_CONCURRENCY,
+          host => sampleBasalAreas(points, host, context.signal),
+          context
+        );
+        assertActive(context);
+        const availableHostCount = settledHosts.filter(result => result.status === 'fulfilled').length;
+        if (availableHostCount === 0) throw new HostServiceError('Host map service is unavailable.');
+
+        let elevations;
+        let elevationFallback = false;
+        try {
+          elevations = await fetchElevations(points, context.signal);
+        } catch (error) {
+          if (isAbortError(error)) throw error;
+          const fallbackElevation = climateBaseline ? climateBaseline.elevation : 2100;
+          elevations = points.map(() => fallbackElevation);
+          elevationFallback = true;
+        }
+        assertActive(context);
+
+        missing.forEach((item, pointIndex) => {
+          const hostValues = HOSTS.map((host, hostIndex) => {
+            const result = settledHosts[hostIndex];
+            return {
+              host,
+              ba: result.status === 'fulfilled' ? result.value[pointIndex] : 0,
+              available: result.status === 'fulfilled'
+            };
+          });
+          const weightedBa = hostValues.reduce((sum, value) => sum + value.ba * value.host.weight, 0);
+          const positiveHosts = hostValues.filter(value => value.available && value.ba > 0);
+          const best = positiveHosts.length
+            ? positiveHosts.reduce((a, b) => b.ba * b.host.weight > a.ba * a.host.weight ? b : a)
+            : null;
+          const rawScore = {
+            key: item.key,
+            latlng: { lat: item.latlng.lat, lng: item.latlng.lng },
+            weightedBa,
+            hostSuitability: clamp(weightedBa / 160, 0, 1),
+            climate: climateAt(item.latlng, elevations[pointIndex]),
+            bestHost: best ? best.host.label : null,
+            bestBa: best ? best.ba : 0,
+            availableHostCount,
+            elevationFallback
+          };
+          cells.set(item.key, rawScore);
+          scoresByKey.set(item.key, rawScore);
+          renderSampleCell(rawScore);
+        });
+      }
+
+      assertActive(context);
+      return latlngs.map(latlng => scoresByKey.get(cellKey(latlng)));
+    }
+
+    function materializeScore(rawScore) {
+      const climateWeight = currentClimateWeight();
+      const suitability = clamp(
+        rawScore.hostSuitability * (1 - climateWeight) +
+        rawScore.hostSuitability * rawScore.climate.score * climateWeight,
+        0,
+        1
+      );
+      return { ...rawScore, suitability };
+    }
+
+    function nearbyPressure(latlng, radiusMeters) {
+      let count = 0;
+      beetles.forEach(beetle => {
+        if (latlng.distanceTo(beetle.latlng) <= radiusMeters) count++;
+      });
+      return clamp(count / 18, 0, 1);
+    }
+
+    function markerColor(suitability) {
+      if (suitability > 0.72) return '#b85c00';
+      if (suitability > 0.35) return '#f77f00';
+      return '#ffd166';
+    }
+
+    function sampleCellStyle(rawScore) {
+      const score = materializeScore(rawScore);
+      let color = '#8f9791';
+      if (rawScore.weightedBa >= MIN_HOST_INDEX) {
+        if (score.suitability > 0.55) color = '#1f6b37';
+        else if (score.suitability > 0.25) color = '#5b9b62';
+        else color = '#a4cfa6';
+      }
+      return {
+        color,
+        weight: 0.7,
+        fillColor: color,
+        fillOpacity: rawScore.weightedBa >= MIN_HOST_INDEX ? 0.52 : 0.22
+      };
+    }
+
+    function sampleCellTooltip(rawScore) {
+      const score = materializeScore(rawScore);
+      return `${score.bestHost || 'No mapped host'}<br>` +
+        `Host index ${score.weightedBa.toFixed(1)}<br>` +
+        `Climate ${score.climate.score.toFixed(2)} · Suitability ${score.suitability.toFixed(2)}`;
+    }
+
+    function renderSampleCell(rawScore) {
+      const existing = sampleMarkers.get(rawScore.key);
+      if (existing) {
+        existing.setStyle(sampleCellStyle(rawScore));
+        existing.setTooltipContent(sampleCellTooltip(rawScore));
+        return;
+      }
+      if (sampleMarkers.size >= MAX_VISIBLE_SAMPLE_CELLS) {
+        const oldestKey = sampleMarkers.keys().next().value;
+        sampleLayer.removeLayer(sampleMarkers.get(oldestKey));
+        sampleMarkers.delete(oldestKey);
+      }
+      const halfCell = 0.005;
+      const bounds = [
+        [rawScore.latlng.lat - halfCell, rawScore.latlng.lng - halfCell],
+        [rawScore.latlng.lat + halfCell, rawScore.latlng.lng + halfCell]
+      ];
+      const marker = L.rectangle(bounds, {
+        ...sampleCellStyle(rawScore),
+        pane: 'samplePane'
+      }).bindTooltip(sampleCellTooltip(rawScore)).addTo(sampleLayer);
+      sampleMarkers.set(rawScore.key, marker);
+    }
+
+    function refreshModelStyles() {
+      sampleMarkers.forEach((marker, key) => {
+        const rawScore = cells.get(key);
+        if (!rawScore) return;
+        marker.setStyle(sampleCellStyle(rawScore));
+        marker.setTooltipContent(sampleCellTooltip(rawScore));
+      });
+      beetles.forEach(beetle => {
+        const color = beetle.founding ? '#d00000' : markerColor(materializeScore(beetle.rawScore).suitability);
+        beetle.marker.setStyle({ color, fillColor: color });
+      });
+    }
+
+    function addBeetle(latlng, rawScore, founding) {
+      const score = materializeScore(rawScore);
+      const color = founding ? '#d00000' : markerColor(score.suitability);
+      const tooltip = `${score.bestHost || 'No mapped host'}<br>` +
+        `Host index ${score.weightedBa.toFixed(1)}<br>` +
+        `Elev ${score.climate.elevation.toFixed(0)} m<br>` +
+        `Summer ${score.climate.summerMean.toFixed(1)} C, winter min ${score.climate.winterMin.toFixed(1)} C`;
+      const marker = L.circleMarker(latlng, {
+        radius: founding ? 6 : 4,
+        color,
+        weight: 1,
+        fillColor: color,
+        fillOpacity: founding ? 0.95 : 0.75,
+        pane: 'modelPane'
+      }).bindTooltip(tooltip).addTo(beetleLayer);
+      if (founding) {
+        rangeLayer.clearLayers();
+        originRangeGuide = L.circle(latlng, {
+          radius: numericValue(els.range, 6, 1, 30) * 1000,
+          color: '#276c43',
+          weight: 1,
+          dashArray: '5 5',
+          fillColor: '#276c43',
+          fillOpacity: 0.025,
+          opacity: 0.55,
+          interactive: false
+        }).addTo(rangeLayer);
+      }
+      beetles.push({ latlng, marker, rawScore, founding, age: 0, vigor: 0.50 + score.suitability });
+    }
+
+    function removeBeetle(beetle) {
+      beetleLayer.removeLayer(beetle.marker);
+    }
+
+    function sampleParents() {
+      const shuffled = beetles.slice();
+      for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+      }
+      return shuffled.length <= MAX_PARENTS_PER_STEP
+        ? shuffled
+        : shuffled.slice(0, MAX_PARENTS_PER_STEP);
+    }
+
+    function prunePopulation() {
+      if (beetles.length <= MAX_BEETLES) return;
+      beetles.sort((a, b) => (b.vigor - b.age * 0.02) - (a.vigor - a.age * 0.02));
+      beetles.splice(MAX_BEETLES).forEach(removeBeetle);
+    }
+
+    function applyAnnualMortality() {
+      const baseMort = numericValue(els.mort, 0.18, 0, 0.8);
+      const density = clamp(beetles.length / MAX_BEETLES, 0, 1);
+      beetles = beetles.filter(beetle => {
+        const currentScore = materializeScore(beetle.rawScore);
+        const hostRefuge = beetle.rawScore.hostSuitability * 0.08;
+        const climateRefuge = beetle.rawScore.climate.score * 0.10;
+        const agePenalty = clamp(beetle.age * 0.015, 0, 0.16);
+        const mortality = clamp(baseMort + density * 0.20 + agePenalty - hostRefuge - climateRefuge, 0.02, 0.92);
+        if (Math.random() < mortality) {
+          removeBeetle(beetle);
+          return false;
+        }
+        beetle.vigor = clamp(beetle.vigor + currentScore.suitability * 0.12 - density * 0.08, 0.1, 1.7);
+        return true;
+      });
+    }
+
+    function buildCandidateCells(parents, rate, rangeMeters) {
+      const unique = new Map();
+      candidateLoop:
+      for (let attempt = 0; attempt < rate; attempt++) {
+        for (const parent of parents) {
+          const latlng = destPoint(
+            parent.latlng,
+            Math.sqrt(Math.random()) * rangeMeters,
+            Math.random() * Math.PI * 2
+          );
+          if (!habitatBounds.contains(latlng)) continue;
+          const key = cellKey(latlng);
+          if (!unique.has(key)) unique.set(key, { key, latlng, parent });
+          if (unique.size >= MAX_CANDIDATE_CELLS_PER_STEP) break candidateLoop;
+        }
+      }
+      return Array.from(unique.values());
+    }
+
+    function pauseSimulation() {
+      running = false;
+      clearInterval(timer);
+      timer = null;
+    }
+
+    async function simStep() {
+      if (stepping || beetles.length === 0) return;
+      stepping = true;
+      updateControls();
+      setStatus('Sampling up to 24 host and climate cells...');
+      const context = startOperation();
+      try {
+        const rate = Math.round(numericValue(els.rate, 3, 1, 8));
+        const rangeMeters = numericValue(els.range, 6, 1, 30) * 1000;
+        const perYear = Math.round(numericValue(els.perYear, 1, 1, 4));
+        const parents = sampleParents();
+        const candidates = buildCandidateCells(parents, rate, rangeMeters);
+        const rawScores = await scoreSitesRaw(candidates.map(candidate => candidate.latlng), context);
+        const sampledCandidates = candidates.map((candidate, index) => ({
+          ...candidate,
+          rawScore: rawScores[index]
+        }));
+        assertActive(context);
+
+        parents.forEach(parent => { parent.age += 1; });
+        const recruits = [];
+        let hostSum = 0;
+        let climateSum = 0;
+        let partialHostCells = 0;
+        for (const candidate of sampledCandidates) {
+          const score = materializeScore(candidate.rawScore);
+          hostSum += score.weightedBa;
+          climateSum += score.climate.score;
+          if (score.availableHostCount < HOSTS.length) partialHostCells++;
+          if (score.weightedBa < MIN_HOST_INDEX || score.suitability <= 0.01) continue;
+          const crowding = nearbyPressure(candidate.latlng, Math.max(1200, rangeMeters * 0.32));
+          const parentBoost = clamp(candidate.parent.vigor / 1.6, 0.3, 1.15);
+          const establish = clamp(0.02 + score.suitability * 0.76 * parentBoost - crowding * 0.18, 0.01, 0.88);
+          if (Math.random() < establish) {
+            recruits.push({ latlng: candidate.latlng, rawScore: candidate.rawScore });
+            if (recruits.length >= MAX_NEW_PER_STEP) break;
+          }
+        }
+
+        assertActive(context);
+        recruits.forEach(item => addBeetle(item.latlng, item.rawScore, false));
+        lastNew = recruits.length;
+        lastAvgHostBa = sampledCandidates.length ? hostSum / sampledCandidates.length : 0;
+        lastAvgClimate = sampledCandidates.length ? climateSum / sampledCandidates.length : 0;
+        generation++;
+        if (generation % perYear === 0) {
+          years++;
+          applyAnnualMortality();
+        }
+        prunePopulation();
+        if (beetles.length === 0) pauseSimulation();
+        const partialNote = partialHostCells ? ` Host data were partial in ${partialHostCells} cells.` : '';
+        setStatus(recruits.length
+          ? `Generation ${generation}: ${recruits.length} new attacks from ${sampledCandidates.length} cells.${partialNote}`
+          : `Generation ${generation}: no new attacks from ${sampledCandidates.length} cells.${partialNote}`);
+      } catch (error) {
+        if (!isAbortError(error) && operationIsActive(context)) {
+          context.controller.abort();
+          pauseSimulation();
+          setStatus(error instanceof HostServiceError
+            ? 'Host-map data are unavailable. The simulation is paused; try again shortly.'
+            : `The generation could not finish: ${error.message || 'unknown error'}`);
+        }
+      } finally {
+        if (context.epoch === operationEpoch) {
+          activeController = null;
+          stepping = false;
+          updateControls();
+        }
+      }
+    }
+
+    function clearSampleCache() {
+      sampleLayer.clearLayers();
+      sampleMarkers.clear();
+      cells.clear();
+    }
+
+    function restoreModelSnapshot(snapshot) {
+      climateBaseline = snapshot.climateBaseline;
+      clearSampleCache();
+      snapshot.cells.forEach((rawScore, key) => {
+        cells.set(key, rawScore);
+      });
+      Array.from(snapshot.cells.values())
+        .slice(-MAX_VISIBLE_SAMPLE_CELLS)
+        .forEach(renderSampleCell);
+    }
+
+    function clearOutbreakState() {
+      pauseSimulation();
+      beetles.forEach(removeBeetle);
+      beetles = [];
+      rangeLayer.clearLayers();
+      originRangeGuide = null;
+      generation = 0;
+      years = 0;
+      lastNew = 0;
+      lastAvgHostBa = 0;
+      lastAvgClimate = 0;
+    }
+
+    function resetSimulation(message = 'Tap the map to choose an outbreak origin.') {
+      cancelActiveOperation();
+      stepping = false;
+      originSelectionSnapshot = null;
+      clearOutbreakState();
+      climateBaseline = null;
+      clearSampleCache();
+      setOriginMode(true);
+      updateControls();
+      setStatus(message);
+    }
+
+    map.on('click', async function(e) {
+      if (!choosingOrigin) return;
+      if (!habitatBounds.contains(e.latlng)) {
+        setStatus('Choose an origin in the western United States habitat area.');
+        return;
+      }
+
+      if (!originSelectionSnapshot) {
+        originSelectionSnapshot = {
+          cells: new Map(cells),
+          climateBaseline,
+          hadRun: beetles.length > 0
+        };
+      }
+      const preserved = originSelectionSnapshot;
+      pauseSimulation();
+      stepping = true;
+      updateControls();
+      const context = startOperation();
+      clearSampleCache();
+      climateBaseline = null;
+      setStatus('Checking climate and nearby host cells...');
+      try {
+        try {
+          climateBaseline = await fetchClimateBaseline(e.latlng, context.signal);
+        } catch (error) {
+          if (isAbortError(error)) throw error;
+          let fallbackElevation = 2100;
+          try {
+            fallbackElevation = await fetchElevation(e.latlng, context.signal);
+          } catch (elevationError) {
+            if (isAbortError(elevationError)) throw elevationError;
+          }
+          climateBaseline = {
+            lat: e.latlng.lat,
+            lng: e.latlng.lng,
+            elevation: fallbackElevation,
+            summerMean: 16,
+            winterMin: -20,
+            annualPrecip: 520,
+            source: 'fallback climate baseline',
+            fallback: true
+          };
+        }
+        assertActive(context);
+        setStatus('Sampling all six host-pine layers near the selected origin...');
+        const seedPoints = [
+          e.latlng,
+          destPoint(e.latlng, SEED_SEARCH_RADIUS_METERS, 0),
+          destPoint(e.latlng, SEED_SEARCH_RADIUS_METERS, Math.PI / 2),
+          destPoint(e.latlng, SEED_SEARCH_RADIUS_METERS, Math.PI),
+          destPoint(e.latlng, SEED_SEARCH_RADIUS_METERS, Math.PI * 1.5)
+        ];
+        const rawScores = await scoreSitesRaw(seedPoints, context);
+        assertActive(context);
+        let bestIndex = 0;
+        rawScores.forEach((candidate, index) => {
+          if (candidate.weightedBa > rawScores[bestIndex].weightedBa) bestIndex = index;
+        });
+        const rawScore = rawScores[bestIndex];
+        const score = materializeScore(rawScore);
+        if (!score.bestHost || score.weightedBa < MIN_HOST_INDEX) {
+          if (preserved.hadRun) restoreModelSnapshot(preserved);
+          const preservedNote = preserved.hadRun ? ' The previous outbreak is preserved.' : '';
+          setStatus(score.availableHostCount < HOSTS.length
+            ? `No mapped host was found within about 1 km, and some host layers were unavailable.${preservedNote}`
+            : `No mapped host was found within about 1 km. Try another area.${preservedNote}`);
+          return;
+        }
+
+        clearOutbreakState();
+        const seedLatLng = seedPoints[bestIndex];
+        addBeetle(seedLatLng, rawScore, true);
+        lastAvgHostBa = score.weightedBa;
+        lastAvgClimate = score.climate.score;
+        originSelectionSnapshot = null;
+        setOriginMode(false);
+        const hostNote = score.availableHostCount < HOSTS.length
+          ? ` ${score.availableHostCount}/${HOSTS.length} host layers responded.`
+          : '';
+        const climateNote = climateBaseline.fallback ? ' Climate fallback active.' : '';
+        const offset = e.latlng.distanceTo(seedLatLng);
+        const nearbyNote = offset > 20 ? ` Nearest sampled host was ${Math.round(offset)} m away.` : '';
+        setStatus(`Seeded on ${score.bestHost}; host ${score.weightedBa.toFixed(1)}, climate ${score.climate.score.toFixed(2)}.${nearbyNote}${hostNote}${climateNote}`);
+      } catch (error) {
+        if (!isAbortError(error) && operationIsActive(context)) {
+          if (preserved.hadRun) restoreModelSnapshot(preserved);
+          const preservedNote = preserved.hadRun ? ' The previous outbreak is preserved.' : '';
+          setStatus(error instanceof HostServiceError
+            ? `Host-map data are unavailable, so no outbreak was seeded.${preservedNote}`
+            : `The origin could not be scored: ${error.message || 'unknown error'}.${preservedNote}`);
+        }
+      } finally {
+        if (context.epoch === operationEpoch) {
+          activeController = null;
+          stepping = false;
+          updateControls();
+        }
+      }
+    });
+
+    els.chooseOrigin.addEventListener('click', function() {
+      if (choosingOrigin) {
+        if (originSelectionSnapshot && originSelectionSnapshot.hadRun) {
+          cancelActiveOperation();
+          stepping = false;
+          restoreModelSnapshot(originSelectionSnapshot);
+          originSelectionSnapshot = null;
+          setOriginMode(false);
+          setStatus('Origin selection canceled. The previous outbreak is unchanged and paused.');
+        } else {
+          setStatus('Tap the map to choose an outbreak origin. Pan and zoom as needed.');
+        }
+        return;
+      }
+      originSelectionSnapshot = {
+        cells: new Map(cells),
+        climateBaseline,
+        hadRun: beetles.length > 0
+      };
+      cancelActiveOperation();
+      pauseSimulation();
+      stepping = false;
+      setOriginMode(true);
+      setStatus('Tap the map to replace the outbreak origin. Pan and zoom without changing the current run.');
+    });
+    els.step.addEventListener('click', simStep);
+    els.run.addEventListener('click', function() {
+      running = !running;
+      if (running) {
+        timer = setInterval(() => { simStep(); }, 1400);
+        simStep();
+      } else {
+        pauseSimulation();
+      }
+      updateControls();
+    });
+    els.reset.addEventListener('click', () => resetSimulation());
+    els.hostLayer.addEventListener('change', syncHostOverlay);
+    els.showHostLayer.addEventListener('change', syncHostOverlay);
+    els.climateWeight.addEventListener('input', refreshModelStyles);
+    els.range.addEventListener('input', function() {
+      if (originRangeGuide) {
+        originRangeGuide.setRadius(numericValue(els.range, 6, 1, 30) * 1000);
+      }
+    });
+    map.on('moveend', syncHostOverlay);
+    window.addEventListener('pagehide', () => {
+      cancelActiveOperation();
+      pauseSimulation();
+      removeHostOverlay();
+    });
+
+    setOriginMode(true);
+    syncHostOverlay();
+  </script>
+</body>
+</html>
