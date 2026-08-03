@@ -1,0 +1,1218 @@
+---
+title: "Ball Crusher v1.0 (Current)"
+---
+
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#0f1221" />
+<title>Ball Crusher v1.0</title>
+<style>
+  :root {
+    color-scheme: dark;
+    --bg: #0f1221;
+    --panel: #151833;
+    --panel-strong: #101433;
+    --accent: #5dd3ff;
+    --good: #77ff77;
+    --warn: #ffcc66;
+    --bad: #ff6b6b;
+    --text: #e7ecf2;
+    --muted: #aab4c2;
+  }
+
+  * { box-sizing: border-box; }
+
+  html,
+  body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+  }
+
+  body {
+    min-height: 100vh;
+    min-height: 100dvh;
+    background:
+      radial-gradient(1100px 760px at 28% -10%, #1b2044 0%, var(--bg) 62%),
+      var(--bg);
+    color: var(--text);
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    overscroll-behavior: none;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  button {
+    min-height: 44px;
+    appearance: none;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 10px;
+    padding: 8px 13px;
+    background: #111534;
+    color: var(--text);
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+    touch-action: manipulation;
+  }
+
+  button:hover { filter: brightness(1.08); }
+  button:active { transform: translateY(1px); }
+  button:focus-visible,
+  canvas:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 2px;
+  }
+  button:disabled {
+    cursor: default;
+    opacity: 0.48;
+    filter: none;
+  }
+
+  .game-shell {
+    width: min(100%, 960px);
+    height: 100vh;
+    height: 100dvh;
+    margin: 0 auto;
+    padding:
+      max(8px, env(safe-area-inset-top))
+      max(8px, env(safe-area-inset-right))
+      max(8px, env(safe-area-inset-bottom))
+      max(8px, env(safe-area-inset-left));
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr);
+    gap: 8px;
+  }
+
+  .topbar {
+    min-width: 0;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 8px;
+    padding: 7px;
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: 13px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(0, 0, 0, 0.09));
+    backdrop-filter: blur(6px);
+  }
+
+  .stats,
+  .actions {
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .stat {
+    min-width: 0;
+    min-height: 38px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 6px 9px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 9px;
+    background: var(--panel-strong);
+    font-size: 14px;
+    font-weight: 650;
+    white-space: nowrap;
+  }
+
+  .stat strong {
+    min-width: 1ch;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .dot {
+    width: 8px;
+    height: 8px;
+    flex: 0 0 auto;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+
+  .dot.good { background: var(--good); }
+  .dot.warn { background: var(--warn); }
+
+  .board {
+    --game-width: 1px;
+    --game-height: 1px;
+    position: relative;
+    min-width: 0;
+    min-height: 0;
+    display: grid;
+    place-items: center;
+  }
+
+  #gameCanvas {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: 14px;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(0, 0, 0, 0.13)),
+      radial-gradient(760px 520px at 70% 8%, rgba(93, 211, 255, 0.09), transparent 62%);
+    box-shadow:
+      0 10px 34px rgba(0, 0, 0, 0.36),
+      inset 0 0 38px rgba(93, 211, 255, 0.07);
+    touch-action: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .overlay {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: var(--game-width);
+    height: var(--game-height);
+    transform: translate(-50%, -50%);
+    display: grid;
+    place-items: center;
+    padding: 14px;
+    border-radius: 14px;
+    background: rgba(8, 10, 24, 0.64);
+  }
+
+  .overlay[hidden] { display: none; }
+
+  .overlay.passive {
+    pointer-events: none;
+    background: rgba(8, 10, 24, 0.48);
+  }
+
+  .card {
+    width: min(100%, 390px);
+    padding: clamp(16px, 5vw, 24px);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 15px;
+    background: var(--panel);
+    box-shadow: 0 12px 38px rgba(0, 0, 0, 0.5);
+    text-align: center;
+  }
+
+  .card h1,
+  .card h2 {
+    margin: 0;
+    font-size: clamp(23px, 6vw, 30px);
+    line-height: 1.1;
+    letter-spacing: 0.01em;
+  }
+
+  .card p {
+    margin: 9px 0 16px;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+
+  .result {
+    display: flex;
+    justify-content: center;
+    gap: 18px;
+    margin: 11px 0 17px;
+    color: var(--muted);
+  }
+
+  .result strong {
+    color: var(--text);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .pause-label {
+    padding: 10px 16px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 999px;
+    background: rgba(21, 24, 51, 0.94);
+    font-size: 19px;
+    font-weight: 800;
+    letter-spacing: 0.03em;
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  @media (max-width: 560px) {
+    .game-shell { gap: 6px; }
+
+    .topbar {
+      grid-template-columns: minmax(0, 1fr);
+      padding: 6px;
+      gap: 6px;
+    }
+
+    .stats,
+    .actions {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .stat {
+      min-height: 34px;
+      padding: 4px 6px;
+      font-size: 13px;
+    }
+
+    .actions button {
+      width: 100%;
+      padding-inline: 5px;
+      font-size: 13px;
+    }
+  }
+
+  @media (max-height: 500px) and (min-width: 561px) {
+    .game-shell { gap: 5px; }
+    .topbar { padding: 4px 6px; }
+    .stat { min-height: 34px; padding-block: 4px; }
+    button { min-height: 38px; padding-block: 5px; }
+  }
+</style>
+</head>
+<body>
+  <div class="game-shell">
+    <header class="topbar" aria-label="Game status and controls">
+      <div class="stats" aria-label="Game status">
+        <div class="stat"><span class="dot"></span><span>Level</span><strong id="levelVal">1</strong></div>
+        <div class="stat"><span class="dot good"></span><span>Balls</span><strong id="ballsVal">1</strong></div>
+        <div class="stat"><span class="dot warn"></span><span>Score</span><strong id="scoreVal">0</strong></div>
+      </div>
+      <div class="actions">
+        <button id="pauseBtn" type="button" aria-pressed="false" disabled>Pause</button>
+        <button id="restartBtn" type="button" disabled>Restart</button>
+        <button id="muteBtn" type="button" aria-pressed="false">Mute</button>
+      </div>
+    </header>
+
+    <main class="board">
+      <canvas
+        id="gameCanvas"
+        width="600"
+        height="744"
+        tabindex="0"
+        aria-label="Ball Crusher game board. Drag or use the arrow keys to aim, then release or press Space to fire."
+      ></canvas>
+
+      <div id="startOverlay" class="overlay">
+        <section class="card" role="dialog" aria-modal="true" aria-labelledby="gameTitle">
+          <h1 id="gameTitle">Ball Crusher</h1>
+          <p>Drag to aim. Release to fire.</p>
+          <button id="startBtn" type="button">Play</button>
+        </section>
+      </div>
+
+      <div id="pauseOverlay" class="overlay passive" hidden aria-live="polite">
+        <div class="pause-label">Paused</div>
+      </div>
+
+      <div id="gameOverOverlay" class="overlay" hidden>
+        <section class="card" role="dialog" aria-modal="true" aria-labelledby="gameOverTitle">
+          <h2 id="gameOverTitle">Game Over</h2>
+          <div class="result">
+            <span>Score <strong id="finalScore">0</strong></span>
+            <span>Best <strong id="bestScore">0</strong></span>
+          </div>
+          <button id="againBtn" type="button">Play Again</button>
+        </section>
+      </div>
+    </main>
+
+    <div id="gameStatus" class="sr-only" aria-live="polite"></div>
+  </div>
+
+<script>
+(() => {
+  "use strict";
+
+  // Fixed logical coordinates keep speed, collision sizes, and aiming identical
+  // on every display. Only the canvas presentation size changes.
+  const WORLD_W = 600;
+  const WORLD_H = 744;
+  const ASPECT = WORLD_W / WORLD_H;
+
+  const COLS = 12;
+  const MAX_ROWS = 13;
+  const PAD = 12;
+  const TOP_PAD = 48;
+  const BALL_R = 6;
+  const BLOCK_INSET = 4;
+  const BASE_SPEED = 420;
+  const FIRE_INTERVAL_MS = 55;
+  const ROW_DROP_SECONDS = 0.18;
+  const PICKUP_RATE = 0.22;
+  const BLOCK_RATE_BASE = 0.55;
+  // Preserve the near-horizontal bank shots introduced in v0.3 while keeping
+  // enough upward motion to prevent a mathematically flat, endless volley.
+  const MAX_AIM_OFFSET = 86 * Math.PI / 180;
+
+  const SPEED_TIERS = [
+    { after: 10000, multiplier: 1.75, tone: 980 },
+    { after: 30000, multiplier: 2.5, tone: 1180 },
+    { after: 120000, multiplier: 4.5, tone: 1450 }
+  ];
+
+  const canvas = document.getElementById("gameCanvas");
+  const ctx = canvas.getContext("2d", { alpha: true });
+  const board = document.querySelector(".board");
+  const levelEl = document.getElementById("levelVal");
+  const ballsEl = document.getElementById("ballsVal");
+  const scoreEl = document.getElementById("scoreVal");
+  const pauseBtn = document.getElementById("pauseBtn");
+  const restartBtn = document.getElementById("restartBtn");
+  const muteBtn = document.getElementById("muteBtn");
+  const startOverlay = document.getElementById("startOverlay");
+  const pauseOverlay = document.getElementById("pauseOverlay");
+  const gameOverOverlay = document.getElementById("gameOverOverlay");
+  const finalScoreEl = document.getElementById("finalScore");
+  const bestScoreEl = document.getElementById("bestScore");
+  const statusEl = document.getElementById("gameStatus");
+
+  const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
+  const cellSize = () => (WORLD_W - PAD * 2) / COLS;
+  const colX = column => PAD + column * cellSize();
+  const rowY = row => TOP_PAD + row * cellSize();
+  const gridBottomY = () => TOP_PAD + MAX_ROWS * cellSize();
+  const returnY = WORLD_H - 26;
+
+  const blocks = [];
+  const pickups = [];
+  let balls = [];
+
+  let state = "READY";
+  let paused = false;
+  let muted = false;
+  let level = 1;
+  let score = 0;
+  let best = loadBest();
+  let ballCount = 1;
+  let volleyTarget = 1;
+  let pendingFireDir = null;
+  let fireTimerMs = 0;
+  let firedThisVolley = 0;
+  let firstReturnX = null;
+  let volleyElapsedMs = 0;
+  let speedMultiplier = 1;
+  let appliedSpeedMultiplier = 1;
+  let rowDropRemaining = 0;
+  let rowDropProgress = 0;
+  let origin = { x: WORLD_W / 2, y: returnY };
+  let activePointerId = null;
+  let dragStart = null;
+  let aimAngle = -Math.PI / 2;
+  let resizeFrame = 0;
+  let needsRender = true;
+  let audioCtx = null;
+
+  function loadBest() {
+    try {
+      return Number(localStorage.getItem("oneShotBest") || 0);
+    } catch {
+      return 0;
+    }
+  }
+
+  function saveBest() {
+    try {
+      localStorage.setItem("oneShotBest", String(best));
+    } catch {
+      // The game remains playable when storage is blocked.
+    }
+  }
+
+  function announce(message) {
+    statusEl.textContent = "";
+    requestAnimationFrame(() => { statusEl.textContent = message; });
+  }
+
+  function setState(next) {
+    state = next;
+    document.body.dataset.gameState = next.toLowerCase();
+    needsRender = true;
+  }
+
+  function updateHud() {
+    levelEl.textContent = String(level);
+    ballsEl.textContent = String(ballCount);
+    scoreEl.textContent = String(score);
+  }
+
+  function setPaused(next, shouldAnnounce = true) {
+    if (state === "READY" || state === "OVER") return;
+    paused = Boolean(next);
+    pauseOverlay.hidden = !paused;
+    pauseBtn.textContent = paused ? "Resume" : "Pause";
+    pauseBtn.setAttribute("aria-pressed", String(paused));
+    if (paused) cancelAim();
+    needsRender = true;
+    if (shouldAnnounce) announce(paused ? "Game paused." : "Game resumed.");
+  }
+
+  function fitCanvas() {
+    const bounds = board.getBoundingClientRect();
+    const availableW = Math.max(1, Math.floor(bounds.width));
+    const availableH = Math.max(1, Math.floor(bounds.height));
+    const cssW = Math.max(1, Math.min(availableW, Math.floor(availableH * ASPECT)));
+    const cssH = Math.max(1, Math.floor(cssW / ASPECT));
+    const dpr = clamp(window.devicePixelRatio || 1, 1, 3);
+
+    canvas.style.width = cssW + "px";
+    canvas.style.height = cssH + "px";
+    canvas.width = Math.max(1, Math.round(cssW * dpr));
+    canvas.height = Math.max(1, Math.round(cssH * dpr));
+    board.style.setProperty("--game-width", cssW + "px");
+    board.style.setProperty("--game-height", cssH + "px");
+
+    ctx.setTransform(canvas.width / WORLD_W, 0, 0, canvas.height / WORLD_H, 0, 0);
+    ctx.imageSmoothingEnabled = true;
+    ctx.lineJoin = "round";
+    ctx.miterLimit = 2;
+    needsRender = true;
+  }
+
+  function scheduleFit() {
+    cancelAnimationFrame(resizeFrame);
+    resizeFrame = requestAnimationFrame(fitCanvas);
+  }
+
+  function worldFromPointer(event) {
+    const rect = canvas.getBoundingClientRect();
+    return {
+      x: clamp((event.clientX - rect.left) * WORLD_W / rect.width, 0, WORLD_W),
+      y: clamp((event.clientY - rect.top) * WORLD_H / rect.height, 0, WORLD_H)
+    };
+  }
+
+  function directionFromAngle(angle) {
+    return { x: Math.cos(angle), y: Math.sin(angle) };
+  }
+
+  function angleFromPoint(point) {
+    const center = -Math.PI / 2;
+    return clamp(
+      Math.atan2(point.y - origin.y, point.x - origin.x),
+      center - MAX_AIM_OFFSET,
+      center + MAX_AIM_OFFSET
+    );
+  }
+
+  function beginAim(event) {
+    if (state !== "AIM" || paused || !event.isPrimary) return;
+    event.preventDefault();
+    activePointerId = event.pointerId;
+    dragStart = worldFromPointer(event);
+    aimAngle = angleFromPoint(dragStart);
+    try { canvas.setPointerCapture(event.pointerId); } catch {}
+    needsRender = true;
+  }
+
+  function moveAim(event) {
+    if (event.pointerId !== activePointerId) return;
+    event.preventDefault();
+    aimAngle = angleFromPoint(worldFromPointer(event));
+    needsRender = true;
+  }
+
+  function endAim(event) {
+    if (event.pointerId !== activePointerId) return;
+    event.preventDefault();
+    const end = worldFromPointer(event);
+    const distance = dragStart ? Math.hypot(end.x - dragStart.x, end.y - dragStart.y) : 0;
+    aimAngle = angleFromPoint(end);
+    cancelAim();
+    if (distance < 10 || state !== "AIM" || paused) return;
+    pendingFireDir = directionFromAngle(aimAngle);
+    startVolley();
+  }
+
+  function cancelAim() {
+    activePointerId = null;
+    dragStart = null;
+    needsRender = true;
+  }
+
+  function beep(frequency = 600, duration = 0.05, gain = 0.025) {
+    if (muted) return;
+    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+    if (!AudioContextClass) return;
+    if (!audioCtx) {
+      try { audioCtx = new AudioContextClass(); } catch { return; }
+    }
+    if (audioCtx.state === "suspended") audioCtx.resume().catch(() => {});
+    const oscillator = audioCtx.createOscillator();
+    const volume = audioCtx.createGain();
+    oscillator.type = "square";
+    oscillator.frequency.value = frequency;
+    volume.gain.value = gain;
+    oscillator.connect(volume);
+    volume.connect(audioCtx.destination);
+    oscillator.start();
+    oscillator.stop(audioCtx.currentTime + duration);
+  }
+
+  function resetGame() {
+    paused = false;
+    pauseOverlay.hidden = true;
+    gameOverOverlay.hidden = true;
+    pauseBtn.textContent = "Pause";
+    pauseBtn.setAttribute("aria-pressed", "false");
+    pauseBtn.disabled = false;
+    restartBtn.disabled = false;
+
+    level = 1;
+    score = 0;
+    ballCount = 1;
+    volleyTarget = 1;
+    pendingFireDir = null;
+    fireTimerMs = 0;
+    firedThisVolley = 0;
+    firstReturnX = null;
+    volleyElapsedMs = 0;
+    speedMultiplier = 1;
+    appliedSpeedMultiplier = 1;
+    rowDropRemaining = 0;
+    rowDropProgress = 0;
+    aimAngle = -Math.PI / 2;
+    origin = { x: WORLD_W / 2, y: returnY };
+    blocks.length = 0;
+    pickups.length = 0;
+    balls = [];
+    cancelAim();
+    updateHud();
+  }
+
+  function startGame() {
+    resetGame();
+    startOverlay.hidden = true;
+    spawnRow();
+    beep(440, 0.06, 0.02);
+    announce("Level 1.");
+    try { canvas.focus({ preventScroll: true }); } catch { canvas.focus(); }
+  }
+
+  function restartGame() {
+    if (state === "READY") return;
+    startGame();
+  }
+
+  function gameOver() {
+    setState("OVER");
+    paused = false;
+    cancelAim();
+    pauseOverlay.hidden = true;
+    pauseBtn.disabled = true;
+    pauseBtn.textContent = "Pause";
+    pauseBtn.setAttribute("aria-pressed", "false");
+    best = Math.max(best, score);
+    saveBest();
+    finalScoreEl.textContent = String(score);
+    bestScoreEl.textContent = String(best);
+    gameOverOverlay.hidden = false;
+    beep(160, 0.2, 0.04);
+    announce("Game over. Score " + score + ". Best " + best + ".");
+    document.getElementById("againBtn").focus();
+  }
+
+  function spawnRow() {
+    for (const block of blocks) block.r += 1;
+
+    for (let index = pickups.length - 1; index >= 0; index -= 1) {
+      pickups[index].r += 1;
+      if (pickups[index].r >= MAX_ROWS) pickups.splice(index, 1);
+    }
+
+    if (blocks.some(block => block.r >= MAX_ROWS)) {
+      gameOver();
+      return;
+    }
+
+    const spawnChance = clamp(BLOCK_RATE_BASE + level * 0.01, 0.55, 0.9);
+    let spawned = 0;
+
+    for (let column = 0; column < COLS; column += 1) {
+      if (Math.random() < spawnChance) {
+        const hp = Math.max(1, Math.floor(level + Math.random() * (2 + level * 0.2)));
+        blocks.push({ c: column, r: 0, hp });
+        spawned += 1;
+      } else if (Math.random() < PICKUP_RATE) {
+        pickups.push({ c: column, r: 0, pulse: Math.random() * Math.PI * 2 });
+      }
+    }
+
+    if (spawned === 0) {
+      blocks.push({ c: Math.floor(Math.random() * COLS), r: 0, hp: level });
+    }
+
+    rowDropRemaining = ROW_DROP_SECONDS;
+    rowDropProgress = 1;
+    setState("BETWEEN");
+  }
+
+  function startVolley() {
+    if (!pendingFireDir || state !== "AIM" || paused) return;
+    setState("FIRING");
+    volleyTarget = ballCount;
+    firedThisVolley = 0;
+    firstReturnX = null;
+    fireTimerMs = FIRE_INTERVAL_MS;
+    volleyElapsedMs = 0;
+    speedMultiplier = 1;
+    appliedSpeedMultiplier = 1;
+    beep(520, 0.05, 0.03);
+  }
+
+  function addBall() {
+    if (!pendingFireDir) return;
+    const speed = BASE_SPEED * speedMultiplier;
+    balls.push({
+      x: origin.x,
+      y: origin.y,
+      vx: pendingFireDir.x * speed,
+      vy: pendingFireDir.y * speed,
+      r: BALL_R,
+      stuck: false,
+      stuckTo: null,
+      stuckX: 0,
+      stuckY: 0,
+      resumeVX: 0,
+      resumeVY: 0,
+      stuckMultiplier: 1,
+      crushTimer: 0
+    });
+    firedThisVolley += 1;
+    if (firedThisVolley >= volleyTarget) pendingFireDir = null;
+  }
+
+  function updateSpeedTier() {
+    let target = 1;
+    let tone = 0;
+
+    for (const tier of SPEED_TIERS) {
+      if (volleyElapsedMs >= tier.after) {
+        target = tier.multiplier;
+        tone = tier.tone;
+      }
+    }
+
+    if (target <= appliedSpeedMultiplier) return;
+    const scale = target / appliedSpeedMultiplier;
+    speedMultiplier = target;
+    appliedSpeedMultiplier = target;
+
+    for (const ball of balls) {
+      if (!ball.stuck) {
+        ball.vx *= scale;
+        ball.vy *= scale;
+      }
+    }
+
+    beep(tone, 0.08, 0.03);
+  }
+
+  function blockRect(block) {
+    const offset = dropOffset();
+    return {
+      x: colX(block.c) + BLOCK_INSET,
+      y: rowY(block.r) + offset + BLOCK_INSET,
+      w: cellSize() - BLOCK_INSET * 2,
+      h: cellSize() - BLOCK_INSET * 2
+    };
+  }
+
+  function isBlockLive(block) {
+    return Boolean(block && block.hp > 0 && blocks.includes(block));
+  }
+
+  function damageBlock(block) {
+    if (!isBlockLive(block)) return true;
+    block.hp -= 1;
+    score += 1;
+    scoreEl.textContent = String(score);
+    beep(680 + Math.random() * 60, 0.02, 0.02);
+
+    if (block.hp > 0) return false;
+    const index = blocks.indexOf(block);
+    if (index >= 0) blocks.splice(index, 1);
+    beep(520, 0.06, 0.03);
+    return true;
+  }
+
+  function releaseCrushingBall(ball) {
+    const scale = speedMultiplier / (ball.stuckMultiplier || 1);
+    ball.vx = (ball.resumeVX || (Math.random() < 0.5 ? -1 : 1) * BASE_SPEED * 0.6) * scale;
+    ball.vy = (ball.resumeVY || -BASE_SPEED * 0.6) * scale;
+    ball.x = ball.stuckX + (ball.vx > 0 ? 0.7 : -0.7);
+    ball.y = ball.stuckY + (ball.vy > 0 ? 0.7 : -0.7);
+    ball.stuck = false;
+    ball.stuckTo = null;
+    ball.crushTimer = 0;
+  }
+
+  function resolveBlockCollision(ball, block) {
+    const rect = blockRect(block);
+    const nearestX = clamp(ball.x, rect.x, rect.x + rect.w);
+    const nearestY = clamp(ball.y, rect.y, rect.y + rect.h);
+    let dx = ball.x - nearestX;
+    let dy = ball.y - nearestY;
+    let distanceSquared = dx * dx + dy * dy;
+
+    if (distanceSquared >= ball.r * ball.r) return false;
+
+    const cornerHit = Math.abs(dx) > 0.001 && Math.abs(dy) > 0.001;
+    let normalX = 0;
+    let normalY = 0;
+    let penetration = 0;
+
+    if (distanceSquared > 0.0001) {
+      const distance = Math.sqrt(distanceSquared);
+      normalX = dx / distance;
+      normalY = dy / distance;
+      penetration = ball.r - distance;
+    } else {
+      const left = Math.abs(ball.x - rect.x);
+      const right = Math.abs(rect.x + rect.w - ball.x);
+      const top = Math.abs(ball.y - rect.y);
+      const bottom = Math.abs(rect.y + rect.h - ball.y);
+      const smallest = Math.min(left, right, top, bottom);
+
+      if (smallest === left) {
+        normalX = -1;
+        penetration = ball.r + left;
+      } else if (smallest === right) {
+        normalX = 1;
+        penetration = ball.r + right;
+      } else if (smallest === top) {
+        normalY = -1;
+        penetration = ball.r + top;
+      } else {
+        normalY = 1;
+        penetration = ball.r + bottom;
+      }
+    }
+
+    ball.x += normalX * (penetration + 0.1);
+    ball.y += normalY * (penetration + 0.1);
+    const approach = ball.vx * normalX + ball.vy * normalY;
+    if (approach < 0) {
+      ball.vx -= 2 * approach * normalX;
+      ball.vy -= 2 * approach * normalY;
+    }
+
+    const destroyed = damageBlock(block);
+    if (!destroyed && cornerHit) {
+      ball.stuck = true;
+      ball.stuckTo = block;
+      ball.stuckX = ball.x;
+      ball.stuckY = ball.y;
+      ball.resumeVX = ball.vx;
+      ball.resumeVY = ball.vy;
+      ball.vx = 0;
+      ball.vy = 0;
+      ball.stuckMultiplier = speedMultiplier;
+      ball.crushTimer = 0;
+      beep(760, 0.04, 0.025);
+    }
+
+    return true;
+  }
+
+  function updateBall(ball, stepDT) {
+    if (ball.stuck) {
+      if (!isBlockLive(ball.stuckTo)) {
+        releaseCrushingBall(ball);
+        return false;
+      }
+
+      ball.crushTimer += stepDT;
+      while (ball.crushTimer >= 0.05 && ball.stuck) {
+        ball.crushTimer -= 0.05;
+        if (damageBlock(ball.stuckTo)) releaseCrushingBall(ball);
+      }
+      return false;
+    }
+
+    ball.x += ball.vx * stepDT;
+    ball.y += ball.vy * stepDT;
+
+    const left = PAD + BALL_R;
+    const right = WORLD_W - PAD - BALL_R;
+    const ceiling = TOP_PAD + BALL_R;
+
+    if (ball.x <= left) {
+      ball.x = left;
+      ball.vx = Math.abs(ball.vx);
+      beep(900, 0.02, 0.01);
+    } else if (ball.x >= right) {
+      ball.x = right;
+      ball.vx = -Math.abs(ball.vx);
+      beep(900, 0.02, 0.01);
+    }
+
+    if (ball.y <= ceiling) {
+      ball.y = ceiling;
+      ball.vy = Math.abs(ball.vy);
+      beep(900, 0.02, 0.01);
+    }
+
+    if (ball.y >= returnY) return true;
+
+    for (let index = blocks.length - 1; index >= 0; index -= 1) {
+      if (resolveBlockCollision(ball, blocks[index])) break;
+    }
+
+    for (let index = pickups.length - 1; index >= 0; index -= 1) {
+      const pickup = pickups[index];
+      const x = colX(pickup.c);
+      const y = rowY(pickup.r) + dropOffset();
+      const size = cellSize();
+      if (ball.x > x && ball.x < x + size && ball.y > y && ball.y < y + size) {
+        ballCount += 1;
+        ballsEl.textContent = String(ballCount);
+        pickups.splice(index, 1);
+        beep(880, 0.06, 0.03);
+      }
+    }
+
+    return false;
+  }
+
+  function update(dt) {
+    if (state === "BETWEEN") {
+      rowDropRemaining = Math.max(0, rowDropRemaining - dt);
+      rowDropProgress = rowDropRemaining / ROW_DROP_SECONDS;
+      if (rowDropRemaining === 0) {
+        rowDropProgress = 0;
+        setState("AIM");
+        announce("Level " + level + ".");
+      }
+      return;
+    }
+
+    if (state !== "FIRING") return;
+
+    volleyElapsedMs += dt * 1000;
+    updateSpeedTier();
+    fireTimerMs += dt * 1000;
+
+    while (fireTimerMs >= FIRE_INTERVAL_MS && firedThisVolley < volleyTarget) {
+      fireTimerMs -= FIRE_INTERVAL_MS;
+      addBall();
+    }
+
+    const totalTravel = BASE_SPEED * speedMultiplier * dt;
+    const maxTravelPerStep = Math.max(4, cellSize() * 0.22);
+    const steps = Math.max(1, Math.ceil(totalTravel / maxTravelPerStep));
+    const stepDT = dt / steps;
+
+    for (let step = 0; step < steps; step += 1) {
+      for (let index = balls.length - 1; index >= 0; index -= 1) {
+        const ball = balls[index];
+        if (!updateBall(ball, stepDT)) continue;
+        if (firstReturnX === null) firstReturnX = ball.x;
+        balls.splice(index, 1);
+      }
+    }
+
+    if (firedThisVolley >= volleyTarget && balls.length === 0) finishVolley();
+  }
+
+  function finishVolley() {
+    if (firstReturnX !== null) {
+      origin.x = clamp(firstReturnX, PAD + BALL_R, WORLD_W - PAD - BALL_R);
+    }
+    level += 1;
+    levelEl.textContent = String(level);
+    spawnRow();
+  }
+
+  function dropOffset() {
+    return -rowDropProgress * cellSize();
+  }
+
+  function roundedRectPath(context, x, y, width, height, radius) {
+    const r = clamp(radius, 0, Math.min(width, height) / 2);
+    context.beginPath();
+    context.moveTo(x + r, y);
+    context.arcTo(x + width, y, x + width, y + height, r);
+    context.arcTo(x + width, y + height, x, y + height, r);
+    context.arcTo(x, y + height, x, y, r);
+    context.arcTo(x, y, x + width, y, r);
+    context.closePath();
+  }
+
+  function hpColor(portion) {
+    const mix = (a, b, amount) => a + (b - a) * amount;
+    const green = { r: 80, g: 220, b: 140 };
+    const yellow = { r: 255, g: 210, b: 90 };
+    const red = { r: 255, g: 100, b: 100 };
+    let from;
+    let to;
+    let amount;
+
+    if (portion < 0.5) {
+      from = green;
+      to = yellow;
+      amount = portion / 0.5;
+    } else {
+      from = yellow;
+      to = red;
+      amount = (portion - 0.5) / 0.5;
+    }
+
+    const r = Math.round(mix(from.r, to.r, amount));
+    const g = Math.round(mix(from.g, to.g, amount));
+    const b = Math.round(mix(from.b, to.b, amount));
+    const luminance = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+    return {
+      fill: "rgb(" + r + "," + g + "," + b + ")",
+      text: luminance > 155 ? "#07111a" : "#f7fbff"
+    };
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, WORLD_W, WORLD_H);
+
+    ctx.save();
+    ctx.fillStyle = "rgba(255,255,255,0.025)";
+    ctx.fillRect(PAD - 1, TOP_PAD - 1, WORLD_W - PAD * 2 + 2, returnY - TOP_PAD + 2);
+    ctx.restore();
+
+    ctx.save();
+    ctx.beginPath();
+    ctx.rect(PAD, TOP_PAD, WORLD_W - PAD * 2, returnY - TOP_PAD);
+    ctx.clip();
+
+    ctx.strokeStyle = "rgba(255,255,255,0.045)";
+    ctx.lineWidth = 1;
+    for (let column = 1; column < COLS; column += 1) {
+      const x = Math.round(colX(column)) + 0.5;
+      ctx.beginPath();
+      ctx.moveTo(x, TOP_PAD);
+      ctx.lineTo(x, gridBottomY());
+      ctx.stroke();
+    }
+
+    for (let row = 1; row <= MAX_ROWS; row += 1) {
+      const y = Math.round(rowY(row) + dropOffset()) + 0.5;
+      ctx.beginPath();
+      ctx.moveTo(PAD, y);
+      ctx.lineTo(WORLD_W - PAD, y);
+      ctx.stroke();
+    }
+
+    ctx.strokeStyle = "rgba(255,107,107,0.28)";
+    ctx.setLineDash([8, 8]);
+    ctx.beginPath();
+    ctx.moveTo(PAD, gridBottomY());
+    ctx.lineTo(WORLD_W - PAD, gridBottomY());
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    for (const block of blocks) {
+      const rect = blockRect(block);
+      const colors = hpColor(clamp(block.hp / (level + 6), 0, 1));
+      roundedRectPath(ctx, rect.x, rect.y, rect.w, rect.h, Math.max(6, cellSize() * 0.16));
+      ctx.fillStyle = colors.fill;
+      ctx.fill();
+      ctx.lineWidth = 1.6;
+      ctx.strokeStyle = "rgba(0,0,0,0.36)";
+      ctx.stroke();
+
+      ctx.fillStyle = colors.text;
+      ctx.font = "700 " + Math.floor(cellSize() * 0.31) + "px ui-sans-serif, system-ui";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillText(String(block.hp), rect.x + rect.w / 2, rect.y + rect.h / 2 + 1);
+    }
+
+    const time = performance.now() / 1000;
+    for (const pickup of pickups) {
+      const size = cellSize();
+      const centerX = colX(pickup.c) + size / 2;
+      const centerY = rowY(pickup.r) + dropOffset() + size / 2;
+      const radius = Math.max(8, size * 0.18) + Math.sin(time * 2 + pickup.pulse) * 1.3;
+
+      ctx.beginPath();
+      ctx.arc(centerX, centerY, radius + 6, 0, Math.PI * 2);
+      ctx.fillStyle = "rgba(119,255,119,0.12)";
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
+      ctx.fillStyle = "#35d66b";
+      ctx.fill();
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = "#0c9a3f";
+      ctx.stroke();
+      ctx.strokeStyle = "#073";
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      ctx.moveTo(centerX - radius * 0.45, centerY);
+      ctx.lineTo(centerX + radius * 0.45, centerY);
+      ctx.moveTo(centerX, centerY - radius * 0.45);
+      ctx.lineTo(centerX, centerY + radius * 0.45);
+      ctx.stroke();
+    }
+
+    if (state === "AIM" && !paused) {
+      const direction = directionFromAngle(aimAngle);
+      const length = cellSize() * 4.5;
+      ctx.strokeStyle = "rgba(93,211,255,0.9)";
+      ctx.lineWidth = 3;
+      ctx.setLineDash([8, 8]);
+      ctx.beginPath();
+      ctx.moveTo(origin.x, origin.y);
+      ctx.lineTo(origin.x + direction.x * length, origin.y + direction.y * length);
+      ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.beginPath();
+      ctx.arc(origin.x + direction.x * length, origin.y + direction.y * length, 4, 0, Math.PI * 2);
+      ctx.fillStyle = "rgba(93,211,255,0.95)";
+      ctx.fill();
+    }
+
+    ctx.beginPath();
+    ctx.arc(origin.x, origin.y, BALL_R + 2, 0, Math.PI * 2);
+    ctx.fillStyle = "#d0f1ff";
+    ctx.fill();
+    ctx.lineWidth = 2;
+    ctx.strokeStyle = "#5dd3ff";
+    ctx.stroke();
+
+    for (const ball of balls) {
+      let drawX = ball.x;
+      let drawY = ball.y;
+      if (ball.stuck) {
+        const jitter = Math.sin(time * 60) * 0.7;
+        drawX += jitter;
+        drawY -= jitter;
+        ctx.beginPath();
+        ctx.arc(drawX, drawY, BALL_R + 5 + Math.sin(time * 16) * 1.5, 0, Math.PI * 2);
+        ctx.strokeStyle = "rgba(255,204,102,0.8)";
+        ctx.lineWidth = 2;
+        ctx.stroke();
+      }
+
+      ctx.beginPath();
+      ctx.arc(drawX, drawY, BALL_R, 0, Math.PI * 2);
+      ctx.fillStyle = "#e8fbff";
+      ctx.fill();
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = "rgba(93,211,255,0.66)";
+      ctx.stroke();
+    }
+
+    ctx.restore();
+    needsRender = false;
+  }
+
+  let lastFrame = performance.now();
+  function loop(now) {
+    requestAnimationFrame(loop);
+    const dt = clamp((now - lastFrame) / 1000, 0, 0.033);
+    lastFrame = now;
+
+    if (!paused && state !== "READY" && state !== "OVER") {
+      update(dt);
+      needsRender = true;
+    }
+
+    if (needsRender) draw();
+  }
+
+  document.getElementById("startBtn").addEventListener("click", startGame);
+  document.getElementById("againBtn").addEventListener("click", startGame);
+  pauseBtn.addEventListener("click", () => setPaused(!paused));
+  restartBtn.addEventListener("click", restartGame);
+  muteBtn.addEventListener("click", () => {
+    muted = !muted;
+    muteBtn.textContent = muted ? "Unmute" : "Mute";
+    muteBtn.setAttribute("aria-pressed", String(muted));
+  });
+
+  canvas.addEventListener("pointerdown", beginAim);
+  canvas.addEventListener("pointermove", moveAim);
+  canvas.addEventListener("pointerup", endAim);
+  canvas.addEventListener("pointercancel", cancelAim);
+
+  window.addEventListener("keydown", event => {
+    if (event.repeat) return;
+    if (event.key === "p" || event.key === "P") {
+      setPaused(!paused);
+      return;
+    }
+    if (event.key === "r" || event.key === "R") {
+      restartGame();
+      return;
+    }
+    if (state !== "AIM" || paused || event.target !== canvas) return;
+    if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
+      event.preventDefault();
+      const direction = event.key === "ArrowLeft" ? -1 : 1;
+      aimAngle = clamp(
+        aimAngle + direction * 4 * Math.PI / 180,
+        -Math.PI / 2 - MAX_AIM_OFFSET,
+        -Math.PI / 2 + MAX_AIM_OFFSET
+      );
+      needsRender = true;
+    } else if (event.key === " " || event.key === "Enter") {
+      event.preventDefault();
+      pendingFireDir = directionFromAngle(aimAngle);
+      startVolley();
+    }
+  });
+
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden && !paused && state !== "READY" && state !== "OVER") {
+      setPaused(true, false);
+    }
+  });
+
+  window.addEventListener("resize", scheduleFit, { passive: true });
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener("resize", scheduleFit, { passive: true });
+  }
+  if ("ResizeObserver" in window) {
+    new ResizeObserver(scheduleFit).observe(board);
+  }
+
+  Object.defineProperty(window, "__ballCrusherV1", {
+    value: Object.freeze({
+      snapshot: () => ({
+        state,
+        paused,
+        level,
+        score,
+        ballCount,
+        activeBalls: balls.length,
+        blocks: blocks.length,
+        pickups: pickups.length,
+        world: { width: WORLD_W, height: WORLD_H }
+      })
+    }),
+    configurable: false,
+    writable: false
+  });
+
+  updateHud();
+  setState("READY");
+  fitCanvas();
+  document.getElementById("startBtn").focus();
+  requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>
