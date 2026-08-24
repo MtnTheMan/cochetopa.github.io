@@ -1,0 +1,46 @@
+{
+  "schemaVersion": "stand-v0.0.2-vertical-assembly-identities/4",
+  "hubCheckpoint": "2d7ad695b6a8f1c9c179950faeedb63f43b6096c",
+  "foundation": {
+    "receiptId": "FOUNDATION-HOST-RECEIPT@1",
+    "reviewedCommit": "2a0e972f54b079575531661572d1521e24a3eaaa",
+    "hubCommit": "ffb5e1ce8154d1b903d5a720d643dac5e269c314"
+  },
+  "world": {
+    "reviewedCommit": "0f75952cb79dfb3f47bb69f715a59ef94a2499d2",
+    "manifestSha256": "23a6c914a5fcff6b7eb831dafbfc37d78b89bafc97c7f31a100504ea3fedb1e0",
+    "siteStateSha256": "eb135fa6fe3c8287e14f1a34f6d6eeded9781ebf37fe8feb140cdc45d2cc4f8b",
+    "viewSha256": "1dd02c1a6e04d6f1f12a998df4acdddf86d66d3c243570eca4b02b60a0f6158a",
+    "rowCount": 458182,
+    "fieldCount": 51,
+    "status": "Working_external_candidate_not_completed_county_package"
+  },
+  "kernel": {
+    "reviewedCommit": "086f2e7c3c1ef559606f98cd803e2498283ff714",
+    "previousReviewedCommit": "5578e39782d69b5a752dc3f59553a6642aae9392",
+    "legacyReviewedCommit": "fe487c818dfc164797c18f1fdd35dde459f2a0de",
+    "ancientReviewedCommit": "7b71fc048a3ed3d9a4faca48eeeefa80f000d44e",
+    "contractVersion": "stand-ecological-kernel-port@2",
+    "protectedOfflinePolicy": "stand-protected-offline@1",
+    "parameterSetId": "stand-sugar-maple-synthetic-reference@1",
+    "parameterStatus": "working-fixture-only-not-production-tuning"
+  },
+  "gameplay": {
+    "reviewedCommit": "bddb8f7ed0722e459deec66a8cf749700d2997c8",
+    "semanticCommands": "SEMANTIC-COMMANDS@1",
+    "domainEvents": "DOMAIN-EVENTS@1"
+  },
+  "renderer": {
+    "artBindingCommit": "c7cdf85f0658bf02db70a0aa4e1cf5a686d6f1b9",
+    "exactIdentityCommit": "086f2e7c3c1ef559606f98cd803e2498283ff714",
+    "previousExactIdentityCommit": "bf0d3f897f463d6f6c584932d2ed493d4b9ed2af",
+    "legacyExactIdentityCommit": "da3b607985206674b9b54156a415c868c3f1ec5a",
+    "ancientExactIdentityCommit": "d7e347a968813d5365ff644ed42d4bb6f71f9174",
+    "ambientFamilyCount": 30,
+    "ambientAuthority": "presentation_only"
+  },
+  "maxent": {
+    "status": "Waiting_optional_not_loaded",
+    "fittedModelPresent": false
+  }
+}

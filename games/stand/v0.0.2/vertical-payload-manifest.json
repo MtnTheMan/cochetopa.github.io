@@ -1,0 +1,368 @@
+{
+  "schemaVersion": "stand-v0.0.2-vertical-packaged-payload@2",
+  "hubCheckpoint": "2d7ad695b6a8f1c9c179950faeedb63f43b6096c",
+  "sourceCommit": "37e1f04d551518d9cb4c81e1eb1e2a5e8886cc70",
+  "sourceDisposition": "all copied and native-host build inputs are exact committed bytes at sourceCommit",
+  "foundationReceiptId": "FOUNDATION-HOST-RECEIPT@1",
+  "runtimeNetworkRequired": false,
+  "externalOneidaBytesPackaged": true,
+  "packagedOneidaRuntimeView": {
+    "path": "data/runtime/oneida-vertical-runtime-view-v1.json",
+    "bytes": 148355,
+    "sha256": "1dd02c1a6e04d6f1f12a998df4acdddf86d66d3c243570eca4b02b60a0f6158a",
+    "sourceCacheRelativePath": "processed/vertical-slice-working-v1/oneida-vertical-runtime-view-v1.json",
+    "claimLimit": "real Oneida county navigation plus county-spanning Working hidden topology; no fitted suitability or calibrated production county ecology"
+  },
+  "files": [
+    {
+      "path": "active-time.mjs",
+      "bytes": 2154,
+      "sha256": "74bea8cf6017cb69d23e695585af489b1c7ca5b583455eae7fd90348c222ddb8"
+    },
+    {
+      "path": "app.mjs",
+      "bytes": 23980,
+      "sha256": "43344eee4bca2b6a1953dd63877aea8cd93841e6fff19fcf3ec1fcf35768d858"
+    },
+    {
+      "path": "browser-storage.mjs",
+      "bytes": 4508,
+      "sha256": "3f683f0d214322962a8b4ff846f0833eacf9cb8fcfb86fc51b7fa984f810ac29"
+    },
+    {
+      "path": "data/fixtures/world/oneida-v0.0.2/sugar-maple-runtime-diagnostic-v1.json",
+      "bytes": 2730,
+      "sha256": "102b45edd0a929e24fe3627ea7d03903b658e8ef037259df93047eadad7708a0"
+    },
+    {
+      "path": "data/runtime/oneida-vertical-runtime-view-v1.json",
+      "bytes": 148355,
+      "sha256": "1dd02c1a6e04d6f1f12a998df4acdddf86d66d3c243570eca4b02b60a0f6158a"
+    },
+    {
+      "path": "dom-elements.mjs",
+      "bytes": 854,
+      "sha256": "27f0326112a6c510a548fdc36309c827b1bb2ed1b54e54162e17484404d2e636"
+    },
+    {
+      "path": "index.html",
+      "bytes": 4496,
+      "sha256": "90892c94bc42451bc569ff8a706bc0edc7c7dd8f964f7f794315b579492ce6fd"
+    },
+    {
+      "path": "platform-host.mjs",
+      "bytes": 1360,
+      "sha256": "80997d8dab30d2b517e3b7d74972f667c84bc56077b5889f04a7f7ecffcd99ce"
+    },
+    {
+      "path": "prototypes/alpha-1/renderer-spike/assets/.gitattributes",
+      "bytes": 102,
+      "sha256": "3506941a6a02f85355bda548560ea6652d072c74fb703c66ea7a33cfe066f50f"
+    },
+    {
+      "path": "prototypes/alpha-1/renderer-spike/assets/ambient-art-bindings.json",
+      "bytes": 32594,
+      "sha256": "e766fbb1bfc770eb332ba4bd9a009162c6200cef2c68c3502933025645a1596b"
+    },
+    {
+      "path": "prototypes/alpha-1/renderer-spike/assets/ambient/abies-balsamea.foliage-96.png",
+      "bytes": 17821,
+      "sha256": "7260eae0fe7f7e51f7c65b77dddbd865e225f0138e3456c851a4b4d72ae4cd0a"
+    },
+    {
+      "path": "prototypes/alpha-1/renderer-spike/assets/ambient/acer-rubrum.foliage-96.png",
+      "bytes": 12124,
+      "sha256": "0d46bf37d8821c230013283f4278b492ccff7bdbf4b935f25774736a5d95a13b"
+    },
+    {
+      "path": "prototypes/alpha-1/renderer-spike/assets/ambient/acer-saccharinum.foliage-96.png",
+      "bytes": 10104,
+      "sha256": "9b58d50bc4b80aa6e5e46512982838b4524392b34998a761929aad9e225b96ed"
+    },
+    {
+      "path": "prototypes/alpha-1/renderer-spike/assets/ambient/betula-alleghaniensis.foliage-96.png",
+      "bytes": 18685,
+      "sha256": "3f8c3a409d33925876edd7024f4f71ca22c0335ab1819fdfa8a42b739e16c472"
+    },
+    {
+      "path": "prototypes/alpha-1/renderer-spike/assets/ambient/betula-papyrifera.foliage-96.png",
+      "bytes": 14901,
+      "sha256": "d33f0ae3ecddfbda7908d243b3942316d1250efff8b0e6d6da0155b9f1be52ef"
+    },
+    {
+      "path": "prototypes/alpha-1/renderer-spike/assets/ambient/carya-ovata.foliage-96.png",
+      "bytes": 22775,
+      "sha256": "32ddf16f0be81d63a75f5bec4c348e2af12f80ce29fac4861d4c0c93d011a7ce"
+    },
+    {
+      "path": "prototypes/alpha-1/renderer-spike/assets/ambient/castanea-dentata.foliage-96.png",
+      "bytes": 12806,
+      "sha256": "35d2489ea9863c7a2c8753630154074891b6cdbf07e3ca6f069a195f5ada2f83"
+    },
+    {
+      "path": "prototypes/alpha-1/renderer-spike/assets/ambient/fagus-grandifolia.foliage-96.png",
+      "bytes": 20003,
+      "sha256": "750b1cb41e48929bd415d8255cc8ecaae5206382173d41f4a985e482aa044dff"
+    },
+    {
+      "path": "prototypes/alpha-1/renderer-spike/assets/ambient/fraxinus-americana.foliage-96.png",
+      "bytes": 12264,
+      "sha256": "df408894dde34d5e5461084ba7e1785afab00bbbcb2129cf3a6aa5b5451331dc"
+    },
+    {
+      "path": "prototypes/alpha-1/renderer-spike/assets/ambient/fraxinus-nigra.foliage-96.png",
+      "bytes": 25076,
+      "sha256": "d5116f2ac8c690f59e939ac88de34f4fee169283040e26ef2463f1756788852a"
+    },
+    {
+      "path": "prototypes/alpha-1/renderer-spike/assets/ambient/juglans-nigra.foliage-96.png",
+      "bytes": 21344,
+      "sha256": "dee86388a2cf16d95a0d50b463632cdbe25adb2f74dfbb4c37a16d3efa44c46b"
+    },
+    {
+      "path": "prototypes/alpha-1/renderer-spike/assets/ambient/larix-laricina.foliage-96.png",
+      "bytes": 14182,
+      "sha256": "4af284faadd614ade5a6d63fe21748e3aa18ad9495a77bc6aea6f7caf22ab58a"
+    },
+    {
+      "path": "prototypes/alpha-1/renderer-spike/assets/ambient/picea-glauca.foliage-96.png",
+      "bytes": 14541,
+      "sha256": "54770b3c0ac8752a8917563fdac6f96056d3590335a109f81db0ce901485b9dc"
+    },
+    {
+      "path": "prototypes/alpha-1/renderer-spike/assets/ambient/picea-mariana.foliage-96.png",
+      "bytes": 7402,
+      "sha256": "b58bc907300e3316fcbae06bf6f137266a69449f84d056f36ec18f8bbc2c245b"
+    },
+    {
+      "path": "prototypes/alpha-1/renderer-spike/assets/ambient/pinus-banksiana.foliage-96.png",
+      "bytes": 23465,
+      "sha256": "61cb91d4d8f6ec7f09db24ad555febc67aad8e9a304250865224c05fd3280e50"
+    },
+    {
+      "path": "prototypes/alpha-1/renderer-spike/assets/ambient/pinus-resinosa.foliage-96.png",
+      "bytes": 26743,
+      "sha256": "610716857795b20a23befc97dd7aee32c3d3d66998b9d57faae932cb089d7f95"
+    },
+    {
+      "path": "prototypes/alpha-1/renderer-spike/assets/ambient/pinus-strobus.foliage-96.png",
+      "bytes": 25218,
+      "sha256": "300f2298880f1a26f186a6159c7a8517225de6f9fbf3c22d35ba72363c37d6f7"
+    },
+    {
+      "path": "prototypes/alpha-1/renderer-spike/assets/ambient/populus-balsamifera.foliage-96.png",
+      "bytes": 15421,
+      "sha256": "c48409cd6415c6aa1e6706cb0aa1fae47d5ff3466ed866f07ec74f1e66af4681"
+    },
+    {
+      "path": "prototypes/alpha-1/renderer-spike/assets/ambient/populus-deltoides.foliage-96.png",
+      "bytes": 17636,
+      "sha256": "f62eaab6b0dbb5fa5d965c1867674efac4a893b35107f4db440a5f09a23cf356"
+    },
+    {
+      "path": "prototypes/alpha-1/renderer-spike/assets/ambient/populus-grandidentata.foliage-96.png",
+      "bytes": 13194,
+      "sha256": "418c2b1340b9f8a72cdf80b8f06501700ab773231276b289e2edbea0943129fd"
+    },
+    {
+      "path": "prototypes/alpha-1/renderer-spike/assets/ambient/populus-tremuloides.foliage-96.png",
+      "bytes": 15619,
+      "sha256": "8b5d10b14ca8d349eaa9aa240c59630757aa21644bd1992a2418e82f13439eb7"
+    },
+    {
+      "path": "prototypes/alpha-1/renderer-spike/assets/ambient/prunus-serotina.foliage-96.png",
+      "bytes": 13596,
+      "sha256": "679c3f833e1bb33eaaa361ab9bd669c86104ab3a7fc9ebb3e7535238a315eb9a"
+    },
+    {
+      "path": "prototypes/alpha-1/renderer-spike/assets/ambient/quercus-alba.foliage-96.png",
+      "bytes": 11890,
+      "sha256": "32db75466a83bc295680a93b501f9506beb07565a5927360dc59a42ce918aadb"
+    },
+    {
+      "path": "prototypes/alpha-1/renderer-spike/assets/ambient/quercus-macrocarpa.foliage-96.png",
+      "bytes": 22339,
+      "sha256": "80710890f0cf228038457eefce381f5af0fe1eea0a0c14504dfc9bf165bb64ee"
+    },
+    {
+      "path": "prototypes/alpha-1/renderer-spike/assets/ambient/quercus-rubra.foliage-96.png",
+      "bytes": 17275,
+      "sha256": "75aec086db0b07cbeef2e75c4f67693e8356fc48d6b72e213be80070b3de5d64"
+    },
+    {
+      "path": "prototypes/alpha-1/renderer-spike/assets/ambient/thuja-occidentalis.foliage-96.png",
+      "bytes": 14669,
+      "sha256": "96fa7d766a8c06c030cc06025a2e11fba11884e5c357a910dc2be7beede7bd1e"
+    },
+    {
+      "path": "prototypes/alpha-1/renderer-spike/assets/ambient/tilia-americana.foliage-96.png",
+      "bytes": 24433,
+      "sha256": "cf0f890acf9e9576f100aacb6703559a2e5677e8a1faf1673c4bccfba89e0830"
+    },
+    {
+      "path": "prototypes/alpha-1/renderer-spike/assets/ambient/tsuga-canadensis.foliage-96.png",
+      "bytes": 20597,
+      "sha256": "8e139cc6545d1fc05e4752e3d33e302c60468ce9088acdba1286561129b67163"
+    },
+    {
+      "path": "prototypes/alpha-1/renderer-spike/assets/ambient/ulmus-americana.foliage-96.png",
+      "bytes": 16424,
+      "sha256": "3c84752141a8417f6153f0133a4ec8999495d06cfa3634dc0e82704001902787"
+    },
+    {
+      "path": "prototypes/alpha-1/renderer-spike/assets/asset-bindings.json",
+      "bytes": 2852,
+      "sha256": "c064d0ee24351baac956918c73ce24f57ed6042c23042d4a990f0eff54302f9d"
+    },
+    {
+      "path": "prototypes/alpha-1/renderer-spike/assets/sugar-maple-foliage.svg",
+      "bytes": 2187,
+      "sha256": "3c271417b7ea77a6fa73eec4f5232c93ec27b5585117531746f0823359275770"
+    },
+    {
+      "path": "prototypes/alpha-1/renderer-spike/assets/sugar-maple-samara.svg",
+      "bytes": 686,
+      "sha256": "a9ab19e5dd45c2e9e48da500e55ff7d4287f9dbed9e2cae1e80210d0d7d9f575"
+    },
+    {
+      "path": "prototypes/alpha-1/renderer-spike/assets/unknown-ambient-crown.svg",
+      "bytes": 671,
+      "sha256": "01f6ca068d64b3a1a9cc03b3e14cc8518a34683393cd10d35e281fd5df5e6037"
+    },
+    {
+      "path": "prototypes/alpha-1/renderer-spike/src/ambient-visual-layer.js",
+      "bytes": 7621,
+      "sha256": "78878197adaef1413533deed4d0b37f20095b7d6a5e5fcee31f60cbb86e97d4c"
+    },
+    {
+      "path": "prototypes/alpha-1/renderer-spike/src/app.js",
+      "bytes": 8266,
+      "sha256": "bb83b55feb52c26dcabeed8fd187c1e24f2349a1df6aa085807d960d0bc31368"
+    },
+    {
+      "path": "prototypes/alpha-1/renderer-spike/src/assets.js",
+      "bytes": 2264,
+      "sha256": "c0237fde20f4ba75528d53d24d88f02157a6243d7f85ef186a37346de034fd5d"
+    },
+    {
+      "path": "prototypes/alpha-1/renderer-spike/src/benchmark-adapter.js",
+      "bytes": 2933,
+      "sha256": "deb0939b986b7383d895fe7fdab3c1cf22774c7122612fc1d273b12a952ab2c1"
+    },
+    {
+      "path": "prototypes/alpha-1/renderer-spike/src/fixture.js",
+      "bytes": 9100,
+      "sha256": "36d27e551f271e3e82f9512915696ef9d6219d00ce0f4601fa2e9e7fec9da220"
+    },
+    {
+      "path": "prototypes/alpha-1/renderer-spike/src/input.js",
+      "bytes": 7864,
+      "sha256": "5564bedcf5a48c27f4a1379f14d7a87d15fb1561f39e3697ec7649ffa6847706"
+    },
+    {
+      "path": "prototypes/alpha-1/renderer-spike/src/renderer.js",
+      "bytes": 32505,
+      "sha256": "ad0b37a65c425ef12a8516d7974106ee54affe174d9d53f5956929745ea8e88b"
+    },
+    {
+      "path": "prototypes/alpha-1/renderer-spike/src/semantic-zoom.js",
+      "bytes": 1828,
+      "sha256": "af32c1b2f1d42a43efccaa5006c26b848a5a22e72cb7d58e617332bbdfde9091"
+    },
+    {
+      "path": "prototypes/alpha-1/renderer-spike/src/synthetic-host.js",
+      "bytes": 3157,
+      "sha256": "58ca45cb8763b59f4b29fffa4c10b5c188421be1de785e14ed7fcc43b8efef33"
+    },
+    {
+      "path": "prototypes/alpha-1/src/domain/canonical.mjs",
+      "bytes": 3145,
+      "sha256": "54032f7a57ddc21dde300893694e09e67f5fcab95c0a12731259929138a4e9dc"
+    },
+    {
+      "path": "prototypes/alpha-1/src/domain/random.mjs",
+      "bytes": 3134,
+      "sha256": "5e6c0e81a0a401288fa88e9efa7ac77de1c19aeb1fa41d4e682f7ecc51dc3e6e"
+    },
+    {
+      "path": "prototypes/alpha-1/src/sim/index.mjs",
+      "bytes": 719,
+      "sha256": "4d621fc40e0b4a9eb2df4424b5ec8c9c9bc1ceeb730d1708a70725e1a3d208e6"
+    },
+    {
+      "path": "prototypes/alpha-1/src/sim/proposed-parameters.mjs",
+      "bytes": 3459,
+      "sha256": "8a1dfbeee2be27b80b44161f9af92745d1b27d17fa26f604ccb9657638e2a7b0"
+    },
+    {
+      "path": "prototypes/alpha-1/src/sim/reference-kernel.mjs",
+      "bytes": 77679,
+      "sha256": "b0344813d395fdbb150dba0c1759544826d949164372d3c3d1491b59cd4ea4c9"
+    },
+    {
+      "path": "prototypes/alpha-1/src/spatial/ecology/conservation.mjs",
+      "bytes": 11897,
+      "sha256": "89501c8f1d6bff19889fcb7ce1f5c77649b6abae2f617e184549f2a35f54e04c"
+    },
+    {
+      "path": "prototypes/alpha-1/vertical-slice/assembly.mjs",
+      "bytes": 15051,
+      "sha256": "ad4743c88e2ee9d016df081d81179bb128f1022e75fd66decb6c7b579a6b54bc"
+    },
+    {
+      "path": "prototypes/alpha-1/vertical-slice/identities.json",
+      "bytes": 2115,
+      "sha256": "f46c199080cba9a22d8e2d8288a55c65f865ea54a84c14ed226c6d9a2a4126e7"
+    },
+    {
+      "path": "prototypes/alpha-1/vertical-slice/kernel-gameplay-adapter.mjs",
+      "bytes": 6205,
+      "sha256": "a49e98b861af048186e1bcec6c972b812c7fda7aeb046d96d2ed52fa5554bf57"
+    },
+    {
+      "path": "prototypes/alpha-1/vertical-slice/presentation-adapter.mjs",
+      "bytes": 9234,
+      "sha256": "3e6f8a7eaa15625b7bba2d0923a15505c2e875c721a4fa4b86cf82a78ba8a0fc"
+    },
+    {
+      "path": "prototypes/alpha-1/vertical-slice/scripted-play.mjs",
+      "bytes": 2306,
+      "sha256": "d31c5f8abd82a9a207217e03582dc552840e26c4390ebb4e7aa8c7063bd967b0"
+    },
+    {
+      "path": "prototypes/alpha-1/vertical-slice/world-view.mjs",
+      "bytes": 11518,
+      "sha256": "d3cbfa036f1c63b164fc9f7068d53a826b97fabe3fec872b832667a35ab33646"
+    },
+    {
+      "path": "prototypes/p0_portable_gameplay/src/config.mjs",
+      "bytes": 989,
+      "sha256": "5cfc05aa3e4c36eeff4dd1a8b170f9022a79d97a956b73d280811e817059ae46"
+    },
+    {
+      "path": "prototypes/p0_portable_gameplay/src/contracts.mjs",
+      "bytes": 8705,
+      "sha256": "4544c13fd1869f56902d8bfbaaa3ad265aa9a2ab6d6cc1cb914f1780cb1a2cc3"
+    },
+    {
+      "path": "prototypes/p0_portable_gameplay/src/controller.mjs",
+      "bytes": 22292,
+      "sha256": "943f9cdc4f2dae8d008b1f5a600b34f607f8611e427344ff939e07225f2f0c00"
+    },
+    {
+      "path": "prototypes/p0_portable_gameplay/src/host-adapter.mjs",
+      "bytes": 4211,
+      "sha256": "6d372d76c65a2e1ee65a3d1b8aea6cdd910992f5e276c4d1eaa21d233aeadb76"
+    },
+    {
+      "path": "src/spine/canonical-json.mjs",
+      "bytes": 1659,
+      "sha256": "2a8977ac6e9fda65c44ff553634ffe07ff55fd7ede412aeb343a98cd9c2db44c"
+    },
+    {
+      "path": "styles.css",
+      "bytes": 3779,
+      "sha256": "6c916380da8b7d5b8696ae420578eee756a850735a4948c9f759504cf5237b7f"
+    }
+  ]
+}

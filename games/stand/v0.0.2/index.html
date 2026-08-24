@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+    <title>Stand v0.0.2 — Oneida Browser Alpha</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Oneida County, Wisconsin · v0.0.2 Browser Alpha</p>
+          <h1>Stand</h1>
+          <p id="source-label">Loading the reviewed Oneida runtime view…</p>
+          <nav id="web-version-nav" class="version-nav" aria-label="Stand versions" hidden>
+            <strong>v0.0.2</strong>
+            <a href="../v0.0.1/">Play v0.0.1</a>
+            <a href="../">Game page</a>
+          </nav>
+        </div>
+        <div class="rp"><span>RP</span><output id="rp-total">0</output><strong id="rp-delta"></strong></div>
+      </header>
+
+      <section class="scene-shell" aria-labelledby="scale-label">
+        <canvas id="scene" tabindex="0" aria-label="Interactive forest view"></canvas>
+        <div class="scene-copy">
+          <strong id="scale-label">Stand view</strong>
+          <span id="site-factor">Working site factor · no fitted suitability</span>
+        </div>
+        <output id="local-feedback" aria-live="polite"></output>
+      </section>
+
+      <nav class="controls" aria-label="Forest controls">
+        <div class="control-group" role="group" aria-label="Interaction mode">
+          <button id="observe-mode" type="button" aria-pressed="true">Observe / Nurture</button>
+          <button id="seeding-mode" type="button" aria-pressed="false">Seeding: Off</button>
+        </div>
+        <div class="control-group" role="group" aria-label="Forest time">
+          <span class="control-readout">Year <output id="forest-year">0</output> · <output id="time-state">½×</output></span>
+          <button id="pause" type="button" aria-pressed="false">Pause</button>
+          <button type="button" data-speed="0.5" aria-pressed="true">½×</button>
+          <button type="button" data-speed="1" aria-pressed="false">1×</button>
+          <button type="button" data-speed="4" aria-pressed="false">4×</button>
+          <button type="button" data-speed="16" aria-pressed="false">16×</button>
+          <button id="tick" type="button" title="Advance one deterministic year">Step +1 year</button>
+        </div>
+        <div class="control-group" role="group" aria-label="Camera">
+          <button type="button" data-view="close">Tree</button>
+          <button type="button" data-view="stand">Stand</button>
+          <button type="button" data-view="far">County</button>
+          <button id="rotate-left" type="button" aria-label="Rotate camera left">Rotate left</button>
+          <button id="rotate-right" type="button" aria-label="Rotate camera right">Rotate right</button>
+          <button id="recenter" type="button">Recenter</button>
+        </div>
+        <div class="control-group" role="group" aria-label="Save controls">
+          <button id="save" type="button">Save</button>
+          <button id="reload" type="button">Reload</button>
+          <span id="browser-save-tools" class="browser-save-tools" hidden>
+            <button id="export-save" type="button">Export save</button>
+            <button id="import-save" type="button">Import save</button>
+            <input id="import-file" type="file" accept="application/json,.json" hidden />
+          </span>
+        </div>
+      </nav>
+      <p class="control-hint">WASD or arrows pan · Q/E or [/] rotate · Space switches Seeding · +/− zoom</p>
+
+      <section class="lower">
+        <div>
+          <h2>Meaningful events</h2>
+          <ol id="event-feed"></ol>
+        </div>
+        <div class="truth">
+          <h2>What this build means</h2>
+          <p>Sugar maple is the only controlled ecological species. The other 29 families are deterministic, non-playable scenery only. Managed sugar maple can spread progressively across the county-scale Working field, which is not fitted suitability or calibrated production ecology. Browser saves stay on this device unless exported.</p>
+          <label><input id="reduced-motion" type="checkbox" /> Reduce motion</label>
+          <p id="status" role="status">Starting…</p>
+        </div>
+      </section>
+    </main>
+    <script type="module" src="./app.mjs"></script>
+  </body>
+</html>

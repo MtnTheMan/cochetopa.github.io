@@ -1,0 +1,2 @@
+# Runtime art manifests address exact repository bytes; checkout must not rewrite SVGs.
+*.svg -text

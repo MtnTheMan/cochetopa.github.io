@@ -1,0 +1,69 @@
+{
+  "manifest_schema": "STAND-ONEIDA-SUGAR-MAPLE-RUNTIME-DIAGNOSTIC@1",
+  "artifact_metadata": {
+    "artifact_version": "0.0.2-sugar-maple-runtime-diagnostic.1",
+    "created_date": "2026-08-21"
+  },
+  "status": "synthetic_loader_contract_fixture_not_real_Oneida_data",
+  "claim_limits": [
+    "test_only",
+    "no_real_geographic_coordinates",
+    "no_real_GIS_or_occurrence_data",
+    "not_an_ecological_outcome_or_suitability_fixture",
+    "hidden_hexes_are_not_visible_territorial_tiles"
+  ],
+  "grid_contract": {
+    "candidate_crs": "EPSG:3071",
+    "raster_cell_size_m": 30,
+    "hidden_hex_nominal_area_m2": 10000,
+    "orientation": "flat_top",
+    "handedness": "right_handed_q_east_r_north"
+  },
+  "sites": [
+    {
+      "hex_id": "diagnostic_flat_forest",
+      "q": 0,
+      "r": 0,
+      "processing_coverage_fraction": 1.0,
+      "county_mask_area_fraction": 1.0,
+      "elevation_m_mean": 320.0,
+      "slope_degrees_mean": 3.0,
+      "terrain_aspect_eastness": 0.0,
+      "terrain_aspect_northness": 1.0,
+      "forest_mask_area_fraction": 1.0,
+      "water_mask_area_fraction": 0.0,
+      "developed_mask_area_fraction": 0.0,
+      "tmin_daily_mean_deg_c_mean": 1.0,
+      "tmax_daily_mean_deg_c_mean": 11.0,
+      "prcp_annual_mean_mm_mean": 850.0,
+      "soil_texture_valid_area_fraction_mean": 1.0,
+      "historical_range_support_acer_saccharum_acer_saccharum_mean": 0.8,
+      "historical_range_support_acer_saccharum_acer_saccharum_valid_area_fraction": 1.0
+    },
+    {
+      "hex_id": "diagnostic_water_edge",
+      "q": 1,
+      "r": 0,
+      "processing_coverage_fraction": 0.7,
+      "county_mask_area_fraction": 0.5,
+      "elevation_m_mean": 315.0,
+      "slope_degrees_mean": 1.0,
+      "terrain_aspect_eastness": 0.0,
+      "terrain_aspect_northness": 0.0,
+      "forest_mask_area_fraction": 0.2,
+      "water_mask_area_fraction": 0.7,
+      "developed_mask_area_fraction": 0.0,
+      "tmin_daily_mean_deg_c_mean": 1.1,
+      "tmax_daily_mean_deg_c_mean": 11.1,
+      "prcp_annual_mean_mm_mean": 850.0,
+      "soil_texture_valid_area_fraction_mean": 0.0,
+      "historical_range_support_acer_saccharum_acer_saccharum_mean": null,
+      "historical_range_support_acer_saccharum_acer_saccharum_valid_area_fraction": 0.0
+    }
+  ],
+  "loader_rules": {
+    "missingness": "null values and zero valid-area fractions stay missing; they are not converted to ecological absence or zero",
+    "historical_range_support": "reference context only; no loader may rename it suitability, occupancy, establishment, probability, or survival",
+    "wind": "procedural seasonal seed-dispersal input only; omitted from this stored fixture"
+  }
+}

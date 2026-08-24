@@ -1,0 +1,16 @@
+{
+  "schemaVersion": "stand-github-pages-release@1",
+  "version": "v0.0.2",
+  "route": "/games/stand/v0.0.2/",
+  "sourceCommit": "37e1f04d551518d9cb4c81e1eb1e2a5e8886cc70",
+  "verticalPayloadSourceCommit": "37e1f04d551518d9cb4c81e1eb1e2a5e8886cc70",
+  "verticalPayloadManifestSha256": "c20c3405a48619a4c7cea275fd3ad6f0abe513208a7fa946ece1360ee4519e47",
+  "host": "static-browser",
+  "persistence": "IndexedDB with two retained local generations and explicit JSON export/import",
+  "networkRequiredAfterLoad": false,
+  "rawGisPackaged": false,
+  "scientificClaimLimit": "real Oneida county navigation plus county-spanning Working hidden topology; no fitted suitability or calibrated production county ecology",
+  "adjacentVersionsPreserved": [
+    "v0.0.1"
+  ]
+}

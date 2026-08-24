@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" role="img" aria-labelledby="title desc">
+  <title id="title">Generic unknown ambient vegetation crown</title>
+  <desc id="desc">An asymmetric crown mass without a species-specific leaf, needle, fruit, or seed motif.</desc>
+  <metadata>assetId=stand.ambient.unknown.crown.v1; license=MIT; identity=unknown</metadata>
+  <path fill="#8fa28b" fill-opacity="0.7" d="M148 650 C100 595 100 520 150 468 C125 385 180 305 270 290 C305 205 415 175 500 225 C580 160 700 190 730 275 C830 282 885 360 860 445 C930 490 940 590 880 650 C820 730 710 745 625 720 C560 780 440 790 370 730 C285 760 190 730 148 650 Z"/>
+</svg>

@@ -1,0 +1,56 @@
+{
+  "schema": "stand-render-asset-bindings@1",
+  "created": "2026-08-19",
+  "activation": "STAND V0.0.2 ACTIVATE — MINIMUM PRODUCTION RENDERER",
+  "ambientSpeciesArtGate": {
+    "status": "Accepted inventory bound for v0.0.2 ambient visual use",
+    "authorization": "MISSION CONTROL CLARIFICATION — v0.0.2 AMBIENT 30-SPECIES ART",
+    "bindingManifest": "./ambient-art-bindings.json",
+    "acceptedFamilyTargetCount": 30,
+    "boundAcceptedFamilyCount": 30,
+    "playableAndSimulatedFamilyCount": 1,
+    "nonPlayablePresentationOnlyFamilyCount": 29,
+    "structuralPlaceholdersSatisfyGate": false
+  },
+  "sources": [
+    {
+      "id": "stand.botanical.acer_saccharum.controlled_master.v1",
+      "role": "close_sugar_maple_foliage",
+      "path": "./sugar-maple-foliage.svg",
+      "runtimeSha256": "3c271417b7ea77a6fa73eec4f5232c93ec27b5585117531746f0823359275770",
+      "upstreamCommit": "e298552",
+      "upstreamPath": "prototypes/alpha-1/tests/art-atmosphere/botanical-production/v1/acer-saccharum/controlled-vector/acer-saccharum-controlled-master.v1.svg",
+      "upstreamSha256": "5eef7dc99a8f2efc85cdaa761df067aead36bf613c10576089ac14c2f99f86e5",
+      "upstreamDisposition": "Art checkpoint direction passed; upstream runtime import was still closed",
+      "rendererDisposition": "Runtime import authorized by the 2026-08-19 minimum-renderer activation; close motif only",
+      "license": "MIT"
+    },
+    {
+      "id": "stand.botanical.acer_saccharum.samara.minimum.v1",
+      "role": "accepted_seed_outcome_proxy",
+      "path": "./sugar-maple-samara.svg",
+      "runtimeSha256": "a9ab19e5dd45c2e9e48da500e55ff7d4287f9dbed9e2cae1e80210d0d7d9f575",
+      "upstreamCommit": "e298552",
+      "upstreamPath": "prototypes/alpha-1/assets/source/art-atmosphere/botanical-contact-sheet/v1/species/acer-saccharum-propagule.svg",
+      "upstreamDisposition": "Draft identity study; no previous production claim",
+      "rendererDisposition": "Transparent minimum proxy adapted under the 2026-08-19 activation; replaceable by later production samara art",
+      "license": "MIT"
+    },
+    {
+      "id": "stand.ambient.unknown.crown.v1",
+      "role": "unknown_ambient_crown",
+      "path": "./unknown-ambient-crown.svg",
+      "runtimeSha256": "01f6ca068d64b3a1a9cc03b3e14cc8518a34683393cd10d35e281fd5df5e6037",
+      "upstreamCommit": "e298552",
+      "upstreamSha256": "3632699f3a3377cd29d9859bf5e46c8138aa248bfb26cc8bcc30fc235e5b7508",
+      "rendererDisposition": "Approved generic non-taxonomic source",
+      "license": "MIT"
+    }
+  ],
+  "forbidden": [
+    "infer sugar maple from a missing species ID",
+    "show a samara before an accepted command outcome",
+    "use the leaf silhouette as an ambient fallback",
+    "claim that this fixture contains measured Oneida data"
+  ]
+}
