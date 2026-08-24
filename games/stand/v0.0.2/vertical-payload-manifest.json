@@ -1,7 +1,7 @@
 {
   "schemaVersion": "stand-v0.0.2-vertical-packaged-payload@2",
   "hubCheckpoint": "2d7ad695b6a8f1c9c179950faeedb63f43b6096c",
-  "sourceCommit": "37e1f04d551518d9cb4c81e1eb1e2a5e8886cc70",
+  "sourceCommit": "343aaadfa88629ba2b3104409e6478bc7e66847a",
   "sourceDisposition": "all copied and native-host build inputs are exact committed bytes at sourceCommit",
   "foundationReceiptId": "FOUNDATION-HOST-RECEIPT@1",
   "runtimeNetworkRequired": false,
