@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "stand-v0.0.2-vertical-assembly-identities/4",
+  "schemaVersion": "stand-v0.0.2-vertical-assembly-identities/5",
   "hubCheckpoint": "2d7ad695b6a8f1c9c179950faeedb63f43b6096c",
   "foundation": {
     "receiptId": "FOUNDATION-HOST-RECEIPT@1",
@@ -31,13 +31,16 @@
     "domainEvents": "DOMAIN-EVENTS@1"
   },
   "renderer": {
-    "artBindingCommit": "c7cdf85f0658bf02db70a0aa4e1cf5a686d6f1b9",
+    "artBindingCommit": "f9ee7e25b02b39ed15a1490861209274a25450ca",
+    "previousArtBindingCommit": "c7cdf85f0658bf02db70a0aa4e1cf5a686d6f1b9",
+    "presentationConsumerCommit": "f9ee7e25b02b39ed15a1490861209274a25450ca",
     "exactIdentityCommit": "086f2e7c3c1ef559606f98cd803e2498283ff714",
     "previousExactIdentityCommit": "bf0d3f897f463d6f6c584932d2ed493d4b9ed2af",
     "legacyExactIdentityCommit": "da3b607985206674b9b54156a415c868c3f1ec5a",
     "ancientExactIdentityCommit": "d7e347a968813d5365ff644ed42d4bb6f71f9174",
     "ambientFamilyCount": 30,
-    "ambientAuthority": "presentation_only"
+    "ambientAuthority": "presentation_only",
+    "saveIdentityDisposition": "unchanged_by_presentation_only_runtime_art_upgrade"
   },
   "maxent": {
     "status": "Waiting_optional_not_loaded",

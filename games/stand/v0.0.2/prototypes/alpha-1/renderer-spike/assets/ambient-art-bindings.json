@@ -33,14 +33,14 @@
   "rightsDisposition": "Original repository Art inventory; runtime ambient-visual use authorized by the 2026-08-21 Mission Control clarification.",
   "runtimeDerivation": {
     "tool": "tools/resize-art.py",
-    "algorithm": "alpha-bounds crop, Pillow LANCZOS fit into transparent 96x96 PNG",
+    "algorithm": "alpha-bounds crop, Pillow LANCZOS fit into transparent 192x192 playable PNG or 96x96 ambient PNG",
     "sourcePixelsRepainted": false
   },
   "bindings": [
     {
       "familyId": "acer-saccharum",
       "inventoryId": "acer_saccharum",
-      "assetId": "stand.botanical.acer_saccharum.controlled_master.v1",
+      "assetId": "stand.botanical.acer_saccharum.watercolor-foliage-192.v2",
       "role": "controlled-and-ambient-foliage-identity",
       "playable": true,
       "simulated": true,
@@ -48,11 +48,11 @@
       "sourceMasterPath": "prototypes/alpha-1/tests/art-atmosphere/botanical-production/v1/acer-saccharum/masters/foliage-master-v1.png",
       "inventoryRecordedMasterSha256": "3430d553c3e51a4b7906f501014e422910f31ac39328df6c8ff42a6f32cf519b",
       "sourceMasterSha256": "3430d553c3e51a4b7906f501014e422910f31ac39328df6c8ff42a6f32cf519b",
-      "inventoryHashMatched": null,
-      "sourceMasterCommit": null,
-      "runtimePath": "./sugar-maple-foliage.svg",
-      "runtimeSha256": "3c271417b7ea77a6fa73eec4f5232c93ec27b5585117531746f0823359275770",
-      "runtimeBytes": 2187,
+      "inventoryHashMatched": true,
+      "sourceMasterCommit": "9d17ceedea4806e6bed627db3d73f92600c3e806",
+      "runtimePath": "./sugar-maple-foliage-192.png",
+      "runtimeSha256": "313b099f4226e0e9c6f502c2d04e5a1809996074c97eb74da9ba20aac9e0dfab",
+      "runtimeBytes": 40860,
       "rendererStatus": "accepted-for-v0.0.2-visual-use",
       "ecologyClaims": false
     },

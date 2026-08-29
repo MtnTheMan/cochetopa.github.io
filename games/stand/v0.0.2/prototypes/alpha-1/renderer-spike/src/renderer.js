@@ -35,6 +35,12 @@ export function createRenderer(canvas, fixture, options = {}) {
   if (!context) throw new TypeError("Canvas 2D is unavailable.");
   const assets = options.assets || {};
   const ambientVisualLayer = options.ambientVisualLayer || null;
+  const siteSampleSpacing = nearestSampleSpacing(fixture.siteFactor?.samples || []);
+  const ambientAppearancesByBand = ambientVisualLayer ? Object.freeze({
+    far: ambientVisualLayer.appearances.filter((appearance) => appearance.scope !== "local-stand-context"),
+    stand: ambientVisualLayer.appearances,
+    close: ambientVisualLayer.appearances.filter((appearance) => appearance.scope !== "county-context"),
+  }) : null;
   const now = typeof options.now === "function" ? options.now : () => performance.now();
   const metrics = { width: 1, height: 1, dpr: 1, fit: 1 };
   let semanticBand = "stand";
@@ -71,7 +77,10 @@ export function createRenderer(canvas, fixture, options = {}) {
   }
 
   function worldToScreen(x, y, view = {}) {
-    const p = projection(view);
+    return projectWorld(x, y, projection(view));
+  }
+
+  function projectWorld(x, y, p) {
     const dx = Number(x) - p.centerX;
     const dy = Number(y) - p.centerY;
     return {
@@ -107,14 +116,12 @@ export function createRenderer(canvas, fixture, options = {}) {
 
     resetContext(context);
     drawCalls += drawBackdrop(context);
-    drawCalls += drawTerrain(context, fixture, view);
+    drawCalls += drawTerrain(context, fixture, p);
 
     let ambientAppearances = [];
     if (ambientVisualLayer) {
       const appearanceCap = p.zoom < 3 ? 240 : p.zoom < 70 ? 190 : 130;
-      const eligibleAppearances = ambientVisualLayer.appearances.filter((appearance) =>
-        p.zoom < 3 ? appearance.scope !== "local-stand-context" : p.zoom >= 70 ? appearance.scope !== "county-context" : true,
-      );
+      const eligibleAppearances = p.zoom < 3 ? ambientAppearancesByBand.far : p.zoom >= 70 ? ambientAppearancesByBand.close : ambientAppearancesByBand.stand;
       ambientAppearances = selectVisible(eligibleAppearances, view, 10, appearanceCap);
     }
 
@@ -138,7 +145,7 @@ export function createRenderer(canvas, fixture, options = {}) {
         treeDrawables.push({ type: "individual", entity, alpha: closeAlpha });
       }
     }
-    for (const drawable of sortByProjectedDepth(treeDrawables, ({ entity }) => worldToScreen(entity.x, entity.y, view).y)) {
+    for (const drawable of sortByProjectedDepth(treeDrawables, ({ entity }) => projectWorld(entity.x, entity.y, p).y)) {
       context.save(); context.globalAlpha = drawable.alpha;
       if (drawable.type === "ambient") {
         const usedAcceptedArt = drawAmbientAppearance(context, drawable.entity, view, p);
@@ -153,7 +160,7 @@ export function createRenderer(canvas, fixture, options = {}) {
       context.restore(); drawCalls += 1;
     }
     for (const seed of snapshot.seeds || []) {
-      drawSeed(context, seed, view, presentationTimeMs); visible.seeds += 1; drawCalls += 1;
+      if (drawSeed(context, seed, p, presentationTimeMs)) { visible.seeds += 1; drawCalls += 1; }
     }
     for (const cue of snapshot.feedback || []) { drawFeedback(context, cue, view, presentationTimeMs); drawCalls += 1; }
 
@@ -182,16 +189,21 @@ export function createRenderer(canvas, fixture, options = {}) {
 
   function hitTest(screenX, screenY, snapshot, view = {}) {
     if (nextSemanticBand(semanticBand, view.zoom) !== "close") return null;
-    const candidates = [];
+    const p = projection(view);
+    let best = null;
+    let bestDistance = Number.POSITIVE_INFINITY;
     for (const entity of snapshot.individuals || []) {
       if (entity.kind !== "tree" || entity.state !== "living" || entity.relationship !== "managed") continue;
-      const point = worldToScreen(entity.x, entity.y, view);
-      const radius = clamp((entity.crownRadius || 1.5) * projection(view).scale, 15, 62);
+      const point = projectWorld(entity.x, entity.y, p);
+      const radius = clamp((entity.crownRadius || 1.5) * p.scale, 15, 62);
       const distance = Math.hypot(screenX - point.x, screenY - (point.y - radius * 0.48));
-      if (distance <= radius) candidates.push({ entity, distance });
+      if (distance > radius) continue;
+      if (distance < bestDistance || (distance === bestDistance && String(entity.id).localeCompare(String(best?.id)) < 0)) {
+        best = entity;
+        bestDistance = distance;
+      }
     }
-    candidates.sort((a, b) => a.distance - b.distance || String(a.entity.id).localeCompare(String(b.entity.id)));
-    return candidates[0]?.entity || null;
+    return best;
   }
 
   function getLastFrame() { return lastFrame; }
@@ -221,38 +233,37 @@ export function createRenderer(canvas, fixture, options = {}) {
     return 1;
   }
 
-  function drawTerrain(ctx, world, camera) {
-    const corners = [[0, 0], [world.extent.width, 0], [world.extent.width, world.extent.height], [0, world.extent.height]].map(([x, y]) => worldToScreen(x, y, camera));
-    const boundary = world.boundary?.points?.length ? world.boundary.points.map(([x, y]) => worldToScreen(x, y, camera)) : corners;
+  function drawTerrain(ctx, world, p) {
+    const corners = [[0, 0], [world.extent.width, 0], [world.extent.width, world.extent.height], [0, world.extent.height]].map(([x, y]) => projectWorld(x, y, p));
+    const boundary = world.boundary?.points?.length ? world.boundary.points.map(([x, y]) => projectWorld(x, y, p)) : corners;
     tracePolygon(ctx, boundary); ctx.fillStyle = COLORS.landLight; ctx.fill();
     ctx.save(); tracePolygon(ctx, boundary); ctx.clip();
     const wash = ctx.createRadialGradient(metrics.width * 0.55, metrics.height * 0.46, 20, metrics.width * 0.55, metrics.height * 0.46, metrics.width * 0.65);
     wash.addColorStop(0, "rgba(151,164,120,.65)"); wash.addColorStop(1, "rgba(205,203,171,.25)");
     ctx.fillStyle = wash; ctx.fillRect(0, 0, metrics.width, metrics.height);
     let count = 2;
-    count += drawContinuousSiteField(ctx, world.siteFactor, camera);
+    count += drawContinuousSiteField(ctx, world.siteFactor, p);
     for (const body of world.water.bodies) {
-      const points = body.polygon.map(([x, y]) => worldToScreen(x, y, camera));
+      const points = body.polygon.map(([x, y]) => projectWorld(x, y, p));
       tracePolygon(ctx, points); ctx.fillStyle = body.kind === "wetland-wash" ? "rgba(139,169,153,.48)" : "rgba(104,157,161,.68)"; ctx.fill(); count += 1;
     }
     for (const stream of world.water.streams) {
-      ctx.beginPath(); stream.forEach(([x, y], index) => { const point = worldToScreen(x, y, camera); index ? ctx.lineTo(point.x, point.y) : ctx.moveTo(point.x, point.y); });
-      ctx.strokeStyle = "rgba(91,145,150,.62)"; ctx.lineWidth = clamp(projection(camera).scale * 0.42, 1, 4); ctx.stroke(); count += 1;
+      ctx.beginPath(); stream.forEach(([x, y], index) => { const point = projectWorld(x, y, p); index ? ctx.lineTo(point.x, point.y) : ctx.moveTo(point.x, point.y); });
+      ctx.strokeStyle = "rgba(91,145,150,.62)"; ctx.lineWidth = clamp(p.scale * 0.42, 1, 4); ctx.stroke(); count += 1;
     }
     ctx.restore();
     tracePolygon(ctx, boundary); ctx.strokeStyle = "rgba(64,77,64,.32)"; ctx.lineWidth = 1.2; ctx.stroke();
     return count + 1;
   }
 
-  function drawContinuousSiteField(ctx, siteFactor, camera) {
+  function drawContinuousSiteField(ctx, siteFactor, p) {
     if (!siteFactor?.samples?.length) return 0;
-    const spacing = nearestSampleSpacing(siteFactor.samples);
-    const radius = clamp(spacing * projection(camera).scale * 2.35, 16, 420);
+    const radius = clamp(siteSampleSpacing * p.scale * 2.35, 16, 420);
     ctx.save();
     ctx.globalCompositeOperation = "multiply";
     for (const [x, y, rawValue] of siteFactor.samples) {
       const value = clamp(Number(rawValue), 0, 1);
-      const point = worldToScreen(x, y, camera);
+      const point = projectWorld(x, y, p);
       if (point.x < -radius || point.x > metrics.width + radius || point.y < -radius || point.y > metrics.height + radius) continue;
       const gradient = ctx.createRadialGradient(point.x, point.y, 0, point.x, point.y, radius);
       const alpha = 0.025 + value * 0.035;
@@ -287,9 +298,13 @@ export function createRenderer(canvas, fixture, options = {}) {
     const point = worldToScreen(appearance.x, appearance.y, camera);
     const baseRadius = ambientCrownRadiusPx(p.scale, p.zoom, appearance.crownScale);
     const width = baseRadius * family.width;
-    const height = baseRadius * family.height * p.isoY;
+    // Crown art is a tree-facing screen form. Ground coordinates hinge with the
+    // camera, but flattening the crown itself turns accepted foliage into a
+    // floating sticker above a nearly invisible sliver.
+    const height = baseRadius * family.height;
     const angled = smoothstep((logZoom(p.zoom) - logZoom(2.5)) / (logZoom(70) - logZoom(2.5)));
     const crownLift = baseRadius * (1.34 + family.height * 0.82) * angled;
+    const layerAlpha = ctx.globalAlpha;
     ctx.save(); ctx.translate(point.x, point.y);
     ctx.globalAlpha *= appearance.glaze;
     if (angled > 0.04) {
@@ -309,7 +324,10 @@ export function createRenderer(canvas, fixture, options = {}) {
     }
     const botanical = assets.ambientArt?.images?.[family.id];
     const usedAcceptedArt = Boolean(botanical && p.zoom >= 6);
-    if (usedAcceptedArt) drawBotanicalMotifs(ctx, botanical, width, height, appearance.id, conifer, p.zoom);
+    if (usedAcceptedArt) {
+      ctx.globalAlpha = layerAlpha * Math.max(appearance.glaze, p.zoom >= 70 ? .96 : .88);
+      drawBotanicalMotif(ctx, botanical, width, height, appearance.id, conifer, p.zoom, false);
+    }
     ctx.restore();
     return usedAcceptedArt;
   }
@@ -376,7 +394,7 @@ export function createRenderer(canvas, fixture, options = {}) {
     const light = stressed ? "rgba(198,142,80,.28)" : ambient ? "rgba(197,204,171,.26)" : "rgba(151,174,82,.34)";
     traceBroadleafCanopy(ctx, 0, 0, crownRadius, crownRadius * .82, entity.id, "main", fullness); ctx.fillStyle = main; ctx.fill();
     drawCrownLobes(ctx, crownRadius, entity.id, fullness, main, shade, light);
-    if (!ambient && assets.foliage && p.zoom >= 6) drawBotanicalMotifs(ctx, assets.foliage, crownRadius * 1.55, crownRadius * 1.3, entity.id, false, p.zoom);
+    if (!ambient && assets.foliage && p.zoom >= 6) drawBotanicalMotif(ctx, assets.foliage, crownRadius * 1.55, crownRadius * 1.3, entity.id, false, p.zoom, true);
     ctx.strokeStyle = "rgba(111,84,57,.42)"; ctx.lineWidth = clamp(crownRadius * .018, .55, 1.25); ctx.beginPath();
     ctx.moveTo(0, crownRadius * .48); ctx.quadraticCurveTo(-crownRadius * .08, crownRadius * .08, -crownRadius * .48, -crownRadius * .12);
     ctx.moveTo(0, crownRadius * .32); ctx.quadraticCurveTo(crownRadius * .12, 0, crownRadius * .43, -crownRadius * .22); ctx.stroke();
@@ -391,15 +409,17 @@ export function createRenderer(canvas, fixture, options = {}) {
     ctx.restore();
   }
 
-  function drawSeed(ctx, seed, camera, time) {
+  function drawSeed(ctx, seed, p, time) {
+    if (p.zoom < 6) return false;
     const age = clamp((time - seed.presentationBornAtMs) / 2200, 0, 1);
     const x = mix(seed.sourceX, seed.targetX, age); const y = mix(seed.sourceY, seed.targetY, age);
-    const point = worldToScreen(x, y, camera); const size = clamp(projection(camera).scale * 1.5, 10, 32);
+    const point = projectWorld(x, y, p); const size = clamp(p.scale * 1.8, 38, 56);
     const flutter = Math.sin(age * Math.PI * 10 + hashAngle(seed.id) * Math.PI * 2) * size * .18;
     ctx.save(); ctx.translate(point.x + flutter, point.y - Math.sin(age * Math.PI) * 42); ctx.rotate(age * Math.PI * 12 + hashAngle(seed.id));
-    if (assets.samara) ctx.drawImage(assets.samara, -size / 2, -size / 2, size, size * 0.64);
+    if (assets.samara) ctx.drawImage(assets.samara, -size / 2, -size / 2, size, size);
     else { ctx.strokeStyle = COLORS.seed; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(-size * .4, 0); ctx.lineTo(0, size * .12); ctx.lineTo(size * .4, 0); ctx.stroke(); }
     ctx.restore();
+    return true;
   }
 
   function drawFeedback(ctx, cue, camera, time) {
@@ -428,16 +448,15 @@ export function createRenderer(canvas, fixture, options = {}) {
     ctx.restore();
   }
 
-  function isVisible(entity, camera, margin) {
-    const point = worldToScreen(entity.x, entity.y, camera);
-    return point.x > -margin * 10 && point.x < metrics.width + margin * 10 && point.y > -margin * 10 && point.y < metrics.height + margin * 10;
-  }
-
   function selectVisible(entities, camera, margin, cap) {
     const centerX = camera.centerX ?? fixture.extent.width / 2;
     const centerY = camera.centerY ?? fixture.extent.height / 2;
+    const p = projection(camera);
     return entities
-      .filter((entity) => isVisible(entity, camera, margin))
+      .filter((entity) => {
+        const point = projectWorld(entity.x, entity.y, p);
+        return point.x > -margin * 10 && point.x < metrics.width + margin * 10 && point.y > -margin * 10 && point.y < metrics.height + margin * 10;
+      })
       .sort((left, right) => {
         const leftFeatured = left.featured ? -1 : 0; const rightFeatured = right.featured ? -1 : 0;
         if (leftFeatured !== rightFeatured) return leftFeatured - rightFeatured;
@@ -547,27 +566,27 @@ function drawPigmentSpeckle(ctx, radius, id, color) {
   }
   ctx.restore();
 }
-function drawBotanicalMotifs(ctx, image, width, height, id, conifer, zoom) {
-  const count = zoom >= 70 ? 3 : 1;
+function drawBotanicalMotif(ctx, image, width, height, id, conifer, zoom, controlled) {
+  const close = zoom >= 70;
+  const minLongEdge = controlled ? (close ? 30 : 18) : (close ? 20 : 12);
+  const maxLongEdge = controlled ? (close ? 58 : 30) : (close ? 36 : 20);
+  const sourceWidth = Number(image.naturalWidth || image.width) || 1;
+  const sourceHeight = Number(image.naturalHeight || image.height) || 1;
+  const aspect = sourceWidth / sourceHeight;
+  const canopyLongEdge = Math.max(width, height) * (conifer ? 1.02 : .94);
+  const longEdge = clamp(canopyLongEdge, minLongEdge, maxLongEdge);
+  const motifWidth = aspect >= 1 ? longEdge : longEdge * aspect;
+  const motifHeight = aspect >= 1 ? longEdge / aspect : longEdge;
   ctx.save();
-  ctx.globalAlpha *= zoom >= 70 ? .74 : .5;
-  for (let index = 0; index < count; index += 1) {
-    const scale = conifer ? .76 : index === 0 ? .72 : .48;
-    const x = count === 1 ? 0 : hashSigned(`${id}-motif-x-${index}`) * width * .22;
-    const y = count === 1 ? 0 : hashSigned(`${id}-motif-y-${index}`) * height * .2;
-    const motifWidth = Math.max(5, width * scale);
-    const motifHeight = Math.max(5, height * scale);
-    ctx.save();
-    ctx.translate(x, y);
-    ctx.rotate(hashSigned(`${id}-motif-rotation-${index}`) * .38);
-    ctx.drawImage(image, -motifWidth / 2, -motifHeight / 2, motifWidth, motifHeight);
-    ctx.restore();
-  }
+  ctx.globalAlpha *= controlled ? .96 : close ? .94 : .9;
+  ctx.translate(hashSigned(`${id}-motif-x`) * width * .045, hashSigned(`${id}-motif-y`) * height * .04);
+  ctx.rotate(hashSigned(`${id}-motif-rotation`) * .16);
+  ctx.drawImage(image, -motifWidth / 2, -motifHeight / 2, motifWidth, motifHeight);
   ctx.restore();
 }
 function hashAngle(value) { let hash = 2166136261; for (const character of String(value)) { hash ^= character.charCodeAt(0); hash = Math.imul(hash, 16777619); } return (hash >>> 0) / 4294967296; }
 function hashSigned(value) { return hashAngle(value) * 2 - 1; }
-function nearestSampleSpacing(samples) {
+export function nearestSampleSpacing(samples) {
   if (samples.length < 2) return 18;
   let nearest = Number.POSITIVE_INFINITY;
   for (let left = 0; left < samples.length - 1; left += 1) {

@@ -14,6 +14,7 @@ const platform = createPlatformHost();
 const elements = bindElements(document);
 const buttons = Array.from(document.querySelectorAll("button"));
 const bootOptions = await platform.bootOptions();
+const assetsPromise = loadRenderAssets();
 const identities = await fetchJson("./prototypes/alpha-1/vertical-slice/identities.json");
 const worldView = bootOptions.testMode
   ? await fetchJson("./data/fixtures/world/oneida-v0.0.2/sugar-maple-runtime-diagnostic-v1.json")
@@ -21,14 +22,18 @@ const worldView = bootOptions.testMode
     ? await platform.loadExternalWorldView()
     : await fetchHashBoundJson("./data/runtime/oneida-vertical-runtime-view-v1.json", identities.world.viewSha256);
 const storage = platform.storage(bootOptions.smokeRequested ? "smoke" : "main");
-const assets = await loadRenderAssets();
+const idPrefix = platform.kind === "browser" ? "browser" : "desktop";
+const assemblyPromise = createVerticalAssembly({ worldView, identities, storage, testMode: bootOptions.testMode, masterSeed: 0x51a70002, idPrefix });
 const normalizedWorldView = bootOptions.testMode ? normalizeTestView(worldView) : worldView;
 const renderFixture = createRenderFixture(normalizedWorldView);
 const selected = normalizedWorldView.sitePreview.find((site) => site.hex_id === normalizedWorldView.selectedFounderSiteId);
+const assets = await assetsPromise;
 const artBindings = assets.ambientArt?.manifest?.bindings ?? [];
 const ambientVisualLayer = createAmbientVisualLayer({
   extent: renderFixture.extent,
   localFocus: { x: selected.viewX, y: selected.viewY },
+  localCount: 360,
+  localRadius: 3.8,
   artBindings,
   loadedFamilyIds: assets.ambientArt?.loadedFamilyIds ?? [],
 });
@@ -39,8 +44,7 @@ const cameras = {
   far: { centerX: renderFixture.extent.width / 2, centerY: renderFixture.extent.height / 2, zoom: 0.88, rotation: 0 },
 };
 const camera = { ...cameras.stand };
-const idPrefix = platform.kind === "browser" ? "browser" : "desktop";
-let assembly = await createVerticalAssembly({ worldView, identities, storage, testMode: bootOptions.testMode, masterSeed: 0x51a70002, idPrefix });
+let assembly = await assemblyPromise;
 let snapshot;
 let pointer = null;
 let serviceTimer = null;
@@ -292,11 +296,11 @@ async function perform(work) {
 }
 
 function refresh() {
-  snapshot = assembly.snapshotView();
   if (renderRequested) return;
   renderRequested = true;
   requestAnimationFrame((time) => {
     renderRequested = false;
+    snapshot = assembly.snapshotView();
     let renderSnapshot = snapshot;
     if (pointer?.kind === "seed-aim") {
       const distance = Math.hypot(pointer.last.x - pointer.start.x, pointer.last.y - pointer.start.y);
@@ -370,12 +374,17 @@ function setBusy(value) { buttons.forEach((button) => { button.disabled = value;
 function setStatus(message, kind = "info") { elements.status.textContent = message; elements.status.dataset.kind = kind; }
 function showFeedback(message) { elements.localFeedback.textContent = message; elements.localFeedback.dataset.visible = "true"; clearTimeout(showFeedback.timer); showFeedback.timer = setTimeout(() => { elements.localFeedback.dataset.visible = "false"; }, 1300); }
 function nearestSeedSource(point, current) {
-  return (current.individuals || [])
-    .filter((entity) => entity.relationship === "managed" && entity.state === "living" && entity.seedSourceEligible)
-    .sort((left, right) => {
-      const distance = Math.hypot(left.x - point.x, left.y - point.y) - Math.hypot(right.x - point.x, right.y - point.y);
-      return distance || String(left.id).localeCompare(String(right.id));
-    })[0] ?? null;
+  let best = null;
+  let bestDistance = Number.POSITIVE_INFINITY;
+  for (const entity of current.individuals || []) {
+    if (entity.relationship !== "managed" || entity.state !== "living" || !entity.seedSourceEligible) continue;
+    const distance = Math.hypot(entity.x - point.x, entity.y - point.y);
+    if (distance < bestDistance || (distance === bestDistance && String(entity.id).localeCompare(String(best?.id)) < 0)) {
+      best = entity;
+      bestDistance = distance;
+    }
+  }
+  return best;
 }
 function localPoint(event) { const rect = elements.scene.getBoundingClientRect(); return { x: event.clientX - rect.left, y: event.clientY - rect.top }; }
 function device(event) { return ["mouse", "touch", "pen"].includes(event.pointerType) ? event.pointerType : "mouse"; }
@@ -383,9 +392,9 @@ function standPosition(point) { return { contract: "STAND-POSITION@1", frameId: 
 function standDirection(x, y) { return { contract: "STAND-DIRECTION@1", frameId: "stand-local-unitless", unit: "unit-vector", x, y }; }
 function normalizeAngle(value) { return Math.atan2(Math.sin(value), Math.cos(value)); }
 function formatTimeSpeed(speed) { return speed === 0.5 ? "½×" : `${speed}×`; }
-async function fetchJson(url) { const response = await fetch(url, { cache: "no-store" }); if (!response.ok) throw new Error(`Packaged payload load failed: ${response.status}`); return response.json(); }
+async function fetchJson(url) { const response = await fetch(url, { cache: "no-cache" }); if (!response.ok) throw new Error(`Packaged payload load failed: ${response.status}`); return response.json(); }
 async function fetchHashBoundJson(url, expectedSha256) {
-  const response = await fetch(url, { cache: "no-store" });
+  const response = await fetch(url, { cache: "no-cache" });
   if (!response.ok) throw new Error(`Packaged Oneida view load failed: ${response.status}`);
   const bytes = await response.arrayBuffer();
   const digest = Array.from(new Uint8Array(await crypto.subtle.digest("SHA-256", bytes)), (value) => value.toString(16).padStart(2, "0")).join("");

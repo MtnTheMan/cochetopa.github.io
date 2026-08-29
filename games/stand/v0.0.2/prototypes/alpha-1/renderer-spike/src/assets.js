@@ -1,6 +1,6 @@
 const ASSET_URLS = Object.freeze({
-  foliage: new URL("../assets/sugar-maple-foliage.svg", import.meta.url),
-  samara: new URL("../assets/sugar-maple-samara.svg", import.meta.url),
+  foliage: new URL("../assets/sugar-maple-foliage-192.png", import.meta.url),
+  samara: new URL("../assets/sugar-maple-samara-160.png", import.meta.url),
   ambient: new URL("../assets/unknown-ambient-crown.svg", import.meta.url),
 });
 const AMBIENT_BINDING_URL = new URL("../assets/ambient-art-bindings.json", import.meta.url);

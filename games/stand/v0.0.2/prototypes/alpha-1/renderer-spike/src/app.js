@@ -2,7 +2,7 @@ import { loadRenderAssets } from "./assets.js";
 import { createAmbientVisualLayer } from "./ambient-visual-layer.js";
 import { CAMERA_CYCLE, DENSITY_BANDS, ONEIDA_FIXTURE, cameraAtCycleSample } from "./fixture.js";
 import { createInputController } from "./input.js";
-import { createRenderer } from "./renderer.js";
+import { createRenderer } from "./renderer.js?v=0.0.2-runtime-art";
 import { representationCopy } from "./semantic-zoom.js";
 import { createSyntheticHost } from "./synthetic-host.js";
 
@@ -29,8 +29,12 @@ if (reducedMotion.matches) { idleDrift.checked = false; idleDrift.disabled = tru
 
 const assets = await loadRenderAssets();
 const host = createSyntheticHost({ densityBand });
+const playableFocus = DENSITY_BANDS["close-featured"].camera;
 const ambientVisualLayer = createAmbientVisualLayer({
   extent: ONEIDA_FIXTURE.extent,
+  localFocus: { x: playableFocus.centerX, y: playableFocus.centerY },
+  localCount: 360,
+  localRadius: 3.8,
   artBindings: assets.ambientArt?.manifest?.bindings || [],
   loadedFamilyIds: assets.ambientArt?.loadedFamilyIds || [],
 });

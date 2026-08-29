@@ -1,7 +1,7 @@
 {
   "schemaVersion": "stand-v0.0.2-vertical-packaged-payload@2",
   "hubCheckpoint": "2d7ad695b6a8f1c9c179950faeedb63f43b6096c",
-  "sourceCommit": "343aaadfa88629ba2b3104409e6478bc7e66847a",
+  "sourceCommit": "e7b0a6dce71a516f9f88cf2661e998473e503f25",
   "sourceDisposition": "all copied and native-host build inputs are exact committed bytes at sourceCommit",
   "foundationReceiptId": "FOUNDATION-HOST-RECEIPT@1",
   "runtimeNetworkRequired": false,
@@ -21,8 +21,8 @@
     },
     {
       "path": "app.mjs",
-      "bytes": 23980,
-      "sha256": "43344eee4bca2b6a1953dd63877aea8cd93841e6fff19fcf3ec1fcf35768d858"
+      "bytes": 24199,
+      "sha256": "9922f65360509979ee54b0ec22beb92a058d5b0642e80a84b2468c7ff7c90808"
     },
     {
       "path": "browser-storage.mjs",
@@ -61,8 +61,8 @@
     },
     {
       "path": "prototypes/alpha-1/renderer-spike/assets/ambient-art-bindings.json",
-      "bytes": 32594,
-      "sha256": "e766fbb1bfc770eb332ba4bd9a009162c6200cef2c68c3502933025645a1596b"
+      "bytes": 32063,
+      "sha256": "cf50d1f0660af1e86028e46f4f6b94a69dcbee9a790b31deb6d09f64b8dd942d"
     },
     {
       "path": "prototypes/alpha-1/renderer-spike/assets/ambient/abies-balsamea.foliage-96.png",
@@ -211,13 +211,23 @@
     },
     {
       "path": "prototypes/alpha-1/renderer-spike/assets/asset-bindings.json",
-      "bytes": 2852,
-      "sha256": "c064d0ee24351baac956918c73ce24f57ed6042c23042d4a990f0eff54302f9d"
+      "bytes": 3251,
+      "sha256": "d4830b4aaaca6eb81d7d6a83580a2f3eb0e6fac9478173d951ddfefd3355f25b"
+    },
+    {
+      "path": "prototypes/alpha-1/renderer-spike/assets/sugar-maple-foliage-192.png",
+      "bytes": 40860,
+      "sha256": "313b099f4226e0e9c6f502c2d04e5a1809996074c97eb74da9ba20aac9e0dfab"
     },
     {
       "path": "prototypes/alpha-1/renderer-spike/assets/sugar-maple-foliage.svg",
       "bytes": 2187,
       "sha256": "3c271417b7ea77a6fa73eec4f5232c93ec27b5585117531746f0823359275770"
+    },
+    {
+      "path": "prototypes/alpha-1/renderer-spike/assets/sugar-maple-samara-160.png",
+      "bytes": 13294,
+      "sha256": "cdd49bc14e32b9bd5cfa07b24c29d74a4f2a33029092cd487a59af3689943a86"
     },
     {
       "path": "prototypes/alpha-1/renderer-spike/assets/sugar-maple-samara.svg",
@@ -236,13 +246,13 @@
     },
     {
       "path": "prototypes/alpha-1/renderer-spike/src/app.js",
-      "bytes": 8266,
-      "sha256": "bb83b55feb52c26dcabeed8fd187c1e24f2349a1df6aa085807d960d0bc31368"
+      "bytes": 8449,
+      "sha256": "3c07e65132e06e484293adf061d35e5b1cee3b0f75b90da1fabef5358b936ecb"
     },
     {
       "path": "prototypes/alpha-1/renderer-spike/src/assets.js",
-      "bytes": 2264,
-      "sha256": "c0237fde20f4ba75528d53d24d88f02157a6243d7f85ef186a37346de034fd5d"
+      "bytes": 2267,
+      "sha256": "aa72dfeb45aa8ceb9d2a84598bb0d3595ac717e04bcecac686a0666f2cede4b4"
     },
     {
       "path": "prototypes/alpha-1/renderer-spike/src/benchmark-adapter.js",
@@ -261,8 +271,8 @@
     },
     {
       "path": "prototypes/alpha-1/renderer-spike/src/renderer.js",
-      "bytes": 32505,
-      "sha256": "ad0b37a65c425ef12a8516d7974106ee54affe174d9d53f5956929745ea8e88b"
+      "bytes": 33440,
+      "sha256": "6e5f42e2ca14e73769bdd0ada8314de5faa90b515188726bc85909eb84dcfba4"
     },
     {
       "path": "prototypes/alpha-1/renderer-spike/src/semantic-zoom.js",
@@ -311,8 +321,8 @@
     },
     {
       "path": "prototypes/alpha-1/vertical-slice/identities.json",
-      "bytes": 2115,
-      "sha256": "f46c199080cba9a22d8e2d8288a55c65f865ea54a84c14ed226c6d9a2a4126e7"
+      "bytes": 2350,
+      "sha256": "604fc3f0b4691525340f5311a5b95f761955cf15f7ee1d1d90810d676f8021ed"
     },
     {
       "path": "prototypes/alpha-1/vertical-slice/kernel-gameplay-adapter.mjs",
