@@ -506,11 +506,11 @@ function publicPracticeLab(module, session) {
       <fieldset class="course-question course-public-practice-station">
         <legend>Station ${index + 1} · ${escapeHtml(formatToken(item.primaryModality))}</legend>
         ${publicMediaImage(item, false)}
-        <label>Identity at the narrowest defensible rank<input name="identity:${escapeHtml(item.mediaId)}" value="${escapeHtml(response.identity || "")}" required ${record.submitted ? "disabled" : ""}></label>
-        <label>Confidence<select name="confidence:${escapeHtml(item.mediaId)}" required ${record.submitted ? "disabled" : ""}><option value="">Choose</option>${["low", "medium", "high"].map((value) => `<option value="${value}" ${response.confidence === value ? "selected" : ""}>${formatToken(value)}</option>`).join("")}</select></label>
-        <label>Visible diagnostic evidence<textarea name="evidence:${escapeHtml(item.mediaId)}" required ${record.submitted ? "disabled" : ""}>${escapeHtml(response.evidence || "")}</textarea></label>
-        <label>Nearest plausible alternative<input name="alternative:${escapeHtml(item.mediaId)}" value="${escapeHtml(response.alternative || "")}" required ${record.submitted ? "disabled" : ""}></label>
-        <label>Best additional view if uncertain<input name="requestedView:${escapeHtml(item.mediaId)}" value="${escapeHtml(response.requestedView || "")}" required ${record.submitted ? "disabled" : ""}></label>
+        <label>Common or scientific name<input name="identity:${escapeHtml(item.mediaId)}" value="${escapeHtml(response.identity || "")}" required ${record.submitted ? "disabled" : ""}></label>
+        <label>Confidence <span class="course-optional">(optional)</span><select name="confidence:${escapeHtml(item.mediaId)}" ${record.submitted ? "disabled" : ""}><option value="">Not stated</option>${["low", "medium", "high"].map((value) => `<option value="${value}" ${response.confidence === value ? "selected" : ""}>${formatToken(value)}</option>`).join("")}</select></label>
+        <label>Visible diagnostic evidence <span class="course-optional">(optional)</span><textarea name="evidence:${escapeHtml(item.mediaId)}" ${record.submitted ? "disabled" : ""}>${escapeHtml(response.evidence || "")}</textarea></label>
+        <label>Nearest plausible alternative <span class="course-optional">(optional)</span><input name="alternative:${escapeHtml(item.mediaId)}" value="${escapeHtml(response.alternative || "")}" ${record.submitted ? "disabled" : ""}></label>
+        <label>Best additional view if uncertain <span class="course-optional">(optional)</span><input name="requestedView:${escapeHtml(item.mediaId)}" value="${escapeHtml(response.requestedView || "")}" ${record.submitted ? "disabled" : ""}></label>
         ${record.submitted ? practiceFeedback(item, response) : ""}
       </fieldset>
     `;
@@ -518,7 +518,7 @@ function publicPracticeLab(module, session) {
   return `
     <section class="course-module-section course-practice-lab">
       <div class="course-section-heading"><p class="course-kicker">Unfamiliar retrieval</p><h2>Field-decision practice</h2></div>
-      <p class="course-notice">These specimens are from the practice pool and do not occur in the 558-station formal examination bank. Species credit is awarded only when this exact view supports it.</p>
+      <p class="course-notice">Enter either a common name or scientific name for each specimen. That is enough to submit and grade the identification. Confidence and field-reasoning fields are optional; use them when you want deeper calibration. These specimens do not occur in the 558-station formal examination bank.</p>
       ${record.submitted ? `<p class="course-score-banner"><strong>Identity decisions: ${record.score}/${items.length} accepted.</strong> Diagnostic reasoning remains part of the field standard even when the name is correct.</p>` : ""}
       <form class="course-form js-public-practice" data-route="${escapeHtml(route)}">${stations}<div class="course-actions">${record.submitted ? '<button class="course-link-button js-reset-practice" type="button">Retry with cleared responses</button>' : '<button class="course-button" type="submit">Submit field decisions</button>'}</div></form>
     </section>
@@ -605,7 +605,7 @@ async function renderFormalAssessment(assessmentId) {
     if (!pendingVisual && !pendingNonvisual) {
       const reviewMessage = form.status === "completed"
         ? "This assessment is graded and locked in the course gradebook."
-        : "Exact-name scoring is complete; field reasoning and extended silvics answers are awaiting criterion-level review.";
+        : "Exact-name scoring is complete; any extended silvics answers are awaiting criterion-level review.";
       view.innerHTML = `${pageHeader("Secure assessment", assessmentId, "Every item has been submitted and locked.")}<p class="course-notice">${reviewMessage} Answer keys remain server-side until the form is finalized, and no submitted item can be replaced.</p><div class="course-actions"><button class="course-link-button js-route" type="button" data-route="${escapeHtml(record.module.moduleId)}">Return to week plan</button></div>`;
       return;
     }
@@ -617,14 +617,13 @@ async function renderFormalAssessment(assessmentId) {
           <fieldset class="course-question course-public-practice-station">
             <legend>Locked unfamiliar visual station ${pendingVisual.stationNumber}</legend>
             <figure class="course-image-card course-formal-image"><img src="${escapeHtml(imageUrl)}" alt="Unlabeled ${escapeHtml(formatToken(pendingVisual.modality))} identification specimen" referrerpolicy="no-referrer"><figcaption>${escapeHtml(pendingVisual.attribution || "Rights-reviewed course specimen")} · ${escapeHtml(pendingVisual.licenseCode || "licensed source")}</figcaption></figure>
-            <label>Identity at the narrowest defensible rank<input name="identity" required autocomplete="off"></label>
-            <label>Scientific name, when species is supported<input name="scientificName" autocomplete="off"></label>
-            <label>Confidence<select name="confidence" required><option value="">Choose</option><option value="low">Low</option><option value="medium">Medium</option><option value="high">High</option></select></label>
-            <label>Visible diagnostic evidence<textarea name="visibleEvidence" required></textarea></label>
-            <label>Nearest plausible alternative<input name="nearestAlternative" required></label>
-            <label>Best additional view if uncertain<input name="requestedView" required></label>
+            <label>Common or scientific name<input name="identity" required autocomplete="off"></label>
+            <label>Confidence <span class="course-optional">(optional)</span><select name="confidence"><option value="">Not stated</option><option value="low">Low</option><option value="medium">Medium</option><option value="high">High</option></select></label>
+            <label>Visible diagnostic evidence <span class="course-optional">(optional)</span><textarea name="visibleEvidence"></textarea></label>
+            <label>Nearest plausible alternative <span class="course-optional">(optional)</span><input name="nearestAlternative"></label>
+            <label>Best additional view if uncertain <span class="course-optional">(optional)</span><input name="requestedView"></label>
           </fieldset>
-          <p class="course-notice">Submission locks this station. Feedback and answer keys are withheld until the complete form is finalized.</p>
+          <p class="course-notice">A common or scientific name is enough to submit and grade this station. The optional fields support reflection but do not change the identification score. Submission locks the station; feedback and answer keys remain withheld until the complete form is finalized.</p>
           <div class="course-actions"><button class="course-button" type="submit">Submit and lock item</button></div>
         </form>`;
     } else {
@@ -639,7 +638,7 @@ async function renderFormalAssessment(assessmentId) {
             <legend>Locked cumulative retrieval item ${pendingNonvisual.itemNumber}</legend>
             <p class="course-formal-prompt">${escapeHtml(pendingNonvisual.prompt)}</p>
             <label>Your answer${answerControl}</label>
-            <label>Confidence<select name="confidence" required><option value="">Choose</option><option value="low">Low</option><option value="medium">Medium</option><option value="high">High</option></select></label>
+            <label>Confidence <span class="course-optional">(optional)</span><select name="confidence"><option value="">Not stated</option><option value="low">Low</option><option value="medium">Medium</option><option value="high">High</option></select></label>
           </fieldset>
           <p class="course-notice">Scientific names are exact-match scored after normalization. Extended silvics and reasoning responses use the private criterion rubric and remain pending until reviewed.</p>
           <div class="course-actions"><button class="course-button" type="submit">Submit and lock item</button></div>
@@ -760,22 +759,37 @@ function isInsufficientAnswer(value) {
 }
 
 function identityEvaluation(item, response) {
+  const commonProvided = Boolean(String(response.commonName || "").trim());
+  const scientificProvided = Boolean(String(response.scientificName || "").trim());
   const commonIE = isInsufficientAnswer(response.commonName);
   const scientificIE = isInsufficientAnswer(response.scientificName);
   const acceptsIE = item.commonAnswers.some(isInsufficientAnswer) && item.scientificAnswers.some(isInsufficientAnswer);
-  if (commonIE || scientificIE) {
-    const pairCorrect = commonIE && scientificIE && acceptsIE;
+  if (!commonProvided && !scientificProvided) {
     return {
-      commonCorrect: pairCorrect,
-      scientificCorrect: pairCorrect,
-      pairCorrect,
-      coherent: commonIE && scientificIE,
+      commonCorrect: false,
+      scientificCorrect: false,
+      identityCorrect: false,
+      coherent: false,
     };
   }
-  const commonCorrect = matchesAnswer(response.commonName, item.commonAnswers);
-  const scientificCorrect = matchesAnswer(response.scientificName, item.scientificAnswers);
-  const pairCorrect = commonCorrect && scientificCorrect;
-  return { commonCorrect: pairCorrect, scientificCorrect: pairCorrect, pairCorrect, coherent: true };
+  if (commonIE || scientificIE) {
+    const coherent = (!commonProvided || commonIE) && (!scientificProvided || scientificIE);
+    const identityCorrect = coherent && acceptsIE;
+    return {
+      commonCorrect: commonProvided && commonIE && acceptsIE,
+      scientificCorrect: scientificProvided && scientificIE && acceptsIE,
+      identityCorrect,
+      coherent,
+    };
+  }
+  const commonAccepted = !commonProvided || matchesAnswer(response.commonName, item.commonAnswers);
+  const scientificAccepted = !scientificProvided || matchesAnswer(response.scientificName, item.scientificAnswers);
+  return {
+    commonCorrect: commonProvided && commonAccepted,
+    scientificCorrect: scientificProvided && scientificAccepted,
+    identityCorrect: commonAccepted && scientificAccepted,
+    coherent: true,
+  };
 }
 
 function calibrationMessage(correct, confidence, permitsInsufficientEvidence = false, autoGradable = true) {
@@ -821,7 +835,7 @@ function shortFieldMarkup(assessmentKey, item, index) {
       <p class="course-question__prompt">${escapeHtml(item.prompt)}</p>
       <div class="course-form-grid">
         <div class="course-field ${item.multiline ? "course-field--wide" : ""}"><label for="${fieldId}">${escapeHtml(item.answerLabel || "Answer")}</label>${answerField}</div>
-        <div class="course-field"><label for="${assessmentKey}-${item.id}-confidence">Confidence</label><select id="${assessmentKey}-${item.id}-confidence" name="confidence" ${disabled} required><option value="">Choose…</option>${confidenceSelectOptions(response.confidence, false)}</select></div>
+        <div class="course-field"><label for="${assessmentKey}-${item.id}-confidence">Confidence <span class="course-optional">(optional)</span></label><select id="${assessmentKey}-${item.id}-confidence" name="confidence" ${disabled}><option value="">Not stated</option>${confidenceSelectOptions(response.confidence, false)}</select></div>
       </div>
       ${result}
     </article>
@@ -834,21 +848,19 @@ function fieldMarkup(assessmentKey, item, index, includeImage) {
   const response = responseFor(assessmentKey, item.id);
   const disabled = assessment.submitted ? "disabled" : "";
   const evaluation = identityEvaluation(item, response);
-  const commonCorrect = assessment.submitted && evaluation.commonCorrect;
-  const scientificCorrect = assessment.submitted && evaluation.scientificCorrect;
 
   const image = includeImage
     ? `<figure class="course-question__figure"><button class="course-zoom-button js-zoom" type="button" aria-label="Enlarge unfamiliar practice image ${index + 1}" data-src="${escapeHtml(item.image.src)}" data-alt="${escapeHtml(item.image.alt)}" data-caption="Unfamiliar practice image ${index + 1}" data-attribution="${escapeHtml(item.image.attribution)}" data-source-url="${escapeHtml(item.image.sourceUrl)}"><img class="course-question__image" src="${escapeHtml(item.image.src)}" alt="${escapeHtml(item.image.alt)}" loading="lazy" /></button><figcaption>${attributionMarkup(item.image, "Photo")}</figcaption></figure>`
     : "";
 
   const result = assessment.submitted
-    ? `<div class="course-result ${commonCorrect && scientificCorrect ? "course-result--correct" : "course-result--review"}">
-        <h3>${commonCorrect && scientificCorrect ? "Identity correct" : "Review the identity"}</h3>
+    ? `<div class="course-result ${evaluation.identityCorrect ? "course-result--correct" : "course-result--review"}">
+        <h3>${evaluation.identityCorrect ? "Identity correct" : "Review the identity"}</h3>
         <p><strong>Course answer:</strong> ${escapeHtml(item.commonAnswers[0])} — <i>${escapeHtml(item.scientificAnswers[0])}</i></p>
         <p><strong>Diagnostic evidence:</strong> ${escapeHtml(item.referenceEvidence)}</p>
         <p><strong>Nearest alternative / requested view:</strong> ${escapeHtml(item.nearestAlternative)}</p>
-        ${!evaluation.coherent ? "<p><strong>Answer-pair check:</strong> ‘Insufficient evidence’ must be entered consistently in both identity fields.</p>" : ""}
-        <p><strong>Confidence check:</strong> ${escapeHtml(calibrationMessage(evaluation.pairCorrect, response.confidence, item.commonAnswers.some(isInsufficientAnswer)))}</p>
+        ${!evaluation.coherent ? "<p><strong>Answer check:</strong> If both name fields are used, they must describe the same identity decision.</p>" : ""}
+        <p><strong>Confidence check:</strong> ${escapeHtml(calibrationMessage(evaluation.identityCorrect, response.confidence, item.commonAnswers.some(isInsufficientAnswer)))}</p>
       </div>`
     : "";
 
@@ -857,12 +869,13 @@ function fieldMarkup(assessmentKey, item, index, includeImage) {
       <h2 class="course-question__number">Item ${index + 1}</h2>
       ${image}
       ${item.prompt ? `<p class="course-question__prompt">${escapeHtml(item.prompt)}</p>` : ""}
-      <div class="course-form-grid">
-        <div class="course-field"><label for="${assessmentKey}-${item.id}-common">Preferred common name</label><input id="${assessmentKey}-${item.id}-common" name="commonName" value="${escapeHtml(response.commonName)}" ${disabled} required autocomplete="off" /></div>
-        <div class="course-field"><label for="${assessmentKey}-${item.id}-scientific">Scientific name</label><input id="${assessmentKey}-${item.id}-scientific" name="scientificName" value="${escapeHtml(response.scientificName)}" ${disabled} required autocomplete="off" autocapitalize="off" spellcheck="false" /></div>
-        <div class="course-field"><label for="${assessmentKey}-${item.id}-confidence">Confidence / evidence limit</label><select id="${assessmentKey}-${item.id}-confidence" name="confidence" ${disabled} required><option value="">Choose…</option>${confidenceSelectOptions(response.confidence, true)}</select></div>
-        <div class="course-field course-field--wide"><label for="${assessmentKey}-${item.id}-evidence">Strongest visible diagnostic evidence</label><textarea id="${assessmentKey}-${item.id}-evidence" name="evidence" ${disabled} required>${escapeHtml(response.evidence)}</textarea></div>
-        <div class="course-field course-field--wide"><label for="${assessmentKey}-${item.id}-alternative">Nearest plausible alternative and separator, or requested view</label><textarea id="${assessmentKey}-${item.id}-alternative" name="alternative" ${disabled} required>${escapeHtml(response.alternative)}</textarea></div>
+      <div class="course-form-grid" data-identity-pair>
+        <p class="course-field-note course-field--wide">Enter either the preferred common name or the scientific name. One correct name is enough for identity credit.</p>
+        <div class="course-field"><label for="${assessmentKey}-${item.id}-common">Preferred common name</label><input id="${assessmentKey}-${item.id}-common" name="commonName" value="${escapeHtml(response.commonName)}" ${disabled} autocomplete="off" /></div>
+        <div class="course-field"><label for="${assessmentKey}-${item.id}-scientific">Scientific name</label><input id="${assessmentKey}-${item.id}-scientific" name="scientificName" value="${escapeHtml(response.scientificName)}" ${disabled} autocomplete="off" autocapitalize="off" spellcheck="false" /></div>
+        <div class="course-field"><label for="${assessmentKey}-${item.id}-confidence">Confidence / evidence limit <span class="course-optional">(optional)</span></label><select id="${assessmentKey}-${item.id}-confidence" name="confidence" ${disabled}><option value="">Not stated</option>${confidenceSelectOptions(response.confidence, true)}</select></div>
+        <div class="course-field course-field--wide"><label for="${assessmentKey}-${item.id}-evidence">Strongest visible diagnostic evidence <span class="course-optional">(optional)</span></label><textarea id="${assessmentKey}-${item.id}-evidence" name="evidence" ${disabled}>${escapeHtml(response.evidence)}</textarea></div>
+        <div class="course-field course-field--wide"><label for="${assessmentKey}-${item.id}-alternative">Nearest plausible alternative and separator, or requested view <span class="course-optional">(optional)</span></label><textarea id="${assessmentKey}-${item.id}-alternative" name="alternative" ${disabled}>${escapeHtml(response.alternative)}</textarea></div>
       </div>
       ${result}
     </article>
@@ -880,10 +893,9 @@ function assessmentScore(assessmentKey, items) {
         if (matchesAnswer(response.answer, item.answers || [])) score += 1;
       }
     } else {
-      maximum += 2;
+      maximum += 1;
       const evaluation = identityEvaluation(item, response);
-      if (evaluation.commonCorrect) score += 1;
-      if (evaluation.scientificCorrect) score += 1;
+      if (evaluation.identityCorrect) score += 1;
     }
   });
   return { score, maximum };
@@ -892,11 +904,11 @@ function assessmentScore(assessmentKey, items) {
 function assessmentPage(assessmentKey, kicker, title, instructions, items, includeImages, activityId, nextRoute) {
   const assessment = state.assessments[assessmentKey];
   const scoreMarkup = assessment.submitted
-    ? `<p class="course-score">${assessment.maximumScore > 0 ? `Auto-checked fields: ${assessment.identityScore} of ${assessment.maximumScore} correct. ` : ""}Evidence, open-response reasoning, alternatives, and confidence require comparison with the revealed rubric and are not auto-graded in this preview.</p>`
+    ? `<p class="course-score">${assessment.maximumScore > 0 ? `Identifications: ${assessment.identityScore} of ${assessment.maximumScore} accepted. ` : ""}Optional evidence, alternatives, and confidence remain available for comparison with the revealed field rubric.</p>`
     : "";
   return `
     ${pageHeader(kicker, title, instructions)}
-    <p class="course-notice">Answers remain hidden until the full batch is submitted; photo credit, license, and source access remain visible throughout. <strong>C1</strong> means tentative with a confuser unresolved; <strong>C2</strong> means probable with converging traits but a meaningful limitation; <strong>C3</strong> means a defensible field call supported by diagnostic evidence; <strong>IE</strong> means the requested identity rank is not supported by the evidence. Confidence is calibration only and does not change scoring. This formative preview cannot promote mastery or enter the course grade.</p>
+    <p class="course-notice">For identification items, enter either the preferred common name or the scientific name; one is enough to submit and receive identity credit. Confidence, visible evidence, and confuser reasoning are optional. Answers remain hidden until the full batch is submitted. This formative preview cannot promote mastery or enter the course grade.</p>
     <form class="course-form js-assessment" data-assessment="${assessmentKey}" data-activity="${activityId}">
       ${items.map((item, index) => fieldMarkup(assessmentKey, item, index, includeImages)).join("")}
       ${scoreMarkup}
@@ -1125,6 +1137,25 @@ async function renderRoute() {
   window.scrollTo({ top: 0, behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
 }
 
+function updateIdentityPairValidity(pair) {
+  const commonName = pair.querySelector('[name="commonName"]');
+  const scientificName = pair.querySelector('[name="scientificName"]');
+  if (!commonName || !scientificName || commonName.disabled || scientificName.disabled) return true;
+  const hasIdentity = Boolean(commonName.value.trim() || scientificName.value.trim());
+  const message = hasIdentity ? "" : "Enter either a preferred common name or a scientific name.";
+  commonName.setCustomValidity(message);
+  scientificName.setCustomValidity(message);
+  return hasIdentity;
+}
+
+function validateAssessmentIdentities(form) {
+  let valid = true;
+  form.querySelectorAll("[data-identity-pair]").forEach((pair) => {
+    if (!updateIdentityPairValidity(pair)) valid = false;
+  });
+  return valid;
+}
+
 function saveResponse(target) {
   const form = target.closest(".js-assessment");
   const question = target.closest(".course-question");
@@ -1133,10 +1164,13 @@ function saveResponse(target) {
   if (assessment.submitted) return;
   const response = responseFor(form.dataset.assessment, question.dataset.itemId);
   response[target.name] = target.value;
+  const identityPair = target.closest("[data-identity-pair]");
+  if (identityPair) updateIdentityPairValidity(identityPair);
   saveState();
 }
 
 function submitAssessment(form) {
+  validateAssessmentIdentities(form);
   if (!form.reportValidity()) return;
   const assessmentKey = form.dataset.assessment;
   const assessment = state.assessments[assessmentKey];
