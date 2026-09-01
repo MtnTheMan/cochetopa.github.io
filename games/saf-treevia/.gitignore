@@ -1,0 +1,5 @@
+# Never stage local secret files or decrypted exports from payload work.
+.env
+.env.*
+*.decrypted.json
+questions.plain.json

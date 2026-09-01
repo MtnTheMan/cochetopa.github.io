@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+    <meta name="robots" content="noindex, nofollow, noarchive" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'"
+    />
+    <meta
+      name="description"
+      content="Password-protected SAF Quiz Bowl and Tree'via practice for Michigan State forestry students."
+    />
+    <title>SAF Tree’via — Quiz Bowl Practice</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to game</a>
+
+    <div class="page-shell">
+      <header class="site-header" aria-label="Game header">
+        <a class="wordmark" href="/" aria-label="Cochetopa home">
+          <span class="wordmark-mark" aria-hidden="true">C</span>
+          <span>
+            <strong>Cochetopa</strong>
+            <small>Learning Lab</small>
+          </span>
+        </a>
+        <div class="header-title">
+          <span>SAF Tree’via</span>
+          <small>Quiz Bowl preparation</small>
+        </div>
+        <button id="lock-button" class="button button-quiet button-small" type="button" hidden>
+          Lock game
+        </button>
+      </header>
+
+      <main id="main-content" tabindex="-1">
+        <section id="gate-view" class="gate-layout" aria-labelledby="gate-title">
+          <div class="gate-card">
+            <p class="eyebrow">SAF Quiz Bowl study tool</p>
+            <h1 id="gate-title">Know the forest.<br />Own the buzzer.</h1>
+            <p class="lede">
+              Practice verified, supplemental, and locally adapted forestry questions—one shuffled round at a time.
+            </p>
+
+            <form id="unlock-form" class="unlock-form">
+              <label for="password-input">Team password</label>
+              <div class="password-row">
+                <input
+                  id="password-input"
+                  type="password"
+                  autocomplete="current-password"
+                  spellcheck="false"
+                  required
+                  aria-describedby="gate-note gate-status"
+                />
+                <button id="unlock-button" class="button button-primary" type="submit">Enter</button>
+              </div>
+              <p id="gate-status" class="form-status" role="alert" aria-live="polite"></p>
+            </form>
+
+            <p id="gate-note" class="gate-note">
+              No account or sign-in. Your unlocked session lasts only while this tab is open.
+            </p>
+          </div>
+
+          <aside class="gate-aside" aria-label="Game features">
+            <p class="aside-kicker">Built for field-minded study</p>
+            <ul class="feature-list">
+              <li><span>01</span> Short answer with typo-tolerant feedback</li>
+              <li><span>02</span> Shuffled multiple-choice rounds</li>
+              <li><span>03</span> Washington + Tacoma local context</li>
+              <li><span>04</span> Source links for answer review</li>
+            </ul>
+            <p class="aside-footnote">Independent study compilation. Not produced or endorsed by SAF.</p>
+          </aside>
+        </section>
+
+        <section id="game-view" class="game-view" hidden>
+          <section id="setup-panel" class="view-panel" aria-labelledby="setup-title">
+            <div class="setup-heading">
+              <div>
+                <p class="eyebrow">Round setup</p>
+                <h1 id="setup-title">Build your practice round</h1>
+                <p>Pick a question bank, narrow the subject if you want, then start. Every round is reshuffled.</p>
+              </div>
+              <div class="bank-pill" aria-live="polite">
+                <strong id="bank-total">—</strong>
+                <span>playable questions</span>
+              </div>
+            </div>
+
+            <div class="setup-grid">
+              <form id="round-form" class="setup-card">
+                <div class="control-block">
+                  <label for="set-select">Question set</label>
+                  <select id="set-select" name="question-set" aria-describedby="set-help">
+                    <option value="local">Washington + Tacoma 2026</option>
+                    <option value="A">A tier — confirmed / high quality</option>
+                    <option value="AB">A + B tiers</option>
+                    <option value="all">All tiers</option>
+                    <option value="custom">Choose tiers…</option>
+                  </select>
+                  <p id="set-help" class="control-help">Locally adapted, source-checked questions for this year’s host region.</p>
+                </div>
+
+                <fieldset id="custom-tier-fields" class="control-block tier-choices" hidden>
+                  <legend>Include tiers</legend>
+                  <label><input type="checkbox" name="tier" value="A" checked /> <span>A</span> Confirmed</label>
+                  <label><input type="checkbox" name="tier" value="B" /> <span>B</span> Supplemental</label>
+                  <label><input type="checkbox" name="tier" value="C" /> <span>C</span> Generated / older</label>
+                  <label><input type="checkbox" name="tier" value="Other" /> <span>O</span> Other archive</label>
+                </fieldset>
+
+                <div class="control-row">
+                  <div class="control-block">
+                    <label for="category-select">Subject area</label>
+                    <select id="category-select" name="category">
+                      <option value="all">All subject areas</option>
+                    </select>
+                  </div>
+
+                  <div class="control-block">
+                    <label for="round-size">Round length</label>
+                    <select id="round-size" name="round-size">
+                      <option value="10">10 questions</option>
+                      <option value="20" selected>20 questions</option>
+                      <option value="30">30 questions</option>
+                      <option value="50">50 questions</option>
+                      <option value="all">All available</option>
+                    </select>
+                  </div>
+                </div>
+
+                <fieldset class="control-block mode-control">
+                  <legend>Answer format</legend>
+                  <div class="segmented-control">
+                    <label><input type="radio" name="mode" value="mixed" checked /><span>Mixed</span></label>
+                    <label><input type="radio" name="mode" value="multiple_choice" /><span>Multiple choice</span></label>
+                    <label><input type="radio" name="mode" value="short_answer" /><span>Short answer</span></label>
+                  </div>
+                </fieldset>
+
+                <div id="quality-warning" class="quality-warning" role="note" hidden></div>
+
+                <div class="start-row">
+                  <div>
+                    <output id="available-count" aria-live="polite">Checking the bank…</output>
+                    <small id="available-detail"></small>
+                  </div>
+                  <button id="start-button" class="button button-primary button-large" type="submit">Start round</button>
+                </div>
+              </form>
+
+              <aside class="tier-guide" aria-labelledby="tier-guide-title">
+                <p class="eyebrow">Know your source</p>
+                <h2 id="tier-guide-title">What the tiers mean</h2>
+                <dl>
+                  <div><dt><span class="tier-dot tier-a">A</span> Confirmed</dt><dd>Published or high-confidence material.</dd></div>
+                  <div><dt><span class="tier-dot tier-b">B</span> Supplemental</dt><dd>Useful questions from other reputable sources.</dd></div>
+                  <div><dt><span class="tier-dot tier-c">C</span> Practice</dt><dd>Generated, older, or less-germane Tree’via items.</dd></div>
+                  <div><dt><span class="tier-dot tier-o">O</span> Other</dt><dd>Archive material that benefits from extra review.</dd></div>
+                </dl>
+                <div class="scoring-note">
+                  <strong>Scoring</strong>
+                  <p>Correct answers earn 1 point. “Close” short answers earn ½ point and show the expected answer for review.</p>
+                </div>
+              </aside>
+            </div>
+          </section>
+
+          <section id="question-panel" class="view-panel question-panel" aria-labelledby="question-prompt" hidden>
+            <div class="round-topline">
+              <div class="progress-copy">
+                <span id="progress-label">Question 1 of 20</span>
+                <span id="round-label">Mixed · A tier</span>
+              </div>
+              <div class="round-actions">
+                <button id="end-round-button" class="button button-quiet button-small" type="button">End round</button>
+              </div>
+            </div>
+            <div class="progress-track" aria-hidden="true"><span id="progress-bar"></span></div>
+
+            <article class="question-card">
+              <div class="question-meta">
+                <span id="tier-badge" class="question-badge">A tier</span>
+                <span id="category-badge" class="question-badge question-badge-neutral">Silviculture</span>
+                <span id="format-badge" class="question-format">Short answer</span>
+              </div>
+
+              <h1 id="question-prompt">Question prompt</h1>
+
+              <fieldset id="multiple-choice-area" class="answer-area" hidden>
+                <legend class="visually-hidden">Choose one answer</legend>
+                <div id="choice-list" class="choice-list"></div>
+              </fieldset>
+
+              <form id="short-answer-form" class="answer-area short-answer-area" hidden>
+                <label for="short-answer-input">Your answer</label>
+                <div class="short-answer-row">
+                  <input
+                    id="short-answer-input"
+                    type="text"
+                    name="answer"
+                    autocomplete="off"
+                    autocapitalize="sentences"
+                    enterkeyhint="done"
+                    spellcheck="true"
+                    aria-describedby="answer-input-status short-answer-help"
+                  />
+                  <button id="check-answer-button" class="button button-primary" type="submit">Check answer</button>
+                </div>
+                <p id="answer-input-status" class="form-status" role="alert"></p>
+                <p id="short-answer-help" class="control-help">A small typo is okay. For lists, include as many key ideas as you can.</p>
+              </form>
+
+              <section id="feedback-panel" class="feedback-panel" aria-labelledby="feedback-title" aria-live="polite" hidden>
+                <div id="feedback-icon" class="feedback-icon" aria-hidden="true"></div>
+                <div class="feedback-copy">
+                  <p id="feedback-title" class="feedback-title">Correct</p>
+                  <p id="feedback-message"></p>
+                  <dl class="answer-review">
+                    <div><dt>Your answer</dt><dd id="submitted-answer"></dd></div>
+                    <div><dt>Expected answer</dt><dd id="expected-answer"></dd></div>
+                  </dl>
+                  <div class="source-row">
+                    <span id="source-label"></span>
+                    <a id="source-link" href="#" target="_blank" rel="noopener noreferrer">Review source <span class="visually-hidden">(opens in a new tab)</span> <span aria-hidden="true">↗</span></a>
+                  </div>
+                </div>
+                <button id="next-button" class="button button-dark" type="button">Next question</button>
+              </section>
+            </article>
+
+            <div class="score-strip" aria-label="Current round score">
+              <span><strong id="score-correct">0</strong> correct</span>
+              <span><strong id="score-close">0</strong> close</span>
+              <span><strong id="score-missed">0</strong> missed</span>
+              <span class="score-total"><strong id="score-points">0</strong> points</span>
+            </div>
+          </section>
+
+          <section id="results-panel" class="view-panel results-panel" aria-labelledby="results-title" hidden>
+            <p class="eyebrow">Round complete</p>
+            <h1 id="results-title">Nice work in the woods.</h1>
+            <p id="results-summary" class="results-summary"></p>
+
+            <div class="result-score" aria-label="Final score">
+              <div class="score-ring">
+                <strong id="result-percent">0%</strong>
+                <span>knowledge score</span>
+              </div>
+              <dl>
+                <div><dt id="result-correct">0</dt><dd>Correct</dd></div>
+                <div><dt id="result-close">0</dt><dd>Close</dd></div>
+                <div><dt id="result-missed">0</dt><dd>Missed</dd></div>
+              </dl>
+            </div>
+
+            <div id="review-list-wrap" class="review-wrap" hidden>
+              <h2>Review these</h2>
+              <ol id="review-list" class="review-list"></ol>
+            </div>
+
+            <div class="results-actions">
+              <button id="retry-button" class="button button-primary" type="button">Retry missed + close</button>
+              <button id="new-round-button" class="button button-secondary" type="button">Build a new round</button>
+            </div>
+          </section>
+        </section>
+
+        <noscript>
+          <p class="noscript-message">This study game needs JavaScript to decrypt and run the question bank.</p>
+        </noscript>
+      </main>
+
+      <footer class="site-footer">
+        <span>SAF Tree’via study archive</span>
+        <span>Questions retain their source tier and citation</span>
+      </footer>
+    </div>
+
+    <script type="module" src="./app.mjs"></script>
+  </body>
+</html>

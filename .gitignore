@@ -8,3 +8,11 @@ node_modules/
 package.json
 package-lock.json
 supabase/.temp/
+
+# SAF Tree’via local build inputs (never publish plaintext questions or secrets)
+games/saf-treevia/**/.env
+games/saf-treevia/**/.env.*
+!games/saf-treevia/**/.env.example
+games/saf-treevia/**/questions.plain.json
+games/saf-treevia/**/questions.raw.json
+games/saf-treevia/**/questions.unencrypted.json

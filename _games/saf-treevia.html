@@ -1,0 +1,84 @@
+---
+layout: null
+title: "SAF Tree’via / Quiz Bowl Prep"
+description: "A private study game for Society of American Foresters Quiz Bowl preparation."
+permalink: /games/saf-treevia/
+---
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="description" content="A private study game for Society of American Foresters Quiz Bowl preparation." />
+  <meta name="robots" content="noindex, nofollow, noarchive" />
+  <meta name="theme-color" content="#18453b" />
+  <title>SAF Tree’via / Quiz Bowl Prep</title>
+  <style>
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+      background: #f4f1e8;
+    }
+
+    main,
+    iframe {
+      width: 100%;
+      height: 100%;
+    }
+
+    iframe {
+      position: fixed;
+      inset: 0;
+      display: block;
+      height: 100vh;
+      height: 100dvh;
+      border: 0;
+    }
+
+    .direct-link {
+      position: fixed;
+      z-index: 2;
+      right: max(0.75rem, env(safe-area-inset-right));
+      bottom: max(0.75rem, env(safe-area-inset-bottom));
+      padding: 0.45rem 0.7rem;
+      border: 1px solid rgba(255, 255, 255, 0.55);
+      border-radius: 999px;
+      color: #fff;
+      background: rgba(24, 69, 59, 0.88);
+      font: 600 0.78rem/1.2 system-ui, sans-serif;
+      text-decoration: none;
+      box-shadow: 0 0.2rem 0.8rem rgba(0, 0, 0, 0.18);
+    }
+
+    .direct-link:focus-visible {
+      outline: 3px solid #fff;
+      outline-offset: 2px;
+      box-shadow: 0 0 0 6px #0b2b26, 0 0.2rem 0.8rem rgba(0, 0, 0, 0.18);
+    }
+
+    @media (max-width: 720px) {
+      .direct-link {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main aria-label="SAF Tree’via / Quiz Bowl preparation game">
+    <iframe
+      src="{{ '/games/saf-treevia/v1/' | relative_url }}"
+      title="SAF Tree’via / Quiz Bowl preparation game"
+      loading="eager"
+    >
+      <a href="{{ '/games/saf-treevia/v1/' | relative_url }}">Open the SAF Tree’via game</a>
+    </iframe>
+    <a class="direct-link" href="{{ '/games/saf-treevia/v1/' | relative_url }}">
+      Open game directly
+    </a>
+  </main>
+</body>
+</html>
