@@ -1,0 +1,535 @@
+{
+  "$schema": "cochetopa-public-teaching-package/1.0",
+  "schemaVersion": "1.0.0",
+  "courseId": "northern-hardwoods-mixedwoods-dendrology-silvics-intensive",
+  "courseVersion": "2026.1-draft",
+  "moduleId": "week-10",
+  "sequence": 10,
+  "title": "Comprehensive Integration and Certification",
+  "deliveryStatus": "teaching_text_complete_visual_media_pending_admission",
+  "objectives": [
+    "Demonstrate rapid, calibrated identification of all eligible taxa from unfamiliar single-organ and mixed evidence.",
+    "Complete cumulative scientific-name retrieval in both directions.",
+    "Pass separate foliage, bark, reproductive, dormant, whole-tree/regional, and rapid mixed-evidence batteries.",
+    "Synthesize field silvics across site, regeneration, disturbance, succession, condition, and management.",
+    "Produce a final numerical grade and a separate species-by-modality mastery and certification report."
+  ],
+  "cumulativeReview": {
+    "policy_id": "CR-01",
+    "eligible_taxon_rule": "introduction_week_lte_module_sequence",
+    "through_introduction_week": 10,
+    "eligible_taxon_count": 80,
+    "selection_priorities": [
+      "certification_modality_deficits",
+      "unresolved_error_ledger",
+      "tier_a_b_coverage",
+      "confuser_sets",
+      "confidence_calibration",
+      "low_frequency_certified_maintenance"
+    ]
+  },
+  "confuserSets": [
+    {
+      "confusionSetId": "CS01",
+      "name": "Sugar / black / Norway maple",
+      "memberTaxa": [
+        "ACER_SACCHARUM",
+        "ACER_NIGRUM",
+        "ACER_PLATANOIDES"
+      ],
+      "keySeparators": "Petiole latex; leaf underside hair and stipules; bud size/shape; samara angle",
+      "resolvingViews": "Fresh-broken petiole; lower surface; terminal bud; ripe samara"
+    },
+    {
+      "confusionSetId": "CS02",
+      "name": "Red / silver maple",
+      "memberTaxa": [
+        "ACER_RUBRUM",
+        "ACER_SACCHARINUM"
+      ],
+      "keySeparators": "Sinus depth; lower-surface whiteness; spring samara size; twig odor; bark strips",
+      "resolvingViews": "Complete leaf underside; samara with scale; crushed twig; mature bark"
+    },
+    {
+      "confusionSetId": "CS03",
+      "name": "Striped / mountain maple",
+      "memberTaxa": [
+        "ACER_PENSYLVANICUM",
+        "ACER_SPICATUM"
+      ],
+      "keySeparators": "Green-white striped bark versus unstriped; leaf size/base; fruit cluster posture; growth form",
+      "resolvingViews": "Young stem; intact leaf; fruit cluster; whole plant"
+    },
+    {
+      "confusionSetId": "CS04",
+      "name": "White / green / black ash",
+      "memberTaxa": [
+        "FRAXINUS_AMERICANA",
+        "FRAXINUS_PENNSYLVANICA",
+        "FRAXINUS_NIGRA"
+      ],
+      "keySeparators": "Leaf-scar shape and bud position; leaflet stalks; samara wing extent; black-ash corky bark",
+      "resolvingViews": "Twig node and leaf scar; whole rachis; samara; bark; hydrologic setting"
+    },
+    {
+      "confusionSetId": "CS05",
+      "name": "Paper / heart-leaved / gray birch",
+      "memberTaxa": [
+        "BETULA_PAPYRIFERA",
+        "BETULA_CORDIFOLIA",
+        "BETULA_POPULIFOLIA"
+      ],
+      "keySeparators": "Leaf base and vein count; twig resin glands; peeling versus tight bark; black branch marks; elevation",
+      "resolvingViews": "Several mature leaves; resin-warty twig; bark sheet; whole growth form; location"
+    },
+    {
+      "confusionSetId": "CS06",
+      "name": "Yellow / sweet birch",
+      "memberTaxa": [
+        "BETULA_ALLEGHANIENSIS",
+        "BETULA_LENTA"
+      ],
+      "keySeparators": "Both wintergreen; yellow birch golden curling bark and spur shoots versus sweet birch dark blocky bark",
+      "resolvingViews": "Scratched twig; young and mature bark; fruiting strobile; lower leaf surface"
+    },
+    {
+      "confusionSetId": "CS07",
+      "name": "White / black / red / Norway spruce",
+      "memberTaxa": [
+        "PICEA_GLAUCA",
+        "PICEA_MARIANA",
+        "PICEA_RUBENS",
+        "PICEA_ABIES"
+      ],
+      "keySeparators": "Cone size and scale margin; twig hairs; bud resin; foliage color/odor; pendulous branchlets",
+      "resolvingViews": "Full cone; twig macro; bud; whole crown; regional site"
+    },
+    {
+      "confusionSetId": "CS08",
+      "name": "Spruce / fir / hemlock",
+      "memberTaxa": [
+        "PICEA_GLAUCA",
+        "PICEA_MARIANA",
+        "PICEA_RUBENS",
+        "ABIES_BALSAMEA",
+        "TSUGA_CANADENSIS"
+      ],
+      "keySeparators": "Woody pegs versus pad base versus petiole; needle cross-section; cone orientation and persistence",
+      "resolvingViews": "Needle attachment macro; underside; terminal shoot; intact or attached cone"
+    },
+    {
+      "confusionSetId": "CS09",
+      "name": "Red / jack / Scots / pitch pine",
+      "memberTaxa": [
+        "PINUS_RESINOSA",
+        "PINUS_BANKSIANA",
+        "PINUS_SYLVESTRIS",
+        "PINUS_RIGIDA"
+      ],
+      "keySeparators": "Fascicle count/length; bend test; cone curvature/prickles; upper-bole orange bark; epicormic shoots",
+      "resolvingViews": "Several complete fascicles; cone and umbo; upper and lower bark; whole crown"
+    },
+    {
+      "confusionSetId": "CS10",
+      "name": "Tamarack / European larch",
+      "memberTaxa": [
+        "LARIX_LARICINA",
+        "LARIX_DECIDUA"
+      ],
+      "keySeparators": "Cone size and scale count/edge; needle cluster density; native peatland versus planting",
+      "resolvingViews": "Full cone; spur shoot; cluster count; site/planting context"
+    },
+    {
+      "confusionSetId": "CS11",
+      "name": "Red-oak group",
+      "memberTaxa": [
+        "QUERCUS_RUBRA",
+        "QUERCUS_VELUTINA",
+        "QUERCUS_COCCINEA",
+        "QUERCUS_ELLIPSOIDALIS",
+        "QUERCUS_PALUSTRIS"
+      ],
+      "keySeparators": "Bud hair/size; lower-leaf hair; sinus architecture; acorn cup depth/rings; bark; site and branch angle",
+      "resolvingViews": "Several sun leaves; terminal buds; complete acorn/cup; mature bark; whole crown"
+    },
+    {
+      "confusionSetId": "CS12",
+      "name": "White-oak group",
+      "memberTaxa": [
+        "QUERCUS_ALBA",
+        "QUERCUS_BICOLOR",
+        "QUERCUS_MACROCARPA",
+        "QUERCUS_MONTANA"
+      ],
+      "keySeparators": "Lower-leaf felt; fruit stalk; fringed cup; chestnut teeth; bark architecture; site",
+      "resolvingViews": "Lower surface; acorn/cup/stalk; terminal bud; upper and lower bole; site"
+    },
+    {
+      "confusionSetId": "CS13",
+      "name": "Aspens / balsam poplar / cottonwood",
+      "memberTaxa": [
+        "POPULUS_TREMULOIDES",
+        "POPULUS_GRANDIDENTATA",
+        "POPULUS_BALSAMIFERA",
+        "POPULUS_DELTOIDES"
+      ],
+      "keySeparators": "Petiole flattening; tooth size; leaf base; bud size/stickiness/odor; bark and floodplain/upland context",
+      "resolvingViews": "Complete leaf and petiole; bud; young and old bark; clonal form; site"
+    },
+    {
+      "confusionSetId": "CS14",
+      "name": "American / slippery / rock / Siberian elm",
+      "memberTaxa": [
+        "ULMUS_AMERICANA",
+        "ULMUS_RUBRA",
+        "ULMUS_THOMASII",
+        "ULMUS_PUMILA"
+      ],
+      "keySeparators": "Leaf roughness/base; bud hair; corky wings; samara hair/notch; bark layering; crown",
+      "resolvingViews": "Leaf surfaces; buds; samara; corky twigs; existing bark section; crown"
+    },
+    {
+      "confusionSetId": "CS15",
+      "name": "Black / pin / chokecherry",
+      "memberTaxa": [
+        "PRUNUS_SEROTINA",
+        "PRUNUS_PENSYLVANICA",
+        "PRUNUS_VIRGINIANA"
+      ],
+      "keySeparators": "Fruit cluster architecture; petiole glands; lower-midvein hair; bark age; whole pioneer/clonal form",
+      "resolvingViews": "Raceme or cluster; petiole macro; lower leaf; mature bark; whole plant"
+    },
+    {
+      "confusionSetId": "CS16",
+      "name": "American hornbeam / eastern hophornbeam",
+      "memberTaxa": [
+        "CARPINUS_CAROLINIANA",
+        "OSTRYA_VIRGINIANA"
+      ],
+      "keySeparators": "Muscular smooth bole and three-lobed fruit bracts versus shreddy bark and hoplike sacs",
+      "resolvingViews": "Bole; fruit; bud; wet versus dry site"
+    },
+    {
+      "confusionSetId": "CS17",
+      "name": "Black walnut / butternut",
+      "memberTaxa": [
+        "JUGLANS_NIGRA",
+        "JUGLANS_CINEREA"
+      ],
+      "keySeparators": "Terminal leaflet; rachis/twig hair; light versus dark pith; round versus elongated nut; bark",
+      "resolvingViews": "Whole leaf; pith section; nut/husk; twig hair; mature bark"
+    },
+    {
+      "confusionSetId": "CS18",
+      "name": "Bitternut / shagbark / pignut / mockernut hickory",
+      "memberTaxa": [
+        "CARYA_CORDIFORMIS",
+        "CARYA_OVATA",
+        "CARYA_GLABRA",
+        "CARYA_TOMENTOSA"
+      ],
+      "keySeparators": "Terminal bud color/size/hair; leaflet count; rachis hair; husk thickness/dehiscence; bark",
+      "resolvingViews": "Terminal bud; entire leaf; husk/nut; mature bark; twig hair"
+    },
+    {
+      "confusionSetId": "CS19",
+      "name": "Northern white-cedar / Atlantic white-cedar / eastern redcedar",
+      "memberTaxa": [
+        "THUJA_OCCIDENTALIS",
+        "CHAMAECYPARIS_THYOIDES",
+        "JUNIPERUS_VIRGINIANA"
+      ],
+      "keySeparators": "Flattened fans versus fine false-cypress sprays versus rounded juniper twigs; cone type; fruit color; wetland chemistry",
+      "resolvingViews": "Full spray; seed cone or berry-like cone; bark; site"
+    },
+    {
+      "confusionSetId": "CS20",
+      "name": "Native compound leaves / invasive confusers",
+      "memberTaxa": [
+        "FRAXINUS_AMERICANA",
+        "FRAXINUS_PENNSYLVANICA",
+        "FRAXINUS_NIGRA",
+        "JUGLANS_NIGRA",
+        "JUGLANS_CINEREA",
+        "ACER_NEGUNDO",
+        "ROBINIA_PSEUDOACACIA",
+        "AILANTHUS_ALTISSIMA"
+      ],
+      "keySeparators": "Opposite/alternate; bud position; leaflet glands; thorns; pith; leaf scar; odor; fruit type",
+      "resolvingViews": "Intact leaf plus node; bud/leaf scar; pith; samara/pod/nut; leaflet base"
+    },
+    {
+      "confusionSetId": "CS21",
+      "name": "Yellow birch / black cherry bark",
+      "memberTaxa": [
+        "BETULA_ALLEGHANIENSIS",
+        "PRUNUS_SEROTINA"
+      ],
+      "keySeparators": "Golden horizontal curls and wintergreen twig versus burnt-chip plates, petiole glands, and almond twig odor",
+      "resolvingViews": "Young and old bark; scratched twig; leaf petiole and underside; fruit"
+    },
+    {
+      "confusionSetId": "CS22",
+      "name": "Serviceberry / mountain-ashes / chokecherry",
+      "memberTaxa": [
+        "AMELANCHIER_LAEVIS",
+        "SORBUS_AMERICANA",
+        "SORBUS_DECORA",
+        "PRUNUS_VIRGINIANA"
+      ],
+      "keySeparators": "Simple versus compound leaves; pome calyx versus drupe; leaflet proportions; buds; fruit architecture",
+      "resolvingViews": "Whole leaf; fruit close-up; bud; flowers; multiple leaves"
+    },
+    {
+      "confusionSetId": "CS23",
+      "name": "Flowering / pagoda dogwood",
+      "memberTaxa": [
+        "CORNUS_FLORIDA",
+        "CORNUS_ALTERNIFOLIA"
+      ],
+      "keySeparators": "Opposite versus alternate branching; red versus blue-black fruit; flower bud; crown tiers",
+      "resolvingViews": "Intact twig nodes; fruit; bud; whole crown"
+    },
+    {
+      "confusionSetId": "CS24",
+      "name": "White mulberry / sassafras / basswood",
+      "memberTaxa": [
+        "MORUS_ALBA",
+        "SASSAFRAS_ALBIDUM",
+        "TILIA_AMERICANA"
+      ],
+      "keySeparators": "Latex and variable coarse leaves; sassafras aroma/mixed shapes; basswood asymmetric heart base and bracted fruit",
+      "resolvingViews": "Fresh twig/petiole; multiple leaves; fruit; buds; bark"
+    }
+  ],
+  "expectedSilvicsRetrieval": {
+    "taxon_scope": "all_80_taxa_with_tier_a_b_certification_priority",
+    "dimensions": [
+      "shade_tolerance",
+      "moisture_drainage_soils",
+      "geographic_climatic_affinity",
+      "forest_associations",
+      "regeneration",
+      "vegetative_reproduction",
+      "seed_mast_behavior",
+      "establishment_requirements",
+      "successional_role",
+      "disturbance_response",
+      "longevity_growth_strategy",
+      "browse_susceptibility",
+      "insects_diseases",
+      "management_implications",
+      "silvicultural_system_response"
+    ],
+    "response_standard": "Certification prompts span at least site, regeneration, disturbance, and management and require field-usable synthesis."
+  },
+  "sessions": [
+    {
+      "sessionId": "W10-A",
+      "letter": "A",
+      "title": "Rapid identification and remediation triage",
+      "kind": "certification_integration",
+      "taxonScope": "all_80_taxa_prioritized_by_certification_deficit",
+      "modalities": [
+        "foliage",
+        "bark",
+        "reproductive",
+        "dormant",
+        "whole_tree_context",
+        "condition"
+      ],
+      "delivery": "rapid unfamiliar drills with no new taxa",
+      "feedbackRelease": "after_batch_submission",
+      "runtimeBoundary": "runtime_retrieval_from_admitted_practice_media",
+      "introducedTaxonIds": [],
+      "teachingProfiles": []
+    },
+    {
+      "sessionId": "W10-B",
+      "letter": "B",
+      "title": "Cumulative scientific-name retrieval",
+      "kind": "delayed_retrieval",
+      "taxonScope": "all_80_taxa_balanced_in_both_name_directions",
+      "modalities": [],
+      "delivery": "closed-response nomenclature batches",
+      "feedbackRelease": "after_batch_submission",
+      "runtimeBoundary": "runtime_retrieval_from_admitted_practice_media",
+      "introducedTaxonIds": [],
+      "teachingProfiles": []
+    },
+    {
+      "sessionId": "W10-C",
+      "letter": "C",
+      "title": "Confusers and insufficient evidence",
+      "kind": "confuser_and_uncertainty_integration",
+      "taxonScope": "all_24_confusion_sets_plus_uncertainty_items",
+      "modalities": [
+        "foliage",
+        "bark",
+        "reproductive",
+        "dormant",
+        "whole_tree_context",
+        "condition"
+      ],
+      "delivery": "isolated and side-by-side confuser drills with requested-view reasoning",
+      "feedbackRelease": "after_response",
+      "runtimeBoundary": "runtime_retrieval_from_admitted_practice_media",
+      "introducedTaxonIds": [],
+      "teachingProfiles": []
+    },
+    {
+      "sessionId": "W10-D",
+      "letter": "D",
+      "title": "Certification modality rehearsal",
+      "kind": "multi_organ_laboratory",
+      "taxonScope": "all_80_taxa_blueprint_balanced_by_tier_and_modality",
+      "modalities": [
+        "foliage",
+        "bark",
+        "reproductive",
+        "dormant",
+        "whole_tree_context",
+        "condition"
+      ],
+      "delivery": "separate foliage bark reproductive dormant and whole-tree stations",
+      "feedbackRelease": "after_station_batch_submission",
+      "runtimeBoundary": "runtime_retrieval_from_admitted_practice_media",
+      "introducedTaxonIds": [],
+      "teachingProfiles": []
+    },
+    {
+      "sessionId": "W10-E",
+      "letter": "E",
+      "title": "Silvics and regional synthesis",
+      "kind": "cumulative_adaptive_retrieval",
+      "taxonScope": "all_80_taxa_prioritized_by_silvics_and_field_condition_deficits",
+      "modalities": [
+        "whole_tree_context",
+        "condition"
+      ],
+      "delivery": "oral or written synthesis and final targeted retrieval",
+      "feedbackRelease": "after_batch_submission",
+      "runtimeBoundary": "runtime_retrieval_from_admitted_practice_media",
+      "introducedTaxonIds": [],
+      "teachingProfiles": []
+    }
+  ],
+  "assessmentSummaries": [
+    {
+      "assessmentId": "W10-NOMENCLATURE-FINAL",
+      "type": "cumulative_scientific_name_examination",
+      "categoryId": "scientific_nomenclature",
+      "cumulative": true,
+      "scope": "all_80_taxa_balanced_in_both_directions",
+      "modalities": []
+    },
+    {
+      "assessmentId": "W10-SILVICS-SYNTHESIS",
+      "type": "oral_or_written_silvics_synthesis",
+      "categoryId": "silvics",
+      "cumulative": true,
+      "scope": "site_regeneration_disturbance_and_management_synthesis",
+      "modalities": [
+        "whole_tree_context"
+      ]
+    },
+    {
+      "assessmentId": "W10-FIELD-CONDITION-CERT",
+      "type": "field_condition_certification_check",
+      "categoryId": "field_condition_identification",
+      "cumulative": true,
+      "scope": "condition_regional_uncertainty_and_host_identity",
+      "modalities": [
+        "bark",
+        "dormant",
+        "whole_tree_context",
+        "condition"
+      ]
+    },
+    {
+      "assessmentId": "W10-FINAL-FOLIAGE",
+      "type": "comprehensive_final_foliage_only_battery",
+      "categoryId": "comprehensive_final_practical",
+      "cumulative": true,
+      "scope": "final_internal_weight_10_percent",
+      "modalities": [
+        "foliage"
+      ]
+    },
+    {
+      "assessmentId": "W10-FINAL-BARK",
+      "type": "comprehensive_final_bark_only_battery",
+      "categoryId": "comprehensive_final_practical",
+      "cumulative": true,
+      "scope": "final_internal_weight_10_percent",
+      "modalities": [
+        "bark"
+      ]
+    },
+    {
+      "assessmentId": "W10-FINAL-REPRODUCTIVE",
+      "type": "comprehensive_final_reproductive_battery",
+      "categoryId": "comprehensive_final_practical",
+      "cumulative": true,
+      "scope": "final_internal_weight_8_percent",
+      "modalities": [
+        "reproductive"
+      ]
+    },
+    {
+      "assessmentId": "W10-FINAL-DORMANT",
+      "type": "comprehensive_final_dormant_battery",
+      "categoryId": "comprehensive_final_practical",
+      "cumulative": true,
+      "scope": "final_internal_weight_12_percent",
+      "modalities": [
+        "dormant"
+      ]
+    },
+    {
+      "assessmentId": "W10-FINAL-WHOLE-TREE",
+      "type": "comprehensive_final_whole_tree_regional_uncertainty_battery",
+      "categoryId": "comprehensive_final_practical",
+      "cumulative": true,
+      "scope": "final_internal_weight_10_percent",
+      "modalities": [
+        "whole_tree_context",
+        "condition"
+      ]
+    },
+    {
+      "assessmentId": "W10-FINAL-RAPID-MIXED",
+      "type": "comprehensive_final_rapid_mixed_evidence_battery",
+      "categoryId": "comprehensive_final_practical",
+      "cumulative": true,
+      "scope": "final_internal_weight_50_percent",
+      "modalities": [
+        "foliage",
+        "bark",
+        "reproductive",
+        "dormant",
+        "whole_tree_context",
+        "condition"
+      ]
+    }
+  ],
+  "remediationGate": {
+    "policy_id": "REM-01",
+    "evaluate_after_assessment_ids": [
+      "W10-NOMENCLATURE-FINAL",
+      "W10-SILVICS-SYNTHESIS",
+      "W10-FIELD-CONDITION-CERT",
+      "W10-FINAL-FOLIAGE",
+      "W10-FINAL-BARK",
+      "W10-FINAL-REPRODUCTIVE",
+      "W10-FINAL-DORMANT",
+      "W10-FINAL-WHOLE-TREE",
+      "W10-FINAL-RAPID-MIXED"
+    ],
+    "broader_course_progression": "course_grade_finalizes_but_certification_remains_separate_until_mastery_evidence_is_met",
+    "insertion_sessions": [
+      "post_course_targeted_remediation"
+    ]
+  },
+  "teachingBoundary": "This package contains labeled instruction and public module structure only. Retrieval stations are assembled separately from admitted practice media, and formal forms, examination media, answer keys, and learner records remain private."
+}

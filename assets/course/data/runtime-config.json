@@ -1,0 +1,10 @@
+{
+  "$schema": "cochetopa-course-runtime-config/1.0",
+  "cloudFeaturesEnabled": false,
+  "supabaseUrl": "",
+  "supabasePublishableKey": "",
+  "turnstileSiteKey": "",
+  "supabaseJsModuleUrl": "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4/+esm",
+  "courseId": "northern-hardwoods-mixedwoods-dendrology-silvics-intensive",
+  "courseVersion": "2026.1"
+}

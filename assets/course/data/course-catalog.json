@@ -1,0 +1,3115 @@
+{
+  "$schema": "cochetopa-public-course-catalog/1.0",
+  "schemaVersion": "1.0.0",
+  "courseId": "northern-hardwoods-mixedwoods-dendrology-silvics-intensive",
+  "courseVersion": "2026.1-draft",
+  "status": "development_preview",
+  "title": "Northern Hardwoods & Mixedwoods Dendrology and Silvics Intensive",
+  "moduleCount": 10,
+  "taxonCount": 80,
+  "gradedAssessmentCount": 32,
+  "gradingWeights": {
+    "weekly_identification_practicals": 0.25,
+    "midterm_examination": 0.15,
+    "scientific_nomenclature": 0.1,
+    "silvics": 0.15,
+    "field_condition_identification": 0.1,
+    "comprehensive_final_practical": 0.25
+  },
+  "modules": [
+    {
+      "moduleId": "week-01",
+      "sequence": 1,
+      "title": "Foundations + Northern Hardwood Anchors",
+      "objectives": [
+        "Apply dendrological vocabulary and the maximum-defensible-rank decision rule.",
+        "Identify the northern-hardwood anchor taxa from unfamiliar foliage, bark, reproductive, dormant, and whole-tree evidence where defensible.",
+        "State a nearest plausible alternative, visible separator, confidence code, and resolving view.",
+        "Retrieve canonical common and scientific names and introductory field silvics for every new taxon.",
+        "Separate American beech host identity from clean or normal bark condition."
+      ],
+      "newTaxa": [
+        {
+          "taxonId": "ACER_SACCHARUM",
+          "preferredCommonName": "Sugar maple",
+          "canonicalScientificName": "Acer saccharum",
+          "family": "Sapindaceae; Aceraceae in older texts",
+          "tier": "A",
+          "coursePriority": "1 - core"
+        },
+        {
+          "taxonId": "ACER_RUBRUM",
+          "preferredCommonName": "Red maple",
+          "canonicalScientificName": "Acer rubrum",
+          "family": "Sapindaceae",
+          "tier": "A",
+          "coursePriority": "1 - core"
+        },
+        {
+          "taxonId": "FAGUS_GRANDIFOLIA",
+          "preferredCommonName": "American beech",
+          "canonicalScientificName": "Fagus grandifolia",
+          "family": "Fagaceae",
+          "tier": "A",
+          "coursePriority": "1 - core"
+        },
+        {
+          "taxonId": "BETULA_ALLEGHANIENSIS",
+          "preferredCommonName": "Yellow birch",
+          "canonicalScientificName": "Betula alleghaniensis",
+          "family": "Betulaceae",
+          "tier": "A",
+          "coursePriority": "1 - core"
+        },
+        {
+          "taxonId": "BETULA_PAPYRIFERA",
+          "preferredCommonName": "Paper birch",
+          "canonicalScientificName": "Betula papyrifera",
+          "family": "Betulaceae",
+          "tier": "A",
+          "coursePriority": "1 - core"
+        },
+        {
+          "taxonId": "TSUGA_CANADENSIS",
+          "preferredCommonName": "Eastern hemlock",
+          "canonicalScientificName": "Tsuga canadensis",
+          "family": "Pinaceae",
+          "tier": "A",
+          "coursePriority": "1 - core"
+        },
+        {
+          "taxonId": "TILIA_AMERICANA",
+          "preferredCommonName": "American basswood",
+          "canonicalScientificName": "Tilia americana",
+          "family": "Malvaceae; Tiliaceae in older texts",
+          "tier": "A",
+          "coursePriority": "1 - core"
+        },
+        {
+          "taxonId": "PRUNUS_SEROTINA",
+          "preferredCommonName": "Black cherry",
+          "canonicalScientificName": "Prunus serotina",
+          "family": "Rosaceae",
+          "tier": "A",
+          "coursePriority": "1 - core"
+        },
+        {
+          "taxonId": "OSTRYA_VIRGINIANA",
+          "preferredCommonName": "Eastern hophornbeam",
+          "canonicalScientificName": "Ostrya virginiana",
+          "family": "Betulaceae",
+          "tier": "A",
+          "coursePriority": "1 - core"
+        }
+      ],
+      "cumulativeEligibleTaxa": 9,
+      "confuserSets": [
+        {
+          "confusionSetId": "CS21",
+          "name": "Yellow birch / black cherry bark",
+          "keySeparators": "Golden horizontal curls and wintergreen twig versus burnt-chip plates, petiole glands, and almond twig odor",
+          "additionalViews": "Young and old bark; scratched twig; leaf petiole and underside; fruit"
+        }
+      ],
+      "silvics": {
+        "dimensions": [
+          "shade_tolerance",
+          "moisture_drainage_soils",
+          "forest_associations",
+          "regeneration"
+        ],
+        "responseStandard": "Give concise, field-usable relationships rather than isolated adjectives."
+      },
+      "sessions": [
+        {
+          "sessionId": "W01-A",
+          "letter": "A",
+          "title": "Six northern-hardwood anchors",
+          "kind": "species_introduction",
+          "delivery": "diagnostic teaching examples plus field-decision modeling",
+          "modalities": [
+            "foliage",
+            "bark",
+            "whole_tree_context"
+          ]
+        },
+        {
+          "sessionId": "W01-B",
+          "letter": "B",
+          "title": "Anchor retrieval",
+          "kind": "delayed_retrieval",
+          "delivery": "closed-response batches of five to ten unfamiliar practice items",
+          "modalities": [
+            "foliage",
+            "bark",
+            "whole_tree_context"
+          ]
+        },
+        {
+          "sessionId": "W01-C",
+          "letter": "C",
+          "title": "Birch, cherry, and hophornbeam contrasts",
+          "kind": "new_species_and_confusers",
+          "delivery": "direct comparison and isolated unfamiliar specimens",
+          "modalities": [
+            "foliage",
+            "bark",
+            "reproductive",
+            "dormant"
+          ]
+        },
+        {
+          "sessionId": "W01-D",
+          "letter": "D",
+          "title": "Anchor multi-organ laboratory",
+          "kind": "multi_organ_laboratory",
+          "delivery": "single-organ and partial-evidence practice stations",
+          "modalities": [
+            "foliage",
+            "bark",
+            "reproductive",
+            "dormant",
+            "whole_tree_context"
+          ]
+        },
+        {
+          "sessionId": "W01-E",
+          "letter": "E",
+          "title": "Week 1 cumulative retrieval",
+          "kind": "cumulative_adaptive_retrieval",
+          "delivery": "adaptive retrieval and remediation insertion",
+          "modalities": [
+            "foliage",
+            "bark",
+            "reproductive",
+            "dormant",
+            "whole_tree_context"
+          ]
+        }
+      ],
+      "assessments": [
+        {
+          "assessmentId": "W01-PRACTICAL",
+          "type": "weekly_identification_practical",
+          "categoryId": "weekly_identification_practicals",
+          "cumulative": true,
+          "stationCount": 18,
+          "timeGuidanceMinutes": 35,
+          "primaryModalityCounts": {
+            "foliage": 4,
+            "bark": 4,
+            "reproductive": 3,
+            "dormant": 3,
+            "whole_tree_context": 4
+          },
+          "minimumConfuserStations": 5,
+          "minimumLimitedEvidenceStations": 2,
+          "minimumSpeciesSupportedStations": 14
+        }
+      ],
+      "deliveryStatus": "interactive_public_development_preview"
+    },
+    {
+      "moduleId": "week-02",
+      "sequence": 2,
+      "title": "Northern Hardwood Associates",
+      "objectives": [
+        "Discriminate the hard-maple, understory-maple, paper-birch, dark-barked birch, cherry, and hornbeam sets.",
+        "Use sapling through mature bark as an independent line of field evidence.",
+        "Retrieve canonical names cumulatively in both directions.",
+        "Connect associate taxa to regeneration, succession, site, and browse relationships.",
+        "Recognize when an isolated organ supports only genus, group, or insufficient evidence."
+      ],
+      "newTaxa": [
+        {
+          "taxonId": "ACER_NIGRUM",
+          "preferredCommonName": "Black maple",
+          "canonicalScientificName": "Acer nigrum",
+          "family": "Sapindaceae",
+          "tier": "B",
+          "coursePriority": "2 - regional"
+        },
+        {
+          "taxonId": "ACER_PENSYLVANICUM",
+          "preferredCommonName": "Striped maple",
+          "canonicalScientificName": "Acer pensylvanicum",
+          "family": "Sapindaceae",
+          "tier": "B",
+          "coursePriority": "2 - regional"
+        },
+        {
+          "taxonId": "ACER_SPICATUM",
+          "preferredCommonName": "Mountain maple",
+          "canonicalScientificName": "Acer spicatum",
+          "family": "Sapindaceae",
+          "tier": "B",
+          "coursePriority": "2 - regional"
+        },
+        {
+          "taxonId": "ACER_PLATANOIDES",
+          "preferredCommonName": "Norway maple",
+          "canonicalScientificName": "Acer platanoides",
+          "family": "Sapindaceae",
+          "tier": "C",
+          "coursePriority": "3 - recognition/confuser"
+        },
+        {
+          "taxonId": "BETULA_CORDIFOLIA",
+          "preferredCommonName": "Heart-leaved paper birch",
+          "canonicalScientificName": "Betula cordifolia",
+          "family": "Betulaceae",
+          "tier": "B",
+          "coursePriority": "2 - regional"
+        },
+        {
+          "taxonId": "BETULA_POPULIFOLIA",
+          "preferredCommonName": "Gray birch",
+          "canonicalScientificName": "Betula populifolia",
+          "family": "Betulaceae",
+          "tier": "B",
+          "coursePriority": "2 - regional"
+        },
+        {
+          "taxonId": "BETULA_LENTA",
+          "preferredCommonName": "Sweet birch",
+          "canonicalScientificName": "Betula lenta",
+          "family": "Betulaceae",
+          "tier": "B",
+          "coursePriority": "2 - regional"
+        },
+        {
+          "taxonId": "PRUNUS_PENSYLVANICA",
+          "preferredCommonName": "Pin cherry",
+          "canonicalScientificName": "Prunus pensylvanica",
+          "family": "Rosaceae",
+          "tier": "B",
+          "coursePriority": "2 - regional"
+        },
+        {
+          "taxonId": "PRUNUS_VIRGINIANA",
+          "preferredCommonName": "Chokecherry",
+          "canonicalScientificName": "Prunus virginiana",
+          "family": "Rosaceae",
+          "tier": "B",
+          "coursePriority": "2 - regional"
+        },
+        {
+          "taxonId": "CARPINUS_CAROLINIANA",
+          "preferredCommonName": "American hornbeam",
+          "canonicalScientificName": "Carpinus caroliniana",
+          "family": "Betulaceae",
+          "tier": "A",
+          "coursePriority": "1 - core"
+        },
+        {
+          "taxonId": "CORNUS_ALTERNIFOLIA",
+          "preferredCommonName": "Pagoda dogwood",
+          "canonicalScientificName": "Cornus alternifolia",
+          "family": "Cornaceae",
+          "tier": "B",
+          "coursePriority": "2 - regional"
+        },
+        {
+          "taxonId": "AMELANCHIER_LAEVIS",
+          "preferredCommonName": "Smooth serviceberry",
+          "canonicalScientificName": "Amelanchier laevis",
+          "family": "Rosaceae",
+          "tier": "C",
+          "coursePriority": "3 - recognition/confuser"
+        }
+      ],
+      "cumulativeEligibleTaxa": 21,
+      "confuserSets": [
+        {
+          "confusionSetId": "CS01",
+          "name": "Sugar / black / Norway maple",
+          "keySeparators": "Petiole latex; leaf underside hair and stipules; bud size/shape; samara angle",
+          "additionalViews": "Fresh-broken petiole; lower surface; terminal bud; ripe samara"
+        },
+        {
+          "confusionSetId": "CS03",
+          "name": "Striped / mountain maple",
+          "keySeparators": "Green-white striped bark versus unstriped; leaf size/base; fruit cluster posture; growth form",
+          "additionalViews": "Young stem; intact leaf; fruit cluster; whole plant"
+        },
+        {
+          "confusionSetId": "CS05",
+          "name": "Paper / heart-leaved / gray birch",
+          "keySeparators": "Leaf base and vein count; twig resin glands; peeling versus tight bark; black branch marks; elevation",
+          "additionalViews": "Several mature leaves; resin-warty twig; bark sheet; whole growth form; location"
+        },
+        {
+          "confusionSetId": "CS06",
+          "name": "Yellow / sweet birch",
+          "keySeparators": "Both wintergreen; yellow birch golden curling bark and spur shoots versus sweet birch dark blocky bark",
+          "additionalViews": "Scratched twig; young and mature bark; fruiting strobile; lower leaf surface"
+        },
+        {
+          "confusionSetId": "CS15",
+          "name": "Black / pin / chokecherry",
+          "keySeparators": "Fruit cluster architecture; petiole glands; lower-midvein hair; bark age; whole pioneer/clonal form",
+          "additionalViews": "Raceme or cluster; petiole macro; lower leaf; mature bark; whole plant"
+        },
+        {
+          "confusionSetId": "CS16",
+          "name": "American hornbeam / eastern hophornbeam",
+          "keySeparators": "Muscular smooth bole and three-lobed fruit bracts versus shreddy bark and hoplike sacs",
+          "additionalViews": "Bole; fruit; bud; wet versus dry site"
+        },
+        {
+          "confusionSetId": "CS21",
+          "name": "Yellow birch / black cherry bark",
+          "keySeparators": "Golden horizontal curls and wintergreen twig versus burnt-chip plates, petiole glands, and almond twig odor",
+          "additionalViews": "Young and old bark; scratched twig; leaf petiole and underside; fruit"
+        }
+      ],
+      "silvics": {
+        "dimensions": [
+          "shade_tolerance",
+          "moisture_drainage_soils",
+          "regeneration",
+          "successional_role",
+          "browse_susceptibility"
+        ],
+        "responseStandard": "Relate site and regeneration traits to likely stand position and field association."
+      },
+      "sessions": [
+        {
+          "sessionId": "W02-A",
+          "letter": "A",
+          "title": "Maple and birch associates",
+          "kind": "species_introduction",
+          "delivery": "diagnostic teaching examples and direct comparisons",
+          "modalities": [
+            "foliage",
+            "bark",
+            "reproductive",
+            "dormant"
+          ]
+        },
+        {
+          "sessionId": "W02-B",
+          "letter": "B",
+          "title": "Maple and birch retrieval",
+          "kind": "delayed_retrieval",
+          "delivery": "unfamiliar isolated and contrast practice batches",
+          "modalities": [
+            "foliage",
+            "bark",
+            "reproductive",
+            "dormant"
+          ]
+        },
+        {
+          "sessionId": "W02-C",
+          "letter": "C",
+          "title": "Birch, cherry, hornbeam, and small-tree contrasts",
+          "kind": "new_species_and_confusers",
+          "delivery": "direct comparison followed by isolated transfer",
+          "modalities": [
+            "foliage",
+            "bark",
+            "reproductive",
+            "dormant",
+            "whole_tree_context"
+          ]
+        },
+        {
+          "sessionId": "W02-D",
+          "letter": "D",
+          "title": "Northern hardwood associate laboratory",
+          "kind": "multi_organ_laboratory",
+          "delivery": "single-organ and multi-evidence stations",
+          "modalities": [
+            "foliage",
+            "bark",
+            "reproductive",
+            "dormant",
+            "whole_tree_context"
+          ]
+        },
+        {
+          "sessionId": "W02-E",
+          "letter": "E",
+          "title": "Cumulative names and field decisions",
+          "kind": "cumulative_adaptive_retrieval",
+          "delivery": "adaptive retrieval with remediation and name prompts",
+          "modalities": [
+            "foliage",
+            "bark",
+            "reproductive",
+            "dormant",
+            "whole_tree_context"
+          ]
+        }
+      ],
+      "assessments": [
+        {
+          "assessmentId": "W02-PRACTICAL",
+          "type": "weekly_identification_practical",
+          "categoryId": "weekly_identification_practicals",
+          "cumulative": true,
+          "stationCount": 20,
+          "timeGuidanceMinutes": 40,
+          "primaryModalityCounts": {
+            "foliage": 4,
+            "bark": 4,
+            "reproductive": 4,
+            "dormant": 4,
+            "whole_tree_context": 4
+          },
+          "minimumConfuserStations": 6,
+          "minimumLimitedEvidenceStations": 2,
+          "minimumSpeciesSupportedStations": 16
+        },
+        {
+          "assessmentId": "W02-NOMENCLATURE-1",
+          "type": "cumulative_nomenclature_check",
+          "categoryId": "scientific_nomenclature",
+          "cumulative": true,
+          "stationCount": 20,
+          "timeGuidanceMinutes": 15,
+          "primaryModalityCounts": {},
+          "minimumConfuserStations": 0,
+          "minimumLimitedEvidenceStations": 0,
+          "minimumSpeciesSupportedStations": 0
+        },
+        {
+          "assessmentId": "W02-SILVICS-1",
+          "type": "cumulative_silvics_retrieval",
+          "categoryId": "silvics",
+          "cumulative": true,
+          "stationCount": 12,
+          "timeGuidanceMinutes": 30,
+          "primaryModalityCounts": {},
+          "minimumConfuserStations": 0,
+          "minimumLimitedEvidenceStations": 0,
+          "minimumSpeciesSupportedStations": 0
+        }
+      ],
+      "deliveryStatus": "curriculum_complete_visual_media_pending_admission"
+    },
+    {
+      "moduleId": "week-03",
+      "sequence": 3,
+      "title": "Coniferous Mixedwoods",
+      "objectives": [
+        "Separate spruce, fir, hemlock, pine, larch, cedar, and juniper from needle attachment and arrangement.",
+        "Discriminate four spruces and the red, jack, Scots, and pitch-pine comparison framework using cones, buds, foliage, bark, and form.",
+        "Use fascicle structure, cone characters, bark age, and whole-crown architecture independently.",
+        "Retrieve conifer scientific names and field silvics cumulatively.",
+        "Recognize planted conifers without allowing planting context to replace morphology."
+      ],
+      "newTaxa": [
+        {
+          "taxonId": "ABIES_BALSAMEA",
+          "preferredCommonName": "Balsam fir",
+          "canonicalScientificName": "Abies balsamea",
+          "family": "Pinaceae",
+          "tier": "A",
+          "coursePriority": "1 - core"
+        },
+        {
+          "taxonId": "PICEA_GLAUCA",
+          "preferredCommonName": "White spruce",
+          "canonicalScientificName": "Picea glauca",
+          "family": "Pinaceae",
+          "tier": "A",
+          "coursePriority": "1 - core"
+        },
+        {
+          "taxonId": "PICEA_MARIANA",
+          "preferredCommonName": "Black spruce",
+          "canonicalScientificName": "Picea mariana",
+          "family": "Pinaceae",
+          "tier": "A",
+          "coursePriority": "1 - core"
+        },
+        {
+          "taxonId": "PICEA_RUBENS",
+          "preferredCommonName": "Red spruce",
+          "canonicalScientificName": "Picea rubens",
+          "family": "Pinaceae",
+          "tier": "A",
+          "coursePriority": "1 - core"
+        },
+        {
+          "taxonId": "PICEA_ABIES",
+          "preferredCommonName": "Norway spruce",
+          "canonicalScientificName": "Picea abies",
+          "family": "Pinaceae",
+          "tier": "C",
+          "coursePriority": "3 - recognition/confuser"
+        },
+        {
+          "taxonId": "PINUS_STROBUS",
+          "preferredCommonName": "Eastern white pine",
+          "canonicalScientificName": "Pinus strobus",
+          "family": "Pinaceae",
+          "tier": "A",
+          "coursePriority": "1 - core"
+        },
+        {
+          "taxonId": "PINUS_RESINOSA",
+          "preferredCommonName": "Red pine",
+          "canonicalScientificName": "Pinus resinosa",
+          "family": "Pinaceae",
+          "tier": "A",
+          "coursePriority": "1 - core"
+        },
+        {
+          "taxonId": "PINUS_BANKSIANA",
+          "preferredCommonName": "Jack pine",
+          "canonicalScientificName": "Pinus banksiana",
+          "family": "Pinaceae",
+          "tier": "B",
+          "coursePriority": "2 - regional"
+        },
+        {
+          "taxonId": "PINUS_SYLVESTRIS",
+          "preferredCommonName": "Scots pine",
+          "canonicalScientificName": "Pinus sylvestris",
+          "family": "Pinaceae",
+          "tier": "C",
+          "coursePriority": "3 - recognition/confuser"
+        },
+        {
+          "taxonId": "LARIX_LARICINA",
+          "preferredCommonName": "Tamarack",
+          "canonicalScientificName": "Larix laricina",
+          "family": "Pinaceae",
+          "tier": "A",
+          "coursePriority": "1 - core"
+        },
+        {
+          "taxonId": "LARIX_DECIDUA",
+          "preferredCommonName": "European larch",
+          "canonicalScientificName": "Larix decidua",
+          "family": "Pinaceae",
+          "tier": "C",
+          "coursePriority": "3 - recognition/confuser"
+        },
+        {
+          "taxonId": "THUJA_OCCIDENTALIS",
+          "preferredCommonName": "Northern white-cedar",
+          "canonicalScientificName": "Thuja occidentalis",
+          "family": "Cupressaceae",
+          "tier": "A",
+          "coursePriority": "1 - core"
+        },
+        {
+          "taxonId": "JUNIPERUS_VIRGINIANA",
+          "preferredCommonName": "Eastern redcedar",
+          "canonicalScientificName": "Juniperus virginiana",
+          "family": "Cupressaceae",
+          "tier": "B",
+          "coursePriority": "2 - regional"
+        }
+      ],
+      "cumulativeEligibleTaxa": 34,
+      "confuserSets": [
+        {
+          "confusionSetId": "CS01",
+          "name": "Sugar / black / Norway maple",
+          "keySeparators": "Petiole latex; leaf underside hair and stipules; bud size/shape; samara angle",
+          "additionalViews": "Fresh-broken petiole; lower surface; terminal bud; ripe samara"
+        },
+        {
+          "confusionSetId": "CS03",
+          "name": "Striped / mountain maple",
+          "keySeparators": "Green-white striped bark versus unstriped; leaf size/base; fruit cluster posture; growth form",
+          "additionalViews": "Young stem; intact leaf; fruit cluster; whole plant"
+        },
+        {
+          "confusionSetId": "CS05",
+          "name": "Paper / heart-leaved / gray birch",
+          "keySeparators": "Leaf base and vein count; twig resin glands; peeling versus tight bark; black branch marks; elevation",
+          "additionalViews": "Several mature leaves; resin-warty twig; bark sheet; whole growth form; location"
+        },
+        {
+          "confusionSetId": "CS06",
+          "name": "Yellow / sweet birch",
+          "keySeparators": "Both wintergreen; yellow birch golden curling bark and spur shoots versus sweet birch dark blocky bark",
+          "additionalViews": "Scratched twig; young and mature bark; fruiting strobile; lower leaf surface"
+        },
+        {
+          "confusionSetId": "CS07",
+          "name": "White / black / red / Norway spruce",
+          "keySeparators": "Cone size and scale margin; twig hairs; bud resin; foliage color/odor; pendulous branchlets",
+          "additionalViews": "Full cone; twig macro; bud; whole crown; regional site"
+        },
+        {
+          "confusionSetId": "CS08",
+          "name": "Spruce / fir / hemlock",
+          "keySeparators": "Woody pegs versus pad base versus petiole; needle cross-section; cone orientation and persistence",
+          "additionalViews": "Needle attachment macro; underside; terminal shoot; intact or attached cone"
+        },
+        {
+          "confusionSetId": "CS09",
+          "name": "Red / jack / Scots / pitch pine",
+          "keySeparators": "Fascicle count/length; bend test; cone curvature/prickles; upper-bole orange bark; epicormic shoots",
+          "additionalViews": "Several complete fascicles; cone and umbo; upper and lower bark; whole crown"
+        },
+        {
+          "confusionSetId": "CS10",
+          "name": "Tamarack / European larch",
+          "keySeparators": "Cone size and scale count/edge; needle cluster density; native peatland versus planting",
+          "additionalViews": "Full cone; spur shoot; cluster count; site/planting context"
+        },
+        {
+          "confusionSetId": "CS15",
+          "name": "Black / pin / chokecherry",
+          "keySeparators": "Fruit cluster architecture; petiole glands; lower-midvein hair; bark age; whole pioneer/clonal form",
+          "additionalViews": "Raceme or cluster; petiole macro; lower leaf; mature bark; whole plant"
+        },
+        {
+          "confusionSetId": "CS16",
+          "name": "American hornbeam / eastern hophornbeam",
+          "keySeparators": "Muscular smooth bole and three-lobed fruit bracts versus shreddy bark and hoplike sacs",
+          "additionalViews": "Bole; fruit; bud; wet versus dry site"
+        },
+        {
+          "confusionSetId": "CS21",
+          "name": "Yellow birch / black cherry bark",
+          "keySeparators": "Golden horizontal curls and wintergreen twig versus burnt-chip plates, petiole glands, and almond twig odor",
+          "additionalViews": "Young and old bark; scratched twig; leaf petiole and underside; fruit"
+        }
+      ],
+      "silvics": {
+        "dimensions": [
+          "shade_tolerance",
+          "moisture_drainage_soils",
+          "geographic_climatic_affinity",
+          "regeneration",
+          "disturbance_response",
+          "management_implications"
+        ],
+        "responseStandard": "Connect conifer morphology and site affinity to realistic mixedwood stand positions and disturbance responses."
+      },
+      "sessions": [
+        {
+          "sessionId": "W03-A",
+          "letter": "A",
+          "title": "Fir, spruces, and major pines",
+          "kind": "species_introduction",
+          "delivery": "attachment-first teaching and direct comparisons",
+          "modalities": [
+            "foliage",
+            "reproductive",
+            "bark",
+            "whole_tree_context"
+          ]
+        },
+        {
+          "sessionId": "W03-B",
+          "letter": "B",
+          "title": "Needle attachment and cone retrieval",
+          "kind": "delayed_retrieval",
+          "delivery": "unfamiliar conifer parts and whole-tree transfer",
+          "modalities": [
+            "foliage",
+            "reproductive",
+            "bark",
+            "whole_tree_context"
+          ]
+        },
+        {
+          "sessionId": "W03-C",
+          "letter": "C",
+          "title": "Pine, larch, cedar, and juniper contrasts",
+          "kind": "new_species_and_confusers",
+          "delivery": "contrast matrices followed by isolated specimens",
+          "modalities": [
+            "foliage",
+            "reproductive",
+            "bark",
+            "whole_tree_context"
+          ]
+        },
+        {
+          "sessionId": "W03-D",
+          "letter": "D",
+          "title": "Coniferous mixedwood laboratory",
+          "kind": "multi_organ_laboratory",
+          "delivery": "needle, fascicle, cone, bud, bark, and crown stations",
+          "modalities": [
+            "foliage",
+            "bark",
+            "reproductive",
+            "dormant",
+            "whole_tree_context"
+          ]
+        },
+        {
+          "sessionId": "W03-E",
+          "letter": "E",
+          "title": "Hardwood-conifer cumulative retrieval",
+          "kind": "cumulative_adaptive_retrieval",
+          "delivery": "adaptive mixed-growth-form retrieval",
+          "modalities": [
+            "foliage",
+            "bark",
+            "reproductive",
+            "dormant",
+            "whole_tree_context"
+          ]
+        }
+      ],
+      "assessments": [
+        {
+          "assessmentId": "W03-PRACTICAL",
+          "type": "weekly_identification_practical",
+          "categoryId": "weekly_identification_practicals",
+          "cumulative": true,
+          "stationCount": 24,
+          "timeGuidanceMinutes": 48,
+          "primaryModalityCounts": {
+            "foliage": 6,
+            "bark": 4,
+            "reproductive": 5,
+            "dormant": 4,
+            "whole_tree_context": 5
+          },
+          "minimumConfuserStations": 8,
+          "minimumLimitedEvidenceStations": 3,
+          "minimumSpeciesSupportedStations": 18
+        }
+      ],
+      "deliveryStatus": "curriculum_complete_visual_media_pending_admission"
+    },
+    {
+      "moduleId": "week-04",
+      "sequence": 4,
+      "title": "Boreal and Great Lakes Transition",
+      "objectives": [
+        "Identify boreal-transition Populus, alder, and mountain-ash taxa from organs and whole-tree form.",
+        "Transfer earlier hardwood and conifer identifications into western Great Lakes and southern boreal contexts.",
+        "Distinguish morphology-supported identification from context-driven guessing.",
+        "Retrieve names and silvics cumulatively through four modules.",
+        "Complete the first substantial cumulative practical and field-context assessment."
+      ],
+      "newTaxa": [
+        {
+          "taxonId": "POPULUS_TREMULOIDES",
+          "preferredCommonName": "Quaking aspen",
+          "canonicalScientificName": "Populus tremuloides",
+          "family": "Salicaceae",
+          "tier": "A",
+          "coursePriority": "1 - core"
+        },
+        {
+          "taxonId": "POPULUS_GRANDIDENTATA",
+          "preferredCommonName": "Bigtooth aspen",
+          "canonicalScientificName": "Populus grandidentata",
+          "family": "Salicaceae",
+          "tier": "A",
+          "coursePriority": "1 - core"
+        },
+        {
+          "taxonId": "POPULUS_BALSAMIFERA",
+          "preferredCommonName": "Balsam poplar",
+          "canonicalScientificName": "Populus balsamifera",
+          "family": "Salicaceae",
+          "tier": "B",
+          "coursePriority": "2 - regional"
+        },
+        {
+          "taxonId": "ALNUS_INCANA_RUGOSA",
+          "preferredCommonName": "Speckled alder",
+          "canonicalScientificName": "Alnus incana subsp. rugosa",
+          "family": "Betulaceae",
+          "tier": "B",
+          "coursePriority": "2 - regional"
+        },
+        {
+          "taxonId": "SORBUS_AMERICANA",
+          "preferredCommonName": "American mountain-ash",
+          "canonicalScientificName": "Sorbus americana",
+          "family": "Rosaceae",
+          "tier": "B",
+          "coursePriority": "2 - regional"
+        },
+        {
+          "taxonId": "SORBUS_DECORA",
+          "preferredCommonName": "Showy mountain-ash",
+          "canonicalScientificName": "Sorbus decora",
+          "family": "Rosaceae",
+          "tier": "B",
+          "coursePriority": "2 - regional"
+        }
+      ],
+      "cumulativeEligibleTaxa": 40,
+      "confuserSets": [
+        {
+          "confusionSetId": "CS01",
+          "name": "Sugar / black / Norway maple",
+          "keySeparators": "Petiole latex; leaf underside hair and stipules; bud size/shape; samara angle",
+          "additionalViews": "Fresh-broken petiole; lower surface; terminal bud; ripe samara"
+        },
+        {
+          "confusionSetId": "CS03",
+          "name": "Striped / mountain maple",
+          "keySeparators": "Green-white striped bark versus unstriped; leaf size/base; fruit cluster posture; growth form",
+          "additionalViews": "Young stem; intact leaf; fruit cluster; whole plant"
+        },
+        {
+          "confusionSetId": "CS05",
+          "name": "Paper / heart-leaved / gray birch",
+          "keySeparators": "Leaf base and vein count; twig resin glands; peeling versus tight bark; black branch marks; elevation",
+          "additionalViews": "Several mature leaves; resin-warty twig; bark sheet; whole growth form; location"
+        },
+        {
+          "confusionSetId": "CS06",
+          "name": "Yellow / sweet birch",
+          "keySeparators": "Both wintergreen; yellow birch golden curling bark and spur shoots versus sweet birch dark blocky bark",
+          "additionalViews": "Scratched twig; young and mature bark; fruiting strobile; lower leaf surface"
+        },
+        {
+          "confusionSetId": "CS07",
+          "name": "White / black / red / Norway spruce",
+          "keySeparators": "Cone size and scale margin; twig hairs; bud resin; foliage color/odor; pendulous branchlets",
+          "additionalViews": "Full cone; twig macro; bud; whole crown; regional site"
+        },
+        {
+          "confusionSetId": "CS08",
+          "name": "Spruce / fir / hemlock",
+          "keySeparators": "Woody pegs versus pad base versus petiole; needle cross-section; cone orientation and persistence",
+          "additionalViews": "Needle attachment macro; underside; terminal shoot; intact or attached cone"
+        },
+        {
+          "confusionSetId": "CS09",
+          "name": "Red / jack / Scots / pitch pine",
+          "keySeparators": "Fascicle count/length; bend test; cone curvature/prickles; upper-bole orange bark; epicormic shoots",
+          "additionalViews": "Several complete fascicles; cone and umbo; upper and lower bark; whole crown"
+        },
+        {
+          "confusionSetId": "CS10",
+          "name": "Tamarack / European larch",
+          "keySeparators": "Cone size and scale count/edge; needle cluster density; native peatland versus planting",
+          "additionalViews": "Full cone; spur shoot; cluster count; site/planting context"
+        },
+        {
+          "confusionSetId": "CS15",
+          "name": "Black / pin / chokecherry",
+          "keySeparators": "Fruit cluster architecture; petiole glands; lower-midvein hair; bark age; whole pioneer/clonal form",
+          "additionalViews": "Raceme or cluster; petiole macro; lower leaf; mature bark; whole plant"
+        },
+        {
+          "confusionSetId": "CS16",
+          "name": "American hornbeam / eastern hophornbeam",
+          "keySeparators": "Muscular smooth bole and three-lobed fruit bracts versus shreddy bark and hoplike sacs",
+          "additionalViews": "Bole; fruit; bud; wet versus dry site"
+        },
+        {
+          "confusionSetId": "CS21",
+          "name": "Yellow birch / black cherry bark",
+          "keySeparators": "Golden horizontal curls and wintergreen twig versus burnt-chip plates, petiole glands, and almond twig odor",
+          "additionalViews": "Young and old bark; scratched twig; leaf petiole and underside; fruit"
+        },
+        {
+          "confusionSetId": "CS22",
+          "name": "Serviceberry / mountain-ashes / chokecherry",
+          "keySeparators": "Simple versus compound leaves; pome calyx versus drupe; leaflet proportions; buds; fruit architecture",
+          "additionalViews": "Whole leaf; fruit close-up; bud; flowers; multiple leaves"
+        }
+      ],
+      "silvics": {
+        "dimensions": [
+          "geographic_climatic_affinity",
+          "moisture_drainage_soils",
+          "forest_associations",
+          "vegetative_reproduction",
+          "successional_role",
+          "disturbance_response"
+        ],
+        "responseStandard": "Use site and regional context to support, but never substitute for, diagnostic morphology."
+      },
+      "sessions": [
+        {
+          "sessionId": "W04-A",
+          "letter": "A",
+          "title": "Aspens and balsam poplar",
+          "kind": "species_introduction",
+          "delivery": "organ comparisons across age and clonal form",
+          "modalities": [
+            "foliage",
+            "bark",
+            "dormant",
+            "whole_tree_context"
+          ]
+        },
+        {
+          "sessionId": "W04-B",
+          "letter": "B",
+          "title": "Populus and transition retrieval",
+          "kind": "delayed_retrieval",
+          "delivery": "unfamiliar isolated specimens and stand-context decisions",
+          "modalities": [
+            "foliage",
+            "bark",
+            "dormant",
+            "whole_tree_context"
+          ]
+        },
+        {
+          "sessionId": "W04-C",
+          "letter": "C",
+          "title": "Alder and mountain-ash comparisons",
+          "kind": "new_species_and_confusers",
+          "delivery": "fruit foliage and growth-form contrasts",
+          "modalities": [
+            "foliage",
+            "reproductive",
+            "dormant",
+            "whole_tree_context"
+          ]
+        },
+        {
+          "sessionId": "W04-D",
+          "letter": "D",
+          "title": "Boreal-transition field laboratory",
+          "kind": "multi_organ_laboratory",
+          "delivery": "regional assemblage and single-organ stations",
+          "modalities": [
+            "foliage",
+            "bark",
+            "reproductive",
+            "dormant",
+            "whole_tree_context"
+          ]
+        },
+        {
+          "sessionId": "W04-E",
+          "letter": "E",
+          "title": "First substantial cumulative review",
+          "kind": "cumulative_adaptive_retrieval",
+          "delivery": "formal-practical preparation without image reuse",
+          "modalities": [
+            "foliage",
+            "bark",
+            "reproductive",
+            "dormant",
+            "whole_tree_context"
+          ]
+        }
+      ],
+      "assessments": [
+        {
+          "assessmentId": "W04-PRACTICAL",
+          "type": "substantial_cumulative_weekly_practical",
+          "categoryId": "weekly_identification_practicals",
+          "cumulative": true,
+          "stationCount": 32,
+          "timeGuidanceMinutes": 64,
+          "primaryModalityCounts": {
+            "foliage": 6,
+            "bark": 6,
+            "reproductive": 6,
+            "dormant": 6,
+            "whole_tree_context": 8
+          },
+          "minimumConfuserStations": 10,
+          "minimumLimitedEvidenceStations": 4,
+          "minimumSpeciesSupportedStations": 24
+        },
+        {
+          "assessmentId": "W04-NOMENCLATURE-2",
+          "type": "cumulative_nomenclature_check",
+          "categoryId": "scientific_nomenclature",
+          "cumulative": true,
+          "stationCount": 30,
+          "timeGuidanceMinutes": 22,
+          "primaryModalityCounts": {},
+          "minimumConfuserStations": 0,
+          "minimumLimitedEvidenceStations": 0,
+          "minimumSpeciesSupportedStations": 0
+        },
+        {
+          "assessmentId": "W04-SILVICS-2",
+          "type": "cumulative_silvics_retrieval",
+          "categoryId": "silvics",
+          "cumulative": true,
+          "stationCount": 16,
+          "timeGuidanceMinutes": 40,
+          "primaryModalityCounts": {},
+          "minimumConfuserStations": 0,
+          "minimumLimitedEvidenceStations": 0,
+          "minimumSpeciesSupportedStations": 0
+        },
+        {
+          "assessmentId": "W04-FIELD-CONTEXT",
+          "type": "whole_tree_and_site_exercise",
+          "categoryId": "field_condition_identification",
+          "cumulative": true,
+          "stationCount": 20,
+          "timeGuidanceMinutes": 45,
+          "primaryModalityCounts": {
+            "whole_tree_context": 20
+          },
+          "minimumConfuserStations": 5,
+          "minimumLimitedEvidenceStations": 5,
+          "minimumSpeciesSupportedStations": 13
+        }
+      ],
+      "deliveryStatus": "curriculum_complete_visual_media_pending_admission"
+    },
+    {
+      "moduleId": "week-05",
+      "sequence": 5,
+      "title": "Ashes, Elms, Lowlands, and Riparian Systems",
+      "objectives": [
+        "Discriminate ashes and elms from foliage, buds, leaf scars, samaras, bark, and site.",
+        "Identify riparian and lowland associates from dormant and reproductive evidence as well as foliage and bark.",
+        "Separate emerald ash borer and Dutch elm disease effects from host identification.",
+        "Use hydrology and floodplain context as supporting evidence without over-weighting it.",
+        "Demonstrate cumulative Weeks 1-5 command on the midterm."
+      ],
+      "newTaxa": [
+        {
+          "taxonId": "ACER_SACCHARINUM",
+          "preferredCommonName": "Silver maple",
+          "canonicalScientificName": "Acer saccharinum",
+          "family": "Sapindaceae",
+          "tier": "B",
+          "coursePriority": "2 - regional"
+        },
+        {
+          "taxonId": "ACER_NEGUNDO",
+          "preferredCommonName": "Boxelder",
+          "canonicalScientificName": "Acer negundo",
+          "family": "Sapindaceae",
+          "tier": "B",
+          "coursePriority": "2 - regional"
+        },
+        {
+          "taxonId": "BETULA_NIGRA",
+          "preferredCommonName": "River birch",
+          "canonicalScientificName": "Betula nigra",
+          "family": "Betulaceae",
+          "tier": "B",
+          "coursePriority": "2 - regional"
+        },
+        {
+          "taxonId": "FRAXINUS_AMERICANA",
+          "preferredCommonName": "White ash",
+          "canonicalScientificName": "Fraxinus americana",
+          "family": "Oleaceae",
+          "tier": "A",
+          "coursePriority": "1 - core"
+        },
+        {
+          "taxonId": "FRAXINUS_PENNSYLVANICA",
+          "preferredCommonName": "Green ash",
+          "canonicalScientificName": "Fraxinus pennsylvanica",
+          "family": "Oleaceae",
+          "tier": "A",
+          "coursePriority": "1 - core"
+        },
+        {
+          "taxonId": "FRAXINUS_NIGRA",
+          "preferredCommonName": "Black ash",
+          "canonicalScientificName": "Fraxinus nigra",
+          "family": "Oleaceae",
+          "tier": "A",
+          "coursePriority": "1 - core"
+        },
+        {
+          "taxonId": "POPULUS_DELTOIDES",
+          "preferredCommonName": "Eastern cottonwood",
+          "canonicalScientificName": "Populus deltoides",
+          "family": "Salicaceae",
+          "tier": "B",
+          "coursePriority": "2 - regional"
+        },
+        {
+          "taxonId": "ULMUS_AMERICANA",
+          "preferredCommonName": "American elm",
+          "canonicalScientificName": "Ulmus americana",
+          "family": "Ulmaceae",
+          "tier": "A",
+          "coursePriority": "1 - core"
+        },
+        {
+          "taxonId": "ULMUS_RUBRA",
+          "preferredCommonName": "Slippery elm",
+          "canonicalScientificName": "Ulmus rubra",
+          "family": "Ulmaceae",
+          "tier": "B",
+          "coursePriority": "2 - regional"
+        },
+        {
+          "taxonId": "ULMUS_THOMASII",
+          "preferredCommonName": "Rock elm",
+          "canonicalScientificName": "Ulmus thomasii",
+          "family": "Ulmaceae",
+          "tier": "B",
+          "coursePriority": "2 - regional"
+        },
+        {
+          "taxonId": "ULMUS_PUMILA",
+          "preferredCommonName": "Siberian elm",
+          "canonicalScientificName": "Ulmus pumila",
+          "family": "Ulmaceae",
+          "tier": "C",
+          "coursePriority": "3 - recognition/confuser"
+        },
+        {
+          "taxonId": "SALIX_NIGRA",
+          "preferredCommonName": "Black willow",
+          "canonicalScientificName": "Salix nigra",
+          "family": "Salicaceae",
+          "tier": "B",
+          "coursePriority": "2 - regional"
+        },
+        {
+          "taxonId": "PLATANUS_OCCIDENTALIS",
+          "preferredCommonName": "American sycamore",
+          "canonicalScientificName": "Platanus occidentalis",
+          "family": "Platanaceae",
+          "tier": "B",
+          "coursePriority": "2 - regional"
+        }
+      ],
+      "cumulativeEligibleTaxa": 53,
+      "confuserSets": [
+        {
+          "confusionSetId": "CS01",
+          "name": "Sugar / black / Norway maple",
+          "keySeparators": "Petiole latex; leaf underside hair and stipules; bud size/shape; samara angle",
+          "additionalViews": "Fresh-broken petiole; lower surface; terminal bud; ripe samara"
+        },
+        {
+          "confusionSetId": "CS02",
+          "name": "Red / silver maple",
+          "keySeparators": "Sinus depth; lower-surface whiteness; spring samara size; twig odor; bark strips",
+          "additionalViews": "Complete leaf underside; samara with scale; crushed twig; mature bark"
+        },
+        {
+          "confusionSetId": "CS03",
+          "name": "Striped / mountain maple",
+          "keySeparators": "Green-white striped bark versus unstriped; leaf size/base; fruit cluster posture; growth form",
+          "additionalViews": "Young stem; intact leaf; fruit cluster; whole plant"
+        },
+        {
+          "confusionSetId": "CS04",
+          "name": "White / green / black ash",
+          "keySeparators": "Leaf-scar shape and bud position; leaflet stalks; samara wing extent; black-ash corky bark",
+          "additionalViews": "Twig node and leaf scar; whole rachis; samara; bark; hydrologic setting"
+        },
+        {
+          "confusionSetId": "CS05",
+          "name": "Paper / heart-leaved / gray birch",
+          "keySeparators": "Leaf base and vein count; twig resin glands; peeling versus tight bark; black branch marks; elevation",
+          "additionalViews": "Several mature leaves; resin-warty twig; bark sheet; whole growth form; location"
+        },
+        {
+          "confusionSetId": "CS06",
+          "name": "Yellow / sweet birch",
+          "keySeparators": "Both wintergreen; yellow birch golden curling bark and spur shoots versus sweet birch dark blocky bark",
+          "additionalViews": "Scratched twig; young and mature bark; fruiting strobile; lower leaf surface"
+        },
+        {
+          "confusionSetId": "CS07",
+          "name": "White / black / red / Norway spruce",
+          "keySeparators": "Cone size and scale margin; twig hairs; bud resin; foliage color/odor; pendulous branchlets",
+          "additionalViews": "Full cone; twig macro; bud; whole crown; regional site"
+        },
+        {
+          "confusionSetId": "CS08",
+          "name": "Spruce / fir / hemlock",
+          "keySeparators": "Woody pegs versus pad base versus petiole; needle cross-section; cone orientation and persistence",
+          "additionalViews": "Needle attachment macro; underside; terminal shoot; intact or attached cone"
+        },
+        {
+          "confusionSetId": "CS09",
+          "name": "Red / jack / Scots / pitch pine",
+          "keySeparators": "Fascicle count/length; bend test; cone curvature/prickles; upper-bole orange bark; epicormic shoots",
+          "additionalViews": "Several complete fascicles; cone and umbo; upper and lower bark; whole crown"
+        },
+        {
+          "confusionSetId": "CS10",
+          "name": "Tamarack / European larch",
+          "keySeparators": "Cone size and scale count/edge; needle cluster density; native peatland versus planting",
+          "additionalViews": "Full cone; spur shoot; cluster count; site/planting context"
+        },
+        {
+          "confusionSetId": "CS13",
+          "name": "Aspens / balsam poplar / cottonwood",
+          "keySeparators": "Petiole flattening; tooth size; leaf base; bud size/stickiness/odor; bark and floodplain/upland context",
+          "additionalViews": "Complete leaf and petiole; bud; young and old bark; clonal form; site"
+        },
+        {
+          "confusionSetId": "CS14",
+          "name": "American / slippery / rock / Siberian elm",
+          "keySeparators": "Leaf roughness/base; bud hair; corky wings; samara hair/notch; bark layering; crown",
+          "additionalViews": "Leaf surfaces; buds; samara; corky twigs; existing bark section; crown"
+        },
+        {
+          "confusionSetId": "CS15",
+          "name": "Black / pin / chokecherry",
+          "keySeparators": "Fruit cluster architecture; petiole glands; lower-midvein hair; bark age; whole pioneer/clonal form",
+          "additionalViews": "Raceme or cluster; petiole macro; lower leaf; mature bark; whole plant"
+        },
+        {
+          "confusionSetId": "CS16",
+          "name": "American hornbeam / eastern hophornbeam",
+          "keySeparators": "Muscular smooth bole and three-lobed fruit bracts versus shreddy bark and hoplike sacs",
+          "additionalViews": "Bole; fruit; bud; wet versus dry site"
+        },
+        {
+          "confusionSetId": "CS21",
+          "name": "Yellow birch / black cherry bark",
+          "keySeparators": "Golden horizontal curls and wintergreen twig versus burnt-chip plates, petiole glands, and almond twig odor",
+          "additionalViews": "Young and old bark; scratched twig; leaf petiole and underside; fruit"
+        },
+        {
+          "confusionSetId": "CS22",
+          "name": "Serviceberry / mountain-ashes / chokecherry",
+          "keySeparators": "Simple versus compound leaves; pome calyx versus drupe; leaflet proportions; buds; fruit architecture",
+          "additionalViews": "Whole leaf; fruit close-up; bud; flowers; multiple leaves"
+        }
+      ],
+      "silvics": {
+        "dimensions": [
+          "moisture_drainage_soils",
+          "forest_associations",
+          "regeneration",
+          "vegetative_reproduction",
+          "seed_mast_behavior",
+          "insects_diseases",
+          "management_implications"
+        ],
+        "responseStandard": "Explain lowland or riparian establishment and management implications while distinguishing host traits from damage symptoms."
+      },
+      "sessions": [
+        {
+          "sessionId": "W05-A",
+          "letter": "A",
+          "title": "Ash and elm systems",
+          "kind": "species_introduction",
+          "delivery": "confuser-first teaching with host-condition separation",
+          "modalities": [
+            "foliage",
+            "bark",
+            "reproductive",
+            "dormant",
+            "whole_tree_context",
+            "condition"
+          ]
+        },
+        {
+          "sessionId": "W05-B",
+          "letter": "B",
+          "title": "Ash and elm dormant retrieval",
+          "kind": "delayed_retrieval",
+          "delivery": "unfamiliar lowland specimens and calibrated field decisions",
+          "modalities": [
+            "bark",
+            "reproductive",
+            "dormant",
+            "whole_tree_context",
+            "condition"
+          ]
+        },
+        {
+          "sessionId": "W05-C",
+          "letter": "C",
+          "title": "Riparian maples, birch, cottonwood, willow, and sycamore",
+          "kind": "new_species_and_confusers",
+          "delivery": "organ contrasts within riparian context",
+          "modalities": [
+            "foliage",
+            "bark",
+            "reproductive",
+            "dormant",
+            "whole_tree_context"
+          ]
+        },
+        {
+          "sessionId": "W05-D",
+          "letter": "D",
+          "title": "Lowland dormant and propagule laboratory",
+          "kind": "multi_organ_laboratory",
+          "delivery": "leaf-scar bud samara bark and site stations",
+          "modalities": [
+            "foliage",
+            "bark",
+            "reproductive",
+            "dormant",
+            "whole_tree_context",
+            "condition"
+          ]
+        },
+        {
+          "sessionId": "W05-E",
+          "letter": "E",
+          "title": "Midterm cumulative retrieval",
+          "kind": "cumulative_adaptive_retrieval",
+          "delivery": "adaptive review without reuse of formal assets",
+          "modalities": [
+            "foliage",
+            "bark",
+            "reproductive",
+            "dormant",
+            "whole_tree_context",
+            "condition"
+          ]
+        }
+      ],
+      "assessments": [
+        {
+          "assessmentId": "W05-PRACTICAL",
+          "type": "weekly_identification_practical",
+          "categoryId": "weekly_identification_practicals",
+          "cumulative": true,
+          "stationCount": 24,
+          "timeGuidanceMinutes": 48,
+          "primaryModalityCounts": {
+            "foliage": 4,
+            "bark": 5,
+            "reproductive": 5,
+            "dormant": 5,
+            "whole_tree_context": 5
+          },
+          "minimumConfuserStations": 8,
+          "minimumLimitedEvidenceStations": 3,
+          "minimumSpeciesSupportedStations": 18
+        },
+        {
+          "assessmentId": "W05-MIDTERM",
+          "type": "cumulative_midterm_examination",
+          "categoryId": "midterm_examination",
+          "cumulative": true,
+          "stationCount": 60,
+          "timeGuidanceMinutes": 120,
+          "primaryModalityCounts": {
+            "foliage": 8,
+            "bark": 8,
+            "reproductive": 8,
+            "dormant": 8,
+            "whole_tree_context": 8
+          },
+          "minimumConfuserStations": 14,
+          "minimumLimitedEvidenceStations": 6,
+          "minimumSpeciesSupportedStations": 30
+        },
+        {
+          "assessmentId": "W05-LOWLAND-FIELD",
+          "type": "lowland_dormant_propagule_exercise",
+          "categoryId": "field_condition_identification",
+          "cumulative": true,
+          "stationCount": 20,
+          "timeGuidanceMinutes": 45,
+          "primaryModalityCounts": {
+            "reproductive": 7,
+            "dormant": 7,
+            "whole_tree_context": 4,
+            "condition": 2
+          },
+          "minimumConfuserStations": 6,
+          "minimumLimitedEvidenceStations": 4,
+          "minimumSpeciesSupportedStations": 14
+        }
+      ],
+      "deliveryStatus": "curriculum_complete_visual_media_pending_admission"
+    },
+    {
+      "moduleId": "week-06",
+      "sequence": 6,
+      "title": "Oaks and Oak-Northern Hardwood Transition",
+      "objectives": [
+        "Discriminate the regional red-oak and white-oak groups from leaves, buds, bark, acorns, and site.",
+        "Identify oak specimens across sun and shade foliage, age, and regional context.",
+        "Use acorn cup, bud, lower-leaf, and bark characters instead of relying on lobe shape alone.",
+        "Connect mast, establishment, fire, succession, and silvicultural response to field management.",
+        "Maintain cumulative northern-hardwood and conifer retrieval while oak density increases."
+      ],
+      "newTaxa": [
+        {
+          "taxonId": "QUERCUS_RUBRA",
+          "preferredCommonName": "Northern red oak",
+          "canonicalScientificName": "Quercus rubra",
+          "family": "Fagaceae",
+          "tier": "A",
+          "coursePriority": "1 - core"
+        },
+        {
+          "taxonId": "QUERCUS_VELUTINA",
+          "preferredCommonName": "Black oak",
+          "canonicalScientificName": "Quercus velutina",
+          "family": "Fagaceae",
+          "tier": "B",
+          "coursePriority": "2 - regional"
+        },
+        {
+          "taxonId": "QUERCUS_COCCINEA",
+          "preferredCommonName": "Scarlet oak",
+          "canonicalScientificName": "Quercus coccinea",
+          "family": "Fagaceae",
+          "tier": "B",
+          "coursePriority": "2 - regional"
+        },
+        {
+          "taxonId": "QUERCUS_ELLIPSOIDALIS",
+          "preferredCommonName": "Northern pin oak",
+          "canonicalScientificName": "Quercus ellipsoidalis",
+          "family": "Fagaceae",
+          "tier": "B",
+          "coursePriority": "2 - regional"
+        },
+        {
+          "taxonId": "QUERCUS_PALUSTRIS",
+          "preferredCommonName": "Pin oak",
+          "canonicalScientificName": "Quercus palustris",
+          "family": "Fagaceae",
+          "tier": "B",
+          "coursePriority": "2 - regional"
+        },
+        {
+          "taxonId": "QUERCUS_ALBA",
+          "preferredCommonName": "White oak",
+          "canonicalScientificName": "Quercus alba",
+          "family": "Fagaceae",
+          "tier": "A",
+          "coursePriority": "1 - core"
+        },
+        {
+          "taxonId": "QUERCUS_BICOLOR",
+          "preferredCommonName": "Swamp white oak",
+          "canonicalScientificName": "Quercus bicolor",
+          "family": "Fagaceae",
+          "tier": "B",
+          "coursePriority": "2 - regional"
+        },
+        {
+          "taxonId": "QUERCUS_MACROCARPA",
+          "preferredCommonName": "Bur oak",
+          "canonicalScientificName": "Quercus macrocarpa",
+          "family": "Fagaceae",
+          "tier": "B",
+          "coursePriority": "2 - regional"
+        },
+        {
+          "taxonId": "QUERCUS_MONTANA",
+          "preferredCommonName": "Chestnut oak",
+          "canonicalScientificName": "Quercus montana",
+          "family": "Fagaceae",
+          "tier": "B",
+          "coursePriority": "2 - regional"
+        },
+        {
+          "taxonId": "CELTIS_OCCIDENTALIS",
+          "preferredCommonName": "Common hackberry",
+          "canonicalScientificName": "Celtis occidentalis",
+          "family": "Cannabaceae",
+          "tier": "B",
+          "coursePriority": "2 - regional"
+        }
+      ],
+      "cumulativeEligibleTaxa": 63,
+      "confuserSets": [
+        {
+          "confusionSetId": "CS01",
+          "name": "Sugar / black / Norway maple",
+          "keySeparators": "Petiole latex; leaf underside hair and stipules; bud size/shape; samara angle",
+          "additionalViews": "Fresh-broken petiole; lower surface; terminal bud; ripe samara"
+        },
+        {
+          "confusionSetId": "CS02",
+          "name": "Red / silver maple",
+          "keySeparators": "Sinus depth; lower-surface whiteness; spring samara size; twig odor; bark strips",
+          "additionalViews": "Complete leaf underside; samara with scale; crushed twig; mature bark"
+        },
+        {
+          "confusionSetId": "CS03",
+          "name": "Striped / mountain maple",
+          "keySeparators": "Green-white striped bark versus unstriped; leaf size/base; fruit cluster posture; growth form",
+          "additionalViews": "Young stem; intact leaf; fruit cluster; whole plant"
+        },
+        {
+          "confusionSetId": "CS04",
+          "name": "White / green / black ash",
+          "keySeparators": "Leaf-scar shape and bud position; leaflet stalks; samara wing extent; black-ash corky bark",
+          "additionalViews": "Twig node and leaf scar; whole rachis; samara; bark; hydrologic setting"
+        },
+        {
+          "confusionSetId": "CS05",
+          "name": "Paper / heart-leaved / gray birch",
+          "keySeparators": "Leaf base and vein count; twig resin glands; peeling versus tight bark; black branch marks; elevation",
+          "additionalViews": "Several mature leaves; resin-warty twig; bark sheet; whole growth form; location"
+        },
+        {
+          "confusionSetId": "CS06",
+          "name": "Yellow / sweet birch",
+          "keySeparators": "Both wintergreen; yellow birch golden curling bark and spur shoots versus sweet birch dark blocky bark",
+          "additionalViews": "Scratched twig; young and mature bark; fruiting strobile; lower leaf surface"
+        },
+        {
+          "confusionSetId": "CS07",
+          "name": "White / black / red / Norway spruce",
+          "keySeparators": "Cone size and scale margin; twig hairs; bud resin; foliage color/odor; pendulous branchlets",
+          "additionalViews": "Full cone; twig macro; bud; whole crown; regional site"
+        },
+        {
+          "confusionSetId": "CS08",
+          "name": "Spruce / fir / hemlock",
+          "keySeparators": "Woody pegs versus pad base versus petiole; needle cross-section; cone orientation and persistence",
+          "additionalViews": "Needle attachment macro; underside; terminal shoot; intact or attached cone"
+        },
+        {
+          "confusionSetId": "CS09",
+          "name": "Red / jack / Scots / pitch pine",
+          "keySeparators": "Fascicle count/length; bend test; cone curvature/prickles; upper-bole orange bark; epicormic shoots",
+          "additionalViews": "Several complete fascicles; cone and umbo; upper and lower bark; whole crown"
+        },
+        {
+          "confusionSetId": "CS10",
+          "name": "Tamarack / European larch",
+          "keySeparators": "Cone size and scale count/edge; needle cluster density; native peatland versus planting",
+          "additionalViews": "Full cone; spur shoot; cluster count; site/planting context"
+        },
+        {
+          "confusionSetId": "CS11",
+          "name": "Red-oak group",
+          "keySeparators": "Bud hair/size; lower-leaf hair; sinus architecture; acorn cup depth/rings; bark; site and branch angle",
+          "additionalViews": "Several sun leaves; terminal buds; complete acorn/cup; mature bark; whole crown"
+        },
+        {
+          "confusionSetId": "CS12",
+          "name": "White-oak group",
+          "keySeparators": "Lower-leaf felt; fruit stalk; fringed cup; chestnut teeth; bark architecture; site",
+          "additionalViews": "Lower surface; acorn/cup/stalk; terminal bud; upper and lower bole; site"
+        },
+        {
+          "confusionSetId": "CS13",
+          "name": "Aspens / balsam poplar / cottonwood",
+          "keySeparators": "Petiole flattening; tooth size; leaf base; bud size/stickiness/odor; bark and floodplain/upland context",
+          "additionalViews": "Complete leaf and petiole; bud; young and old bark; clonal form; site"
+        },
+        {
+          "confusionSetId": "CS14",
+          "name": "American / slippery / rock / Siberian elm",
+          "keySeparators": "Leaf roughness/base; bud hair; corky wings; samara hair/notch; bark layering; crown",
+          "additionalViews": "Leaf surfaces; buds; samara; corky twigs; existing bark section; crown"
+        },
+        {
+          "confusionSetId": "CS15",
+          "name": "Black / pin / chokecherry",
+          "keySeparators": "Fruit cluster architecture; petiole glands; lower-midvein hair; bark age; whole pioneer/clonal form",
+          "additionalViews": "Raceme or cluster; petiole macro; lower leaf; mature bark; whole plant"
+        },
+        {
+          "confusionSetId": "CS16",
+          "name": "American hornbeam / eastern hophornbeam",
+          "keySeparators": "Muscular smooth bole and three-lobed fruit bracts versus shreddy bark and hoplike sacs",
+          "additionalViews": "Bole; fruit; bud; wet versus dry site"
+        },
+        {
+          "confusionSetId": "CS21",
+          "name": "Yellow birch / black cherry bark",
+          "keySeparators": "Golden horizontal curls and wintergreen twig versus burnt-chip plates, petiole glands, and almond twig odor",
+          "additionalViews": "Young and old bark; scratched twig; leaf petiole and underside; fruit"
+        },
+        {
+          "confusionSetId": "CS22",
+          "name": "Serviceberry / mountain-ashes / chokecherry",
+          "keySeparators": "Simple versus compound leaves; pome calyx versus drupe; leaflet proportions; buds; fruit architecture",
+          "additionalViews": "Whole leaf; fruit close-up; bud; flowers; multiple leaves"
+        }
+      ],
+      "silvics": {
+        "dimensions": [
+          "moisture_drainage_soils",
+          "geographic_climatic_affinity",
+          "seed_mast_behavior",
+          "establishment_requirements",
+          "successional_role",
+          "disturbance_response",
+          "management_implications",
+          "silvicultural_system_response"
+        ],
+        "responseStandard": "Relate oak regeneration and disturbance requirements to site, competing vegetation, and defensible management implications."
+      },
+      "sessions": [
+        {
+          "sessionId": "W06-A",
+          "letter": "A",
+          "title": "Regional red-oak group",
+          "kind": "species_introduction",
+          "delivery": "character-combination teaching across sun and shade foliage",
+          "modalities": [
+            "foliage",
+            "bark",
+            "reproductive",
+            "dormant",
+            "whole_tree_context"
+          ]
+        },
+        {
+          "sessionId": "W06-B",
+          "letter": "B",
+          "title": "Red-oak retrieval",
+          "kind": "delayed_retrieval",
+          "delivery": "unfamiliar isolated organs and whole-tree decisions",
+          "modalities": [
+            "foliage",
+            "bark",
+            "reproductive",
+            "dormant",
+            "whole_tree_context"
+          ]
+        },
+        {
+          "sessionId": "W06-C",
+          "letter": "C",
+          "title": "White-oak group and hackberry",
+          "kind": "new_species_and_confusers",
+          "delivery": "direct group contrasts followed by mixed isolated specimens",
+          "modalities": [
+            "foliage",
+            "bark",
+            "reproductive",
+            "dormant",
+            "whole_tree_context"
+          ]
+        },
+        {
+          "sessionId": "W06-D",
+          "letter": "D",
+          "title": "Oak multi-organ laboratory",
+          "kind": "multi_organ_laboratory",
+          "delivery": "leaves buds acorns bark and site stations",
+          "modalities": [
+            "foliage",
+            "bark",
+            "reproductive",
+            "dormant",
+            "whole_tree_context"
+          ]
+        },
+        {
+          "sessionId": "W06-E",
+          "letter": "E",
+          "title": "Oak-transition cumulative retrieval",
+          "kind": "cumulative_adaptive_retrieval",
+          "delivery": "adaptive retrieval with nomenclature and silvics prompts",
+          "modalities": [
+            "foliage",
+            "bark",
+            "reproductive",
+            "dormant",
+            "whole_tree_context"
+          ]
+        }
+      ],
+      "assessments": [
+        {
+          "assessmentId": "W06-PRACTICAL",
+          "type": "weekly_identification_practical",
+          "categoryId": "weekly_identification_practicals",
+          "cumulative": true,
+          "stationCount": 24,
+          "timeGuidanceMinutes": 48,
+          "primaryModalityCounts": {
+            "foliage": 5,
+            "bark": 5,
+            "reproductive": 5,
+            "dormant": 4,
+            "whole_tree_context": 5
+          },
+          "minimumConfuserStations": 9,
+          "minimumLimitedEvidenceStations": 3,
+          "minimumSpeciesSupportedStations": 18
+        },
+        {
+          "assessmentId": "W06-NOMENCLATURE-3",
+          "type": "cumulative_nomenclature_check",
+          "categoryId": "scientific_nomenclature",
+          "cumulative": true,
+          "stationCount": 40,
+          "timeGuidanceMinutes": 30,
+          "primaryModalityCounts": {},
+          "minimumConfuserStations": 0,
+          "minimumLimitedEvidenceStations": 0,
+          "minimumSpeciesSupportedStations": 0
+        },
+        {
+          "assessmentId": "W06-SILVICS-3",
+          "type": "cumulative_silvics_retrieval",
+          "categoryId": "silvics",
+          "cumulative": true,
+          "stationCount": 20,
+          "timeGuidanceMinutes": 50,
+          "primaryModalityCounts": {},
+          "minimumConfuserStations": 0,
+          "minimumLimitedEvidenceStations": 0,
+          "minimumSpeciesSupportedStations": 0
+        }
+      ],
+      "deliveryStatus": "curriculum_complete_visual_media_pending_admission"
+    },
+    {
+      "moduleId": "week-07",
+      "sequence": 7,
+      "title": "Hickories, Walnuts, and Allegheny/Southern Associates",
+      "objectives": [
+        "Discriminate regional hickories and walnuts using leaf, bud, pith, nut, husk, and bark combinations.",
+        "Identify Allegheny and southern-transition associates from unfamiliar organs and whole-tree context.",
+        "Use compound-leaf architecture without confusing native genera or later invasive confusers.",
+        "Retrieve increasingly demanding canonical scientific names in both directions.",
+        "Connect mast, establishment, disease, succession, and management to transition-forest silvics."
+      ],
+      "newTaxa": [
+        {
+          "taxonId": "CASTANEA_DENTATA",
+          "preferredCommonName": "American chestnut",
+          "canonicalScientificName": "Castanea dentata",
+          "family": "Fagaceae",
+          "tier": "C",
+          "coursePriority": "3 - recognition/confuser"
+        },
+        {
+          "taxonId": "CARYA_CORDIFORMIS",
+          "preferredCommonName": "Bitternut hickory",
+          "canonicalScientificName": "Carya cordiformis",
+          "family": "Juglandaceae",
+          "tier": "B",
+          "coursePriority": "2 - regional"
+        },
+        {
+          "taxonId": "CARYA_OVATA",
+          "preferredCommonName": "Shagbark hickory",
+          "canonicalScientificName": "Carya ovata",
+          "family": "Juglandaceae",
+          "tier": "B",
+          "coursePriority": "2 - regional"
+        },
+        {
+          "taxonId": "CARYA_GLABRA",
+          "preferredCommonName": "Pignut hickory",
+          "canonicalScientificName": "Carya glabra",
+          "family": "Juglandaceae",
+          "tier": "B",
+          "coursePriority": "2 - regional"
+        },
+        {
+          "taxonId": "CARYA_TOMENTOSA",
+          "preferredCommonName": "Mockernut hickory",
+          "canonicalScientificName": "Carya tomentosa",
+          "family": "Juglandaceae",
+          "tier": "B",
+          "coursePriority": "2 - regional"
+        },
+        {
+          "taxonId": "JUGLANS_NIGRA",
+          "preferredCommonName": "Black walnut",
+          "canonicalScientificName": "Juglans nigra",
+          "family": "Juglandaceae",
+          "tier": "B",
+          "coursePriority": "2 - regional"
+        },
+        {
+          "taxonId": "JUGLANS_CINEREA",
+          "preferredCommonName": "Butternut",
+          "canonicalScientificName": "Juglans cinerea",
+          "family": "Juglandaceae",
+          "tier": "B",
+          "coursePriority": "2 - regional"
+        },
+        {
+          "taxonId": "NYSSA_SYLVATICA",
+          "preferredCommonName": "Blackgum",
+          "canonicalScientificName": "Nyssa sylvatica",
+          "family": "Nyssaceae; sometimes Cornaceae",
+          "tier": "B",
+          "coursePriority": "2 - regional"
+        },
+        {
+          "taxonId": "SASSAFRAS_ALBIDUM",
+          "preferredCommonName": "Sassafras",
+          "canonicalScientificName": "Sassafras albidum",
+          "family": "Lauraceae",
+          "tier": "B",
+          "coursePriority": "2 - regional"
+        },
+        {
+          "taxonId": "MAGNOLIA_ACUMINATA",
+          "preferredCommonName": "Cucumbertree",
+          "canonicalScientificName": "Magnolia acuminata",
+          "family": "Magnoliaceae",
+          "tier": "B",
+          "coursePriority": "2 - regional"
+        },
+        {
+          "taxonId": "LIRIODENDRON_TULIPIFERA",
+          "preferredCommonName": "Tuliptree",
+          "canonicalScientificName": "Liriodendron tulipifera",
+          "family": "Magnoliaceae",
+          "tier": "B",
+          "coursePriority": "2 - regional"
+        },
+        {
+          "taxonId": "CORNUS_FLORIDA",
+          "preferredCommonName": "Flowering dogwood",
+          "canonicalScientificName": "Cornus florida",
+          "family": "Cornaceae",
+          "tier": "B",
+          "coursePriority": "2 - regional"
+        }
+      ],
+      "cumulativeEligibleTaxa": 75,
+      "confuserSets": [
+        {
+          "confusionSetId": "CS01",
+          "name": "Sugar / black / Norway maple",
+          "keySeparators": "Petiole latex; leaf underside hair and stipules; bud size/shape; samara angle",
+          "additionalViews": "Fresh-broken petiole; lower surface; terminal bud; ripe samara"
+        },
+        {
+          "confusionSetId": "CS02",
+          "name": "Red / silver maple",
+          "keySeparators": "Sinus depth; lower-surface whiteness; spring samara size; twig odor; bark strips",
+          "additionalViews": "Complete leaf underside; samara with scale; crushed twig; mature bark"
+        },
+        {
+          "confusionSetId": "CS03",
+          "name": "Striped / mountain maple",
+          "keySeparators": "Green-white striped bark versus unstriped; leaf size/base; fruit cluster posture; growth form",
+          "additionalViews": "Young stem; intact leaf; fruit cluster; whole plant"
+        },
+        {
+          "confusionSetId": "CS04",
+          "name": "White / green / black ash",
+          "keySeparators": "Leaf-scar shape and bud position; leaflet stalks; samara wing extent; black-ash corky bark",
+          "additionalViews": "Twig node and leaf scar; whole rachis; samara; bark; hydrologic setting"
+        },
+        {
+          "confusionSetId": "CS05",
+          "name": "Paper / heart-leaved / gray birch",
+          "keySeparators": "Leaf base and vein count; twig resin glands; peeling versus tight bark; black branch marks; elevation",
+          "additionalViews": "Several mature leaves; resin-warty twig; bark sheet; whole growth form; location"
+        },
+        {
+          "confusionSetId": "CS06",
+          "name": "Yellow / sweet birch",
+          "keySeparators": "Both wintergreen; yellow birch golden curling bark and spur shoots versus sweet birch dark blocky bark",
+          "additionalViews": "Scratched twig; young and mature bark; fruiting strobile; lower leaf surface"
+        },
+        {
+          "confusionSetId": "CS07",
+          "name": "White / black / red / Norway spruce",
+          "keySeparators": "Cone size and scale margin; twig hairs; bud resin; foliage color/odor; pendulous branchlets",
+          "additionalViews": "Full cone; twig macro; bud; whole crown; regional site"
+        },
+        {
+          "confusionSetId": "CS08",
+          "name": "Spruce / fir / hemlock",
+          "keySeparators": "Woody pegs versus pad base versus petiole; needle cross-section; cone orientation and persistence",
+          "additionalViews": "Needle attachment macro; underside; terminal shoot; intact or attached cone"
+        },
+        {
+          "confusionSetId": "CS09",
+          "name": "Red / jack / Scots / pitch pine",
+          "keySeparators": "Fascicle count/length; bend test; cone curvature/prickles; upper-bole orange bark; epicormic shoots",
+          "additionalViews": "Several complete fascicles; cone and umbo; upper and lower bark; whole crown"
+        },
+        {
+          "confusionSetId": "CS10",
+          "name": "Tamarack / European larch",
+          "keySeparators": "Cone size and scale count/edge; needle cluster density; native peatland versus planting",
+          "additionalViews": "Full cone; spur shoot; cluster count; site/planting context"
+        },
+        {
+          "confusionSetId": "CS11",
+          "name": "Red-oak group",
+          "keySeparators": "Bud hair/size; lower-leaf hair; sinus architecture; acorn cup depth/rings; bark; site and branch angle",
+          "additionalViews": "Several sun leaves; terminal buds; complete acorn/cup; mature bark; whole crown"
+        },
+        {
+          "confusionSetId": "CS12",
+          "name": "White-oak group",
+          "keySeparators": "Lower-leaf felt; fruit stalk; fringed cup; chestnut teeth; bark architecture; site",
+          "additionalViews": "Lower surface; acorn/cup/stalk; terminal bud; upper and lower bole; site"
+        },
+        {
+          "confusionSetId": "CS13",
+          "name": "Aspens / balsam poplar / cottonwood",
+          "keySeparators": "Petiole flattening; tooth size; leaf base; bud size/stickiness/odor; bark and floodplain/upland context",
+          "additionalViews": "Complete leaf and petiole; bud; young and old bark; clonal form; site"
+        },
+        {
+          "confusionSetId": "CS14",
+          "name": "American / slippery / rock / Siberian elm",
+          "keySeparators": "Leaf roughness/base; bud hair; corky wings; samara hair/notch; bark layering; crown",
+          "additionalViews": "Leaf surfaces; buds; samara; corky twigs; existing bark section; crown"
+        },
+        {
+          "confusionSetId": "CS15",
+          "name": "Black / pin / chokecherry",
+          "keySeparators": "Fruit cluster architecture; petiole glands; lower-midvein hair; bark age; whole pioneer/clonal form",
+          "additionalViews": "Raceme or cluster; petiole macro; lower leaf; mature bark; whole plant"
+        },
+        {
+          "confusionSetId": "CS16",
+          "name": "American hornbeam / eastern hophornbeam",
+          "keySeparators": "Muscular smooth bole and three-lobed fruit bracts versus shreddy bark and hoplike sacs",
+          "additionalViews": "Bole; fruit; bud; wet versus dry site"
+        },
+        {
+          "confusionSetId": "CS17",
+          "name": "Black walnut / butternut",
+          "keySeparators": "Terminal leaflet; rachis/twig hair; light versus dark pith; round versus elongated nut; bark",
+          "additionalViews": "Whole leaf; pith section; nut/husk; twig hair; mature bark"
+        },
+        {
+          "confusionSetId": "CS18",
+          "name": "Bitternut / shagbark / pignut / mockernut hickory",
+          "keySeparators": "Terminal bud color/size/hair; leaflet count; rachis hair; husk thickness/dehiscence; bark",
+          "additionalViews": "Terminal bud; entire leaf; husk/nut; mature bark; twig hair"
+        },
+        {
+          "confusionSetId": "CS21",
+          "name": "Yellow birch / black cherry bark",
+          "keySeparators": "Golden horizontal curls and wintergreen twig versus burnt-chip plates, petiole glands, and almond twig odor",
+          "additionalViews": "Young and old bark; scratched twig; leaf petiole and underside; fruit"
+        },
+        {
+          "confusionSetId": "CS22",
+          "name": "Serviceberry / mountain-ashes / chokecherry",
+          "keySeparators": "Simple versus compound leaves; pome calyx versus drupe; leaflet proportions; buds; fruit architecture",
+          "additionalViews": "Whole leaf; fruit close-up; bud; flowers; multiple leaves"
+        },
+        {
+          "confusionSetId": "CS23",
+          "name": "Flowering / pagoda dogwood",
+          "keySeparators": "Opposite versus alternate branching; red versus blue-black fruit; flower bud; crown tiers",
+          "additionalViews": "Intact twig nodes; fruit; bud; whole crown"
+        }
+      ],
+      "silvics": {
+        "dimensions": [
+          "shade_tolerance",
+          "moisture_drainage_soils",
+          "geographic_climatic_affinity",
+          "seed_mast_behavior",
+          "establishment_requirements",
+          "insects_diseases",
+          "management_implications"
+        ],
+        "responseStandard": "Tie reproductive strategy and site affinity to realistic Allegheny or oak-hardwood stand development and management."
+      },
+      "sessions": [
+        {
+          "sessionId": "W07-A",
+          "letter": "A",
+          "title": "Hickories and walnuts",
+          "kind": "species_introduction",
+          "delivery": "compound-leaf nut pith bud and bark comparison",
+          "modalities": [
+            "foliage",
+            "bark",
+            "reproductive",
+            "dormant",
+            "whole_tree_context"
+          ]
+        },
+        {
+          "sessionId": "W07-B",
+          "letter": "B",
+          "title": "Hickory and walnut retrieval",
+          "kind": "delayed_retrieval",
+          "delivery": "unfamiliar isolated organs and direct contrasts",
+          "modalities": [
+            "foliage",
+            "bark",
+            "reproductive",
+            "dormant"
+          ]
+        },
+        {
+          "sessionId": "W07-C",
+          "letter": "C",
+          "title": "Allegheny and southern-transition associates",
+          "kind": "new_species_and_confusers",
+          "delivery": "regional associate comparisons with host-condition separation",
+          "modalities": [
+            "foliage",
+            "bark",
+            "reproductive",
+            "dormant",
+            "whole_tree_context",
+            "condition"
+          ]
+        },
+        {
+          "sessionId": "W07-D",
+          "letter": "D",
+          "title": "Allegheny multi-organ laboratory",
+          "kind": "multi_organ_laboratory",
+          "delivery": "compound leaves nuts pith buds bark and site stations",
+          "modalities": [
+            "foliage",
+            "bark",
+            "reproductive",
+            "dormant",
+            "whole_tree_context",
+            "condition"
+          ]
+        },
+        {
+          "sessionId": "W07-E",
+          "letter": "E",
+          "title": "Southern-transition cumulative retrieval",
+          "kind": "cumulative_adaptive_retrieval",
+          "delivery": "adaptive retrieval with increased scientific-name demand",
+          "modalities": [
+            "foliage",
+            "bark",
+            "reproductive",
+            "dormant",
+            "whole_tree_context"
+          ]
+        }
+      ],
+      "assessments": [
+        {
+          "assessmentId": "W07-PRACTICAL",
+          "type": "weekly_identification_practical",
+          "categoryId": "weekly_identification_practicals",
+          "cumulative": true,
+          "stationCount": 24,
+          "timeGuidanceMinutes": 48,
+          "primaryModalityCounts": {
+            "foliage": 5,
+            "bark": 4,
+            "reproductive": 6,
+            "dormant": 4,
+            "whole_tree_context": 5
+          },
+          "minimumConfuserStations": 9,
+          "minimumLimitedEvidenceStations": 3,
+          "minimumSpeciesSupportedStations": 18
+        }
+      ],
+      "deliveryStatus": "curriculum_complete_visual_media_pending_admission"
+    },
+    {
+      "moduleId": "week-08",
+      "sequence": 8,
+      "title": "Acadian and Eastern Regional Integration",
+      "objectives": [
+        "Identify Atlantic white-cedar and pitch pine and place them against their closest regional confusers.",
+        "Transfer identification of learned taxa across Acadian, New England, New York, eastern Canadian, and Great Lakes appearances.",
+        "Recognize the same species under geographic, site, age, and condition variation.",
+        "Use regional associations to test hypotheses without allowing them to replace visible characters.",
+        "Complete the fourth cumulative nomenclature and silvics checks and the regional transfer assessment."
+      ],
+      "newTaxa": [
+        {
+          "taxonId": "PINUS_RIGIDA",
+          "preferredCommonName": "Pitch pine",
+          "canonicalScientificName": "Pinus rigida",
+          "family": "Pinaceae",
+          "tier": "B",
+          "coursePriority": "2 - regional"
+        },
+        {
+          "taxonId": "CHAMAECYPARIS_THYOIDES",
+          "preferredCommonName": "Atlantic white-cedar",
+          "canonicalScientificName": "Chamaecyparis thyoides",
+          "family": "Cupressaceae",
+          "tier": "B",
+          "coursePriority": "2 - regional"
+        }
+      ],
+      "cumulativeEligibleTaxa": 77,
+      "confuserSets": [
+        {
+          "confusionSetId": "CS01",
+          "name": "Sugar / black / Norway maple",
+          "keySeparators": "Petiole latex; leaf underside hair and stipules; bud size/shape; samara angle",
+          "additionalViews": "Fresh-broken petiole; lower surface; terminal bud; ripe samara"
+        },
+        {
+          "confusionSetId": "CS02",
+          "name": "Red / silver maple",
+          "keySeparators": "Sinus depth; lower-surface whiteness; spring samara size; twig odor; bark strips",
+          "additionalViews": "Complete leaf underside; samara with scale; crushed twig; mature bark"
+        },
+        {
+          "confusionSetId": "CS03",
+          "name": "Striped / mountain maple",
+          "keySeparators": "Green-white striped bark versus unstriped; leaf size/base; fruit cluster posture; growth form",
+          "additionalViews": "Young stem; intact leaf; fruit cluster; whole plant"
+        },
+        {
+          "confusionSetId": "CS04",
+          "name": "White / green / black ash",
+          "keySeparators": "Leaf-scar shape and bud position; leaflet stalks; samara wing extent; black-ash corky bark",
+          "additionalViews": "Twig node and leaf scar; whole rachis; samara; bark; hydrologic setting"
+        },
+        {
+          "confusionSetId": "CS05",
+          "name": "Paper / heart-leaved / gray birch",
+          "keySeparators": "Leaf base and vein count; twig resin glands; peeling versus tight bark; black branch marks; elevation",
+          "additionalViews": "Several mature leaves; resin-warty twig; bark sheet; whole growth form; location"
+        },
+        {
+          "confusionSetId": "CS06",
+          "name": "Yellow / sweet birch",
+          "keySeparators": "Both wintergreen; yellow birch golden curling bark and spur shoots versus sweet birch dark blocky bark",
+          "additionalViews": "Scratched twig; young and mature bark; fruiting strobile; lower leaf surface"
+        },
+        {
+          "confusionSetId": "CS07",
+          "name": "White / black / red / Norway spruce",
+          "keySeparators": "Cone size and scale margin; twig hairs; bud resin; foliage color/odor; pendulous branchlets",
+          "additionalViews": "Full cone; twig macro; bud; whole crown; regional site"
+        },
+        {
+          "confusionSetId": "CS08",
+          "name": "Spruce / fir / hemlock",
+          "keySeparators": "Woody pegs versus pad base versus petiole; needle cross-section; cone orientation and persistence",
+          "additionalViews": "Needle attachment macro; underside; terminal shoot; intact or attached cone"
+        },
+        {
+          "confusionSetId": "CS09",
+          "name": "Red / jack / Scots / pitch pine",
+          "keySeparators": "Fascicle count/length; bend test; cone curvature/prickles; upper-bole orange bark; epicormic shoots",
+          "additionalViews": "Several complete fascicles; cone and umbo; upper and lower bark; whole crown"
+        },
+        {
+          "confusionSetId": "CS10",
+          "name": "Tamarack / European larch",
+          "keySeparators": "Cone size and scale count/edge; needle cluster density; native peatland versus planting",
+          "additionalViews": "Full cone; spur shoot; cluster count; site/planting context"
+        },
+        {
+          "confusionSetId": "CS11",
+          "name": "Red-oak group",
+          "keySeparators": "Bud hair/size; lower-leaf hair; sinus architecture; acorn cup depth/rings; bark; site and branch angle",
+          "additionalViews": "Several sun leaves; terminal buds; complete acorn/cup; mature bark; whole crown"
+        },
+        {
+          "confusionSetId": "CS12",
+          "name": "White-oak group",
+          "keySeparators": "Lower-leaf felt; fruit stalk; fringed cup; chestnut teeth; bark architecture; site",
+          "additionalViews": "Lower surface; acorn/cup/stalk; terminal bud; upper and lower bole; site"
+        },
+        {
+          "confusionSetId": "CS13",
+          "name": "Aspens / balsam poplar / cottonwood",
+          "keySeparators": "Petiole flattening; tooth size; leaf base; bud size/stickiness/odor; bark and floodplain/upland context",
+          "additionalViews": "Complete leaf and petiole; bud; young and old bark; clonal form; site"
+        },
+        {
+          "confusionSetId": "CS14",
+          "name": "American / slippery / rock / Siberian elm",
+          "keySeparators": "Leaf roughness/base; bud hair; corky wings; samara hair/notch; bark layering; crown",
+          "additionalViews": "Leaf surfaces; buds; samara; corky twigs; existing bark section; crown"
+        },
+        {
+          "confusionSetId": "CS15",
+          "name": "Black / pin / chokecherry",
+          "keySeparators": "Fruit cluster architecture; petiole glands; lower-midvein hair; bark age; whole pioneer/clonal form",
+          "additionalViews": "Raceme or cluster; petiole macro; lower leaf; mature bark; whole plant"
+        },
+        {
+          "confusionSetId": "CS16",
+          "name": "American hornbeam / eastern hophornbeam",
+          "keySeparators": "Muscular smooth bole and three-lobed fruit bracts versus shreddy bark and hoplike sacs",
+          "additionalViews": "Bole; fruit; bud; wet versus dry site"
+        },
+        {
+          "confusionSetId": "CS17",
+          "name": "Black walnut / butternut",
+          "keySeparators": "Terminal leaflet; rachis/twig hair; light versus dark pith; round versus elongated nut; bark",
+          "additionalViews": "Whole leaf; pith section; nut/husk; twig hair; mature bark"
+        },
+        {
+          "confusionSetId": "CS18",
+          "name": "Bitternut / shagbark / pignut / mockernut hickory",
+          "keySeparators": "Terminal bud color/size/hair; leaflet count; rachis hair; husk thickness/dehiscence; bark",
+          "additionalViews": "Terminal bud; entire leaf; husk/nut; mature bark; twig hair"
+        },
+        {
+          "confusionSetId": "CS19",
+          "name": "Northern white-cedar / Atlantic white-cedar / eastern redcedar",
+          "keySeparators": "Flattened fans versus fine false-cypress sprays versus rounded juniper twigs; cone type; fruit color; wetland chemistry",
+          "additionalViews": "Full spray; seed cone or berry-like cone; bark; site"
+        },
+        {
+          "confusionSetId": "CS21",
+          "name": "Yellow birch / black cherry bark",
+          "keySeparators": "Golden horizontal curls and wintergreen twig versus burnt-chip plates, petiole glands, and almond twig odor",
+          "additionalViews": "Young and old bark; scratched twig; leaf petiole and underside; fruit"
+        },
+        {
+          "confusionSetId": "CS22",
+          "name": "Serviceberry / mountain-ashes / chokecherry",
+          "keySeparators": "Simple versus compound leaves; pome calyx versus drupe; leaflet proportions; buds; fruit architecture",
+          "additionalViews": "Whole leaf; fruit close-up; bud; flowers; multiple leaves"
+        },
+        {
+          "confusionSetId": "CS23",
+          "name": "Flowering / pagoda dogwood",
+          "keySeparators": "Opposite versus alternate branching; red versus blue-black fruit; flower bud; crown tiers",
+          "additionalViews": "Intact twig nodes; fruit; bud; whole crown"
+        }
+      ],
+      "silvics": {
+        "dimensions": [
+          "geographic_climatic_affinity",
+          "moisture_drainage_soils",
+          "forest_associations",
+          "regeneration",
+          "successional_role",
+          "disturbance_response",
+          "management_implications"
+        ],
+        "responseStandard": "Compare regional expression while keeping species-level silvics internally consistent and site-specific."
+      },
+      "sessions": [
+        {
+          "sessionId": "W08-A",
+          "letter": "A",
+          "title": "Atlantic white-cedar and pitch pine",
+          "kind": "species_introduction",
+          "delivery": "regional conifer comparison and morphology-first field decisions",
+          "modalities": [
+            "foliage",
+            "bark",
+            "reproductive",
+            "dormant",
+            "whole_tree_context"
+          ]
+        },
+        {
+          "sessionId": "W08-B",
+          "letter": "B",
+          "title": "Acadian conifer retrieval",
+          "kind": "delayed_retrieval",
+          "delivery": "unfamiliar isolated and regional-context specimens",
+          "modalities": [
+            "foliage",
+            "bark",
+            "reproductive",
+            "whole_tree_context"
+          ]
+        },
+        {
+          "sessionId": "W08-C",
+          "letter": "C",
+          "title": "Eastern regional confuser integration",
+          "kind": "regional_confuser_integration",
+          "delivery": "same-species geographic transfer and direct confuser contrast",
+          "modalities": [
+            "foliage",
+            "bark",
+            "reproductive",
+            "dormant",
+            "whole_tree_context"
+          ]
+        },
+        {
+          "sessionId": "W08-D",
+          "letter": "D",
+          "title": "Acadian and eastern integration laboratory",
+          "kind": "multi_organ_laboratory",
+          "delivery": "regional multi-organ stations across geographic appearances",
+          "modalities": [
+            "foliage",
+            "bark",
+            "reproductive",
+            "dormant",
+            "whole_tree_context",
+            "condition"
+          ]
+        },
+        {
+          "sessionId": "W08-E",
+          "letter": "E",
+          "title": "Regional transfer cumulative retrieval",
+          "kind": "cumulative_adaptive_retrieval",
+          "delivery": "adaptive retrieval with regional and scientific-name transfer",
+          "modalities": [
+            "foliage",
+            "bark",
+            "reproductive",
+            "dormant",
+            "whole_tree_context",
+            "condition"
+          ]
+        }
+      ],
+      "assessments": [
+        {
+          "assessmentId": "W08-PRACTICAL",
+          "type": "weekly_identification_practical",
+          "categoryId": "weekly_identification_practicals",
+          "cumulative": true,
+          "stationCount": 28,
+          "timeGuidanceMinutes": 56,
+          "primaryModalityCounts": {
+            "foliage": 5,
+            "bark": 6,
+            "reproductive": 5,
+            "dormant": 5,
+            "whole_tree_context": 7
+          },
+          "minimumConfuserStations": 9,
+          "minimumLimitedEvidenceStations": 4,
+          "minimumSpeciesSupportedStations": 21
+        },
+        {
+          "assessmentId": "W08-NOMENCLATURE-4",
+          "type": "cumulative_nomenclature_check",
+          "categoryId": "scientific_nomenclature",
+          "cumulative": true,
+          "stationCount": 50,
+          "timeGuidanceMinutes": 38,
+          "primaryModalityCounts": {},
+          "minimumConfuserStations": 0,
+          "minimumLimitedEvidenceStations": 0,
+          "minimumSpeciesSupportedStations": 0
+        },
+        {
+          "assessmentId": "W08-SILVICS-4",
+          "type": "cumulative_silvics_retrieval",
+          "categoryId": "silvics",
+          "cumulative": true,
+          "stationCount": 24,
+          "timeGuidanceMinutes": 60,
+          "primaryModalityCounts": {},
+          "minimumConfuserStations": 0,
+          "minimumLimitedEvidenceStations": 0,
+          "minimumSpeciesSupportedStations": 0
+        },
+        {
+          "assessmentId": "W08-REGIONAL-TRANSFER",
+          "type": "regional_transfer_exercise",
+          "categoryId": "field_condition_identification",
+          "cumulative": true,
+          "stationCount": 24,
+          "timeGuidanceMinutes": 55,
+          "primaryModalityCounts": {
+            "foliage": 3,
+            "bark": 4,
+            "whole_tree_context": 11,
+            "condition": 6
+          },
+          "minimumConfuserStations": 6,
+          "minimumLimitedEvidenceStations": 6,
+          "minimumSpeciesSupportedStations": 15
+        }
+      ],
+      "deliveryStatus": "curriculum_complete_visual_media_pending_admission"
+    },
+    {
+      "moduleId": "week-09",
+      "sequence": 9,
+      "title": "Pathology, Variation, Winter Dendrology, and Adversarial Identification",
+      "objectives": [
+        "Discriminate black locust, tree-of-heaven, and white mulberry from native compound-leaved and variable-leaved trees.",
+        "Identify taxa under disease, insect, age, injury, weather, lichen, browse, and poor-view variation.",
+        "Identify American beech across the required bark and foliage-condition sequence while scoring host and condition separately.",
+        "Make calibrated winter identifications from twigs, buds, scars, pith, thorns, persistent structures, and site.",
+        "Choose genus, group, or insufficient evidence when adversarial material cannot defend species."
+      ],
+      "newTaxa": [
+        {
+          "taxonId": "ROBINIA_PSEUDOACACIA",
+          "preferredCommonName": "Black locust",
+          "canonicalScientificName": "Robinia pseudoacacia",
+          "family": "Fabaceae",
+          "tier": "C",
+          "coursePriority": "3 - recognition/confuser"
+        },
+        {
+          "taxonId": "AILANTHUS_ALTISSIMA",
+          "preferredCommonName": "Tree-of-heaven",
+          "canonicalScientificName": "Ailanthus altissima",
+          "family": "Simaroubaceae",
+          "tier": "C",
+          "coursePriority": "3 - recognition/confuser"
+        },
+        {
+          "taxonId": "MORUS_ALBA",
+          "preferredCommonName": "White mulberry",
+          "canonicalScientificName": "Morus alba",
+          "family": "Moraceae",
+          "tier": "C",
+          "coursePriority": "3 - recognition/confuser"
+        }
+      ],
+      "cumulativeEligibleTaxa": 80,
+      "confuserSets": [
+        {
+          "confusionSetId": "CS01",
+          "name": "Sugar / black / Norway maple",
+          "keySeparators": "Petiole latex; leaf underside hair and stipules; bud size/shape; samara angle",
+          "additionalViews": "Fresh-broken petiole; lower surface; terminal bud; ripe samara"
+        },
+        {
+          "confusionSetId": "CS02",
+          "name": "Red / silver maple",
+          "keySeparators": "Sinus depth; lower-surface whiteness; spring samara size; twig odor; bark strips",
+          "additionalViews": "Complete leaf underside; samara with scale; crushed twig; mature bark"
+        },
+        {
+          "confusionSetId": "CS03",
+          "name": "Striped / mountain maple",
+          "keySeparators": "Green-white striped bark versus unstriped; leaf size/base; fruit cluster posture; growth form",
+          "additionalViews": "Young stem; intact leaf; fruit cluster; whole plant"
+        },
+        {
+          "confusionSetId": "CS04",
+          "name": "White / green / black ash",
+          "keySeparators": "Leaf-scar shape and bud position; leaflet stalks; samara wing extent; black-ash corky bark",
+          "additionalViews": "Twig node and leaf scar; whole rachis; samara; bark; hydrologic setting"
+        },
+        {
+          "confusionSetId": "CS05",
+          "name": "Paper / heart-leaved / gray birch",
+          "keySeparators": "Leaf base and vein count; twig resin glands; peeling versus tight bark; black branch marks; elevation",
+          "additionalViews": "Several mature leaves; resin-warty twig; bark sheet; whole growth form; location"
+        },
+        {
+          "confusionSetId": "CS06",
+          "name": "Yellow / sweet birch",
+          "keySeparators": "Both wintergreen; yellow birch golden curling bark and spur shoots versus sweet birch dark blocky bark",
+          "additionalViews": "Scratched twig; young and mature bark; fruiting strobile; lower leaf surface"
+        },
+        {
+          "confusionSetId": "CS07",
+          "name": "White / black / red / Norway spruce",
+          "keySeparators": "Cone size and scale margin; twig hairs; bud resin; foliage color/odor; pendulous branchlets",
+          "additionalViews": "Full cone; twig macro; bud; whole crown; regional site"
+        },
+        {
+          "confusionSetId": "CS08",
+          "name": "Spruce / fir / hemlock",
+          "keySeparators": "Woody pegs versus pad base versus petiole; needle cross-section; cone orientation and persistence",
+          "additionalViews": "Needle attachment macro; underside; terminal shoot; intact or attached cone"
+        },
+        {
+          "confusionSetId": "CS09",
+          "name": "Red / jack / Scots / pitch pine",
+          "keySeparators": "Fascicle count/length; bend test; cone curvature/prickles; upper-bole orange bark; epicormic shoots",
+          "additionalViews": "Several complete fascicles; cone and umbo; upper and lower bark; whole crown"
+        },
+        {
+          "confusionSetId": "CS10",
+          "name": "Tamarack / European larch",
+          "keySeparators": "Cone size and scale count/edge; needle cluster density; native peatland versus planting",
+          "additionalViews": "Full cone; spur shoot; cluster count; site/planting context"
+        },
+        {
+          "confusionSetId": "CS11",
+          "name": "Red-oak group",
+          "keySeparators": "Bud hair/size; lower-leaf hair; sinus architecture; acorn cup depth/rings; bark; site and branch angle",
+          "additionalViews": "Several sun leaves; terminal buds; complete acorn/cup; mature bark; whole crown"
+        },
+        {
+          "confusionSetId": "CS12",
+          "name": "White-oak group",
+          "keySeparators": "Lower-leaf felt; fruit stalk; fringed cup; chestnut teeth; bark architecture; site",
+          "additionalViews": "Lower surface; acorn/cup/stalk; terminal bud; upper and lower bole; site"
+        },
+        {
+          "confusionSetId": "CS13",
+          "name": "Aspens / balsam poplar / cottonwood",
+          "keySeparators": "Petiole flattening; tooth size; leaf base; bud size/stickiness/odor; bark and floodplain/upland context",
+          "additionalViews": "Complete leaf and petiole; bud; young and old bark; clonal form; site"
+        },
+        {
+          "confusionSetId": "CS14",
+          "name": "American / slippery / rock / Siberian elm",
+          "keySeparators": "Leaf roughness/base; bud hair; corky wings; samara hair/notch; bark layering; crown",
+          "additionalViews": "Leaf surfaces; buds; samara; corky twigs; existing bark section; crown"
+        },
+        {
+          "confusionSetId": "CS15",
+          "name": "Black / pin / chokecherry",
+          "keySeparators": "Fruit cluster architecture; petiole glands; lower-midvein hair; bark age; whole pioneer/clonal form",
+          "additionalViews": "Raceme or cluster; petiole macro; lower leaf; mature bark; whole plant"
+        },
+        {
+          "confusionSetId": "CS16",
+          "name": "American hornbeam / eastern hophornbeam",
+          "keySeparators": "Muscular smooth bole and three-lobed fruit bracts versus shreddy bark and hoplike sacs",
+          "additionalViews": "Bole; fruit; bud; wet versus dry site"
+        },
+        {
+          "confusionSetId": "CS17",
+          "name": "Black walnut / butternut",
+          "keySeparators": "Terminal leaflet; rachis/twig hair; light versus dark pith; round versus elongated nut; bark",
+          "additionalViews": "Whole leaf; pith section; nut/husk; twig hair; mature bark"
+        },
+        {
+          "confusionSetId": "CS18",
+          "name": "Bitternut / shagbark / pignut / mockernut hickory",
+          "keySeparators": "Terminal bud color/size/hair; leaflet count; rachis hair; husk thickness/dehiscence; bark",
+          "additionalViews": "Terminal bud; entire leaf; husk/nut; mature bark; twig hair"
+        },
+        {
+          "confusionSetId": "CS19",
+          "name": "Northern white-cedar / Atlantic white-cedar / eastern redcedar",
+          "keySeparators": "Flattened fans versus fine false-cypress sprays versus rounded juniper twigs; cone type; fruit color; wetland chemistry",
+          "additionalViews": "Full spray; seed cone or berry-like cone; bark; site"
+        },
+        {
+          "confusionSetId": "CS20",
+          "name": "Native compound leaves / invasive confusers",
+          "keySeparators": "Opposite/alternate; bud position; leaflet glands; thorns; pith; leaf scar; odor; fruit type",
+          "additionalViews": "Intact leaf plus node; bud/leaf scar; pith; samara/pod/nut; leaflet base"
+        },
+        {
+          "confusionSetId": "CS21",
+          "name": "Yellow birch / black cherry bark",
+          "keySeparators": "Golden horizontal curls and wintergreen twig versus burnt-chip plates, petiole glands, and almond twig odor",
+          "additionalViews": "Young and old bark; scratched twig; leaf petiole and underside; fruit"
+        },
+        {
+          "confusionSetId": "CS22",
+          "name": "Serviceberry / mountain-ashes / chokecherry",
+          "keySeparators": "Simple versus compound leaves; pome calyx versus drupe; leaflet proportions; buds; fruit architecture",
+          "additionalViews": "Whole leaf; fruit close-up; bud; flowers; multiple leaves"
+        },
+        {
+          "confusionSetId": "CS23",
+          "name": "Flowering / pagoda dogwood",
+          "keySeparators": "Opposite versus alternate branching; red versus blue-black fruit; flower bud; crown tiers",
+          "additionalViews": "Intact twig nodes; fruit; bud; whole crown"
+        },
+        {
+          "confusionSetId": "CS24",
+          "name": "White mulberry / sassafras / basswood",
+          "keySeparators": "Latex and variable coarse leaves; sassafras aroma/mixed shapes; basswood asymmetric heart base and bracted fruit",
+          "additionalViews": "Fresh twig/petiole; multiple leaves; fruit; buds; bark"
+        }
+      ],
+      "silvics": {
+        "dimensions": [
+          "regeneration",
+          "vegetative_reproduction",
+          "disturbance_response",
+          "browse_susceptibility",
+          "insects_diseases",
+          "management_implications"
+        ],
+        "responseStandard": "State host silvics separately from observed condition, causal diagnosis, and management implication."
+      },
+      "sessions": [
+        {
+          "sessionId": "W09-A",
+          "letter": "A",
+          "title": "Planted and invasive confusers",
+          "kind": "species_introduction",
+          "delivery": "native-versus-invasive character combinations",
+          "modalities": [
+            "foliage",
+            "bark",
+            "reproductive",
+            "dormant",
+            "whole_tree_context"
+          ]
+        },
+        {
+          "sessionId": "W09-B",
+          "letter": "B",
+          "title": "Winter and invasive-confuser retrieval",
+          "kind": "delayed_retrieval",
+          "delivery": "unfamiliar partial winter specimens",
+          "modalities": [
+            "bark",
+            "reproductive",
+            "dormant",
+            "whole_tree_context"
+          ]
+        },
+        {
+          "sessionId": "W09-C",
+          "letter": "C",
+          "title": "American beech condition laboratory",
+          "kind": "condition_and_confuser_integration",
+          "delivery": "host-identification and condition-diagnosis stations scored separately",
+          "modalities": [
+            "foliage",
+            "bark",
+            "whole_tree_context",
+            "condition"
+          ]
+        },
+        {
+          "sessionId": "W09-D",
+          "letter": "D",
+          "title": "Adversarial winter and damage laboratory",
+          "kind": "multi_organ_laboratory",
+          "delivery": "poor views damaged material disease effects and insufficient-evidence stations",
+          "modalities": [
+            "foliage",
+            "bark",
+            "reproductive",
+            "dormant",
+            "whole_tree_context",
+            "condition"
+          ]
+        },
+        {
+          "sessionId": "W09-E",
+          "letter": "E",
+          "title": "No weak species disappears",
+          "kind": "cumulative_adaptive_retrieval",
+          "delivery": "adversarial adaptive retrieval and targeted remediation",
+          "modalities": [
+            "foliage",
+            "bark",
+            "reproductive",
+            "dormant",
+            "whole_tree_context",
+            "condition"
+          ]
+        }
+      ],
+      "assessments": [
+        {
+          "assessmentId": "W09-PRACTICAL",
+          "type": "weekly_identification_practical",
+          "categoryId": "weekly_identification_practicals",
+          "cumulative": true,
+          "stationCount": 30,
+          "timeGuidanceMinutes": 65,
+          "primaryModalityCounts": {
+            "foliage": 4,
+            "bark": 7,
+            "reproductive": 5,
+            "dormant": 7,
+            "whole_tree_context": 5,
+            "condition": 2
+          },
+          "minimumConfuserStations": 10,
+          "minimumLimitedEvidenceStations": 6,
+          "minimumSpeciesSupportedStations": 21
+        },
+        {
+          "assessmentId": "W09-BEECH-CONDITION",
+          "type": "american_beech_condition_laboratory",
+          "categoryId": "field_condition_identification",
+          "cumulative": true,
+          "stationCount": 24,
+          "timeGuidanceMinutes": 60,
+          "primaryModalityCounts": {
+            "foliage": 3,
+            "bark": 11,
+            "whole_tree_context": 4,
+            "condition": 6
+          },
+          "minimumConfuserStations": 4,
+          "minimumLimitedEvidenceStations": 6,
+          "minimumSpeciesSupportedStations": 15
+        },
+        {
+          "assessmentId": "W09-ADVERSARIAL-WINTER",
+          "type": "adversarial_winter_damage_practical",
+          "categoryId": "field_condition_identification",
+          "cumulative": true,
+          "stationCount": 30,
+          "timeGuidanceMinutes": 70,
+          "primaryModalityCounts": {
+            "bark": 7,
+            "reproductive": 4,
+            "dormant": 10,
+            "whole_tree_context": 5,
+            "condition": 4
+          },
+          "minimumConfuserStations": 10,
+          "minimumLimitedEvidenceStations": 10,
+          "minimumSpeciesSupportedStations": 17
+        }
+      ],
+      "deliveryStatus": "curriculum_complete_visual_media_pending_admission"
+    },
+    {
+      "moduleId": "week-10",
+      "sequence": 10,
+      "title": "Comprehensive Integration and Certification",
+      "objectives": [
+        "Demonstrate rapid, calibrated identification of all eligible taxa from unfamiliar single-organ and mixed evidence.",
+        "Complete cumulative scientific-name retrieval in both directions.",
+        "Pass separate foliage, bark, reproductive, dormant, whole-tree/regional, and rapid mixed-evidence batteries.",
+        "Synthesize field silvics across site, regeneration, disturbance, succession, condition, and management.",
+        "Produce a final numerical grade and a separate species-by-modality mastery and certification report."
+      ],
+      "newTaxa": [],
+      "cumulativeEligibleTaxa": 80,
+      "confuserSets": [
+        {
+          "confusionSetId": "CS01",
+          "name": "Sugar / black / Norway maple",
+          "keySeparators": "Petiole latex; leaf underside hair and stipules; bud size/shape; samara angle",
+          "additionalViews": "Fresh-broken petiole; lower surface; terminal bud; ripe samara"
+        },
+        {
+          "confusionSetId": "CS02",
+          "name": "Red / silver maple",
+          "keySeparators": "Sinus depth; lower-surface whiteness; spring samara size; twig odor; bark strips",
+          "additionalViews": "Complete leaf underside; samara with scale; crushed twig; mature bark"
+        },
+        {
+          "confusionSetId": "CS03",
+          "name": "Striped / mountain maple",
+          "keySeparators": "Green-white striped bark versus unstriped; leaf size/base; fruit cluster posture; growth form",
+          "additionalViews": "Young stem; intact leaf; fruit cluster; whole plant"
+        },
+        {
+          "confusionSetId": "CS04",
+          "name": "White / green / black ash",
+          "keySeparators": "Leaf-scar shape and bud position; leaflet stalks; samara wing extent; black-ash corky bark",
+          "additionalViews": "Twig node and leaf scar; whole rachis; samara; bark; hydrologic setting"
+        },
+        {
+          "confusionSetId": "CS05",
+          "name": "Paper / heart-leaved / gray birch",
+          "keySeparators": "Leaf base and vein count; twig resin glands; peeling versus tight bark; black branch marks; elevation",
+          "additionalViews": "Several mature leaves; resin-warty twig; bark sheet; whole growth form; location"
+        },
+        {
+          "confusionSetId": "CS06",
+          "name": "Yellow / sweet birch",
+          "keySeparators": "Both wintergreen; yellow birch golden curling bark and spur shoots versus sweet birch dark blocky bark",
+          "additionalViews": "Scratched twig; young and mature bark; fruiting strobile; lower leaf surface"
+        },
+        {
+          "confusionSetId": "CS07",
+          "name": "White / black / red / Norway spruce",
+          "keySeparators": "Cone size and scale margin; twig hairs; bud resin; foliage color/odor; pendulous branchlets",
+          "additionalViews": "Full cone; twig macro; bud; whole crown; regional site"
+        },
+        {
+          "confusionSetId": "CS08",
+          "name": "Spruce / fir / hemlock",
+          "keySeparators": "Woody pegs versus pad base versus petiole; needle cross-section; cone orientation and persistence",
+          "additionalViews": "Needle attachment macro; underside; terminal shoot; intact or attached cone"
+        },
+        {
+          "confusionSetId": "CS09",
+          "name": "Red / jack / Scots / pitch pine",
+          "keySeparators": "Fascicle count/length; bend test; cone curvature/prickles; upper-bole orange bark; epicormic shoots",
+          "additionalViews": "Several complete fascicles; cone and umbo; upper and lower bark; whole crown"
+        },
+        {
+          "confusionSetId": "CS10",
+          "name": "Tamarack / European larch",
+          "keySeparators": "Cone size and scale count/edge; needle cluster density; native peatland versus planting",
+          "additionalViews": "Full cone; spur shoot; cluster count; site/planting context"
+        },
+        {
+          "confusionSetId": "CS11",
+          "name": "Red-oak group",
+          "keySeparators": "Bud hair/size; lower-leaf hair; sinus architecture; acorn cup depth/rings; bark; site and branch angle",
+          "additionalViews": "Several sun leaves; terminal buds; complete acorn/cup; mature bark; whole crown"
+        },
+        {
+          "confusionSetId": "CS12",
+          "name": "White-oak group",
+          "keySeparators": "Lower-leaf felt; fruit stalk; fringed cup; chestnut teeth; bark architecture; site",
+          "additionalViews": "Lower surface; acorn/cup/stalk; terminal bud; upper and lower bole; site"
+        },
+        {
+          "confusionSetId": "CS13",
+          "name": "Aspens / balsam poplar / cottonwood",
+          "keySeparators": "Petiole flattening; tooth size; leaf base; bud size/stickiness/odor; bark and floodplain/upland context",
+          "additionalViews": "Complete leaf and petiole; bud; young and old bark; clonal form; site"
+        },
+        {
+          "confusionSetId": "CS14",
+          "name": "American / slippery / rock / Siberian elm",
+          "keySeparators": "Leaf roughness/base; bud hair; corky wings; samara hair/notch; bark layering; crown",
+          "additionalViews": "Leaf surfaces; buds; samara; corky twigs; existing bark section; crown"
+        },
+        {
+          "confusionSetId": "CS15",
+          "name": "Black / pin / chokecherry",
+          "keySeparators": "Fruit cluster architecture; petiole glands; lower-midvein hair; bark age; whole pioneer/clonal form",
+          "additionalViews": "Raceme or cluster; petiole macro; lower leaf; mature bark; whole plant"
+        },
+        {
+          "confusionSetId": "CS16",
+          "name": "American hornbeam / eastern hophornbeam",
+          "keySeparators": "Muscular smooth bole and three-lobed fruit bracts versus shreddy bark and hoplike sacs",
+          "additionalViews": "Bole; fruit; bud; wet versus dry site"
+        },
+        {
+          "confusionSetId": "CS17",
+          "name": "Black walnut / butternut",
+          "keySeparators": "Terminal leaflet; rachis/twig hair; light versus dark pith; round versus elongated nut; bark",
+          "additionalViews": "Whole leaf; pith section; nut/husk; twig hair; mature bark"
+        },
+        {
+          "confusionSetId": "CS18",
+          "name": "Bitternut / shagbark / pignut / mockernut hickory",
+          "keySeparators": "Terminal bud color/size/hair; leaflet count; rachis hair; husk thickness/dehiscence; bark",
+          "additionalViews": "Terminal bud; entire leaf; husk/nut; mature bark; twig hair"
+        },
+        {
+          "confusionSetId": "CS19",
+          "name": "Northern white-cedar / Atlantic white-cedar / eastern redcedar",
+          "keySeparators": "Flattened fans versus fine false-cypress sprays versus rounded juniper twigs; cone type; fruit color; wetland chemistry",
+          "additionalViews": "Full spray; seed cone or berry-like cone; bark; site"
+        },
+        {
+          "confusionSetId": "CS20",
+          "name": "Native compound leaves / invasive confusers",
+          "keySeparators": "Opposite/alternate; bud position; leaflet glands; thorns; pith; leaf scar; odor; fruit type",
+          "additionalViews": "Intact leaf plus node; bud/leaf scar; pith; samara/pod/nut; leaflet base"
+        },
+        {
+          "confusionSetId": "CS21",
+          "name": "Yellow birch / black cherry bark",
+          "keySeparators": "Golden horizontal curls and wintergreen twig versus burnt-chip plates, petiole glands, and almond twig odor",
+          "additionalViews": "Young and old bark; scratched twig; leaf petiole and underside; fruit"
+        },
+        {
+          "confusionSetId": "CS22",
+          "name": "Serviceberry / mountain-ashes / chokecherry",
+          "keySeparators": "Simple versus compound leaves; pome calyx versus drupe; leaflet proportions; buds; fruit architecture",
+          "additionalViews": "Whole leaf; fruit close-up; bud; flowers; multiple leaves"
+        },
+        {
+          "confusionSetId": "CS23",
+          "name": "Flowering / pagoda dogwood",
+          "keySeparators": "Opposite versus alternate branching; red versus blue-black fruit; flower bud; crown tiers",
+          "additionalViews": "Intact twig nodes; fruit; bud; whole crown"
+        },
+        {
+          "confusionSetId": "CS24",
+          "name": "White mulberry / sassafras / basswood",
+          "keySeparators": "Latex and variable coarse leaves; sassafras aroma/mixed shapes; basswood asymmetric heart base and bracted fruit",
+          "additionalViews": "Fresh twig/petiole; multiple leaves; fruit; buds; bark"
+        }
+      ],
+      "silvics": {
+        "dimensions": [
+          "shade_tolerance",
+          "moisture_drainage_soils",
+          "geographic_climatic_affinity",
+          "forest_associations",
+          "regeneration",
+          "vegetative_reproduction",
+          "seed_mast_behavior",
+          "establishment_requirements",
+          "successional_role",
+          "disturbance_response",
+          "longevity_growth_strategy",
+          "browse_susceptibility",
+          "insects_diseases",
+          "management_implications",
+          "silvicultural_system_response"
+        ],
+        "responseStandard": "Certification prompts span at least site, regeneration, disturbance, and management and require field-usable synthesis."
+      },
+      "sessions": [
+        {
+          "sessionId": "W10-A",
+          "letter": "A",
+          "title": "Rapid identification and remediation triage",
+          "kind": "certification_integration",
+          "delivery": "rapid unfamiliar drills with no new taxa",
+          "modalities": [
+            "foliage",
+            "bark",
+            "reproductive",
+            "dormant",
+            "whole_tree_context",
+            "condition"
+          ]
+        },
+        {
+          "sessionId": "W10-B",
+          "letter": "B",
+          "title": "Cumulative scientific-name retrieval",
+          "kind": "delayed_retrieval",
+          "delivery": "closed-response nomenclature batches",
+          "modalities": []
+        },
+        {
+          "sessionId": "W10-C",
+          "letter": "C",
+          "title": "Confusers and insufficient evidence",
+          "kind": "confuser_and_uncertainty_integration",
+          "delivery": "isolated and side-by-side confuser drills with requested-view reasoning",
+          "modalities": [
+            "foliage",
+            "bark",
+            "reproductive",
+            "dormant",
+            "whole_tree_context",
+            "condition"
+          ]
+        },
+        {
+          "sessionId": "W10-D",
+          "letter": "D",
+          "title": "Certification modality rehearsal",
+          "kind": "multi_organ_laboratory",
+          "delivery": "separate foliage bark reproductive dormant and whole-tree stations",
+          "modalities": [
+            "foliage",
+            "bark",
+            "reproductive",
+            "dormant",
+            "whole_tree_context",
+            "condition"
+          ]
+        },
+        {
+          "sessionId": "W10-E",
+          "letter": "E",
+          "title": "Silvics and regional synthesis",
+          "kind": "cumulative_adaptive_retrieval",
+          "delivery": "oral or written synthesis and final targeted retrieval",
+          "modalities": [
+            "whole_tree_context",
+            "condition"
+          ]
+        }
+      ],
+      "assessments": [
+        {
+          "assessmentId": "W10-NOMENCLATURE-FINAL",
+          "type": "cumulative_scientific_name_examination",
+          "categoryId": "scientific_nomenclature",
+          "cumulative": true,
+          "stationCount": 80,
+          "timeGuidanceMinutes": 60,
+          "primaryModalityCounts": {},
+          "minimumConfuserStations": 0,
+          "minimumLimitedEvidenceStations": 0,
+          "minimumSpeciesSupportedStations": 0
+        },
+        {
+          "assessmentId": "W10-SILVICS-SYNTHESIS",
+          "type": "oral_or_written_silvics_synthesis",
+          "categoryId": "silvics",
+          "cumulative": true,
+          "stationCount": 40,
+          "timeGuidanceMinutes": 100,
+          "primaryModalityCounts": {},
+          "minimumConfuserStations": 0,
+          "minimumLimitedEvidenceStations": 0,
+          "minimumSpeciesSupportedStations": 0
+        },
+        {
+          "assessmentId": "W10-FIELD-CONDITION-CERT",
+          "type": "field_condition_certification_check",
+          "categoryId": "field_condition_identification",
+          "cumulative": true,
+          "stationCount": 30,
+          "timeGuidanceMinutes": 70,
+          "primaryModalityCounts": {
+            "bark": 8,
+            "dormant": 9,
+            "whole_tree_context": 7,
+            "condition": 6
+          },
+          "minimumConfuserStations": 8,
+          "minimumLimitedEvidenceStations": 8,
+          "minimumSpeciesSupportedStations": 19
+        },
+        {
+          "assessmentId": "W10-FINAL-FOLIAGE",
+          "type": "comprehensive_final_foliage_only_battery",
+          "categoryId": "comprehensive_final_practical",
+          "cumulative": true,
+          "stationCount": 20,
+          "timeGuidanceMinutes": 35,
+          "primaryModalityCounts": {
+            "foliage": 20
+          },
+          "minimumConfuserStations": 7,
+          "minimumLimitedEvidenceStations": 3,
+          "minimumSpeciesSupportedStations": 15
+        },
+        {
+          "assessmentId": "W10-FINAL-BARK",
+          "type": "comprehensive_final_bark_only_battery",
+          "categoryId": "comprehensive_final_practical",
+          "cumulative": true,
+          "stationCount": 20,
+          "timeGuidanceMinutes": 40,
+          "primaryModalityCounts": {
+            "bark": 20
+          },
+          "minimumConfuserStations": 7,
+          "minimumLimitedEvidenceStations": 4,
+          "minimumSpeciesSupportedStations": 14
+        },
+        {
+          "assessmentId": "W10-FINAL-REPRODUCTIVE",
+          "type": "comprehensive_final_reproductive_battery",
+          "categoryId": "comprehensive_final_practical",
+          "cumulative": true,
+          "stationCount": 16,
+          "timeGuidanceMinutes": 30,
+          "primaryModalityCounts": {
+            "reproductive": 16
+          },
+          "minimumConfuserStations": 5,
+          "minimumLimitedEvidenceStations": 2,
+          "minimumSpeciesSupportedStations": 12
+        },
+        {
+          "assessmentId": "W10-FINAL-DORMANT",
+          "type": "comprehensive_final_dormant_battery",
+          "categoryId": "comprehensive_final_practical",
+          "cumulative": true,
+          "stationCount": 20,
+          "timeGuidanceMinutes": 45,
+          "primaryModalityCounts": {
+            "dormant": 20
+          },
+          "minimumConfuserStations": 7,
+          "minimumLimitedEvidenceStations": 4,
+          "minimumSpeciesSupportedStations": 14
+        },
+        {
+          "assessmentId": "W10-FINAL-WHOLE-TREE",
+          "type": "comprehensive_final_whole_tree_regional_uncertainty_battery",
+          "categoryId": "comprehensive_final_practical",
+          "cumulative": true,
+          "stationCount": 20,
+          "timeGuidanceMinutes": 40,
+          "primaryModalityCounts": {
+            "whole_tree_context": 14,
+            "condition": 6
+          },
+          "minimumConfuserStations": 5,
+          "minimumLimitedEvidenceStations": 6,
+          "minimumSpeciesSupportedStations": 12
+        },
+        {
+          "assessmentId": "W10-FINAL-RAPID-MIXED",
+          "type": "comprehensive_final_rapid_mixed_evidence_battery",
+          "categoryId": "comprehensive_final_practical",
+          "cumulative": true,
+          "stationCount": 50,
+          "timeGuidanceMinutes": 70,
+          "primaryModalityCounts": {
+            "foliage": 10,
+            "bark": 10,
+            "reproductive": 8,
+            "dormant": 8,
+            "whole_tree_context": 10,
+            "condition": 4
+          },
+          "minimumConfuserStations": 15,
+          "minimumLimitedEvidenceStations": 8,
+          "minimumSpeciesSupportedStations": 37
+        }
+      ],
+      "deliveryStatus": "curriculum_complete_visual_media_pending_admission"
+    }
+  ],
+  "developmentBoundary": "This public catalog contains curriculum structure only. It contains no private examination assets, answer keys, learner records, credentials, or production assessment forms."
+}

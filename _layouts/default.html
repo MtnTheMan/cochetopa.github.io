@@ -6,13 +6,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link href="{{ '/assets/css/dist-style.css' | relative_url }}" rel="stylesheet" />
   <link href="{{ '/assets/css/fonts.css' | relative_url }}" rel="stylesheet" />
-  {% if site.typewriter_effect %}
+  {% if site.typewriter_effect and page.typewriter_effect != false %}
   <script src="https://unpkg.com/typeit@8.8.4/dist/index.umd.js"></script>
   {% endif %} {% seo %} {% include custom_head.html %}
 </head>
 
 <body class="bg-white text-gray-900 dark:bg-gray-700 dark:text-slate-100">
-  {% if site.typewriter_effect %}
+  {% if site.typewriter_effect and page.typewriter_effect != false %}
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       new TypeIt("h1", {}).go();
@@ -23,13 +23,30 @@
   <script>
     document.querySelectorAll("a").forEach(function (link) {
       link.addEventListener("click", function (event) {
-        event.preventDefault(); // Prevent the default link action temporarily
+        var href = link.getAttribute("href") || "";
+        if (
+          event.defaultPrevented ||
+          event.button !== 0 ||
+          event.metaKey ||
+          event.ctrlKey ||
+          event.shiftKey ||
+          event.altKey ||
+          link.target === "_blank" ||
+          link.hasAttribute("download") ||
+          href.startsWith("#") ||
+          href.startsWith("mailto:") ||
+          href.startsWith("tel:")
+        ) {
+          return;
+        }
+
+        event.preventDefault();
         link.classList.add("gentle-clicked");
 
         setTimeout(function () {
           link.classList.remove("gentle-clicked");
-          window.location.href = link.href; // Navigate to the link after the animation
-        }, 300); // Duration of the gentle bounce animation
+          window.location.assign(link.href);
+        }, 300);
       });
     });
   </script>

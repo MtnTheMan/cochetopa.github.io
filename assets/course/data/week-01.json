@@ -1,0 +1,1161 @@
+{
+  "schemaVersion": "0.2.0",
+  "courseVersion": "development-preview-2026-08-31",
+  "title": "Northern Hardwoods & Mixedwoods Dendrology and Silvics Intensive",
+  "week": {
+    "id": "week-01",
+    "number": 1,
+    "title": "Foundations + Northern Hardwood Anchors",
+    "objectives": [
+      "Separate direct morphological observation from ecological inference.",
+      "Use arrangement, attachment, margins, venation, buds, bark, reproductive structures, and whole-tree form as independent evidence.",
+      "Identify nine anchor species from more than one organ.",
+      "Give the accepted scientific name for every anchor.",
+      "Retrieve relative shade tolerance, site position, regeneration strategy, and one management implication.",
+      "Stop at a defensible rank and request the resolving view when evidence is inadequate."
+    ],
+    "confusers": [
+      "Sugar maple / red maple",
+      "Yellow birch / paper birch",
+      "American beech / eastern hophornbeam from distant bark",
+      "Yellow birch / black cherry bark",
+      "Eastern hemlock / spruce / fir at needle level"
+    ],
+    "activities": [
+      { "id": "briefing", "title": "Week 1 briefing" },
+      { "id": "session-a", "title": "Session A — Evidence Before Identity" },
+      { "id": "visual-lab", "title": "Session B — Unfamiliar-image retrieval" },
+      { "id": "confuser-lab", "title": "Session C — Confuser decisions" },
+      { "id": "multi-organ-lab", "title": "Session D — Multi-organ laboratory" },
+      { "id": "checkpoint", "title": "Session E — Cumulative retrieval" },
+      { "id": "weekly-practical", "title": "Week 1 practical rehearsal" }
+    ]
+  },
+  "fieldDecisionSteps": [
+    "Structure: broadleaf or conifer; simple or compound.",
+    "Arrangement: opposite, alternate, whorled, or fascicled.",
+    "Primary organ characters: margins, venation, attachment, buds, scars, pith, bark architecture, fruit, or cone construction.",
+    "Independent corroboration: seek a second organ or a genuinely independent character.",
+    "Context: site and associates change plausibility, not morphology.",
+    "Decision: give the narrowest defensible rank, strongest evidence, nearest alternative, requested view, and confidence."
+  ],
+  "species": [
+    {
+      "id": "ACER_SACCHARUM",
+      "commonName": "Sugar maple",
+      "scientificName": "Acer saccharum",
+      "family": "Sapindaceae",
+      "fastCall": "Opposite, simple, palmately veined leaf; usually five pointed lobes with rounded U-shaped sinuses and relatively few large teeth. Fall color is not diagnostic.",
+      "otherOrgans": "Brown, narrow, sharply pointed terminal bud with many tight scales; paired samaras mature in autumn; young bark is gray and relatively smooth, while old bark develops irregular vertical plates with lifting edges.",
+      "variation": "Shade leaves may be thinner and less deeply lobed. Old bark can look substantially rougher than pole-sized bark.",
+      "confusers": "Red maple has more continuously serrate margins, often sharper sinuses, redder/blunter buds, and spring-maturing samaras. Norway maple usually has milky petiole sap, large blunt buds, and widely spreading samaras.",
+      "silvics": "Very shade tolerant; strongest on cool, fertile, well-drained mesic sites; maintains advance regeneration; long-lived; responds to release, while logging wounds and compaction can be consequential.",
+      "images": [
+        {
+          "assetId": "INAT_PHOTO_724733783",
+          "src": "/assets/course/images/week-01/INAT_PHOTO_724733783.jpg",
+          "alt": "Sugar maple leaf showing five lobes, palmate venation, rounded sinuses, and sparse large teeth.",
+          "view": "Foliage",
+          "caption": "Use the lobe-and-sinus pattern together with opposite arrangement; do not make the call from outline alone.",
+          "attribution": "Alan Prather, CC BY",
+          "sourceUrl": "https://www.inaturalist.org/photos/724733783"
+        },
+        {
+          "assetId": "INAT_PHOTO_725105570",
+          "src": "/assets/course/images/week-01/INAT_PHOTO_725105570.jpg",
+          "alt": "Old sugar maple with a broad divided bole and rough vertically plated bark.",
+          "view": "Old bark and form",
+          "caption": "An old individual: useful variation training, but a leaf, bud, or fruit view should corroborate the bark call.",
+          "attribution": "Tom Norton, CC BY",
+          "sourceUrl": "https://www.inaturalist.org/photos/725105570"
+        },
+        {
+          "assetId": "INAT_PHOTO_715249708",
+          "src": "/assets/course/images/week-01/INAT_PHOTO_715249708.jpg",
+          "alt": "Sugar maple crown with mixed green, orange, and red early autumn foliage.",
+          "view": "Crown and season",
+          "caption": "Crown context is supportive. Color is variable and must never substitute for morphology.",
+          "attribution": "naturalist charlie, CC BY",
+          "sourceUrl": "https://www.inaturalist.org/photos/715249708"
+        }
+      ]
+    },
+    {
+      "id": "FAGUS_GRANDIFOLIA",
+      "commonName": "American beech",
+      "scientificName": "Fagus grandifolia",
+      "family": "Fagaceae",
+      "fastCall": "Alternate leaves with straight, parallel lateral veins ending at distinct marginal teeth; exceptionally long, slender cigar-shaped buds; normally smooth pale-gray bark.",
+      "otherOrgans": "Prickly husks split to expose sharply three-angled nuts. Saplings often retain dead leaves in winter, and large trees may develop broad spreading crowns.",
+      "variation": "Smooth bark is an anchor, not a requirement. Scale, beech bark disease, cankers, wounds, callus, lichen, wetness, and aftermath roughening can substantially alter the surface.",
+      "confusers": "Eastern hophornbeam can look smooth from a distance but develops narrow shreddy strips and has shorter ovoid buds. Host identity must remain separate from condition diagnosis.",
+      "silvics": "Exceptionally shade tolerant; characteristic of mesic, well-drained forest; maintains advance regeneration and commonly root-suckers; episodic mast is important to wildlife; wounds and disease strongly affect quality and structure.",
+      "images": [
+        {
+          "assetId": "INAT_PHOTO_725638621",
+          "src": "/assets/course/images/week-01/INAT_PHOTO_725638621.jpg",
+          "alt": "American beech twig with alternate leaves and straight lateral veins ending at marginal teeth.",
+          "view": "Foliage",
+          "caption": "Track each strong, straight lateral vein to its own tooth; arrangement remains alternate.",
+          "attribution": "No rights reserved (CC0)",
+          "sourceUrl": "https://www.inaturalist.org/photos/725638621"
+        },
+        {
+          "assetId": "INAT_PHOTO_716769793",
+          "src": "/assets/course/images/week-01/INAT_PHOTO_716769793.jpg",
+          "alt": "American beech trunk with characteristic smooth pale-gray bark and a few old scars.",
+          "view": "Clean mature bark",
+          "caption": "The classic clean-bark condition. Notice that scars and epiphytes can occur without erasing the host pattern.",
+          "attribution": "Nate W., CC BY",
+          "sourceUrl": "https://www.inaturalist.org/photos/716769793"
+        },
+        {
+          "assetId": "INAT_PHOTO_719099216",
+          "src": "/assets/course/images/week-01/INAT_PHOTO_719099216.jpg",
+          "alt": "Dark roughened American beech bark with extensive surface alteration and old scars.",
+          "view": "Altered bark",
+          "caption": "A condition-altered stem. This view alone does not justify a disease-stage diagnosis; request buds, leaves, fruit, and closer condition evidence.",
+          "attribution": "mattmsa, CC BY",
+          "sourceUrl": "https://www.inaturalist.org/photos/719099216"
+        }
+      ]
+    },
+    {
+      "id": "BETULA_ALLEGHANIENSIS",
+      "commonName": "Yellow birch",
+      "scientificName": "Betula alleghaniensis",
+      "family": "Betulaceae",
+      "fastCall": "Bronze to yellow-gold intermediate bark with horizontal lenticels and thin curly exfoliation; scratched twigs or inner bark smell of wintergreen.",
+      "otherOrgans": "Alternate ovate leaves with doubly serrate margins; pointed reddish-brown buds; spur shoots on slower twigs; erect cone-like female catkins that disintegrate.",
+      "variation": "Seedlings may have ordinary gray-brown bark, while very old trunks may be dark reddish-brown and plated. Classic golden curl is an age-specific anchor, not a universal surface.",
+      "confusers": "Sweet birch also smells of wintergreen, but its bark becomes dark and plate-like without the characteristic golden papery curls.",
+      "silvics": "Moderately to very shade tolerant; cool, moist, often nutrient-rich sites; long-lived; tiny seedlings establish especially well on rotten wood and disturbed mineral soil rather than thick intact litter.",
+      "images": [
+        {
+          "assetId": "INAT_PHOTO_706353091",
+          "src": "/assets/course/images/week-01/INAT_PHOTO_706353091.jpg",
+          "alt": "Yellow birch trunk with yellow-bronze bark, horizontal lenticels, and thin curling strips.",
+          "view": "Characteristic intermediate bark",
+          "caption": "A high-value bark view: color, horizontal lenticels, and fine curling exfoliation work together.",
+          "attribution": "Jaime McGuigan, CC BY",
+          "sourceUrl": "https://www.inaturalist.org/photos/706353091"
+        },
+        {
+          "assetId": "INAT_PHOTO_710686446",
+          "src": "/assets/course/images/week-01/INAT_PHOTO_710686446.jpg",
+          "alt": "Yellow birch twig with alternate ovate leaves and sharply doubly serrate margins.",
+          "view": "Foliage",
+          "caption": "Useful support, but isolated birch foliage often needs bark, buds, catkins, or wintergreen odor for a secure species call.",
+          "attribution": "Andrew Conboy, CC BY",
+          "sourceUrl": "https://www.inaturalist.org/photos/710686446"
+        },
+        {
+          "assetId": "INAT_PHOTO_698451014",
+          "src": "/assets/course/images/week-01/INAT_PHOTO_698451014.jpg",
+          "alt": "Older yellow birch bark, darker and rougher with reduced golden curling.",
+          "view": "Older bark",
+          "caption": "The classic gold is muted. This is why bark must be learned as an age series.",
+          "attribution": "No rights reserved (CC0)",
+          "sourceUrl": "https://www.inaturalist.org/photos/698451014"
+        }
+      ]
+    },
+    {
+      "id": "TSUGA_CANADENSIS",
+      "commonName": "Eastern hemlock",
+      "scientificName": "Tsuga canadensis",
+      "family": "Pinaceae",
+      "fastCall": "Short, flat, mostly blunt single needles of unequal length; each narrows to a tiny petiole-like base; two pale stomatal bands below; very small pendent cones.",
+      "otherOrgans": "Delicate slender twigs with tiny buds; feathery sprays and a drooping leader; older bark becomes deeply ridged and may reveal cinnamon-red inner bark.",
+      "variation": "Shoot density and apparent needle arrangement change with light and vigor. Disease or insect stress can thin crowns and discolor foliage.",
+      "confusers": "Fir needles have broader pad-like attachment bases and upright mature cones that disintegrate. Spruce needles sit on persistent woody pegs and are generally stiffer and angular in cross-section.",
+      "silvics": "Among the most shade-tolerant North American trees; long-lived; maintains advance regeneration; favors cool humid slopes, ravines, and stream-influenced sites; creates dense shade and cool microclimates.",
+      "images": [
+        {
+          "assetId": "INAT_PHOTO_716684479",
+          "src": "/assets/course/images/week-01/INAT_PHOTO_716684479.jpg",
+          "alt": "Eastern hemlock shoot held against a hand, showing short flat unequal needles and delicate twigs.",
+          "view": "Needles and twig",
+          "caption": "Look for flat needles that narrow into tiny petiole-like bases; request the underside when the stomatal bands are not visible.",
+          "attribution": "No rights reserved (CC0)",
+          "sourceUrl": "https://www.inaturalist.org/photos/716684479"
+        },
+        {
+          "assetId": "INAT_PHOTO_725468547",
+          "src": "/assets/course/images/week-01/INAT_PHOTO_725468547.jpg",
+          "alt": "Eastern hemlock branch bearing several very small pendent green cones.",
+          "view": "Cones and foliage",
+          "caption": "The very small pendent cones separate this branch from fir and support the needle evidence.",
+          "attribution": "No rights reserved (CC0)",
+          "sourceUrl": "https://www.inaturalist.org/photos/725468547"
+        },
+        {
+          "assetId": "INAT_PHOTO_725823189",
+          "src": "/assets/course/images/week-01/INAT_PHOTO_725823189.jpg",
+          "alt": "Mature eastern hemlock trunk viewed upward, with deeply ridged bark and fine conifer branches overhead.",
+          "view": "Mature bark and form",
+          "caption": "Bark and architecture are supportive at this distance; needles, attachment, and cones should resolve the identification.",
+          "attribution": "Johanna Marshall, CC BY",
+          "sourceUrl": "https://www.inaturalist.org/photos/725823189"
+        }
+      ]
+    },
+    {
+      "id": "ACER_RUBRUM",
+      "commonName": "Red maple",
+      "scientificName": "Acer rubrum",
+      "family": "Sapindaceae",
+      "fastCall": "Opposite simple leaf, usually three to five lobes, with regular teeth extending around lobes and into the sinuses; undersides are commonly pale and sinuses are often sharper than sugar maple's.",
+      "otherOrgans": "Red to reddish blunt-ovoid buds; flowers and young samaras often red; relatively small samaras mature in spring; young bark is pale gray, while old bark develops narrow scaly or lifting plates.",
+      "variation": "Leaf lobing and habitat are extremely variable. Red color is supportive but neither universal nor independently diagnostic.",
+      "confusers": "Sugar maple usually has fewer large teeth and more rounded U-shaped sinuses. Silver maple has much deeper sinuses, narrower lobes, and distinctive shaggy mature bark.",
+      "silvics": "Broadly distributed from wet lowlands to dry uplands; relatively shade tolerant when young and strongly disturbance-responsive; abundant seed and vigorous stump sprouting support a generalist strategy.",
+      "images": [
+        {
+          "assetId": "INAT_PHOTO_719667995",
+          "src": "/assets/course/images/week-01/INAT_PHOTO_719667995.jpg",
+          "alt": "Red maple leaf showing three main lobes, regular serration, and angular sinuses.",
+          "view": "Foliage",
+          "caption": "Continuous serration and relatively angular sinuses help separate this leaf from sugar maple.",
+          "attribution": "Glenn Wooden, CC BY",
+          "sourceUrl": "https://www.inaturalist.org/photos/719667995"
+        },
+        {
+          "assetId": "INAT_PHOTO_719653251",
+          "src": "/assets/course/images/week-01/INAT_PHOTO_719653251.jpg",
+          "alt": "Red maple leaves with variable lobe depth and finely toothed margins.",
+          "view": "Foliage variation",
+          "caption": "A less textbook outline. Arrangement and the pattern of teeth still matter more than the exact number or depth of lobes.",
+          "attribution": "No rights reserved (CC0)",
+          "sourceUrl": "https://www.inaturalist.org/photos/719653251"
+        },
+        {
+          "assetId": "INAT_PHOTO_712889083",
+          "src": "/assets/course/images/week-01/INAT_PHOTO_712889083.jpg",
+          "alt": "Very old red maple with deeply furrowed, vertically ridged dark bark.",
+          "view": "Old bark and form",
+          "caption": "An old and damaged individual. A species-level bark call from this view alone would be overconfident.",
+          "attribution": "Kalvin Chan, CC BY",
+          "sourceUrl": "https://www.inaturalist.org/photos/712889083"
+        }
+      ]
+    },
+    {
+      "id": "TILIA_AMERICANA",
+      "commonName": "American basswood",
+      "scientificName": "Tilia americana",
+      "family": "Malvaceae",
+      "fastCall": "Large alternate heart-shaped leaf with a strongly uneven base and serrate margin; clusters of round nutlets hang from a narrow leaf-like bract.",
+      "otherOrgans": "Plump reddish buds with only two or three visible unequal scales; young bark is smooth gray and old bark is dark and deeply furrowed; cut or injured trees commonly develop multiple basal stems.",
+      "variation": "Leaf size changes greatly with shoot vigor. Stump sprouts may carry exceptionally large leaves.",
+      "confusers": "Mulberries can have variable cordate leaves but lack the Tilia bract and have different buds and fruit. Planted lindens may require species-level caution outside forest context.",
+      "silvics": "Shade tolerant; favors fertile mesic, often base-rich soils; common sugar maple associate; vigorous stump sprouter; responds to release but is susceptible to browse and decay through injury.",
+      "images": [
+        {
+          "assetId": "INAT_PHOTO_724600674",
+          "src": "/assets/course/images/week-01/INAT_PHOTO_724600674.jpg",
+          "alt": "American basswood round nutlets hanging from stalks attached to a narrow leafy bract.",
+          "view": "Fruit",
+          "caption": "The bract-and-fruit construction is a high-value reproductive character; ask to see the full attachment when it is partly cropped.",
+          "attribution": "Phoenix M.S, CC BY",
+          "sourceUrl": "https://www.inaturalist.org/photos/724600674"
+        },
+        {
+          "assetId": "INAT_PHOTO_717924585",
+          "src": "/assets/course/images/week-01/INAT_PHOTO_717924585.jpg",
+          "alt": "American basswood leaves showing broad heart-shaped blades, uneven bases, and serrate margins.",
+          "view": "Foliage",
+          "caption": "The uneven cordate base is strong evidence, but arrangement and the reproductive bract make the call more secure.",
+          "attribution": "No rights reserved (CC0)",
+          "sourceUrl": "https://www.inaturalist.org/photos/717924585"
+        },
+        {
+          "assetId": "INAT_PHOTO_711200402",
+          "src": "/assets/course/images/week-01/INAT_PHOTO_711200402.jpg",
+          "alt": "Large American basswood leaves held for scale, showing an uneven base and finely toothed margin.",
+          "view": "Large-leaf variation",
+          "caption": "Large leaves are common on vigorous shoots. Size supports the field impression but does not replace structure.",
+          "attribution": "No rights reserved (CC0)",
+          "sourceUrl": "https://www.inaturalist.org/photos/711200402"
+        }
+      ]
+    },
+    {
+      "id": "BETULA_PAPYRIFERA",
+      "commonName": "Paper birch",
+      "scientificName": "Betula papyrifera",
+      "family": "Betulaceae",
+      "fastCall": "Mature bark is chalky white with dark horizontal lenticels and peels in thin papery sheets; alternate ovate to triangular leaves are usually doubly serrate. Use foliage or dormant characters to corroborate a bark call.",
+      "otherOrgans": "Slender reddish-brown twigs may bear resin glands; buds are pointed and appressed; male catkins persist through winter; upright female strobiles disintegrate into tiny winged nutlets and three-lobed scales.",
+      "variation": "Sapling bark can be reddish-brown and nonpapery, while the bases of old trunks become dark, thick, and furrowed. White bark develops unevenly and is not independently species-diagnostic.",
+      "confusers": "Heart-leaved paper birch can have nearly identical white bark; request mature leaves, current twigs, fruit scales, elevation, and geography. Gray birch generally has chalkier nonpeeling bark with dark triangular marks below branches and more triangular leaves.",
+      "silvics": "Very shade intolerant and relatively short-lived; a prolific small-seeded pioneer after fire, logging, and severe soil disturbance; strongest on cool moist but aerated northern sites; young stems may sprout after damage.",
+      "images": [
+        {
+          "assetId": "INAT_PHOTO_715249108",
+          "src": "/assets/course/images/week-01/INAT_PHOTO_715249108.jpg",
+          "alt": "Paper birch shoot with alternate ovate serrate leaves beside pale peeling bark.",
+          "view": "Foliage with bark",
+          "caption": "The combination is stronger than either organ alone. Follow the lateral veins to the teeth and note that the white bark still needs corroboration against other white birches.",
+          "attribution": "ian bullock, CC BY",
+          "sourceUrl": "https://www.inaturalist.org/photos/715249108"
+        },
+        {
+          "assetId": "INAT_PHOTO_725105414",
+          "src": "/assets/course/images/week-01/INAT_PHOTO_725105414.jpg",
+          "alt": "Mature paper birch trunk with white bark, dark horizontal lenticels, and thin peeling sheets.",
+          "view": "Characteristic mature bark",
+          "caption": "A strong genus-level birch view. Species confidence should fall if no leaf, twig, fruit, or geographic evidence is available.",
+          "attribution": "Tom Norton, CC BY",
+          "sourceUrl": "https://www.inaturalist.org/photos/725105414"
+        },
+        {
+          "assetId": "INAT_PHOTO_703764304",
+          "src": "/assets/course/images/week-01/INAT_PHOTO_703764304.jpg",
+          "alt": "Clump of mature paper birch stems in a northern forest, showing narrow crowns and pale trunks.",
+          "view": "Whole-tree form",
+          "caption": "Clumped stems and bright bark support a pioneer-birch field impression, but the stand view cannot resolve close white-birch taxa by itself.",
+          "attribution": "Tim Wasserman, CC BY",
+          "sourceUrl": "https://www.inaturalist.org/photos/703764304"
+        }
+      ]
+    },
+    {
+      "id": "PRUNUS_SEROTINA",
+      "commonName": "Black cherry",
+      "scientificName": "Prunus serotina",
+      "family": "Rosaceae",
+      "fastCall": "Alternate glossy elliptic leaves have fine incurved teeth, one or more petiole glands, and usually rusty hairs along the lower midvein near its base; mature bark breaks into dark scaly plates often likened to burnt potato chips.",
+      "otherOrgans": "Small white flowers and later dark drupes occur on elongated racemes; young bark is smooth reddish-brown with horizontal lenticels; small pointed buds are alternate and often appressed. Scratched twigs smell of bitter almond—smell only; do not taste.",
+      "variation": "Young stems lack the classic plated bark, and suppressed forest leaves may be thinner and broader. Fruit load varies greatly among years and individuals.",
+      "confusers": "Pin cherry has flowers and fruit in shorter umbel-like clusters and smoother reddish bark; chokecherry has shorter denser racemes and broader leaves. Mature black-cherry bark can be confused with rough old yellow birch from a distance.",
+      "silvics": "Shade intolerant to moderately intolerant; bird-dispersed and disturbance-responsive; abundant dormant seed, rapid juvenile height growth, and stump sprouting favor gaps. It reaches exceptional timber importance on well-drained fertile Allegheny sites.",
+      "images": [
+        {
+          "assetId": "INAT_PHOTO_726127282",
+          "src": "/assets/course/images/week-01/INAT_PHOTO_726127282.jpg",
+          "alt": "Black cherry shoot with alternate glossy elliptic leaves and fine serrations.",
+          "view": "Foliage",
+          "caption": "Leaf shape is only the opening clue. Request the petiole glands and the rusty hair line on the lower midvein before calling a sterile shoot with high confidence.",
+          "attribution": "No rights reserved (CC0)",
+          "sourceUrl": "https://www.inaturalist.org/photos/726127282"
+        },
+        {
+          "assetId": "INAT_PHOTO_716772660",
+          "src": "/assets/course/images/week-01/INAT_PHOTO_716772660.jpg",
+          "alt": "Mature black cherry trunk with dark scaly plates and upturned edges.",
+          "view": "Mature bark",
+          "caption": "This is the familiar mature surface. Younger black cherry remains smooth and lenticelled, so learn the transition rather than one bark state.",
+          "attribution": "Zachary Justus, CC BY",
+          "sourceUrl": "https://www.inaturalist.org/photos/716772660"
+        },
+        {
+          "assetId": "INAT_PHOTO_717223648",
+          "src": "/assets/course/images/week-01/INAT_PHOTO_717223648.jpg",
+          "alt": "Black cherry leaves and an elongated raceme bearing red to black ripening drupes.",
+          "view": "Fruit and foliage",
+          "caption": "Read the elongated raceme architecture, not merely the dark fruit. That arrangement will later separate black cherry from pin cherry.",
+          "attribution": "Deana Tempest Thomas, CC BY",
+          "sourceUrl": "https://www.inaturalist.org/photos/717223648"
+        }
+      ]
+    },
+    {
+      "id": "OSTRYA_VIRGINIANA",
+      "commonName": "Eastern hophornbeam",
+      "scientificName": "Ostrya virginiana",
+      "family": "Betulaceae",
+      "fastCall": "A small understory tree with narrow loose shreddy bark strips, alternate doubly serrate leaves, and hanging clusters of inflated papery sacs that resemble hops.",
+      "otherOrgans": "Each inflated sac encloses a small nutlet; twigs are fine and often zigzag; buds are short, pointed, many-scaled, and diverge from the twig. The wood is notably dense and hard.",
+      "variation": "Young bark can be smooth enough to suggest beech or hornbeam, while old stems become much more shaggy. Sterile foliage alone overlaps strongly with birches, elms, and American hornbeam.",
+      "confusers": "American hornbeam has smooth, sinewy or muscle-like bark and fruit subtended by open three-lobed bracts rather than closed hop sacs. American beech has very long cigar-shaped buds and normally smooth pale bark.",
+      "silvics": "Shade tolerant, slow growing, and usually a small understory tree on dry-mesic, rocky, and often base-rich sites; reproduces mainly by seed and can persist beneath a canopy; generally managed as structural diversity rather than a major timber crop.",
+      "images": [
+        {
+          "assetId": "INAT_PHOTO_717398184",
+          "src": "/assets/course/images/week-01/INAT_PHOTO_717398184.jpg",
+          "alt": "Eastern hophornbeam trunk with narrow loose vertical strips of shredding bark.",
+          "view": "Mature bark",
+          "caption": "The thin loose strips are more ragged than beech and less smooth and muscular than American hornbeam. Confirm with buds or hoplike fruit when possible.",
+          "attribution": "Jaime McGuigan, CC BY",
+          "sourceUrl": "https://www.inaturalist.org/photos/717398184"
+        },
+        {
+          "assetId": "INAT_PHOTO_718600741",
+          "src": "/assets/course/images/week-01/INAT_PHOTO_718600741.jpg",
+          "alt": "Eastern hophornbeam leaves and a dangling cluster of inflated hoplike fruit sacs.",
+          "view": "Fruit and foliage",
+          "caption": "The closed inflated sacs are the decisive visible structure; the doubly serrate leaf alone is not species-specific.",
+          "attribution": "No rights reserved (CC0)",
+          "sourceUrl": "https://www.inaturalist.org/photos/718600741"
+        },
+        {
+          "assetId": "INAT_PHOTO_720685686",
+          "src": "/assets/course/images/week-01/INAT_PHOTO_720685686.jpg",
+          "alt": "Small eastern hophornbeam growing beneath a taller forest canopy.",
+          "view": "Understory form",
+          "caption": "The small understory stature fits the silvics, but site and form only change plausibility; they do not establish identity.",
+          "attribution": "Judy Dobles, CC BY",
+          "sourceUrl": "https://www.inaturalist.org/photos/720685686"
+        }
+      ]
+    }
+  ],
+  "visualLab": {
+    "title": "Unfamiliar-image retrieval lab",
+    "instructions": "These nine photographs were not used in Session A. For each, provide the common and scientific name, confidence, strongest visible evidence, and nearest alternative or resolving view. Identity fields are auto-checked; evidence and calibration remain a reference-rubric comparison in this preview.",
+    "items": [
+      {
+        "id": "visual-01",
+        "image": {
+          "assetId": "INAT_PHOTO_720873631",
+          "src": "/assets/course/images/week-01/INAT_PHOTO_720873631.jpg",
+          "alt": "Assessment photograph for visual retrieval item 1; examine the visible evidence before answering.",
+          "attribution": "betsyyyy, CC BY",
+          "sourceUrl": "https://www.inaturalist.org/photos/720873631"
+        },
+        "commonAnswers": ["sugar maple"],
+        "scientificAnswers": ["acer saccharum"],
+        "referenceEvidence": "Opposite palmately veined leaves with five pointed lobes, rounded U-like sinuses, and relatively sparse large teeth.",
+        "nearestAlternative": "Red maple; look for finer, more continuous serration and sharper sinuses, or request buds and samaras."
+      },
+      {
+        "id": "visual-02",
+        "image": {
+          "assetId": "INAT_PHOTO_713960927",
+          "src": "/assets/course/images/week-01/INAT_PHOTO_713960927.jpg",
+          "alt": "Assessment photograph for visual retrieval item 2; examine the visible evidence before answering.",
+          "attribution": "geosesarma, CC BY",
+          "sourceUrl": "https://www.inaturalist.org/photos/713960927"
+        },
+        "commonAnswers": ["american beech", "beech"],
+        "scientificAnswers": ["fagus grandifolia"],
+        "referenceEvidence": "Alternate leaves with many straight parallel lateral veins, each terminating at a distinct tooth.",
+        "nearestAlternative": "American hornbeam or hophornbeam foliage; request the very long beech buds, smooth bark, or beech fruit."
+      },
+      {
+        "id": "visual-03",
+        "image": {
+          "assetId": "INAT_PHOTO_705678300",
+          "src": "/assets/course/images/week-01/INAT_PHOTO_705678300.jpg",
+          "alt": "Assessment photograph for visual retrieval item 3; examine the visible evidence before answering.",
+          "attribution": "naturalist charlie, CC BY",
+          "sourceUrl": "https://www.inaturalist.org/photos/705678300"
+        },
+        "commonAnswers": ["yellow birch"],
+        "scientificAnswers": ["betula alleghaniensis"],
+        "referenceEvidence": "Bronze-yellow bark with strong horizontal lenticels and thin curling exfoliation on an intermediate stem.",
+        "nearestAlternative": "Sweet birch; request a wider age-series bark view plus twig odor, buds, and foliage."
+      },
+      {
+        "id": "visual-04",
+        "image": {
+          "assetId": "INAT_PHOTO_713392516",
+          "src": "/assets/course/images/week-01/INAT_PHOTO_713392516.jpg",
+          "alt": "Assessment photograph for visual retrieval item 4; examine the visible evidence before answering.",
+          "attribution": "Jamie VanBuskirk, CC BY",
+          "sourceUrl": "https://www.inaturalist.org/photos/713392516"
+        },
+        "commonAnswers": ["eastern hemlock", "hemlock"],
+        "scientificAnswers": ["tsuga canadensis"],
+        "referenceEvidence": "Short flat mostly blunt single needles of unequal length on delicate twigs; tiny petiole-like bases are visible.",
+        "nearestAlternative": "Fir or spruce; request the needle underside and attachment base, then cones if available."
+      },
+      {
+        "id": "visual-05",
+        "image": {
+          "assetId": "INAT_PHOTO_718831114",
+          "src": "/assets/course/images/week-01/INAT_PHOTO_718831114.jpg",
+          "alt": "Assessment photograph for visual retrieval item 5; examine the visible evidence before answering.",
+          "attribution": "Rob Foster, CC BY",
+          "sourceUrl": "https://www.inaturalist.org/photos/718831114"
+        },
+        "commonAnswers": ["red maple"],
+        "scientificAnswers": ["acer rubrum"],
+        "referenceEvidence": "Opposite three- to five-lobed leaves with serration extending into angular sinuses; reddish petioles and young shoots support the call.",
+        "nearestAlternative": "Sugar maple; compare tooth density and sinus shape, then request buds or samaras."
+      },
+      {
+        "id": "visual-06",
+        "image": {
+          "assetId": "INAT_PHOTO_720231619",
+          "src": "/assets/course/images/week-01/INAT_PHOTO_720231619.jpg",
+          "alt": "Assessment photograph for visual retrieval item 6; examine the visible evidence before answering.",
+          "attribution": "Tom Norton, CC BY",
+          "sourceUrl": "https://www.inaturalist.org/photos/720231619"
+        },
+        "commonAnswers": ["linden", "tilia", "insufficient evidence"],
+        "scientificAnswers": ["tilia", "insufficient evidence"],
+        "referenceEvidence": "Broad cordate serrate leaves plus round nutlets suspended from narrow leaf-like bracts support Tilia, but the view does not show a character that securely separates American basswood from planted lindens.",
+        "nearestAlternative": "American basswood is plausible; request measured mature leaves, lower-surface pubescence, buds, fruit size and texture, bark, and growing context before naming a Tilia species."
+      },
+      {
+        "id": "visual-07",
+        "image": {
+          "assetId": "INAT_PHOTO_713079666",
+          "src": "/assets/course/images/week-01/INAT_PHOTO_713079666.jpg",
+          "alt": "Assessment photograph for visual retrieval item 7; examine the visible evidence before answering.",
+          "attribution": "No rights reserved (CC0)",
+          "sourceUrl": "https://www.inaturalist.org/photos/713079666"
+        },
+        "commonAnswers": ["birch", "betula", "insufficient evidence"],
+        "scientificAnswers": ["betula", "insufficient evidence"],
+        "referenceEvidence": "Alternate serrate foliage plus pale bark with horizontal lenticels and papery exfoliation support Betula, but leaf bases and dormant or reproductive characters are not resolved closely enough to exclude heart-leaved paper birch.",
+        "nearestAlternative": "Paper birch is plausible; request a close fully expanded mature leaf, current twig and buds, resin-gland detail, and fruiting scales before naming a species."
+      },
+      {
+        "id": "visual-08",
+        "image": {
+          "assetId": "INAT_PHOTO_713082478",
+          "src": "/assets/course/images/week-01/INAT_PHOTO_713082478.jpg",
+          "alt": "Assessment photograph for visual retrieval item 8; examine the visible evidence before answering.",
+          "attribution": "Matt Pelikan, CC BY",
+          "sourceUrl": "https://www.inaturalist.org/photos/713082478"
+        },
+        "commonAnswers": ["black cherry"],
+        "scientificAnswers": ["prunus serotina"],
+        "referenceEvidence": "Glossy finely serrate alternate leaf occurs with several black drupes borne along an elongated raceme rather than in an umbel-like cluster.",
+        "nearestAlternative": "Chokecherry; compare raceme density and leaf proportions, then request the lower midvein hairs, petiole glands, twig, and bark."
+      },
+      {
+        "id": "visual-09",
+        "image": {
+          "assetId": "INAT_PHOTO_713918591",
+          "src": "/assets/course/images/week-01/INAT_PHOTO_713918591.jpg",
+          "alt": "Assessment photograph for visual retrieval item 9; examine the visible evidence before answering.",
+          "attribution": "No rights reserved (CC0)",
+          "sourceUrl": "https://www.inaturalist.org/photos/713918591"
+        },
+        "commonAnswers": ["eastern hophornbeam", "hophornbeam", "ironwood"],
+        "scientificAnswers": ["ostrya virginiana"],
+        "referenceEvidence": "Alternate doubly serrate leaves are accompanied by pendant clusters of closed, inflated, papery hoplike sacs.",
+        "nearestAlternative": "American hornbeam; its nutlets sit beneath open three-lobed leafy bracts, and the trunk is smooth and sinewy rather than narrowly shredding."
+      }
+    ]
+  },
+  "confuserLab": {
+    "title": "Confuser decisions: identify, separate, or stop",
+    "instructions": "Work from the evidence stated. For every item, name the organism at the narrowest defensible rank, give the scientific name when species is defensible, and explain the nearest alternative or the additional view required.",
+    "items": [
+      {
+        "id": "confuser-01",
+        "prompt": "An opposite leaf has five pointed lobes, rounded U-shaped sinuses, and only a few large teeth. The broken petiole produces no milky sap.",
+        "commonAnswers": ["sugar maple"],
+        "scientificAnswers": ["acer saccharum"],
+        "referenceEvidence": "Sparse large teeth and rounded sinuses support sugar maple; absence of milky sap weighs against Norway maple but is not the sole character.",
+        "nearestAlternative": "Red maple has more regular serration and sharper sinuses; request the narrow many-scaled brown bud or mature autumn samaras."
+      },
+      {
+        "id": "confuser-02",
+        "prompt": "An opposite leaf has three main lobes, sharp teeth continuing into angular sinuses, a pale lower surface, and a red petiole on the current shoot.",
+        "commonAnswers": ["red maple"],
+        "scientificAnswers": ["acer rubrum"],
+        "referenceEvidence": "Continuous serration, angular sinuses, pale underside, and red shoot characters converge on red maple.",
+        "nearestAlternative": "Sugar maple has fewer larger teeth and usually rounder sinuses; request buds or spring-maturing samaras."
+      },
+      {
+        "id": "confuser-03",
+        "prompt": "Intermediate bark is bronze-gold with horizontal lenticels and thin curling flakes. Scratched current growth smells strongly of wintergreen.",
+        "commonAnswers": ["yellow birch"],
+        "scientificAnswers": ["betula alleghaniensis"],
+        "referenceEvidence": "Golden curly exfoliation plus wintergreen odor is a two-character yellow-birch call.",
+        "nearestAlternative": "Sweet birch also smells of wintergreen but matures to dark tight plates rather than golden papery curls."
+      },
+      {
+        "id": "confuser-04",
+        "prompt": "A pioneer in a recent northern cut has white bark with dark horizontal lenticels and thin peeling sheets. The alternate leaves are ovate to triangular and doubly serrate; twigs do not smell of wintergreen.",
+        "commonAnswers": ["birch", "betula", "insufficient evidence"],
+        "scientificAnswers": ["betula", "insufficient evidence"],
+        "referenceEvidence": "Papery white bark, compatible foliage, and lack of wintergreen odor support Betula and weigh against yellow or sweet birch, but they do not separate paper birch from heart-leaved paper birch.",
+        "nearestAlternative": "Paper birch and heart-leaved paper birch remain unresolved; request fully expanded mature leaf bases, current-twig resin glands, buds, and fruiting scales."
+      },
+      {
+        "id": "confuser-05",
+        "prompt": "A small understory tree has narrow vertical bark strips that loosen at both ends. Its fruit hangs in clusters of closed inflated papery sacs.",
+        "commonAnswers": ["eastern hophornbeam", "hophornbeam", "ironwood"],
+        "scientificAnswers": ["ostrya virginiana"],
+        "referenceEvidence": "Closed hoplike sacs resolve the identity; the narrow shredding bark independently supports it.",
+        "nearestAlternative": "American hornbeam has smooth sinewy bark and open three-lobed fruit bracts; beech has long cigar buds and smooth pale bark."
+      },
+      {
+        "id": "confuser-06",
+        "prompt": "Old bark is dark and scaly. The same branch bears glossy finely serrate leaves with petiole glands and black drupes spaced along an elongated raceme.",
+        "commonAnswers": ["black cherry"],
+        "scientificAnswers": ["prunus serotina"],
+        "referenceEvidence": "The raceme, petiole glands, and leaf surface corroborate the mature black-cherry bark.",
+        "nearestAlternative": "Old yellow birch can appear rough at distance, but it lacks cherry drupes and petiole glands and usually retains horizontal-lenticel evidence."
+      },
+      {
+        "id": "confuser-07",
+        "prompt": "Single short flat needles narrow to tiny petiole-like bases. Two pale bands occur below, woody pegs are absent, and the cones are very small and pendent.",
+        "commonAnswers": ["eastern hemlock", "hemlock"],
+        "scientificAnswers": ["tsuga canadensis"],
+        "referenceEvidence": "Petiole-like needle bases, paired lower bands, and tiny pendent cones diagnose eastern hemlock among the current set.",
+        "nearestAlternative": "Fir has broader pad-like needle bases and upright mature cones; spruce leaves persistent woody pegs."
+      },
+      {
+        "id": "confuser-08",
+        "prompt": "Alternate broad cordate leaves have strongly uneven bases. Round nutlets hang from a stalk fused to a narrow leaf-like bract.",
+        "commonAnswers": ["linden", "tilia", "insufficient evidence"],
+        "scientificAnswers": ["tilia", "insufficient evidence"],
+        "referenceEvidence": "The distinctive bract-and-nutlet construction corroborates the asymmetric cordate leaf and securely supports Tilia, not a species within the genus.",
+        "nearestAlternative": "American basswood is plausible, while mulberry lacks the narrow fruiting bract; request measured leaves, lower-surface pubescence, buds, fruit details, and growing context for a Tilia species call."
+      },
+      {
+        "id": "confuser-09",
+        "prompt": "The only available view is a distant white-barked birch trunk. No leaves, twigs, catkins, fruit scales, precise elevation, or location are available.",
+        "commonAnswers": ["insufficient evidence", "birch", "betula"],
+        "scientificAnswers": ["insufficient evidence", "betula"],
+        "referenceEvidence": "White bark supports Betula but does not distinguish paper birch from heart-leaved paper birch, gray birch, or planted white-barked birches.",
+        "nearestAlternative": "Request mature foliage, current twigs and buds, fruit scales, a close bark series, precise geography, and elevation."
+      }
+    ]
+  },
+  "multiOrganLab": {
+    "title": "Multi-organ laboratory",
+    "instructions": "These are new specimens. Treat the photograph as a partial field encounter: identify only what the visible organ supports, state confidence, and name the most useful next view.",
+    "items": [
+      {
+        "id": "multi-01",
+        "image": {
+          "assetId": "INAT_PHOTO_718076480",
+          "src": "/assets/course/images/week-01/INAT_PHOTO_718076480.jpg",
+          "alt": "Assessment photograph for the multi-organ laboratory item 1; examine the visible evidence before answering.",
+          "attribution": "John Baur, CC BY",
+          "sourceUrl": "https://www.inaturalist.org/photos/718076480"
+        },
+        "commonAnswers": ["sugar maple"],
+        "scientificAnswers": ["acer saccharum"],
+        "referenceEvidence": "Five pointed lobes, broad rounded sinuses, and relatively sparse large teeth support sugar maple.",
+        "nearestAlternative": "Red maple; request the twig arrangement and buds, petiole sap, or samaras."
+      },
+      {
+        "id": "multi-02",
+        "image": {
+          "assetId": "INAT_PHOTO_722014678",
+          "src": "/assets/course/images/week-01/INAT_PHOTO_722014678.jpg",
+          "alt": "Assessment photograph for the multi-organ laboratory item 2; examine the visible evidence before answering.",
+          "attribution": "naturalist charlie, CC BY",
+          "sourceUrl": "https://www.inaturalist.org/photos/722014678"
+        },
+        "commonAnswers": ["american beech", "beech"],
+        "scientificAnswers": ["fagus grandifolia"],
+        "referenceEvidence": "Smooth pale bark is corroborated by alternate beech foliage with straight lateral veins terminating at teeth.",
+        "nearestAlternative": "Eastern hophornbeam; request the exceptionally long beech buds or hophornbeam's shredding bark and hoplike fruit."
+      },
+      {
+        "id": "multi-03",
+        "image": {
+          "assetId": "INAT_PHOTO_709251192",
+          "src": "/assets/course/images/week-01/INAT_PHOTO_709251192.jpg",
+          "alt": "Assessment photograph for the multi-organ laboratory item 3; examine the visible evidence before answering.",
+          "attribution": "Marc-Olivier Beausoleil, CC BY",
+          "sourceUrl": "https://www.inaturalist.org/photos/709251192"
+        },
+        "commonAnswers": ["yellow birch"],
+        "scientificAnswers": ["betula alleghaniensis"],
+        "referenceEvidence": "Bronze-yellow surface, strong horizontal lenticels, and fine curly exfoliation form the characteristic intermediate-bark pattern.",
+        "nearestAlternative": "Sweet birch or young paper birch; request wintergreen odor, foliage, buds, and a broader age-series view."
+      },
+      {
+        "id": "multi-04",
+        "image": {
+          "assetId": "INAT_PHOTO_713413174",
+          "src": "/assets/course/images/week-01/INAT_PHOTO_713413174.jpg",
+          "alt": "Assessment photograph for the multi-organ laboratory item 4; examine the visible evidence before answering.",
+          "attribution": "No rights reserved (CC0)",
+          "sourceUrl": "https://www.inaturalist.org/photos/713413174"
+        },
+        "commonAnswers": ["eastern hemlock", "hemlock"],
+        "scientificAnswers": ["tsuga canadensis"],
+        "referenceEvidence": "Short, flat, unequal needles in flattened sprays on slender drooping twigs support eastern hemlock; no cone is resolved in this photograph.",
+        "nearestAlternative": "Fir or spruce; request a close view of needle attachment, the lower needle surface, and any cones."
+      },
+      {
+        "id": "multi-05",
+        "image": {
+          "assetId": "INAT_PHOTO_724923890",
+          "src": "/assets/course/images/week-01/INAT_PHOTO_724923890.jpg",
+          "alt": "Assessment photograph for the multi-organ laboratory item 5; examine the visible evidence before answering.",
+          "attribution": "No rights reserved (CC0)",
+          "sourceUrl": "https://www.inaturalist.org/photos/724923890"
+        },
+        "commonAnswers": ["red maple"],
+        "scientificAnswers": ["acer rubrum"],
+        "referenceEvidence": "Opposite lobed leaves show regular serration and relatively angular sinuses typical of red maple.",
+        "nearestAlternative": "Sugar maple; request buds, the leaf underside, petiole sap, or spring versus autumn samaras."
+      },
+      {
+        "id": "multi-06",
+        "image": {
+          "assetId": "INAT_PHOTO_718221651",
+          "src": "/assets/course/images/week-01/INAT_PHOTO_718221651.jpg",
+          "alt": "Assessment photograph for the multi-organ laboratory item 6; examine the visible evidence before answering.",
+          "attribution": "Robert Roach, CC BY",
+          "sourceUrl": "https://www.inaturalist.org/photos/718221651"
+        },
+        "commonAnswers": ["linden", "tilia", "insufficient evidence"],
+        "scientificAnswers": ["tilia", "insufficient evidence"],
+        "referenceEvidence": "Asymmetric cordate leaves with a narrow bract and suspended nutlet cluster securely support Tilia, but the photograph does not resolve a species-level character.",
+        "nearestAlternative": "American basswood is plausible; request measured mature leaves, lower-surface pubescence, buds, fruit size and texture, bark, and growing context."
+      },
+      {
+        "id": "multi-07",
+        "image": {
+          "assetId": "INAT_PHOTO_718849947",
+          "src": "/assets/course/images/week-01/INAT_PHOTO_718849947.jpg",
+          "alt": "Assessment photograph for the multi-organ laboratory item 7; examine the visible evidence before answering.",
+          "attribution": "deefinder200, CC BY",
+          "sourceUrl": "https://www.inaturalist.org/photos/718849947"
+        },
+        "commonAnswers": ["birch", "betula", "insufficient evidence"],
+        "scientificAnswers": ["betula", "insufficient evidence"],
+        "referenceEvidence": "Thin exfoliating bark with horizontal lenticels supports Betula, but this close bark-only view is altered by an old wound and does not distinguish paper birch from heart-leaved paper birch at species rank.",
+        "nearestAlternative": "Paper birch and heart-leaved paper birch remain unresolved; request fully expanded mature leaves, current twigs and buds, resin-gland detail, and fruiting scales."
+      },
+      {
+        "id": "multi-08",
+        "image": {
+          "assetId": "INAT_PHOTO_721566456",
+          "src": "/assets/course/images/week-01/INAT_PHOTO_721566456.jpg",
+          "alt": "Assessment photograph for the multi-organ laboratory item 8; examine the visible evidence before answering.",
+          "attribution": "Ken Clark, CC BY",
+          "sourceUrl": "https://www.inaturalist.org/photos/721566456"
+        },
+        "commonAnswers": ["black cherry"],
+        "scientificAnswers": ["prunus serotina"],
+        "referenceEvidence": "The elongated raceme of black drupes and glossy finely serrate leaves support black cherry.",
+        "nearestAlternative": "Chokecherry; request petiole glands, lower-midvein hairs, twig, and bark."
+      },
+      {
+        "id": "multi-09",
+        "image": {
+          "assetId": "INAT_PHOTO_713243448",
+          "src": "/assets/course/images/week-01/INAT_PHOTO_713243448.jpg",
+          "alt": "Assessment photograph for the multi-organ laboratory item 9; examine the visible evidence before answering.",
+          "attribution": "brendanboyd, CC BY",
+          "sourceUrl": "https://www.inaturalist.org/photos/713243448"
+        },
+        "commonAnswers": ["eastern hophornbeam", "hophornbeam", "ironwood"],
+        "scientificAnswers": ["ostrya virginiana"],
+        "referenceEvidence": "Pendant closed inflated fruit sacs corroborate alternate doubly serrate foliage.",
+        "nearestAlternative": "American hornbeam; compare its open three-lobed fruit bracts and smooth sinewy bark."
+      }
+    ]
+  },
+  "checkpoint": {
+    "title": "Cumulative closed-notes retrieval",
+    "instructions": "Do not reopen the species profiles. A bare name is incomplete: give common name, scientific name, confidence, strongest diagnostic character, and nearest alternative with a separator or requested view.",
+    "items": [
+      {
+        "id": "checkpoint-01",
+        "prompt": "An opposite simple leaf has five principal lobes, mostly rounded U-shaped sinuses, relatively few large marginal teeth, and no milky petiole sap.",
+        "commonAnswers": ["sugar maple"],
+        "scientificAnswers": ["acer saccharum"],
+        "referenceEvidence": "Opposite leaf with sparse large teeth and rounded U-shaped sinuses; absent milky sap weighs against Norway maple.",
+        "nearestAlternative": "Red maple has more continuous serration and sharper sinuses; Norway maple usually has milky sap and blunt large buds."
+      },
+      {
+        "id": "checkpoint-02",
+        "prompt": "A tree has smooth pale-gray bark. Its winter twigs bear very long, slender, sharply pointed buds, and some dead leaves persist into winter.",
+        "commonAnswers": ["american beech", "beech"],
+        "scientificAnswers": ["fagus grandifolia"],
+        "referenceEvidence": "The extremely long cigar-shaped buds independently corroborate the normally smooth pale-gray bark.",
+        "nearestAlternative": "Eastern hophornbeam; request its short ovoid buds and narrow shreddy bark strips."
+      },
+      {
+        "id": "checkpoint-03",
+        "prompt": "A tree shows bronze-gold bark peeling in thin curly strips. A scratched twig smells of wintergreen, and the alternate leaf is doubly serrate.",
+        "commonAnswers": ["yellow birch"],
+        "scientificAnswers": ["betula alleghaniensis"],
+        "referenceEvidence": "Golden curling bark plus wintergreen odor and doubly serrate alternate foliage provide independent support.",
+        "nearestAlternative": "Sweet birch also smells of wintergreen but lacks the characteristic golden papery curls."
+      },
+      {
+        "id": "checkpoint-04",
+        "prompt": "A conifer twig bears short flat needles attached by tiny petiole-like bases. The undersides show two pale bands, and the cones are small and pendent.",
+        "commonAnswers": ["eastern hemlock", "hemlock"],
+        "scientificAnswers": ["tsuga canadensis"],
+        "referenceEvidence": "Flat needles narrowed into tiny petiole-like bases, paired pale bands below, and very small pendent cones.",
+        "nearestAlternative": "Fir has pad-like needle bases and upright mature cones; spruce has woody pegs."
+      },
+      {
+        "id": "checkpoint-05",
+        "prompt": "An opposite leaf has three prominent lobes, sharply serrate margins, and relatively V-shaped sinuses. Associated winter buds are reddish.",
+        "commonAnswers": ["red maple"],
+        "scientificAnswers": ["acer rubrum"],
+        "referenceEvidence": "Opposite arrangement with continuous sharp serration, angular sinuses, and reddish buds.",
+        "nearestAlternative": "Sugar maple has fewer large teeth, more rounded sinuses, and narrow brown many-scaled buds."
+      },
+      {
+        "id": "checkpoint-06",
+        "prompt": "An alternate leaf is broad and heart-shaped with an uneven base. The reproductive cluster hangs from a narrow, leaf-like bract.",
+        "commonAnswers": ["linden", "tilia", "insufficient evidence"],
+        "scientificAnswers": ["tilia", "insufficient evidence"],
+        "referenceEvidence": "The uneven cordate leaf and distinctive fruiting bract support Tilia; no species-resolving character or growing context is supplied.",
+        "nearestAlternative": "American basswood is plausible, while mulberry lacks the Tilia bract; request measured leaves, lower-surface pubescence, buds, fruit details, bark, and growing context."
+      },
+      {
+        "id": "checkpoint-07",
+        "prompt": "A northern pioneer has alternate doubly serrate leaves and white bark with dark horizontal lenticels that separates in thin sheets. The base of an old stem is dark and furrowed.",
+        "commonAnswers": ["birch", "betula", "insufficient evidence"],
+        "scientificAnswers": ["betula", "insufficient evidence"],
+        "referenceEvidence": "White papery bark, horizontal lenticels, alternate serrate foliage, and a dark rough old base support Betula but do not exclude heart-leaved paper birch.",
+        "nearestAlternative": "Paper birch and heart-leaved paper birch remain unresolved; request fully expanded mature leaf bases, current-twig resin glands, buds, and fruiting scales."
+      },
+      {
+        "id": "checkpoint-08",
+        "prompt": "A tree has alternate glossy leaves with fine incurved teeth, small glands near the petiole apex, rusty hairs beside the lower midvein, and dark drupes on elongated racemes. Old bark forms dark upturned scales.",
+        "commonAnswers": ["black cherry"],
+        "scientificAnswers": ["prunus serotina"],
+        "referenceEvidence": "Petiole glands and lower-midvein hairs corroborate the elongated fruit raceme and mature dark scaly bark.",
+        "nearestAlternative": "Chokecherry has a denser shorter raceme and different leaf details; pin cherry bears fruit in short umbel-like clusters and retains smoother bark."
+      },
+      {
+        "id": "checkpoint-09",
+        "prompt": "A small shade-tolerant understory tree has alternate doubly serrate leaves, narrow loose shredding bark strips, and pendant clusters of papery inflated sacs, each enclosing a nutlet.",
+        "commonAnswers": ["eastern hophornbeam", "hophornbeam", "ironwood"],
+        "scientificAnswers": ["ostrya virginiana"],
+        "referenceEvidence": "The closed hoplike fruit sacs and narrow shredding bark independently support eastern hophornbeam.",
+        "nearestAlternative": "American hornbeam has smooth sinewy bark and open three-lobed fruit bracts rather than inflated sacs."
+      }
+    ]
+  },
+  "nomenclatureDrill": {
+    "title": "Bidirectional scientific-name retrieval",
+    "instructions": "Work from memory. The direction alternates: common name to scientific name, then scientific name to preferred common name. Genus and specific epithet are both required when the prompt asks for a scientific name.",
+    "items": [
+      {
+        "id": "name-01",
+        "responseType": "short",
+        "prompt": "Give the accepted scientific name for sugar maple.",
+        "answerLabel": "Genus and specific epithet",
+        "answers": ["acer saccharum"],
+        "courseAnswer": "Acer saccharum",
+        "referenceEvidence": "Acer places sugar maple with the maples in Sapindaceae; saccharum is the required specific epithet."
+      },
+      {
+        "id": "name-02",
+        "responseType": "short",
+        "prompt": "Give the preferred common name for Fagus grandifolia.",
+        "answerLabel": "Preferred common name",
+        "answers": ["american beech", "beech"],
+        "courseAnswer": "American beech",
+        "referenceEvidence": "Fagus grandifolia is the course answer for American beech in Fagaceae."
+      },
+      {
+        "id": "name-03",
+        "responseType": "short",
+        "prompt": "Give the accepted scientific name for yellow birch.",
+        "answerLabel": "Genus and specific epithet",
+        "answers": ["betula alleghaniensis"],
+        "courseAnswer": "Betula alleghaniensis",
+        "referenceEvidence": "The birch genus is Betula; alleghaniensis is the required specific epithet."
+      },
+      {
+        "id": "name-04",
+        "responseType": "short",
+        "prompt": "Give the preferred common name for Tsuga canadensis.",
+        "answerLabel": "Preferred common name",
+        "answers": ["eastern hemlock", "hemlock"],
+        "courseAnswer": "Eastern hemlock",
+        "referenceEvidence": "Tsuga canadensis is eastern hemlock, a member of Pinaceae."
+      },
+      {
+        "id": "name-05",
+        "responseType": "short",
+        "prompt": "Give the accepted scientific name for red maple.",
+        "answerLabel": "Genus and specific epithet",
+        "answers": ["acer rubrum"],
+        "courseAnswer": "Acer rubrum",
+        "referenceEvidence": "Red and sugar maple share Acer; rubrum distinguishes red maple."
+      },
+      {
+        "id": "name-06",
+        "responseType": "short",
+        "prompt": "Give the preferred common name for Tilia americana.",
+        "answerLabel": "Preferred common name",
+        "answers": ["american basswood", "basswood"],
+        "courseAnswer": "American basswood",
+        "referenceEvidence": "Tilia americana is American basswood, placed in Malvaceae in the course taxonomy."
+      },
+      {
+        "id": "name-07",
+        "responseType": "short",
+        "prompt": "Give the accepted scientific name for paper birch.",
+        "answerLabel": "Genus and specific epithet",
+        "answers": ["betula papyrifera"],
+        "courseAnswer": "Betula papyrifera",
+        "referenceEvidence": "Paper and yellow birch share Betula; papyrifera is the required specific epithet."
+      },
+      {
+        "id": "name-08",
+        "responseType": "short",
+        "prompt": "Give the preferred common name for Prunus serotina.",
+        "answerLabel": "Preferred common name",
+        "answers": ["black cherry"],
+        "courseAnswer": "Black cherry",
+        "referenceEvidence": "Prunus serotina is black cherry in Rosaceae."
+      },
+      {
+        "id": "name-09",
+        "responseType": "short",
+        "prompt": "Give the preferred common name for Ostrya virginiana.",
+        "answerLabel": "Preferred common name",
+        "answers": ["eastern hophornbeam", "hophornbeam", "ironwood"],
+        "courseAnswer": "Eastern hophornbeam",
+        "referenceEvidence": "Ostrya virginiana is eastern hophornbeam, a member of Betulaceae."
+      }
+    ]
+  },
+  "silvicsDrill": {
+    "title": "Forester's silvics retrieval",
+    "instructions": "Answer in one to three sentences without reopening the profiles. These are open-response prompts: compare your answer with the revealed reference rubric after submitting the entire seven-item batch.",
+    "items": [
+      {
+        "id": "silvics-01",
+        "responseType": "short",
+        "autoGrade": false,
+        "multiline": true,
+        "prompt": "Compare eastern hemlock, American beech, and sugar maple in shade tolerance and advance-regeneration behavior.",
+        "answerLabel": "Short field-silvics answer",
+        "courseAnswer": "All three are highly shade tolerant and can maintain advance regeneration; hemlock and beech tolerate exceptionally deep shade, while sugar maple is also a major long-lived advance-regeneration component on suitable mesic sites.",
+        "referenceEvidence": "Full credit names all three as shade-tolerant advance-regeneration species and distinguishes exceptionally deep-shade persistence from a simple pioneer strategy."
+      },
+      {
+        "id": "silvics-02",
+        "responseType": "short",
+        "autoGrade": false,
+        "multiline": true,
+        "prompt": "What disturbance and establishment pattern makes paper birch common after severe northern-forest disturbance?",
+        "answerLabel": "Short field-silvics answer",
+        "courseAnswer": "Paper birch is very shade intolerant and produces abundant small seed that establishes on exposed mineral soil after fire, logging, or other severe disturbance; it grows rapidly but is relatively short-lived.",
+        "referenceEvidence": "Full credit includes shade intolerance, prolific seed, exposed seedbed/severe disturbance, and pioneer succession."
+      },
+      {
+        "id": "silvics-03",
+        "responseType": "short",
+        "autoGrade": false,
+        "multiline": true,
+        "prompt": "Why are rotten logs, stumps, and disturbed mineral soil important to yellow-birch regeneration?",
+        "answerLabel": "Short field-silvics answer",
+        "courseAnswer": "Yellow birch has very small seed and seedlings that compete poorly through thick intact litter; moist decayed wood and exposed mineral soil provide receptive, elevated microsites with better moisture and rooting conditions.",
+        "referenceEvidence": "Full credit connects tiny seed/seedling limitations to receptive moist seedbeds rather than merely naming rotten wood."
+      },
+      {
+        "id": "silvics-04",
+        "responseType": "short",
+        "autoGrade": false,
+        "multiline": true,
+        "prompt": "Explain why red maple can increase across both lowland and upland disturbed forests.",
+        "answerLabel": "Short field-silvics answer",
+        "courseAnswer": "Red maple occupies an unusually broad moisture range, produces abundant seed, tolerates some shade when young, and responds vigorously to disturbance through stump sprouting, allowing it to establish in both wet and dry settings.",
+        "referenceEvidence": "Full credit includes ecological breadth plus at least two regeneration mechanisms: seed, juvenile tolerance, or stump sprouting."
+      },
+      {
+        "id": "silvics-05",
+        "responseType": "short",
+        "autoGrade": false,
+        "multiline": true,
+        "prompt": "What combination of dispersal, seed behavior, and gap response makes black cherry important on productive Allegheny sites?",
+        "answerLabel": "Short field-silvics answer",
+        "courseAnswer": "Birds disperse black-cherry seed, a persistent soil seed bank can respond after canopy disturbance, and shade-intolerant seedlings grow rapidly in gaps; fertile well-drained Allegheny sites can then produce high-value timber.",
+        "referenceEvidence": "Full credit connects bird dispersal or dormant seed, gap release, rapid juvenile growth, and Allegheny site productivity."
+      },
+      {
+        "id": "silvics-06",
+        "responseType": "short",
+        "autoGrade": false,
+        "multiline": true,
+        "prompt": "Contrast American basswood and eastern hophornbeam in site tendency, vegetative response, and management importance.",
+        "answerLabel": "Short field-silvics answer",
+        "courseAnswer": "Basswood favors fertile mesic often base-rich sites and sprouts vigorously from stumps, so it can respond strongly after cutting; hophornbeam is a slow-growing shade-tolerant small tree of dry-mesic or rocky understories and is usually retained for diversity rather than managed as a principal crop tree.",
+        "referenceEvidence": "Full credit distinguishes fertile-mesic vigorous-sprouting basswood from small persistent dry-mesic/rocky understory hophornbeam and states a management consequence."
+      },
+      {
+        "id": "silvics-07",
+        "responseType": "short",
+        "autoGrade": false,
+        "multiline": true,
+        "prompt": "Give one regeneration feature and one management or condition implication a forester should remember for American beech.",
+        "answerLabel": "Short field-silvics answer",
+        "courseAnswer": "American beech maintains deeply shade-tolerant advance regeneration and can spread by root suckers; disease, wounds, and root-sucker proliferation can strongly affect stand structure and quality, so host identification must remain separate from diagnosing bark condition.",
+        "referenceEvidence": "Full credit gives either advance regeneration or root suckering and ties disease/injury or sprout behavior to a concrete stand-management implication."
+      }
+    ]
+  },
+  "weeklyPractical": {
+    "title": "Week 1 practical rehearsal",
+    "instructions": "This public build rehearses the formal practical format but does not enter the gradebook. The twelve photographs are new to this learner sequence. Four items intentionally do not support a defensible species call; stop at genus when supported or use ‘insufficient evidence’ instead of guessing.",
+    "items": [
+      {
+        "id": "practical-01",
+        "image": {
+          "assetId": "INAT_PHOTO_714597475",
+          "src": "/assets/course/images/week-01/INAT_PHOTO_714597475.jpg",
+          "alt": "Assessment photograph for practical item 1; examine the visible evidence before answering.",
+          "attribution": "No rights reserved (CC0)",
+          "sourceUrl": "https://www.inaturalist.org/photos/714597475"
+        },
+        "commonAnswers": ["sugar maple"],
+        "scientificAnswers": ["acer saccharum"],
+        "referenceEvidence": "The leaf has pointed lobes, broad rounded sinuses, and sparse large teeth; the limited trunk view is not mature or diagnostic enough to serve as independent corroboration.",
+        "nearestAlternative": "Red maple; request opposite buds or samaras if the leaf margin cannot be inspected clearly."
+      },
+      {
+        "id": "practical-02",
+        "image": {
+          "assetId": "INAT_PHOTO_716757033",
+          "src": "/assets/course/images/week-01/INAT_PHOTO_716757033.jpg",
+          "alt": "Assessment photograph for practical item 2; examine the visible evidence before answering.",
+          "attribution": "Zachary Justus, CC BY",
+          "sourceUrl": "https://www.inaturalist.org/photos/716757033"
+        },
+        "commonAnswers": ["american beech", "beech"],
+        "scientificAnswers": ["fagus grandifolia"],
+        "referenceEvidence": "Strong straight lateral veins terminate at individual teeth on alternate leaves, a high-value American-beech foliage pattern.",
+        "nearestAlternative": "Eastern hophornbeam; request buds, bark, and fruit because foliage overlap can be substantial."
+      },
+      {
+        "id": "practical-03",
+        "image": {
+          "assetId": "INAT_PHOTO_692361831",
+          "src": "/assets/course/images/week-01/INAT_PHOTO_692361831.jpg",
+          "alt": "Assessment photograph for practical item 3; examine the visible evidence before answering.",
+          "attribution": "Spencer Bierman, CC BY",
+          "sourceUrl": "https://www.inaturalist.org/photos/692361831"
+        },
+        "commonAnswers": ["yellow birch"],
+        "scientificAnswers": ["betula alleghaniensis"],
+        "referenceEvidence": "The older surface retains bronze color, horizontal lenticels, and curling plate edges consistent with yellow birch.",
+        "nearestAlternative": "Black cherry or sweet birch; request wintergreen odor, foliage, buds, and another bark age."
+      },
+      {
+        "id": "practical-04",
+        "image": {
+          "assetId": "INAT_PHOTO_718472467",
+          "src": "/assets/course/images/week-01/INAT_PHOTO_718472467.jpg",
+          "alt": "Assessment photograph for practical item 4; examine the visible evidence before answering.",
+          "attribution": "No rights reserved (CC0)",
+          "sourceUrl": "https://www.inaturalist.org/photos/718472467"
+        },
+        "commonAnswers": ["eastern hemlock", "hemlock"],
+        "scientificAnswers": ["tsuga canadensis"],
+        "referenceEvidence": "Short flat unequal needles on a delicate twig narrow into tiny petiole-like bases rather than sitting on woody pegs.",
+        "nearestAlternative": "Fir or spruce; request the lower needle surface and any cones."
+      },
+      {
+        "id": "practical-05",
+        "image": {
+          "assetId": "INAT_PHOTO_717573410",
+          "src": "/assets/course/images/week-01/INAT_PHOTO_717573410.jpg",
+          "alt": "Assessment photograph for practical item 5; examine the visible evidence before answering.",
+          "attribution": "No rights reserved (CC0)",
+          "sourceUrl": "https://www.inaturalist.org/photos/717573410"
+        },
+        "commonAnswers": ["red maple"],
+        "scientificAnswers": ["acer rubrum"],
+        "referenceEvidence": "The three prominent lobes, sharp regular serration, and angular sinuses support red maple.",
+        "nearestAlternative": "Sugar maple; request buds, petiole sap, or samaras."
+      },
+      {
+        "id": "practical-06",
+        "image": {
+          "assetId": "INAT_PHOTO_721862789",
+          "src": "/assets/course/images/week-01/INAT_PHOTO_721862789.jpg",
+          "alt": "Assessment photograph for practical item 6; examine the visible evidence before answering.",
+          "attribution": "Michelle Norcéide, CC BY",
+          "sourceUrl": "https://www.inaturalist.org/photos/721862789"
+        },
+        "commonAnswers": ["linden", "tilia", "insufficient evidence"],
+        "scientificAnswers": ["tilia", "insufficient evidence"],
+        "referenceEvidence": "Very broad alternate leaves with serrate margins and conspicuously uneven cordate bases support Tilia, but foliage alone in this photograph does not securely separate American basswood from planted lindens.",
+        "nearestAlternative": "American basswood is plausible; request a fruiting bract, measured mature leaves, lower-surface pubescence, buds, bark, and growing context before naming a species."
+      },
+      {
+        "id": "practical-07",
+        "image": {
+          "assetId": "INAT_PHOTO_690432625",
+          "src": "/assets/course/images/week-01/INAT_PHOTO_690432625.jpg",
+          "alt": "Assessment photograph for practical item 7; examine the visible evidence before answering.",
+          "attribution": "Joey M, CC BY",
+          "sourceUrl": "https://www.inaturalist.org/photos/690432625"
+        },
+        "commonAnswers": ["birch", "betula", "insufficient evidence"],
+        "scientificAnswers": ["betula", "insufficient evidence"],
+        "referenceEvidence": "Bright bark with horizontal lenticels and thin peeling sheets supports Betula, but the distant bark-and-bole view does not show a species-resolving organ.",
+        "nearestAlternative": "Paper birch and heart-leaved paper birch remain unresolved; request fully expanded mature leaves, current twigs and buds, resin-gland detail, and fruiting scales."
+      },
+      {
+        "id": "practical-08",
+        "image": {
+          "assetId": "INAT_PHOTO_723760868",
+          "src": "/assets/course/images/week-01/INAT_PHOTO_723760868.jpg",
+          "alt": "Assessment photograph for practical item 8; examine the visible evidence before answering.",
+          "attribution": "betsyyyy, CC BY",
+          "sourceUrl": "https://www.inaturalist.org/photos/723760868"
+        },
+        "commonAnswers": ["black cherry"],
+        "scientificAnswers": ["prunus serotina"],
+        "referenceEvidence": "Mature bark forms dark small scaly plates with lifted edges, the classic black-cherry pattern.",
+        "nearestAlternative": "Old yellow birch or another dark plated hardwood; request leaves, petiole glands, lower-midvein hairs, fruit racemes, or scratched-twig odor."
+      },
+      {
+        "id": "practical-09",
+        "image": {
+          "assetId": "INAT_PHOTO_712648782",
+          "src": "/assets/course/images/week-01/INAT_PHOTO_712648782.jpg",
+          "alt": "Assessment photograph for practical item 9; examine the visible evidence before answering.",
+          "attribution": "No rights reserved (CC0)",
+          "sourceUrl": "https://www.inaturalist.org/photos/712648782"
+        },
+        "commonAnswers": ["eastern hophornbeam", "hophornbeam", "ironwood"],
+        "scientificAnswers": ["ostrya virginiana"],
+        "referenceEvidence": "The small stem bears the narrow loose vertical strips characteristic of mature eastern hophornbeam bark.",
+        "nearestAlternative": "American hornbeam or beech; request hoplike fruit, short pointed buds, and doubly serrate leaves."
+      },
+      {
+        "id": "practical-10",
+        "image": {
+          "assetId": "INAT_PHOTO_724026055",
+          "src": "/assets/course/images/week-01/INAT_PHOTO_724026055.jpg",
+          "alt": "Assessment photograph for practical item 10; examine the visible evidence before answering.",
+          "attribution": "No rights reserved (CC0)",
+          "sourceUrl": "https://www.inaturalist.org/photos/724026055"
+        },
+        "commonAnswers": ["insufficient evidence", "maple", "acer"],
+        "scientificAnswers": ["insufficient evidence", "acer"],
+        "referenceEvidence": "The damaged detached foliage supports maple, but the view does not securely resolve sugar maple from black-maple-like variation or other overlapping Acer material.",
+        "nearestAlternative": "Request intact opposite shoots, both leaf surfaces, petiole sap, buds, samaras, and a representative crown sample."
+      },
+      {
+        "id": "practical-11",
+        "image": {
+          "assetId": "INAT_PHOTO_720165795",
+          "src": "/assets/course/images/week-01/INAT_PHOTO_720165795.jpg",
+          "alt": "Assessment photograph for practical item 11; examine the visible evidence before answering.",
+          "attribution": "Summit Metro Parks, CC BY",
+          "sourceUrl": "https://www.inaturalist.org/photos/720165795"
+        },
+        "commonAnswers": ["insufficient evidence", "maple", "acer"],
+        "scientificAnswers": ["insufficient evidence", "acer"],
+        "referenceEvidence": "The distant lobed crown may support Acer, but neither leaf margin, buds, fruit, nor diagnostic bark detail is resolved well enough for a species call.",
+        "nearestAlternative": "Request a current shoot with opposite leaves or buds, close bark at known age, and any samaras."
+      },
+      {
+        "id": "practical-12",
+        "image": {
+          "assetId": "INAT_PHOTO_725105483",
+          "src": "/assets/course/images/week-01/INAT_PHOTO_725105483.jpg",
+          "alt": "Assessment photograph for practical item 12; examine the visible evidence before answering.",
+          "attribution": "Tom Norton, CC BY",
+          "sourceUrl": "https://www.inaturalist.org/photos/725105483"
+        },
+        "commonAnswers": ["insufficient evidence", "birch", "betula"],
+        "scientificAnswers": ["insufficient evidence", "betula"],
+        "referenceEvidence": "Old rough bark can support birch but does not reveal enough stable species-level characters here; classic yellow-birch curl is not adequately resolved.",
+        "nearestAlternative": "Request intermediate bark, current twigs and buds, wintergreen odor, foliage, and reproductive structures."
+      }
+    ]
+  }
+}

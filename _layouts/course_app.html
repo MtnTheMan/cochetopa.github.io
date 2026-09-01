@@ -1,0 +1,78 @@
+---
+layout: default
+---
+
+<div
+  class="course-app"
+  id="course-app"
+  data-content-url="{{ '/assets/course/data/week-01.json' | relative_url }}"
+  data-catalog-url="{{ '/assets/course/data/course-catalog.json' | relative_url }}"
+  data-teaching-base-url="{{ '/assets/course/data/teaching' | relative_url }}"
+  data-media-url="{{ '/assets/course/data/public-media.json' | relative_url }}"
+>
+  <a class="course-skip-link" href="#course-view">Skip to lesson content</a>
+
+  <aside class="course-sidebar" aria-label="Course navigation">
+    <div class="course-sidebar__brand">
+      <p class="course-sidebar__eyebrow">Self-paced field course</p>
+      <p class="course-sidebar__title">Northern Hardwoods &amp; Mixedwoods</p>
+      <p class="course-sidebar__note">Local progress works now; email sign-in and cloud sync are the final deployment step.</p>
+    </div>
+
+    <nav class="course-nav" id="course-nav" aria-label="Course activities">
+      <p class="course-nav__loading">Loading ten-week catalog…</p>
+    </nav>
+  </aside>
+
+  <div class="course-workspace">
+    <header class="course-topbar">
+      <button class="course-menu-button" id="course-menu-button" type="button" aria-expanded="false" aria-controls="course-mobile-nav">Menu</button>
+      <div class="course-progress" aria-label="Week 1 preview progress">
+        <div class="course-progress__labels">
+          <span>Preview progress</span>
+          <strong id="course-progress-label">0 of 7 activities</strong>
+        </div>
+        <progress class="course-progress__meter" id="course-progress-bar" max="7" value="0">0 of 7 activities</progress>
+      </div>
+      <section class="course-account" id="course-account" data-config-url="{{ '/assets/course/data/runtime-config.json' | relative_url }}" aria-label="Course account">
+        <p id="course-account-status" role="status">Checking cloud sign-in…</p>
+        <form id="course-signin-form" class="course-signin-form">
+          <label for="course-signin-email">Email address</label>
+          <input id="course-signin-email" name="email" type="email" autocomplete="email" required placeholder="you@example.com">
+          <div id="course-turnstile" aria-label="Human verification"></div>
+          <button class="course-link-button" type="submit">Email me a sign-in link</button>
+        </form>
+        <button class="course-link-button" id="course-signout" type="button" hidden>Sign out</button>
+        <form id="course-reminder-form" class="course-reminder-form" hidden>
+          <label><input id="course-reminder-opt-in" type="checkbox"> Send optional retrieval encouragements</label>
+          <label for="course-reminder-cadence">Cadence</label>
+          <select id="course-reminder-cadence"><option value="weekly">Weekly</option><option value="twice_weekly">Twice weekly</option><option value="due_only">Only when species are due</option><option value="off">Off</option></select>
+          <button class="course-link-button" type="submit">Save reminder preference</button>
+        </form>
+      </section>
+    </header>
+
+    <nav class="course-mobile-nav" id="course-mobile-nav" aria-label="Mobile course activities" hidden></nav>
+
+    <p class="course-storage-status" id="course-storage-status" role="status" hidden></p>
+
+    <main class="course-view" id="course-view" tabindex="-1" aria-live="polite">
+      <div class="course-loading" role="status">Loading the Week 1 preview…</div>
+    </main>
+  </div>
+
+  <dialog class="course-image-dialog" id="course-image-dialog" aria-labelledby="course-image-dialog-title" aria-describedby="course-image-dialog-caption">
+    <h2 class="course-visually-hidden" id="course-image-dialog-title">Enlarged course image</h2>
+    <button type="button" class="course-dialog-close" aria-label="Close enlarged image">Close</button>
+    <div class="course-dialog-image-frame"><img src="" alt="" /></div>
+    <p id="course-image-dialog-caption"></p>
+    <p class="course-dialog-credit" id="course-image-dialog-credit"></p>
+  </dialog>
+
+  <noscript>
+    <p class="course-noscript">This interactive preview requires JavaScript. The public course description remains available on the Course page.</p>
+  </noscript>
+</div>
+
+<script type="module" src="{{ '/assets/course/auth.js' | relative_url }}"></script>
+<script type="module" src="{{ '/assets/course/app.js' | relative_url }}"></script>

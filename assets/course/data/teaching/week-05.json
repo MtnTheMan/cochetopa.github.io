@@ -1,0 +1,1293 @@
+{
+  "$schema": "cochetopa-public-teaching-package/1.0",
+  "schemaVersion": "1.0.0",
+  "courseId": "northern-hardwoods-mixedwoods-dendrology-silvics-intensive",
+  "courseVersion": "2026.1-draft",
+  "moduleId": "week-05",
+  "sequence": 5,
+  "title": "Ashes, Elms, Lowlands, and Riparian Systems",
+  "deliveryStatus": "teaching_text_complete_visual_media_pending_admission",
+  "objectives": [
+    "Discriminate ashes and elms from foliage, buds, leaf scars, samaras, bark, and site.",
+    "Identify riparian and lowland associates from dormant and reproductive evidence as well as foliage and bark.",
+    "Separate emerald ash borer and Dutch elm disease effects from host identification.",
+    "Use hydrology and floodplain context as supporting evidence without over-weighting it.",
+    "Demonstrate cumulative Weeks 1-5 command on the midterm."
+  ],
+  "cumulativeReview": {
+    "policy_id": "CR-01",
+    "eligible_taxon_rule": "introduction_week_lte_module_sequence",
+    "through_introduction_week": 5,
+    "eligible_taxon_count": 53,
+    "selection_priorities": [
+      "ash_elm_confusers",
+      "dormant_and_propagule_deficits",
+      "lowland_context_calibration",
+      "midterm_cumulative_coverage",
+      "active_remediation"
+    ]
+  },
+  "confuserSets": [
+    {
+      "confusionSetId": "CS01",
+      "name": "Sugar / black / Norway maple",
+      "memberTaxa": [
+        "ACER_SACCHARUM",
+        "ACER_NIGRUM",
+        "ACER_PLATANOIDES"
+      ],
+      "keySeparators": "Petiole latex; leaf underside hair and stipules; bud size/shape; samara angle",
+      "resolvingViews": "Fresh-broken petiole; lower surface; terminal bud; ripe samara"
+    },
+    {
+      "confusionSetId": "CS02",
+      "name": "Red / silver maple",
+      "memberTaxa": [
+        "ACER_RUBRUM",
+        "ACER_SACCHARINUM"
+      ],
+      "keySeparators": "Sinus depth; lower-surface whiteness; spring samara size; twig odor; bark strips",
+      "resolvingViews": "Complete leaf underside; samara with scale; crushed twig; mature bark"
+    },
+    {
+      "confusionSetId": "CS03",
+      "name": "Striped / mountain maple",
+      "memberTaxa": [
+        "ACER_PENSYLVANICUM",
+        "ACER_SPICATUM"
+      ],
+      "keySeparators": "Green-white striped bark versus unstriped; leaf size/base; fruit cluster posture; growth form",
+      "resolvingViews": "Young stem; intact leaf; fruit cluster; whole plant"
+    },
+    {
+      "confusionSetId": "CS04",
+      "name": "White / green / black ash",
+      "memberTaxa": [
+        "FRAXINUS_AMERICANA",
+        "FRAXINUS_PENNSYLVANICA",
+        "FRAXINUS_NIGRA"
+      ],
+      "keySeparators": "Leaf-scar shape and bud position; leaflet stalks; samara wing extent; black-ash corky bark",
+      "resolvingViews": "Twig node and leaf scar; whole rachis; samara; bark; hydrologic setting"
+    },
+    {
+      "confusionSetId": "CS05",
+      "name": "Paper / heart-leaved / gray birch",
+      "memberTaxa": [
+        "BETULA_PAPYRIFERA",
+        "BETULA_CORDIFOLIA",
+        "BETULA_POPULIFOLIA"
+      ],
+      "keySeparators": "Leaf base and vein count; twig resin glands; peeling versus tight bark; black branch marks; elevation",
+      "resolvingViews": "Several mature leaves; resin-warty twig; bark sheet; whole growth form; location"
+    },
+    {
+      "confusionSetId": "CS06",
+      "name": "Yellow / sweet birch",
+      "memberTaxa": [
+        "BETULA_ALLEGHANIENSIS",
+        "BETULA_LENTA"
+      ],
+      "keySeparators": "Both wintergreen; yellow birch golden curling bark and spur shoots versus sweet birch dark blocky bark",
+      "resolvingViews": "Scratched twig; young and mature bark; fruiting strobile; lower leaf surface"
+    },
+    {
+      "confusionSetId": "CS07",
+      "name": "White / black / red / Norway spruce",
+      "memberTaxa": [
+        "PICEA_GLAUCA",
+        "PICEA_MARIANA",
+        "PICEA_RUBENS",
+        "PICEA_ABIES"
+      ],
+      "keySeparators": "Cone size and scale margin; twig hairs; bud resin; foliage color/odor; pendulous branchlets",
+      "resolvingViews": "Full cone; twig macro; bud; whole crown; regional site"
+    },
+    {
+      "confusionSetId": "CS08",
+      "name": "Spruce / fir / hemlock",
+      "memberTaxa": [
+        "PICEA_GLAUCA",
+        "PICEA_MARIANA",
+        "PICEA_RUBENS",
+        "ABIES_BALSAMEA",
+        "TSUGA_CANADENSIS"
+      ],
+      "keySeparators": "Woody pegs versus pad base versus petiole; needle cross-section; cone orientation and persistence",
+      "resolvingViews": "Needle attachment macro; underside; terminal shoot; intact or attached cone"
+    },
+    {
+      "confusionSetId": "CS09",
+      "name": "Red / jack / Scots / pitch pine",
+      "memberTaxa": [
+        "PINUS_RESINOSA",
+        "PINUS_BANKSIANA",
+        "PINUS_SYLVESTRIS",
+        "PINUS_RIGIDA"
+      ],
+      "keySeparators": "Fascicle count/length; bend test; cone curvature/prickles; upper-bole orange bark; epicormic shoots",
+      "resolvingViews": "Several complete fascicles; cone and umbo; upper and lower bark; whole crown"
+    },
+    {
+      "confusionSetId": "CS10",
+      "name": "Tamarack / European larch",
+      "memberTaxa": [
+        "LARIX_LARICINA",
+        "LARIX_DECIDUA"
+      ],
+      "keySeparators": "Cone size and scale count/edge; needle cluster density; native peatland versus planting",
+      "resolvingViews": "Full cone; spur shoot; cluster count; site/planting context"
+    },
+    {
+      "confusionSetId": "CS13",
+      "name": "Aspens / balsam poplar / cottonwood",
+      "memberTaxa": [
+        "POPULUS_TREMULOIDES",
+        "POPULUS_GRANDIDENTATA",
+        "POPULUS_BALSAMIFERA",
+        "POPULUS_DELTOIDES"
+      ],
+      "keySeparators": "Petiole flattening; tooth size; leaf base; bud size/stickiness/odor; bark and floodplain/upland context",
+      "resolvingViews": "Complete leaf and petiole; bud; young and old bark; clonal form; site"
+    },
+    {
+      "confusionSetId": "CS14",
+      "name": "American / slippery / rock / Siberian elm",
+      "memberTaxa": [
+        "ULMUS_AMERICANA",
+        "ULMUS_RUBRA",
+        "ULMUS_THOMASII",
+        "ULMUS_PUMILA"
+      ],
+      "keySeparators": "Leaf roughness/base; bud hair; corky wings; samara hair/notch; bark layering; crown",
+      "resolvingViews": "Leaf surfaces; buds; samara; corky twigs; existing bark section; crown"
+    },
+    {
+      "confusionSetId": "CS15",
+      "name": "Black / pin / chokecherry",
+      "memberTaxa": [
+        "PRUNUS_SEROTINA",
+        "PRUNUS_PENSYLVANICA",
+        "PRUNUS_VIRGINIANA"
+      ],
+      "keySeparators": "Fruit cluster architecture; petiole glands; lower-midvein hair; bark age; whole pioneer/clonal form",
+      "resolvingViews": "Raceme or cluster; petiole macro; lower leaf; mature bark; whole plant"
+    },
+    {
+      "confusionSetId": "CS16",
+      "name": "American hornbeam / eastern hophornbeam",
+      "memberTaxa": [
+        "CARPINUS_CAROLINIANA",
+        "OSTRYA_VIRGINIANA"
+      ],
+      "keySeparators": "Muscular smooth bole and three-lobed fruit bracts versus shreddy bark and hoplike sacs",
+      "resolvingViews": "Bole; fruit; bud; wet versus dry site"
+    },
+    {
+      "confusionSetId": "CS21",
+      "name": "Yellow birch / black cherry bark",
+      "memberTaxa": [
+        "BETULA_ALLEGHANIENSIS",
+        "PRUNUS_SEROTINA"
+      ],
+      "keySeparators": "Golden horizontal curls and wintergreen twig versus burnt-chip plates, petiole glands, and almond twig odor",
+      "resolvingViews": "Young and old bark; scratched twig; leaf petiole and underside; fruit"
+    },
+    {
+      "confusionSetId": "CS22",
+      "name": "Serviceberry / mountain-ashes / chokecherry",
+      "memberTaxa": [
+        "AMELANCHIER_LAEVIS",
+        "SORBUS_AMERICANA",
+        "SORBUS_DECORA",
+        "PRUNUS_VIRGINIANA"
+      ],
+      "keySeparators": "Simple versus compound leaves; pome calyx versus drupe; leaflet proportions; buds; fruit architecture",
+      "resolvingViews": "Whole leaf; fruit close-up; bud; flowers; multiple leaves"
+    }
+  ],
+  "expectedSilvicsRetrieval": {
+    "taxon_scope": "all_taxa_introduced_through_week_5",
+    "dimensions": [
+      "moisture_drainage_soils",
+      "forest_associations",
+      "regeneration",
+      "vegetative_reproduction",
+      "seed_mast_behavior",
+      "insects_diseases",
+      "management_implications"
+    ],
+    "response_standard": "Explain lowland or riparian establishment and management implications while distinguishing host traits from damage symptoms."
+  },
+  "sessions": [
+    {
+      "sessionId": "W05-A",
+      "letter": "A",
+      "title": "Ash and elm systems",
+      "kind": "species_introduction",
+      "taxonScope": "listed_new_taxa",
+      "modalities": [
+        "foliage",
+        "bark",
+        "reproductive",
+        "dormant",
+        "whole_tree_context",
+        "condition"
+      ],
+      "delivery": "confuser-first teaching with host-condition separation",
+      "feedbackRelease": "during_instruction",
+      "runtimeBoundary": "labeled_teaching_content",
+      "introducedTaxonIds": [
+        "FRAXINUS_AMERICANA",
+        "FRAXINUS_PENNSYLVANICA",
+        "FRAXINUS_NIGRA",
+        "ULMUS_AMERICANA",
+        "ULMUS_RUBRA",
+        "ULMUS_THOMASII",
+        "ULMUS_PUMILA"
+      ],
+      "teachingProfiles": [
+        {
+          "taxonId": "FRAXINUS_AMERICANA",
+          "preferredCommonName": "White ash",
+          "canonicalScientificName": "Fraxinus americana",
+          "acceptedAlternatives": [],
+          "family": "Oleaceae",
+          "distributionInCourseRegion": "Mesic well-drained sites throughout most of the region",
+          "ecologicalImportance": "Valuable mid-tolerant hardwood and major emerald ash borer host; site-quality indicator",
+          "coursePriority": "1 - core",
+          "tier": "A",
+          "fieldIdentification": {
+            "foliage": "Leaves are opposite and pinnately compound, usually with seven but sometimes five to nine stalked leaflets. Mature leaflets are generally dark green above and conspicuously paler, papillose, or whitish beneath; margins range from nearly entire to shallowly toothed. Leaflet stalks and the pale lower surface are more reliable than leaflet count, which overlaps green ash.",
+            "barkAgeSeries": "Seedlings and young saplings have smooth gray bark with scattered pale lenticels. Pole-size bark develops intersecting narrow ridges, and mature bark forms firm, regular diamond-shaped furrows with pointed ridge intersections. Old bark becomes deeply furrowed and blockier, while wet bark, lichens, cankers, woodpecker scaling, and emerald ash borer injury can disrupt the diamond pattern.",
+            "dormant": "Stout opposite brown to blue-brown twigs are normally glabrous. The terminal bud is rounded at the apex and sits adjacent to the uppermost pair of lateral buds; each lateral bud is nested above a leaf scar whose upper edge is deeply concave like a broad smile. The deeply notched scar is a high-value separator from green ash, but inspect several healthy nodes because scars deform around wounds and vigorous sprouts.",
+            "reproductive": "Small apetalous flowers occur before or with early leaf-out, usually on separate male and female trees. Single paddle-shaped samaras hang in clusters; a persistent calyx forms a small lobed cup at the base, and the wing extends only about one-third to one-half down the cylindrical seed body. Detached ash samaras must show the wing-body junction and calyx before they can reliably separate white from green ash.",
+            "wholeTreeContext": "A medium to large straight-boled tree of fertile, well-drained coves, slopes, benches, and mesic northern-hardwood or oak-hardwood stands. Opposite branching can be seen in intact crowns, though death of one branch distorts the pattern. White ash is less centered on saturated lowlands than green or black ash and often occurs with sugar maple, basswood, black cherry, yellow birch, beech, and northern red oak.",
+            "variationAndCondition": "Lower leaf color, marginal teeth, and bark regularity vary with vigor and site. Emerald ash borer can cause crown thinning, epicormic shoots, vertical bark splits, serpentine galleries, D-shaped exit holes, and pale woodpecker-scaled bark; these identify an ash host plus an injury process, not white ash specifically. Do not infer resistance from a surviving tree or diagnose EAB from crown decline alone.",
+            "defensibilityLimits": "Opposite compound leaves, diamond-furrowed bark, or EAB signs establish Fraxinus at best. Species-level evidence should combine stalked leaflets with pale undersides, glabrous brown-blue twigs, a deeply concave leaf scar and rounded terminal bud, or a samara whose wing is limited to the distal body. If scar, fruit, and lower leaf surfaces are unavailable, answer ash or Fraxinus rather than forcing white versus green."
+          },
+          "confuserControl": [
+            {
+              "confuser": "Fraxinus pennsylvanica",
+              "visibleSeparators": "White ash typically has glabrous brown-blue twigs, a rounded terminal bud, a deeply concave leaf-scar margin, paler leaflet undersides, and a samara wing extending about one-third down the body. Green ash typically has gray-brown pubescent twigs, an acute terminal bud, a straight or only slightly concave scar, and a wing extending about halfway down the body; glabrous green-ash forms require fruit and scar evidence.",
+              "resolvingView": "Several healthy winter nodes, magnified twig pubescence, lower leaflet surfaces and petiolules, plus intact samaras showing calyx and wing-body junction."
+            },
+            {
+              "confuser": "Fraxinus nigra",
+              "visibleSeparators": "White ash has five to nine stalked leaflets and a terminal bud adjacent to the highest lateral buds. Black ash has seven to thirteen mostly sessile leaflets and a terminal bud separated from the highest lateral pair; its bark becomes corky-scaly rather than regularly diamond furrowed.",
+              "resolvingView": "Full compound leaf with leaflet bases, terminal three-bud arrangement, mature bark, and a samara showing how far the wing descends."
+            },
+            {
+              "confuser": "Acer negundo",
+              "visibleSeparators": "Boxelder also has opposite compound leaves but usually only three to seven irregularly lobed leaflets, green or glaucous twigs, pale-hairy buds, and paired maple samaras. White ash leaflets are more uniform and its fruits are single samaras.",
+              "resolvingView": "Attached leaf and node, twig color, bud and leaf-scar macro, and fruit attachment."
+            }
+          ],
+          "silvicsCapsule": {
+            "shadeTolerance": "Young seedlings tolerate shade for a time, but tolerance declines with age; saplings need overhead release to recruit into the canopy.",
+            "moistureDrainageSoils": "Best on deep, fertile, moist but well-drained loams with favorable nutrient status; it avoids prolonged saturation and performs poorly on droughty or highly compacted sites.",
+            "geographicClimaticAffinity": "A widespread eastern species across the Great Lakes, southern Canada, New England, New York, the Allegheny region, and northern New Jersey.",
+            "forestAssociations": "Common with sugar and red maple, basswood, yellow birch, beech, black cherry, hemlock, white pine, northern red oak, and tulip tree toward the south.",
+            "regeneration": "Wind-dispersed seed produces advance regeneration beneath partial canopy; seedlings may persist slowly, then respond rapidly to release and adequate soil moisture.",
+            "vegetativeReproduction": "Young stumps can sprout, but seed-origin regeneration is more important in natural stands and sprouting capacity declines with size and age.",
+            "seedMastBehavior": "Seed crops are variable with periodic good years; samaras mature in fall, disperse through fall and winter, and exhibit dormancy relieved by stratification.",
+            "establishmentRequirements": "Fertile mineral soil or mixed humus, moderate moisture, and partial light support initial survival; successful canopy recruitment requires timely release from overhead competition and browse.",
+            "successionalRole": "An intermediate-successional, persistent associate rather than a climax dominant, using advance regeneration and canopy gaps to maintain a scattered overstory presence.",
+            "disturbanceResponse": "Seedlings and saplings release well after thinning or gap creation, while thin bark and limited sprouting make severe fire damaging; exposed crowns generally respond to reasonable release.",
+            "longevityGrowthStrategy": "Moderately fast on good sites and capable of living roughly two centuries or more, with valuable straight stems when crowns remain vigorous and sites are fertile.",
+            "browseSusceptibility": "Highly preferred by deer and livestock; repeated browsing can eliminate terminal growth, deform stems, and prevent regeneration from escaping the browse layer.",
+            "insectsDiseases": "Emerald ash borer is the overriding mortality agent; ash yellows, anthracnose, cankers, borers, and heart or root rots also occur, especially in stressed or wounded trees.",
+            "managementImplications": "Inventory living seed sources, regeneration, EAB status, hazard exposure, and genetic-conservation objectives before cutting; retaining apparently healthy individuals does not prove resistance but may preserve adaptive potential.",
+            "silviculturalSystemResponse": "Selection, shelterwood, and small-group openings can release established regeneration where browse is controlled; without EAB planning and regeneration protection, residual-tree systems alone cannot assure a future ash component."
+          },
+          "references": [
+            {
+              "title": "White Ash — Silvics of North America",
+              "url": "https://research.fs.usda.gov/silvics/white-ash",
+              "scope": "Distribution, sites, associations, regeneration, shade response, growth, damaging agents, and management."
+            },
+            {
+              "title": "Fraxinus americana — white ash",
+              "url": "https://gobotany.nativeplanttrust.org/species/fraxinus/americana/",
+              "scope": "Regional leaflet, twig, bud, scar, samara, habitat, and direct ash-confuser characters."
+            },
+            {
+              "title": "Emerald Ash Borer",
+              "url": "https://www.aphis.usda.gov/plant-pests-diseases/eab",
+              "scope": "Authoritative EAB host range, signs, symptoms, galleries, exit holes, and condition-identification limits."
+            }
+          ]
+        },
+        {
+          "taxonId": "FRAXINUS_PENNSYLVANICA",
+          "preferredCommonName": "Green ash",
+          "canonicalScientificName": "Fraxinus pennsylvanica",
+          "acceptedAlternatives": [
+            "Fraxinus lanceolata",
+            "varieties lanceolata and subintegerrima"
+          ],
+          "family": "Oleaceae",
+          "distributionInCourseRegion": "Floodplains and moist uplands across the Great Lakes, southern Canada, NY, PA/NJ, and lower New England",
+          "ecologicalImportance": "Flood-tolerant lowland ash formerly important in forests and plantings; heavily affected by EAB",
+          "coursePriority": "1 - core",
+          "tier": "A",
+          "fieldIdentification": {
+            "foliage": "Leaves are opposite and pinnately compound with five to nine stalked leaflets. Leaflets are usually serrate and green on both surfaces rather than strongly whitened beneath; typical material has hairs on the lower veins, petiolules, rachis, or young shoots. Pubescence varies greatly and traditionally recognized glabrous forms overlap white ash, so a hairless leaf is not a safe exclusion.",
+            "barkAgeSeries": "Young bark is smooth gray-brown with lenticels. Pole and mature stems develop narrow interlacing ridges and diamond-shaped furrows similar to white ash, often slightly shallower or less regular. Old bark becomes deeply ridged and damaged EAB stems may show vertical splits, loose bark, pale woodpecker scaling, and extensive epicormic sprouts that obscure normal bark characters.",
+            "dormant": "Opposite gray-brown branchlets are usually pubescent on current growth, and the terminal bud is acute rather than rounded. Leaf scars are semicircular to broadly shield-shaped, with a straight or only slightly concave upper edge; the lateral bud sits above rather than deeply within the scar. Examine several sun-exposed current twigs because hairs can weather away and glabrous forms occur.",
+            "reproductive": "Usually dioecious, with inconspicuous apetalous flowers before the leaves. Single narrow samaras occur in clusters; a persistent calyx is present and the wing typically extends about halfway down the flattened seed body, farther than in white ash but not nearly to the base as in black ash. Wing extent must be assessed on several mature fruits viewed from the same orientation.",
+            "wholeTreeContext": "A medium to large ash of floodplains, streambanks, wet woods, lake margins, and moist disturbed uplands; it was also planted extensively along streets, shelterbelts, and farmsteads. The crown is irregularly rounded with opposite branching, and natural associates include silver maple, cottonwood, American elm, boxelder, willow, bur oak, and swamp white oak.",
+            "variationAndCondition": "Twig and foliage pubescence ranges from obvious to nearly absent, and planted ecotypes vary in leaf color, hardiness, and form. EAB produces the same crown dieback, epicormic shoots, D-shaped exits, galleries, bark splits, and woodpecker blonding seen on other ashes; those signs identify neither green ash nor EAB reliably without the insect or diagnostic galleries and exits.",
+            "defensibilityLimits": "A defensible species call combines stalked green leaflets with pubescent gray-brown twigs, acute buds, a straight-topped leaf scar, appropriate samara wing extent, and lowland context. Opposite compound leaves, diamond bark, or EAB mortality alone support Fraxinus only. Glabrous specimens without fruit or intact winter nodes should remain white/green ash unresolved."
+          },
+          "confuserControl": [
+            {
+              "confuser": "Fraxinus americana",
+              "visibleSeparators": "Green ash generally has pubescent gray-brown current twigs, an acute terminal bud, a straight or shallowly concave upper leaf-scar edge, similarly green leaflet surfaces, and a samara wing reaching about halfway down the body. White ash has glabrous brown-blue twigs, a rounded bud, deeply concave scar, paler lower leaflet surface, and shorter wing descent.",
+              "resolvingView": "Current twig under magnification, several leaf scars and buds, lower leaflet surface, petiolules, and mature samaras in profile."
+            },
+            {
+              "confuser": "Fraxinus nigra",
+              "visibleSeparators": "Green ash has five to nine stalked leaflets and the terminal bud adjacent to the highest lateral buds. Black ash has seven to thirteen mostly sessile leaflets, a separated terminal bud, nearly basal samara wings, and corky-scaly mature bark.",
+              "resolvingView": "Whole leaf with leaflet attachment, terminal twig architecture, mature bark, and several intact samaras."
+            },
+            {
+              "confuser": "Acer negundo",
+              "visibleSeparators": "Boxelder has greenish or glaucous twigs, usually three to seven often-lobed leaflets, raised lines between opposite scars, and paired samaras. Green ash has more uniformly shaped leaflets, ash-type buds and scars, and single samaras.",
+              "resolvingView": "Opposite node with attached leaf, twig surface and color, bud-scar macro, and fruit cluster."
+            }
+          ],
+          "silvicsCapsule": {
+            "shadeTolerance": "Variable from intermediate to moderately tolerant when young, with advance regeneration able to persist briefly but requiring release for canopy recruitment.",
+            "moistureDrainageSoils": "Most characteristic on fertile alluvial clays, silts, and loams subject to periodic flooding, yet adaptable to moist uplands and a wider texture and pH range than most ashes.",
+            "geographicClimaticAffinity": "The most broadly distributed North American ash, spanning boreal margins to warm temperate floodplains and common throughout much of the course region.",
+            "forestAssociations": "Common with American elm, silver maple, cottonwood, black willow, boxelder, hackberry, bur oak, swamp white oak, and lowland poplars.",
+            "regeneration": "Wind-dispersed seed establishes on moist alluvium, flood deposits, and disturbed mineral soil; advance seedlings can persist and respond to release.",
+            "vegetativeReproduction": "Young stumps sprout readily, though natural stand replacement depends substantially on seed and sprouting ability declines in larger trees.",
+            "seedMastBehavior": "Female trees often bear substantial crops, with variability among years; samaras mature in fall, disperse into winter, and require dormancy-breaking conditions before germination.",
+            "establishmentRequirements": "Moist exposed soil, adequate seed supply, and at least partial light favor establishment; recruitment survives temporary flooding better than prolonged deep shade or stagnant inundation.",
+            "successionalRole": "A pioneer or early intermediate species on fresh alluvium that can also persist as a lowland associate through advance regeneration and gap response.",
+            "disturbanceResponse": "Flooding creates seedbeds and young stems release well after canopy opening; fire top-kills thin-barked stems, while sprouts can follow cutting or injury.",
+            "longevityGrowthStrategy": "Moderately fast growing and moderately lived, capable of useful timber form on fertile lowlands but often shorter lived and more defective on stressful sites.",
+            "browseSusceptibility": "Deer, rabbits, and livestock browse or sever young regeneration, and repeated browsing can delay height escape despite vigorous release growth.",
+            "insectsDiseases": "Emerald ash borer causes overwhelming mortality; ash yellows, anthracnose, rusts, cankers, borers, and root or stem rots are additional concerns.",
+            "managementImplications": "Plan for EAB-driven mortality, protect hydrologic function and non-ash associates, assess seedling and sprout cohorts, and retain selected living ash only within explicit safety and conservation objectives.",
+            "silviculturalSystemResponse": "Openings release advance regeneration and create seedbeds, but any system seeking a future ash component must pair canopy treatment with EAB strategy, browse control, and promotion of diverse replacement species."
+          },
+          "references": [
+            {
+              "title": "Green Ash — Silvics of North America",
+              "url": "https://research.fs.usda.gov/silvics/green-ash",
+              "scope": "Distribution, wide site tolerance, flooding, associates, regeneration, shade response, growth, and management."
+            },
+            {
+              "title": "Fraxinus pennsylvanica — green ash",
+              "url": "https://gobotany.nativeplanttrust.org/species/fraxinus/pennsylvanica/",
+              "scope": "Regional pubescence, bud, leaf-scar, leaflet, samara, habitat, and white-ash comparison characters."
+            },
+            {
+              "title": "Emerald Ash Borer",
+              "url": "https://www.aphis.usda.gov/plant-pests-diseases/eab",
+              "scope": "Authoritative EAB signs, symptoms, host range, galleries, exits, and condition interpretation."
+            }
+          ]
+        },
+        {
+          "taxonId": "FRAXINUS_NIGRA",
+          "preferredCommonName": "Black ash",
+          "canonicalScientificName": "Fraxinus nigra",
+          "acceptedAlternatives": [],
+          "family": "Oleaceae",
+          "distributionInCourseRegion": "Cold swamps from MN/WI/MI through ON/QC, northern NY/New England, and NB",
+          "ecologicalImportance": "Defining northern wetland hardwood; hydrologically important and highly EAB-vulnerable",
+          "coursePriority": "1 - core",
+          "tier": "A",
+          "fieldIdentification": {
+            "foliage": "Leaves are opposite and pinnately compound with seven to thirteen, occasionally more, narrow sharply serrate leaflets. Except for the terminal leaflet, the laterals are essentially sessile on the rachis rather than carried on distinct petiolules. The widely spaced unstalked leaflets are the best foliage separator from white and green ash; count alone is insufficient.",
+            "barkAgeSeries": "Sapling bark is smooth light gray and may feel somewhat corky. Intermediate stems develop shallow fissures and soft irregular flaky scales. Mature bark is gray to gray-brown and broken into thin corky plates or scaly ridges that can be rubbed or scraped from the surface; it generally lacks the hard regular diamond-furrow pattern of white and green ash.",
+            "dormant": "Stout opposite twigs bear dark brown to nearly black buds. The terminal bud stands distinctly above and is separated by a length of twig from the uppermost lateral pair, unlike the tight three-bud cluster of white and green ash; leaf-scar upper margins are straight to slightly concave. Inspect an intact terminal shoot because browse or dieback can remove the diagnostic apex.",
+            "reproductive": "Usually dioecious, with inconspicuous wind-pollinated flowers. Clusters of single samaras mature in fall; flowers lack a persistent calyx, and the broad wing descends nearly to the base of the flattened seed body. Several mature fruits and a terminal twig can separate black ash even when foliage is absent.",
+            "wholeTreeContext": "A slender, often small- to medium-sized tree with a narrow open crown, found in cold forested swamps, seepage wetlands, low riparian woods, and peatland margins. It commonly grows on slight hummocks with northern white-cedar, red maple, balsam fir, yellow birch, speckled alder, and tamarack; site is strong supporting but never sole evidence.",
+            "variationAndCondition": "Flooded stems may be buttressed or moss-covered and old bark can look blockier after repeated injury. EAB produces crown loss, epicormic shoots, bark splits, galleries, D-shaped exits, and woodpecker scaling just as on other ashes. Widespread death can alter water tables and promote shrub or graminoid conversion, but stand condition does not establish the identity of every dead stem.",
+            "defensibilityLimits": "Species-level identification should rest on mostly sessile numerous leaflets, the separated terminal bud, nearly basal samara wing, or corky-scaly bark in a northern wetland. A dead gray wetland tree, opposite branching, EAB damage, or compound foliage without leaflet bases warrants Fraxinus or ash only. Request the terminal twig, rachis attachments, intact fruit, and uneroded bark."
+          },
+          "confuserControl": [
+            {
+              "confuser": "Fraxinus pennsylvanica",
+              "visibleSeparators": "Black ash has seven to thirteen mostly sessile leaflets, a terminal bud separated from the highest lateral buds, a samara wing nearly to the body base, and corky-scaly bark. Green ash has five to nine stalked leaflets, a tight terminal-bud cluster, shorter wing descent, and usually diamond-furrowed bark.",
+              "resolvingView": "Close views of lateral leaflet attachment, terminal three nodes, samara wing-body junction, and mature bark texture."
+            },
+            {
+              "confuser": "Fraxinus americana",
+              "visibleSeparators": "White ash has five to nine stalked leaflets with pale undersides, a terminal bud adjacent to the upper laterals, deeply concave leaf scars, and hard diamond-furrowed mature bark. Black ash has unstalked leaflets, a separated apex, straighter scar tops, and corky scales.",
+              "resolvingView": "Full leaf and lower surface, petiolule macro, intact terminal shoot, leaf scar, and bark that has not been woodpecker-scaled."
+            },
+            {
+              "confuser": "Sorbus americana or Sorbus decora",
+              "visibleSeparators": "Mountain-ashes have alternate rather than opposite compound leaves, conspicuous bud form, and clusters of berry-like red pomes rather than single winged samaras. Habitat may overlap at northern wetland margins.",
+              "resolvingView": "Two consecutive nodes showing arrangement, terminal bud, attached fruit, and a complete leaf."
+            }
+          ],
+          "silvicsCapsule": {
+            "shadeTolerance": "Intermediate when young, with seedlings able to persist under a partial canopy but requiring release for sustained height growth.",
+            "moistureDrainageSoils": "Specialized for cold, poorly drained mineral or organic soils, often where nutrient-rich groundwater moves through the rooting zone; prolonged hydrologic change can be more damaging than ordinary seasonal flooding.",
+            "geographicClimaticAffinity": "A northern and boreal-transition wetland tree from Minnesota and the Great Lakes through Ontario, Quebec, northern New York and New England, and New Brunswick.",
+            "forestAssociations": "Common with northern white-cedar, red maple, balsam fir, yellow birch, tamarack, black spruce, speckled alder, and lowland conifers or hardwoods.",
+            "regeneration": "Seedlings establish on moist moss, rotten wood, exposed organic-mineral mixtures, and elevated microsites; successful cohorts depend on both moisture and sufficient aeration.",
+            "vegetativeReproduction": "Young stumps sprout and root suckers may occur, providing local persistence after injury, though these pathways cannot replace landscape-scale seed sources.",
+            "seedMastBehavior": "Crops vary and seeds possess complex dormancy; germination often follows extended warm and cold conditioning rather than occurring immediately after dispersal.",
+            "establishmentRequirements": "A living seed source, saturated but not continuously deeply flooded microsites, partial light, and hummocks or decayed wood that keep roots aerated favor establishment.",
+            "successionalRole": "A persistent swamp canopy species that can form near-pure stands on suitable hydrology, yet regenerates episodically through canopy gaps and favorable water-table periods.",
+            "disturbanceResponse": "Thin bark provides little fire resistance; cutting can induce sprouts but heavy overstory removal may raise water tables, drown regeneration, and shift the wetland to shrubs or graminoids.",
+            "longevityGrowthStrategy": "Slow to moderate growing, often slender, and potentially long lived on stable hydrology, with growth limited by cold saturated soils.",
+            "browseSusceptibility": "Deer and moose browse regeneration, and concentrated use can impede recovery of already sparse post-EAB cohorts.",
+            "insectsDiseases": "Emerald ash borer threatens near-total overstory mortality; ash yellows, cankers, rusts, and stem or root rots are secondary concerns in stressed wetlands.",
+            "managementImplications": "Treat black-ash loss as both a tree-mortality and wetland-hydrology problem; retain species and structural diversity, protect cultural basketry resources, and avoid broad preemptive removal that eliminates transpiration and seed sources.",
+            "silviculturalSystemResponse": "Partial retention, group openings, underplanting of suitable non-ash wetland trees, and careful hydrologic monitoring are generally safer than untested large clearcuts; responses vary by water table, advance regeneration, browse, and EAB timing."
+          },
+          "references": [
+            {
+              "title": "Black Ash — Silvics of North America",
+              "url": "https://research.fs.usda.gov/silvics/black-ash",
+              "scope": "Northern wetland distribution, sites, associates, reproduction, growth, disturbance, and damaging agents."
+            },
+            {
+              "title": "Fraxinus nigra — black ash",
+              "url": "https://gobotany.nativeplanttrust.org/species/fraxinus/nigra/",
+              "scope": "Regional sessile-leaflet, terminal-bud, scar, samara, wetland, and ash-confuser characters."
+            },
+            {
+              "title": "Emerald Ash Borer",
+              "url": "https://www.aphis.usda.gov/plant-pests-diseases/eab",
+              "scope": "Authoritative EAB signs, symptoms, Fraxinus host range, galleries, exit holes, and reporting context."
+            }
+          ]
+        },
+        {
+          "taxonId": "ULMUS_AMERICANA",
+          "preferredCommonName": "American elm",
+          "canonicalScientificName": "Ulmus americana",
+          "acceptedAlternatives": [],
+          "family": "Ulmaceae",
+          "distributionInCourseRegion": "Floodplains and rich forests across the region; persists as young and scattered mature trees",
+          "ecologicalImportance": "Classic lowland canopy tree strongly altered by Dutch elm disease",
+          "coursePriority": "1 - core",
+          "tier": "A",
+          "fieldIdentification": {
+            "foliage": "Leaves are alternate, simple, usually seven to fourteen centimeters long, ovate to elliptic, abruptly pointed, strongly asymmetrical at the base, and double-serrate. Most lateral veins run unbranched nearly to the margin; usually none, or at most one, forks well before reaching the teeth. Upper-surface roughness varies, so vein forking, fruit, twigs, and bark should outrank the touch test.",
+            "barkAgeSeries": "Young bark is smooth gray to gray-brown. Intermediate stems form shallow intersecting fissures and flattened ridges. Mature bark is ash-gray to dark gray with deep irregular diamond-like furrows and broad ridges; a cut outer-bark section lacks the conspicuous contrasting light and dark layers characteristic of slippery elm. Bark sampling injures trees and should be limited to lawful broken material or authorized work.",
+            "dormant": "Slender alternate twigs form a slight zigzag and generally lack corky wings. Small ovoid brown vegetative buds are two-ranked and slightly flattened against the twig; rounder flower buds occur on older wood, and there is no true terminal bud. Twigs may be glabrous or sparsely hairy, making winter species calls difficult without flower buds, bark, persistent fruit, or a known whole-tree form.",
+            "reproductive": "Flowers appear before leaves in dense short fascicles. Flat oval to nearly round samaras mature in spring; the wing is fringed with cilia around most or all of its margin but the surface over the seed body is glabrous. Margin cilia plus a hairless seed body strongly separate American elm from slippery elm, while the short fascicle and wholly glabrous surfaces distinguish it from rock elm.",
+            "wholeTreeContext": "Where disease has not destroyed the crown, open-grown trees develop a classic vase or fountain form with a divided trunk and high arching limbs; forest trees may be narrow and straight and therefore lack that silhouette. It occurs on floodplains, terraces, streambanks, swamps, rich uplands, roadsides, and old field edges throughout the region.",
+            "variationAndCondition": "Dutch elm disease can produce one-sided flagging, wilted yellow-to-brown leaves, vascular streaking, rapid crown death, epicormic sprouts, and repeated juvenile cohorts; elm yellows, verticillium wilt, drought, and root injury can overlap. Disease symptoms indicate a declining elm, not American elm specifically, and a single surviving mature tree does not demonstrate genetic resistance or tolerance.",
+            "defensibilityLimits": "Species-level evidence is strongest from ciliate-margined, otherwise glabrous samaras, low vein-fork counts, nonwinged branches, mature bark, and compatible form or site. A vase crown, diseased elm, asymmetric serrate leaf, or furrowed bark alone supports Ulmus only. In winter without fruit or authorized bark section, many specimens should remain elm or American/slippery elm unresolved."
+          },
+          "confuserControl": [
+            {
+              "confuser": "Ulmus rubra",
+              "visibleSeparators": "American elm leaves usually have no early-forking lateral veins, and its samaras have marginal cilia but no hairs over the seed body. Slippery elm usually has two or more early-forking veins, rusty-hairy buds and twigs, mucilaginous inner bark, and samaras hairy over the seed body but lacking a ciliate margin.",
+              "resolvingView": "Several full leaves backlit to trace veins, mature samara margin and seed body under magnification, dormant buds, and an authorized broken-bark cross-section."
+            },
+            {
+              "confuser": "Ulmus thomasii",
+              "visibleSeparators": "Rock elm often has two or more irregular corky plates on branches, elongated raceme-like flower clusters, and samaras pubescent across body and wing. American elm lacks corky branch wings, has dense short flower fascicles, and glabrous samara surfaces except for marginal cilia.",
+              "resolvingView": "Several two- to four-year branches, complete flower cluster or mature samaras, and habitat or range context."
+            },
+            {
+              "confuser": "Ulmus pumila",
+              "visibleSeparators": "Siberian elm has much smaller, nearly hairless, mostly single-serrate leaves with a weakly asymmetric base and completely glabrous, eciliate samaras. American elm has larger double-serrate leaves with a strongly unequal base and marginally ciliate fruit.",
+              "resolvingView": "Mature leaves with scale, leaf-base symmetry, teeth and pubescence, plus a mature samara and planting context."
+            }
+          ],
+          "silvicsCapsule": {
+            "shadeTolerance": "Intermediate to moderately tolerant when young; seedlings can persist beneath a partial canopy and respond to release, while older crowns need ample light.",
+            "moistureDrainageSoils": "Broad site amplitude from moist well-drained uplands to seasonally flooded rich alluvium, with best development on deep fertile loams and silt loams.",
+            "geographicClimaticAffinity": "Widespread across eastern North America and nearly the entire course region, from continental Great Lakes climates to Acadian and Allegheny forests.",
+            "forestAssociations": "Occurs with silver maple, green ash, cottonwood, boxelder, swamp white oak, basswood, sugar maple, red maple, yellow birch, hemlock, and many other rich-site trees.",
+            "regeneration": "Abundant spring-dispersed seed germinates on moist mineral soil and litter; stump and root-related sprouts plus repeated seedling cohorts sustain the species despite loss of large trees.",
+            "vegetativeReproduction": "Young stumps sprout vigorously, and root suckers or sprouts can occur after injury; interconnected roots also permit rapid Dutch elm disease spread through grafts.",
+            "seedMastBehavior": "Seed is produced frequently, matures in spring, has short viability, and normally germinates promptly when moisture is sufficient.",
+            "establishmentRequirements": "Moist exposed substrate, partial to full light, and freedom from dense herbaceous competition favor establishment; seedlings tolerate more shade than is required for later canopy recruitment.",
+            "successionalRole": "A versatile early- to late-successional associate, formerly a dominant lowland canopy tree and still persistent through seedlings, sprouts, and scattered mature survivors.",
+            "disturbanceResponse": "Floods and soil exposure promote establishment, young trees sprout after cutting or fire, and released saplings can grow rapidly; severe fire damages thin bark and DED often truncates cohorts before maturity.",
+            "longevityGrowthStrategy": "Fast to moderately fast on good sites and potentially very long lived, historically reaching massive size before Dutch elm disease greatly shortened realized longevity.",
+            "browseSusceptibility": "Deer, rabbits, and rodents browse seedlings and sprouts, although prolific regeneration often leaves some stems to escape where pressure is moderate.",
+            "insectsDiseases": "Dutch elm disease and elm yellows are major lethal diseases; elm bark beetles vector DED, and leaf beetles, cankerworms, wetwood, cankers, and stem decays also occur.",
+            "managementImplications": "Separate host identity from disease diagnosis, retain and monitor suitable mature survivors where safety permits, conserve diverse seed sources, and apply sanitation or root-graft management only within a documented DED program.",
+            "silviculturalSystemResponse": "Gap, selection, and even-aged systems can all recruit its abundant seedlings or sprouts, but sustaining large elm requires DED-aware retention, diverse cohorts, and avoidance of unnecessary loss of potential tolerant genotypes."
+          },
+          "references": [
+            {
+              "title": "American Elm — Silvics of North America",
+              "url": "https://research.fs.usda.gov/silvics/american-elm",
+              "scope": "Distribution, broad site range, associations, regeneration, growth, disturbance, Dutch elm disease, and management."
+            },
+            {
+              "title": "Ulmus americana — American elm",
+              "url": "https://gobotany.nativeplanttrust.org/species/ulmus/americana/",
+              "scope": "Regional leaf-vein, twig, bark, samara, habitat, and direct native-elm comparison characters."
+            },
+            {
+              "title": "Dutch elm disease — Northern Hardwood Notes",
+              "url": "https://research.fs.usda.gov/treesearch/18765",
+              "scope": "USDA Forest Service summary of DED symptoms, native elm susceptibility, persistence, and condition interpretation."
+            }
+          ]
+        },
+        {
+          "taxonId": "ULMUS_RUBRA",
+          "preferredCommonName": "Slippery elm",
+          "canonicalScientificName": "Ulmus rubra",
+          "acceptedAlternatives": [
+            "Ulmus fulva"
+          ],
+          "family": "Ulmaceae",
+          "distributionInCourseRegion": "Southern/western Great Lakes, southern ON, NY, PA/NJ, and southern New England",
+          "ecologicalImportance": "Rich-site elm with mucilaginous inner bark; less floodplain-centered than American elm",
+          "coursePriority": "2 - regional",
+          "tier": "B",
+          "fieldIdentification": {
+            "foliage": "Leaves are alternate, simple, usually eight to sixteen centimeters long, broad ovate to elliptic, double-serrate, and strongly asymmetric at the base. The upper surface is typically coarse and sandpapery and the underside hairy, but texture varies with age and drought. Usually two or more lateral veins fork well before reaching the margin, a better measured separator from American elm than roughness alone.",
+            "barkAgeSeries": "Young bark is gray-brown and shallowly fissured. Intermediate and mature bark becomes dark gray to reddish brown with deep furrows and broad irregular ridges; an authorized outer-bark cross-section shows contrasting light and dark layers. The inner bark is slippery and mucilaginous when chewed or wetted, but destructive tasting or cutting is neither necessary nor appropriate on an unknown standing tree.",
+            "dormant": "Alternate zigzag twigs are more often stout and hairy than those of American elm. Ovoid buds have red to rusty-brown scales fringed with dense reddish hairs, and flower buds are rounder on older shoots; there is no true terminal bud. Rusty pubescence supports slippery elm, but weathered shoots require fruit, leaf venation, or bark confirmation.",
+            "reproductive": "Flowers appear before leaves in dense clusters. Nearly round samaras mature in spring; the wing margin lacks a continuous ciliate fringe, while hairs are concentrated over the central seed body. This hair-placement pattern is one of the most defensible distinctions from American elm when mature fruit can be inspected closely.",
+            "wholeTreeContext": "A medium-sized elm of rich mesic woods, lower slopes, calcareous sites, riparian terraces, and rocky forested slopes, usually less tied to active floodplain surfaces than American elm. The crown is broad and irregular rather than reliably vase-shaped, and associates include sugar maple, basswood, white ash, hickories, oaks, and American elm.",
+            "variationAndCondition": "Leaf roughness weakens on late-season, shaded, or weathered foliage, and buds lose hairs. Dutch elm disease, elm yellows, dieback, drought, and cankers can all cause flagging, vascular discoloration, epicormic shoots, or crown death. Disease damage confirms neither slippery elm nor the causal agent without host characters and diagnostic examination.",
+            "defensibilityLimits": "Species-level evidence should combine early-forking leaf veins, coarse foliage, rusty-hairy buds or twigs, layered outer bark, mucilaginous inner bark from already exposed material, or samaras hairy over the seed but not ciliate on the margin. A rough asymmetric leaf, dark furrowed bark, or diseased crown alone warrants Ulmus only."
+          },
+          "confuserControl": [
+            {
+              "confuser": "Ulmus americana",
+              "visibleSeparators": "Slippery elm usually has two or more lateral veins forking well before the margin, rusty-hairy buds, contrasting bark layers, and samaras hairy over the seed body but lacking marginal cilia. American elm usually has no early-forking veins and has ciliate-margined, otherwise glabrous samaras.",
+              "resolvingView": "Backlit mature leaves from several shoots, bud-scale pubescence, mature fruit under magnification, and lawful broken bark in cross-section."
+            },
+            {
+              "confuser": "Ulmus thomasii",
+              "visibleSeparators": "Rock elm often bears irregular corky branch wings and has samaras pubescent across body and wing; slippery elm lacks corky wings and confines fruit hairs mainly to the seed body. Both may occupy rich calcareous uplands.",
+              "resolvingView": "Several older branchlets, complete mature samaras, flower-cluster architecture, and twig-bud pubescence."
+            },
+            {
+              "confuser": "Ulmus pumila",
+              "visibleSeparators": "Siberian elm has small mostly single-serrate, nearly hairless leaves and completely glabrous eciliate samaras. Slippery elm has much larger double-serrate rough leaves, hairy buds and lower surfaces, and hairs over the samara seed body.",
+              "resolvingView": "Mature leaf with size scale and both surfaces, teeth and base, winter buds, and samara surface."
+            }
+          ],
+          "silvicsCapsule": {
+            "shadeTolerance": "Intermediate to tolerant when young, allowing seedlings to persist beneath partial canopy before responding to gaps.",
+            "moistureDrainageSoils": "Best on moist fertile, well-drained loams and calcareous rich woods; occurs on riparian terraces and rocky slopes but is less tolerant of prolonged flooding than American elm.",
+            "geographicClimaticAffinity": "Centered in the central and eastern deciduous forest, strongest in the southern and western Great Lakes, southern Ontario, New York, Pennsylvania, New Jersey, and southern New England.",
+            "forestAssociations": "Occurs with sugar maple, basswood, white ash, black walnut, bitternut hickory, oaks, American elm, and rich-site understory plants.",
+            "regeneration": "Spring-dispersed seed germinates quickly on moist litter or mineral soil, and seedlings can form advance regeneration in rich stands.",
+            "vegetativeReproduction": "Young trees and stumps sprout readily after cutting or injury; seed remains the main mechanism for colonizing new sites.",
+            "seedMastBehavior": "Crops are frequent but variable, ripen in spring, and have short-lived seed that usually germinates soon after dispersal.",
+            "establishmentRequirements": "Moist fertile seedbeds, partial light, and freedom from severe browse support establishment; later canopy recruitment depends on gaps and continued crown space.",
+            "successionalRole": "A mid- to late-successional rich-site associate that persists through advance regeneration but is repeatedly set back by disease before attaining large size.",
+            "disturbanceResponse": "Saplings release after canopy opening and young stumps sprout, while severe fire damages thin bark and Dutch elm disease often removes larger stems.",
+            "longevityGrowthStrategy": "Moderate growth and potential for long life, although DED and elm yellows now commonly truncate development before commercial maturity.",
+            "browseSusceptibility": "Deer and small mammals browse or girdle young stems, and the nutritious mucilaginous bark has also been used by wildlife and people.",
+            "insectsDiseases": "Dutch elm disease, elm yellows, Dothiorella dieback, elm leaf beetles, scales, aphids, cankers, wetwood, and wood rots are important.",
+            "managementImplications": "Preserve verified seed sources and species diversity, avoid wounding trees merely to test inner bark, and treat foliar flagging as a diagnostic prompt rather than proof of DED or host species.",
+            "silviculturalSystemResponse": "Selection and group openings can release advance regeneration, while larger openings recruit seedling cohorts; long-term retention requires disease-aware monitoring rather than reliance on silvicultural system alone."
+          },
+          "references": [
+            {
+              "title": "Slippery Elm — Silvics of North America",
+              "url": "https://research.fs.usda.gov/silvics/slippery-elm",
+              "scope": "Distribution, rich sites, associates, regeneration, shade response, growth, DED, elm yellows, and management."
+            },
+            {
+              "title": "Ulmus rubra — slippery elm",
+              "url": "https://gobotany.nativeplanttrust.org/species/ulmus/rubra/",
+              "scope": "Regional vein-forking, pubescence, bark layers, samara hair placement, habitat, and American-elm comparison."
+            },
+            {
+              "title": "Dutch elm disease — Northern Hardwood Notes",
+              "url": "https://research.fs.usda.gov/treesearch/18765",
+              "scope": "USDA Forest Service summary of DED in American, slippery, and rock elm and condition-identification cautions."
+            }
+          ]
+        },
+        {
+          "taxonId": "ULMUS_THOMASII",
+          "preferredCommonName": "Rock elm",
+          "canonicalScientificName": "Ulmus thomasii",
+          "acceptedAlternatives": [
+            "Ulmus racemosa"
+          ],
+          "family": "Ulmaceae",
+          "distributionInCourseRegion": "MN/WI/MI, southern ON, and western NY; local eastward",
+          "ecologicalImportance": "Slow-growing dry or calcareous upland elm with corky twigs",
+          "coursePriority": "2 - regional",
+          "tier": "B",
+          "fieldIdentification": {
+            "foliage": "Leaves are alternate, simple, elliptic to obovate or ovate, double-serrate, and usually firm textured, with a pointed tip and a base that ranges from nearly symmetrical to moderately unequal. Leaf size and upper-surface hairiness vary too widely for a reliable leaf-only call. Trace vein branching and retain the twig because the corky branch character and fruit are much more diagnostic.",
+            "barkAgeSeries": "Young stems are smooth gray-brown. Intermediate bark develops shallow fissures and narrow firm ridges. Mature bark is gray to dark gray-brown with deep irregular furrows and narrow flattened or broken ridges, overlapping American and slippery elm extensively; bark usually contributes only genus-level support unless paired with corky branches and upland context.",
+            "dormant": "Alternate twigs are gray, brown, or reddish and lack a true terminal bud. Two- to several-year branches often develop two or more thick, irregular longitudinal corky plates or wings, sometimes interrupted into knobs. These wings are the principal winter field character, but they can be sparse or absent on some shoots, so inspect several branches rather than rejecting rock elm from one smooth twig.",
+            "reproductive": "Flowers occur before the leaves in an elongated raceme-like cyme that may reach about five centimeters, unlike the short dense fascicle of American elm. Mature samaras are pubescent over both the seed body and wing surface. The combination of elongated flower cluster, fully hairy samara surfaces, and cork-winged branches is highly diagnostic.",
+            "wholeTreeContext": "A medium to large, slow-growing elm of rocky or calcareous uplands, limestone ridges, rich woods, riparian forests, and local swamps, centered in the Great Lakes. Crowns are narrow to rounded rather than reliably vase-shaped, and the species is often scattered with sugar maple, basswood, white ash, bur oak, hickories, and American or slippery elm.",
+            "variationAndCondition": "Cork wings vary from massive plates to scattered ridges and can be lost from young, shaded, damaged, or weathered shoots. Dutch elm disease may cause flagging, vascular discoloration, dieback, epicormic growth, and death just as in other native elms; corky wings persist on some dead branches but disease symptoms never substitute for host characters.",
+            "defensibilityLimits": "Leaves or bark alone usually support Ulmus, not rock elm. Species-level identification should include irregular cork wings on several branches, fully pubescent samaras, or the elongated raceme-like inflorescence, supported by Great Lakes range and calcareous or rocky site. A single corky ridge can arise from injury and should be checked for repeated organized plates."
+          },
+          "confuserControl": [
+            {
+              "confuser": "Ulmus americana",
+              "visibleSeparators": "Rock elm often has two or more irregular corky branch plates, raceme-like flower clusters to about five centimeters, and samaras pubescent over body and wing. American elm lacks cork wings, has short dense fascicles, and samara surfaces are glabrous except for marginal cilia.",
+              "resolvingView": "Several older branchlets around the crown, complete inflorescence with scale, and mature samara surfaces and margins."
+            },
+            {
+              "confuser": "Ulmus rubra",
+              "visibleSeparators": "Slippery elm lacks cork-winged branches and has rusty-hairy buds plus samara hairs concentrated over the seed body. Rock elm has irregular cork plates and hairs across both body and wing surface.",
+              "resolvingView": "Dormant buds, multiple two- to four-year branches, full samara surfaces, and authorized bark cross-section if naturally exposed."
+            },
+            {
+              "confuser": "Celtis occidentalis or winged woody stems caused by injury",
+              "visibleSeparators": "Hackberry bark has distinctive warty cork projections but its twigs usually lack repeated longitudinal paired wings, and its fruits are fleshy drupes. Injury cork is localized and irregular rather than recurring on many healthy branches.",
+              "resolvingView": "Distribution of cork on multiple branches, buds and leaf bases, mature trunk, and attached fruit."
+            }
+          ],
+          "silvicsCapsule": {
+            "shadeTolerance": "Intermediate in shade tolerance; seedlings persist under partial canopy but need release for sustained crown development.",
+            "moistureDrainageSoils": "Most characteristic on well-drained loams, rocky uplands, and calcareous substrates, though it also occurs locally on rich floodplains and swamp margins.",
+            "geographicClimaticAffinity": "Centered in the continental Great Lakes and upper Midwest, extending through southern Ontario and locally into western New York and northern New England.",
+            "forestAssociations": "Occurs with sugar maple, basswood, white ash, hickories, bur and northern red oak, American elm, slippery elm, and other rich or calcareous-site hardwoods.",
+            "regeneration": "Spring seed establishes on moist exposed soil and light litter; advance seedlings can persist until small canopy disturbances improve light.",
+            "vegetativeReproduction": "Young stumps can sprout after cutting, but seed is the main mechanism for replacing and dispersing natural populations.",
+            "seedMastBehavior": "Seed crops are irregular, mature in spring, and have limited viability; germination follows quickly under adequate moisture.",
+            "establishmentRequirements": "A local seed source, moist aerated seedbed, and moderate light favor establishment; later recruitment needs canopy space and protection from chronic browse.",
+            "successionalRole": "A mid- to late-successional scattered upland associate, slower growing than many competitors but capable of persistence on suitable calcareous sites.",
+            "disturbanceResponse": "Saplings respond to release and young stumps sprout, while severe fire damages bark and Dutch elm disease repeatedly removes larger trees.",
+            "longevityGrowthStrategy": "Slow growing, strong wooded, and potentially long lived, historically producing valuable hard elm timber on good sites.",
+            "browseSusceptibility": "Deer and small mammals browse seedlings and sprouts; low population density can make repeated browse disproportionately important to recruitment.",
+            "insectsDiseases": "Highly susceptible to Dutch elm disease; elm yellows, bark beetles, leaf beetles, scales, cankers, wetwood, and stem decays also occur.",
+            "managementImplications": "Protect verified seed trees and regeneration in its restricted regional range, retain cork-wing evidence for inventory vouchers, and do not equate a surviving mature tree with proven DED resistance.",
+            "silviculturalSystemResponse": "Small gaps and selection can release existing seedlings, while larger openings may recruit spring seed; disease, browse, rarity, and retention of diverse genotypes often matter more than the nominal system."
+          },
+          "references": [
+            {
+              "title": "Rock Elm — Silvics of North America",
+              "url": "https://research.fs.usda.gov/silvics/rock-elm",
+              "scope": "Great Lakes range, calcareous sites, associations, regeneration, growth, Dutch elm disease, and management."
+            },
+            {
+              "title": "Ulmus thomasii — rock elm",
+              "url": "https://gobotany.nativeplanttrust.org/species/ulmus/thomasii/",
+              "scope": "Regional cork-wing, inflorescence, samara pubescence, habitat, nomenclature, and American-elm comparisons."
+            },
+            {
+              "title": "Dutch elm disease — Northern Hardwood Notes",
+              "url": "https://research.fs.usda.gov/treesearch/18765",
+              "scope": "USDA Forest Service summary of susceptibility and persistence of American, slippery, and rock elm."
+            }
+          ]
+        },
+        {
+          "taxonId": "ULMUS_PUMILA",
+          "preferredCommonName": "Siberian elm",
+          "canonicalScientificName": "Ulmus pumila",
+          "acceptedAlternatives": [],
+          "family": "Ulmaceae",
+          "distributionInCourseRegion": "Planted and naturalized in Great Lakes and urban/agricultural corridors eastward",
+          "ecologicalImportance": "Fast-growing invasive/weedy elm and winter-dendrology confuser",
+          "coursePriority": "3 - recognition/confuser",
+          "tier": "C",
+          "fieldIdentification": {
+            "foliage": "Leaves are alternate, simple, small, usually two to six and a half centimeters long, elliptic to lanceolate, and nearly hairless at maturity. Margins are mostly single-serrate rather than double-serrate, and the base is rounded, truncate, or weakly cordate with only slight asymmetry. Drought and long-shoot leaves vary, so use several fully expanded blades rather than a single undersized leaf.",
+            "barkAgeSeries": "Young bark is smooth gray to light brown. Intermediate stems develop shallow fissures and narrow ridges. Mature bark is gray-brown, rough, and irregularly furrowed or plated, often on a crooked multiple-branched bole; it overlaps native elms and cannot support species-level identification without leaves, buds, fruit, or planted-disturbed context.",
+            "dormant": "Slender alternate gray-brown twigs form a zigzag and lack a true terminal bud. Small globose buds have overlapping scales fringed with dark or black hairs, while branchlets themselves are nearly hairless and lack the rusty tomentum of slippery elm or corky plates of rock elm. Winter-only determinations remain uncertain where ornamental and hybrid elms occur.",
+            "reproductive": "Flowers appear before leaves in small drooping clusters. Flat nearly circular samaras mature rapidly in spring, are deeply notched at the tip, and are completely glabrous over the wing and seed body with no ciliate margin. This glabrous eciliate fruit paired with small single-serrate leaves is the strongest practical combination.",
+            "wholeTreeContext": "A small to medium, fast-growing tree with an irregular open crown, multiple leaders, brittle spreading branches, and abundant seedlings beneath seed trees. It is concentrated along shelterbelts, old plantings, roadsides, rail corridors, fencerows, dry fields, disturbed streambanks, and urban edges rather than intact northern forest interiors.",
+            "variationAndCondition": "Drought produces very small tough leaves and sparse crowns, while coppice shoots carry larger blades. Siberian elm is less susceptible to Dutch elm disease than American elm but is not immune; branch breakage, cankers, leaf beetles, storm injury, and poor architecture are common. Cultivars and hybrid elms can be intermediate and may make species-level visual identification impossible.",
+            "defensibilityLimits": "A defensible call combines small mostly single-serrate nearly hairless leaves, weak basal asymmetry, dark-ciliate globose buds, wholly glabrous eciliate samaras, and planted or disturbed provenance. Small leaves, drought tolerance, or apparent DED survival alone are not sufficient. Leafless planted elms without fruit may need to remain Ulmus or ornamental elm unresolved."
+          },
+          "confuserControl": [
+            {
+              "confuser": "Ulmus americana",
+              "visibleSeparators": "Siberian elm has small mostly single-serrate leaves with a weakly asymmetric base and wholly glabrous eciliate samaras. American elm has larger double-serrate strongly asymmetric leaves and samaras with a ciliate margin.",
+              "resolvingView": "Several mature leaves with scale, base and teeth, both leaf surfaces, a mature samara margin, and planting context."
+            },
+            {
+              "confuser": "Ulmus rubra",
+              "visibleSeparators": "Slippery elm has large double-serrate rough leaves, rusty-hairy buds and twigs, and samaras hairy over the seed body. Siberian elm is smaller leaved and nearly hairless with completely glabrous fruit.",
+              "resolvingView": "Leaf size and texture series, bud-scale hairs, twig pubescence, and fruit surface under magnification."
+            },
+            {
+              "confuser": "Ulmus parvifolia or hybrid ornamental elms",
+              "visibleSeparators": "Chinese elm flowers in late summer or fall and has small mature leaves with more early-forking lateral veins; Siberian elm flowers before leaf-out in spring and bears winged spring samaras. Hybrids may not key cleanly.",
+              "resolvingView": "Phenology, flowers or fruit, bark exfoliation, multiple mature leaves with venation, cultivar history, and genetic evidence if operationally necessary."
+            }
+          ],
+          "silvicsCapsule": {
+            "shadeTolerance": "Shade intolerant; seedlings establish and grow best in open fields, roadsides, edges, and canopy gaps.",
+            "moistureDrainageSoils": "Extremely tolerant of drought, cold, wind, alkaline or nutrient-poor soils, and compaction, while also colonizing disturbed streambanks and moist sites.",
+            "geographicClimaticAffinity": "Native to Eurasia and widely planted across cold continental North America; naturalized in Great Lakes, agricultural, transportation, and urban corridors through the course region.",
+            "forestAssociations": "Occurs mainly with ruderal shrubs and trees along fencerows, shelterbelts, grasslands, disturbed riparian strips, and open woodland edges rather than as a stable native forest associate.",
+            "regeneration": "Large wind-dispersed spring seed crops germinate rapidly on exposed soil and in sparse vegetation, often producing dense local seedling patches.",
+            "vegetativeReproduction": "Cut stumps and damaged roots resprout, so mechanical treatment without follow-up can replace one stem with a persistent clump.",
+            "seedMastBehavior": "Produces frequent abundant crops at a relatively young age; spring seed is short lived but germinates quickly when moisture is available.",
+            "establishmentRequirements": "Open light, disturbed or sparsely vegetated soil, and proximity to a seed-bearing tree favor invasion; seedlings tolerate drying once roots develop.",
+            "successionalRole": "An early-seral invasive and ruderal colonizer that can form thickets, persist on harsh edges, and impede native grassland or woodland regeneration.",
+            "disturbanceResponse": "Cutting and injury induce sprouts, fire may kill young stems but repeated disturbance can also maintain open seedbeds, and brittle crowns break readily in wind or ice.",
+            "longevityGrowthStrategy": "Fast growing and relatively short lived, prioritizing early reproduction and rapid occupation over durable form or wood strength.",
+            "browseSusceptibility": "Deer and livestock browse seedlings and low shoots, but prolific recruitment and sprouting often sustain populations where browsing is not severe.",
+            "insectsDiseases": "More resistant to Dutch elm disease than American elm but not immune; elm leaf beetles, cankers, wetwood, aphids, and borers commonly damage stressed trees.",
+            "managementImplications": "Map seed sources, verify identity before treatment, prioritize satellite populations and high-quality natural areas, and plan repeated control of sprouts and seedlings under applicable invasive-species rules.",
+            "silviculturalSystemResponse": "Any opening or edge creation can favor seedling establishment; maintaining closed native canopy reduces recruitment, while removal programs require cut-stump or other approved follow-up and long-term seedling surveillance."
+          },
+          "references": [
+            {
+              "title": "Siberian elm — Wisconsin Department of Natural Resources",
+              "url": "https://dnr.wisconsin.gov/topic/Invasives/fact/SiberianElm",
+              "scope": "Regional invasive status, morphology, habitat, ecological effects, reproduction, and control considerations."
+            },
+            {
+              "title": "Ulmus pumila — Siberian elm",
+              "url": "https://gobotany.nativeplanttrust.org/species/ulmus/pumila/",
+              "scope": "Regional leaf size and teeth, bud, fruit, habitat, nativity, and elm-confuser characters."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sessionId": "W05-B",
+      "letter": "B",
+      "title": "Ash and elm dormant retrieval",
+      "kind": "delayed_retrieval",
+      "taxonScope": "session_a_taxa_plus_due_cumulative_review",
+      "modalities": [
+        "bark",
+        "reproductive",
+        "dormant",
+        "whole_tree_context",
+        "condition"
+      ],
+      "delivery": "unfamiliar lowland specimens and calibrated field decisions",
+      "feedbackRelease": "after_batch_submission",
+      "runtimeBoundary": "runtime_retrieval_from_admitted_practice_media",
+      "introducedTaxonIds": [],
+      "teachingProfiles": []
+    },
+    {
+      "sessionId": "W05-C",
+      "letter": "C",
+      "title": "Riparian maples, birch, cottonwood, willow, and sycamore",
+      "kind": "new_species_and_confusers",
+      "taxonScope": "listed_new_taxa_plus_week_confusers",
+      "modalities": [
+        "foliage",
+        "bark",
+        "reproductive",
+        "dormant",
+        "whole_tree_context"
+      ],
+      "delivery": "organ contrasts within riparian context",
+      "feedbackRelease": "after_response",
+      "runtimeBoundary": "labeled_teaching_content",
+      "introducedTaxonIds": [
+        "ACER_SACCHARINUM",
+        "ACER_NEGUNDO",
+        "BETULA_NIGRA",
+        "POPULUS_DELTOIDES",
+        "SALIX_NIGRA",
+        "PLATANUS_OCCIDENTALIS"
+      ],
+      "teachingProfiles": [
+        {
+          "taxonId": "ACER_SACCHARINUM",
+          "preferredCommonName": "Silver maple",
+          "canonicalScientificName": "Acer saccharinum",
+          "acceptedAlternatives": [],
+          "family": "Sapindaceae",
+          "distributionInCourseRegion": "Floodplains and lake/river margins across the Great Lakes, southern ON/QC, NY, PA/NJ, and lower New England",
+          "ecologicalImportance": "Fast-growing floodplain canopy tree and riparian colonizer",
+          "coursePriority": "2 - regional",
+          "tier": "B",
+          "fieldIdentification": {
+            "foliage": "Leaves are opposite, simple, and usually five-lobed, with very deep sinuses that produce long narrow lobes; the central lobe is conspicuously longer than half the blade. Margins are coarsely toothed mainly toward lobe tips, and the lower surface is strikingly silvery white or glaucous. Sun leaves can be more deeply cut than shade leaves, so confirm opposite arrangement and the pale underside rather than relying on silhouette alone.",
+            "barkAgeSeries": "Seedlings and saplings have smooth light-gray bark, sometimes with fine vertical lenticels. Intermediate stems develop narrow fissures and elongated plates whose edges begin to lift. Mature and old bark is gray to gray-brown, shaggy, and broken into long loose-edged plates that curl outward at one or both ends; wetness, lichens, and old wounds can hide the loosened edges.",
+            "dormant": "Twigs are opposite, slender to moderately stout, reddish brown, and bear blunt red to reddish-brown buds. Clusters of plump collateral flower buds may flank smaller vegetative buds, especially on reproductive shoots. Opposite branching establishes maple, while blunt red buds, clustered flower buds, and loose-plated older bark support silver maple; twigs alone can overlap red maple and Freeman maple.",
+            "reproductive": "Small red, yellow, or greenish flowers open well before the leaves. Paired samaras mature and fall in spring; they are among the largest native-maple samaras in the region, with widely divergent wings and a thick seed body that is hairy when young. Early-season fruiting is useful, but wing angle and size vary and must be combined with pubescence, foliage, or twig evidence.",
+            "wholeTreeContext": "A fast-growing, often massive lowland tree with a short bole, broad irregular crown, ascending main limbs, and long drooping branchlets. It is strongly associated with floodplains, river terraces, oxbows, and lake margins, often with American elm, cottonwood, sycamore, boxelder, green ash, and swamp white oak; planted trees also occur far from water.",
+            "variationAndCondition": "Shade foliage may be broader and less deeply divided, epicormic shoots may carry unusually large leaves, and old trees commonly show storm breakage, cavities, included bark, and callus because the wood is weak. Acer rubrum × A. saccharinum (Freeman maple) and ornamental selections can be intermediate in lobe depth, sinus shape, underside color, and samara characters; an intermediate planted tree should not be forced to species.",
+            "defensibilityLimits": "Species-level identification is strongest when opposite deeply divided leaves with a silvery underside are paired with spring samaras or characteristic loose-plated bark. A distant ragged crown, shaggy gray bark, one deeply lobed leaf, or red winter buds alone cannot exclude red maple, a Freeman hybrid, or a cultivated maple; request intact opposite foliage, lower leaf surfaces, mature fruit, and provenance when characters are intermediate."
+          },
+          "confuserControl": [
+            {
+              "confuser": "Acer rubrum",
+              "visibleSeparators": "Red maple usually has shallower V-shaped sinuses, shorter broader lobes, teeth around more of the margin, and smaller glabrous samaras; mature bark is scaly or plated but not typically in long loose curling strips. Silver maple has very deep sinuses, a strongly silvery lower surface, and large spring samaras hairy over the seed body.",
+              "resolvingView": "Lower leaf surface, full blade with petiole, several mature samaras with a scale reference, and an intermediate-to-mature trunk."
+            },
+            {
+              "confuser": "Acer × freemanii (Freeman maple)",
+              "visibleSeparators": "Freeman maple can combine red-maple V-shaped sinuses and shorter central lobe with the paler underside and deeper lobing of silver maple. No single intermediate leaf is decisive, and cultivated clones are especially variable.",
+              "resolvingView": "A series of sun and shade leaves, flowers or mature samaras including pubescence, buds, bark, and evidence of planted versus natural origin."
+            }
+          ],
+          "silvicsCapsule": {
+            "shadeTolerance": "Intermediate to moderately tolerant when young, but best crown development and rapid growth require strong overhead light.",
+            "moistureDrainageSoils": "Most characteristic on moist alluvial soils and seasonally flooded lowlands; it tolerates considerable inundation but grows best where fertile fine-textured soil is aerated between floods.",
+            "geographicClimaticAffinity": "A central and eastern North American lowland species reaching the Great Lakes, southern Ontario and Quebec, New York, lower New England, Pennsylvania, and New Jersey.",
+            "forestAssociations": "Common with American elm, green ash, eastern cottonwood, boxelder, sycamore, river birch, swamp white oak, and other floodplain hardwoods.",
+            "regeneration": "Very large spring seed crops colonize fresh moist silt and exposed alluvium; seedlings grow rapidly when light and moisture remain adequate.",
+            "vegetativeReproduction": "Young stumps and damaged stems sprout vigorously, although seed is the principal means of occupying new sediment.",
+            "seedMastBehavior": "Produces frequent, often annual, abundant samara crops; seeds mature in late spring, remain viable only briefly, and germinate promptly without prolonged dormancy.",
+            "establishmentRequirements": "Fresh seed, continuously moist exposed substrate, and open light favor establishment; dense litter, prolonged drying, and heavy shade sharply reduce recruitment.",
+            "successionalRole": "A floodplain pioneer and early-seral canopy tree that can persist in stable lowland stands but is usually replaced on sites where shade-tolerant hardwoods close the canopy.",
+            "disturbanceResponse": "Flooding and sediment deposition create seedbeds, while cutting and storm injury stimulate sprouts; brittle wood and broad weak forks make exposed crowns prone to ice and wind breakage.",
+            "longevityGrowthStrategy": "Very fast growing and relatively short to moderately lived, investing in rapid height and crown expansion rather than strong decay-resistant wood.",
+            "browseSusceptibility": "Deer and rodents browse seedlings and sprouts, while beaver may cut saplings and pole-size stems in riparian settings.",
+            "insectsDiseases": "Tar spot, anthracnose, verticillium wilt, stem decays, borers, and sapsucker injury occur, but structural failure and decay in old wounded trees are often more operationally important.",
+            "managementImplications": "Retain where rapid lowland cover, cavity habitat, and bank protection are desired, but account for weak wood, large crowns, floodplain access, and regeneration dependence on fresh moist seedbeds.",
+            "silviculturalSystemResponse": "Openings and even-aged disturbances recruit abundant seedlings or sprouts when a current seed crop meets moist mineral soil; partial canopy retention can maintain mixture, but suppressed regeneration needs release to reach the canopy."
+          },
+          "references": [
+            {
+              "title": "Silver Maple — Silvics of North America",
+              "url": "https://research.fs.usda.gov/silvics/silver-maple",
+              "scope": "Distribution, floodplain sites, associates, regeneration, growth, disturbance, damaging agents, and management."
+            },
+            {
+              "title": "Acer saccharinum — silver maple",
+              "url": "https://gobotany.nativeplanttrust.org/species/acer/saccharinum/",
+              "scope": "Regional morphology, fruit pubescence, leaf characters, habitat, synonyms, and red-maple and Freeman-maple comparisons."
+            }
+          ]
+        },
+        {
+          "taxonId": "ACER_NEGUNDO",
+          "preferredCommonName": "Boxelder",
+          "canonicalScientificName": "Acer negundo",
+          "acceptedAlternatives": [
+            "Negundo aceroides",
+            "Acer negundo var. negundo"
+          ],
+          "family": "Sapindaceae",
+          "distributionInCourseRegion": "Great Lakes and major river systems through southern ON/QC, NY, and PA; scattered eastward",
+          "ecologicalImportance": "Fast-growing short-lived riparian and disturbed-site tree",
+          "coursePriority": "2 - regional",
+          "tier": "B",
+          "fieldIdentification": {
+            "foliage": "Leaves are opposite and pinnately compound, an unusual combination among regional trees. Each leaf usually has three to seven, sometimes nine, ovate leaflets; the terminal leaflet is often three-lobed and lateral leaflets may be coarsely toothed, lobed, or nearly entire. Leaf shape is highly variable even on one shoot, so confirm the continuous rachis, opposite nodes, and paired leaf scars.",
+            "barkAgeSeries": "Young bark is smooth, thin, and gray to light brown. Intermediate stems develop shallow narrow fissures and low interlacing ridges. Mature bark is gray-brown with narrow firm ridges and irregular furrows, but it lacks the clean, regularly repeated diamond pattern often associated with mature ash; old stems commonly show cavities, sprouts, scars, and decay.",
+            "dormant": "Opposite stout twigs are green, olive, purplish, or brown and often carry a pale waxy bloom. Buds are small, ovoid, and pale-hairy, with a larger terminal bud; narrow V-shaped leaf scars meet across the node in a raised point or line. The greenish glaucous twig and opposite compound-leaf scars are valuable winter evidence, but vigorous ash shoots must be excluded with bud and scar details.",
+            "reproductive": "Trees are usually dioecious. Male flowers hang in slender tassel-like clusters before leaf-out, while female flowers develop into long drooping clusters of paired narrow samaras; the clusters often persist into winter. A paired maple samara on an opposite twig separates boxelder from ashes, whose fruits are single samaras rather than joined pairs.",
+            "wholeTreeContext": "Usually a small to medium, short-boled, irregular tree with multiple leaders, low forks, leaning limbs, and abundant basal or trunk sprouts. It is common on riverbanks, floodplains, disturbed alluvium, fencerows, vacant ground, and farmstead edges, often with cottonwood, willow, silver maple, green ash, and elm.",
+            "variationAndCondition": "Flood damage, pruning, ice, and decay produce extremely irregular crowns and epicormic sprouts. Sun shoots may be waxy blue-green and strongly lobed, while shaded foliage can be thin and only three-foliolate. Seedling sex cannot be determined from vegetative characters, and absence of fruit on a male tree is expected rather than contradictory.",
+            "defensibilityLimits": "Opposite compound leaves establish a short list, not boxelder by themselves. A defensible call combines opposite nodes with three-to-seven variably lobed leaflets, green or glaucous twigs, maple-type paired samaras, or characteristic leaf-scar lines. Detached compound foliage without an attached node may support only a compound-leaved hardwood until ash, walnut, tree-of-heaven, and other alternatives are excluded."
+          },
+          "confuserControl": [
+            {
+              "confuser": "Fraxinus americana, Fraxinus pennsylvanica, or Fraxinus nigra",
+              "visibleSeparators": "Both have opposite compound leaves, but boxelder commonly has only three to seven irregularly lobed leaflets, green or glaucous twigs, raised lines between paired leaf scars, and paired maple samaras. Ashes usually have more uniformly shaped leaflets, stout scaled buds, and single paddle-like samaras.",
+              "resolvingView": "An intact node with both leaf bases, terminal and lateral buds, twig color and bloom, full leaf, and any fruit cluster."
+            },
+            {
+              "confuser": "Juglans nigra or Ailanthus altissima",
+              "visibleSeparators": "Black walnut and tree-of-heaven have alternate rather than opposite leaves. Tree-of-heaven also has many mostly entire leaflets with basal glandular teeth and a strong odor; walnut has chambered pith and nut husks rather than paired samaras.",
+              "resolvingView": "Two consecutive twig nodes, leaflet bases and margins, a split twig showing pith, odor only as supporting evidence, and reproductive structures."
+            }
+          ],
+          "silvicsCapsule": {
+            "shadeTolerance": "Shade intolerant to intermediate when young; it persists best along edges and in open, repeatedly disturbed lowlands.",
+            "moistureDrainageSoils": "Most frequent on moist fertile alluvium, stream margins, and low terraces, but remarkably tolerant of compacted, droughty, alkaline, or otherwise disturbed soils once established.",
+            "geographicClimaticAffinity": "A broad continental species centered on major river systems, common around the Great Lakes and southern Canada and scattered eastward through the course region.",
+            "forestAssociations": "Occurs with green ash, cottonwood, black willow, silver maple, hackberry, American elm, bur oak, and disturbed-site shrubs.",
+            "regeneration": "Wind-dispersed samaras establish readily on moist exposed soil, alluvium, spoil, and neglected urban or agricultural ground.",
+            "vegetativeReproduction": "Stumps and injured stems sprout vigorously, and leaning or buried stems can root, allowing damaged individuals to persist as clumps.",
+            "seedMastBehavior": "Female trees often produce heavy crops; samaras mature in fall, may hang into winter, and germinate after cold stratification when moisture and light are favorable.",
+            "establishmentRequirements": "Open or edge light, a nearby female seed source, and exposed moist substrate favor rapid recruitment; dense closed-canopy litter is less suitable.",
+            "successionalRole": "An early-seral riparian and ruderal colonizer that often follows willow and cottonwood or fills disturbed edges, then declines as taller, longer-lived trees close the canopy.",
+            "disturbanceResponse": "Floods expose seedbeds and transport seed, while cutting, breakage, and fire top-kill can trigger vigorous sprouting; weak branch attachments and decay lead to recurrent crown damage.",
+            "longevityGrowthStrategy": "Fast growing and short lived, commonly becoming defective within several decades while continuing through sprouts and multiple stems.",
+            "browseSusceptibility": "Deer browse seedlings and sprouts, and beaver use stems in riparian habitats; vigorous resprouting can offset moderate browsing.",
+            "insectsDiseases": "Boxelder bugs feed mainly on seeds, while verticillium wilt, cankers, heart rots, and other decay organisms exploit damaged stems; structural defects are common in old trees.",
+            "managementImplications": "Treat boxelder as either useful rapid riparian cover and wildlife structure or an unwanted low-value competitor according to objectives; anticipate persistent sprouts after cutting.",
+            "silviculturalSystemResponse": "Openings and heavy disturbance favor seedling and sprout recruitment, whereas sustained closed-canopy competition suppresses it; repeated follow-up is needed where removal rather than retention is the objective."
+          },
+          "references": [
+            {
+              "title": "Boxelder — Silvics of North America",
+              "url": "https://research.fs.usda.gov/silvics/boxelder",
+              "scope": "Distribution, alluvial sites, associations, reproduction, growth, damage, and succession."
+            },
+            {
+              "title": "Acer negundo — ash-leaved maple",
+              "url": "https://gobotany.nativeplanttrust.org/species/acer/negundo/",
+              "scope": "Regional compound-leaf, twig, flower, fruit, habitat, and nomenclatural characters."
+            }
+          ]
+        },
+        {
+          "taxonId": "BETULA_NIGRA",
+          "preferredCommonName": "River birch",
+          "canonicalScientificName": "Betula nigra",
+          "acceptedAlternatives": [],
+          "family": "Betulaceae",
+          "distributionInCourseRegion": "Southern Great Lakes and southern ON east through NY, PA/NJ, CT, and MA along rivers and lowlands",
+          "ecologicalImportance": "Shade-intolerant riparian pioneer on moist alluvium; tolerant of flooding and heat",
+          "coursePriority": "2 - regional",
+          "tier": "B",
+          "fieldIdentification": {
+            "foliage": "Leaves are alternate, simple, and broadly rhombic to ovate, usually with a wedge-shaped base, acute tip, and conspicuous double-serrate margin. Petioles and young lower leaf surfaces are often tomentose, and straight lateral veins run to major teeth. The rhombic blade and hairy petiole are more useful than leaf size, which varies widely on sprouts and shade shoots.",
+            "barkAgeSeries": "Young stems and upper branches have salmon, cinnamon, pinkish tan, or cream bark peeling in thin papery curls and ragged flakes, commonly exposing several colors at once. Intermediate trunks retain colorful exfoliation between darker scaly patches. Old lower boles become thick, gray-brown, rough, and deeply scaly or ridged, sometimes with little obvious papery bark; inspect upper limbs or younger stems before rejecting river birch.",
+            "dormant": "Slender alternate twigs are reddish brown to gray, lenticellate, and may bear glandular hairs when young. Small pointed imbricate lateral buds are arranged along slightly zigzag twigs; birches lack a true terminal bud, and short spur shoots may be present. Persistent preformed staminate catkins near twig ends, papery bark on young wood, and the absence of a strong wintergreen odor support river birch.",
+            "reproductive": "Staminate catkins form in the previous season and hang in spring. Short cylindrical pistillate strobiles mature unusually early for a birch, breaking apart in late spring or early summer into three-lobed bracts and small winged nutlets; the nutlet body is broader than either individual wing. Detached birch nutlets or catkin fragments require magnification and comparison material for species-level use.",
+            "wholeTreeContext": "A medium to large, often multiple-stemmed tree of active riverbanks, islands, sandbars, floodplain edges, and moist alluvium. The crown is open and irregular, with fine drooping branchlets and conspicuously pale peeling upper stems; ornamental multi-stem trees are frequent on upland lawns.",
+            "variationAndCondition": "Cultivars may have exceptionally pale, cinnamon, or cream bark and a deliberately multi-stemmed form. Old floodplain trees can be dark, furrowed, leaning, silt-scoured, or scarred, while sprouts carry oversized leaves. Flooding, ice, abrasion, lichens, and peeling caused by injury can obscure the normal bark sequence, so condition must be separated from identity.",
+            "defensibilityLimits": "Colorful peeling bark on young limbs plus rhombic double-serrate leaves, hairy petioles, early-disintegrating strobiles, and riparian context supports species. Old rough bark, a generic birch leaf, or a catkin alone may justify only Betula. Request young bark, intact mature leaves with petioles, nutlet and bract details, and twig odor before separating difficult or planted birches."
+          },
+          "confuserControl": [
+            {
+              "confuser": "Betula alleghaniensis",
+              "visibleSeparators": "Yellow birch has shiny bronze to yellowish bark peeling in thin horizontal curls, a strong wintergreen odor in fresh twigs, and more consistently ovate leaves. River birch has salmon-to-cinnamon ragged papery bark, no strong wintergreen odor, and broadly rhombic leaves with often-tomentose petioles.",
+              "resolvingView": "Freshly scratched or clipped twig for odor, young upper-stem bark, full leaf and petiole, and mature fruiting bracts or nutlets."
+            },
+            {
+              "confuser": "Betula papyrifera or Betula populifolia",
+              "visibleSeparators": "Paper and gray birch usually have white chalky bark rather than salmon-cinnamon curls. River birch has rhombic leaves, often hairy petioles, early fruit maturation, and a nutlet body broader than an individual wing; paper-birch nutlet bodies are not broader than the wings.",
+              "resolvingView": "Bark on both young and mature stems, petiole pubescence, leaf base, fruiting date, and magnified nutlet."
+            }
+          ],
+          "silvicsCapsule": {
+            "shadeTolerance": "Shade intolerant; seedlings need open light and established crowns deteriorate beneath overtopping competitors.",
+            "moistureDrainageSoils": "Best on moist, well-aerated alluvial sands, silts, and loams along waterways; it tolerates periodic flooding and heat but not permanently stagnant, severely oxygen-poor rooting conditions.",
+            "geographicClimaticAffinity": "A warm-temperate eastern riparian species entering the southern Great Lakes, southern Ontario, New York, lower New England, Pennsylvania, and New Jersey.",
+            "forestAssociations": "Occurs with sycamore, cottonwood, black willow, silver maple, boxelder, American elm, green ash, and floodplain oaks.",
+            "regeneration": "Abundant light seed colonizes fresh moist sediment, exposed mineral soil, bars, and bank scars after floods or other disturbance.",
+            "vegetativeReproduction": "Young cut or injured stems can sprout from the stump, but new-site colonization is chiefly by seed.",
+            "seedMastBehavior": "Seed crops are commonly frequent; nutlets disperse in late spring or early summer, have limited longevity, and germinate rapidly on moist substrate.",
+            "establishmentRequirements": "Open sunlight, continuous surface moisture during germination, and relatively bare alluvium are critical; dense litter, shade, or rapid seedbed drying causes failure.",
+            "successionalRole": "A pioneer of unstable banks and newly deposited alluvium that can persist in riparian canopies but is replaced where disturbance ceases and shade increases.",
+            "disturbanceResponse": "Flood deposition and bank disturbance create regeneration sites; thin bark confers little fire resistance, while young stems may sprout after cutting or injury.",
+            "longevityGrowthStrategy": "Rapid juvenile growth and moderate longevity, generally shorter lived than yellow birch, with allocation toward quick occupation of dynamic riparian sites.",
+            "browseSusceptibility": "Deer browse seedlings and sprouts, and beaver cut stems near water; established trees usually escape browsing through rapid height growth.",
+            "insectsDiseases": "Leaf miners, aphids, cankers, dieback, and wood decays occur; bronze birch borer is generally less damaging to river birch than to drought-stressed white-barked birches.",
+            "managementImplications": "Protect active-bank seedbeds and riparian hydrology where natural recruitment is desired, retain roots for bank stability, and avoid treating ornamental bark color as representative of every old forest tree.",
+            "silviculturalSystemResponse": "Large openings or natural flood disturbance can recruit seedlings when fresh seed meets moist mineral soil; partial cuts without seedbed exposure or adequate light are unlikely to regenerate a strong cohort."
+          },
+          "references": [
+            {
+              "title": "River Birch — Silvics of North America",
+              "url": "https://research.fs.usda.gov/silvics/river-birch",
+              "scope": "Range, alluvial sites, flooding limits, associates, reproduction, growth, damaging agents, and management."
+            },
+            {
+              "title": "Betula nigra — river birch",
+              "url": "https://gobotany.nativeplanttrust.org/species/betula/nigra/",
+              "scope": "Regional leaf, petiole, twig, bark, nutlet, habitat, and paper-birch comparisons."
+            }
+          ]
+        },
+        {
+          "taxonId": "POPULUS_DELTOIDES",
+          "preferredCommonName": "Eastern cottonwood",
+          "canonicalScientificName": "Populus deltoides",
+          "acceptedAlternatives": [
+            "Populus deltoides subsp. deltoides"
+          ],
+          "family": "Salicaceae",
+          "distributionInCourseRegion": "Major rivers of MN/WI/MI and southern ON through NY, PA/NJ, and scattered New England",
+          "ecologicalImportance": "Very fast-growing floodplain pioneer dependent on exposed moist alluvium",
+          "coursePriority": "2 - regional",
+          "tier": "B",
+          "fieldIdentification": {
+            "foliage": "Leaves are alternate, simple, broadly triangular or deltoid, and often nearly as wide as long, with a truncate to broadly wedge-shaped base, long point, and coarse rounded or forward-pointing teeth. Two to five small glands may occur at the top of the petiole. The long petiole is flattened perpendicular to the blade, causing leaves to flutter, but flattened petioles occur in other poplars and are genus-level evidence by themselves.",
+            "barkAgeSeries": "Seedlings and young branches are smooth yellow-green to gray with lenticels. Intermediate trunks become gray and shallowly furrowed. Mature and old bark is thick, ash-gray to dark gray-brown, and deeply divided into broad rough ridges and long furrows; on massive trees the lower bole can look blocky and dark, while upper limbs retain smoother pale bark.",
+            "dormant": "Twigs are stout, glossy yellow-brown to reddish brown, conspicuously lenticellate, and often angular on vigorous shoots. The large sharply pointed terminal bud is resinous and sticky; lateral buds are appressed above large triangular leaf scars. A resinous Populus bud and large alternate scar establish poplar, but hybrid cottonwoods and balsam poplar require branchlet shape, bud, leaf, and provenance comparisons.",
+            "reproductive": "Trees are dioecious and flower before leaf-out in long pendant catkins. Female capsules split in late spring or early summer to release numerous tiny seeds embedded in white cottony hairs, briefly coating water and floodplain surfaces. Catkins and cotton establish Salicaceae context but rarely provide a stand-alone species call without leaves, buds, or capsule details.",
+            "wholeTreeContext": "A very large, fast-growing floodplain tree with a massive straight or leaning bole, open high crown, coarse ascending limbs, and fine twigging. It forms groves on river bars, islands, fresh alluvium, shorelines, and disturbed bottomlands, often with black willow, silver maple, boxelder, green ash, and American elm; planted windbreak and hybrid poplars complicate roadside identifications.",
+            "variationAndCondition": "Juvenile and sprout leaves can be exceptionally large, heart-shaped, or less triangular, and long shoots are more angular than short shoots. Flood scars, ice, windthrow, heart rot, branch breakage, and beaver cutting are common. Populus balsamifera × P. deltoides and other cultivated hybrids may combine triangular leaves, sticky buds, and intermediate branchlets; do not force a parent species from one leaf.",
+            "defensibilityLimits": "Species-level evidence combines coarse-toothed deltoid leaves with glands at the petiole apex, strongly flattened petioles, angular stout branchlets, large resinous buds, and major-river context. Deeply furrowed bark, cottony seed, a fluttering leaf, or a sticky bud alone supports Populus at most. Suspected planted or hybrid trees without mature leaves and provenance should be recorded as cottonwood or Populus hybrid unresolved."
+          },
+          "confuserControl": [
+            {
+              "confuser": "Populus balsamifera",
+              "visibleSeparators": "Balsam poplar usually has ovate rather than broadly deltoid leaves, a less strongly flattened petiole, round rather than conspicuously angled branchlets, and very fragrant sticky buds; eastern cottonwood has large coarse-toothed triangular leaves, petiole-apex glands, and angular long shoots. Natural and planted hybrids are intermediate.",
+              "resolvingView": "Mature short-shoot and long-shoot leaves, petiole cross-section and apical glands, current branchlet cross-section, terminal bud, and evidence of planting or hybrid origin."
+            },
+            {
+              "confuser": "Populus grandidentata",
+              "visibleSeparators": "Bigtooth aspen has rounded to ovate leaves with conspicuously large blunt teeth, hairy expanding leaves and buds, and generally smaller twigs and stature. Cottonwood leaves are broadly triangular with a straighter base and its old bark is much more deeply furrowed.",
+              "resolvingView": "Full mature leaf and base, expanding shoot pubescence, terminal bud, twig diameter, and mature lower trunk."
+            },
+            {
+              "confuser": "Cultivated or escaped hybrid poplars",
+              "visibleSeparators": "Hybrid poplars can reproduce nearly every diagnostic combination between cottonwood and balsam or Eurasian poplars. Intermediate petiole compression, twig angularity, leaf base, bud resin, and capsule characters should trigger a hybrid hypothesis.",
+              "resolvingView": "Multiple leaves from short and long shoots, flowers or capsules, branchlet cross-section, clone or planting records, and genetic evidence if a species-level determination is operationally necessary."
+            }
+          ],
+          "silvicsCapsule": {
+            "shadeTolerance": "Very shade intolerant; seedlings and lower crowns decline rapidly when overtopped.",
+            "moistureDrainageSoils": "Best on deep moist, well-aerated sands and silts deposited along rivers; tolerates periodic flooding but seedlings fail if surfaces dry quickly or remain continuously oxygen-starved.",
+            "geographicClimaticAffinity": "A continental floodplain species most prominent along large rivers of the western and southern course region, with native, planted, and escaped occurrences eastward.",
+            "forestAssociations": "Common with black willow, silver maple, green ash, boxelder, American elm, sycamore, hackberry, and floodplain oaks.",
+            "regeneration": "Enormous crops of minute wind- and water-dispersed seed colonize freshly deposited moist bars and banks immediately after dispersal.",
+            "vegetativeReproduction": "Stumps and roots sprout, and cuttings root readily when kept moist; vegetative propagation is widely used for planting and restoration.",
+            "seedMastBehavior": "Female trees commonly seed heavily each year; seeds are dispersed in late spring, remain viable for only days to weeks, and require immediate contact with moist exposed substrate.",
+            "establishmentRequirements": "Full light, fresh moist mineral sediment, low initial competition, and a slowly receding water table that keeps roots supplied as seedlings elongate are critical.",
+            "successionalRole": "A classic pioneer forming even-aged cohorts after river disturbance, later giving way to more shade-tolerant floodplain hardwoods as surfaces stabilize.",
+            "disturbanceResponse": "Flood scour and deposition drive recruitment; buried or damaged stems can root or sprout, while fire, ice, wind, and rapid water-table shifts readily injure thin-barked or shallow-rooted trees.",
+            "longevityGrowthStrategy": "Among the fastest-growing eastern trees but relatively short lived, commonly maturing within a century while occasional individuals survive much longer.",
+            "browseSusceptibility": "Deer browse seedlings and sprouts, and beaver heavily use young stems and branches; rapid growth can permit escape where browsing is not chronic.",
+            "insectsDiseases": "Cottonwood leaf beetle, borers, leaf spots, cankers, stem rots, and rusts can be important, with clone and site strongly influencing plantation damage.",
+            "managementImplications": "Regeneration depends on floodplain process rather than canopy opening alone; protect seed trees, sediment dynamics, and bank hydrology, and identify hybrids before using local-genotype claims.",
+            "silviculturalSystemResponse": "Large open disturbances with prepared moist mineral soil can regenerate even-aged cohorts; partial cuts beneath an existing canopy seldom provide enough light or seedbed continuity for successful establishment."
+          },
+          "references": [
+            {
+              "title": "Eastern Cottonwood — Silvics of North America",
+              "url": "https://research.fs.usda.gov/silvics/eastern-cottonwood",
+              "scope": "Floodplain sites, seedbed requirements, rapid growth, regeneration, disturbance, damaging agents, and management."
+            },
+            {
+              "title": "Populus deltoides — eastern cottonwood",
+              "url": "https://gobotany.nativeplanttrust.org/species/populus/deltoides/",
+              "scope": "Regional leaf, petiole-gland, twig, capsule, habitat, subspecies, and hybrid-poplar characters."
+            }
+          ]
+        },
+        {
+          "taxonId": "SALIX_NIGRA",
+          "preferredCommonName": "Black willow",
+          "canonicalScientificName": "Salix nigra",
+          "acceptedAlternatives": [],
+          "family": "Salicaceae",
+          "distributionInCourseRegion": "Major rivers and lowlands of the southern/western Great Lakes through southern ON, NY, PA/NJ, and lower New England",
+          "ecologicalImportance": "Fast-growing floodplain tree dependent on fresh moist sediment",
+          "coursePriority": "2 - regional",
+          "tier": "B",
+          "fieldIdentification": {
+            "foliage": "Leaves are alternate, simple, narrowly lanceolate, mostly about 7.5–17 millimeters wide, long-pointed, and finely serrate to double-serrate. Both surfaces are green rather than strongly white-glaucous below; small but evident stipules occur at the petiole base, and the petiole bears nectary glands. Mature vegetative material is essential because early willow leaves can be hairier and differently shaped than later leaves.",
+            "barkAgeSeries": "Young bark is smooth yellow-brown, gray, or reddish brown. Intermediate stems become shallowly fissured with narrow ridges. Mature and old bark is dark gray-brown to nearly black, deeply furrowed, and divided into rough shaggy or scaly ridges; large open-grown trunks are frequently hollow, leaning, scarred, and broken, which can mask the normal pattern.",
+            "dormant": "Slender alternate branchlets are yellow, orange, red-brown, or gray, conspicuously lenticellate, glabrous, and brittle at the base, breaking relatively cleanly at annual junctions. Small appressed buds are covered by a single cap-like scale, and there is no true terminal bud. These traits establish willow well, but winter species calls usually require reproductive material, mature bark, and range.",
+            "reproductive": "Trees are dioecious. Slender catkins appear with or near leaf expansion; female catkins bear small three- to five-millimeter capsules that split to release minute seeds with silky hairs. Catkin sex, capsule dimensions, hair placement, and associated mature leaves matter because detached cottony seed or an immature catkin cannot safely distinguish black willow from the many regional Salix species.",
+            "wholeTreeContext": "The largest regularly tree-forming native willow across much of the course region, usually with one or several leaning trunks, an open irregular crown, long flexible-looking branchlets, and abundant broken limbs. It occupies low river margins, sloughs, swales, drainage channels, reservoir shores, and newly deposited fine sediment, often with cottonwood, silver maple, boxelder, and green ash.",
+            "variationAndCondition": "Willows display strong seasonal and environmental plasticity: first leaves, later leaves, shoots, stump sprouts, and browsed plants can look strikingly different. Hybridization occurs but explains fewer odd specimens than plasticity. Flood scouring, silt burial, ice, beaver, storm breakage, dieback, and heart rot strongly deform black willow without erasing the single bud scale, brittle-based branchlets, or mature leaf characters.",
+            "defensibilityLimits": "Species-level identification should use mature narrow green-beneath leaves with evident stipules and petiole nectaries, brittle-based glabrous branchlets, tree stature, capsules or flowers, and compatible river-margin range. Bark, catkins, cottony seeds, or one narrow leaf alone usually support Salix only. If mature reproductive or vegetative characters are missing, a genus-level willow answer is the defensible field decision."
+          },
+          "confuserControl": [
+            {
+              "confuser": "Other tree-form willows, especially Salix alba, Salix lucida, and Salix amygdaloides",
+              "visibleSeparators": "Black willow combines a true tree habit, very narrow mature leaves that remain green beneath, evident stipules, petiole nectaries, and small capsules. White willow is whitish beneath with minute or absent stipules, while shining willow has much broader glossy leaves and larger capsules; peachleaf willow differs in mature leaf and reproductive details.",
+              "resolvingView": "Fully mature first and later leaves, lower surfaces, stipules and petiole glands, fresh branch-junction brittleness, both-sex reproductive material where available, and capsule measurements."
+            },
+            {
+              "confuser": "Populus deltoides",
+              "visibleSeparators": "Cottonwood has broad deltoid leaves with coarse teeth, a strongly flattened petiole, stout angular twigs, and large sticky multi-scaled buds. Black willow has narrow finely toothed leaves, unflattened petioles, slender brittle-based branchlets, and one cap-like bud scale.",
+              "resolvingView": "Full leaf and petiole cross-section, terminal twig with buds, branchlet break at an annual junction, and capsule or fruiting catkin."
+            },
+            {
+              "confuser": "Alnus incana subsp. rugosa",
+              "visibleSeparators": "Speckled alder has broader ovate double-serrate leaves, stalked buds with several scales, and persistent woody cone-like female strobiles. Black willow has narrow leaves, a single cap-like bud scale, and nonwoody catkins that release cottony seed.",
+              "resolvingView": "Mature leaf, bud scale and stalk, persistent reproductive structures, and whole growth form."
+            }
+          ],
+          "silvicsCapsule": {
+            "shadeTolerance": "Very shade intolerant; seedlings and lower crowns decline rapidly beneath taller vegetation.",
+            "moistureDrainageSoils": "Requires a continuous growing-season water supply and is most competitive on very wet alluvial silts, clays, and low river margins subject to flooding and silt deposition.",
+            "geographicClimaticAffinity": "A warm-temperate to continental eastern species reaching the southern and western Great Lakes, southern Ontario, southern New England, New York, Pennsylvania, and New Jersey.",
+            "forestAssociations": "Forms pioneer stands with eastern cottonwood and occurs with river birch, sycamore, silver maple, boxelder, green ash, red maple, and lowland elms.",
+            "regeneration": "Minute wind- and water-dispersed seed establishes immediately on saturated fresh sediment, mudflats, banks, and other open wet substrates.",
+            "vegetativeReproduction": "Young rootstocks sprout prolifically, and stem cuttings root readily in moist soil, making live stakes useful in suitable riparian stabilization projects.",
+            "seedMastBehavior": "Produces frequent large spring seed crops; seed remains viable for only a very short period and must encounter wet exposed substrate almost immediately.",
+            "establishmentRequirements": "Full sunlight, nearly continuous moisture, fresh bare sediment, and low initial competition are essential; even brief seedbed drying can eliminate a cohort.",
+            "successionalRole": "A temporary pioneer forming even-aged stands on active sediment, commonly followed or overtopped by cottonwood and longer-lived floodplain hardwoods as surfaces stabilize.",
+            "disturbanceResponse": "Flooding and siltation promote establishment, young stems sprout after cutting, and buried cuttings root; weak wood, ice, wind, and channel movement cause frequent breakage and turnover.",
+            "longevityGrowthStrategy": "Exceptionally fast growing but short lived, often maturing by roughly fifty to seventy years and becoming hollow or defective at greater ages.",
+            "browseSusceptibility": "Deer browse young shoots and beaver heavily cut stems and branches; vigorous sprouts and rapid growth can compensate where use is moderate.",
+            "insectsDiseases": "Willow borers, leaf beetles, aphids, cankers, crown gall, leaf spots, and heart rots occur, with breakage and decay common in old trees.",
+            "managementImplications": "Use the species where rapid bank cover and live-stake rooting match hydrology, but recognize its weak wood, short life, need for open wet sediment, and potential confusion with other willows.",
+            "silviculturalSystemResponse": "Large open riparian disturbances and coppice favor it; closed-canopy or small shaded gaps do not. Natural regeneration depends more on water-level timing and exposed sediment than on conventional upland harvesting prescriptions."
+          },
+          "references": [
+            {
+              "title": "Black Willow — Silvics of North America",
+              "url": "https://research.fs.usda.gov/silvics/black-willow",
+              "scope": "Wet alluvial sites, rapid growth, seed and cutting regeneration, pioneer succession, disturbance, longevity, and management."
+            },
+            {
+              "title": "Salix nigra — black willow",
+              "url": "https://gobotany.nativeplanttrust.org/species/salix/nigra/",
+              "scope": "Regional mature-leaf, stipule, petiole-gland, branch-brittleness, capsule, habitat, and willow-confuser characters."
+            },
+            {
+              "title": "Salix — dichotomous key and identification cautions",
+              "url": "https://gobotany.nativeplanttrust.org/dkey/salix/",
+              "scope": "Seasonal plasticity, reproductive keys, branch brittleness, hair variation, and conservative genus-level limits."
+            }
+          ]
+        },
+        {
+          "taxonId": "PLATANUS_OCCIDENTALIS",
+          "preferredCommonName": "American sycamore",
+          "canonicalScientificName": "Platanus occidentalis",
+          "acceptedAlternatives": [
+            "Buttonwood is an alternative common name"
+          ],
+          "family": "Platanaceae",
+          "distributionInCourseRegion": "Southern Great Lakes and southern ON through NY, PA/NJ, CT, and MA along rivers and alluvium",
+          "ecologicalImportance": "Very large shade-intolerant floodplain pioneer; important riparian form tree",
+          "coursePriority": "2 - regional",
+          "tier": "B",
+          "fieldIdentification": {
+            "foliage": "Leaves are alternate, simple, broad, palmately veined, and usually three to five shallow or moderate lobes with coarse teeth. The broad petiole base encloses the axillary bud, and large stipules leave a ring-like scar around the twig; lower surfaces and petioles may be hairy when young. Detached maple-like leaves are not species-level evidence until alternate attachment and the bud-enclosing petiole base are demonstrated.",
+            "barkAgeSeries": "Young stems are gray-brown and smoothish. Intermediate trunks begin exfoliating in irregular thin plates that reveal cream, white, tan, olive, and pale green patches. On old trees the lower bole may be dark brown and deeply plated or scaly, while the upper trunk and major limbs remain conspicuously mottled and pale; inspect the upper bole before rejecting an old dark-based sycamore.",
+            "dormant": "Stout alternate twigs zigzag between nodes and show a complete stipule-scar ring encircling each node. The conical axillary bud has a single visible cap-like scale and was hidden inside the swollen petiole base during the growing season; there is no true terminal bud. These node characters are highly diagnostic for Platanus even when mottled bark is obscured.",
+            "reproductive": "Male and female flowers occur in separate spherical heads on the same tree. Female heads mature into persistent brown seed balls, usually one per long hanging stalk in American sycamore, and disintegrate into many narrow achenes with basal hairs. London planetree more often carries two or more balls per stalk, but both species occasionally violate the usual count.",
+            "wholeTreeContext": "One of the largest regional hardwoods, with a massive often buttressed bole, broad open crown, crooked coarse limbs, and striking white upper branches visible across floodplains in winter. It occupies major streambanks, alluvial flats, bars, and moist lower slopes and commonly associates with cottonwood, black willow, silver maple, American elm, green ash, and river birch.",
+            "variationAndCondition": "Old lower bark can be uniformly dark and plated, juvenile leaves can be deeply lobed, and shade leaves may be broad and shallow-lobed. Sycamore anthracnose causes delayed leaf-out, shoot blight, tufts of epicormic foliage, and crooked branching; cankers, cavities, flood scars, and storm breakage are also common. These conditions do not distinguish American sycamore from planted London plane.",
+            "defensibilityLimits": "Mottled exfoliating bark plus encircling stipule scars and petiole-hidden buds establishes Platanus strongly. Species-level separation from London planetree should also use fruit-head number, mature leaf lobe proportions, bark, and provenance. A single hanging ball, one maple-like leaf, or white mottled trunk alone may justify plane tree or Platanus only in urban plantings."
+          },
+          "confuserControl": [
+            {
+              "confuser": "Platanus × acerifolia (London planetree)",
+              "visibleSeparators": "American sycamore usually has one fruit ball per stalk and leaf lobes shorter than wide, while London plane usually has paired or multiple balls and a longer central lobe. Both characters overlap occasionally, and ornamental selections or backcrosses can be intermediate.",
+              "resolvingView": "Many fruit stalks from the same crown, several mature sun leaves, upper and lower bark, flower heads if available, and planting or site provenance."
+            },
+            {
+              "confuser": "Acer species",
+              "visibleSeparators": "Maples have opposite leaves and twigs and paired samaras. Sycamore has alternate leaves, a petiole base that encloses the bud, encircling stipule scars, and spherical reproductive heads.",
+              "resolvingView": "Attached leaf nodes showing arrangement and petiole removal, dormant bud and stipule ring, and fruit."
+            },
+            {
+              "confuser": "Populus deltoides at distance",
+              "visibleSeparators": "Both can be enormous floodplain trees, but cottonwood has dark deeply furrowed bark into the upper trunk, a less white-mottled crown, triangular fluttering leaves, sticky buds, and cottony capsules rather than spherical seed balls.",
+              "resolvingView": "Upper-bole bark, full leaf and petiole, twig buds, and reproductive structures with a scale reference."
+            }
+          ],
+          "silvicsCapsule": {
+            "shadeTolerance": "Very shade intolerant; seedlings need open light and crowns self-prune or decline when overtopped.",
+            "moistureDrainageSoils": "Best on deep moist, fertile, well-aerated alluvial loams and sands along streams; tolerates periodic flooding but grows poorly on persistently stagnant or droughty shallow soils.",
+            "geographicClimaticAffinity": "A warm-temperate eastern floodplain species entering the southern Great Lakes, southern Ontario, New York, lower New England, Pennsylvania, and New Jersey.",
+            "forestAssociations": "Occurs with river birch, cottonwood, black willow, silver maple, American elm, green ash, hackberry, black walnut, and floodplain oaks.",
+            "regeneration": "Wind- and water-dispersed achenes establish on fresh moist mineral soil, silt deposits, exposed banks, and other open alluvial seedbeds.",
+            "vegetativeReproduction": "Young stumps sprout vigorously, and cuttings or pollarded stems can regenerate, although seed drives colonization of new floodplain surfaces.",
+            "seedMastBehavior": "Seed balls are produced frequently, persist into winter, and release many achenes through winter and spring; viability is variable and suitable moist seedbeds govern success.",
+            "establishmentRequirements": "Full light, moist exposed alluvium, a local seed source, and reduced competition are required for strong seedling cohorts; established roots need both moisture and aeration.",
+            "successionalRole": "A pioneer or early-seral floodplain canopy tree that may persist for centuries and become a remnant giant as more tolerant associates fill around it.",
+            "disturbanceResponse": "Flood deposition, channel movement, and large openings create regeneration opportunities; young stems sprout, while thin bark and shallow roots make severe fire damaging despite the resilience of large trees to ordinary flooding.",
+            "longevityGrowthStrategy": "Very fast growing when young and exceptionally large, yet also capable of several centuries of life; old trees commonly become hollow while retaining living crowns.",
+            "browseSusceptibility": "Deer browse seedlings and sprouts, and beaver may cut smaller stems; rapid juvenile growth can permit escape on productive open sites.",
+            "insectsDiseases": "Sycamore anthracnose is a conspicuous shoot and leaf disease; cankers, bacterial leaf scorch, lace bugs, powdery mildew, and heart rots also occur.",
+            "managementImplications": "Retain large trees for riparian structure, cavities, shade, and landscape identity where risk permits; provide wide buffers for roots and crowns and distinguish anthracnose deformation from species characters.",
+            "silviculturalSystemResponse": "Large openings or natural alluvial disturbance with exposed moist soil recruit seedlings, while coppice can regenerate young cut stems; small shaded gaps seldom provide sufficient light for a new cohort."
+          },
+          "references": [
+            {
+              "title": "Sycamore — Silvics of North America",
+              "url": "https://research.fs.usda.gov/silvics/sycamore",
+              "scope": "Distribution, alluvial sites, associates, reproduction, rapid growth, disturbance, damaging agents, and management."
+            },
+            {
+              "title": "Platanus occidentalis — American sycamore",
+              "url": "https://gobotany.nativeplanttrust.org/species/platanus/occidentalis/",
+              "scope": "Regional leaf, bark, bud, stipule-scar, fruit-head, habitat, and London-plane comparison characters."
+            },
+            {
+              "title": "Platanaceae — dichotomous key",
+              "url": "https://gobotany.nativeplanttrust.org/dkey/platanaceae/",
+              "scope": "Direct American sycamore and London planetree comparison using fruit-head number and leaf-lobe proportions."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sessionId": "W05-D",
+      "letter": "D",
+      "title": "Lowland dormant and propagule laboratory",
+      "kind": "multi_organ_laboratory",
+      "taxonScope": "all_module_taxa_plus_lowland_cumulative_sample",
+      "modalities": [
+        "foliage",
+        "bark",
+        "reproductive",
+        "dormant",
+        "whole_tree_context",
+        "condition"
+      ],
+      "delivery": "leaf-scar bud samara bark and site stations",
+      "feedbackRelease": "after_station_batch_submission",
+      "runtimeBoundary": "runtime_retrieval_from_admitted_practice_media",
+      "introducedTaxonIds": [],
+      "teachingProfiles": []
+    },
+    {
+      "sessionId": "W05-E",
+      "letter": "E",
+      "title": "Midterm cumulative retrieval",
+      "kind": "cumulative_adaptive_retrieval",
+      "taxonScope": "cr_01_eligible_taxa_prioritized_by_mastery_and_midterm_blueprint",
+      "modalities": [
+        "foliage",
+        "bark",
+        "reproductive",
+        "dormant",
+        "whole_tree_context",
+        "condition"
+      ],
+      "delivery": "adaptive review without reuse of formal assets",
+      "feedbackRelease": "after_batch_submission",
+      "runtimeBoundary": "runtime_retrieval_from_admitted_practice_media",
+      "introducedTaxonIds": [],
+      "teachingProfiles": []
+    }
+  ],
+  "assessmentSummaries": [
+    {
+      "assessmentId": "W05-PRACTICAL",
+      "type": "weekly_identification_practical",
+      "categoryId": "weekly_identification_practicals",
+      "cumulative": true,
+      "scope": "taxa_introduced_through_week_5_with_lowland_emphasis",
+      "modalities": [
+        "foliage",
+        "bark",
+        "reproductive",
+        "dormant",
+        "whole_tree_context"
+      ]
+    },
+    {
+      "assessmentId": "W05-MIDTERM",
+      "type": "cumulative_midterm_examination",
+      "categoryId": "midterm_examination",
+      "cumulative": true,
+      "scope": "weeks_1_through_5_blueprint_60_percent_mixed_identity_20_percent_dormant_reproductive_20_percent_confuser_and_evidence_reasoning",
+      "modalities": [
+        "foliage",
+        "bark",
+        "reproductive",
+        "dormant",
+        "whole_tree_context"
+      ]
+    },
+    {
+      "assessmentId": "W05-LOWLAND-FIELD",
+      "type": "lowland_dormant_propagule_exercise",
+      "categoryId": "field_condition_identification",
+      "cumulative": true,
+      "scope": "lowland_and_riparian_taxa",
+      "modalities": [
+        "reproductive",
+        "dormant",
+        "whole_tree_context",
+        "condition"
+      ]
+    }
+  ],
+  "remediationGate": {
+    "policy_id": "REM-01",
+    "evaluate_after_assessment_ids": [
+      "W05-PRACTICAL",
+      "W05-MIDTERM",
+      "W05-LOWLAND-FIELD"
+    ],
+    "broader_course_progression": "continues",
+    "insertion_sessions": [
+      "W06-B",
+      "W06-E"
+    ]
+  },
+  "teachingBoundary": "This package contains labeled instruction and public module structure only. Retrieval stations are assembled separately from admitted practice media, and formal forms, examination media, answer keys, and learner records remain private."
+}

@@ -1,0 +1,576 @@
+{
+  "$schema": "cochetopa-public-teaching-package/1.0",
+  "schemaVersion": "1.0.0",
+  "courseId": "northern-hardwoods-mixedwoods-dendrology-silvics-intensive",
+  "courseVersion": "2026.1-draft",
+  "moduleId": "week-08",
+  "sequence": 8,
+  "title": "Acadian and Eastern Regional Integration",
+  "deliveryStatus": "teaching_text_complete_visual_media_pending_admission",
+  "objectives": [
+    "Identify Atlantic white-cedar and pitch pine and place them against their closest regional confusers.",
+    "Transfer identification of learned taxa across Acadian, New England, New York, eastern Canadian, and Great Lakes appearances.",
+    "Recognize the same species under geographic, site, age, and condition variation.",
+    "Use regional associations to test hypotheses without allowing them to replace visible characters.",
+    "Complete the fourth cumulative nomenclature and silvics checks and the regional transfer assessment."
+  ],
+  "cumulativeReview": {
+    "policy_id": "CR-01",
+    "eligible_taxon_rule": "introduction_week_lte_module_sequence",
+    "through_introduction_week": 8,
+    "eligible_taxon_count": 77,
+    "selection_priorities": [
+      "regional_transfer",
+      "same_species_different_appearance",
+      "acadian_confusers",
+      "overdue_tier_a_b_modalities",
+      "nomenclature_and_silvics"
+    ]
+  },
+  "confuserSets": [
+    {
+      "confusionSetId": "CS01",
+      "name": "Sugar / black / Norway maple",
+      "memberTaxa": [
+        "ACER_SACCHARUM",
+        "ACER_NIGRUM",
+        "ACER_PLATANOIDES"
+      ],
+      "keySeparators": "Petiole latex; leaf underside hair and stipules; bud size/shape; samara angle",
+      "resolvingViews": "Fresh-broken petiole; lower surface; terminal bud; ripe samara"
+    },
+    {
+      "confusionSetId": "CS02",
+      "name": "Red / silver maple",
+      "memberTaxa": [
+        "ACER_RUBRUM",
+        "ACER_SACCHARINUM"
+      ],
+      "keySeparators": "Sinus depth; lower-surface whiteness; spring samara size; twig odor; bark strips",
+      "resolvingViews": "Complete leaf underside; samara with scale; crushed twig; mature bark"
+    },
+    {
+      "confusionSetId": "CS03",
+      "name": "Striped / mountain maple",
+      "memberTaxa": [
+        "ACER_PENSYLVANICUM",
+        "ACER_SPICATUM"
+      ],
+      "keySeparators": "Green-white striped bark versus unstriped; leaf size/base; fruit cluster posture; growth form",
+      "resolvingViews": "Young stem; intact leaf; fruit cluster; whole plant"
+    },
+    {
+      "confusionSetId": "CS04",
+      "name": "White / green / black ash",
+      "memberTaxa": [
+        "FRAXINUS_AMERICANA",
+        "FRAXINUS_PENNSYLVANICA",
+        "FRAXINUS_NIGRA"
+      ],
+      "keySeparators": "Leaf-scar shape and bud position; leaflet stalks; samara wing extent; black-ash corky bark",
+      "resolvingViews": "Twig node and leaf scar; whole rachis; samara; bark; hydrologic setting"
+    },
+    {
+      "confusionSetId": "CS05",
+      "name": "Paper / heart-leaved / gray birch",
+      "memberTaxa": [
+        "BETULA_PAPYRIFERA",
+        "BETULA_CORDIFOLIA",
+        "BETULA_POPULIFOLIA"
+      ],
+      "keySeparators": "Leaf base and vein count; twig resin glands; peeling versus tight bark; black branch marks; elevation",
+      "resolvingViews": "Several mature leaves; resin-warty twig; bark sheet; whole growth form; location"
+    },
+    {
+      "confusionSetId": "CS06",
+      "name": "Yellow / sweet birch",
+      "memberTaxa": [
+        "BETULA_ALLEGHANIENSIS",
+        "BETULA_LENTA"
+      ],
+      "keySeparators": "Both wintergreen; yellow birch golden curling bark and spur shoots versus sweet birch dark blocky bark",
+      "resolvingViews": "Scratched twig; young and mature bark; fruiting strobile; lower leaf surface"
+    },
+    {
+      "confusionSetId": "CS07",
+      "name": "White / black / red / Norway spruce",
+      "memberTaxa": [
+        "PICEA_GLAUCA",
+        "PICEA_MARIANA",
+        "PICEA_RUBENS",
+        "PICEA_ABIES"
+      ],
+      "keySeparators": "Cone size and scale margin; twig hairs; bud resin; foliage color/odor; pendulous branchlets",
+      "resolvingViews": "Full cone; twig macro; bud; whole crown; regional site"
+    },
+    {
+      "confusionSetId": "CS08",
+      "name": "Spruce / fir / hemlock",
+      "memberTaxa": [
+        "PICEA_GLAUCA",
+        "PICEA_MARIANA",
+        "PICEA_RUBENS",
+        "ABIES_BALSAMEA",
+        "TSUGA_CANADENSIS"
+      ],
+      "keySeparators": "Woody pegs versus pad base versus petiole; needle cross-section; cone orientation and persistence",
+      "resolvingViews": "Needle attachment macro; underside; terminal shoot; intact or attached cone"
+    },
+    {
+      "confusionSetId": "CS09",
+      "name": "Red / jack / Scots / pitch pine",
+      "memberTaxa": [
+        "PINUS_RESINOSA",
+        "PINUS_BANKSIANA",
+        "PINUS_SYLVESTRIS",
+        "PINUS_RIGIDA"
+      ],
+      "keySeparators": "Fascicle count/length; bend test; cone curvature/prickles; upper-bole orange bark; epicormic shoots",
+      "resolvingViews": "Several complete fascicles; cone and umbo; upper and lower bark; whole crown"
+    },
+    {
+      "confusionSetId": "CS10",
+      "name": "Tamarack / European larch",
+      "memberTaxa": [
+        "LARIX_LARICINA",
+        "LARIX_DECIDUA"
+      ],
+      "keySeparators": "Cone size and scale count/edge; needle cluster density; native peatland versus planting",
+      "resolvingViews": "Full cone; spur shoot; cluster count; site/planting context"
+    },
+    {
+      "confusionSetId": "CS11",
+      "name": "Red-oak group",
+      "memberTaxa": [
+        "QUERCUS_RUBRA",
+        "QUERCUS_VELUTINA",
+        "QUERCUS_COCCINEA",
+        "QUERCUS_ELLIPSOIDALIS",
+        "QUERCUS_PALUSTRIS"
+      ],
+      "keySeparators": "Bud hair/size; lower-leaf hair; sinus architecture; acorn cup depth/rings; bark; site and branch angle",
+      "resolvingViews": "Several sun leaves; terminal buds; complete acorn/cup; mature bark; whole crown"
+    },
+    {
+      "confusionSetId": "CS12",
+      "name": "White-oak group",
+      "memberTaxa": [
+        "QUERCUS_ALBA",
+        "QUERCUS_BICOLOR",
+        "QUERCUS_MACROCARPA",
+        "QUERCUS_MONTANA"
+      ],
+      "keySeparators": "Lower-leaf felt; fruit stalk; fringed cup; chestnut teeth; bark architecture; site",
+      "resolvingViews": "Lower surface; acorn/cup/stalk; terminal bud; upper and lower bole; site"
+    },
+    {
+      "confusionSetId": "CS13",
+      "name": "Aspens / balsam poplar / cottonwood",
+      "memberTaxa": [
+        "POPULUS_TREMULOIDES",
+        "POPULUS_GRANDIDENTATA",
+        "POPULUS_BALSAMIFERA",
+        "POPULUS_DELTOIDES"
+      ],
+      "keySeparators": "Petiole flattening; tooth size; leaf base; bud size/stickiness/odor; bark and floodplain/upland context",
+      "resolvingViews": "Complete leaf and petiole; bud; young and old bark; clonal form; site"
+    },
+    {
+      "confusionSetId": "CS14",
+      "name": "American / slippery / rock / Siberian elm",
+      "memberTaxa": [
+        "ULMUS_AMERICANA",
+        "ULMUS_RUBRA",
+        "ULMUS_THOMASII",
+        "ULMUS_PUMILA"
+      ],
+      "keySeparators": "Leaf roughness/base; bud hair; corky wings; samara hair/notch; bark layering; crown",
+      "resolvingViews": "Leaf surfaces; buds; samara; corky twigs; existing bark section; crown"
+    },
+    {
+      "confusionSetId": "CS15",
+      "name": "Black / pin / chokecherry",
+      "memberTaxa": [
+        "PRUNUS_SEROTINA",
+        "PRUNUS_PENSYLVANICA",
+        "PRUNUS_VIRGINIANA"
+      ],
+      "keySeparators": "Fruit cluster architecture; petiole glands; lower-midvein hair; bark age; whole pioneer/clonal form",
+      "resolvingViews": "Raceme or cluster; petiole macro; lower leaf; mature bark; whole plant"
+    },
+    {
+      "confusionSetId": "CS16",
+      "name": "American hornbeam / eastern hophornbeam",
+      "memberTaxa": [
+        "CARPINUS_CAROLINIANA",
+        "OSTRYA_VIRGINIANA"
+      ],
+      "keySeparators": "Muscular smooth bole and three-lobed fruit bracts versus shreddy bark and hoplike sacs",
+      "resolvingViews": "Bole; fruit; bud; wet versus dry site"
+    },
+    {
+      "confusionSetId": "CS17",
+      "name": "Black walnut / butternut",
+      "memberTaxa": [
+        "JUGLANS_NIGRA",
+        "JUGLANS_CINEREA"
+      ],
+      "keySeparators": "Terminal leaflet; rachis/twig hair; light versus dark pith; round versus elongated nut; bark",
+      "resolvingViews": "Whole leaf; pith section; nut/husk; twig hair; mature bark"
+    },
+    {
+      "confusionSetId": "CS18",
+      "name": "Bitternut / shagbark / pignut / mockernut hickory",
+      "memberTaxa": [
+        "CARYA_CORDIFORMIS",
+        "CARYA_OVATA",
+        "CARYA_GLABRA",
+        "CARYA_TOMENTOSA"
+      ],
+      "keySeparators": "Terminal bud color/size/hair; leaflet count; rachis hair; husk thickness/dehiscence; bark",
+      "resolvingViews": "Terminal bud; entire leaf; husk/nut; mature bark; twig hair"
+    },
+    {
+      "confusionSetId": "CS19",
+      "name": "Northern white-cedar / Atlantic white-cedar / eastern redcedar",
+      "memberTaxa": [
+        "THUJA_OCCIDENTALIS",
+        "CHAMAECYPARIS_THYOIDES",
+        "JUNIPERUS_VIRGINIANA"
+      ],
+      "keySeparators": "Flattened fans versus fine false-cypress sprays versus rounded juniper twigs; cone type; fruit color; wetland chemistry",
+      "resolvingViews": "Full spray; seed cone or berry-like cone; bark; site"
+    },
+    {
+      "confusionSetId": "CS21",
+      "name": "Yellow birch / black cherry bark",
+      "memberTaxa": [
+        "BETULA_ALLEGHANIENSIS",
+        "PRUNUS_SEROTINA"
+      ],
+      "keySeparators": "Golden horizontal curls and wintergreen twig versus burnt-chip plates, petiole glands, and almond twig odor",
+      "resolvingViews": "Young and old bark; scratched twig; leaf petiole and underside; fruit"
+    },
+    {
+      "confusionSetId": "CS22",
+      "name": "Serviceberry / mountain-ashes / chokecherry",
+      "memberTaxa": [
+        "AMELANCHIER_LAEVIS",
+        "SORBUS_AMERICANA",
+        "SORBUS_DECORA",
+        "PRUNUS_VIRGINIANA"
+      ],
+      "keySeparators": "Simple versus compound leaves; pome calyx versus drupe; leaflet proportions; buds; fruit architecture",
+      "resolvingViews": "Whole leaf; fruit close-up; bud; flowers; multiple leaves"
+    },
+    {
+      "confusionSetId": "CS23",
+      "name": "Flowering / pagoda dogwood",
+      "memberTaxa": [
+        "CORNUS_FLORIDA",
+        "CORNUS_ALTERNIFOLIA"
+      ],
+      "keySeparators": "Opposite versus alternate branching; red versus blue-black fruit; flower bud; crown tiers",
+      "resolvingViews": "Intact twig nodes; fruit; bud; whole crown"
+    }
+  ],
+  "expectedSilvicsRetrieval": {
+    "taxon_scope": "all_taxa_introduced_through_week_8",
+    "dimensions": [
+      "geographic_climatic_affinity",
+      "moisture_drainage_soils",
+      "forest_associations",
+      "regeneration",
+      "successional_role",
+      "disturbance_response",
+      "management_implications"
+    ],
+    "response_standard": "Compare regional expression while keeping species-level silvics internally consistent and site-specific."
+  },
+  "sessions": [
+    {
+      "sessionId": "W08-A",
+      "letter": "A",
+      "title": "Atlantic white-cedar and pitch pine",
+      "kind": "species_introduction",
+      "taxonScope": "listed_new_taxa_plus_cs09_and_cs19_members",
+      "modalities": [
+        "foliage",
+        "bark",
+        "reproductive",
+        "dormant",
+        "whole_tree_context"
+      ],
+      "delivery": "regional conifer comparison and morphology-first field decisions",
+      "feedbackRelease": "during_instruction",
+      "runtimeBoundary": "labeled_teaching_content",
+      "introducedTaxonIds": [
+        "PINUS_RIGIDA",
+        "CHAMAECYPARIS_THYOIDES"
+      ],
+      "teachingProfiles": [
+        {
+          "taxonId": "PINUS_RIGIDA",
+          "preferredCommonName": "Pitch pine",
+          "canonicalScientificName": "Pinus rigida",
+          "acceptedAlternatives": [],
+          "family": "Pinaceae",
+          "distributionInCourseRegion": "Barrens and dry ridges from NJ/PA through NY, CT, and MA; local northward",
+          "ecologicalImportance": "Strongly fire-adapted pine with epicormic and basal sprouting",
+          "coursePriority": "2 - regional",
+          "tier": "B",
+          "fieldIdentification": {
+            "foliage": "Stout, rigid, yellow-green needles are usually in fascicles of three, less often two, with persistent basal sheaths; they spread or twist rather than forming soft flexible bundles. Count several intact fascicles because broken needles and occasional two-needle bundles mislead.",
+            "barkAgeSeries": "Young bark is reddish-brown and scaly; intermediate and mature boles develop thick, dark gray-brown irregular plates and deep fissures. Fire-blackening, basal scars, and clusters of shoots emerging through older bark are common in repeatedly burned stands.",
+            "dormant": "Stout shoots carry clustered resinous pointed buds, persistent fascicle sheaths, and often short epicormic branches or needle tufts directly on the bole. Dormant buds protected beneath thick bark enable the unusual sprouting response.",
+            "reproductive": "Ovoid cones mature in the second year, bear a short sharp prickle on each scale shield, and may remain attached for years. Some open promptly while others are strongly serotinous; cone persistence is useful, but serotiny is variable among trees and sites.",
+            "wholeTreeContext": "Crown form is commonly irregular, coarse-branched, flat-topped, or multi-stemmed, with foliage and shoots on the trunk after fire or release. It is characteristic of sandy barrens, coastal plains, shallow rocky ridges, and fire-influenced pine-oak landscapes.",
+            "variationAndCondition": "Frequent fire, browsing, leader loss, basal sprouting, epicormic shoots, dwarf Pine Plains growth, and variable cone opening create forms unlike a textbook single-stem pine. Fire history supports ecology but does not alone identify the host.",
+            "defensibilityLimits": "Three rigid needles per fascicle plus prickled persistent cones and epicormic or basal sprouting is strong species evidence. A distant irregular pine, plated bark, or one fascicle with two surviving needles cannot exclude jack, red, Scots, or other hard pines."
+          },
+          "confuserControl": [
+            {
+              "confuser": "Pinus resinosa",
+              "visibleSeparators": "Red pine has consistently two long brittle needles per fascicle, smoother orange-red upper bark, unarmed cone scales, and normally a cleaner bole without persistent epicormic needle clusters or basal sprouting.",
+              "resolvingView": "Several fascicles with sheaths, a complete cone scale and umbo, upper and lower bark, and the bole for epicormic shoots."
+            },
+            {
+              "confuser": "Pinus banksiana and Pinus sylvestris",
+              "visibleSeparators": "Jack pine has two shorter twisted needles and strongly curved persistent cones; Scots pine has two blue-green twisted needles and conspicuous orange upper bark. Neither normally shows pitch pine's combination of three rigid needles and fire-stimulated bole or basal sprouts.",
+              "resolvingView": "Multiple fascicles, complete cones in side view, upper-bole bark, and whole-tree branching."
+            }
+          ],
+          "silvicsCapsule": {
+            "shadeTolerance": "Shade intolerant; seedlings and sprouts need strong light, and associated hardwoods readily overtop regeneration without disturbance or competition control.",
+            "moistureDrainageSoils": "Most characteristic on infertile acidic sands, gravels, and shallow rocky soils, but also occupies poorly drained sands and peat margins; thick intact litter is a poor seedbed.",
+            "geographicClimaticAffinity": "A northeastern and Appalachian pine concentrated in coastal New England, Long Island, New Jersey, eastern Pennsylvania, and scattered barrens or ridges northward.",
+            "forestAssociations": "Occurs in pitch pine and pine-oak barrens with scrub and tree oaks, gray birch, blackgum, red maple, hickories, lowbush blueberry, and locally Atlantic white-cedar.",
+            "regeneration": "Wind-dispersed seed from open or heat-opened cones establishes on exposed mineral soil after fire, cutting, or scarification; early seedlings are vulnerable to drought and competition.",
+            "vegetativeReproduction": "Exceptional among regional pines: dormant bole and root-collar buds produce epicormic shoots and basal sprouts after fire, cutting, browsing, or leader death, though vigor declines with age and repeated sprout generations.",
+            "seedMastBehavior": "Good cone crops are irregular, commonly separated by several years; cone opening ranges from prompt to strongly serotinous, allowing some trees to store seed in the crown until heat or cutting.",
+            "establishmentRequirements": "Abundant light, exposed mineral soil, nearby seed or viable closed cones, and control of hardwood sprouts are needed; thick litter and prolonged drought cause failure.",
+            "successionalRole": "Early-seral and disturbance-maintained; without recurrent fire or other canopy and seedbed disturbance, more shade-tolerant hardwoods and conifers replace it.",
+            "disturbanceResponse": "Thick bark, protected buds, variable serotiny, epicormic shoots, and basal sprouting confer unusual fire resilience, but repeated severe fires can produce slow-growing, deformed sprout stands.",
+            "longevityGrowthStrategy": "Moderate growth and often rough form on poor sites; many stands are relatively short-lived or defect-prone, though individuals may exceed two centuries.",
+            "browseSusceptibility": "Deer and rabbits browse seedlings and sprouts and can repeatedly remove leaders, reducing height growth and intensifying crooked or multi-stemmed form.",
+            "insectsDiseases": "Tip moths, sawflies, pitch pine looper, southern pine beetle, needle and stem diseases, root rots, and heart rot affect vigor and form; storm and salt damage also occur.",
+            "managementImplications": "Maintain adequate fire or mechanical disturbance, mineral seedbeds, seed-bearing trees or cones, and hardwood control where barrens or pitch-pine habitat is the objective; distinguish ecological restoration from timber-form goals.",
+            "silviculturalSystemResponse": "Even-aged seed-tree or shelterwood approaches with seedbed preparation and competition control best match its intolerance; prescribed fire may prepare sites and sustain barrens when carefully timed and bounded."
+          },
+          "references": [
+            {
+              "title": "Pitch Pine — Silvics of North America",
+              "url": "https://research.fs.usda.gov/silvics/pitch-pine",
+              "scope": "Range, sites, variable serotiny, mineral-soil regeneration, sprouting, fire response, growth, associates, damaging agents, and management."
+            },
+            {
+              "title": "Pinus rigida — pitch pine",
+              "url": "https://gobotany.nativeplanttrust.org/species/pinus/rigida/",
+              "scope": "Regional needle fascicles, buds, cones, bark, growth form, habitat, and comparative morphology."
+            }
+          ]
+        },
+        {
+          "taxonId": "CHAMAECYPARIS_THYOIDES",
+          "preferredCommonName": "Atlantic white-cedar",
+          "canonicalScientificName": "Chamaecyparis thyoides",
+          "acceptedAlternatives": [],
+          "family": "Cupressaceae",
+          "distributionInCourseRegion": "Localized acidic swamps of NJ, coastal NY, and New England north locally to Maine",
+          "ecologicalImportance": "Regionally distinctive wetland conifer sensitive to fire and hydrologic change",
+          "coursePriority": "2 - regional",
+          "tier": "B",
+          "fieldIdentification": {
+            "foliage": "Minute opposite scale leaves overlap in four ranks on slender blue-green branchlets that appear more four-angled or rounded than the strongly flattened fans of northern white-cedar; facial leaves commonly show a resin gland. Juvenile shoots may carry sharper spreading foliage.",
+            "barkAgeSeries": "Young bark is thin reddish-brown; older stems separate into narrow flat fibrous strips and shallow intersecting ridges. The fibrous surface resembles other Cupressaceae and requires foliage or cones for species resolution.",
+            "dormant": "Evergreen sprays retain tiny appressed scales through winter; buds are inconspicuous and branchlets remain fine and four-ranked. A useful winter specimen must show branchlet cross-form or attached cones, not merely evergreen color.",
+            "reproductive": "Very small nearly spherical cones mature from bluish or purple to brown and consist of several shield-shaped peltate scales, each with a central boss. This globose cone construction sharply separates Chamaecyparis from Thuja's elongate cones and Juniperus berry-like cones.",
+            "wholeTreeContext": "A narrow conical wetland tree often forming dense even-aged stands on acidic peat and muck in coastal-plain swamps. Localized geography and hydrology strongly support plausibility but cannot replace cone and branchlet evidence.",
+            "variationAndCondition": "Shade, flooding, wind, salt, fire scars, browsing, and horticultural cultivars change density and form; seedlings may show juvenile foliage. Hydrologic stress can thin crowns without creating a diagnostic host character.",
+            "defensibilityLimits": "Four-ranked glandular scale foliage plus small globose peltate-scaled cones supports species in regional swamps. Fibrous bark, a distant cedar-like crown, or a cropped scale spray without cone architecture may justify only Cupressaceae or genus-level caution."
+          },
+          "confuserControl": [
+            {
+              "confuser": "Thuja occidentalis",
+              "visibleSeparators": "Northern white-cedar has conspicuously flattened fanlike sprays and elongate upright cones with overlapping nonpeltate scales; Atlantic white-cedar branchlets are more four-angled and bear small globose cones with shield-shaped scales.",
+              "resolvingView": "Branchlet edge and face views, the complete cone in side view, and a habitat/stand view."
+            },
+            {
+              "confuser": "Juniperus virginiana",
+              "visibleSeparators": "Eastern redcedar commonly mixes sharp juvenile and appressed adult foliage and bears fleshy blue berry-like seed cones; Atlantic white-cedar has dry globose woody cones with peltate scales and is tied to acidic swamps.",
+              "resolvingView": "Mature seed cones, several shoot ages, branchlet cross-form, and substrate context."
+            }
+          ],
+          "silvicsCapsule": {
+            "shadeTolerance": "Generally shade intolerant; seedlings tolerate brief partial cover but successful stand development requires substantial overhead light.",
+            "moistureDrainageSoils": "Restricted mainly to saturated, acidic, low-nutrient organic soils, peat, muck, and wet sands where the water table remains high but prolonged deep flooding can still damage regeneration.",
+            "geographicClimaticAffinity": "A coastal-plain species reaching its northern limit in New England and southern Maine, with important course-region occurrences in New Jersey, coastal New York, Massachusetts, and nearby states.",
+            "forestAssociations": "Forms Atlantic white-cedar swamps with red maple, blackgum, pitch pine, swamp hardwoods, ericaceous shrubs, sphagnum, and other acidic-wetland plants.",
+            "regeneration": "Tiny wind-dispersed seeds establish on moist exposed peat, decayed wood, moss, or lightly disturbed organic soil when light and water levels are suitable.",
+            "vegetativeReproduction": "Layering from low branches and occasionally uprooted stems can occur, but stump sprouting is not a dependable stand-regeneration mechanism.",
+            "seedMastBehavior": "Seed crops begin relatively young and can be frequent, but sound-seed percentage and seedling survival vary; dispersal is mostly short and seedbed dependent.",
+            "establishmentRequirements": "A nearby seed source, nearly full light, continuously moist but not deeply flooded seedbeds, and limited shrub or hardwood competition are critical.",
+            "successionalRole": "A disturbance-dependent wetland dominant that can form persistent stands but is replaced by red maple and other hardwoods when hydrology, fire regime, or light no longer favors cedar recruitment.",
+            "disturbanceResponse": "Fire commonly kills thin-barked trees and may destroy shallow roots and peat; windthrow, drainage, impoundment, salt intrusion, and altered water tables can rapidly change stand composition.",
+            "longevityGrowthStrategy": "Moderately slow to moderate growth, capable of living several centuries on stable sites, with narrow crowns and dense stands that self-prune lower branches.",
+            "browseSusceptibility": "Deer browse seedlings and lower foliage and can prevent recruitment where populations are high, especially in small isolated swamps.",
+            "insectsDiseases": "Root and butt rots, bagworms and other defoliators, browsing, fire, wind, salt, and hydrologic stress are important; stand decline often reflects interacting site changes.",
+            "managementImplications": "Protect hydrologic regime, peat, seed sources, and regeneration from deer and hardwood competition; drainage or flooding changes can defeat otherwise appropriate cutting treatments.",
+            "silviculturalSystemResponse": "Even-aged clearcut or shelterwood methods can regenerate cedar when seed, exposed moist substrate, light, and water-table control coincide; partial cutting that releases hardwoods without cedar recruitment risks conversion."
+          },
+          "references": [
+            {
+              "title": "Atlantic White-Cedar — Silvics of North America",
+              "url": "https://research.fs.usda.gov/silvics/atlantic-white-cedar",
+              "scope": "Range, swamp hydrology, sites, seed and layering, light requirements, disturbance, growth, damaging agents, and management."
+            },
+            {
+              "title": "Chamaecyparis thyoides — Atlantic white cedar",
+              "url": "https://gobotany.nativeplanttrust.org/species/chamaecyparis/thyoides/",
+              "scope": "Regional scale foliage, branchlets, globose cones, bark, habitat, and Cupressaceae comparisons."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sessionId": "W08-B",
+      "letter": "B",
+      "title": "Acadian conifer retrieval",
+      "kind": "delayed_retrieval",
+      "taxonScope": "session_a_taxa_plus_due_eastern_conifers",
+      "modalities": [
+        "foliage",
+        "bark",
+        "reproductive",
+        "whole_tree_context"
+      ],
+      "delivery": "unfamiliar isolated and regional-context specimens",
+      "feedbackRelease": "after_batch_submission",
+      "runtimeBoundary": "runtime_retrieval_from_admitted_practice_media",
+      "introducedTaxonIds": [],
+      "teachingProfiles": []
+    },
+    {
+      "sessionId": "W08-C",
+      "letter": "C",
+      "title": "Eastern regional confuser integration",
+      "kind": "regional_confuser_integration",
+      "taxonScope": "acadian_anchor_taxa_and_all_due_confuser_sets",
+      "modalities": [
+        "foliage",
+        "bark",
+        "reproductive",
+        "dormant",
+        "whole_tree_context"
+      ],
+      "delivery": "same-species geographic transfer and direct confuser contrast",
+      "feedbackRelease": "after_response",
+      "runtimeBoundary": "runtime_retrieval_from_admitted_practice_media",
+      "introducedTaxonIds": [],
+      "teachingProfiles": []
+    },
+    {
+      "sessionId": "W08-D",
+      "letter": "D",
+      "title": "Acadian and eastern integration laboratory",
+      "kind": "multi_organ_laboratory",
+      "taxonScope": "red_spruce_balsam_fir_yellow_birch_beech_sugar_maple_hemlock_white_pine_mountain_ashes_plus_new_taxa",
+      "modalities": [
+        "foliage",
+        "bark",
+        "reproductive",
+        "dormant",
+        "whole_tree_context",
+        "condition"
+      ],
+      "delivery": "regional multi-organ stations across geographic appearances",
+      "feedbackRelease": "after_station_batch_submission",
+      "runtimeBoundary": "runtime_retrieval_from_admitted_practice_media",
+      "introducedTaxonIds": [],
+      "teachingProfiles": []
+    },
+    {
+      "sessionId": "W08-E",
+      "letter": "E",
+      "title": "Regional transfer cumulative retrieval",
+      "kind": "cumulative_adaptive_retrieval",
+      "taxonScope": "cr_01_eligible_taxa_prioritized_by_mastery",
+      "modalities": [
+        "foliage",
+        "bark",
+        "reproductive",
+        "dormant",
+        "whole_tree_context",
+        "condition"
+      ],
+      "delivery": "adaptive retrieval with regional and scientific-name transfer",
+      "feedbackRelease": "after_batch_submission",
+      "runtimeBoundary": "runtime_retrieval_from_admitted_practice_media",
+      "introducedTaxonIds": [],
+      "teachingProfiles": []
+    }
+  ],
+  "assessmentSummaries": [
+    {
+      "assessmentId": "W08-PRACTICAL",
+      "type": "weekly_identification_practical",
+      "categoryId": "weekly_identification_practicals",
+      "cumulative": true,
+      "scope": "taxa_introduced_through_week_8_with_acadian_emphasis",
+      "modalities": [
+        "foliage",
+        "bark",
+        "reproductive",
+        "dormant",
+        "whole_tree_context"
+      ]
+    },
+    {
+      "assessmentId": "W08-NOMENCLATURE-4",
+      "type": "cumulative_nomenclature_check",
+      "categoryId": "scientific_nomenclature",
+      "cumulative": true,
+      "scope": "balanced_common_to_scientific_and_scientific_to_common",
+      "modalities": []
+    },
+    {
+      "assessmentId": "W08-SILVICS-4",
+      "type": "cumulative_silvics_retrieval",
+      "categoryId": "silvics",
+      "cumulative": true,
+      "scope": "taxa_introduced_through_week_8",
+      "modalities": [
+        "whole_tree_context"
+      ]
+    },
+    {
+      "assessmentId": "W08-REGIONAL-TRANSFER",
+      "type": "regional_transfer_exercise",
+      "categoryId": "field_condition_identification",
+      "cumulative": true,
+      "scope": "same_species_across_acadian_great_lakes_and_northern_hardwood_appearances",
+      "modalities": [
+        "foliage",
+        "bark",
+        "whole_tree_context",
+        "condition"
+      ]
+    }
+  ],
+  "remediationGate": {
+    "policy_id": "REM-01",
+    "evaluate_after_assessment_ids": [
+      "W08-PRACTICAL",
+      "W08-NOMENCLATURE-4",
+      "W08-SILVICS-4",
+      "W08-REGIONAL-TRANSFER"
+    ],
+    "broader_course_progression": "continues",
+    "insertion_sessions": [
+      "W09-B",
+      "W09-E"
+    ]
+  },
+  "teachingBoundary": "This package contains labeled instruction and public module structure only. Retrieval stations are assembled separately from admitted practice media, and formal forms, examination media, answer keys, and learner records remain private."
+}

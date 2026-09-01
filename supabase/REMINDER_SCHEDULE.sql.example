@@ -1,0 +1,19 @@
+-- Configure only after storing both values in Supabase Vault. The cron secret
+-- must match COURSE_CRON_SECRET in Edge Function secrets.
+-- select vault.create_secret('https://YOUR_PROJECT_REF.supabase.co', 'course_project_url');
+-- select vault.create_secret('LONG_RANDOM_CRON_SECRET', 'course_cron_secret');
+
+select cron.schedule(
+  'cochetopa-course-reminders-daily',
+  '15 14 * * *',
+  $$
+  select net.http_post(
+    url := (select decrypted_secret from vault.decrypted_secrets where name='course_project_url') || '/functions/v1/send-course-reminders',
+    headers := jsonb_build_object(
+      'Content-Type','application/json',
+      'x-course-cron-secret',(select decrypted_secret from vault.decrypted_secrets where name='course_cron_secret')
+    ),
+    body := '{}'::jsonb
+  );
+  $$
+);

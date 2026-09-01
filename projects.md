@@ -1,12 +1,6 @@
 ---
-layout: projects
-title: Projects
+layout: course
+title: Course
 nav: true
-description: These are example projects in the awesome jekyll theme
+description: A rigorous, self-paced field course in northern hardwood and mixedwood dendrology and silvics.
 ---
-
-Here are some of our featured projects:
-
-{% for project in site.projects %}
-- [{{ project.title }}]({{ project.url }})
-{% endfor %}

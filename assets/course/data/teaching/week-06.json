@@ -1,0 +1,1129 @@
+{
+  "$schema": "cochetopa-public-teaching-package/1.0",
+  "schemaVersion": "1.0.0",
+  "courseId": "northern-hardwoods-mixedwoods-dendrology-silvics-intensive",
+  "courseVersion": "2026.1-draft",
+  "moduleId": "week-06",
+  "sequence": 6,
+  "title": "Oaks and Oak-Northern Hardwood Transition",
+  "deliveryStatus": "teaching_text_complete_visual_media_pending_admission",
+  "objectives": [
+    "Discriminate the regional red-oak and white-oak groups from leaves, buds, bark, acorns, and site.",
+    "Identify oak specimens across sun and shade foliage, age, and regional context.",
+    "Use acorn cup, bud, lower-leaf, and bark characters instead of relying on lobe shape alone.",
+    "Connect mast, establishment, fire, succession, and silvicultural response to field management.",
+    "Maintain cumulative northern-hardwood and conifer retrieval while oak density increases."
+  ],
+  "cumulativeReview": {
+    "policy_id": "CR-01",
+    "eligible_taxon_rule": "introduction_week_lte_module_sequence",
+    "through_introduction_week": 6,
+    "eligible_taxon_count": 63,
+    "selection_priorities": [
+      "oak_confuser_discrimination",
+      "midterm_error_ledger",
+      "acorn_bud_bark_deficits",
+      "scientific_names",
+      "silvics_application"
+    ]
+  },
+  "confuserSets": [
+    {
+      "confusionSetId": "CS01",
+      "name": "Sugar / black / Norway maple",
+      "memberTaxa": [
+        "ACER_SACCHARUM",
+        "ACER_NIGRUM",
+        "ACER_PLATANOIDES"
+      ],
+      "keySeparators": "Petiole latex; leaf underside hair and stipules; bud size/shape; samara angle",
+      "resolvingViews": "Fresh-broken petiole; lower surface; terminal bud; ripe samara"
+    },
+    {
+      "confusionSetId": "CS02",
+      "name": "Red / silver maple",
+      "memberTaxa": [
+        "ACER_RUBRUM",
+        "ACER_SACCHARINUM"
+      ],
+      "keySeparators": "Sinus depth; lower-surface whiteness; spring samara size; twig odor; bark strips",
+      "resolvingViews": "Complete leaf underside; samara with scale; crushed twig; mature bark"
+    },
+    {
+      "confusionSetId": "CS03",
+      "name": "Striped / mountain maple",
+      "memberTaxa": [
+        "ACER_PENSYLVANICUM",
+        "ACER_SPICATUM"
+      ],
+      "keySeparators": "Green-white striped bark versus unstriped; leaf size/base; fruit cluster posture; growth form",
+      "resolvingViews": "Young stem; intact leaf; fruit cluster; whole plant"
+    },
+    {
+      "confusionSetId": "CS04",
+      "name": "White / green / black ash",
+      "memberTaxa": [
+        "FRAXINUS_AMERICANA",
+        "FRAXINUS_PENNSYLVANICA",
+        "FRAXINUS_NIGRA"
+      ],
+      "keySeparators": "Leaf-scar shape and bud position; leaflet stalks; samara wing extent; black-ash corky bark",
+      "resolvingViews": "Twig node and leaf scar; whole rachis; samara; bark; hydrologic setting"
+    },
+    {
+      "confusionSetId": "CS05",
+      "name": "Paper / heart-leaved / gray birch",
+      "memberTaxa": [
+        "BETULA_PAPYRIFERA",
+        "BETULA_CORDIFOLIA",
+        "BETULA_POPULIFOLIA"
+      ],
+      "keySeparators": "Leaf base and vein count; twig resin glands; peeling versus tight bark; black branch marks; elevation",
+      "resolvingViews": "Several mature leaves; resin-warty twig; bark sheet; whole growth form; location"
+    },
+    {
+      "confusionSetId": "CS06",
+      "name": "Yellow / sweet birch",
+      "memberTaxa": [
+        "BETULA_ALLEGHANIENSIS",
+        "BETULA_LENTA"
+      ],
+      "keySeparators": "Both wintergreen; yellow birch golden curling bark and spur shoots versus sweet birch dark blocky bark",
+      "resolvingViews": "Scratched twig; young and mature bark; fruiting strobile; lower leaf surface"
+    },
+    {
+      "confusionSetId": "CS07",
+      "name": "White / black / red / Norway spruce",
+      "memberTaxa": [
+        "PICEA_GLAUCA",
+        "PICEA_MARIANA",
+        "PICEA_RUBENS",
+        "PICEA_ABIES"
+      ],
+      "keySeparators": "Cone size and scale margin; twig hairs; bud resin; foliage color/odor; pendulous branchlets",
+      "resolvingViews": "Full cone; twig macro; bud; whole crown; regional site"
+    },
+    {
+      "confusionSetId": "CS08",
+      "name": "Spruce / fir / hemlock",
+      "memberTaxa": [
+        "PICEA_GLAUCA",
+        "PICEA_MARIANA",
+        "PICEA_RUBENS",
+        "ABIES_BALSAMEA",
+        "TSUGA_CANADENSIS"
+      ],
+      "keySeparators": "Woody pegs versus pad base versus petiole; needle cross-section; cone orientation and persistence",
+      "resolvingViews": "Needle attachment macro; underside; terminal shoot; intact or attached cone"
+    },
+    {
+      "confusionSetId": "CS09",
+      "name": "Red / jack / Scots / pitch pine",
+      "memberTaxa": [
+        "PINUS_RESINOSA",
+        "PINUS_BANKSIANA",
+        "PINUS_SYLVESTRIS",
+        "PINUS_RIGIDA"
+      ],
+      "keySeparators": "Fascicle count/length; bend test; cone curvature/prickles; upper-bole orange bark; epicormic shoots",
+      "resolvingViews": "Several complete fascicles; cone and umbo; upper and lower bark; whole crown"
+    },
+    {
+      "confusionSetId": "CS10",
+      "name": "Tamarack / European larch",
+      "memberTaxa": [
+        "LARIX_LARICINA",
+        "LARIX_DECIDUA"
+      ],
+      "keySeparators": "Cone size and scale count/edge; needle cluster density; native peatland versus planting",
+      "resolvingViews": "Full cone; spur shoot; cluster count; site/planting context"
+    },
+    {
+      "confusionSetId": "CS11",
+      "name": "Red-oak group",
+      "memberTaxa": [
+        "QUERCUS_RUBRA",
+        "QUERCUS_VELUTINA",
+        "QUERCUS_COCCINEA",
+        "QUERCUS_ELLIPSOIDALIS",
+        "QUERCUS_PALUSTRIS"
+      ],
+      "keySeparators": "Bud hair/size; lower-leaf hair; sinus architecture; acorn cup depth/rings; bark; site and branch angle",
+      "resolvingViews": "Several sun leaves; terminal buds; complete acorn/cup; mature bark; whole crown"
+    },
+    {
+      "confusionSetId": "CS12",
+      "name": "White-oak group",
+      "memberTaxa": [
+        "QUERCUS_ALBA",
+        "QUERCUS_BICOLOR",
+        "QUERCUS_MACROCARPA",
+        "QUERCUS_MONTANA"
+      ],
+      "keySeparators": "Lower-leaf felt; fruit stalk; fringed cup; chestnut teeth; bark architecture; site",
+      "resolvingViews": "Lower surface; acorn/cup/stalk; terminal bud; upper and lower bole; site"
+    },
+    {
+      "confusionSetId": "CS13",
+      "name": "Aspens / balsam poplar / cottonwood",
+      "memberTaxa": [
+        "POPULUS_TREMULOIDES",
+        "POPULUS_GRANDIDENTATA",
+        "POPULUS_BALSAMIFERA",
+        "POPULUS_DELTOIDES"
+      ],
+      "keySeparators": "Petiole flattening; tooth size; leaf base; bud size/stickiness/odor; bark and floodplain/upland context",
+      "resolvingViews": "Complete leaf and petiole; bud; young and old bark; clonal form; site"
+    },
+    {
+      "confusionSetId": "CS14",
+      "name": "American / slippery / rock / Siberian elm",
+      "memberTaxa": [
+        "ULMUS_AMERICANA",
+        "ULMUS_RUBRA",
+        "ULMUS_THOMASII",
+        "ULMUS_PUMILA"
+      ],
+      "keySeparators": "Leaf roughness/base; bud hair; corky wings; samara hair/notch; bark layering; crown",
+      "resolvingViews": "Leaf surfaces; buds; samara; corky twigs; existing bark section; crown"
+    },
+    {
+      "confusionSetId": "CS15",
+      "name": "Black / pin / chokecherry",
+      "memberTaxa": [
+        "PRUNUS_SEROTINA",
+        "PRUNUS_PENSYLVANICA",
+        "PRUNUS_VIRGINIANA"
+      ],
+      "keySeparators": "Fruit cluster architecture; petiole glands; lower-midvein hair; bark age; whole pioneer/clonal form",
+      "resolvingViews": "Raceme or cluster; petiole macro; lower leaf; mature bark; whole plant"
+    },
+    {
+      "confusionSetId": "CS16",
+      "name": "American hornbeam / eastern hophornbeam",
+      "memberTaxa": [
+        "CARPINUS_CAROLINIANA",
+        "OSTRYA_VIRGINIANA"
+      ],
+      "keySeparators": "Muscular smooth bole and three-lobed fruit bracts versus shreddy bark and hoplike sacs",
+      "resolvingViews": "Bole; fruit; bud; wet versus dry site"
+    },
+    {
+      "confusionSetId": "CS21",
+      "name": "Yellow birch / black cherry bark",
+      "memberTaxa": [
+        "BETULA_ALLEGHANIENSIS",
+        "PRUNUS_SEROTINA"
+      ],
+      "keySeparators": "Golden horizontal curls and wintergreen twig versus burnt-chip plates, petiole glands, and almond twig odor",
+      "resolvingViews": "Young and old bark; scratched twig; leaf petiole and underside; fruit"
+    },
+    {
+      "confusionSetId": "CS22",
+      "name": "Serviceberry / mountain-ashes / chokecherry",
+      "memberTaxa": [
+        "AMELANCHIER_LAEVIS",
+        "SORBUS_AMERICANA",
+        "SORBUS_DECORA",
+        "PRUNUS_VIRGINIANA"
+      ],
+      "keySeparators": "Simple versus compound leaves; pome calyx versus drupe; leaflet proportions; buds; fruit architecture",
+      "resolvingViews": "Whole leaf; fruit close-up; bud; flowers; multiple leaves"
+    }
+  ],
+  "expectedSilvicsRetrieval": {
+    "taxon_scope": "all_taxa_introduced_through_week_6_with_oak_emphasis",
+    "dimensions": [
+      "moisture_drainage_soils",
+      "geographic_climatic_affinity",
+      "seed_mast_behavior",
+      "establishment_requirements",
+      "successional_role",
+      "disturbance_response",
+      "management_implications",
+      "silvicultural_system_response"
+    ],
+    "response_standard": "Relate oak regeneration and disturbance requirements to site, competing vegetation, and defensible management implications."
+  },
+  "sessions": [
+    {
+      "sessionId": "W06-A",
+      "letter": "A",
+      "title": "Regional red-oak group",
+      "kind": "species_introduction",
+      "taxonScope": "listed_new_taxa",
+      "modalities": [
+        "foliage",
+        "bark",
+        "reproductive",
+        "dormant",
+        "whole_tree_context"
+      ],
+      "delivery": "character-combination teaching across sun and shade foliage",
+      "feedbackRelease": "during_instruction",
+      "runtimeBoundary": "labeled_teaching_content",
+      "introducedTaxonIds": [
+        "QUERCUS_RUBRA",
+        "QUERCUS_VELUTINA",
+        "QUERCUS_COCCINEA",
+        "QUERCUS_ELLIPSOIDALIS",
+        "QUERCUS_PALUSTRIS"
+      ],
+      "teachingProfiles": [
+        {
+          "taxonId": "QUERCUS_RUBRA",
+          "preferredCommonName": "Northern red oak",
+          "canonicalScientificName": "Quercus rubra",
+          "acceptedAlternatives": [
+            "Quercus borealis",
+            "Quercus rubra var. borealis"
+          ],
+          "family": "Fagaceae",
+          "distributionInCourseRegion": "Widespread from MN/WI/MI and southern ON/QC through NY/New England/NB and PA/NJ",
+          "ecologicalImportance": "Major northern oak and valuable timber/mast tree; responds well to release",
+          "coursePriority": "1 - core",
+          "tier": "A",
+          "fieldIdentification": {
+            "foliage": "Alternate leaves usually have 7–11 bristle-tipped lobes, sinuses generally extending less than halfway to the midrib, and a broad wedge-shaped to shallowly heart-shaped base. The upper surface is dull to moderately glossy green; the paler lower surface is mostly hairless except for possible small axillary tufts. Confirm the bristles because damaged or late-season tips can be obscure.",
+            "barkAgeSeries": "Young stems are smooth gray-brown. Saplings and pole timber develop long smooth pale vertical bands between shallow fissures; on mature boles these become broad, flat-topped ridges with shiny stripe-like tracks often called ski trails. Very old bark darkens and breaks into wider ridges, so the striped character may be confined to upper bole sections.",
+            "dormant": "Stout reddish-brown to gray-brown twigs end in a cluster of several pointed, reddish-brown, mostly hairless buds. Leaf scars are alternate and semicircular with numerous bundle scars. The clustered terminal buds establish oak, while relatively smooth buds and twigs favor northern red oak over black oak but do not alone exclude scarlet or northern pin oak.",
+            "reproductive": "Red-oak-group acorns require two growing seasons. The broad ovoid nut is commonly 19–30 mm long and sits in a shallow, flat saucer cup that usually covers one-quarter or less of the nut; the tightly appressed cup scales lack a conspicuous fringe. A nearly mature first-year green acorn must not be confused with a one-season white-oak-group fruit.",
+            "wholeTreeContext": "A large, straight-boled canopy tree with a rounded crown, common on well-drained middle and lower slopes, coves, benches, and deep loams. It also occupies drier uplands, but good height and form on mesic northern-hardwood sites are strong contextual support across most of the course region.",
+            "variationAndCondition": "Sun leaves may be smaller and more deeply cut than shade leaves, epicormic and stump-sprout leaves may be oversized, and acorn form varies geographically. Northern red oak hybridizes or introgresses with other red-oak-group species. Oak wilt, bacterial leaf scorch, drought, defoliators, and late-season senescence can all scorch or shed foliage; those symptoms describe condition, not identity.",
+            "defensibilityLimits": "The best species call combines several mature leaves, a terminal-bud cluster, mature acorn and cup, bark age, and range/site. Ski-trail bark can strongly support a field call on a typical mature bole, but one bark panel, one variable leaf, or an immature acorn cannot reliably separate the red-oak-group complex. Record intermediates as Quercus section Lobatae or a named species complex when the decisive cup, bud, and lower-leaf views are absent."
+          },
+          "confuserControl": [
+            {
+              "confuser": "Quercus velutina",
+              "visibleSeparators": "Black oak more often has a densely hairy, angular terminal bud, yellow to orange inner bark, lower-leaf pubescence or rusty axillary tufts, and a deeper cup with loose or fringed upper scales. Northern red oak usually has smoother buds, paler nearly hairless lower leaves, ski-trail bark, and a shallow saucer cup.",
+              "resolvingView": "Terminal buds in scale, lower leaf surfaces, a mature cup in side view, intact mature bark and, only if sampling is authorized, a tiny view of freshly exposed inner bark."
+            },
+            {
+              "confuser": "Quercus coccinea",
+              "visibleSeparators": "Scarlet oak typically has deeper rounded or C-shaped sinuses and a cup enclosing about one-third to one-half of the nut, often with concentric rings around the nut tip. Northern red oak usually has shallower sinuses and a broad shallow cup; leaf depth alone overlaps.",
+              "resolvingView": "Several crown leaves, a complete mature acorn showing cup depth and nut tip, terminal buds, bark above breast height, and slope position."
+            },
+            {
+              "confuser": "Quercus ellipsoidalis",
+              "visibleSeparators": "Northern pin oak is centered on dry nutrient-poor sands of the western Great Lakes and usually has very deep sinuses plus a deeper cup around a commonly ellipsoid nut. Northern red oak ranges much more widely, favors better mesic sites, and usually has the shallow saucer cup; hybrids make single organs unsafe.",
+              "resolvingView": "Mature acorns from the same tree, multiple leaves, terminal buds, georeferenced range, soil or landform context, and neighboring oaks."
+            }
+          ],
+          "silvicsCapsule": {
+            "shadeTolerance": "Intermediate in shade tolerance; seedlings can persist for a time beneath partial canopy but durable recruitment and crown development require release.",
+            "moistureDrainageSoils": "Best on deep, fertile, moist but well-drained loams and silt loams; it occupies a broad site range but performs poorly on prolonged saturation and the most droughty sterile sands.",
+            "geographicClimaticAffinity": "The broadest and most northerly major eastern red oak, extending throughout the course region and into the Acadian forest fringe.",
+            "forestAssociations": "Occurs with sugar maple, basswood, white ash, beech, yellow birch, hemlock, white pine, black cherry, white oak, black oak, and hickories according to site and region.",
+            "regeneration": "Animal-cached acorns and abundant stump sprouts contribute; successful stands commonly originate from established advance reproduction or sprouts released by substantial canopy disturbance.",
+            "vegetativeReproduction": "Young and intermediate stems sprout strongly from the stump or root collar after cutting or top-kill; sprouting capacity declines with increasing size and age.",
+            "seedMastBehavior": "Acorns mature in their second season, with irregular crops and episodic heavy mast; insects, deer, rodents, birds, and fungi remove a large share before establishment.",
+            "establishmentRequirements": "A mineral-soil or mixed-litter seedbed, adequate moisture, acorn protection, and enough light after establishment are important; small seedlings rarely compete through dense fern, shrub, or shade-tolerant advance layers.",
+            "successionalRole": "Mid-successional to persistent canopy species maintained by disturbance; without adequate disturbance it is often replaced in regeneration layers by sugar maple, beech, and other shade-tolerant trees.",
+            "disturbanceResponse": "Codominant young trees respond well to timely crown release. Fire top-kills small stems but can favor oak through sprouting and competitor reduction; severe repeated fire, wounding, or soil compaction is damaging.",
+            "longevityGrowthStrategy": "Moderate to fast for an oak on good sites, commonly living 200–300 years and occasionally longer, with strong height growth after adequate release.",
+            "browseSusceptibility": "Acorns, seedlings, and sprouts are heavily used by deer and other wildlife; repeated browse can prevent otherwise abundant advance reproduction from reaching recruitment height.",
+            "insectsDiseases": "Oak wilt is a major concern in susceptible red-oak-group stands, while gypsy moth or spongy moth defoliation, two-lined chestnut borer, acorn weevils, shoestring root rot, and leaf diseases can be important. Symptoms require diagnosis independent of species identification.",
+            "managementImplications": "Inventory advance regeneration by size, not seedling count alone; retain productive seed trees and vigorous crop trees, protect roots and boles, manage browse and competing vegetation, and avoid forcing hybrid-looking stems into a species label.",
+            "silviculturalSystemResponse": "Shelterwood and group or even-aged methods that build large advance reproduction and then provide substantial light are generally more reliable than repeatedly light selection cuts; early crop-tree release can increase diameter growth, whereas late heavy release may trigger epicormic branches."
+          },
+          "references": [
+            {
+              "title": "Northern Red Oak — Silvics of North America",
+              "url": "https://research.fs.usda.gov/silvics/northern-red-oak",
+              "scope": "Distribution, sites, life history, tolerance, growth, regeneration, management, taxonomy, damaging agents, and fire."
+            },
+            {
+              "title": "Quercus rubra — northern red oak",
+              "url": "https://gobotany.nativeplanttrust.org/species/quercus/rubra/",
+              "scope": "Regional morphology, habitat, fruit and bud characters, taxonomy, and range."
+            },
+            {
+              "title": "Northern red oak (Quercus rubra)",
+              "url": "https://www.dnr.state.mn.us/trees/northern-red-oak.html",
+              "scope": "Western Great Lakes field characters, bark, leaves, fruit, form, and site context."
+            }
+          ]
+        },
+        {
+          "taxonId": "QUERCUS_VELUTINA",
+          "preferredCommonName": "Black oak",
+          "canonicalScientificName": "Quercus velutina",
+          "acceptedAlternatives": [
+            "Quercus tinctoria is historic"
+          ],
+          "family": "Fagaceae",
+          "distributionInCourseRegion": "Southern Great Lakes, southern ON, NY, PA/NJ, and southern New England",
+          "ecologicalImportance": "Dry-site red-oak-group associate and timber tree",
+          "coursePriority": "2 - regional",
+          "tier": "B",
+          "fieldIdentification": {
+            "foliage": "Alternate leaves are extremely variable, usually with 5–9 bristle-tipped lobes and sinuses ranging from shallow to deep. The upper surface is dark glossy green; the lower surface is commonly yellow-green to tawny with diffuse pubescence or conspicuous rusty tufts in vein axils. Use upper-crown mature leaves because vigorous sprouts can be atypical.",
+            "barkAgeSeries": "Young bark is smooth gray. It darkens early and becomes thick, deeply furrowed, and blocky on mature stems, often lacking the long smooth ski trails typical of northern red oak. Freshly exposed inner bark is yellow to orange because of quercitron pigment, but cutting bark is destructive and should be used only on authorized samples.",
+            "dormant": "Twigs are moderately stout and reddish-brown to gray, ending in a cluster of relatively large, angular or ovoid terminal buds densely covered with gray-tawny hairs. Bud hair is one of the best non-destructive winter contrasts with northern red oak, although occasional buds are less densely hairy.",
+            "reproductive": "Acorns mature in two seasons. The ovoid nut is about 13–20 mm long and is enclosed one-third to one-half by a deep bowl- to top-shaped cup; lower scales are appressed but scales near the rim are often loose, ragged, or fringed. Cup depth and scale posture are more useful than nut color.",
+            "wholeTreeContext": "A medium to large canopy oak with an open irregular crown, frequent on dry upper slopes, ridges, sandy or rocky uplands, and glacial soils in the southern part of the course region. It can grow well on rich sites, so a dry ridge supports but does not establish identity.",
+            "variationAndCondition": "Leaf depth and lower-surface hair vary greatly, and black oak hybridizes with northern red, scarlet, and northern pin oaks where ranges meet. Bark color changes with moisture and lichen; inner-bark yellow fades after exposure. Oak wilt and defoliation can alter the crown but cannot distinguish black oak from other susceptible red oaks.",
+            "defensibilityLimits": "A defensible call combines hairy terminal buds, lower-leaf pubescence, deep loose-scaled cup, blocky mature bark, and regional context. Yellow inner bark is supporting evidence only when legally and ethically exposed and is not required. A variable leaf or dark blocky bark alone should remain red-oak group."
+          },
+          "confuserControl": [
+            {
+              "confuser": "Quercus rubra",
+              "visibleSeparators": "Northern red oak usually has mostly hairless pointed buds, a shallow saucer cup, paler nearly hairless leaf undersides, and mature bark with long smooth vertical tracks. Black oak tends to hairy buds, a cup enclosing one-third to one-half of the nut, lower-leaf hair, and yellow-orange inner bark.",
+              "resolvingView": "Terminal buds, lower leaf surfaces, mature cup in profile, intact bole bark and, if an authorized wound already exists, the fresh inner-bark color."
+            },
+            {
+              "confuser": "Quercus coccinea",
+              "visibleSeparators": "Scarlet oak more often has deeply cut leaves with clean pale undersides except small axillary tufts and a tight-scaled cup with concentric rings around the nut tip. Black oak more often has broader variable lobes, more diffuse lower-surface hair, densely hairy buds, and loose scales at the cup rim.",
+              "resolvingView": "Several upper-crown leaves, terminal buds, lower leaf surfaces, and complete mature acorns showing the cup rim and nut tip."
+            },
+            {
+              "confuser": "Quercus ellipsoidalis",
+              "visibleSeparators": "Northern pin oak is concentrated on nutrient-poor western Great Lakes sands, has commonly ellipsoid nuts and often more deeply cut, nearly hairless leaves. Black oak extends farther south and east and more often shows hairy buds, lower-leaf pubescence, and yellow inner bark; introgression can erase the boundary.",
+              "resolvingView": "Georeferenced range and soil context, terminal buds, lower leaf surfaces, a series of mature acorns, and neighboring oak identities."
+            }
+          ],
+          "silvicsCapsule": {
+            "shadeTolerance": "Intermediate but light-demanding for successful recruitment; seedlings may persist under partial cover but do not maintain growth beneath dense shade.",
+            "moistureDrainageSoils": "Occurs from dry sandy and rocky uplands to moist rich well-drained loams; it avoids prolonged saturation and is often most competitive on moderately dry acidic sites.",
+            "geographicClimaticAffinity": "Eastern and central species reaching its northern limits in southern Ontario, the southern Great Lakes, New York, and New England.",
+            "forestAssociations": "Commonly associates with northern red, scarlet, white, and chestnut oaks, hickories, blackgum, red maple, white pine, and dry-site understory shrubs.",
+            "regeneration": "Animal-dispersed acorns create seedlings and advance reproduction; substantial overstory opening and control of competing shade-tolerant vegetation are usually needed for canopy recruitment.",
+            "vegetativeReproduction": "Stumps of small and medium stems sprout vigorously after cutting or top-kill, often contributing more reliable regeneration than seedlings on disturbed sites.",
+            "seedMastBehavior": "Second-season acorns are produced irregularly, with good crops separated by lighter years; acorn insects and wildlife consume much of the crop.",
+            "establishmentRequirements": "Acorns need contact with moist mineral soil or thin litter and protection from desiccation and predators; established seedlings need increasing light before competitors overtop them.",
+            "successionalRole": "A disturbance-dependent, mid-successional canopy species that can persist on dry edaphic sites but commonly loses regeneration space to more shade-tolerant hardwoods during fire exclusion.",
+            "disturbanceResponse": "Young trees and seedlings sprout after fire or cutting; thicker bark improves survival with size. Moderate disturbance can favor it, while repeated severe fire, wounding, drought plus defoliation, or compaction can cause decline.",
+            "longevityGrowthStrategy": "Moderate growth and commonly less than 200 years on poor sites, becoming a large valuable tree on favorable soils but generally shorter-lived than white oak.",
+            "browseSusceptibility": "Acorns and young shoots are important wildlife foods, and deer browsing can suppress advance regeneration and sprout height growth.",
+            "insectsDiseases": "Oak wilt can rapidly kill red-oak-group trees; spongy moth defoliation, two-lined chestnut borer, shoestring root rot, cankers, and acorn insects are also important, particularly when drought-stressed.",
+            "managementImplications": "Use site and multi-organ evidence before marking species, protect sound seed and crop trees, retain adequate advance regeneration or sprout potential, and reduce browse and understory competition before final overstory removal.",
+            "silviculturalSystemResponse": "Shelterwood, group openings, or other even-aged treatments can recruit black oak when they deliberately establish and release reproduction; coppice contributions are strong on younger stands, whereas low-intensity selection tends to favor tolerant competitors."
+          },
+          "references": [
+            {
+              "title": "Black Oak — Silvics of North America",
+              "url": "https://research.fs.usda.gov/silvics/black-oak",
+              "scope": "Distribution, site relations, reproduction, shade tolerance, growth, management, damaging agents, and fire."
+            },
+            {
+              "title": "Quercus velutina, black oak — FEIS",
+              "url": "https://research.fs.usda.gov/feis/species-reviews/quevel",
+              "scope": "Taxonomy, ecology, succession, sprouting, disturbance, fire response, and management context."
+            },
+            {
+              "title": "Quercus velutina — black oak",
+              "url": "https://gobotany.nativeplanttrust.org/species/quercus/velutina/",
+              "scope": "Regional morphology, habitat, fruit, bud, leaf, and bark characters."
+            }
+          ]
+        },
+        {
+          "taxonId": "QUERCUS_COCCINEA",
+          "preferredCommonName": "Scarlet oak",
+          "canonicalScientificName": "Quercus coccinea",
+          "acceptedAlternatives": [],
+          "family": "Fagaceae",
+          "distributionInCourseRegion": "PA/NJ, southern NY, and southern New England; southern Great Lakes fringe",
+          "ecologicalImportance": "Shade-intolerant fire-associated oak of dry acidic ridges and barrens",
+          "coursePriority": "2 - regional",
+          "tier": "B",
+          "fieldIdentification": {
+            "foliage": "Alternate glossy leaves usually have 7–9 narrow bristle-tipped lobes and deep broad C- or U-shaped sinuses extending well over halfway to the midrib. The lower surface is pale and mostly hairless apart from small axillary tufts. Fall color can be vivid scarlet but is too variable and seasonal to identify the species.",
+            "barkAgeSeries": "Sapling bark is smooth gray-brown. Mature bark becomes dark gray to nearly black with irregular narrow ridges and shallow to moderate fissures; the red to pinkish inner bark lacks black oak's strong yellow pigment. Exterior bark overlaps black and northern red oak and is weakest on young or rain-darkened stems.",
+            "dormant": "Slender reddish-brown twigs end in clustered ovoid, pointed reddish-brown buds that may be finely pale-hairy toward the tip but are not densely woolly like typical black oak. Persistent dead lower branches may occur but are shared with northern pin and pin oaks.",
+            "reproductive": "Acorns mature in two seasons. The 13–25 mm ovoid nut sits one-third to one-half deep in a bowl-shaped cup with tightly appressed scales; concentric rings around the exposed nut tip are a useful scarlet-oak character when clearly visible. Confirm a naturally attached or confidently associated fruit because ground acorns mix beneath oak crowns.",
+            "wholeTreeContext": "A medium to large light-demanding oak with an open irregular crown, characteristic of dry acidic upper slopes, ridges, barrens, and fire-influenced oak–pine woods in Pennsylvania, New Jersey, southern New York, and southern New England. A basal swell and retained dead branches may occur but are not unique.",
+            "variationAndCondition": "Shade leaves may be broader and less deeply cut, while stump-sprout leaves can be exaggerated. Scarlet oak overlaps and hybridizes with black and other red oaks, and northern pin oak can be nearly indistinguishable where geography is ignored. Oak wilt, drought scorch, leaf spots, and defoliation alter color and crown density but not identity.",
+            "defensibilityLimits": "Deeply cut foliage should trigger a scarlet–pin–northern-pin comparison, not an immediate species call. Require cup depth and scale posture, nut-tip rings when present, lower-leaf hair, buds, bark, and verified regional site. Outside the documented range or without mature fruit, a red-oak-group or explicit complex answer is often more defensible."
+          },
+          "confuserControl": [
+            {
+              "confuser": "Quercus velutina",
+              "visibleSeparators": "Black oak tends to have densely hairy terminal buds, more diffuse lower-leaf pubescence, yellow inner bark, and loose or ragged cup-rim scales. Scarlet oak more often has clean deeply cut leaves, less hairy buds, tight cup scales, and concentric rings at the nut tip.",
+              "resolvingView": "Terminal buds, lower leaf surface, cup rim and nut tip, intact mature bark and any already exposed fresh inner bark."
+            },
+            {
+              "confuser": "Quercus rubra",
+              "visibleSeparators": "Northern red oak usually has shallower sinuses, a much shallower saucer cup, and long smooth bark tracks; scarlet oak usually has narrow lobes separated by deep rounded sinuses and a deeper bowl cup. Individual shade and sprout leaves overlap.",
+              "resolvingView": "Upper-crown leaves, complete mature acorns in profile, clustered terminal buds, and bark from both lower and upper bole."
+            },
+            {
+              "confuser": "Quercus ellipsoidalis or Quercus palustris",
+              "visibleSeparators": "Northern pin oak is centered on western Great Lakes xeric sands and often has an ellipsoid nut in a deep cup; pin oak is a wet-flat species with a shallow cup and strongly tiered crown. Scarlet oak is eastern and dry-ridge centered, but leaves alone may be inseparable.",
+              "resolvingView": "Mature acorn and cup, georeferenced location, soil drainage and landform, lower-crown architecture, and multiple leaves."
+            }
+          ],
+          "silvicsCapsule": {
+            "shadeTolerance": "Intermediate to intolerant and strongly light-demanding for successful recruitment; suppressed seedlings persist poorly under a closed canopy.",
+            "moistureDrainageSoils": "Most characteristic of dry, acidic, well-drained sandy or rocky soils on ridges and upper slopes; growth improves on deeper soils but the species avoids wet lowlands.",
+            "geographicClimaticAffinity": "Appalachian and central-eastern oak centered south of the northern-hardwood core, reaching the course region mainly in PA/NJ, southern NY, southern New England, and the southern Great Lakes fringe.",
+            "forestAssociations": "Occurs with chestnut, black, northern red, and white oaks, hickories, blackgum, red maple, pitch or white pine, sassafras, and ericaceous shrubs.",
+            "regeneration": "Animal-dispersed acorns and abundant advance seedlings or sprouts recruit after canopy opening; low seedling height and competing shrubs often limit regeneration despite adequate acorn crops.",
+            "vegetativeReproduction": "Seedlings, saplings, and cut stems sprout vigorously from the root collar or stump, allowing persistence after top-kill and supporting coppice-origin stands.",
+            "seedMastBehavior": "Acorns mature in the second year; good crops are periodic rather than annual, and weevils, squirrels, deer, birds, and fungi remove many fruits.",
+            "establishmentRequirements": "Thin litter or mineral-soil contact, adequate first-season moisture, and timely high light are needed; prescribed disturbance is effective only where advance reproduction, seed source, and competition are addressed.",
+            "successionalRole": "Fire-associated, disturbance-dependent mid-successional oak that can dominate dry ridges but declines in regeneration under prolonged canopy closure and mesophication.",
+            "disturbanceResponse": "Mature bark provides some fire resistance and smaller stems resprout after top-kill. Repeated moderate fire can maintain open oak systems, while intense fire, logging injury, or compounded drought and defoliation can cause mortality.",
+            "longevityGrowthStrategy": "Moderately fast when released, commonly maturing within roughly 80–150 years and generally shorter-lived than white or northern red oak.",
+            "browseSusceptibility": "Deer consume acorns and browse seedlings and sprouts; repeated browse can remove the height advantage created by cutting or fire.",
+            "insectsDiseases": "Highly susceptible to oak wilt as a red-oak-group species; spongy moth, two-lined chestnut borer, acorn weevils, cankers, and root rots become especially damaging after drought or defoliation.",
+            "managementImplications": "Maintain adequate light, large advance reproduction, seed trees, and sprout sources on appropriate dry sites; coordinate fire or harvest with browse and competitor control, and diagnose declining crowns rather than treating red foliage as identification.",
+            "silviculturalSystemResponse": "Shelterwood, group or even-aged regeneration methods, and carefully prescribed fire can favor established reproduction and sprouts; repeated light selection without understory treatment usually shifts composition toward tolerant competitors."
+          },
+          "references": [
+            {
+              "title": "Scarlet Oak — Silvics of North America",
+              "url": "https://research.fs.usda.gov/silvics/scarlet-oak",
+              "scope": "Distribution, dry-site ecology, associates, reproduction, growth, management, damaging agents, and fire."
+            },
+            {
+              "title": "Quercus coccinea, scarlet oak — FEIS",
+              "url": "https://research.fs.usda.gov/feis/species-reviews/quecoc",
+              "scope": "Taxonomy, succession, sprouting, wildlife, fire adaptations, and disturbance response."
+            },
+            {
+              "title": "Quercus coccinea — scarlet oak",
+              "url": "https://gobotany.nativeplanttrust.org/species/quercus/coccinea/",
+              "scope": "Regional identification characters, morphology, habitat, range, and fruit details."
+            }
+          ]
+        },
+        {
+          "taxonId": "QUERCUS_ELLIPSOIDALIS",
+          "preferredCommonName": "Northern pin oak",
+          "canonicalScientificName": "Quercus ellipsoidalis",
+          "acceptedAlternatives": [
+            "Quercus coccinea var. ellipsoidalis",
+            "sometimes treated near Q. coccinea"
+          ],
+          "family": "Fagaceae",
+          "distributionInCourseRegion": "MN/WI/MI and western Great Lakes sand country; rare/local in southern ON",
+          "ecologicalImportance": "Fire-associated oak of dry nutrient-poor sands; hybridizes with red oaks",
+          "coursePriority": "2 - regional",
+          "tier": "B",
+          "fieldIdentification": {
+            "foliage": "Alternate leaves commonly have 5–7 narrow bristle-tipped lobes separated by deep rounded sinuses, with a mostly hairless lower surface except small axillary tufts. Shape overlaps scarlet and pin oaks and varies on sun, shade, and sprout shoots, so a leaf-only identification is rarely defensible.",
+            "barkAgeSeries": "Young bark is smooth gray-brown; older stems develop shallow fissures and irregular dark gray to blackish ridges, often with persistent dead branch stubs. Bark can become blocky but lacks a unique field character that consistently separates it from black, scarlet, or pin oak.",
+            "dormant": "Reddish-brown twigs end in a clustered group of small ovoid to conic reddish-brown buds, hairless to lightly hairy. Buds establish the red-oak group but overlap scarlet and pin oak; densely woolly buds instead favor black oak.",
+            "reproductive": "Acorns mature in two seasons. The nut is often distinctly ellipsoid, about 12–20 mm long, with a bowl-shaped cup covering roughly one-third to one-half and bearing closely appressed scales. Both nut shape and cup depth vary, especially in introgressed populations, so examine several mature fruits from one crown.",
+            "wholeTreeContext": "A small to medium canopy tree with an irregular crown and retained dead lower branches, most characteristic of dry acidic nutrient-poor sand plains, dunes, outwash, and sandstone hills in MN/WI/MI. Extensive local stands on xeric sands are much stronger context than a planted individual.",
+            "variationAndCondition": "Northern pin oak intergrades and hybridizes with northern red and black oak, and its relationship to scarlet oak has a history of alternative treatment. Leaves and acorns may be intermediate within mixed stands. Fire scars, drought dieback, oak wilt, and retained dead limbs alter condition but are not identity characters.",
+            "defensibilityLimits": "A reliable field determination needs a western Great Lakes xeric-sand context plus a series of deep-lobed leaves, mature ellipsoid acorns with deep cups, buds, and bark. Range and soil cannot rescue a contradictory specimen, and morphology cannot always resolve introgression; use a red-oak-group complex or note probable hybrid when characters conflict."
+          },
+          "confuserControl": [
+            {
+              "confuser": "Quercus palustris",
+              "visibleSeparators": "Pin oak is native chiefly to wet southern lowlands and flats, has a small nearly round nut in a shallow saucer cup covering about one-quarter, and often shows strongly descending lower branches. Northern pin oak occupies dry western Great Lakes sands and usually has an ellipsoid nut in a deeper cup.",
+              "resolvingView": "Mature acorn in side view, whole crown including lower branches, georeferenced location, and direct soil-drainage or landform evidence."
+            },
+            {
+              "confuser": "Quercus coccinea",
+              "visibleSeparators": "Scarlet oak is centered farther east and south on dry acidic ridges and often shows a tight cup plus concentric rings around the nut tip; northern pin oak is Great Lakes-centered, commonly has ellipsoid nuts, and is strongly tied to xeric sand. Leaves are often not separable.",
+              "resolvingView": "Several mature acorns showing the nut tip and cup, verified locality, soil parent material, terminal buds, and population-level variation."
+            },
+            {
+              "confuser": "Quercus rubra or Quercus velutina",
+              "visibleSeparators": "Northern red oak usually has shallower sinuses and a shallow saucer cup; black oak more often has hairy buds, lower-leaf pubescence, and yellow inner bark. Northern pin oak tends to deep sinuses, a deeper cup, ellipsoid nut, and xeric-sand context, but hybridization is common.",
+              "resolvingView": "Terminal buds, lower leaf surface, several mature fruits, upper-bole bark, soil context, and neighboring oak morphology."
+            }
+          ],
+          "silvicsCapsule": {
+            "shadeTolerance": "Very intolerant of shade; it does not regenerate successfully beneath its own closed canopy and requires substantial light.",
+            "moistureDrainageSoils": "Specialized on dry acidic, nutrient-poor sands and sandy or sandstone uplands with a thin organic layer; highly drought tolerant and absent from truly wet pin-oak sites.",
+            "geographicClimaticAffinity": "A north-central oak with its course-region center in MN, WI, and MI; occurrence far east of that core demands careful documentation of planting, range, and identity.",
+            "forestAssociations": "Forms pure or mixed stands with northern red, black, white, bur, and sometimes scarlet oak, plus jack or white pine, hophornbeam, hickories, aspen, and barrens shrubs.",
+            "regeneration": "Acorns dispersed by gravity, squirrels, and birds establish seedlings after disturbance; open conditions and reduced competition are essential.",
+            "vegetativeReproduction": "Root collars and stumps sprout vigorously following cutting, fire top-kill, or crown injury, often sustaining stands where seedling recruitment is episodic.",
+            "seedMastBehavior": "Second-season acorns begin on relatively young trees; good crops are intermittent, with substantial losses to weevils and wildlife.",
+            "establishmentRequirements": "Exposed or lightly covered sandy seedbeds, adequate early moisture, and full or nearly full light favor recruitment; litter, shade, browse, and pine or shrub competition can prevent establishment.",
+            "successionalRole": "Facultative-seral and fire-associated; on extremely poor sands it may act as an edaphic climax, while on better sites it is succeeded by less light-demanding oaks, white pine, or mesic hardwoods.",
+            "disturbanceResponse": "Mature bark can withstand low-intensity fire and top-killed small stems sprout strongly. Fire often maintains open habitat, although frequent severe burning can reduce small-stem populations.",
+            "longevityGrowthStrategy": "Slow to moderate growth on infertile sands, usually a small to medium tree with drought-adapted roots rather than a high-yield timber form.",
+            "browseSusceptibility": "Acorns and young shoots are eaten by deer, squirrels, jays, and other wildlife; repeated deer browse can delay sprout and seedling recruitment.",
+            "insectsDiseases": "Susceptible to oak wilt and common oak defoliators, borers, galls, and acorn insects; condition symptoms overlap other red oaks and must not be used as an identity shortcut.",
+            "managementImplications": "Conserve xeric oak barrens and verified local seed sources, retain sprout capacity and adequate seed trees, use range-aware identifications, and label morphologically intermediate stems explicitly rather than assuming pure northern pin oak.",
+            "silviculturalSystemResponse": "Clearcut or shelterwood systems can regenerate stands when advance reproduction is adequate or deliberately established; prescribed fire and competitor control can maintain open conditions, while partial shade without follow-up release favors succession away from the species."
+          },
+          "references": [
+            {
+              "title": "Quercus ellipsoidalis, northern pin oak — FEIS",
+              "url": "https://research.fs.usda.gov/feis/species-reviews/queell",
+              "scope": "Taxonomy, limited range, xeric sites, reproduction, shade intolerance, fire ecology, hybridization, and management."
+            },
+            {
+              "title": "Northern pin oak (Quercus ellipsoidalis)",
+              "url": "https://www.dnr.state.mn.us/trees/northern-pin-oak.html",
+              "scope": "Authoritative western Great Lakes field characters, fruit, bark, form, and dry-site distribution."
+            },
+            {
+              "title": "Key Plants Appearing in Minnesota Native Plant Community Field Guides",
+              "url": "https://files.dnr.state.mn.us/forestry/ecssilviculture/npc_plantID.pdf",
+              "scope": "Minnesota DNR field identification and community context for northern pin oak and regional associates."
+            }
+          ]
+        },
+        {
+          "taxonId": "QUERCUS_PALUSTRIS",
+          "preferredCommonName": "Pin oak",
+          "canonicalScientificName": "Quercus palustris",
+          "acceptedAlternatives": [],
+          "family": "Fagaceae",
+          "distributionInCourseRegion": "Wet bottomlands in the southern Great Lakes and southern ON east through NY, PA/NJ, CT, and MA; widely planted",
+          "ecologicalImportance": "Shade-intolerant wet-site red-oak-group tree and common planted confuser",
+          "coursePriority": "2 - regional",
+          "tier": "B",
+          "fieldIdentification": {
+            "foliage": "Alternate leaves usually have 5–7 narrow bristle-tipped lobes divided by deep broad U-shaped sinuses. The lower surface is pale with small rusty tufts in vein axils. Foliage closely overlaps scarlet and northern pin oak and must be joined to acorn, crown, and site evidence.",
+            "barkAgeSeries": "Young and pole-size trees retain thin, smooth gray-brown bark for many years. Older boles become shallowly ridged and narrowly fissured but are usually less thick and blocky than mature black or northern pin oak. Trunks often retain many small dead branch stubs that produce the characteristic pin knots.",
+            "dormant": "Slender reddish-brown twigs end in clusters of small pointed chestnut-brown buds that are usually hairless to only finely hairy. Numerous persistent short branchlets and dead lower branches support the whole-tree pattern but do not distinguish a detached twig.",
+            "reproductive": "Acorns mature in two seasons and are small, about 10–15 mm, nearly hemispherical to rounded, often faintly striped, and seated in a thin shallow saucer cup covering about one-quarter or less of the nut. This shallow cup is a critical contrast with northern pin and scarlet oak.",
+            "wholeTreeContext": "Open-grown trees have a strongly excurrent, pyramidal crown: upper branches ascend, middle branches spread horizontally, and lower branches droop. Native trees occupy seasonally wet poorly drained flats and bottomlands; planted street and lawn trees occur widely outside that context.",
+            "variationAndCondition": "Forest crowding can obscure the tiered crown, pruning removes lower branches, and planted trees may be far outside the native range. Alkaline soils often cause interveinal chlorosis, while oak wilt, bacterial leaf scorch, drought, and defoliation cause additional discoloration. None of these conditions proves species identity.",
+            "defensibilityLimits": "Deep-lobed leaves plus a pyramidal crown are suggestive, not sufficient. A species-level call should include the small round acorn with shallow cup and either authentic wet-flat ecology or documented planting. Without fruit and context, answer the deep-lobed red-oak complex; diagnose chlorosis or wilt separately."
+          },
+          "confuserControl": [
+            {
+              "confuser": "Quercus ellipsoidalis",
+              "visibleSeparators": "Northern pin oak is a xeric western Great Lakes sand species and usually has an ellipsoid nut in a cup enclosing one-third to one-half. Pin oak is naturally a wet-flat tree with a small round nut in a shallow cup and often a strongly tiered crown.",
+              "resolvingView": "Mature fruit in side view, whole crown including lower limbs, georeferenced location, and evidence of soil drainage or planting."
+            },
+            {
+              "confuser": "Quercus coccinea",
+              "visibleSeparators": "Scarlet oak is associated with dry acidic ridges and has a deeper bowl cup, often with concentric rings at the nut tip. Pin oak occurs naturally on poorly drained flats, has a shallow cup, and commonly retains drooping lower branches; leaves alone overlap strongly.",
+              "resolvingView": "Complete mature acorn, slope and drainage context, lower-crown architecture, terminal buds, and multiple upper-crown leaves."
+            },
+            {
+              "confuser": "Quercus velutina",
+              "visibleSeparators": "Black oak more often has densely hairy terminal buds, lower-leaf pubescence, yellow inner bark, blocky mature bark, and a deeper loose-scaled cup. Pin oak has small smoother buds, a small shallow-cupped fruit, smoother bark, and wet-flat context.",
+              "resolvingView": "Terminal buds, lower leaf surface, mature cup, mature bole bark, and site drainage."
+            }
+          ],
+          "silvicsCapsule": {
+            "shadeTolerance": "Intolerant of shade; overtopped seedlings and intermediates decline quickly, and natural stands are mainly even-aged dominants or codominants.",
+            "moistureDrainageSoils": "Characteristic of poorly drained, seasonally flooded heavy clays, glacial till flats, and bottomlands; it tolerates dormant-season inundation but not permanent deep flooding and often chloroses on alkaline uplands.",
+            "geographicClimaticAffinity": "Central lowland species reaching the course region in southern Great Lakes and northeastern bottomlands; widely planted north and east of native populations.",
+            "forestAssociations": "Associates with swamp white oak, silver and red maples, American elm, green ash, cottonwood, sycamore, blackgum, and other wet-bottomland hardwoods.",
+            "regeneration": "Abundant animal- and gravity-dispersed acorns can create dense reproduction on suitable wet flats; rapid release is necessary because seedlings do not tolerate overtopping.",
+            "vegetativeReproduction": "Young stumps and injured seedlings sprout vigorously from dormant stem or root-collar buds; sprouting declines with age and large size.",
+            "seedMastBehavior": "Second-season acorns are produced frequently after maturity, with good crops in many years; wildlife and acorn insects remove large quantities.",
+            "establishmentRequirements": "Moist exposed soil or thin litter on seasonally wet but aerated microsites and high light after germination; prolonged seedling submergence or dense shade causes failure.",
+            "successionalRole": "Subclimax and disturbance-dependent on heavy wet soils, where abundant regeneration can persist if released; on better-drained sites it is displaced by more tolerant hardwoods.",
+            "disturbanceResponse": "Young trees sprout after top injury and established trees tolerate periodic flooding, but thin bark is fire-sensitive. Drainage change, permanent flooding, severe soil disturbance, and alkalinity can cause decline.",
+            "longevityGrowthStrategy": "Rapid juvenile growth on suitable bottomlands but comparatively short-lived for an oak, often reaching physiological maturity near 80–100 years and rarely forming ancient trees.",
+            "browseSusceptibility": "Deer and other wildlife consume acorns and browse young stems; heavy browse can suppress otherwise abundant regeneration.",
+            "insectsDiseases": "Highly susceptible to oak wilt; common oak defoliators, borers, galls, acorn weevils, bacterial leaf scorch, and nutrient-related chlorosis also occur. Condition patterns are diagnostically separate from identity.",
+            "managementImplications": "Reserve it for appropriate wet mineral-soil sites, protect hydrology, release adequate reproduction promptly, avoid moving planted-tree assumptions into native inventories, and distinguish nutrient chlorosis from lethal vascular disease.",
+            "silviculturalSystemResponse": "Even-aged regeneration or clearcutting can work where abundant advance reproduction is present on suitable flats; small light openings and selection are poor matches for this shade-intolerant species, and hydrologic damage can negate any silvicultural treatment."
+          },
+          "references": [
+            {
+              "title": "Pin Oak — Silvics of North America",
+              "url": "https://research.fs.usda.gov/silvics/pin-oak",
+              "scope": "Distribution, wet-site ecology, reproduction, crown form, tolerance, longevity, management, and damaging agents."
+            },
+            {
+              "title": "Pin Oak (Quercus palustris) — Wisconsin DNR",
+              "url": "https://apps.dnr.wi.gov/biodiversity/Home/detail/plants/8785",
+              "scope": "Regional status, floodplain habitat, look-alikes, and diagnostic shallow acorn cup."
+            },
+            {
+              "title": "Quercus palustris — pin oak",
+              "url": "https://gobotany.nativeplanttrust.org/species/quercus/palustris/",
+              "scope": "Regional morphology, leaves, buds, fruit, bark, habitat, and naturalized range."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sessionId": "W06-B",
+      "letter": "B",
+      "title": "Red-oak retrieval",
+      "kind": "delayed_retrieval",
+      "taxonScope": "session_a_taxa_plus_midterm_remediation",
+      "modalities": [
+        "foliage",
+        "bark",
+        "reproductive",
+        "dormant",
+        "whole_tree_context"
+      ],
+      "delivery": "unfamiliar isolated organs and whole-tree decisions",
+      "feedbackRelease": "after_batch_submission",
+      "runtimeBoundary": "runtime_retrieval_from_admitted_practice_media",
+      "introducedTaxonIds": [],
+      "teachingProfiles": []
+    },
+    {
+      "sessionId": "W06-C",
+      "letter": "C",
+      "title": "White-oak group and hackberry",
+      "kind": "new_species_and_confusers",
+      "taxonScope": "listed_new_taxa_plus_cs11_and_cs12",
+      "modalities": [
+        "foliage",
+        "bark",
+        "reproductive",
+        "dormant",
+        "whole_tree_context"
+      ],
+      "delivery": "direct group contrasts followed by mixed isolated specimens",
+      "feedbackRelease": "after_response",
+      "runtimeBoundary": "labeled_teaching_content",
+      "introducedTaxonIds": [
+        "QUERCUS_ALBA",
+        "QUERCUS_BICOLOR",
+        "QUERCUS_MACROCARPA",
+        "QUERCUS_MONTANA",
+        "CELTIS_OCCIDENTALIS"
+      ],
+      "teachingProfiles": [
+        {
+          "taxonId": "QUERCUS_ALBA",
+          "preferredCommonName": "White oak",
+          "canonicalScientificName": "Quercus alba",
+          "acceptedAlternatives": [],
+          "family": "Fagaceae",
+          "distributionInCourseRegion": "Broad in southern and western portions of the region, north locally to southern Canada and New England",
+          "ecologicalImportance": "Long-lived mast and timber tree; central white-oak-group reference",
+          "coursePriority": "1 - core",
+          "tier": "A",
+          "fieldIdentification": {
+            "foliage": "Alternate leaves have 7–9 rounded, bristleless lobes, with sinuses ranging from shallow to deep and an often wedge-shaped base. The upper surface is blue-green to dark green and the lower surface paler, usually becoming nearly hairless. Confirm multiple mature leaves because shade, sun, epicormic, and juvenile foliage differ markedly.",
+            "barkAgeSeries": "Young stems are smooth light gray to brownish gray. Pole and mature bark becomes pale ashy gray and breaks into irregular overlapping flaky plates or narrow loose scales; very old lower boles can become deeply furrowed and darker while upper bark retains paler scaling.",
+            "dormant": "Gray to reddish twigs terminate in a tight cluster of short, blunt to ovoid reddish-brown, mostly hairless buds. Alternate leaf scars and clustered buds identify oak; short rounded buds and pale twigs support the white-oak group but overlap swamp white and bur oak.",
+            "reproductive": "White-oak-group acorns mature in one growing season. The oblong to ovoid nut, commonly 15–25 mm long, is enclosed about one-quarter by a shallow bowl cup with warty, closely appressed scales and is sessile or on a short stalk. Sound acorns commonly begin root germination soon after autumn fall.",
+            "wholeTreeContext": "A large, long-lived tree with a broad rounded crown and massive limbs when open-grown, occurring on well-drained uplands from dry ridges to productive loams. Within the course region it is strongest south and west of the northern-hardwood center and may be local near its northern limits.",
+            "variationAndCondition": "Leaf depth, bark plating, acorn size, and form vary among individuals and sites, and white oak hybridizes with several members of the white-oak group. Wet or lichen-covered bark can appear darker; fire scars and old wounds alter the lower bole. Oak wilt can occur but typically progresses differently than in red oaks and is condition evidence only.",
+            "defensibilityLimits": "Rounded bristleless lobes place a specimen in the white-oak group but do not alone prove Q. alba. A strong field call combines several leaves, pale flaky mature bark, clustered short buds, shallow short-stalked cup, and upland range/site. Young bark, winter twigs, or an isolated fallen acorn without source-tree association may require a white-oak-group answer."
+          },
+          "confuserControl": [
+            {
+              "confuser": "Quercus bicolor",
+              "visibleSeparators": "Swamp white oak usually has shallow irregular lobes or coarse rounded teeth, a densely white felted lower surface, and acorns on a conspicuously long common stalk. White oak usually has more definite rounded lobes, a less densely hairy underside, and sessile or short-stalked acorns.",
+              "resolvingView": "Lower leaf surface, complete fruit stalk with attachment, several mature leaves, and direct evidence of upland versus seasonally flooded habitat."
+            },
+            {
+              "confuser": "Quercus macrocarpa",
+              "visibleSeparators": "Bur oak often has a very large leaf with a deep middle waist, corky twig ridges, thick dark furrowed bark, and a large acorn deeply enclosed by a mossy-fringed cup. White oak lacks the massive fringe and usually has paler flaky bark and a shallow cup.",
+              "resolvingView": "Complete leaf with scale, twig internodes, mature cup in side view, and mature bark above any scarred base."
+            },
+            {
+              "confuser": "Quercus montana",
+              "visibleSeparators": "Chestnut oak leaves are unlobed but have coarse rounded chestnut-like teeth, mature bark is dark and deeply blocky, and the acorn cup is deeper. White oak has true rounded lobes and usually pale flaky bark.",
+              "resolvingView": "Several complete leaves including their bases, mature bark, clustered buds, and mature acorn and cup."
+            }
+          ],
+          "silvicsCapsule": {
+            "shadeTolerance": "Intermediate and generally more shade tolerant as a seedling than the most light-demanding red oaks, but sustained canopy recruitment requires substantial release.",
+            "moistureDrainageSoils": "Occupies a broad range from dry ridges to moist well-drained coves, growing best on deep fertile loams and clay loams while avoiding permanent saturation.",
+            "geographicClimaticAffinity": "Broad eastern and central species, common in the southern and western course region and increasingly local toward northern New England, New Brunswick, Quebec, and northern Ontario.",
+            "forestAssociations": "Occurs with northern red, black, scarlet, chestnut, bur, and swamp white oaks, hickories, red maple, blackgum, white pine, tulip tree, and northern hardwoods on favorable sites.",
+            "regeneration": "Animal-cached annual acorns produce seedlings and advance reproduction; successful replacement depends on sufficient seedling size, timely light, browse control, and competition reduction.",
+            "vegetativeReproduction": "Seedlings and young stems sprout from root collars or stumps after fire, cutting, or top-kill; large old trees have reduced sprouting capacity.",
+            "seedMastBehavior": "One-season acorns are produced in variable crops, with heavy mast separated by poor years; they germinate quickly in autumn and are highly preferred by wildlife and acorn insects.",
+            "establishmentRequirements": "Fresh sound acorns, moist seedbeds with limited litter barriers, and protection from predators support establishment; seedlings can begin under partial shade but need release before tolerant competitors overtop them.",
+            "successionalRole": "Long-lived mid- to late-successional canopy species that can persist through repeated disturbance, yet often fails to replace itself under dense shade and fire exclusion.",
+            "disturbanceResponse": "Thickening bark and strong sprouting confer fire resilience with size; moderate fire or harvest can release regeneration, while severe fire, root injury, compaction, and compounded drought and defoliation cause decline.",
+            "longevityGrowthStrategy": "Slow to moderate juvenile growth, strong long-term persistence, and potential life spans of several centuries; invests in durable wood and crown longevity rather than rapid pioneer growth.",
+            "browseSusceptibility": "Acorns are highly preferred and seedlings and sprouts are browsed by deer and other mammals; repeated browse can eliminate the larger advance reproduction needed for regeneration.",
+            "insectsDiseases": "Oak wilt can affect white oak but is often slower than in red-oak-group trees; spongy moth, two-lined chestnut borer, acorn weevils, anthracnose, root rots, and decline complexes are important under stress.",
+            "managementImplications": "Protect long-lived seed and crop trees, maintain large advance reproduction and sprout sources, coordinate harvest or fire with competitor and browse control, and preserve genetically and structurally diverse white-oak-group components.",
+            "silviculturalSystemResponse": "Shelterwood and group or even-aged systems that first develop advance reproduction and then release it are reliable; prescribed fire can improve competitive position on suitable sites, whereas repeated light selection generally favors shade-tolerant mesophytes."
+          },
+          "references": [
+            {
+              "title": "White Oak — Silvics of North America",
+              "url": "https://research.fs.usda.gov/silvics/white-oak",
+              "scope": "Distribution, site relations, seed and sprout regeneration, tolerance, growth, management, damaging agents, and fire."
+            },
+            {
+              "title": "Quercus alba, white oak — FEIS",
+              "url": "https://research.fs.usda.gov/feis/species-reviews/quealb",
+              "scope": "Taxonomy, associations, succession, wildlife, regeneration, and disturbance ecology."
+            },
+            {
+              "title": "Quercus alba — white oak",
+              "url": "https://gobotany.nativeplanttrust.org/species/quercus/alba/",
+              "scope": "Regional morphology, leaf, bud, bark, fruit, habitat, and range characters."
+            }
+          ]
+        },
+        {
+          "taxonId": "QUERCUS_BICOLOR",
+          "preferredCommonName": "Swamp white oak",
+          "canonicalScientificName": "Quercus bicolor",
+          "acceptedAlternatives": [],
+          "family": "Fagaceae",
+          "distributionInCourseRegion": "Southern Great Lakes and lower Great Lakes through NY, PA/NJ, and southern New England",
+          "ecologicalImportance": "Flood-tolerant white-oak-group tree of swamps, terraces, and floodplains",
+          "coursePriority": "2 - regional",
+          "tier": "B",
+          "fieldIdentification": {
+            "foliage": "Alternate obovate leaves have shallow irregular rounded lobes or coarse rounded teeth and a wedge-shaped base. The dark green upper surface contrasts strongly with the densely white to gray felted lower surface, producing the 'bicolor' effect; the petiole is relatively short. Confirm hair rather than relying on reflected light.",
+            "barkAgeSeries": "Young bark is smooth gray-brown. Older bark becomes gray, scaly, and irregularly flaky, often peeling in strips or plates and resembling white oak; branch bark may be especially shaggy. Mature bark is supportive only when paired with foliage and fruit.",
+            "dormant": "Yellow-brown to gray-brown twigs carry clustered short blunt buds; young twigs may be somewhat hairy. Dormant material overlaps white and bur oak, so seek persistent long fruit stalks, shaggy branch bark, and lowland context rather than forcing a twig-only species call.",
+            "reproductive": "Acorns mature in one season, commonly one or two together on a conspicuously long peduncle 25–75 mm or more. The ovoid nut is enclosed about one-third by a deep bowl cup whose upper scales may be thickened, pointed, or weakly fringed. Retain the full stalk in specimens because detached cups lose the strongest character.",
+            "wholeTreeContext": "A medium to large lowland oak with a broad irregular crown, occurring on stream terraces, swamp margins, depressions, and bottomlands that flood periodically but are not permanently inundated. It can stand on slight rises within wet complexes and therefore need not be rooted in visible water.",
+            "variationAndCondition": "Leaf lobing and lower-surface hair density vary, and fruit stalk length is easier to assess on intact clusters than fallen acorns. Swamp white oak hybridizes with bur and white oak. Flood scars, epicormic shoots, wet bark, and oak wilt or scorch affect condition but are not species characters.",
+            "defensibilityLimits": "The strongest combination is a white felted lower leaf surface, long-stalked one-season acorns, flaky gray bark, and periodically flooded habitat. A pale underside alone can be confused with bur oak, and bark or buds alone rarely resolve the species. If fruit attachment and site are unavailable, retain a white-oak-group identification."
+          },
+          "confuserControl": [
+            {
+              "confuser": "Quercus alba",
+              "visibleSeparators": "White oak usually has more definite rounded lobes, a lower surface that becomes less densely felted, and sessile or short-stalked shallow-cupped acorns. Swamp white oak has a striking white underside and one or two deeper-cupped acorns on a long common stalk.",
+              "resolvingView": "Lower leaf surface at high detail, intact fruiting peduncle, several leaves, bark above breast height, and site drainage."
+            },
+            {
+              "confuser": "Quercus macrocarpa",
+              "visibleSeparators": "Bur oak can also have pale leaf undersides but often shows a deep central leaf waist, corky twig wings, thick deeply furrowed bark, and a very large cup with a conspicuous mossy fringe. Swamp white oak usually has a long slender fruit stalk and a less massive cup.",
+              "resolvingView": "Complete leaves, twig internodes, fruit stalk and cup profile, and mature trunk bark."
+            },
+            {
+              "confuser": "Quercus montana",
+              "visibleSeparators": "Chestnut oak has coarsely rounded teeth but its lower leaf surface is not densely white felted, its fruit is short-stalked, and its habitat and mature bark are dry-ridge and deeply blocky rather than wet-lowland and flaky.",
+              "resolvingView": "Lower leaf surface, complete acorn stalk, mature bole bark, and landform or hydrology view."
+            }
+          ],
+          "silvicsCapsule": {
+            "shadeTolerance": "Intermediate; seedlings can establish under moderate shade but require release for sustained growth and canopy recruitment.",
+            "moistureDrainageSoils": "Most common on hydromorphic mineral, alluvial, or organic soils with imperfect to poor drainage and periodic flooding, but absent from permanently inundated sites.",
+            "geographicClimaticAffinity": "A north-central and northeastern lowland oak strongest from the southern Great Lakes through lower Great Lakes and northeastern floodplains.",
+            "forestAssociations": "Associates with pin and bur oak, red and silver maple, American elm, green ash, cottonwood, sycamore, blackgum, black willow, and basswood.",
+            "regeneration": "One-season acorns dispersed by gravity, water, birds, and mammals establish on moist aerated microsites; seedlings need release from shade and flood-tolerant competition.",
+            "vegetativeReproduction": "Young stems and seedlings can sprout after cutting or injury, but natural regeneration planning should not assume the vigorous coppice response of every upland oak.",
+            "seedMastBehavior": "Acorns ripen in autumn on long stalks, with crop size varying among years; ducks, deer, squirrels, and other wildlife consume and disperse the mast.",
+            "establishmentRequirements": "Moist exposed soil on hummocks, terraces, or better-aerated lowland microsites, protection from prolonged submergence, and adequate light following establishment.",
+            "successionalRole": "A persistent lowland associate that may become dominant on better-drained wetland soils; flood variability makes succession less predictable than on uplands.",
+            "disturbanceResponse": "Tolerates periodic flooding after establishment but not permanent saturation, severe root disturbance, or repeated fire. Canopy opening releases seedlings, while hydrologic alteration can rapidly change suitability.",
+            "longevityGrowthStrategy": "Moderately fast on good lowlands and long-lived, often reaching 300 years or more, with shallow roots adapted to high water tables.",
+            "browseSusceptibility": "Acorns and young shoots are eaten by deer and other wildlife; lowland browse concentration can suppress regeneration.",
+            "insectsDiseases": "Subject to oak wilt, anthracnose, leaf spots, borers, galls, root rots, and acorn insects, but no condition symptom is diagnostic for the species.",
+            "managementImplications": "Protect natural flood regimes and soil structure, retain seed trees and aerated microsites, account for browse, and avoid substituting the species indiscriminately on permanently wet or alkaline disturbed ground.",
+            "silviculturalSystemResponse": "Even-aged openings, including clearcutting on suitable better-drained lowland sites, can release abundant reproduction; any harvest system must minimize rutting and preserve hydrology, and partial cuts succeed only with adequate light and established seedlings."
+          },
+          "references": [
+            {
+              "title": "Swamp White Oak — Silvics of North America",
+              "url": "https://research.fs.usda.gov/silvics/swamp-white-oak",
+              "scope": "Distribution, hydromorphic soils, flood relations, associates, reproduction, growth, longevity, and management."
+            },
+            {
+              "title": "Quercus bicolor, swamp white oak — FEIS",
+              "url": "https://research.fs.usda.gov/feis/species-reviews/quebic",
+              "scope": "Taxonomy, regional lowland communities, succession, disturbance, and regeneration context."
+            },
+            {
+              "title": "Quercus bicolor — swamp white oak",
+              "url": "https://gobotany.nativeplanttrust.org/species/quercus/bicolor/",
+              "scope": "Regional leaf, lower-surface, bark, fruit-stalk, bud, habitat, and range characters."
+            }
+          ]
+        },
+        {
+          "taxonId": "QUERCUS_MACROCARPA",
+          "preferredCommonName": "Bur oak",
+          "canonicalScientificName": "Quercus macrocarpa",
+          "acceptedAlternatives": [],
+          "family": "Fagaceae",
+          "distributionInCourseRegion": "Strongest in MN/WI/MI and southern ON; local eastward on calcareous or floodplain sites",
+          "ecologicalImportance": "Fire- and drought-tolerant savanna/woodland oak with thick bark and large mast",
+          "coursePriority": "2 - regional",
+          "tier": "B",
+          "fieldIdentification": {
+            "foliage": "Alternate leaves are large and obovate with rounded bristleless lobes, commonly narrowed by a pair of very deep middle sinuses into a distinctive waist and expanded into a broad terminal lobe. The lower surface is pale and variably hairy. Examine multiple leaves because some lack the textbook waist.",
+            "barkAgeSeries": "Young bark is gray and becomes corky at an early age. Mature boles have very thick dark gray-brown bark divided into deep furrows and heavy rugged ridges, an adaptation associated with fire-prone savannas. Old open-grown trees often carry massive rough limbs.",
+            "dormant": "Stout gray-brown twigs end in clustered short rounded buds and commonly develop conspicuous corky ridges or wings along internodes. Corkiness varies and may be absent on a sampled twig, but when combined with stoutness and the bud cluster it strongly supports bur oak.",
+            "reproductive": "One-season acorns are among the largest regional oak fruits, commonly 25–50 mm. A deep thick cup encloses one-half or more of the nut and usually bears a conspicuous mossy fringe of elongated scales around the rim. Northern populations can have smaller, thinner, less strongly fringed cups, so assess a series.",
+            "wholeTreeContext": "A rugged, broad-crowned tree of prairie–forest margins, oak openings, dry sandy or limestone uplands, savannas, and also elevated terraces or ridges in floodplains. It is strongest in the western Great Lakes and southern Ontario and becomes local eastward.",
+            "variationAndCondition": "Leaf waists, twig cork, acorn size, and cup fringe vary strongly, including a recognized northern fruit form, and bur oak hybridizes with swamp white and white oak. Browse, repeated fire, open-grown architecture, and flood or mechanical scars change form without changing identity.",
+            "defensibilityLimits": "The deep fringed cup is the best single structure, but northern or hybrid fruits may be less extreme. Combine fruit, large variably waisted leaves, corky twigs, thick bark, and regional site. A white-oak-group leaf or deeply furrowed old bole alone is insufficient, and apparent hybrids should be recorded as such or left in a species complex."
+          },
+          "confuserControl": [
+            {
+              "confuser": "Quercus bicolor",
+              "visibleSeparators": "Swamp white oak has a densely white felted leaf underside and acorns on a conspicuously long slender stalk, usually with a less massive cup. Bur oak more often has a deeply waisted leaf, corky twigs, thick bark, and a large deeply enclosing mossy-fringed cup.",
+              "resolvingView": "Full fruit stalk and cup, lower leaf surface, twig internodes, several leaves, and mature trunk bark."
+            },
+            {
+              "confuser": "Quercus alba",
+              "visibleSeparators": "White oak usually has several more evenly spaced rounded lobes, pale flaky bark, non-corky twigs, and a smaller shallow cup without a mossy fringe. Bur oak is coarser in leaf, twig, bark, and fruit, but hybrids can be intermediate.",
+              "resolvingView": "Several mature leaves, twigs, cup in profile, upper-bole bark, and population context."
+            },
+            {
+              "confuser": "Quercus montana",
+              "visibleSeparators": "Chestnut oak leaves are unlobed with coarse rounded teeth, its cup lacks a mossy fringe, and it is centered on dry Appalachian ridges. Bur oak has true rounded lobes, often a deep waist, a fringed cup, corky twigs, and a western Great Lakes–prairie affinity.",
+              "resolvingView": "Complete leaf margins, cup rim, twig corkiness, verified location, and landscape context."
+            }
+          ],
+          "silvicsCapsule": {
+            "shadeTolerance": "Intermediate but unable to recruit indefinitely under dense shade; seedlings and saplings need release, especially where maple and basswood are advancing.",
+            "moistureDrainageSoils": "Exceptionally broad, from droughty sands, thin limestone ridges, claypans, and prairie loams to moist elevated bottomland terraces; avoids long permanent inundation.",
+            "geographicClimaticAffinity": "Continental and cold- and drought-tolerant, with greatest course-region abundance in MN/WI/MI and southern Ontario and scattered calcareous or floodplain occurrences eastward.",
+            "forestAssociations": "Dominates oak savannas and openings and associates with northern pin, white, black, and swamp white oaks, basswood, sugar maple, green ash, elm, bitternut hickory, and prairie-edge shrubs.",
+            "regeneration": "Large acorns dispersed by gravity and animals establish seedlings on open mineral or lightly littered soil; advance reproduction and sprouts need adequate light to remain competitive.",
+            "vegetativeReproduction": "Young trees and seedlings sprout after cutting or fire top-kill, while sprouting capacity declines with age and diameter.",
+            "seedMastBehavior": "One-season acorns vary strongly in size and crop among years and regions; northern forms may delay germination until spring, while typical fruits may germinate in autumn. Wildlife consumes much of the mast.",
+            "establishmentRequirements": "Open or partially open sites with adequate first-year moisture, exposed soil, and reduced grass, shrub, or tolerant-tree competition; cached acorns aid establishment beyond crown drip lines.",
+            "successionalRole": "Pioneer and persistent canopy species on prairie margins and severe dry sites; on mesic fire-protected sites it is commonly succeeded by shade-tolerant maple–basswood or beech–maple vegetation.",
+            "disturbanceResponse": "Thick bark makes large trees highly resistant to low-intensity fire and young top-killed stems can sprout. Fire exclusion promotes mesophication, while severe repeated fire can still damage regeneration and roots.",
+            "longevityGrowthStrategy": "Slow on harsh uplands and moderate on fertile bottomlands, often living 200–300 years or more and developing massive crowns and boles.",
+            "browseSusceptibility": "Large acorns are valuable mast and young shoots are browsed by deer and livestock; savanna regeneration can be lost to combined browse and grass competition.",
+            "insectsDiseases": "Oak wilt can affect bur oak, as can bur oak blight in parts of the upper Midwest, oak decline, root rots, borers, defoliators, cankers, and acorn insects. Symptoms require independent diagnosis.",
+            "managementImplications": "Retain old fire-resistant seed trees and locally adapted seed sources, restore adequate light and disturbance where savanna is the objective, protect regeneration from browse and competing sod, and preserve hydrology on bottomland sites.",
+            "silviculturalSystemResponse": "Shelterwood, group openings, coppice contributions, and prescribed fire can regenerate bur oak when timed to advance reproduction and competitor control; repeated light selection and fire exclusion tend to favor shade-tolerant associates."
+          },
+          "references": [
+            {
+              "title": "Bur Oak — Silvics of North America",
+              "url": "https://research.fs.usda.gov/silvics/bur-oak",
+              "scope": "Range, broad site amplitude, associations, reproduction, northern fruit variation, longevity, management, and fire resistance."
+            },
+            {
+              "title": "Quercus macrocarpa, bur oak — FEIS",
+              "url": "https://research.fs.usda.gov/feis/species-reviews/quemac",
+              "scope": "Taxonomy, oak-savanna ecology, succession, sprouting, fire history, wildlife, and management."
+            },
+            {
+              "title": "Bur oak (Quercus macrocarpa)",
+              "url": "https://www.dnr.state.mn.us/trees/bur-oak.html",
+              "scope": "Western Great Lakes field characters, leaves, corky twigs, bark, fruit, form, and site."
+            }
+          ]
+        },
+        {
+          "taxonId": "QUERCUS_MONTANA",
+          "preferredCommonName": "Chestnut oak",
+          "canonicalScientificName": "Quercus montana",
+          "acceptedAlternatives": [
+            "Quercus prinus is a widely used accepted alternative"
+          ],
+          "family": "Fagaceae",
+          "distributionInCourseRegion": "Allegheny Plateau and ridges of PA/NJ/NY and southern New England; isolated westward",
+          "ecologicalImportance": "Dry-ridge white-oak-group dominant with strong sprouting",
+          "coursePriority": "2 - regional",
+          "tier": "B",
+          "fieldIdentification": {
+            "foliage": "Alternate obovate to elliptic leaves are unlobed but have 10–16 pairs of large rounded crenate teeth, resembling a chestnut leaf with blunt rather than sharp teeth. The upper surface is yellow-green and the lower surface paler and variably hairy, especially when young.",
+            "barkAgeSeries": "Young bark is smooth gray-brown. Mature bark becomes exceptionally thick, dark gray-brown, and deeply divided by V-shaped furrows into long broad blocky ridges; upper bark can be less extreme. Bark is strong contextual evidence on old ridge trees but overlaps other rough-barked oaks.",
+            "dormant": "Stout reddish- to gray-brown twigs end in clustered pointed reddish-brown buds, sometimes finely hairy. Buds and leaf scars establish white-oak-group affinity poorly, so winter identification should add massive ridge bark, retained acorn cups, and dry Appalachian landform.",
+            "reproductive": "Acorns mature in one season. The shiny chestnut-brown ovoid nut is commonly 20–35 mm long and held about one-third to nearly one-half in a deep hemispheric cup with thick, tightly appressed warty scales; the fruit is sessile or short-stalked and lacks bur oak's fringe.",
+            "wholeTreeContext": "A medium to large tree, often with a crooked bole and irregular crown, dominant on dry rocky acidic ridgetops, upper slopes, and sandstone outcrops of the Allegheny Plateau and Appalachians. It can occupy better sites, but ridge position and thick bark are a powerful regional combination.",
+            "variationAndCondition": "Shade leaves can have shallower teeth, young bark lacks massive blocks, and sprouts carry oversized leaves. The name Q. prinus has been applied inconsistently in older literature, sometimes entangling chestnut and swamp chestnut oaks; the course accepts it for Q. montana only when clearly intended. Fire scars, lichen, and oak wilt are conditions, not identity.",
+            "defensibilityLimits": "Rounded chestnut-like teeth plus deeply blocky bark and dry Allegheny/Appalachian ridge context support species level; add the one-season deep unfringed cup whenever possible. A detached unlobed leaf may be American chestnut or another chestnut-leaved oak, and a young twig alone should remain white-oak group."
+          },
+          "confuserControl": [
+            {
+              "confuser": "Castanea dentata",
+              "visibleSeparators": "American chestnut leaves are longer and more lanceolate with many sharp, forward-pointing hooked teeth, while chestnut oak has fewer large rounded teeth. Chestnut bears spiny burs rather than acorns and lacks clustered oak terminal buds.",
+              "resolvingView": "Leaf margin and base in scale, terminal buds, any fruit or cup, and mature bark."
+            },
+            {
+              "confuser": "Quercus bicolor",
+              "visibleSeparators": "Swamp white oak has a densely white felted lower leaf surface, long-stalked acorns, flaky gray bark, and lowland flooding context. Chestnut oak has a less white underside, short-stalked deeper cups, massive dark blocky bark, and dry ridge context.",
+              "resolvingView": "Lower leaf surface, complete fruit stalk, mature bark, and a landscape view establishing ridge versus lowland position."
+            },
+            {
+              "confuser": "Quercus alba or Quercus macrocarpa",
+              "visibleSeparators": "White and bur oak leaves have true rounded lobes; bur oak also has a mossy-fringed cup and often corky twigs, while white oak has pale flaky bark and a shallow cup. Chestnut oak is unlobed with rounded teeth and has a deep unfringed cup.",
+              "resolvingView": "Several complete leaves, cup rim and profile, twig internodes, and mature upper-bole bark."
+            }
+          ],
+          "silvicsCapsule": {
+            "shadeTolerance": "Intermediate; seedlings may persist beneath an open canopy but successful recruitment depends on substantial light and release.",
+            "moistureDrainageSoils": "Most characteristic of dry, rocky, well-drained acidic sandstone and shale ridges with low fertility, though best growth occurs on deeper protected slopes.",
+            "geographicClimaticAffinity": "Appalachian and Allegheny species reaching the course chiefly in PA/NJ, southern NY and New England, with scattered western outliers.",
+            "forestAssociations": "Associates with scarlet, black, white, and northern red oak, hickories, blackgum, red maple, sweet birch, white or pitch pine, mountain-laurel, and blueberries.",
+            "regeneration": "Animal-dispersed acorns establish seedlings and advance reproduction; vigorous sprouts following harvest or top-kill are a major stand-replacement pathway.",
+            "vegetativeReproduction": "One of the strongest eastern oak sprouters, producing vigorous root-collar and stump sprouts after cutting or fire, especially from young and moderate-size stems.",
+            "seedMastBehavior": "One-season acorns are produced in variable crops and dispersed rapidly by gravity and wildlife; predation and acorn weevils create large losses.",
+            "establishmentRequirements": "Thin litter or exposed mineral soil, adequate moisture during germination, and high light after establishment; ericaceous shrubs, tolerant hardwoods, browse, and drought can suppress seedlings.",
+            "successionalRole": "Persistent edaphic dominant on dry ridges and a disturbance-dependent mid-successional oak on better sites; fire exclusion can shift mixed stands toward red maple and other mesophytes.",
+            "disturbanceResponse": "Thick bark and vigorous sprouting confer resilience to surface fire and cutting, but small stems may be top-killed and repeated severe burning can exhaust sprouts. Drought tolerance is high relative to mesic associates.",
+            "longevityGrowthStrategy": "Slow on harsh ridges, moderate on better slopes, and capable of living several centuries; prioritizes persistence and sprouting over rapid early height growth.",
+            "browseSusceptibility": "Acorns and sprouts are heavily used by deer and other wildlife; repeated browsing can hold advance reproduction below competitive height.",
+            "insectsDiseases": "Oak wilt is possible but white-oak-group trees often decline more slowly than red oaks; spongy moth, borers, chestnut oak decline, root rots, and acorn insects are important under stress.",
+            "managementImplications": "Match the species to dry-ridge objectives, retain vigorous seed trees and sprout sources, control browse and competing ericaceous or mesophytic layers, and treat historical Q. prinus records cautiously where taxonomy is ambiguous.",
+            "silviculturalSystemResponse": "Shelterwood, group openings, clearcutting with reliable sprout potential, and prescribed fire can sustain chestnut oak; single-tree selection without adequate understory light generally favors more tolerant species."
+          },
+          "references": [
+            {
+              "title": "Chestnut Oak — Silvics of North America",
+              "url": "https://research.fs.usda.gov/silvics/chestnut-oak",
+              "scope": "Distribution, ridge sites, associations, sprouting, growth, management, damaging agents, and fire."
+            },
+            {
+              "title": "Quercus michauxii and Quercus montana — FEIS",
+              "url": "https://research.fs.usda.gov/feis/species-reviews/quespp3",
+              "scope": "Taxonomic history of Q. prinus, ecology, regeneration, succession, and disturbance response."
+            },
+            {
+              "title": "Quercus montana — chestnut oak",
+              "url": "https://gobotany.nativeplanttrust.org/species/quercus/montana/",
+              "scope": "Regional leaf, bark, bud, fruit, habitat, range, and nomenclatural characters."
+            }
+          ]
+        },
+        {
+          "taxonId": "CELTIS_OCCIDENTALIS",
+          "preferredCommonName": "Common hackberry",
+          "canonicalScientificName": "Celtis occidentalis",
+          "acceptedAlternatives": [
+            "Formerly placed in Ulmaceae or Celtidaceae"
+          ],
+          "family": "Cannabaceae",
+          "distributionInCourseRegion": "MN/WI/MI and southern ON through NY, PA/NJ, and southern New England",
+          "ecologicalImportance": "Tough tree of rich bottomlands, limestone sites, and urban settings",
+          "coursePriority": "2 - regional",
+          "tier": "B",
+          "fieldIdentification": {
+            "foliage": "Alternate simple ovate leaves have a strongly unequal, oblique base, three prominent veins arising near the base, and a serrate margin mainly beyond the lower third. The upper surface is distinctly rough like sandpaper while the lower surface is smoother to softly hairy. Twig attachment must be visible because detached leaves can mimic elm.",
+            "barkAgeSeries": "Young bark is smooth gray-brown with lenticels. Intermediate stems develop isolated corky warts, and mature gray bark forms distinctive irregular corky knobs, ridges, and projecting plates. Warts may be sparse on vigorous young trees and are not insect galls.",
+            "dormant": "Slender alternate twigs are often zigzag, reddish-brown to gray, with small appressed ovoid pointed buds and no true terminal bud; the last lateral bud appears terminal. Leaf scars are small and alternate. Corky bark and persistent fruits greatly improve winter confidence because the twig alone overlaps elm.",
+            "reproductive": "Small greenish flowers appear with the leaves. Each fruit is a single round drupe about 6–10 mm wide on a long slender drooping pedicel, ripening orange-red to dark purple or nearly black around one hard pitted stone and often persisting into winter. It is not an elm samara or basswood nutlet cluster.",
+            "wholeTreeContext": "A small to medium, occasionally large tree with an irregular rounded crown, common on rich bottomlands, riparian terraces, limestone bluffs, high-pH soils, disturbed edges, and urban sites. It tolerates drought and periodic flooding but not permanent saturation.",
+            "variationAndCondition": "Leaf size, roughness, and bark corkiness vary with age and vigor. Hackberry nipple galls distort leaves, and witches'-broom produces dense twig clusters; both are common conditions but neither is required for identity. Epicormic growth, road salt, drought, and pruning can further alter form.",
+            "defensibilityLimits": "Warty corky mature bark can permit rapid field recognition, but young smooth stems require the combined unequal three-veined rough leaf, alternate twig, and long-stalked drupe. A gall-covered detached leaf or zigzag twig alone is insufficient. Sugarberry is mostly outside the course region, but planted or southern material may require a Celtis-level answer."
+          },
+          "confuserControl": [
+            {
+              "confuser": "Ulmus species",
+              "visibleSeparators": "Elms also have unequal alternate leaves but usually show strongly double-serrate margins, lateral veins running toward each tooth, different buds, and flat samaras. Hackberry has three strong basal veins, a rough upper surface, corky warty bark, and long-stalked round drupes.",
+              "resolvingView": "Leaf base and venation, complete margin, buds, mature bark, and any fruit or persistent pedicel."
+            },
+            {
+              "confuser": "Tilia americana",
+              "visibleSeparators": "Basswood leaves are broadly heart-shaped and more nearly symmetrical with palmate veins, and fruits hang as nutlet clusters from a strap-like bract. Hackberry leaves are obliquely based and fruits are solitary long-stalked drupes; mature bark is corky rather than long-ridged.",
+              "resolvingView": "Complete leaf base, fruit attachment, several twig nodes, and mature bark."
+            },
+            {
+              "confuser": "Celtis laevigata",
+              "visibleSeparators": "Sugarberry generally has narrower, less rough leaves and smoother bark with fewer prominent corky warts and is principally southern; common hackberry has coarser rough leaves and strongly corky bark. Characters and ranges overlap south of the course envelope.",
+              "resolvingView": "Multiple mature leaves with texture and measurements, bark from the trunk, fruit, and verified geographic provenance."
+            }
+          ],
+          "silvicsCapsule": {
+            "shadeTolerance": "Intermediate to tolerant; seedlings may persist in dense shade, although prolonged suppression produces poor form and release improves growth.",
+            "moistureDrainageSoils": "Grows on many soils but is strongest on fertile valley alluvium, riparian terraces, and calcareous or high-pH uplands; tolerates drought and periodic flooding but not permanent high water.",
+            "geographicClimaticAffinity": "Broad continental eastern species tolerant of heat, cold, and climatic extremes, especially common in the Great Lakes and central portion of the course region.",
+            "forestAssociations": "Occurs with elm, green ash, boxelder, silver maple, cottonwood, basswood, sugar maple, bur and swamp white oak, walnut, and other rich-site hardwoods.",
+            "regeneration": "Birds and mammals disperse drupes widely; seeds can remain viable in litter through more than one winter, and seedlings establish under existing hardwood stands as well as some disturbed sites.",
+            "vegetativeReproduction": "Small stumps may sprout and the species can be propagated by cuttings or layering, but large-tree stump sprouting is uncommon and clonal spread is not its main forest strategy.",
+            "seedMastBehavior": "Produces good fruit crops in most years with lighter intervening crops; persistent winter drupes are consumed and dispersed by many birds and mammals.",
+            "establishmentRequirements": "Moist but aerated soil, a seed source or animal dispersal, and eventual crown space; young seedlings are more sensitive to saturated soils than mature trees.",
+            "successionalRole": "Occurs from temporary to subclimax communities and can enter understories beneath oak or mixed hardwoods; it seldom forms extensive pure forest stands.",
+            "disturbanceResponse": "Tolerates urban disturbance, wind, drought, and periodic flooding better than many associates, but thin bark is fire-sensitive and flooding of long duration injures roots and seedlings.",
+            "longevityGrowthStrategy": "Moderate to fast on good alluvium, slow when suppressed or on poor sites, and commonly reaches about 150–200 years as a small to medium canopy tree.",
+            "browseSusceptibility": "Deer browse seedlings and twigs, while birds and mammals heavily use the fruit; browsing may limit local recruitment but is not usually the species' sole constraint.",
+            "insectsDiseases": "Nipple galls are conspicuous but usually minor; witches'-broom results from interacting gall mites and powdery mildew. Leaf spots, hackberry engraver, root rot, and decay after fire or injury also occur.",
+            "managementImplications": "Retain for wildlife fruit, bottomland diversity, and resilience on calcareous sites, protect roots and soil aeration, and do not mistake cosmetic galls or witches'-broom for evidence that a different species is present.",
+            "silviculturalSystemResponse": "Can persist under selection and respond to moderate release; group openings improve crown form and fruiting, while lowland harvesting must avoid rutting, compaction, and hydrologic change."
+          },
+          "references": [
+            {
+              "title": "Hackberry — Silvics of North America",
+              "url": "https://research.fs.usda.gov/silvics/hackberry",
+              "scope": "Distribution, soils, flooding, reproduction, shade tolerance, growth, longevity, associates, management, and damaging agents."
+            },
+            {
+              "title": "Celtis occidentalis, common hackberry — FEIS",
+              "url": "https://research.fs.usda.gov/feis/species-reviews/celocc",
+              "scope": "Taxonomy, synonyms, distribution, ecology, wildlife, succession, fire, and management context."
+            },
+            {
+              "title": "Celtis occidentalis — common hackberry",
+              "url": "https://gobotany.nativeplanttrust.org/species/celtis/occidentalis/",
+              "scope": "Regional leaf, bark, bud, fruit, habitat, family, taxonomy, and range characters."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sessionId": "W06-D",
+      "letter": "D",
+      "title": "Oak multi-organ laboratory",
+      "kind": "multi_organ_laboratory",
+      "taxonScope": "all_module_taxa",
+      "modalities": [
+        "foliage",
+        "bark",
+        "reproductive",
+        "dormant",
+        "whole_tree_context"
+      ],
+      "delivery": "leaves buds acorns bark and site stations",
+      "feedbackRelease": "after_station_batch_submission",
+      "runtimeBoundary": "runtime_retrieval_from_admitted_practice_media",
+      "introducedTaxonIds": [],
+      "teachingProfiles": []
+    },
+    {
+      "sessionId": "W06-E",
+      "letter": "E",
+      "title": "Oak-transition cumulative retrieval",
+      "kind": "cumulative_adaptive_retrieval",
+      "taxonScope": "cr_01_eligible_taxa_prioritized_by_mastery",
+      "modalities": [
+        "foliage",
+        "bark",
+        "reproductive",
+        "dormant",
+        "whole_tree_context"
+      ],
+      "delivery": "adaptive retrieval with nomenclature and silvics prompts",
+      "feedbackRelease": "after_batch_submission",
+      "runtimeBoundary": "runtime_retrieval_from_admitted_practice_media",
+      "introducedTaxonIds": [],
+      "teachingProfiles": []
+    }
+  ],
+  "assessmentSummaries": [
+    {
+      "assessmentId": "W06-PRACTICAL",
+      "type": "weekly_identification_practical",
+      "categoryId": "weekly_identification_practicals",
+      "cumulative": true,
+      "scope": "taxa_introduced_through_week_6_with_oak_emphasis",
+      "modalities": [
+        "foliage",
+        "bark",
+        "reproductive",
+        "dormant",
+        "whole_tree_context"
+      ]
+    },
+    {
+      "assessmentId": "W06-NOMENCLATURE-3",
+      "type": "cumulative_nomenclature_check",
+      "categoryId": "scientific_nomenclature",
+      "cumulative": true,
+      "scope": "balanced_common_to_scientific_and_scientific_to_common",
+      "modalities": []
+    },
+    {
+      "assessmentId": "W06-SILVICS-3",
+      "type": "cumulative_silvics_retrieval",
+      "categoryId": "silvics",
+      "cumulative": true,
+      "scope": "taxa_introduced_through_week_6",
+      "modalities": [
+        "whole_tree_context"
+      ]
+    }
+  ],
+  "remediationGate": {
+    "policy_id": "REM-01",
+    "evaluate_after_assessment_ids": [
+      "W06-PRACTICAL",
+      "W06-NOMENCLATURE-3",
+      "W06-SILVICS-3"
+    ],
+    "broader_course_progression": "continues",
+    "insertion_sessions": [
+      "W07-B",
+      "W07-E"
+    ]
+  },
+  "teachingBoundary": "This package contains labeled instruction and public module structure only. Retrieval stations are assembled separately from admitted practice media, and formal forms, examination media, answer keys, and learner records remain private."
+}

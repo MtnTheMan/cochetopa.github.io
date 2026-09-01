@@ -1,0 +1,101 @@
+{
+  "$schema": "cochetopa-public-teaching-package-index/1.0",
+  "schemaVersion": "1.0.0",
+  "courseId": "northern-hardwoods-mixedwoods-dendrology-silvics-intensive",
+  "courseVersion": "2026.1-draft",
+  "moduleCount": 10,
+  "sessionCount": 50,
+  "profileCount": 80,
+  "modules": [
+    {
+      "moduleId": "week-01",
+      "sequence": 1,
+      "title": "Foundations + Northern Hardwood Anchors",
+      "path": "week-01.json",
+      "sha256": "221e20c106610f983275aabaace3c0c6b11644d03f13b7119682dee2b4382262",
+      "sessionCount": 5,
+      "profileCount": 9
+    },
+    {
+      "moduleId": "week-02",
+      "sequence": 2,
+      "title": "Northern Hardwood Associates",
+      "path": "week-02.json",
+      "sha256": "4bcd60a792d4c8f99a7e6df1ff22cc79c2f83a5155afc246b0fd367ed145f35d",
+      "sessionCount": 5,
+      "profileCount": 12
+    },
+    {
+      "moduleId": "week-03",
+      "sequence": 3,
+      "title": "Coniferous Mixedwoods",
+      "path": "week-03.json",
+      "sha256": "c2e4550a6bf6a95bb2baad35cf1963437ab7c618a4aaf9873549b4e164518e40",
+      "sessionCount": 5,
+      "profileCount": 13
+    },
+    {
+      "moduleId": "week-04",
+      "sequence": 4,
+      "title": "Boreal and Great Lakes Transition",
+      "path": "week-04.json",
+      "sha256": "4176adbc8c0e8f69f845a0be998a46329338a836be25b1d7682b24afe6918cdd",
+      "sessionCount": 5,
+      "profileCount": 6
+    },
+    {
+      "moduleId": "week-05",
+      "sequence": 5,
+      "title": "Ashes, Elms, Lowlands, and Riparian Systems",
+      "path": "week-05.json",
+      "sha256": "1f226f52abca9c60314ea4b226a41354cd4a73aeaa5b3a5ceb140e06166cce25",
+      "sessionCount": 5,
+      "profileCount": 13
+    },
+    {
+      "moduleId": "week-06",
+      "sequence": 6,
+      "title": "Oaks and Oak-Northern Hardwood Transition",
+      "path": "week-06.json",
+      "sha256": "3d62ad6cef0ac0da16d5d97b821a934418c473a599b470e4d1a4d39c29d9da79",
+      "sessionCount": 5,
+      "profileCount": 10
+    },
+    {
+      "moduleId": "week-07",
+      "sequence": 7,
+      "title": "Hickories, Walnuts, and Allegheny/Southern Associates",
+      "path": "week-07.json",
+      "sha256": "6140a930ef7425e80a5b00d4cd7712933276431c2c8196c13f28edc5425c0b9b",
+      "sessionCount": 5,
+      "profileCount": 12
+    },
+    {
+      "moduleId": "week-08",
+      "sequence": 8,
+      "title": "Acadian and Eastern Regional Integration",
+      "path": "week-08.json",
+      "sha256": "5e4489182053dc6b21b149cc120b8103a7e3f42a2b5fdfddafdc92d1509d4a7c",
+      "sessionCount": 5,
+      "profileCount": 2
+    },
+    {
+      "moduleId": "week-09",
+      "sequence": 9,
+      "title": "Pathology, Variation, Winter Dendrology, and Adversarial Identification",
+      "path": "week-09.json",
+      "sha256": "3cc2fbe2a48f2a55e187ac5123806a1cfcb68c60c04bc7dbd9f4689d2c8433a5",
+      "sessionCount": 5,
+      "profileCount": 3
+    },
+    {
+      "moduleId": "week-10",
+      "sequence": 10,
+      "title": "Comprehensive Integration and Certification",
+      "path": "week-10.json",
+      "sha256": "5e03f080681af3f3993d271cd2116f92641aead73919544c13845742535aab25",
+      "sessionCount": 5,
+      "profileCount": 0
+    }
+  ]
+}

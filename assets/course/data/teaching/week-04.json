@@ -1,0 +1,781 @@
+{
+  "$schema": "cochetopa-public-teaching-package/1.0",
+  "schemaVersion": "1.0.0",
+  "courseId": "northern-hardwoods-mixedwoods-dendrology-silvics-intensive",
+  "courseVersion": "2026.1-draft",
+  "moduleId": "week-04",
+  "sequence": 4,
+  "title": "Boreal and Great Lakes Transition",
+  "deliveryStatus": "teaching_text_complete_visual_media_pending_admission",
+  "objectives": [
+    "Identify boreal-transition Populus, alder, and mountain-ash taxa from organs and whole-tree form.",
+    "Transfer earlier hardwood and conifer identifications into western Great Lakes and southern boreal contexts.",
+    "Distinguish morphology-supported identification from context-driven guessing.",
+    "Retrieve names and silvics cumulatively through four modules.",
+    "Complete the first substantial cumulative practical and field-context assessment."
+  ],
+  "cumulativeReview": {
+    "policy_id": "CR-01",
+    "eligible_taxon_rule": "introduction_week_lte_module_sequence",
+    "through_introduction_week": 4,
+    "eligible_taxon_count": 40,
+    "selection_priorities": [
+      "field_context_transfer",
+      "populus_and_sorbus_confusers",
+      "overdue_week_1_3_taxa",
+      "whole_tree_deficits",
+      "nomenclature_and_silvics"
+    ]
+  },
+  "confuserSets": [
+    {
+      "confusionSetId": "CS01",
+      "name": "Sugar / black / Norway maple",
+      "memberTaxa": [
+        "ACER_SACCHARUM",
+        "ACER_NIGRUM",
+        "ACER_PLATANOIDES"
+      ],
+      "keySeparators": "Petiole latex; leaf underside hair and stipules; bud size/shape; samara angle",
+      "resolvingViews": "Fresh-broken petiole; lower surface; terminal bud; ripe samara"
+    },
+    {
+      "confusionSetId": "CS03",
+      "name": "Striped / mountain maple",
+      "memberTaxa": [
+        "ACER_PENSYLVANICUM",
+        "ACER_SPICATUM"
+      ],
+      "keySeparators": "Green-white striped bark versus unstriped; leaf size/base; fruit cluster posture; growth form",
+      "resolvingViews": "Young stem; intact leaf; fruit cluster; whole plant"
+    },
+    {
+      "confusionSetId": "CS05",
+      "name": "Paper / heart-leaved / gray birch",
+      "memberTaxa": [
+        "BETULA_PAPYRIFERA",
+        "BETULA_CORDIFOLIA",
+        "BETULA_POPULIFOLIA"
+      ],
+      "keySeparators": "Leaf base and vein count; twig resin glands; peeling versus tight bark; black branch marks; elevation",
+      "resolvingViews": "Several mature leaves; resin-warty twig; bark sheet; whole growth form; location"
+    },
+    {
+      "confusionSetId": "CS06",
+      "name": "Yellow / sweet birch",
+      "memberTaxa": [
+        "BETULA_ALLEGHANIENSIS",
+        "BETULA_LENTA"
+      ],
+      "keySeparators": "Both wintergreen; yellow birch golden curling bark and spur shoots versus sweet birch dark blocky bark",
+      "resolvingViews": "Scratched twig; young and mature bark; fruiting strobile; lower leaf surface"
+    },
+    {
+      "confusionSetId": "CS07",
+      "name": "White / black / red / Norway spruce",
+      "memberTaxa": [
+        "PICEA_GLAUCA",
+        "PICEA_MARIANA",
+        "PICEA_RUBENS",
+        "PICEA_ABIES"
+      ],
+      "keySeparators": "Cone size and scale margin; twig hairs; bud resin; foliage color/odor; pendulous branchlets",
+      "resolvingViews": "Full cone; twig macro; bud; whole crown; regional site"
+    },
+    {
+      "confusionSetId": "CS08",
+      "name": "Spruce / fir / hemlock",
+      "memberTaxa": [
+        "PICEA_GLAUCA",
+        "PICEA_MARIANA",
+        "PICEA_RUBENS",
+        "ABIES_BALSAMEA",
+        "TSUGA_CANADENSIS"
+      ],
+      "keySeparators": "Woody pegs versus pad base versus petiole; needle cross-section; cone orientation and persistence",
+      "resolvingViews": "Needle attachment macro; underside; terminal shoot; intact or attached cone"
+    },
+    {
+      "confusionSetId": "CS09",
+      "name": "Red / jack / Scots / pitch pine",
+      "memberTaxa": [
+        "PINUS_RESINOSA",
+        "PINUS_BANKSIANA",
+        "PINUS_SYLVESTRIS",
+        "PINUS_RIGIDA"
+      ],
+      "keySeparators": "Fascicle count/length; bend test; cone curvature/prickles; upper-bole orange bark; epicormic shoots",
+      "resolvingViews": "Several complete fascicles; cone and umbo; upper and lower bark; whole crown"
+    },
+    {
+      "confusionSetId": "CS10",
+      "name": "Tamarack / European larch",
+      "memberTaxa": [
+        "LARIX_LARICINA",
+        "LARIX_DECIDUA"
+      ],
+      "keySeparators": "Cone size and scale count/edge; needle cluster density; native peatland versus planting",
+      "resolvingViews": "Full cone; spur shoot; cluster count; site/planting context"
+    },
+    {
+      "confusionSetId": "CS15",
+      "name": "Black / pin / chokecherry",
+      "memberTaxa": [
+        "PRUNUS_SEROTINA",
+        "PRUNUS_PENSYLVANICA",
+        "PRUNUS_VIRGINIANA"
+      ],
+      "keySeparators": "Fruit cluster architecture; petiole glands; lower-midvein hair; bark age; whole pioneer/clonal form",
+      "resolvingViews": "Raceme or cluster; petiole macro; lower leaf; mature bark; whole plant"
+    },
+    {
+      "confusionSetId": "CS16",
+      "name": "American hornbeam / eastern hophornbeam",
+      "memberTaxa": [
+        "CARPINUS_CAROLINIANA",
+        "OSTRYA_VIRGINIANA"
+      ],
+      "keySeparators": "Muscular smooth bole and three-lobed fruit bracts versus shreddy bark and hoplike sacs",
+      "resolvingViews": "Bole; fruit; bud; wet versus dry site"
+    },
+    {
+      "confusionSetId": "CS21",
+      "name": "Yellow birch / black cherry bark",
+      "memberTaxa": [
+        "BETULA_ALLEGHANIENSIS",
+        "PRUNUS_SEROTINA"
+      ],
+      "keySeparators": "Golden horizontal curls and wintergreen twig versus burnt-chip plates, petiole glands, and almond twig odor",
+      "resolvingViews": "Young and old bark; scratched twig; leaf petiole and underside; fruit"
+    },
+    {
+      "confusionSetId": "CS22",
+      "name": "Serviceberry / mountain-ashes / chokecherry",
+      "memberTaxa": [
+        "AMELANCHIER_LAEVIS",
+        "SORBUS_AMERICANA",
+        "SORBUS_DECORA",
+        "PRUNUS_VIRGINIANA"
+      ],
+      "keySeparators": "Simple versus compound leaves; pome calyx versus drupe; leaflet proportions; buds; fruit architecture",
+      "resolvingViews": "Whole leaf; fruit close-up; bud; flowers; multiple leaves"
+    }
+  ],
+  "expectedSilvicsRetrieval": {
+    "taxon_scope": "all_taxa_introduced_through_week_4",
+    "dimensions": [
+      "geographic_climatic_affinity",
+      "moisture_drainage_soils",
+      "forest_associations",
+      "vegetative_reproduction",
+      "successional_role",
+      "disturbance_response"
+    ],
+    "response_standard": "Use site and regional context to support, but never substitute for, diagnostic morphology."
+  },
+  "sessions": [
+    {
+      "sessionId": "W04-A",
+      "letter": "A",
+      "title": "Aspens and balsam poplar",
+      "kind": "species_introduction",
+      "taxonScope": "listed_new_taxa",
+      "modalities": [
+        "foliage",
+        "bark",
+        "dormant",
+        "whole_tree_context"
+      ],
+      "delivery": "organ comparisons across age and clonal form",
+      "feedbackRelease": "during_instruction",
+      "runtimeBoundary": "labeled_teaching_content",
+      "introducedTaxonIds": [
+        "POPULUS_TREMULOIDES",
+        "POPULUS_GRANDIDENTATA",
+        "POPULUS_BALSAMIFERA"
+      ],
+      "teachingProfiles": [
+        {
+          "taxonId": "POPULUS_TREMULOIDES",
+          "preferredCommonName": "Quaking aspen",
+          "canonicalScientificName": "Populus tremuloides",
+          "acceptedAlternatives": [],
+          "family": "Salicaceae",
+          "distributionInCourseRegion": "Throughout the region, especially northern and boreal-transition landscapes",
+          "ecologicalImportance": "Extremely shade-intolerant clonal pioneer after fire or harvest",
+          "coursePriority": "1 - core",
+          "tier": "A",
+          "fieldIdentification": {
+            "foliage": "Alternate, simple leaves on normal short shoots are usually nearly round to broadly ovate or rhombic, 2–8 cm long, with mostly 18–30 small rounded teeth per side. The long petiole is strongly flattened at right angles to the blade, allowing the leaf to quake in light wind. Vigorous root suckers and stump shoots may carry much larger, less circular, coarsely toothed leaves and must not be keyed as normal crown foliage.",
+            "barkAgeSeries": "Young stems have thin, smooth, pale greenish-white to cream bark, often with dark branch scars and horizontal lenticels. Pole bark becomes gray-green or yellowish, while old lower boles become gray to nearly black and deeply furrowed even though upper bark remains pale and smooth. Powdery surface bloom, wetness, lichens, cankers, and animal scarring can substantially alter the familiar white-bark appearance.",
+            "dormant": "Alternate slender brown to gray-red twigs end in narrow, pointed, usually glabrous buds with overlapping glossy scales; lateral buds are appressed. Leaf scars are alternate and small. Dormant twigs resemble other aspens, so the glabrous buds are most useful when directly contrasted with the visibly hairy buds of bigtooth aspen and the much larger, sticky, strongly aromatic buds of balsam poplar.",
+            "reproductive": "Male and female catkins occur on separate clones and expand before the leaves. Female catkins develop many small capsules that split to release minute seeds embedded in cottony hairs in late spring or early summer. Catkins and cottony seed establish Populus well but usually need associated foliage, buds, or a known parent tree for a defensible species call.",
+            "wholeTreeContext": "A fast-growing, straight-stemmed small to medium canopy tree often occurring in even-aged clonal patches after fire, clearcutting, windthrow, or land abandonment. Pale upper boles, fine branches, leaves visibly trembling, and a dense cohort of connected stems support the call across northern hardwood, aspen–birch, and boreal-transition landscapes.",
+            "variationAndCondition": "Leaf size and tooth pattern differ sharply between crown short shoots and vigorous suckers. Natural hybrids with bigtooth aspen can show intermediate blade size and roughly 14–20 intermediate-height teeth per side. Hypoxylon canker, trunk decay, browsing, sapsucker holes, fire scars, old rough basal bark, and browse- or weevil-deformed crowns should be treated as condition evidence rather than different taxa.",
+            "defensibilityLimits": "Several normal crown leaves showing many small teeth plus a strongly flattened petiole usually support species, especially with glabrous buds or a clonal whole-tree view. A single giant sucker leaf, white bark alone, distant yellow foliage, detached catkins, or cottony seed alone supports only Populus, an aspen group, or insufficient evidence. Intermediate tooth counts should trigger consideration of Populus × smithii rather than a forced parent-species call."
+          },
+          "confuserControl": [
+            {
+              "confuser": "Populus grandidentata",
+              "visibleSeparators": "Normal bigtooth aspen leaves are usually 7–12 cm long with only about 5–12 large teeth per side, and its winter bud scales are hairy. Quaking aspen normally has smaller blades with 18–30 teeth per side and glabrous bud scales; vigorous shoots and hybrids can erase this contrast.",
+              "resolvingView": "Several ordinary short-shoot leaves with scale and tooth counts, plus a sharply focused terminal bud and a whole shoot showing whether it is a vigorous sucker."
+            },
+            {
+              "confuser": "Populus balsamifera",
+              "visibleSeparators": "Balsam poplar has longer ovate leaves with a drawn-out tip, weakly rather than strongly flattened petioles, and a very sticky, large, aromatic terminal bud. Quaking aspen has rounder finely toothed leaves and smaller, non-viscid buds.",
+              "resolvingView": "Petiole cross-section, both leaf surfaces, and an intact terminal bud tested visually for resin and, on a field specimen, cautiously for odor."
+            },
+            {
+              "confuser": "Betula papyrifera",
+              "visibleSeparators": "Paper birch leaves have a pinnate vein framework ending in sharper double teeth and petioles that are not laterally flattened; its bark peels in papery sheets and bears conspicuous horizontal lenticels. Aspen bark may be pale but does not form birch-like papery curls.",
+              "resolvingView": "Leaf venation and petiole in cross-section, then a close bark view showing whether thin papery sheets and horizontal birch lenticels are present."
+            }
+          ],
+          "silvicsCapsule": {
+            "shadeTolerance": "Very shade intolerant; seedlings and root suckers require nearly full light, and suppressed stems lose vigor rapidly beneath a developing canopy.",
+            "moistureDrainageSoils": "Occupies a very broad edaphic range, from dry sands and shallow uplands to moist loams and cold lowlands, but best growth generally occurs on deep, fertile, well-aerated, moist soils without prolonged saturation.",
+            "geographicClimaticAffinity": "A transcontinental cold-temperate and boreal species that is ubiquitous through the northern part of the course region and extends southward on cool sites and after disturbance.",
+            "forestAssociations": "Forms pure or mixed aspen stands and commonly occurs with paper birch, balsam fir, white and black spruce, jack and red pine, balsam poplar, red maple, and northern hardwood successors.",
+            "regeneration": "Minute wind-dispersed seed can establish on continuously moist exposed mineral soil, but most established stands in the region regenerate from pre-existing root systems after the parent overstory is killed or removed.",
+            "vegetativeReproduction": "Root suckering is the dominant stand-regeneration mechanism. Loss of the parent stems and warming of the forest floor release dormant root buds, producing dense genetically clonal cohorts that can expand beyond the former crown area.",
+            "seedMastBehavior": "Seed is produced frequently by mature female clones and disperses soon after capsule opening, but viability is brief and successful seedling recruitment is episodic because the tiny seeds require a persistently moist bare seedbed.",
+            "establishmentRequirements": "Suckers require full light, warm soil, and living roots with adequate carbohydrate reserves; seedlings require bare moist mineral substrate and freedom from drying and heavy competition during their first weeks.",
+            "successionalRole": "Classic early-seral pioneer that rapidly occupies burned, harvested, or abandoned ground, ameliorates the site, and is commonly replaced by more shade-tolerant conifers or northern hardwoods without renewed disturbance.",
+            "disturbanceResponse": "Fire, clearcutting, windthrow, and other overstory-killing disturbances commonly stimulate profuse suckering if roots survive. Repeated severe fire, soil compaction, flooding, root damage, or partial cutting that leaves a shaded residual canopy can reduce the response.",
+            "longevityGrowthStrategy": "Fast juvenile height growth and early stand dominance are coupled with relatively short stem longevity; individual stems commonly decline well before long-lived northern hardwoods, although the clone can persist through repeated stem generations.",
+            "browseSusceptibility": "Highly palatable to deer, moose, snowshoe hare, and beaver; sustained browsing can repeatedly top-kill young suckers and prevent a cohort from escaping into sapling size.",
+            "insectsDiseases": "Forest tent caterpillar and other defoliators, aspen leaf miner, borers, Hypoxylon canker, Armillaria root disease, and Phellinus heart rot can cause major mortality, breakage, and internal defect.",
+            "managementImplications": "Map clone vigor and health before harvest, protect the extensive shallow root system from rutting and compaction, retain wildlife values where appropriate, and anticipate very high sucker density rather than judging regeneration by seed trees alone.",
+            "silviculturalSystemResponse": "Even-aged clearcut or coppice-style overstory removal during dormancy commonly produces the strongest sucker cohort. Shelterwood or selection residuals shade suckers and can damage roots, so they are poor choices when vigorous aspen renewal is the objective."
+          },
+          "references": [
+            {
+              "title": "Quaking Aspen — Silvics of North America",
+              "url": "https://research.fs.usda.gov/silvics/quaking-aspen",
+              "scope": "Range, sites, associates, seed and clonal regeneration, succession, disturbance response, growth, damaging agents, and management."
+            },
+            {
+              "title": "Populus tremuloides — quaking poplar",
+              "url": "https://gobotany.nativeplanttrust.org/species/populus/tremuloides/",
+              "scope": "Regional morphology, petiole orientation, leaf measurements, tooth counts, habitat, hybrids, and defensible comparison with bigtooth aspen."
+            },
+            {
+              "title": "Populus tremuloides, quaking aspen — Fire Effects Information System",
+              "url": "https://research.fs.usda.gov/feis/species-reviews/poptre",
+              "scope": "Fire ecology, postfire suckering, plant communities, browse, successional behavior, and management evidence."
+            }
+          ]
+        },
+        {
+          "taxonId": "POPULUS_GRANDIDENTATA",
+          "preferredCommonName": "Bigtooth aspen",
+          "canonicalScientificName": "Populus grandidentata",
+          "acceptedAlternatives": [],
+          "family": "Salicaceae",
+          "distributionInCourseRegion": "Great Lakes through southern ON/QC, NY, New England, and NB, often warmer/drier than quaking aspen",
+          "ecologicalImportance": "Fast-growing disturbance tree regenerating strongly by root suckers",
+          "coursePriority": "1 - core",
+          "tier": "A",
+          "fieldIdentification": {
+            "foliage": "Alternate, simple blades on normal shoots are broadly ovate, usually 7–12 cm long, and bear roughly 5–12 conspicuously large, rounded to blunt teeth per side. Expanding leaves are densely white-woolly before becoming mostly glabrous; the petiole is strongly flattened at right angles to the blade. Use ordinary crown leaves, because sprouts and hybrid leaves can be substantially different.",
+            "barkAgeSeries": "Saplings have smooth thin olive-green to gray bark with lenticels and dark branch scars. Pole bark becomes dull gray or yellow-green; mature lower boles darken and develop thick irregular furrows and ridges while upper stems remain smoother. Old rough bark, wet surfaces, and pale lichens overlap both quaking aspen and balsam poplar.",
+            "dormant": "Alternate gray-brown twigs have a true terminal bud and appressed lateral buds. The several overlapping bud scales are distinctly hairy, a valuable winter separator from the normally glabrous buds of quaking aspen; flower buds are plumper. Bud hair must be seen at close range and should be paired with twig and leaf evidence when possible.",
+            "reproductive": "Male and female catkins occur on separate trees and appear before leaf expansion. Female catkins mature into capsules whose minute seeds are carried by cottony hairs. Reproductive material strongly supports Populus but is rarely diagnostic between the native aspens without bud, emerging-leaf, or parent-tree evidence.",
+            "wholeTreeContext": "A rapidly growing medium tree with a straight bole, ascending branches, and a rounded or open crown, commonly forming root-suckering patches on disturbed sandy uplands, glacial outwash, ridges, and well-drained northern hardwood sites. It is regionally more associated with warm, dry uplands than quaking aspen, but the site ranges overlap.",
+            "variationAndCondition": "New leaves lose their striking white wool as they expand, and sucker leaves can be oversized or atypically toothed. Natural hybrids with quaking aspen have intermediate blade size and tooth number. Cankers, heart rot, animal browse, logging scars, fire, lichens, and old furrowed basal bark can obscure normal form.",
+            "defensibilityLimits": "A strong species call uses multiple normal leaves with few very large teeth plus hairy winter buds or clearly woolly expanding foliage. One coarse-toothed sucker leaf, rough bark, a cottony catkin, or dry-upland context alone is insufficient. Intermediate leaves should be recorded as the quaking–bigtooth complex or possible Populus × smithii until additional shoots and buds can be examined."
+          },
+          "confuserControl": [
+            {
+              "confuser": "Populus tremuloides",
+              "visibleSeparators": "Bigtooth aspen normally has 5–12 large teeth per leaf side, larger 7–12 cm blades, white-woolly emerging leaves, and hairy bud scales. Quaking aspen normally has 18–30 tiny teeth per side, smaller blades, and glabrous buds.",
+              "resolvingView": "Several mature short-shoot leaves with a scale reference, a newly expanding leaf if available, and a sharply focused winter bud showing scale hairs."
+            },
+            {
+              "confuser": "Populus balsamifera",
+              "visibleSeparators": "Balsam poplar has a drawn-out leaf tip, much finer teeth, only weakly flattened petioles, and large sticky aromatic buds. Bigtooth aspen has fewer coarse blunt teeth, strongly flattened petioles, and hairy rather than strongly viscid buds.",
+              "resolvingView": "Terminal bud, petiole cross-section, full leaf margin, and lower leaf surface checked for orange resin streaks."
+            },
+            {
+              "confuser": "Populus × smithii",
+              "visibleSeparators": "The natural quaking-aspen × bigtooth-aspen hybrid typically has intermediate leaves, mostly about 46–74 mm long with roughly 14–20 teeth per margin, and may backcross. No single intermediate character reliably assigns a parent species.",
+              "resolvingView": "Representative foliage from several crown positions and stems in the patch, bud pubescence, emerging leaves, and, if operationally important, a voucher reviewed by a botanist."
+            }
+          ],
+          "silvicsCapsule": {
+            "shadeTolerance": "Very shade intolerant; successful suckers and seedlings need nearly full overhead light and decline rapidly when overtopped.",
+            "moistureDrainageSoils": "Most characteristic on well-drained sandy or loamy uplands and glacial deposits, but best growth occurs where those soils retain adequate moisture and fertility; prolonged saturation and very droughty infertile sand limit productivity.",
+            "geographicClimaticAffinity": "A northeastern and Great Lakes species centered farther south and on somewhat warmer sites than quaking aspen, with particular abundance in the Great Lakes–St. Lawrence region.",
+            "forestAssociations": "Occurs in aspen, aspen–birch, pine–hardwood, and northern-hardwood mixtures with quaking aspen, paper birch, red maple, white and red pine, northern red oak, sugar maple, and conifer or hardwood successors.",
+            "regeneration": "Tiny windborne seed can colonize exposed moist mineral soil, but root suckering following major overstory disturbance supplies most regeneration in established stands.",
+            "vegetativeReproduction": "Established lateral roots produce abundant suckers after cutting, fire, or death of parent stems. The resulting patch is clonal, and its regeneration potential depends on root condition and stored reserves.",
+            "seedMastBehavior": "Seed crops are frequent once reproductive age is reached, but individual seeds are short-lived and successful seedling years require the brief coincidence of dispersal with continuously moist bare seedbeds.",
+            "establishmentRequirements": "Dense suckering requires full light, warm soil, and undamaged living roots; seedling establishment requires exposed moist mineral soil with little litter and minimal early competition.",
+            "successionalRole": "Early-seral pioneer that rapidly reforests disturbed uplands, stabilizes soil, and shelters slower-growing pines, conifers, and northern hardwoods that commonly replace it in the absence of further disturbance.",
+            "disturbanceResponse": "Clearcutting and stand-replacing fire usually stimulate strong root suckering if root systems survive. Partial canopy retention, repeated severe burning, root disturbance, rutting, or heavy browsing can reduce cohort density and vigor.",
+            "longevityGrowthStrategy": "Fast growing during the first decades and generally short-lived, with many stems declining within roughly a century even though the root clone may persist longer.",
+            "browseSusceptibility": "Buds and young shoots are important winter food for moose, deer, hare, and grouse; repeated ungulate browsing can suppress sucker height and alter stem form.",
+            "insectsDiseases": "Forest tent caterpillar, leaf-feeding insects, borers, Hypoxylon and other cankers, root disease, and heart rots can cause mortality, breakage, and serious internal defect.",
+            "managementImplications": "Assess clone vigor and defect before retaining an aspen objective, protect roots from equipment damage, use cohort-scale rather than single-tree thinking, and recognize that dry-site presence does not guarantee acceptable growth.",
+            "silviculturalSystemResponse": "Complete even-aged removal or coppice-style treatment usually gives the best sucker response. Selection and shelterwood residuals suppress suckers and expose retained stems and roots to damage, so they do not efficiently perpetuate bigtooth aspen."
+          },
+          "references": [
+            {
+              "title": "Bigtooth Aspen — Silvics of North America",
+              "url": "https://research.fs.usda.gov/silvics/bigtooth-aspen",
+              "scope": "Distribution, soils and climate, associates, seed and sucker reproduction, succession, disturbance, growth, damaging agents, and management."
+            },
+            {
+              "title": "Populus grandidentata — big-toothed poplar",
+              "url": "https://gobotany.nativeplanttrust.org/species/populus/grandidentata/",
+              "scope": "Regional leaf measurements and tooth counts, bud pubescence, habitat, taxonomy, hybrids, and comparison with quaking aspen."
+            },
+            {
+              "title": "Populus grandidentata, bigtooth aspen — Fire Effects Information System",
+              "url": "https://research.fs.usda.gov/feis/species-reviews/popgra",
+              "scope": "Plant communities, clonal growth, postfire response, succession, wildlife use, and management evidence."
+            }
+          ]
+        },
+        {
+          "taxonId": "POPULUS_BALSAMIFERA",
+          "preferredCommonName": "Balsam poplar",
+          "canonicalScientificName": "Populus balsamifera",
+          "acceptedAlternatives": [
+            "Populus tacamahacca is historic"
+          ],
+          "family": "Salicaceae",
+          "distributionInCourseRegion": "Northern Great Lakes, ON/QC, northern NY/New England, and NB on cold floodplains and wet sites",
+          "ecologicalImportance": "Boreal riparian/lowland pioneer with strongly aromatic buds",
+          "coursePriority": "2 - regional",
+          "tier": "B",
+          "fieldIdentification": {
+            "foliage": "Alternate, simple blades are broadly ovate to lance-ovate with a long acute or short-acuminate tip, a broad-cuneate to rounded or shallowly heart-shaped base, and many small rounded teeth. The upper surface is glossy dark green; the lower surface is paler and often bears orange resin streaks. Petioles are round to only weakly compressed, not strongly flattened like the two aspens.",
+            "barkAgeSeries": "Young stems have smooth gray-green to brown bark with evident lenticels; pole bark remains relatively smooth and gray. Mature lower boles become darker gray-brown and develop broad furrows and ridges while the upper bole remains smoother. Old wet or lichen-covered bark is not reliably separable from other northern poplars.",
+            "dormant": "The large, sharply pointed terminal bud is conspicuously resinous, sticky, and strongly balsamic-smelling; lateral buds are appressed on round twigs. This is one of the strongest winter characters in the region, but cultivated balsam-poplar hybrids may share it. Do not taste or unnecessarily damage a specimen to test odor.",
+            "reproductive": "Male and female catkins occur on separate trees before leaf-out. Female catkins bear two- or three-valved capsules that release many cottony seeds. Catkin sex and capsule details can aid hybrid work, but isolated cottony fruit does not safely separate balsam poplar from other Populus.",
+            "wholeTreeContext": "A fast-growing medium to large northern tree with an open crown, stout ascending branches, and often a straight bole on alluvial flats, river and lake shores, cold seepage areas, and moist boreal mixedwoods. It may form pure floodplain patches or occur with spruce, aspen, birch, willow, and alder.",
+            "variationAndCondition": "Orange leaf resin can be faint or absent, and sucker leaves may be unusually broad. Planted balm-of-Gilead material and the balsam-poplar × eastern-cottonwood hybrid Populus × jackii can combine sticky aromatic buds with broader triangular foliage. Cankers, rust, stem decay, flooding scars, beaver cutting, and wet bark can alter form and texture.",
+            "defensibilityLimits": "Native balsam poplar is best supported by a large viscid aromatic bud together with long finely toothed leaves, weakly compressed petioles, round branchlets, and northern wet-site context. A sticky bud alone may indicate the balsam-poplar hybrid complex, while catkins, cottony seed, rough bark, or habitat alone support only Populus or insufficient evidence."
+          },
+          "confuserControl": [
+            {
+              "confuser": "Populus tremuloides and Populus grandidentata",
+              "visibleSeparators": "Both aspens have strongly laterally flattened petioles and rounder blades; quaking aspen has many tiny teeth and bigtooth aspen has few very large teeth. Balsam poplar has a drawn-out leaf tip, finer teeth, a weakly compressed petiole, and a much larger sticky aromatic terminal bud.",
+              "resolvingView": "Petiole cross-section, terminal bud with scale and resin visible, entire leaf margin, and lower leaf surface."
+            },
+            {
+              "confuser": "Populus deltoides and Populus × jackii",
+              "visibleSeparators": "Eastern cottonwood has broad triangular leaves, petiole glands, and often angular young twigs. Populus × jackii can have triangular-ovate leaves, round twigs, and viscid balsam-like buds, so morphology may place it only in the hybrid complex.",
+              "resolvingView": "Several long-shoot and short-shoot leaves, petiole apex checked for glands, twig cross-section, buds, capsules, and evidence of planting or nearby cultivated trees."
+            },
+            {
+              "confuser": "Populus heterophylla",
+              "visibleSeparators": "Swamp cottonwood has broader leaves with a rounded or blunt apex, persistent hair along lower-surface veins, and a terminal bud that is scarcely viscid. Balsam poplar has an acute to short-acuminate tip, a mostly glabrous lower surface often streaked with orange resin, and a very viscid bud.",
+              "resolvingView": "Leaf apex and base, magnified lower-surface veins, and an intact terminal winter bud."
+            }
+          ],
+          "silvicsCapsule": {
+            "shadeTolerance": "Very shade intolerant; regeneration needs nearly full light and is rapidly overtopped beneath spruce, fir, cedar, or hardwood canopies.",
+            "moistureDrainageSoils": "Best developed on moist, nutrient-rich, aerated alluvial soils and fresh flood deposits; it also occupies moist uplands in the far north but performs poorly under stagnant anaerobic water or severe drought.",
+            "geographicClimaticAffinity": "The northernmost native North American hardwood, strongly associated with boreal and cold continental climates; in the course region it is most characteristic of northern Great Lakes and Canadian lowlands and floodplains.",
+            "forestAssociations": "Occurs with white spruce, black spruce, balsam fir, quaking aspen, paper birch, black ash, tamarack, northern white-cedar, speckled alder, and riparian willows.",
+            "regeneration": "Abundant wind- and water-dispersed seed colonizes fresh moist silt, sand, and exposed mineral soil; root suckers and sprouts contribute strongly after cutting, burning, or stem injury on established sites.",
+            "vegetativeReproduction": "Roots and stumps can produce vigorous sprouts, and suitable stem material roots more readily than aspen. Vegetative regeneration can dominate cutovers, although some under-canopy suckers are short-lived without release.",
+            "seedMastBehavior": "Female trees produce large quantities of minute cottony seed at short intervals, but seed is short-lived; effective recruitment depends more on fresh moist substrate during dispersal than on a persistent seed bank.",
+            "establishmentRequirements": "Successful seedlings require bare, continuously moist but aerated mineral or alluvial seedbeds in full light. Suckers require living roots, adequate reserves, and prompt crown release.",
+            "successionalRole": "A primary pioneer on new river deposits and a secondary pioneer after fire or harvest; on many floodplains it dominates early decades and is gradually replaced by white spruce or other shade-tolerant associates.",
+            "disturbanceResponse": "Flood deposition, erosion, fire, and overstory removal create suitable seedbeds or stimulate vegetative shoots. Severe root damage, long-term inundation, competition, and shaded partial cuts reduce successful renewal.",
+            "longevityGrowthStrategy": "Fast growing and generally short-lived to moderately long-lived; many stems decline within roughly a century, although exceptional floodplain trees can approach two centuries.",
+            "browseSusceptibility": "Twigs and bark are heavily used by moose, deer, snowshoe hare, and beaver; repeated browsing and beaver cutting can strongly shape stand structure.",
+            "insectsDiseases": "Leaf rusts, Septoria and Cytospora cankers, borers, defoliators, root disease, and heart rots can reduce vigor and wood quality; wounds and flood stress increase opportunities for decay.",
+            "managementImplications": "Protect riparian soils and hydrology, avoid rutting shallow roots, retain wildlife and bank-stabilization functions, and distinguish native stands from planted hybrid poplars before drawing ecological conclusions.",
+            "silviculturalSystemResponse": "Even-aged overstory removal can release sprouts and suckers where balsam poplar is an objective. Natural regeneration on new alluvium depends on exposed seedbeds; partial shade favors replacement by spruce, fir, cedar, or other associates."
+          },
+          "references": [
+            {
+              "title": "Balsam Poplar — Silvics of North America",
+              "url": "https://research.fs.usda.gov/silvics/balsam-poplar",
+              "scope": "Range, floodplain and upland sites, associates, sexual and vegetative reproduction, succession, growth, wildlife use, and management."
+            },
+            {
+              "title": "Populus balsamifera — balsam poplar",
+              "url": "https://gobotany.nativeplanttrust.org/species/populus/balsamifera/",
+              "scope": "Regional morphology, resin characters, petiole and twig traits, habitat, taxonomy, and hybrid or cottonwood comparisons."
+            },
+            {
+              "title": "Populus — key for mature vegetative material",
+              "url": "https://gobotany.nativeplanttrust.org/dkey/populus-key-for-mature-vegetative-material/",
+              "scope": "Comparative long-shoot foliage, petiole compression, glands, branchlet form, and winter-bud position across regional poplars."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sessionId": "W04-B",
+      "letter": "B",
+      "title": "Populus and transition retrieval",
+      "kind": "delayed_retrieval",
+      "taxonScope": "session_a_taxa_plus_due_boreal_associates",
+      "modalities": [
+        "foliage",
+        "bark",
+        "dormant",
+        "whole_tree_context"
+      ],
+      "delivery": "unfamiliar isolated specimens and stand-context decisions",
+      "feedbackRelease": "after_batch_submission",
+      "runtimeBoundary": "runtime_retrieval_from_admitted_practice_media",
+      "introducedTaxonIds": [],
+      "teachingProfiles": []
+    },
+    {
+      "sessionId": "W04-C",
+      "letter": "C",
+      "title": "Alder and mountain-ash comparisons",
+      "kind": "new_species_and_confusers",
+      "taxonScope": "listed_new_taxa_plus_cs22",
+      "modalities": [
+        "foliage",
+        "reproductive",
+        "dormant",
+        "whole_tree_context"
+      ],
+      "delivery": "fruit foliage and growth-form contrasts",
+      "feedbackRelease": "after_response",
+      "runtimeBoundary": "labeled_teaching_content",
+      "introducedTaxonIds": [
+        "ALNUS_INCANA_RUGOSA",
+        "SORBUS_AMERICANA",
+        "SORBUS_DECORA"
+      ],
+      "teachingProfiles": [
+        {
+          "taxonId": "ALNUS_INCANA_RUGOSA",
+          "preferredCommonName": "Speckled alder",
+          "canonicalScientificName": "Alnus incana subsp. rugosa",
+          "acceptedAlternatives": [
+            "Alnus rugosa",
+            "Alnus incana var. rugosa"
+          ],
+          "family": "Betulaceae",
+          "distributionInCourseRegion": "Wet thickets, stream margins, and peatland edges across the northern region",
+          "ecologicalImportance": "Nitrogen-fixing colonizer of disturbed wet ground and riparian succession",
+          "coursePriority": "2 - regional",
+          "tier": "B",
+          "fieldIdentification": {
+            "foliage": "Alternate, simple leaves are narrow-ovate to elliptic or broadly elliptic, commonly with a rounded to subcordate base, an acute tip, and coarse double serration. The lower surface often becomes glaucous, and strong straight side veins with conspicuous cross-veins give it a corrugated look. Several mature leaves are needed because shape and pubescence vary.",
+            "barkAgeSeries": "Young brown to gray stems are smooth and densely speckled with conspicuous horizontal or oval white lenticels, the source of the common name. Older multiple stems remain relatively thin-barked but become grayer and slightly scaly while retaining pale lenticels. Wet bark, lichens, and shade can hide or imitate the speckling.",
+            "dormant": "Alternate ovoid buds stand on obvious 2–4 mm stalks and are covered by two, sometimes three, roughly equal scurfy scales. Long pendulous staminate catkins and shorter pistillate catkins are preformed and exposed through winter, while old woody infructescences often persist. This combined bud-and-catkin architecture is much stronger than twig color alone.",
+            "reproductive": "Staminate catkins elongate and shed pollen before leaf-out; smaller pistillate catkins mature into persistent woody cone-like strobiles. The small nutlets are merely thin-edged rather than broadly winged. Persistent cones prove Alnus, but close foliage, buds, bark, and geographic context are needed for subspecies-level identification.",
+            "wholeTreeContext": "Usually a many-stemmed shrub or small tree forming dense nearly continuous thickets on streambanks, lake margins, wet field edges, beaver meadows, swamps, and peatland margins. A low tangled crown, persistent alder cones, white-speckled stems, and saturated northern context together are characteristic.",
+            "variationAndCondition": "Leaf bases, degree of bloom, resin, and serration vary, and hybridization with smooth alder can produce subtle intermediates where ranges overlap. Coppicing, ice, beaver cutting, browse, floods, alder insects, lichens, and stem death create irregular thicket form without changing host identity.",
+            "defensibilityLimits": "A defensible subspecies call combines abundant white lenticels, glaucous coarsely double-serrate leaves, and stalked two-scaled buds; persistent cones alone establish only Alnus. Sterile shoots lacking buds, blurred wetland panoramas, or plants intermediate with smooth alder should remain Alnus incana, Alnus sp., or insufficient evidence rather than being forced to subsp. rugosa."
+          },
+          "confuserControl": [
+            {
+              "confuser": "Alnus serrulata",
+              "visibleSeparators": "Speckled alder normally has many pale bark lenticels, coarsely double-serrate leaves with a glaucous lower surface and conspicuous cross-veins, and little resin blotching. Smooth alder usually has fewer darker lenticels, more finely regular serration, no lower-surface bloom, and thin resin blotches; hybrids can be intermediate.",
+              "resolvingView": "Multiple mature leaf undersides, close bark and twig lenticels, stalked winter buds, and the branchlet geometry supporting staminate and pistillate catkins."
+            },
+            {
+              "confuser": "Alnus glutinosa",
+              "visibleSeparators": "European alder commonly becomes a larger single-stemmed tree and has broadly obovate to nearly round leaves with a rounded or notched apex. Speckled alder is usually a northern thicket shrub with elliptic leaves that have an acute tip and conspicuous pale stem lenticels.",
+              "resolvingView": "Several mature leaves showing the apex, whole growth form, winter buds, fruiting stalks, and local planting or naturalization context."
+            },
+            {
+              "confuser": "Betula populifolia and wetland Salix species",
+              "visibleSeparators": "Gray birch has papery chalky bark with dark chevrons and nonpersistent female catkins that disintegrate; willows have one bud scale and capsules rather than persistent woody cones. Speckled alder has stalked two-scaled buds and cone-like infructescences.",
+              "resolvingView": "A close winter bud, attached persistent reproductive structure, mature bark, and complete leaf attachment."
+            }
+          ],
+          "silvicsCapsule": {
+            "shadeTolerance": "Generally shade intolerant to intermediate; dense thickets persist where crowns receive open or edge light but thin beneath a closed forest canopy.",
+            "moistureDrainageSoils": "Characteristic of saturated or seasonally flooded mineral and organic soils along streams, shorelines, swamp margins, wet fields, and peatland edges; it tolerates poor drainage better than most course taxa.",
+            "geographicClimaticAffinity": "A cold-temperate and boreal North American subspecies widespread across the northern Great Lakes, southern Canadian, northeastern, and Acadian parts of the course region.",
+            "forestAssociations": "Occurs with willows, balsam poplar, red maple, black ash, tamarack, northern white-cedar, black spruce, sedges, and early riparian or beaver-meadow vegetation.",
+            "regeneration": "Small nutlets disperse by wind and water from persistent cones and establish on exposed wet mineral or organic substrates, especially after flooding, drawdown, or soil disturbance.",
+            "vegetativeReproduction": "Rhizomes, root-crown shoots, and basal shoots allow patches to expand and recover after cutting, browsing, ice, or top-kill; individual cut stems die, but the connected plant can send up replacement stems.",
+            "seedMastBehavior": "Cones mature in autumn and release numerous small nutlets through fall and winter. Crop size varies, and establishment depends on wet exposed substrate rather than a dependable long-lived seed bank.",
+            "establishmentRequirements": "Moist exposed soil, high water availability, and adequate light favor germination and thicket expansion. Seedlings and new shoots are less competitive under dense shade or on dry sites.",
+            "successionalRole": "Early-seral wetland and riparian colonizer whose Frankia root nodules fix atmospheric nitrogen, enrich local soils, stabilize banks, and sometimes precede willow, poplar, spruce, cedar, ash, or other later vegetation.",
+            "disturbanceResponse": "Flooding, drawdown, beaver activity, cutting, and other wet-site disturbance can create seedbeds or stimulate vegetative shoots. Fire usually top-kills thin stems, but surviving belowground organs may resprout where organic soils and roots are not consumed.",
+            "longevityGrowthStrategy": "Individual stems are relatively short-lived and modest in diameter, while a multi-stemmed rhizomatous patch can persist through repeated stem replacement.",
+            "browseSusceptibility": "Twigs and foliage are browsed by moose, deer, hare, and beaver; heavy use can suppress height, create dense low shoots, or repeatedly remove older stems.",
+            "insectsDiseases": "Alder flea beetles, sawflies, leaf miners, defoliating caterpillars, cankers, and stem or root rots occur; damage is often conspicuous locally but established clones can replace affected stems.",
+            "managementImplications": "Retain where bank stability, wetland cover, nitrogen inputs, and wildlife browse are objectives; where alder blocks desired conifer or hardwood regeneration, expect repeated treatment because cutting one stem does not eliminate the clone and observe wetland rules.",
+            "silviculturalSystemResponse": "Conventional overstory systems apply poorly to this shrub. Opening or wet-ground disturbance can increase thickets, whereas sustained canopy shade can reduce them; control or retention should be planned at patch scale with hydrology and repeated vegetative response in mind."
+          },
+          "references": [
+            {
+              "title": "Alnus incana — speckled alder",
+              "url": "https://gobotany.nativeplanttrust.org/species/alnus/incana/",
+              "scope": "Regional taxonomy, wetland status, leaves, bark lenticels, buds, reproductive structures, hybrids, and comparisons with smooth and green alder."
+            },
+            {
+              "title": "Alnus — dichotomous key",
+              "url": "https://gobotany.nativeplanttrust.org/dkey/alnus/",
+              "scope": "Direct diagnostic contrasts in bud stalks and scales, leaf serration and bloom, bark lenticels, resin, nutlet wings, and inflorescence architecture."
+            },
+            {
+              "title": "Speckled Alder — USDA NRCS Plant Guide",
+              "url": "https://plants.usda.gov/DocumentLibrary/plantguide/pdf/cs_alinr.pdf",
+              "scope": "Accepted infraspecific name, distribution, nitrogen fixation, wet-site adaptation, reproduction, wildlife use, restoration functions, and management."
+            }
+          ]
+        },
+        {
+          "taxonId": "SORBUS_AMERICANA",
+          "preferredCommonName": "American mountain-ash",
+          "canonicalScientificName": "Sorbus americana",
+          "acceptedAlternatives": [
+            "Pyrus americana",
+            "Aucuparia americana"
+          ],
+          "family": "Rosaceae",
+          "distributionInCourseRegion": "Cool uplands from MN/WI/MI through ON/QC, NY/New England, and NB",
+          "ecologicalImportance": "Bird-dispersed boreal/montane small tree of gaps and edges",
+          "coursePriority": "2 - regional",
+          "tier": "B",
+          "fieldIdentification": {
+            "foliage": "Leaves are alternate and pinnately compound, generally 10–22 cm long, with a terminal leaflet and numerous narrowly lanceolate to oblong sharply serrate leaflets. Typical leaflets are about three to five times as long as wide and mostly glabrous, including the lower surface. Always show the attachment of the entire compound leaf because a detached leaflet can resemble a simple-leaved tree.",
+            "barkAgeSeries": "Young trunks are thin, smooth, gray to gray-brown, with horizontal lenticels; older small boles become somewhat scaly or shallowly fissured but rarely develop massive ridges. Browse scars, fire blight, lichens, and multiple stems can make bark especially unreliable for separating the native mountain-ashes.",
+            "dormant": "Alternate twigs carry a conspicuous ovoid to pointed terminal bud and smaller lateral buds with overlapping scales. Twigs, bud scales, and leaflet undersides are glabrous or only very sparsely hairy; bud-scale margins are not or only sparsely ciliate. Leaf scars are alternate. Bud size and hair require a macro view and direct comparison.",
+            "reproductive": "Many small five-petaled white flowers form a broad flat-topped corymb in late spring or early summer. Orange-red to red pomes about 4–7 mm in diameter ripen in late summer and can persist into winter; each retains a small calyx crown. Fruit size must be measured because perspective and crop condition are misleading.",
+            "wholeTreeContext": "A slow-growing shrub or small tree, usually with a short trunk, slender spreading branches, and a narrow open rounded crown in cool humid openings, spruce–fir and northern-hardwood edges, rocky ridges, swamps, and montane sites. Bird perches, disturbed edges, and semiopen stands are more characteristic than deep closed shade.",
+            "variationAndCondition": "Leaflet width, tip, glaucescence, fruit color, and crown form vary with exposure and shoot vigor. Moose and deer can maintain old plants as low distorted browse, while fire blight, rust, borers, storm breakage, and fruit removal by birds can erase familiar characters. Ornamental European rowan can escape near settlements.",
+            "defensibilityLimits": "Species-level identification requires an alternate compound leaf plus the narrow-leaflet, low-hair suite and preferably measured fruit, petals, or bud-scale margins. A distant red-fruited crown, smooth gray bark, one detached leaflet, or an unmeasured fruit cluster supports only Sorbus or insufficient evidence. Sterile plants should often remain the S. americana–S. decora complex."
+          },
+          "confuserControl": [
+            {
+              "confuser": "Sorbus decora",
+              "visibleSeparators": "American mountain-ash typically has leaflets three to five times as long as wide, bud-scale margins not or sparsely ciliate, 3–4 mm petals, and 4–7 mm fruit. Showy mountain-ash tends to have leaflets only two to three-and-a-half times as long as wide, ciliate bud-scale margins, 4–5 mm petals, and 7–10 mm fruit.",
+              "resolvingView": "Several complete leaves, macro photographs of terminal-bud scale margins, and flowers or ripe fruit photographed with a ruler."
+            },
+            {
+              "confuser": "Sorbus aucuparia",
+              "visibleSeparators": "European rowan usually has evident hair on young branchlets, inflorescences, bud scales, and lower leaflet surfaces. American mountain-ash is glabrous or very sparsely hairy in those parts; planted and escaped context increases the probability of European rowan.",
+              "resolvingView": "Sharp close-ups of young branchlets, flower-cluster axes, bud scales, and both leaflet surfaces, plus evidence of cultivation or naturalized cohorts."
+            },
+            {
+              "confuser": "Fraxinus species",
+              "visibleSeparators": "True ashes have opposite compound leaves and opposite twigs, one-seeded samaras, and no red pomes. Mountain-ash has alternate leaves and buds plus flat clusters of calyx-crowned pomes.",
+              "resolvingView": "Several consecutive twig nodes showing arrangement and any attached fruit."
+            }
+          ],
+          "silvicsCapsule": {
+            "shadeTolerance": "Shade intolerant overall; it can persist beneath a semiopen canopy but abundance, flowering, and recruitment decline in deep closed shade.",
+            "moistureDrainageSoils": "Most successful on cool moist acidic soils with adequate aeration, but occurs from swamp borders to well-drained rocky slopes and can survive in stunted form on drier sites.",
+            "geographicClimaticAffinity": "A northeastern cold-temperate, boreal, and montane species extending from the Great Lakes and southern Canada through New England and the higher Alleghenies and Appalachians.",
+            "forestAssociations": "Occurs in spruce–fir, aspen–birch, northern hardwood, and pine mixtures, often with balsam fir, red or white spruce, paper birch, mountain maple, serviceberry, and other gap or edge shrubs.",
+            "regeneration": "Birds and small mammals disperse the pomes and seed; seeds require an extended cold stratification period, and seedlings recruit most readily in moist semiopen microsites.",
+            "vegetativeReproduction": "Stumps can sprout after top-kill, allowing established individuals to survive some logging, browse, or fire damage, but off-site bird-dispersed seed is also important for colonization.",
+            "seedMastBehavior": "Fruit crops are recurrent but variable, ripen in late summer, and may remain available into winter until removed by birds and mammals. The course should not assume a fixed mast interval.",
+            "establishmentRequirements": "Cold stratification, a moist seedbed, and enough gap or edge light for early growth are more important than mineral-soil exposure alone; seedlings are vulnerable to drying and browsing.",
+            "successionalRole": "Facultative early-seral or gap species that becomes more abundant after opening yet can persist at low density in old spruce–fir and northern-hardwood stands.",
+            "disturbanceResponse": "Logging and canopy mortality commonly increase surviving shoots and light; thin bark makes stems vulnerable to fire, but root-crown or stump sprouts and later bird-dispersed seedlings can reoccupy disturbed sites.",
+            "longevityGrowthStrategy": "Slow growing, short-lived, and usually confined to the understory or small-tree layer rather than competing for upper-canopy dominance.",
+            "browseSusceptibility": "Highly preferred by moose and white-tailed deer; repeated browsing can hold stems below recruitment height for decades and locally eliminate mature fruiting trees despite persistent small sprouts.",
+            "insectsDiseases": "Fire blight, rusts, leaf spots, apple scab, sawflies, borers, and defoliators can damage foliage, shoots, and fruit; stressed small trees also suffer stem decay and breakage.",
+            "managementImplications": "Retain as a wildlife-fruit and browse component where compatible with objectives, protect a portion of stems from excessive ungulate pressure, and do not infer conifer-site quality from its presence alone.",
+            "silviculturalSystemResponse": "Group openings, edge creation, and partial canopy release can increase vigor and fruiting. Heavy conifer release treatments may remove it as competition, so balance crop-tree goals against its disproportionate browse and soft-mast value."
+          },
+          "references": [
+            {
+              "title": "Sorbus americana — American mountain-ash",
+              "url": "https://gobotany.nativeplanttrust.org/species/sorbus/americana/",
+              "scope": "Regional morphology, leaf and bud characters, fruit, habitat, taxonomy, and direct comparison with showy mountain-ash and European rowan."
+            },
+            {
+              "title": "Sorbus americana, American mountain-ash — Fire Effects Information System",
+              "url": "https://research.fs.usda.gov/feis/species-reviews/sorame",
+              "scope": "Distribution, sites, communities, regeneration, shade tolerance, succession, fire response, browse, wildlife use, and management."
+            },
+            {
+              "title": "Sorbus seed biology — Woody Plant Seed Manual",
+              "url": "https://www.fs.usda.gov/nsl/Wpsm/Sorbus.pdf",
+              "scope": "Flowering and fruiting phenology, seed morphology, collection, storage, dormancy, stratification, germination, and nursery propagation."
+            }
+          ]
+        },
+        {
+          "taxonId": "SORBUS_DECORA",
+          "preferredCommonName": "Showy mountain-ash",
+          "canonicalScientificName": "Sorbus decora",
+          "acceptedAlternatives": [
+            "Sorbus americana var. decora",
+            "Pyrus decora"
+          ],
+          "family": "Rosaceae",
+          "distributionInCourseRegion": "Boreal/Acadian areas around Lake Superior, northern ON/QC, northern NY/New England, and NB",
+          "ecologicalImportance": "Boreal small tree of cool moist sites with wildlife fruit",
+          "coursePriority": "2 - regional",
+          "tier": "B",
+          "fieldIdentification": {
+            "foliage": "Alternate pinnately compound leaves commonly carry 13–17 blue-green leaflets. Compared with American mountain-ash, the leaflets are generally shorter and broader, about two to three-and-a-half times as long as wide, with serrate margins and acute to sometimes acuminate tips. A single plant may carry both blunt and pointed leaflet tips, so tip shape is not independently diagnostic.",
+            "barkAgeSeries": "Young gray-brown bark is smooth with lenticels; older small boles become scaly or shallowly fissured but remain thin. It closely overlaps American mountain-ash and European rowan at every age and should be used only with foliage, buds, or measured reproductive material.",
+            "dormant": "Alternate twigs end in a conspicuous ovoid to pointed scaly bud. The margins of the winter bud scales are distinctly ciliate, unlike the nonciliate or very sparsely ciliate scales typical of American mountain-ash. Hair and cilia require a sharp macro view; distant bud color or outline is not enough.",
+            "reproductive": "Broad corymbs of white five-petaled flowers appear in late spring, about 7–10 days earlier than American mountain-ash where they grow together. Petals are about 4–5 mm long, and the showy red pomes are usually about 7–10 mm in diameter and often persist into winter. Scale is essential when using fruit size.",
+            "wholeTreeContext": "A shrub or small tree to roughly 10 m, with a rounded crown in boreal and Acadian forest openings, cool moist woods, swamps, rocky ridges, shores, and subalpine sites. It is strongly plausible around Lake Superior, northern Ontario and Quebec, northern New England, and New Brunswick, but context cannot separate it from American mountain-ash.",
+            "variationAndCondition": "Leaflet apex and lower-surface bloom vary within individuals. Plants sometimes separated as Sorbus groenlandica cannot be reliably distinguished morphologically and are included here for the course. Browse, cold exposure, fire blight, rust, stem injury, ornamental planting, and heavy fruit removal can alter crown, foliage, and reproductive display.",
+            "defensibilityLimits": "A defensible species call uses multiple broad leaflets plus ciliate bud-scale margins or measured flowers and fruit; northern habitat and blue-green foliage are corroborative only. Bark, one detached leaflet, fruit color, or a distant cluster cannot reliably separate S. decora from S. americana or planted S. aucuparia, and sterile material often warrants Sorbus sp. or the native mountain-ash complex."
+          },
+          "confuserControl": [
+            {
+              "confuser": "Sorbus americana",
+              "visibleSeparators": "Showy mountain-ash generally has leaflets two to three-and-a-half times as long as wide, ciliate winter-bud scale margins, 4–5 mm petals, and 7–10 mm fruit. American mountain-ash has narrower leaflets three to five times as long as wide, little or no bud-scale ciliation, 3–4 mm petals, and 4–7 mm fruit.",
+              "resolvingView": "Several complete leaves, a macro view of terminal-bud scale margins, and flowers or mature fruit photographed beside a ruler."
+            },
+            {
+              "confuser": "Sorbus aucuparia",
+              "visibleSeparators": "European rowan typically shows conspicuous hair on young branchlets, inflorescence axes, bud scales, and lower leaflet surfaces and is frequent in cultivated or escaped settings. Showy mountain-ash may have ciliate bud margins but is not densely hairy across that entire character suite.",
+              "resolvingView": "Young twig and inflorescence axes, both leaflet surfaces, terminal bud, and a whole-site view showing planting or naturalized context."
+            },
+            {
+              "confuser": "Fraxinus and Amelanchier species",
+              "visibleSeparators": "Ashes have opposite compound leaves and samaras, while serviceberries have alternate simple leaves and dark calyx-crowned pomes. Showy mountain-ash combines alternate pinnate leaves with dense clusters of red pomes.",
+              "resolvingView": "Several consecutive nodes, one complete leaf from petiole base to terminal leaflet, and an attached fruit cluster."
+            }
+          ],
+          "silvicsCapsule": {
+            "shadeTolerance": "Tolerates partial shade but not a deeply closed canopy; crown growth, flowering, and fruiting are best in openings and along forest edges.",
+            "moistureDrainageSoils": "Favored by cool moist conditions and occurs on a variety of acidic to neutral substrates, including rocky or relatively poor soils; heat, drought, and warm lowland exposure are important limitations.",
+            "geographicClimaticAffinity": "A distinctly northern boreal, Acadian, and subalpine mountain-ash centered in Canada and the northern Great Lakes and New England portions of the course region.",
+            "forestAssociations": "Occurs in openings and edges of spruce–fir, boreal mixedwood, aspen–birch, and cool northern-hardwood forests, as well as swamps, shores, ridges, and subalpine vegetation.",
+            "regeneration": "Birds and small mammals disperse the fleshy pomes. As in regional Sorbus, seed dormancy is overcome by seasonal stratification, and recruitment is most likely in moist semiopen microsites.",
+            "vegetativeReproduction": "Basal or stump sprouting may allow damaged mountain-ash stems to recover, but species-specific evidence for the frequency and stand importance of vegetative reproduction in S. decora is limited; do not assume an aspen-like clonal strategy.",
+            "seedMastBehavior": "Conspicuous crops ripen in late summer and often remain into winter, but production varies with crown light, weather, and disease. No fixed course mast interval should be inferred from one heavy fruit year.",
+            "establishmentRequirements": "Cold conditioning, a reliably moist seedbed, and partial to high light in a cool setting favor recruitment; warm droughty sites and deep shade limit establishment and subsequent growth.",
+            "successionalRole": "A gap, edge, and disturbed-site small tree that can persist as a minor component of mature boreal or Acadian forest but does not become a dominant upper-canopy species.",
+            "disturbanceResponse": "Canopy gaps, shores, and moderate soil disturbance may improve light and seedling opportunities. Thin bark and small stature make stems vulnerable to fire and mechanical injury; the relative roles of resprouting and seed after disturbance are not well quantified for this species.",
+            "longevityGrowthStrategy": "Slow to moderate growing, modest in stature, and generally short-lived compared with canopy spruce, hemlock, or northern hardwoods; wood and branches are relatively weak.",
+            "browseSusceptibility": "Twigs and foliage are used by deer and moose, and repeated browsing can deform or suppress young stems; persistent fruits are important winter food for birds and small mammals.",
+            "insectsDiseases": "Fire blight, leaf spots, rusts, sawflies, borers, and other rosaceous-tree pests can damage foliage and shoots, especially on stressed trees, though it is often considered more disease-resistant in cultivation than European rowan.",
+            "managementImplications": "Retain for northern forest diversity and durable wildlife fruit where compatible with objectives, protect selected stems from chronic browse, and verify identity before using it as an indicator of boreal site conditions.",
+            "silviculturalSystemResponse": "Small group openings, selection edges, and retention along cool moist ecotones can maintain crown light and fruiting. Full exposure on hot dry sites or complete suppression under dense residual canopy is unfavorable; species-specific yield prescriptions are not established."
+          },
+          "references": [
+            {
+              "title": "Sorbus decora — showy mountain-ash",
+              "url": "https://gobotany.nativeplanttrust.org/species/sorbus/decora/",
+              "scope": "Regional morphology, taxonomic variation, flowering time, leaflet and bud characters, fruit measurements, habitat, and comparison with American mountain-ash."
+            },
+            {
+              "title": "Showy mountain-ash — Ontario Tree Atlas",
+              "url": "https://www.ontario.ca/page/showy-mountain-ash",
+              "scope": "Ontario distribution, form, bark, leaflet number and size, flowers, fruit persistence, moisture, soils, shade, and wildlife value."
+            },
+            {
+              "title": "Native Trees and Shrubs for Maine Landscapes: Showy Mountain Ash",
+              "url": "https://extension.umaine.edu/publications/2582e/",
+              "scope": "Cold-climate landscape performance, habit, site requirements, flowers, fruit, disease considerations, and regional management context."
+            },
+            {
+              "title": "Sorbus seed biology — Woody Plant Seed Manual",
+              "url": "https://www.fs.usda.gov/nsl/Wpsm/Sorbus.pdf",
+              "scope": "Genus-level flowering, fruiting, seed collection, dormancy, stratification, germination, and propagation evidence."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sessionId": "W04-D",
+      "letter": "D",
+      "title": "Boreal-transition field laboratory",
+      "kind": "multi_organ_laboratory",
+      "taxonScope": "all_module_taxa_plus_representative_conifers_and_hardwoods",
+      "modalities": [
+        "foliage",
+        "bark",
+        "reproductive",
+        "dormant",
+        "whole_tree_context"
+      ],
+      "delivery": "regional assemblage and single-organ stations",
+      "feedbackRelease": "after_station_batch_submission",
+      "runtimeBoundary": "runtime_retrieval_from_admitted_practice_media",
+      "introducedTaxonIds": [],
+      "teachingProfiles": []
+    },
+    {
+      "sessionId": "W04-E",
+      "letter": "E",
+      "title": "First substantial cumulative review",
+      "kind": "cumulative_adaptive_retrieval",
+      "taxonScope": "cr_01_eligible_taxa_prioritized_by_mastery",
+      "modalities": [
+        "foliage",
+        "bark",
+        "reproductive",
+        "dormant",
+        "whole_tree_context"
+      ],
+      "delivery": "formal-practical preparation without image reuse",
+      "feedbackRelease": "after_batch_submission",
+      "runtimeBoundary": "runtime_retrieval_from_admitted_practice_media",
+      "introducedTaxonIds": [],
+      "teachingProfiles": []
+    }
+  ],
+  "assessmentSummaries": [
+    {
+      "assessmentId": "W04-PRACTICAL",
+      "type": "substantial_cumulative_weekly_practical",
+      "categoryId": "weekly_identification_practicals",
+      "cumulative": true,
+      "scope": "taxa_introduced_through_week_4",
+      "modalities": [
+        "foliage",
+        "bark",
+        "reproductive",
+        "dormant",
+        "whole_tree_context"
+      ]
+    },
+    {
+      "assessmentId": "W04-NOMENCLATURE-2",
+      "type": "cumulative_nomenclature_check",
+      "categoryId": "scientific_nomenclature",
+      "cumulative": true,
+      "scope": "balanced_common_to_scientific_and_scientific_to_common",
+      "modalities": []
+    },
+    {
+      "assessmentId": "W04-SILVICS-2",
+      "type": "cumulative_silvics_retrieval",
+      "categoryId": "silvics",
+      "cumulative": true,
+      "scope": "taxa_introduced_through_week_4",
+      "modalities": [
+        "whole_tree_context"
+      ]
+    },
+    {
+      "assessmentId": "W04-FIELD-CONTEXT",
+      "type": "whole_tree_and_site_exercise",
+      "categoryId": "field_condition_identification",
+      "cumulative": true,
+      "scope": "boreal_and_great_lakes_transition_assemblages",
+      "modalities": [
+        "whole_tree_context"
+      ]
+    }
+  ],
+  "remediationGate": {
+    "policy_id": "REM-01",
+    "evaluate_after_assessment_ids": [
+      "W04-PRACTICAL",
+      "W04-NOMENCLATURE-2",
+      "W04-SILVICS-2",
+      "W04-FIELD-CONTEXT"
+    ],
+    "broader_course_progression": "continues",
+    "insertion_sessions": [
+      "W05-B",
+      "W05-E"
+    ]
+  },
+  "teachingBoundary": "This package contains labeled instruction and public module structure only. Retrieval stations are assembled separately from admitted practice media, and formal forms, examination media, answer keys, and learner records remain private."
+}

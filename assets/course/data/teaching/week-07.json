@@ -1,0 +1,1279 @@
+{
+  "$schema": "cochetopa-public-teaching-package/1.0",
+  "schemaVersion": "1.0.0",
+  "courseId": "northern-hardwoods-mixedwoods-dendrology-silvics-intensive",
+  "courseVersion": "2026.1-draft",
+  "moduleId": "week-07",
+  "sequence": 7,
+  "title": "Hickories, Walnuts, and Allegheny/Southern Associates",
+  "deliveryStatus": "teaching_text_complete_visual_media_pending_admission",
+  "objectives": [
+    "Discriminate regional hickories and walnuts using leaf, bud, pith, nut, husk, and bark combinations.",
+    "Identify Allegheny and southern-transition associates from unfamiliar organs and whole-tree context.",
+    "Use compound-leaf architecture without confusing native genera or later invasive confusers.",
+    "Retrieve increasingly demanding canonical scientific names in both directions.",
+    "Connect mast, establishment, disease, succession, and management to transition-forest silvics."
+  ],
+  "cumulativeReview": {
+    "policy_id": "CR-01",
+    "eligible_taxon_rule": "introduction_week_lte_module_sequence",
+    "through_introduction_week": 7,
+    "eligible_taxon_count": 75,
+    "selection_priorities": [
+      "hickory_and_walnut_confusers",
+      "compound_leaf_reasoning",
+      "nuts_buds_pith_and_bark",
+      "scientific_name_deficits",
+      "allegheny_site_transfer"
+    ]
+  },
+  "confuserSets": [
+    {
+      "confusionSetId": "CS01",
+      "name": "Sugar / black / Norway maple",
+      "memberTaxa": [
+        "ACER_SACCHARUM",
+        "ACER_NIGRUM",
+        "ACER_PLATANOIDES"
+      ],
+      "keySeparators": "Petiole latex; leaf underside hair and stipules; bud size/shape; samara angle",
+      "resolvingViews": "Fresh-broken petiole; lower surface; terminal bud; ripe samara"
+    },
+    {
+      "confusionSetId": "CS02",
+      "name": "Red / silver maple",
+      "memberTaxa": [
+        "ACER_RUBRUM",
+        "ACER_SACCHARINUM"
+      ],
+      "keySeparators": "Sinus depth; lower-surface whiteness; spring samara size; twig odor; bark strips",
+      "resolvingViews": "Complete leaf underside; samara with scale; crushed twig; mature bark"
+    },
+    {
+      "confusionSetId": "CS03",
+      "name": "Striped / mountain maple",
+      "memberTaxa": [
+        "ACER_PENSYLVANICUM",
+        "ACER_SPICATUM"
+      ],
+      "keySeparators": "Green-white striped bark versus unstriped; leaf size/base; fruit cluster posture; growth form",
+      "resolvingViews": "Young stem; intact leaf; fruit cluster; whole plant"
+    },
+    {
+      "confusionSetId": "CS04",
+      "name": "White / green / black ash",
+      "memberTaxa": [
+        "FRAXINUS_AMERICANA",
+        "FRAXINUS_PENNSYLVANICA",
+        "FRAXINUS_NIGRA"
+      ],
+      "keySeparators": "Leaf-scar shape and bud position; leaflet stalks; samara wing extent; black-ash corky bark",
+      "resolvingViews": "Twig node and leaf scar; whole rachis; samara; bark; hydrologic setting"
+    },
+    {
+      "confusionSetId": "CS05",
+      "name": "Paper / heart-leaved / gray birch",
+      "memberTaxa": [
+        "BETULA_PAPYRIFERA",
+        "BETULA_CORDIFOLIA",
+        "BETULA_POPULIFOLIA"
+      ],
+      "keySeparators": "Leaf base and vein count; twig resin glands; peeling versus tight bark; black branch marks; elevation",
+      "resolvingViews": "Several mature leaves; resin-warty twig; bark sheet; whole growth form; location"
+    },
+    {
+      "confusionSetId": "CS06",
+      "name": "Yellow / sweet birch",
+      "memberTaxa": [
+        "BETULA_ALLEGHANIENSIS",
+        "BETULA_LENTA"
+      ],
+      "keySeparators": "Both wintergreen; yellow birch golden curling bark and spur shoots versus sweet birch dark blocky bark",
+      "resolvingViews": "Scratched twig; young and mature bark; fruiting strobile; lower leaf surface"
+    },
+    {
+      "confusionSetId": "CS07",
+      "name": "White / black / red / Norway spruce",
+      "memberTaxa": [
+        "PICEA_GLAUCA",
+        "PICEA_MARIANA",
+        "PICEA_RUBENS",
+        "PICEA_ABIES"
+      ],
+      "keySeparators": "Cone size and scale margin; twig hairs; bud resin; foliage color/odor; pendulous branchlets",
+      "resolvingViews": "Full cone; twig macro; bud; whole crown; regional site"
+    },
+    {
+      "confusionSetId": "CS08",
+      "name": "Spruce / fir / hemlock",
+      "memberTaxa": [
+        "PICEA_GLAUCA",
+        "PICEA_MARIANA",
+        "PICEA_RUBENS",
+        "ABIES_BALSAMEA",
+        "TSUGA_CANADENSIS"
+      ],
+      "keySeparators": "Woody pegs versus pad base versus petiole; needle cross-section; cone orientation and persistence",
+      "resolvingViews": "Needle attachment macro; underside; terminal shoot; intact or attached cone"
+    },
+    {
+      "confusionSetId": "CS09",
+      "name": "Red / jack / Scots / pitch pine",
+      "memberTaxa": [
+        "PINUS_RESINOSA",
+        "PINUS_BANKSIANA",
+        "PINUS_SYLVESTRIS",
+        "PINUS_RIGIDA"
+      ],
+      "keySeparators": "Fascicle count/length; bend test; cone curvature/prickles; upper-bole orange bark; epicormic shoots",
+      "resolvingViews": "Several complete fascicles; cone and umbo; upper and lower bark; whole crown"
+    },
+    {
+      "confusionSetId": "CS10",
+      "name": "Tamarack / European larch",
+      "memberTaxa": [
+        "LARIX_LARICINA",
+        "LARIX_DECIDUA"
+      ],
+      "keySeparators": "Cone size and scale count/edge; needle cluster density; native peatland versus planting",
+      "resolvingViews": "Full cone; spur shoot; cluster count; site/planting context"
+    },
+    {
+      "confusionSetId": "CS11",
+      "name": "Red-oak group",
+      "memberTaxa": [
+        "QUERCUS_RUBRA",
+        "QUERCUS_VELUTINA",
+        "QUERCUS_COCCINEA",
+        "QUERCUS_ELLIPSOIDALIS",
+        "QUERCUS_PALUSTRIS"
+      ],
+      "keySeparators": "Bud hair/size; lower-leaf hair; sinus architecture; acorn cup depth/rings; bark; site and branch angle",
+      "resolvingViews": "Several sun leaves; terminal buds; complete acorn/cup; mature bark; whole crown"
+    },
+    {
+      "confusionSetId": "CS12",
+      "name": "White-oak group",
+      "memberTaxa": [
+        "QUERCUS_ALBA",
+        "QUERCUS_BICOLOR",
+        "QUERCUS_MACROCARPA",
+        "QUERCUS_MONTANA"
+      ],
+      "keySeparators": "Lower-leaf felt; fruit stalk; fringed cup; chestnut teeth; bark architecture; site",
+      "resolvingViews": "Lower surface; acorn/cup/stalk; terminal bud; upper and lower bole; site"
+    },
+    {
+      "confusionSetId": "CS13",
+      "name": "Aspens / balsam poplar / cottonwood",
+      "memberTaxa": [
+        "POPULUS_TREMULOIDES",
+        "POPULUS_GRANDIDENTATA",
+        "POPULUS_BALSAMIFERA",
+        "POPULUS_DELTOIDES"
+      ],
+      "keySeparators": "Petiole flattening; tooth size; leaf base; bud size/stickiness/odor; bark and floodplain/upland context",
+      "resolvingViews": "Complete leaf and petiole; bud; young and old bark; clonal form; site"
+    },
+    {
+      "confusionSetId": "CS14",
+      "name": "American / slippery / rock / Siberian elm",
+      "memberTaxa": [
+        "ULMUS_AMERICANA",
+        "ULMUS_RUBRA",
+        "ULMUS_THOMASII",
+        "ULMUS_PUMILA"
+      ],
+      "keySeparators": "Leaf roughness/base; bud hair; corky wings; samara hair/notch; bark layering; crown",
+      "resolvingViews": "Leaf surfaces; buds; samara; corky twigs; existing bark section; crown"
+    },
+    {
+      "confusionSetId": "CS15",
+      "name": "Black / pin / chokecherry",
+      "memberTaxa": [
+        "PRUNUS_SEROTINA",
+        "PRUNUS_PENSYLVANICA",
+        "PRUNUS_VIRGINIANA"
+      ],
+      "keySeparators": "Fruit cluster architecture; petiole glands; lower-midvein hair; bark age; whole pioneer/clonal form",
+      "resolvingViews": "Raceme or cluster; petiole macro; lower leaf; mature bark; whole plant"
+    },
+    {
+      "confusionSetId": "CS16",
+      "name": "American hornbeam / eastern hophornbeam",
+      "memberTaxa": [
+        "CARPINUS_CAROLINIANA",
+        "OSTRYA_VIRGINIANA"
+      ],
+      "keySeparators": "Muscular smooth bole and three-lobed fruit bracts versus shreddy bark and hoplike sacs",
+      "resolvingViews": "Bole; fruit; bud; wet versus dry site"
+    },
+    {
+      "confusionSetId": "CS17",
+      "name": "Black walnut / butternut",
+      "memberTaxa": [
+        "JUGLANS_NIGRA",
+        "JUGLANS_CINEREA"
+      ],
+      "keySeparators": "Terminal leaflet; rachis/twig hair; light versus dark pith; round versus elongated nut; bark",
+      "resolvingViews": "Whole leaf; pith section; nut/husk; twig hair; mature bark"
+    },
+    {
+      "confusionSetId": "CS18",
+      "name": "Bitternut / shagbark / pignut / mockernut hickory",
+      "memberTaxa": [
+        "CARYA_CORDIFORMIS",
+        "CARYA_OVATA",
+        "CARYA_GLABRA",
+        "CARYA_TOMENTOSA"
+      ],
+      "keySeparators": "Terminal bud color/size/hair; leaflet count; rachis hair; husk thickness/dehiscence; bark",
+      "resolvingViews": "Terminal bud; entire leaf; husk/nut; mature bark; twig hair"
+    },
+    {
+      "confusionSetId": "CS21",
+      "name": "Yellow birch / black cherry bark",
+      "memberTaxa": [
+        "BETULA_ALLEGHANIENSIS",
+        "PRUNUS_SEROTINA"
+      ],
+      "keySeparators": "Golden horizontal curls and wintergreen twig versus burnt-chip plates, petiole glands, and almond twig odor",
+      "resolvingViews": "Young and old bark; scratched twig; leaf petiole and underside; fruit"
+    },
+    {
+      "confusionSetId": "CS22",
+      "name": "Serviceberry / mountain-ashes / chokecherry",
+      "memberTaxa": [
+        "AMELANCHIER_LAEVIS",
+        "SORBUS_AMERICANA",
+        "SORBUS_DECORA",
+        "PRUNUS_VIRGINIANA"
+      ],
+      "keySeparators": "Simple versus compound leaves; pome calyx versus drupe; leaflet proportions; buds; fruit architecture",
+      "resolvingViews": "Whole leaf; fruit close-up; bud; flowers; multiple leaves"
+    },
+    {
+      "confusionSetId": "CS23",
+      "name": "Flowering / pagoda dogwood",
+      "memberTaxa": [
+        "CORNUS_FLORIDA",
+        "CORNUS_ALTERNIFOLIA"
+      ],
+      "keySeparators": "Opposite versus alternate branching; red versus blue-black fruit; flower bud; crown tiers",
+      "resolvingViews": "Intact twig nodes; fruit; bud; whole crown"
+    }
+  ],
+  "expectedSilvicsRetrieval": {
+    "taxon_scope": "all_new_taxa_plus_due_cumulative_taxa",
+    "dimensions": [
+      "shade_tolerance",
+      "moisture_drainage_soils",
+      "geographic_climatic_affinity",
+      "seed_mast_behavior",
+      "establishment_requirements",
+      "insects_diseases",
+      "management_implications"
+    ],
+    "response_standard": "Tie reproductive strategy and site affinity to realistic Allegheny or oak-hardwood stand development and management."
+  },
+  "sessions": [
+    {
+      "sessionId": "W07-A",
+      "letter": "A",
+      "title": "Hickories and walnuts",
+      "kind": "species_introduction",
+      "taxonScope": "listed_new_taxa",
+      "modalities": [
+        "foliage",
+        "bark",
+        "reproductive",
+        "dormant",
+        "whole_tree_context"
+      ],
+      "delivery": "compound-leaf nut pith bud and bark comparison",
+      "feedbackRelease": "during_instruction",
+      "runtimeBoundary": "labeled_teaching_content",
+      "introducedTaxonIds": [
+        "CARYA_CORDIFORMIS",
+        "CARYA_OVATA",
+        "CARYA_GLABRA",
+        "CARYA_TOMENTOSA",
+        "JUGLANS_NIGRA",
+        "JUGLANS_CINEREA"
+      ],
+      "teachingProfiles": [
+        {
+          "taxonId": "CARYA_CORDIFORMIS",
+          "preferredCommonName": "Bitternut hickory",
+          "canonicalScientificName": "Carya cordiformis",
+          "acceptedAlternatives": [
+            "Juglans cordiformis (historic)"
+          ],
+          "family": "Juglandaceae",
+          "distributionInCourseRegion": "Southern Great Lakes and southern ON/QC through NY, PA/NJ, and locally New England",
+          "ecologicalImportance": "Fast-growing northern hickory of moist/rich sites with sulfur-yellow buds",
+          "coursePriority": "2 - regional",
+          "tier": "B",
+          "fieldIdentification": {
+            "foliage": "Leaves are alternate and pinnately compound, usually with 7 or 9 narrowly ovate to lanceolate serrate leaflets; 5 can occur. The terminal leaflet is only moderately larger than the upper laterals, and the leaf is generally slimmer than mockernut foliage. Rachises and leaflets become mostly glabrous except for limited hair beneath. Show the entire leaf base because a detached leaflet is not proof of a compound leaf.",
+            "barkAgeSeries": "Saplings have relatively smooth gray bark. Pole and mature stems develop shallow furrows and narrow interlacing gray ridges, sometimes becoming slightly scaly or forming close narrow plates. It does not develop the long, free-ended strips of mature shagbark, and tight bark alone cannot safely separate it from pignut or young shagbark.",
+            "dormant": "The high-value character is a slender pointed terminal bud with sulfur-yellow to mustard-yellow, largely valvate scales; lateral buds are similarly yellow and small. Alternate leaf scars are often three-lobed, twigs are relatively slender, and the pith is solid rather than chambered. Bud color must be evaluated on an intact, normally exposed shoot because grime, wetness, and dead scales can dull it.",
+            "reproductive": "The small pear-shaped to nearly spherical fruit has a thin husk with four narrow raised or winged sutures; it typically splits to or near the middle rather than opening as four thick free valves. The thin-shelled nut has a bitter kernel. Loose nuts are frequently weathered or carried from elsewhere, so the husk and a parent shoot are more diagnostic than taste.",
+            "wholeTreeContext": "A medium to large straight-boled hickory, often the most northerly and fastest-growing regional Carya, in fertile moist but usually aerated bottomlands, stream terraces, coves, and rich uplands. Association with basswood, sugar maple, elms, ashes, red maple, and oaks supports plausibility but cannot replace the yellow bud or fruit suite.",
+            "variationAndCondition": "Leaflet number and hair vary with shoot vigor, and yellow bud scales darken after weathering. Bark of old trees may form short loose plates that can suggest shagbark. Rare hybrids with shagbark, pignut, or pecan can combine bud, bark, leaf, and husk characters; intermediate material should not be forced to species from one organ.",
+            "defensibilityLimits": "A sharply focused sulfur-yellow pointed terminal bud is often sufficient for an experienced field call when attached to an alternate, solid-pith hickory twig, but multiple organs remain preferable. A 7-leaflet compound leaf, close gray bark, a bitter loose nut, or moist habitat alone supports only Carya or a short confuser set. Brown-budded or morphologically intermediate trees require intact husk, bud architecture, foliage, and bark before a species call."
+          },
+          "confuserControl": [
+            {
+              "confuser": "Carya ovata",
+              "visibleSeparators": "Shagbark usually has 5 leaflets with three conspicuously enlarged upper leaflets, a larger brown imbricate terminal bud, thick husk that separates fully into four valves, and mature bark in long free-ended strips. Bitternut usually has 7–9 slimmer leaflets, a small pointed yellow valvate bud, a thin narrowly winged husk, and tight bark.",
+              "resolvingView": "An intact terminal bud in neutral light, one whole leaf, husk sutures and thickness, and bark from both upper and lower bole."
+            },
+            {
+              "confuser": "Carya glabra and Carya tomentosa",
+              "visibleSeparators": "Pignut has a small brown imbricate bud and often 5 mostly glabrous leaflets; mockernut has a very large pale hairy bud, stout hairy twigs, usually 7 broad hairy leaflets, and a thick husk. Neither has the slender sulfur-yellow valvate bud of bitternut.",
+              "resolvingView": "Macro views of bud scales and twig hair, a complete leaf with lower surfaces, and a cross-section or intact husk if fruit is present."
+            },
+            {
+              "confuser": "Juglans species",
+              "visibleSeparators": "Walnuts usually have many more leaflets, chambered pith, and fruits enclosed in indehiscent fleshy husks; hickories have solid pith and their mature husks split along sutures. Bitternut's yellow valvate bud is also unlike regional Juglans buds.",
+              "resolvingView": "A clean longitudinal twig section through several internodes, the complete compound leaf, and intact fruit with husk."
+            }
+          ],
+          "silvicsCapsule": {
+            "shadeTolerance": "Intermediate; seedlings can persist under partial canopy, but vigorous height growth and recruitment into the canopy require release.",
+            "moistureDrainageSoils": "Best on deep, fertile, moist, well-aerated loams of bottomlands, terraces, and rich uplands, though it tolerates a wider moisture range than the nickname swamp hickory suggests and is not a tree of long-term inundation.",
+            "geographicClimaticAffinity": "The most northerly widespread hickory, centered in humid continental Great Lakes and northeastern climates and reaching southern Quebec and localized northern New England.",
+            "forestAssociations": "Occurs with sugar maple, basswood, white ash, elms, red maple, northern red oak, shagbark hickory, and floodplain hardwoods on nutrient-rich sites.",
+            "regeneration": "Large nuts fall near the crown and are secondarily cached by squirrels and other rodents; cold stratification precedes hypogeal germination, and seedlings invest heavily in a taproot.",
+            "vegetativeReproduction": "Stumps of young and pole-sized trees sprout readily after cutting or top-kill; sprouting declines with tree size and age, and root suckering is not a principal stand-scale pathway.",
+            "seedMastBehavior": "Some nuts may be produced in many years, with larger crops at irregular multi-year intervals; predation is high and the bitter kernel reduces but does not eliminate animal use.",
+            "establishmentRequirements": "Cached or buried sound nuts, cold moist conditioning, and a moist but aerated seedbed support germination. Advance seedlings tolerate partial shade but require release before competing crowns overtop them.",
+            "successionalRole": "A mid- to late-seral mixed-hardwood associate that can remain in the understory and respond to gaps; it rarely forms pure stands or dominates without favorable site and disturbance history.",
+            "disturbanceResponse": "Canopy gaps and partial overstory removal release advance regeneration; young stems sprout after cutting. Fire damages thin-barked seedlings and saplings, while drought and stress can predispose larger trees to decline agents.",
+            "longevityGrowthStrategy": "Relatively fast growing and shorter lived than many true hickories, though individuals can persist roughly two centuries; early taproot development trades slow initial shoot growth for later stability.",
+            "browseSusceptibility": "Deer browse seedlings and sprouts, and rodents consume or cache nuts; repeated browse can delay recruitment even where seedlings are abundant.",
+            "insectsDiseases": "Hickory bark beetle, borers, defoliators, cankers, heart rots, and hickory decline complexes can reduce vigor and quality, particularly during drought or after crown stress.",
+            "managementImplications": "Retain sound seed trees and well-formed crop trees on fertile sites, protect boles and roots during harvest, and evaluate hickory regeneration by size and vigor rather than assuming numerous small seedlings will recruit unaided.",
+            "silviculturalSystemResponse": "Shelterwood, group selection, and larger gap treatments can release advance regeneration while maintaining a seed source; a dense residual overstory suppresses height growth, while abrupt exposure can damage long-suppressed or poor-crown stems."
+          },
+          "references": [
+            {
+              "title": "Bitternut Hickory — Silvics of North America",
+              "url": "https://research.fs.usda.gov/silvics/bitternut-hickory",
+              "scope": "USDA Forest Service range, sites, associates, seed and sprout reproduction, shade tolerance, growth, damaging agents, and management."
+            },
+            {
+              "title": "Carya cordiformis — bitternut hickory",
+              "url": "https://gobotany.nativeplanttrust.org/species/carya/cordiformis/",
+              "scope": "Regional leaves, buds, bark, fruit, habitat, taxonomy, hybrids, and direct northeastern identification characters."
+            },
+            {
+              "title": "Carya cordiformis — Fire Effects Information System",
+              "url": "https://research.fs.usda.gov/feis/species-reviews/carcor",
+              "scope": "Distribution, communities, regeneration, succession, fire response, and management evidence."
+            }
+          ]
+        },
+        {
+          "taxonId": "CARYA_OVATA",
+          "preferredCommonName": "Shagbark hickory",
+          "canonicalScientificName": "Carya ovata",
+          "acceptedAlternatives": [
+            "Hicoria ovata (historic)"
+          ],
+          "family": "Juglandaceae",
+          "distributionInCourseRegion": "MN/WI/MI and southern ON through NY, PA/NJ, and southern New England",
+          "ecologicalImportance": "Long-lived mast/timber tree on fertile uplands and lowlands",
+          "coursePriority": "2 - regional",
+          "tier": "B",
+          "fieldIdentification": {
+            "foliage": "Alternate pinnately compound leaves usually have 5 leaflets, less often 7; the terminal leaflet and upper lateral pair are conspicuously larger than the basal pair. Leaflets are serrate, broadly obovate to lanceolate, and may have limited hair beneath. Count only complete leaves from petiole base to terminal leaflet, because the small basal pair is easily lost and vigorous foliage can be atypical.",
+            "barkAgeSeries": "Seedlings and saplings have smooth gray bark, and pole trees develop close shallow ridges before any shag appears. Mature bark separates into long narrow vertical plates whose centers remain attached while one or both ends curve strongly away from the bole. Upper bole and younger branches may remain tight; old damaged bark can be less orderly, so bark age and position must be recorded.",
+            "dormant": "Twigs are stout, alternate, and contain solid pith. The terminal bud is large, ovoid, and brown to tan, with several overlapping imbricate scales; outer scales may loosen and expose a lighter inner bud. Large three-lobed leaf scars sit below. The bud is brown and bulkier than bitternut's narrow yellow point, but not densely pale-hairy like mockernut.",
+            "reproductive": "A thick green husk splits freely to the base along four sutures and releases a nearly round, four-angled, hard-shelled nut with a sweet kernel. Male flowers are hanging catkins and female flowers occur at new-shoot tips. Full husk dehiscence plus bud and leaf evidence is valuable; squirrels may remove husks and transport nuts well away from the parent.",
+            "wholeTreeContext": "A medium to large, usually straight-boled tree in oak–hickory, maple–basswood, and mixed mesic stands on fertile slopes, benches, and some bottomlands. A mature shaggy bole is conspicuous at distance, but young cohorts lack that cue and shellbark hickory or planted hickories may create local exceptions.",
+            "variationAndCondition": "Bark does not become shaggy until pole or mature stages, and lower-bole injury, wetness, lichen, or fire can obscure the plate pattern. Leaflet number, hair, and nut shape vary. Rare hybrids with bitternut and other hickories can have brown valvate-looking buds, only slightly loose bark, or unusually thin shells; such intermediates require explicit uncertainty.",
+            "defensibilityLimits": "Long free-ended bark plates on a mature tree within range strongly support shagbark, but a rigorous species call adds a 5-leaflet leaf, large brown imbricate bud, or fully splitting thick husk. Five leaflets alone, a loose sweet nut, short loose bark scales, or a distant shaggy silhouette is insufficient where other hickories or cultivated taxa are plausible."
+          },
+          "confuserControl": [
+            {
+              "confuser": "Carya cordiformis",
+              "visibleSeparators": "Bitternut usually bears 7–9 leaflets, has a small sulfur-yellow pointed valvate bud, thin narrowly winged husk, and tight bark. Shagbark usually has 5 leaflets, a large brown imbricate bud, a thick husk opening fully, and long free-ended bark plates when mature.",
+              "resolvingView": "The intact terminal bud, one complete leaf, fruit husk in side and split views, and bark at known stem age."
+            },
+            {
+              "confuser": "Carya glabra and Carya tomentosa",
+              "visibleSeparators": "Pignut may also have 5 leaflets but has a smaller bud, tight interlaced bark, and a thinner husk that often opens incompletely. Mockernut usually has 7–9 broad hairy leaflets, a very large pale hairy bud, tight diamond-ridged bark, and a very thick husk.",
+              "resolvingView": "Bud-scale size and hair, lower leaflet surfaces and rachis, full lower-bole bark, and intact husk thickness."
+            },
+            {
+              "confuser": "Carya laciniosa or planted shagbark-like hickories",
+              "visibleSeparators": "Shellbark hickory generally has 7–9 leaflets, orange-brown twigs, and much larger thick-husked fruit, though its mature bark is also shaggy. It is uncommon and localized within the course region, making range supportive but not decisive.",
+              "resolvingView": "Several complete leaves, measured fruit and nut, terminal bud and current twig color, plus verified locality or planting history."
+            }
+          ],
+          "silvicsCapsule": {
+            "shadeTolerance": "Intermediate; seedlings can survive beneath partial canopy but require release to sustain height growth and enter dominant crown classes.",
+            "moistureDrainageSoils": "Grows from dry uplands to moist lowlands, with best growth on deep fertile well-drained loams; it is poorly suited to prolonged saturation, severe drought, or compacted soils.",
+            "geographicClimaticAffinity": "A broad eastern species extending well into the Great Lakes and southern Canadian fringe, but most abundant south of the northern-hardwood core.",
+            "forestAssociations": "Commonly mixed with white and northern red oaks, sugar maple, basswood, black walnut, other hickories, white ash, and diverse central-hardwood associates.",
+            "regeneration": "Heavy nuts fall near parent crowns and are cached by squirrels; cold stratification precedes hypogeal germination, and seedlings develop a deep taproot with slow initial shoot growth.",
+            "vegetativeReproduction": "Young and pole-sized stumps sprout vigorously after cutting or top-kill; sprouting capacity declines with age and size, and true root suckering is not the dominant strategy.",
+            "seedMastBehavior": "Nut production is variable, with light crops in some years and good crops at irregular intervals; viable nuts are rapidly consumed or cached and do not create a long-lived forest seed bank.",
+            "establishmentRequirements": "Sound buried nuts, winter stratification, and a moist aerated seedbed permit germination. Deep-rooted advance regeneration needs adequate light and freedom from repeated browse or overtopping to convert root reserves into height growth.",
+            "successionalRole": "A persistent mid- to late-seral oak–hardwood associate that can recruit after gaps from advance seedlings and sprouts but seldom forms extensive pure stands.",
+            "disturbanceResponse": "Canopy opening releases seedlings and saplings, while cutting stimulates stump sprouts. Thin-barked young stems are fire sensitive; established root systems may resprout after top-kill, but repeated severe fire reduces survival.",
+            "longevityGrowthStrategy": "Long lived and moderately slow growing, investing heavily in roots when young; mature trees can remain productive mast and canopy components for centuries on good sites.",
+            "browseSusceptibility": "Deer browse seedlings and sprouts, and squirrels and other wildlife remove many nuts; chronic browse can keep advance regeneration below recruitment height.",
+            "insectsDiseases": "Hickory bark beetle, borers, defoliators, nut weevils, cankers, heart rots, and drought-associated hickory decline can affect crowns, seed crops, and timber quality.",
+            "managementImplications": "Protect well-formed seed and crop trees, retain mast value where compatible with objectives, avoid bole injury, and release established regeneration early enough that slow juvenile shoot growth does not leave it overtopped.",
+            "silviculturalSystemResponse": "Shelterwood, group selection, and oak-oriented regeneration methods can maintain shagbark where adequate advance regeneration or stump-sprout potential exists. Repeated selection without sufficient light tends to favor more tolerant competitors."
+          },
+          "references": [
+            {
+              "title": "Shagbark Hickory — Silvics of North America",
+              "url": "https://research.fs.usda.gov/silvics/shagbark-hickory",
+              "scope": "USDA Forest Service distribution, site relationships, associations, reproduction, growth, damaging agents, genetics, and management."
+            },
+            {
+              "title": "Carya ovata — shagbark hickory",
+              "url": "https://gobotany.nativeplanttrust.org/species/carya/ovata/",
+              "scope": "Regional leaves, buds, bark, fruit, habitat, taxonomy, hybrids, and comparison characters."
+            },
+            {
+              "title": "Carya ovata — Fire Effects Information System",
+              "url": "https://research.fs.usda.gov/feis/species-reviews/carova",
+              "scope": "Communities, regeneration, succession, fire effects, wildlife relations, and management considerations."
+            }
+          ]
+        },
+        {
+          "taxonId": "CARYA_GLABRA",
+          "preferredCommonName": "Pignut hickory",
+          "canonicalScientificName": "Carya glabra",
+          "acceptedAlternatives": [
+            "Hicoria glabra (historic)"
+          ],
+          "family": "Juglandaceae",
+          "distributionInCourseRegion": "PA/NJ/NY, southern New England, southern Great Lakes, and southern ON fringe",
+          "ecologicalImportance": "Dry-to-mesic upland hickory of oak forests",
+          "coursePriority": "2 - regional",
+          "tier": "B",
+          "fieldIdentification": {
+            "foliage": "Alternate pinnately compound leaves most often have 5 leaflets, sometimes 7; the upper three are larger, and mature leaflets and rachis are mostly glabrous. Leaflets are lanceolate to obovate and finely to coarsely serrate. The species name glabra is a useful prompt, not an absolute rule: young tissue and vein axils can carry some hair, while shagbark can also become nearly glabrous.",
+            "barkAgeSeries": "Young stems are smooth gray. Mature bark is gray to dark gray with close, interlacing, often diamond-patterned ridges and relatively shallow furrows. Old stems may develop short curling scales or plates, but usually not the long strongly free-ended strips of shagbark. Bark overlap with mockernut and other upland hickories is substantial.",
+            "dormant": "Alternate slender to moderately stout twigs have solid pith and a small ovoid to ellipsoid reddish-brown or gray-brown terminal bud with several overlapping imbricate scales. Twigs and buds are mostly glabrous. The bud is smaller and darker than mockernut's large pale hairy bud and lacks bitternut's yellow valvate point.",
+            "reproductive": "The fruit is pear-shaped to nearly spherical. Its relatively thin husk lacks the narrow wings of bitternut and may split only partway, irregularly, or sometimes nearly to the base. The hard nut is often pear-shaped, and the kernel ranges from bitter to somewhat sweet. Fruit form is variable enough that husk behavior must be combined with bud and foliage.",
+            "wholeTreeContext": "A medium-sized to large hickory of dry to mesic ridges, upper slopes, and oak-dominated uplands, often with black, scarlet, chestnut, white, or northern red oak. Crown form and dry site help distinguish the ecological setting from bitternut, but neither is species-level evidence.",
+            "variationAndCondition": "The Carya glabra complex has broad variation in fruit size, husk opening, leaflet number, and hair; red hickory has often been treated near or within it, and hybrids occur. Fire, drought, lichens, and old age can make bark resemble other hickories. An apparent pignut with very hairy foliage, a pale bulky bud, or strongly winged husk requires reconsideration.",
+            "defensibilityLimits": "Pignut is one of the least safe regional hickories to identify from a single organ. A strong call combines mostly 5 glabrous leaflets, a small brown glabrous imbricate bud, tight ridged bark, and a thin nonwinged incompletely splitting husk. Bark alone, a pear-shaped loose nut, dry oak habitat, or a five-leaflet leaf should remain Carya sp. or a pignut–shagbark–mockernut set."
+          },
+          "confuserControl": [
+            {
+              "confuser": "Carya ovata",
+              "visibleSeparators": "Both can have 5 mostly glabrous leaflets. Shagbark has a larger brown terminal bud, thick husk that opens fully to the base, and long free-ended mature bark plates; pignut has a smaller bud, a thinner variably dehiscent husk, and generally tight interlaced bark.",
+              "resolvingView": "Terminal bud with scale, intact and split husk, and lower-bole bark from a known mature stem."
+            },
+            {
+              "confuser": "Carya tomentosa",
+              "visibleSeparators": "Mockernut usually has 7–9 broad leaflets and persistent pubescence on leaf undersides, rachis, twigs, and a very large pale bud; pignut is normally slimmer, 5-leafleted, mostly glabrous, and small-budded. Mockernut also has a markedly thicker husk.",
+              "resolvingView": "Lower leaflet surfaces, rachis and current twig under magnification, terminal bud, and a fruit cross-section showing husk thickness."
+            },
+            {
+              "confuser": "Carya cordiformis and intermediate Carya hybrids",
+              "visibleSeparators": "Bitternut has a pointed sulfur-yellow valvate bud and a thin husk narrowly winged on four sutures; pignut has a brown imbricate bud and a nonwinged husk. Hybrids can combine a yellow-brown bud, 7 leaflets, and intermediate sutures.",
+              "resolvingView": "Neutral-light bud macro, complete leaf, all four fruit sutures, and multiple organs from the same tree; retain hybrid or insufficient-evidence language if traits conflict."
+            }
+          ],
+          "silvicsCapsule": {
+            "shadeTolerance": "Intermediate overall but often treated as relatively intolerant in the Northeast; seedlings may persist under partial cover, while effective canopy recruitment requires substantial light.",
+            "moistureDrainageSoils": "Most characteristic of well-drained dry to mesic uplands, ridges, and slopes on loams or rocky soils; good growth occurs on deeper sites, but the species is more drought tolerant than bitternut and avoids prolonged saturation.",
+            "geographicClimaticAffinity": "A central and eastern oak–hickory species reaching the course mainly in the Allegheny, southern Great Lakes, southern New England, and lower Great Lakes–St. Lawrence fringe.",
+            "forestAssociations": "Common with white, black, scarlet, chestnut, and northern red oaks, mockernut and shagbark hickories, blackgum, sassafras, red maple, and other dry-upland hardwoods.",
+            "regeneration": "Heavy nuts are dispersed by gravity and caching mammals; cold stratification precedes hypogeal germination, and advance seedlings develop substantial root systems before rapid shoot growth.",
+            "vegetativeReproduction": "Young trees and poles can stump-sprout after cutting or top-kill; sprouting declines in older large stems, and root suckering is not a major regeneration mechanism.",
+            "seedMastBehavior": "Nut production varies strongly by year, with good crops at irregular intervals and high losses to insects and vertebrate consumers; viable nuts generally do not persist for many years in soil.",
+            "establishmentRequirements": "Cached sound nuts, winter chilling, and an aerated seedbed allow germination. Seedlings need enough light after establishment to compete with faster-growing oak, red maple, and shrub layers.",
+            "successionalRole": "A persistent mid- to late-seral member of oak forests, often present as advance regeneration and capable of replacing some less-tolerant pioneers after gaps, yet rarely dominant over broad areas.",
+            "disturbanceResponse": "Gap formation and overstory reduction release established seedlings; young cut or fire-top-killed stems sprout. Repeated severe fire, drought stress, and crown damage increase mortality and decline risk.",
+            "longevityGrowthStrategy": "Long lived and slow to moderate growing, with strong wood and deep roots; suppressed seedlings can persist, but released individuals need good crown position for useful diameter growth.",
+            "browseSusceptibility": "Deer browse young shoots and sprouts, while squirrels and other mammals heavily use nuts; chronic browse can prevent advance regeneration from reaching sapling height.",
+            "insectsDiseases": "Hickory bark beetle, borers, defoliators, nut weevils, cankers, heart rots, and drought-associated hickory decline affect growth, mast, and timber quality.",
+            "managementImplications": "Retain well-formed mast and crop trees on appropriate oak sites, protect residual stems from logging damage, and verify species before making hickory-specific decisions because bark and leaf-only errors are frequent.",
+            "silviculturalSystemResponse": "Oak shelterwood, group openings, and regeneration cuts can favor established pignut seedlings and sprouts if light is sufficient. Repeated low-intensity selection may leave it suppressed beneath more tolerant maple and beech."
+          },
+          "references": [
+            {
+              "title": "Pignut Hickory — Fire Effects Information System",
+              "url": "https://research.fs.usda.gov/feis/species-reviews/cargla",
+              "scope": "USDA Forest Service taxonomy, distribution, communities, regeneration, succession, fire response, and management."
+            },
+            {
+              "title": "Carya glabra — pignut hickory",
+              "url": "https://gobotany.nativeplanttrust.org/species/carya/glabra/",
+              "scope": "Regional leaves, buds, bark, fruit, habitat, taxonomic variation, hybrids, and direct comparison characters."
+            },
+            {
+              "title": "Sweet Pignut Hickory — Silvics of North America",
+              "url": "https://research.fs.usda.gov/silvics/sweet-pignut-hickory",
+              "scope": "USDA Forest Service site relations, reproduction, growth, shade tolerance, damaging agents, genetics, and silvicultural response for Carya glabra."
+            }
+          ]
+        },
+        {
+          "taxonId": "CARYA_TOMENTOSA",
+          "preferredCommonName": "Mockernut hickory",
+          "canonicalScientificName": "Carya tomentosa",
+          "acceptedAlternatives": [
+            "Carya alba",
+            "Hicoria alba"
+          ],
+          "family": "Juglandaceae",
+          "distributionInCourseRegion": "Southern fringe, especially PA/NJ and locally southern Great Lakes, NY, and southern New England",
+          "ecologicalImportance": "Dry-upland oak associate with pubescent buds/twigs and thick-husked nuts",
+          "coursePriority": "2 - regional",
+          "tier": "B",
+          "fieldIdentification": {
+            "foliage": "Alternate pinnately compound leaves usually have 7 leaflets, sometimes 5 or 9. Leaflets are broad, serrate, and strongly aromatic when crushed; the lower surfaces, rachis, and petiolules commonly retain dense soft hair, especially on new growth. The terminal three leaflets are largest. Hair can wear away late in the season, so inspect protected vein surfaces and the rachis rather than judging an upper surface alone.",
+            "barkAgeSeries": "Sapling bark is gray and relatively smooth. Mature bark becomes dark gray with deep furrows and close interlacing, often diamond-patterned ridges; it is rough but normally remains tight rather than peeling in long shagbark strips. Very old stems can develop short loose plates, while lichens and fire scars can mask the lattice pattern.",
+            "dormant": "Twigs are notably stout and often densely pubescent, with solid pith and large three-lobed leaf scars. The terminal bud is very large, broadly ovoid, pale tan to buff, and covered by densely hairy overlapping scales, often resembling a soft cream-colored egg. This bud-and-twig suite is the best winter separator from pignut, shagbark, and bitternut.",
+            "reproductive": "A large globose to pear-shaped fruit has a very thick husk that splits along four sutures to the base. The hard, thick-shelled, usually four-ridged nut contains a relatively small but sweet kernel. Husk thickness and the pale hairy bud together are more reliable than nut shape, which varies and can be altered by drying or animal gnawing.",
+            "wholeTreeContext": "A medium to large, long-lived hickory of dry to mesic oak–hickory ridges and slopes, strongest toward Pennsylvania and New Jersey within the course region. It often grows with black, white, chestnut, scarlet, and northern red oaks, pignut hickory, and blackgum. Southern or dry-site context supports plausibility but does not replace pubescence and bud evidence.",
+            "variationAndCondition": "Hair density declines as shoots age and differs among trees; vigorous shoots can carry unusually large leaves and buds. Old bark can become slightly loose. Natural hybridization with shagbark and other hickories can yield mixed hair, bud, and fruit characters, and drought-associated hickory decline can thin crowns without changing host identity.",
+            "defensibilityLimits": "A strong species call combines a very large pale hairy terminal bud and stout pubescent twig with broad 7-leaflet foliage or a thick four-valved husk. Seven leaflets alone, coarse tight bark, a large loose nut, citrus-like odor, or dry oak habitat is insufficient. A glabrous small-budded or thin-husked specimen should remain Carya sp. or a pignut–mockernut set until additional organs resolve it."
+          },
+          "confuserControl": [
+            {
+              "confuser": "Carya glabra",
+              "visibleSeparators": "Pignut is usually mostly glabrous, commonly 5-leafleted, and has a small brown bud and relatively thin variably splitting husk. Mockernut is conspicuously pubescent, usually 7-leafleted, large pale-budded, and very thick-husked.",
+              "resolvingView": "Macro views of terminal bud, current twig, rachis, and lower leaflet veins, plus a fruit cross-section through the husk."
+            },
+            {
+              "confuser": "Carya ovata",
+              "visibleSeparators": "Shagbark generally has 5 leaflets, a brown rather than pale densely hairy bud, and long free-ended mature bark plates; mockernut generally has 7 broad hairy leaflets, a very large pale hairy bud, and close rough bark. Both can have thick fully splitting husks.",
+              "resolvingView": "Whole leaf, terminal bud under neutral light, lower-bole bark and younger upper bark, and lower leaflet surfaces."
+            },
+            {
+              "confuser": "Carya cordiformis",
+              "visibleSeparators": "Bitternut has a slender sulfur-yellow pointed valvate bud, slimmer mostly glabrous 7–9-leaflet foliage, and a small thin narrowly winged husk. Mockernut has a bulky buff hairy bud, stout hairy shoot, broad leaflets, and a thick unwinged husk.",
+              "resolvingView": "Bud architecture and color, twig and rachis hair, and intact fruit showing suture wings and husk thickness."
+            }
+          ],
+          "silvicsCapsule": {
+            "shadeTolerance": "Intermediate; established seedlings can persist beneath partial cover, but good height growth and canopy recruitment require release and a competitive crown position.",
+            "moistureDrainageSoils": "Most characteristic of well-drained dry to mesic uplands on loams and rocky soils, while best growth occurs on deeper fertile soils; it tolerates seasonal drought better than bitternut but not prolonged saturation.",
+            "geographicClimaticAffinity": "A warm-temperate central and southern Appalachian and oak–hickory species that reaches its northern fringe in Pennsylvania, New Jersey, southern New England, New York, and localized Great Lakes sites.",
+            "forestAssociations": "Occurs with white, black, chestnut, scarlet, and northern red oaks, pignut and shagbark hickories, blackgum, sourwood southward, red maple, and other upland hardwoods.",
+            "regeneration": "Heavy nuts are dispersed mainly by gravity and mammal caching; cold stratification precedes hypogeal germination, and seedlings allocate strongly to a deep taproot before rapid shoot growth.",
+            "vegetativeReproduction": "Young and pole-sized stumps sprout readily after cutting or top-kill, while older large stems have lower sprouting capacity; root suckering is not the principal mechanism.",
+            "seedMastBehavior": "Trees may produce some seed in many years, with much larger crops at irregular intervals. Nut predators and weevils remove a large share, and sound seed normally remains viable only through the following establishment season.",
+            "establishmentRequirements": "Buried sound nuts need cold moist conditioning and an aerated seedbed. Advance seedlings require increasing light and control of faster-growing competitors to convert stored root reserves into shoot growth.",
+            "successionalRole": "A persistent mid- to late-seral oak–hickory associate that can survive in the understory and respond to gaps, but generally remains mixed rather than forming pure stands.",
+            "disturbanceResponse": "Canopy gaps release established regeneration and cutting stimulates sprouts. Young stems are readily top-killed by fire; surviving roots can resprout, while repeated severe burning or drought weakens cohorts.",
+            "longevityGrowthStrategy": "Long lived, often persisting for two centuries or more, with slow juvenile shoot growth, strong root development, and moderate later growth when crowns remain free.",
+            "browseSusceptibility": "Seedlings and sprouts are browsed by deer and nuts are heavily used by squirrels and other wildlife; sustained browse can eliminate height gains after release.",
+            "insectsDiseases": "Hickory bark beetle, borers, defoliators, nut weevils, cankers, heart rots, and drought-associated decline can damage crowns, mast, and boles, though no single agent normally controls regional abundance.",
+            "managementImplications": "Retain sound seed and wildlife-mast trees, protect crop-tree boles during harvest, and favor the species on suitable oak uplands only where advance regeneration or sprout potential is present and can receive light.",
+            "silviculturalSystemResponse": "Oak shelterwood, group openings, and regeneration cuts can release mockernut advance regeneration and sprouts. Repeated low-light selection favors more tolerant competitors; full exposure of long-suppressed poor-crown trees may not restore quality."
+          },
+          "references": [
+            {
+              "title": "Mockernut Hickory — Silvics of North America",
+              "url": "https://research.fs.usda.gov/silvics/mockernut-hickory",
+              "scope": "Current USDA Forest Service synthesis of identification, distribution, environmental associations, reproduction, growth, mast, damaging agents, wildlife value, and management."
+            },
+            {
+              "title": "Carya tomentosa — mockernut hickory",
+              "url": "https://gobotany.nativeplanttrust.org/species/carya/tomentosa/",
+              "scope": "Regional morphology, pubescence, buds, bark, fruit, habitat, taxonomy, and comparison characters."
+            },
+            {
+              "title": "Carya tomentosa — Fire Effects Information System",
+              "url": "https://research.fs.usda.gov/feis/species-reviews/cartom",
+              "scope": "Distribution, communities, regeneration, succession, fire response, wildlife relations, and management."
+            }
+          ]
+        },
+        {
+          "taxonId": "JUGLANS_NIGRA",
+          "preferredCommonName": "Black walnut",
+          "canonicalScientificName": "Juglans nigra",
+          "acceptedAlternatives": [],
+          "family": "Juglandaceae",
+          "distributionInCourseRegion": "Southern/western Great Lakes, southern ON, NY, PA/NJ, and rich southern New England sites",
+          "ecologicalImportance": "High-value light-demanding tree of fertile well-drained sites",
+          "coursePriority": "2 - regional",
+          "tier": "B",
+          "fieldIdentification": {
+            "foliage": "Alternate pinnately compound leaves commonly have 11–23 finely serrate leaflets. The terminal leaflet is absent, very small, or clearly smaller than the middle leaflets, producing a feather-like leaf widest near the middle. Leaflets are mostly glabrous above with hair beneath, especially along veins, and crushed foliage is aromatic. Confirm the petiole base: a detached leaflet is easily mistaken for a simple leaf.",
+            "barkAgeSeries": "Young bark is gray-brown and relatively smooth with lenticels. Pole bark develops narrow fissures, while mature and old boles become dark brown to nearly black with deep furrows and thick intersecting ridges that form elongated diamonds. Butternut bark is generally paler with broader flatter ridges, but wetness, age, and site make color alone unsafe.",
+            "dormant": "Alternate stout brown twigs show large shield- or heart-shaped leaf scars with three main groups of bundle scars, a small superposed bud above some lateral buds, and chambered pith in longitudinal section. The terminal bud is short, gray-brown, and somewhat silky rather than conspicuously scaly. Black-walnut pith is typically tan to light brown, contrasting with butternut's darker chocolate-brown pith, but lighting and decay demand a fresh cut.",
+            "reproductive": "The nearly spherical green fruit has a thick, smooth to slightly rough fleshy husk that does not split neatly into valves. Inside is a round, deeply corrugated, very hard nut. Staminate catkins hang from older wood and small pistillate flowers occur in short terminal clusters. A round loose walnut is supportive, but planted cultivars and transported nuts require attachment or independent vegetative evidence.",
+            "wholeTreeContext": "A large, often straight-boled tree with an open rounded crown, usually scattered rather than in extensive pure stands on deep fertile, moist but well-drained alluvium, lower slopes, stream terraces, farm woodlots, and old homesteads. Site quality and land-use history help locate it but cannot distinguish it from planted walnuts.",
+            "variationAndCondition": "Leaflet number, terminal-leaflet size, bark darkness, and nut size vary with genotype and vigor. Anthracnose can cause premature defoliation; drought, browse, ice, and crown exposure alter form. Orchard trees, naturalized plantings, and rare walnut hybrids complicate provenance. Do not use allelopathy symptoms in nearby plants as identification evidence.",
+            "defensibilityLimits": "A defensible call combines many leaflets with a reduced terminal leaflet, round husked fruit or nut, dark deeply ridged bark, and a chambered-pith twig. Any one of these can mislead. Compound foliage alone cannot exclude butternut, ash, sumac, black locust, or tree-of-heaven; bark alone cannot exclude other dark-ridged hardwoods."
+          },
+          "confuserControl": [
+            {
+              "confuser": "Juglans cinerea",
+              "visibleSeparators": "Butternut normally has 11–17 leaflets with a well-developed terminal leaflet, hairy sticky rachis and twigs, dark chocolate chambered pith, pale flat-ridged bark, and oblong sticky-hairy fruit. Black walnut tends to have more leaflets, a reduced terminal leaflet, less hairy twigs, lighter pith, dark diamond-ridged bark, and round fruit.",
+              "resolvingView": "One complete leaf, fresh current twig and rachis hair, a clean longitudinal pith section, mature bark, and intact fruit with shape and husk texture."
+            },
+            {
+              "confuser": "Ailanthus altissima",
+              "visibleSeparators": "Tree-of-heaven leaflets are mostly entire except for one or more large basal gland-tipped teeth, have a strong rancid odor, and occur on very large continuous-pith twigs with enormous leaf scars; its fruits are samaras. Black-walnut leaflets are serrate nearly throughout, twigs have chambered pith, and fruits are round husked nuts.",
+              "resolvingView": "Leaflet bases and margins, complete twig with leaf scars, a longitudinal pith cut, and any fruit."
+            },
+            {
+              "confuser": "Fraxinus, Rhus, Robinia, and Carya species",
+              "visibleSeparators": "Ashes have opposite leaves and twigs plus samaras; sumacs lack a true terminal bud and bear dense red drupes; black locust has paired stipular spines and legumes; hickories usually have fewer leaflets, solid pith, and husks splitting on sutures. Walnut combines alternate arrangement, chambered pith, and an indehiscent fleshy husk.",
+              "resolvingView": "Several consecutive nodes, petiole base, twig pith, armature, and attached reproductive structures."
+            }
+          ],
+          "silvicsCapsule": {
+            "shadeTolerance": "Shade intolerant; seedlings may survive briefly under partial cover but need early crown release and sustained overhead light for good form and growth.",
+            "moistureDrainageSoils": "Best on deep, fertile, moist, well-drained loams with near-neutral reaction, often on alluvium, terraces, and lower slopes; poor growth follows shallow droughty, saturated, strongly acidic, or compacted soils.",
+            "geographicClimaticAffinity": "A central and eastern warm-temperate hardwood reaching its northern limits in the Great Lakes, southern Ontario, New York, and southern New England; local seed-source adaptation matters near the northern edge.",
+            "forestAssociations": "Scattered with sugar maple, basswood, white ash, black cherry, yellow-poplar, elms, hackberry, northern red oak, and hickories on rich sites and along forest–agriculture edges.",
+            "regeneration": "Large nuts fall near parent trees and are cached by squirrels; cold stratification precedes hypogeal germination, and seedlings develop a strong taproot that complicates transplanting.",
+            "vegetativeReproduction": "Young stumps may sprout after cutting, but sprouting decreases rapidly with age and is less dependable than seed or planting for stand establishment; root suckering is not a primary strategy.",
+            "seedMastBehavior": "Nut crops vary among years, with good crops recurring irregularly; sound seed is recalcitrant, heavily used by wildlife, and does not form a durable multi-year soil bank under ordinary forest conditions.",
+            "establishmentRequirements": "Seedlings need sound stratified nuts or suitable nursery stock, deep aerated soil, early competing-vegetation control, and enough light to remain dominant. Provenance and root handling are important in artificial regeneration.",
+            "successionalRole": "A gap- and disturbance-dependent, early- to mid-seral rich-site species that persists as scattered canopy trees when crowns remain free; it is not a shade-driven late-successional dominant.",
+            "disturbanceResponse": "Large gaps, field abandonment, and well-planned harvest openings favor regeneration. Fire and logging injury degrade thin young bark and high-value boles; drought, flooding, and crown competition sharply reduce vigor.",
+            "longevityGrowthStrategy": "Moderately long lived and capable of rapid diameter growth on excellent sites, but high-quality timber depends on early height growth, a single straight stem, and sustained crown freedom.",
+            "browseSusceptibility": "Deer browse seedlings and rub saplings, often causing forks and value loss; rodents consume seed. Protection can be necessary in plantations and small regeneration cohorts.",
+            "insectsDiseases": "Walnut anthracnose, thousand cankers disease risk, walnut caterpillar, shoot moths, borers, ambrosia beetles, cankers, and root diseases can affect foliage, form, and survival; range-edge drought stress can magnify damage.",
+            "managementImplications": "Reserve black walnut for high-quality sites, identify and release well-formed crop trees, protect roots and boles, maintain genetic and seed-source suitability, and control competition without exposing stems to avoidable epicormic branching or injury.",
+            "silviculturalSystemResponse": "Even-aged methods, large groups, and wide crown-release treatments generally fit its light demand. Shelterwood can establish seedlings if the overstory is removed promptly; small selection gaps and prolonged shade usually yield poor form and weak recruitment."
+          },
+          "references": [
+            {
+              "title": "Black Walnut — Silvics of North America",
+              "url": "https://research.fs.usda.gov/silvics/black-walnut",
+              "scope": "USDA Forest Service distribution, site quality, associations, reproduction, growth, genetics, damaging agents, and intensive management."
+            },
+            {
+              "title": "Juglans nigra — black walnut",
+              "url": "https://gobotany.nativeplanttrust.org/species/juglans/nigra/",
+              "scope": "Regional leaves, buds, pith, bark, fruit, habitat, taxonomy, and comparison morphology."
+            },
+            {
+              "title": "Juglans nigra — Fire Effects Information System",
+              "url": "https://research.fs.usda.gov/feis/species-reviews/jugnig",
+              "scope": "Communities, regeneration, succession, disturbance response, wildlife relations, and management considerations."
+            }
+          ]
+        },
+        {
+          "taxonId": "JUGLANS_CINEREA",
+          "preferredCommonName": "Butternut",
+          "canonicalScientificName": "Juglans cinerea",
+          "acceptedAlternatives": [],
+          "family": "Juglandaceae",
+          "distributionInCourseRegion": "Great Lakes through southern ON/QC, NY/New England/NB, and PA/NJ; increasingly scarce",
+          "ecologicalImportance": "Light-demanding rich-site walnut severely reduced by butternut canker",
+          "coursePriority": "2 - regional",
+          "tier": "B",
+          "fieldIdentification": {
+            "foliage": "Alternate pinnately compound leaves usually have 11–17 serrate leaflets and a well-developed terminal leaflet. The petiole, rachis, young leaflet surfaces, and especially lower veins are conspicuously hairy and may feel sticky. Leaves often look coarser and more openly spaced than black walnut. Hair must be checked on current vigorous foliage because weathering reduces it.",
+            "barkAgeSeries": "Young bark is smooth gray with lenticels. Mature bark is light gray to ashy, divided by shallow furrows into broad, flat-topped or interlacing ridges rather than the deep dark diamond network of black walnut. Cankers, dark staining, epicormic shoots, and dead bark can obscure the normal pattern, so bark is never sufficient by itself.",
+            "dormant": "Stout gray-brown current twigs are densely hairy, often with a hairy ridge or pad immediately above the large three-lobed leaf scar. Buds are pale, hairy, and only weakly scaly. A fresh longitudinal cut shows chambered, typically dark chocolate-brown pith. That chambered pith establishes Juglans, while its color, twig hair, and supra-axillary pad help separate butternut from black walnut.",
+            "reproductive": "Fruits are oblong to ovoid, often pointed, and covered by a sticky, densely hairy green husk that does not split into valves. The nut is elongate with prominent sharp longitudinal ribs and deep grooves. This contrasts with black walnut's round smoother-husked fruit and round corrugated nut; hybrids may show intermediate, heart-shaped, or less sharply ridged nuts.",
+            "wholeTreeContext": "A small to medium, short-lived walnut with a broad open crown on rich, moist but well-drained stream benches, coves, talus, limestone-influenced slopes, and forest edges. Within the region it ranges farther north than black walnut but is now scattered and declining. A vigorous planted or roadside walnut deserves special hybrid scrutiny.",
+            "variationAndCondition": "Butternut canker produces elongated sunken cankers, inky exudation, callus margins, crown dieback, epicormic shoots, and eventual stem death. Bunch disease can produce witches'-brooms. Japanese walnut and the common buartnut hybrid may be healthier and more vigorous, with variable twig hair and often thick heart-shaped nuts. Host identification and disease diagnosis are separate decisions; an apparently healthy tree is not proof of resistance.",
+            "defensibilityLimits": "A strong wild-tree call combines a terminal leaflet, hairy sticky rachis and twig, dark chambered pith, pale flat-ridged bark, and oblong sticky fruit or sharply ribbed nut. Cankers, pale bark, one hairy leaflet, or an oblong loose nut is not enough. In settled landscapes or conservation surveys, putative butternut without fruit and multiple twig characters should remain Juglans sp. or a butternut–Japanese-walnut hybrid complex."
+          },
+          "confuserControl": [
+            {
+              "confuser": "Juglans nigra",
+              "visibleSeparators": "Black walnut generally has more leaflets and a reduced terminal leaflet, less hairy current growth, lighter tan chambered pith, dark deeply diamond-ridged bark, and round fruit. Butternut has a large terminal leaflet, dense hair and a hairy pad above the scar, dark pith, pale flat ridges, and oblong sticky-hairy fruit.",
+              "resolvingView": "Complete leaf, current twig and leaf scar, fresh longitudinal pith section, mature bark, and intact mature fruit."
+            },
+            {
+              "confuser": "Juglans ailantifolia and buartnut hybrids",
+              "visibleSeparators": "Japanese walnut and hybrids often show especially vigorous growth, broader or more numerous leaflets, a flatter or more abruptly rounded leaf-scar top, and nuts that are heart-shaped or less sharply elongate than typical butternut. Character combinations overlap and morphology may not resolve all hybrids.",
+              "resolvingView": "Several mature nuts in side and end view, current twig and leaf-scar macros, complete leaves, planting history, and genetic verification for conservation-grade decisions."
+            },
+            {
+              "confuser": "Carya species and Ailanthus altissima",
+              "visibleSeparators": "Hickories have solid pith and fruit husks that split along sutures; tree-of-heaven has continuous pith, mostly entire leaflets with basal gland-teeth, and samaras. Butternut combines alternate arrangement, chambered dark pith, serrate leaflets, and an indehiscent oblong husk.",
+              "resolvingView": "A clean pith section, leaflet bases and margins, complete leaf, and intact reproductive structure."
+            }
+          ],
+          "silvicsCapsule": {
+            "shadeTolerance": "Shade intolerant; seedlings and sprouts need substantial light, and established trees decline when overtopped or tightly crowded.",
+            "moistureDrainageSoils": "Best on fertile moist well-drained soils of stream terraces, coves, and slopes, often with calcareous influence; it can occupy rocky sites but is uncommon on dry compact infertile soil or saturated ground.",
+            "geographicClimaticAffinity": "A cool-temperate eastern walnut extending farther north than black walnut, from the Great Lakes and southern Canada through New England and the Allegheny region, now reduced throughout by disease.",
+            "forestAssociations": "Scattered with sugar maple, basswood, white ash, black cherry, elms, hickories, hemlock, and northern red oak in rich mixed hardwoods, riparian benches, and edges.",
+            "regeneration": "Heavy nuts fall near parent trees and are cached by wildlife; cold stratification supports hypogeal germination, and seedlings develop a strong taproot. Low surviving adult density now constrains seed supply.",
+            "vegetativeReproduction": "Young trees may stump-sprout after cutting or injury, but sprouting is not dependable in older or canker-girdled trees and cannot compensate indefinitely for disease mortality.",
+            "seedMastBehavior": "Nut production is variable and limited by declining crown health and scarcity; sound nuts are short-lived in the forest floor and heavily consumed or moved by rodents.",
+            "establishmentRequirements": "Seedlings need sound stratified native seed, rich aerated soil, and early crown light. Conservation planting also requires careful parent verification because Japanese-walnut introgression is common in apparently healthy material.",
+            "successionalRole": "A light-demanding gap, edge, and early- to mid-seral rich-site associate rather than a closed-canopy dominant; canopy openings were historically important for recruitment.",
+            "disturbanceResponse": "Moderate opening can release healthy individuals and regeneration, but fire, bole wounds, storm breakage, and cutting may create stress or infection opportunities. Severe canker girdling kills stems and may prevent effective resprouting.",
+            "longevityGrowthStrategy": "Relatively fast growing but short lived, often less than a century even without canker; current disease commonly truncates life before large-tree development.",
+            "browseSusceptibility": "Deer browse seedlings and sprouts and rub saplings; rodents consume nuts. Small remnant cohorts can therefore lose recruitment despite otherwise suitable light and soil.",
+            "insectsDiseases": "Butternut canker caused by Ophiognomonia clavigignenti-juglandacearum is the principal threat; butternut curculio, borers, defoliators, bunch disease, decay, and storm injury also matter. Symptom absence does not demonstrate resistance or pure ancestry.",
+            "managementImplications": "Verify identity before conservation action, retain healthy and potentially valuable native trees where safe, reduce avoidable injury and competition without overexposure, document canker status, and follow regional butternut conservation and seed-collection protocols.",
+            "silviculturalSystemResponse": "Group openings or carefully timed crown release can improve light for healthy trees and regeneration. Clearcut or shelterwood restoration may work with verified stock, but conventional release alone cannot overcome canker or hybrid misidentification."
+          },
+          "references": [
+            {
+              "title": "Butternut — Silvics of North America",
+              "url": "https://research.fs.usda.gov/silvics/butternut",
+              "scope": "USDA Forest Service distribution, sites, associates, reproduction, growth, damaging agents, genetics, and management."
+            },
+            {
+              "title": "Juglans cinerea — butternut",
+              "url": "https://gobotany.nativeplanttrust.org/species/juglans/cinerea/",
+              "scope": "Regional leaves, twig hair, buds, pith, bark, fruit, habitat, taxonomy, and comparison morphology."
+            },
+            {
+              "title": "A Forest Manager's Guide to Butternut",
+              "url": "https://research.fs.usda.gov/treesearch/download/12925.pdf",
+              "scope": "USDA Forest Service field recognition, canker assessment, hybrid concerns, retention, regeneration, and conservation management."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sessionId": "W07-B",
+      "letter": "B",
+      "title": "Hickory and walnut retrieval",
+      "kind": "delayed_retrieval",
+      "taxonScope": "session_a_taxa_plus_due_oak_transition_review",
+      "modalities": [
+        "foliage",
+        "bark",
+        "reproductive",
+        "dormant"
+      ],
+      "delivery": "unfamiliar isolated organs and direct contrasts",
+      "feedbackRelease": "after_batch_submission",
+      "runtimeBoundary": "runtime_retrieval_from_admitted_practice_media",
+      "introducedTaxonIds": [],
+      "teachingProfiles": []
+    },
+    {
+      "sessionId": "W07-C",
+      "letter": "C",
+      "title": "Allegheny and southern-transition associates",
+      "kind": "new_species_and_confusers",
+      "taxonScope": "listed_new_taxa_plus_cs23",
+      "modalities": [
+        "foliage",
+        "bark",
+        "reproductive",
+        "dormant",
+        "whole_tree_context",
+        "condition"
+      ],
+      "delivery": "regional associate comparisons with host-condition separation",
+      "feedbackRelease": "after_response",
+      "runtimeBoundary": "labeled_teaching_content",
+      "introducedTaxonIds": [
+        "CASTANEA_DENTATA",
+        "LIRIODENDRON_TULIPIFERA",
+        "MAGNOLIA_ACUMINATA",
+        "SASSAFRAS_ALBIDUM",
+        "NYSSA_SYLVATICA",
+        "CORNUS_FLORIDA"
+      ],
+      "teachingProfiles": [
+        {
+          "taxonId": "CASTANEA_DENTATA",
+          "preferredCommonName": "American chestnut",
+          "canonicalScientificName": "Castanea dentata",
+          "acceptedAlternatives": [
+            "Castanea americana (historic)"
+          ],
+          "family": "Fagaceae",
+          "distributionInCourseRegion": "Former range from PA/NJ and NY through New England and southern ON; now mainly sprouts and rare stems",
+          "ecologicalImportance": "Historically dominant timber/mast tree; current field work centers blight-affected sprouts",
+          "coursePriority": "3 - recognition/confuser",
+          "tier": "C",
+          "fieldIdentification": {
+            "foliage": "Leaves are alternate, simple, narrowly elliptic to lanceolate, commonly 12–22 cm long, with a long pointed tip and many coarse, sharply triangular, forward-pointing teeth; straight parallel lateral veins terminate in the teeth. The blade is thin but firm and normally glabrous or nearly so beneath. Sun shoots can carry smaller, thicker leaves and stump sprouts can carry very large leaves, so use several mature blades and confirm their attachment.",
+            "barkAgeSeries": "Seedlings, sprouts, and young stems have smooth olive-brown to gray-brown bark with conspicuous pale lenticels. Historically, unblighted mature boles developed dark gray-brown bark with broad, shallowly fissured, often flat-topped ridges, but that stage is now rare. Orange, swollen, sunken, cracked, or callused cankers, dead tops, and epicormic shoots are condition evidence associated with chestnut blight, not the normal mature-bark key.",
+            "dormant": "Alternate slender reddish-brown twigs are glabrous and bear small ovoid to conical brown buds with only a few visible scales; leaf scars are small and semicircular. Buds are far shorter than the long, narrow, many-scaled buds of American beech. Dormant chestnut sprouts are difficult to separate from planted Asian chestnuts without twig-hair and bud-scale close-ups or retained leaves and burs.",
+            "reproductive": "Long pale staminate catkins appear in early summer; the shorter bisexual portions occur near catkin bases. A densely armed spherical bur opens by four valves and normally contains two or three glossy brown nuts, each flattened on one or two sides and tipped by a pale beak. An attached bur and representative leaves are much stronger evidence than a loose nut, because cultivated Castanea species and hybrids occur within the region.",
+            "wholeTreeContext": "In present-day forests, expect clumps of slender root-collar sprouts, often repeatedly killed back, beneath oak and mixed-hardwood canopies on well-drained acidic slopes and ridges. Rare larger survivors may have dead limbs, cankers, and basal sprouts. Historical abundance, a nearby restoration planting, or a blighted-looking stem changes prior probability but cannot establish species.",
+            "variationAndCondition": "Chestnut blight commonly produces orange stromata, bark fissures, sunken or swollen cankers, callus margins, epicormic branching, top death, and renewed basal sprouting. Other injuries and sunscald can mimic cankers. Chinese and Japanese chestnuts and breeding hybrids can persist near plantings; hybrid foliage and twig pubescence may be intermediate. Identify the host separately from diagnosing disease, and never infer blight resistance from one living or apparently healthy stem.",
+            "defensibilityLimits": "A defensible species call normally combines several sharply toothed, glabrous leaves with glabrous twigs and small buds, or uses an attached native-type bur and nuts with vegetative evidence. A blighted sprout clump, one serrate leaf, bark alone, a loose bur, or historical site knowledge is insufficient. Sterile material near cultivation may warrant Castanea sp. or an American-versus-Asian chestnut complex until lower leaf surfaces, current twigs, buds, and fruit are available."
+          },
+          "confuserControl": [
+            {
+              "confuser": "Quercus montana",
+              "visibleSeparators": "Chestnut oak has obovate leaves with broad rounded crenations lacking long sharp bristle-like points, clustered terminal oak buds, and acorns in cups. American chestnut has narrowly elliptic leaves with many acute vein-ending teeth, small unclustered-looking buds, and spiny burs.",
+              "resolvingView": "Several full leaves with margins and bases, the twig tip showing bud arrangement, and any attached acorn cup or bur."
+            },
+            {
+              "confuser": "Castanea mollissima and other planted Castanea",
+              "visibleSeparators": "Chinese chestnut commonly has densely hairy current twigs and lower leaf surfaces, larger buds, and a more spreading orchard form; American chestnut is usually glabrous on current twigs and leaf undersides. Hybrids can combine these traits, so no single character is absolute.",
+              "resolvingView": "Macro views of current-year twig hairs and the lower leaf surface, multiple buds, an attached bur and nuts, and evidence of planting or restoration origin."
+            },
+            {
+              "confuser": "Fagus grandifolia",
+              "visibleSeparators": "American beech leaves have many straight side veins but smaller regular teeth, and dormant shoots have unmistakably long narrow pointed buds; mature bark is normally smooth gray. Chestnut teeth are much coarser and more triangular, its buds are short, and reproductive material is a spiny bur rather than a small four-valved beech husk.",
+              "resolvingView": "A complete dormant shoot with terminal and lateral buds, mature leaf margins, and attached fruit if available."
+            }
+          ],
+          "silvicsCapsule": {
+            "shadeTolerance": "Seedlings and sprouts can persist for years under partial shade, but sustained height growth, flowering, and canopy recruitment require substantial release; the species is best treated as intermediate rather than a deep-shade climax tree.",
+            "moistureDrainageSoils": "Historically occupied a wide range but was especially successful on well-drained acidic loams and sandy loams of slopes and ridges; it avoids prolonged saturation and performs poorly on highly calcareous or compacted sites.",
+            "geographicClimaticAffinity": "A humid-temperate eastern species formerly important from the central Appalachians through southern New England and into southern Ontario, reaching the course region chiefly in its eastern and Allegheny portions.",
+            "forestAssociations": "Formerly mixed with chestnut oak, northern red and white oaks, hickories, red maple, blackgum, white pine, and other Appalachian and oak–hardwood associates; today it persists mainly as a sprout-layer component of those communities.",
+            "regeneration": "Large animal-dispersed nuts germinate soon after overwintering and do not form a long-lived seed bank. Present persistence is dominated by repeated shoots from surviving root collars after blight kills stems.",
+            "vegetativeReproduction": "Root collars and stumps sprout vigorously after top-kill, allowing genets to survive many cycles of blight and disturbance even when stems seldom reach reproductive size.",
+            "seedMastBehavior": "Historically produced relatively regular, nutritionally important nut crops compared with many oaks, though output varied among years; modern forest seed production is sparse because few stems become large, healthy, and reproductive.",
+            "establishmentRequirements": "Nuts require prompt protection from desiccation and predators, then seedlings need a suitable well-drained site and increasing light. Restoration plantings require suitable genetic material, competing-vegetation control, and long-term disease monitoring.",
+            "successionalRole": "Historically a fast-growing, long-lived canopy and subcanopy component capable of persisting in shade and responding strongly to gaps; today it functions chiefly as a recurrent understory sprout unless restoration succeeds.",
+            "disturbanceResponse": "Cutting, fire top-kill, and blight stimulate basal sprouting where root systems survive. Release improves growth, but severe fire, repeated browsing, root injury, and renewed blight can exhaust or eliminate sprout clumps.",
+            "longevityGrowthStrategy": "Root systems may persist for decades through repeated shoot generations; unblighted trees were long-lived and fast growing, but most modern wild stems die back before reaching merchantable size.",
+            "browseSusceptibility": "Deer and other herbivores browse young sprouts, and repeated browsing can keep already blight-limited plants below reproductive or canopy recruitment height.",
+            "insectsDiseases": "Chestnut blight caused by Cryphonectria parasitica is the decisive agent; Phytophthora root rot, defoliators, ambrosia beetles, and other pests can also affect restoration. Cankers alone do not prove host identity or resistance status.",
+            "managementImplications": "Retain verified native sprouts and rare large stems where safe, prevent avoidable root and bole damage, document condition separately from identity, and coordinate seed collection or planting with established chestnut-conservation programs rather than moving unverified stock.",
+            "silviculturalSystemResponse": "Canopy release can greatly accelerate established sprouts and planted seedlings, while closed-canopy retention prolongs suppression. Restoration commonly uses shelterwood or gap conditions plus competition control, but treatment cannot substitute for suitable disease-tested material and monitoring."
+          },
+          "references": [
+            {
+              "title": "The Silvics of Castanea dentata, American chestnut",
+              "url": "https://research.fs.usda.gov/treesearch/43054",
+              "scope": "USDA Forest Service synthesis of range, historical importance, site relationships, shade response, regeneration, blight, restoration, and silviculture."
+            },
+            {
+              "title": "Castanea dentata — American chestnut",
+              "url": "https://gobotany.nativeplanttrust.org/species/castanea/dentata/",
+              "scope": "Regional morphology, buds, leaves, burs, habitat, taxonomy, and comparison evidence for northeastern field identification."
+            }
+          ]
+        },
+        {
+          "taxonId": "LIRIODENDRON_TULIPIFERA",
+          "preferredCommonName": "Tuliptree",
+          "canonicalScientificName": "Liriodendron tulipifera",
+          "acceptedAlternatives": [
+            "Yellow-poplar (alternative common name)",
+            "Tulip-poplar (alternative common name)"
+          ],
+          "family": "Magnoliaceae",
+          "distributionInCourseRegion": "PA/NJ and southern NY/New England west through southern Great Lakes and southern ON",
+          "ecologicalImportance": "Fast-growing high-value tree of deep moist sites and canopy gaps",
+          "coursePriority": "2 - regional",
+          "tier": "B",
+          "fieldIdentification": {
+            "foliage": "Alternate simple leaves are broadly four-lobed, with two lobes on each side and a squared, truncate, or shallowly notched apex that looks cut off; margins are otherwise entire and petioles are long. Juvenile and sun leaves vary in lobe depth, and torn partial leaves can look maple- or sassafras-like, so confirm the distinctive apex and alternate attachment on several blades.",
+            "barkAgeSeries": "Seedlings and saplings have smooth dark greenish-gray bark with pale vertical lenticels. Pole bark develops shallow furrows; mature and old boles carry long, straight, deeply furrowed gray ridges, often with a pale cast in the furrow bottoms. Fire, logging wounds, wetness, and lichens can alter color, while cucumbertree bark can overlap at viewing distance.",
+            "dormant": "Alternate twigs are reddish brown, aromatic when lawfully scraped or broken, and ringed at each node by stipule scars. The terminal bud is flattened and enclosed by two broad valvate scales resembling a duck's bill; lateral buds repeat the form at smaller size. This two-valved flattened bud plus a complete encircling stipule scar is highly diagnostic even without leaves.",
+            "reproductive": "Large tulip-like flowers have six greenish-yellow petals with a bold orange band near the base and open after the leaves. Numerous one-seeded winged samaras form an upright cone-like aggregate whose central spindle often persists on twigs after dispersal. A loose samara resembles other winged fruits; the aggregate cone and duckbill twig resolve it.",
+            "wholeTreeContext": "One of the tallest eastern hardwoods, typically with a remarkably straight cylindrical bole, high clean trunk, and relatively small crown in closed stands. It is common in large gaps, old fields, coves, lower slopes, and deep mesic Allegheny or central-hardwood sites. Planted street trees can have lower broad crowns and do not indicate natural site quality.",
+            "variationAndCondition": "Leaf lobing and size vary with shoot vigor; pollarded, browsed, or stump-sprout shoots can be oversized. Young stump sprouts are vulnerable to ice and glaze. Fire scars, top breakage, root-collar borer, scale, and epicormic shoots alter form and quality. A yellow-poplar common name must never be interpreted as a true Populus relationship.",
+            "defensibilityLimits": "A complete truncate-tipped four-lobed leaf or intact duckbill bud with a ring stipule scar is usually sufficient. Partial leaves, deeply furrowed bark, great height, a loose samara, or rich cove habitat alone is not. Distant crowns without visible leaves or buds should remain an architectural hypothesis rather than a species-level examination answer."
+          },
+          "confuserControl": [
+            {
+              "confuser": "Magnolia acuminata",
+              "visibleSeparators": "Cucumbertree has large unlobed entire leaves, a silky single cap-scaled bud, and fleshy knobby aggregate fruit with dangling red seeds. Tuliptree has truncate four-lobed leaves, flattened two-scaled buds, and a dry cone of samaras; both have encircling stipule scars.",
+              "resolvingView": "Full leaf apex, terminal bud in side view, and attached mature reproductive structure."
+            },
+            {
+              "confuser": "Sassafras albidum and Acer species from partial leaves",
+              "visibleSeparators": "Sassafras has unlobed, mitten, and three-lobed entire aromatic leaves and lacks ring stipule scars; maples have opposite leaves and buds and teeth in regional lobed species. Tuliptree remains alternate and shows a consistently truncate blade apex and duckbill bud.",
+              "resolvingView": "Several intact leaves, consecutive nodes establishing arrangement, encircling stipule scars, and terminal bud."
+            },
+            {
+              "confuser": "Populus species implied by the common name yellow-poplar",
+              "visibleSeparators": "True poplars have salicaceous buds, toothed unlobed leaves, catkins, and cottony seed capsules. Tuliptree is a magnolia relative with entire four-lobed leaves, stipule rings, large perfect flowers, and samara cones.",
+              "resolvingView": "Leaf margin and apex, bud, and reproductive structure rather than relying on the common name."
+            }
+          ],
+          "silvicsCapsule": {
+            "shadeTolerance": "Shade intolerant; seedlings may persist briefly under light cover, but dominant height growth and canopy recruitment demand large openings and freedom from overtopping.",
+            "moistureDrainageSoils": "Best on deep, fertile, moist, well-drained loams of coves, lower slopes, and alluvial terraces; growth declines sharply on droughty ridges, shallow soil, prolonged saturation, or compacted sites.",
+            "geographicClimaticAffinity": "A central Appalachian and eastern warm-temperate species reaching southern Ontario, Michigan, southern New England, and New York, usually on protected rich sites at its northern limit.",
+            "forestAssociations": "Occurs with white ash, black cherry, cucumbertree, basswood, sugar maple, northern red and white oaks, black walnut, hemlock, and mixed-mesophytic hardwoods; it can form young nearly pure cohorts after major disturbance.",
+            "regeneration": "Wind disperses samaras, often far beyond crowns. Seed germinates after cold stratification, and abundant seedlings establish on moist exposed or lightly covered seedbeds following canopy and soil disturbance.",
+            "vegetativeReproduction": "Stumps, especially those of young trees, sprout vigorously and can produce fast-growing stems; sprouting capacity declines with age and sprouts can be vulnerable to breakage.",
+            "seedMastBehavior": "Trees produce seed frequently over long reproductive lives, but filled-seed percentages are often low and vary by tree and year. Large seed rain can still yield abundant cohorts after favorable disturbance.",
+            "establishmentRequirements": "Moist mineral soil or disturbed humus, cold-conditioned viable seed, a large light environment, and early control of competing vegetation support establishment; seedlings fail when droughted or overtopped.",
+            "successionalRole": "A classic gap and old-field pioneer on productive sites that rapidly dominates young cohorts, then persists for centuries as scattered emergent or canopy trees while more tolerant species recruit beneath it.",
+            "disturbanceResponse": "Clearcutting, large wind gaps, and agricultural abandonment favor seedling and sprout recruitment. Small stems are very fire sensitive; larger bark becomes more protective, but wounds and top breakage admit decay and reduce timber quality.",
+            "longevityGrowthStrategy": "Exceptionally rapid juvenile height growth on good sites, strong self-pruning in dense stands, and potential longevity approaching several centuries; it maintains dominance only when not overtopped early.",
+            "browseSusceptibility": "Deer and livestock readily browse tender seedlings and sprouts, and repeated leader loss can prevent recruitment or create poor form; protection may be needed in small cohorts.",
+            "insectsDiseases": "Tuliptree scale, yellow-poplar weevil, root-collar borer, ambrosia beetles, cankers, and decay following wounds or broken tops affect growth and quality, although the species is relatively free of catastrophic pests.",
+            "managementImplications": "Use presence and performance as a good-site indicator only after separating plantations, maintain full crowns on selected crop trees, protect boles and roots, and plan browse and competing-vegetation control before relying on seed rain.",
+            "silviculturalSystemResponse": "Clearcut, shelterwood with timely overstory removal, and large group openings favor regeneration. Small selection gaps usually underperform for this light-demanding species, while dense young cohorts self-prune and respond strongly to well-timed thinning."
+          },
+          "references": [
+            {
+              "title": "Yellow-Poplar — Silvics of North America",
+              "url": "https://research.fs.usda.gov/silvics/yellow-poplar",
+              "scope": "USDA Forest Service range, sites, seed and sprout regeneration, shade response, succession, growth, pests, disturbance, and management."
+            },
+            {
+              "title": "Liriodendron tulipifera — tuliptree",
+              "url": "https://gobotany.nativeplanttrust.org/species/liriodendron/tulipifera/",
+              "scope": "Regional leaves, duckbill buds, stipule scars, bark, flowers, samara aggregates, habitat, and taxonomy."
+            }
+          ]
+        },
+        {
+          "taxonId": "MAGNOLIA_ACUMINATA",
+          "preferredCommonName": "Cucumbertree",
+          "canonicalScientificName": "Magnolia acuminata",
+          "acceptedAlternatives": [],
+          "family": "Magnoliaceae",
+          "distributionInCourseRegion": "Allegheny PA and western NY with scattered southern Great Lakes, southern ON, and NJ occurrences",
+          "ecologicalImportance": "Large mesic-site magnolia and Allegheny/southern-transition indicator",
+          "coursePriority": "2 - regional",
+          "tier": "B",
+          "fieldIdentification": {
+            "foliage": "Alternate simple leaves are large, commonly 10–25 cm long, elliptic to oblong, entire, and abruptly to gradually acuminate, with a rounded, cuneate, or nearly truncate base. The lower surface is paler or slightly glaucous and can carry fine hair. Unlike tuliptree, the blade is unlobed and lacks a truncate notch; unlike basswood, it is not serrate or strongly cordate.",
+            "barkAgeSeries": "Young stems have thin smooth gray-brown bark with scattered lenticels. Pole bark begins to fissure; mature bark becomes gray-brown with narrow, elongated, often scaly ridges and deep furrows. Thin bark is readily scarred by fire and machinery, and mature texture can resemble tuliptree from a distance.",
+            "dormant": "Alternate stout reddish-brown twigs bear large silky gray-green to brown terminal buds enclosed by a single cap-like pubescent scale. Each node carries a conspicuous stipule scar encircling the twig and a broad leaf scar. The soft single-scaled bud and ring scar establish magnolia affinity; tuliptree's terminal bud is flattened between two valvate duckbill scales.",
+            "reproductive": "Single greenish-yellow to yellow-white magnolia flowers open after leaf expansion and may be inconspicuous high in the crown. The immature aggregate fruit is green, elongate, and cucumber-shaped; at maturity it becomes red and knobby as follicles open and red-orange seeds hang briefly on slender threads. An attached aggregate fruit is strong evidence, unlike a detached red seed.",
+            "wholeTreeContext": "A tall, straight-boled canopy tree with a narrow to rounded crown in cool, rich, moist but well-drained coves, lower slopes, and valleys, especially on the Allegheny Plateau and localized western New York and southern Ontario sites. It is usually scattered rather than dominant, and planted trees occur beyond natural stands.",
+            "variationAndCondition": "Leaf width, base shape, lower-surface hair, flower color, and fruit length vary. Ornamental cultivars and hybrids with Asian magnolias can alter flower color and form near settlements. Frost can kill seedlings and flowers; Nectria cankers, fire scars, magnolia scale, and storm damage modify bark or crown without changing host identity.",
+            "defensibilityLimits": "A strong species call combines large entire unlobed foliage, a silky one-scaled terminal bud with encircling stipule scars, and preferably cucumber-shaped aggregate fruit. Large entire leaves alone can be basswood-like when folded or resemble other magnolias; deeply furrowed bark or rich cove habitat alone is insufficient. Planted sterile magnolias may require flowers, fruit, or expert treatment below genus."
+          },
+          "confuserControl": [
+            {
+              "confuser": "Liriodendron tulipifera",
+              "visibleSeparators": "Tuliptree has four-lobed leaves with a truncate or notched tip, flattened two-valved duckbill buds, tulip-like flowers with an orange band, and a dry cone of samaras. Cucumbertree has unlobed entire leaves, silky single-scaled buds, greenish magnolia flowers, and a fleshy knobby aggregate with dangling red seeds.",
+              "resolvingView": "Full leaf apex, terminal bud in face and side view, node ring scars, and attached flower or fruit."
+            },
+            {
+              "confuser": "Tilia americana",
+              "visibleSeparators": "Basswood leaves are cordate and asymmetrical at the base with serrate margins and palmate basal veins; its fruit hangs from a strap-like bract. Cucumbertree leaves are entire and more elliptic, and its twigs have silky cap-scaled buds and encircling stipule scars.",
+              "resolvingView": "Leaf margin, base and venation, terminal bud and twig node, and any reproductive stalk."
+            },
+            {
+              "confuser": "Other native or planted Magnolia species",
+              "visibleSeparators": "Umbrella and Fraser magnolias have much larger leaves clustered in apparent whorls, with auriculate bases in Fraser magnolia; many Asian ornamentals flower conspicuously before leaves. Cucumbertree usually has evenly distributed elliptic leaves and greenish flowers after leaf-out, but hybrids can be intermediate.",
+              "resolvingView": "Whole shoot showing leaf distribution, blade base, terminal bud, flower timing and color, mature aggregate fruit, and planting context."
+            }
+          ],
+          "silvicsCapsule": {
+            "shadeTolerance": "Intermediate; young plants tolerate some side shade, but regeneration is more frequent and growth more competitive in clearcuts and sizable gaps than beneath a dense residual canopy.",
+            "moistureDrainageSoils": "Best on deep, fertile, moist, well-drained loams of coves, valleys, and lower slopes; poorly drained, droughty, shallow, or fire-prone sites limit growth and survival.",
+            "geographicClimaticAffinity": "The hardiest native tree magnolia, centered in Appalachian and central hardwood climates and reaching localized northern outposts in western New York, southern Ontario, Michigan, and nearby regions.",
+            "forestAssociations": "Occurs with tuliptree, sugar maple, basswood, American beech, yellow birch northward, black cherry, white ash, northern red oak, hemlock, and diverse mixed-mesophytic hardwoods.",
+            "regeneration": "Birds and rodents consume or disperse the red-coated seeds. Cold stratification supports germination, but natural reproduction is often sparse because of seed predation, frost-sensitive seedlings, and exacting seedbed conditions.",
+            "vegetativeReproduction": "Stump sprouting can occur after cutting in smaller trees, but seed is the principal natural dispersal pathway and the species does not form extensive root-sucker clones.",
+            "seedMastBehavior": "Seed crops vary with flowering weather and crown condition; reproductive output can be conspicuous in some years but seed predation is high, so visible fruit does not guarantee a large seedling cohort.",
+            "establishmentRequirements": "Cold-conditioned sound seed, moist fertile substrate, protection from late frost and drying, and moderate to high light support establishment. Nursery seedlings can be used where natural seed supply is inadequate.",
+            "successionalRole": "A gap-responsive mid-seral to persistent canopy associate that can compete with tuliptree and black cherry on good sites but rarely dominates broad stands.",
+            "disturbanceResponse": "Clearcut and large-gap conditions often increase regeneration and juvenile growth. Thin bark makes seedlings and saplings highly sensitive to ground fire and logging injury; frost and exposed-site cankers can reduce success.",
+            "longevityGrowthStrategy": "Moderately fast growing on good sites, attaining large straight boles and roughly century-scale maturity; it self-prunes well in closed stands and can persist as a scattered canopy tree.",
+            "browseSusceptibility": "Deer browse seedlings and saplings and rodents consume seed; sparse natural regeneration can make even moderate browsing consequential.",
+            "insectsDiseases": "Nectria canker, magnolia scale, other sap-feeding insects, defoliators, and ambrosia beetles affect stems or recently felled wood; ground fire and frost often cause more important field damage.",
+            "managementImplications": "Protect localized native populations and seed trees, avoid bole and root injury, favor deep mesic sites, and verify wild versus planted origin before using occurrence as an ecological indicator.",
+            "silviculturalSystemResponse": "Clearcuts and large group openings can recruit and release cucumbertree on good sites; partial cuts may retain it but commonly provide insufficient light for abundant regeneration. Closed-stand growth favors clear boles but requires earlier establishment and crown access."
+          },
+          "references": [
+            {
+              "title": "Cucumbertree — Silvics of North America",
+              "url": "https://research.fs.usda.gov/silvics/cucumbertree",
+              "scope": "USDA Forest Service range, sites, reproduction, shade tolerance, stand development, damaging agents, genetics, and management."
+            },
+            {
+              "title": "Magnolia acuminata — cucumber-tree",
+              "url": "https://gobotany.nativeplanttrust.org/species/magnolia/acuminata/",
+              "scope": "Regional leaves, one-scaled buds, stipule scars, bark, flowers, fruit, habitat, and taxonomy."
+            }
+          ]
+        },
+        {
+          "taxonId": "SASSAFRAS_ALBIDUM",
+          "preferredCommonName": "Sassafras",
+          "canonicalScientificName": "Sassafras albidum",
+          "acceptedAlternatives": [
+            "Laurus sassafras (historic)"
+          ],
+          "family": "Lauraceae",
+          "distributionInCourseRegion": "Southern Great Lakes and southern ON through NY, PA/NJ, CT, and MA",
+          "ecologicalImportance": "Clonal shade-intolerant pioneer of fields, edges, and dry woods",
+          "coursePriority": "2 - regional",
+          "tier": "B",
+          "fieldIdentification": {
+            "foliage": "Alternate simple leaves can be unlobed and oval, asymmetrically one-lobed like a mitten, or symmetrically three-lobed on the same shoot. Margins are entire and three strong veins radiate from near the cuneate base; crushed leaves are aromatic and mucilaginous. Lobed leaves are memorable, but some crowns carry mostly unlobed leaves, so arrangement, venation, odor, and other organs must remain active characters.",
+            "barkAgeSeries": "Young stems and branches are smooth green to reddish green with pale lenticels. Pole bark turns orange-brown and begins to furrow; mature bark is thick, reddish brown, and deeply divided into short irregular corky interlacing ridges. Fresh inner bark is aromatic, but destructive bark removal is unnecessary and should never be used on a living specimen merely to confirm a photograph-based identification.",
+            "dormant": "Alternate greenish to reddish aromatic twigs have solid pith and a true terminal bud. Vegetative buds are narrow and pointed, while rounded many-scaled flower buds can be larger and clustered near shoot tips on reproductive trees. Leaf scars are small and semicircular. Twig color and odor help, but a sharply focused bud and attached retained fruit stalk are stronger than color alone.",
+            "reproductive": "Small yellow-green flowers open before or with the leaves, usually on separate male and female trees. Female trees bear single blue-black ovoid drupes seated in a distinctive red, thickened cup on a red club-shaped pedicel. That red cup-and-stalk architecture is highly diagnostic; a loose blue drupe without its receptacle is not.",
+            "wholeTreeContext": "A small to medium tree with crooked branching, often occurring as dense root-sucker colonies in old fields, road edges, fence rows, dry open woods, and post-disturbance stands. Larger single stems occur on good sites, but clonal thickets and repeated stems of different size are common. Colony form supports the species only when paired with morphology.",
+            "variationAndCondition": "The proportions of unlobed, mitten, and three-lobed leaves differ among shoots and trees; vigorous sprouts often have the largest and most deeply lobed blades. Browsing, mowing, fire, and cutting reinforce low dense clonal form. Laurel wilt is a major southern threat but is not currently a routine identification shortcut across most of the course region.",
+            "defensibilityLimits": "Several leaf shapes on an aromatic alternate shoot plus the three-veined entire blade strongly support sassafras, and the blue drupe on a red cup is nearly decisive. One mitten-shaped detached leaf, orange fall color, green twigs, corky bark, odor reported by a photographer, or a clonal patch alone is insufficient. Sterile unlobed foliage should often remain unresolved until buds, venation, aroma from a lawful field specimen, or fruit are available."
+          },
+          "confuserControl": [
+            {
+              "confuser": "Morus alba",
+              "visibleSeparators": "White mulberry can also have entire and mitten- or three-lobed leaves, but its margins are usually sharply serrate, primary veins radiate from a commonly cordate base, and its fruit is an aggregate mulberry. Sassafras margins are entire, the base is usually cuneate, twigs are aromatic, and fruit is a single blue drupe on a red cup.",
+              "resolvingView": "Several leaf margins and bases, current twig and buds, and attached fruit showing either an aggregate or a single cup-seated drupe."
+            },
+            {
+              "confuser": "Liriodendron tulipifera",
+              "visibleSeparators": "Tuliptree leaves have a distinctive truncate or notched apex and usually four lobes, plus encircling stipule scars and two-valved duckbill buds. Sassafras leaves have rounded mitten or three-lobed forms, pointed or rounded apices, no encircling stipule scar, and aromatic shoots.",
+              "resolvingView": "A complete leaf apex and base, two consecutive twig nodes showing stipule scars, and terminal-bud architecture."
+            },
+            {
+              "confuser": "Lindera benzoin and other aromatic Lauraceae",
+              "visibleSeparators": "Spicebush is usually a multi-stemmed shrub with all leaves unlobed and pinnately veined, paired-looking globose flower buds, and red drupes. Sassafras can become a tree, has palmately three-veined and often lobed leaves, and blue-black fruit on a red cup.",
+              "resolvingView": "Whole-plant stature, several mature leaves with venation, buds, and attached ripe fruit."
+            }
+          ],
+          "silvicsCapsule": {
+            "shadeTolerance": "Shade intolerant; seedlings and root sprouts grow best in full or nearly full light, and suppressed stems decline beneath a closing canopy.",
+            "moistureDrainageSoils": "Occupies many soils but is most conspicuous on well-drained sandy or loamy old fields, ridges, and woodland edges; best growth occurs on moist fertile soils, while prolonged flooding and dense compaction are unfavorable.",
+            "geographicClimaticAffinity": "A warm-temperate eastern species reaching southern Ontario, Michigan, southern New England, and locally farther north, with greatest abundance south of the northern-hardwood center.",
+            "forestAssociations": "Occurs with oaks, hickories, red maple, blackgum, tuliptree, black cherry, eastern redcedar, pitch pine, and old-field shrubs in oak–hardwood and post-agricultural landscapes.",
+            "regeneration": "Birds disperse the drupes; seeds need cold stratification and can remain viable in the forest floor for several years. Seedling establishment is irregular in closed forest and more successful on moist protected seedbeds with light.",
+            "vegetativeReproduction": "Root suckering is a dominant strategy and can create extensive clones after field abandonment, cutting, fire, or root disturbance; young stumps also sprout prolifically.",
+            "seedMastBehavior": "Female trees can bear recurrent crops, but production varies with sex ratio, crown light, and weather. Bird dispersal is important, while persistence of buried seed provides a limited multi-year reserve rather than an indefinite bank.",
+            "establishmentRequirements": "Seedlings need stratified seed, moisture, and high light; established roots can rapidly occupy openings by suckers even when seedling recruitment is sparse.",
+            "successionalRole": "An early-seral old-field, edge, and disturbance pioneer that may dominate thickets briefly and then decline as taller, more shade-tolerant hardwoods close the canopy.",
+            "disturbanceResponse": "Cutting, fire top-kill, cultivation abandonment, and canopy opening commonly stimulate dense root and stump sprouts. Repeated top-kill can maintain low thickets, while severe root damage can reduce clonal recovery.",
+            "longevityGrowthStrategy": "Fast growing when young but usually short to moderately lived and modest in stature; clonal root systems can outlast individual stems through repeated sprout generations.",
+            "browseSusceptibility": "Deer browse foliage and young shoots and can deform sprouts, though prolific clonal growth often maintains local abundance under moderate pressure; fruits are eaten by many birds.",
+            "insectsDiseases": "Sassafras borers, weevils, scales, defoliators, cankers, and root rots occur; laurel wilt is a severe invasive disease south of much of the course region and should be monitored without assuming every wilted sassafras has it.",
+            "managementImplications": "Retain selected stems for wildlife fruit and diversity where desired, anticipate persistent root suckering after cutting, and distinguish deliberate retention from situations where dense clones interfere with crop-tree or regeneration objectives.",
+            "silviculturalSystemResponse": "Clearcuts, large gaps, edge creation, and old-field release favor sassafras strongly through suckering. Selection systems and closing shade reduce it over time; mechanical control may require repeated treatment because cutting alone stimulates clones."
+          },
+          "references": [
+            {
+              "title": "Sassafras — Silvics of North America",
+              "url": "https://research.fs.usda.gov/silvics/sassafras",
+              "scope": "USDA Forest Service range, sites, seed persistence, root sprouting, shade tolerance, succession, damaging agents, and management."
+            },
+            {
+              "title": "Sassafras albidum — sassafras",
+              "url": "https://gobotany.nativeplanttrust.org/species/sassafras/albidum/",
+              "scope": "Regional leaves, buds, bark, fruit, pith, odor, habitat, and taxonomic morphology."
+            },
+            {
+              "title": "Sassafras albidum — Fire Effects Information System",
+              "url": "https://research.fs.usda.gov/feis/species-reviews/sasalb",
+              "scope": "Distribution, communities, seed and vegetative regeneration, succession, fire response, wildlife use, and management."
+            }
+          ]
+        },
+        {
+          "taxonId": "NYSSA_SYLVATICA",
+          "preferredCommonName": "Blackgum",
+          "canonicalScientificName": "Nyssa sylvatica",
+          "acceptedAlternatives": [
+            "Nyssa sylvatica var. sylvatica",
+            "Nyssa multiflora (historic)"
+          ],
+          "family": "Nyssaceae; sometimes Cornaceae",
+          "distributionInCourseRegion": "PA/NJ, NY, and New England north locally to southern ME; southern ON and Great Lakes fringe",
+          "ecologicalImportance": "Long-lived site-flexible hardwood with layered branching and wildlife fruit",
+          "coursePriority": "2 - regional",
+          "tier": "B",
+          "fieldIdentification": {
+            "foliage": "Alternate simple leaves are elliptic to obovate, usually entire but occasionally with a few coarse teeth, with a short often reddish petiole, a glossy dark upper surface, and a paler lower surface. Leaves often cluster toward twig ends and can develop brilliant red color early, but color is not diagnostic. Several blades must be checked because sun and sprout leaves vary strongly in width and teeth.",
+            "barkAgeSeries": "Young trunks are gray and shallowly furrowed. Mature bark develops irregular vertical ridges and then breaks into dark gray to nearly black, roughly rectangular or polygonal blocks often described as alligator hide. Old trees may be deeply blocky and hollow, while wetness and lichens obscure color; the block pattern overlaps persimmon outside or near the southern course fringe.",
+            "dormant": "Alternate gray-brown to reddish twigs bear small ovoid to conical, reddish-brown, many-scaled terminal and lateral buds. Leaf scars are small and semicircular with three bundle scars, and short spur-like shoots may crowd nodes near twig ends. Branches commonly leave the trunk nearly at right angles. Dormant material is not safely species-level without bark, fruit stalks, or a known regional confuser comparison.",
+            "reproductive": "Small greenish flowers occur on long slender stalks; trees are functionally dioecious or polygamo-dioecious. One to several oval blue-black drupes, about 1 cm long, ripen on conspicuously long pedicels and contain a ridged stone. Detached dark drupes are non-diagnostic; the long-stalked cluster, entire alternate foliage, and parent bark should be shown together.",
+            "wholeTreeContext": "A slow-growing, long-lived tree with strong horizontal limbs, irregular layered branching, many short crooked branchlets, and often a flat-topped or ragged old crown. It occupies dry ridges, mesic slopes, pond margins, swamps, and pitch-pine or oak woods across its northern range. Broad site amplitude means habitat confirms plausibility but poorly separates species.",
+            "variationAndCondition": "Blade shape, marginal teeth, fall color, and crown form vary with site and age. Fire scars commonly admit heart rot; old blackgums form cavities and broken tops. Drought can thin crowns, and wet-site trunks can have swollen bases. Northern upland blackgum should not be forced into swamp-tupelo treatments from one wet-site photograph.",
+            "defensibilityLimits": "A defensible call usually combines alternate entire obovate leaves, long-stalked blue-black drupes, right-angled layered branching, and blocky mature bark. One red leaf, dark blocky bark, an irregular crown, or a loose drupe is insufficient. Sterile young material can overlap black cherry, sourwood, dogwood, persimmon, and several shrubs and may warrant Nyssa or insufficient evidence."
+          },
+          "confuserControl": [
+            {
+              "confuser": "Prunus serotina",
+              "visibleSeparators": "Black cherry leaves are finely serrate with petiole glands and often rusty hair along the lower midrib; fruit occurs in elongated racemes, and mature bark forms scaly burnt-potato-chip plates. Blackgum leaves are usually entire, fruit is one to a few drupes on long stalks, and mature bark is blocky.",
+              "resolvingView": "Leaf margins and petiole glands, lower midrib, complete fruit attachment, and mature bark."
+            },
+            {
+              "confuser": "Cornus florida",
+              "visibleSeparators": "Flowering dogwood has opposite leaves and twigs, strongly arcuate veins, red drupes in tight clusters, and opposite onion-shaped flower buds; blackgum is alternate and has blue-black long-stalked drupes. Both can have layered crowns and blocky bark.",
+              "resolvingView": "Several consecutive nodes, terminal and flower buds, venation, and attached fruit."
+            },
+            {
+              "confuser": "Diospyros virginiana, Oxydendrum arboreum, and Nyssa wetland variants",
+              "visibleSeparators": "Persimmon has larger plum-like fruit and a persistent four-lobed calyx; sourwood has finely serrate leaves and dry capsules on branched panicles. Swamp-tupelo taxa are primarily southeastern wetland plants and can overlap morphologically; northern course material should not be separated below species or variety without habitat and reproductive evidence.",
+              "resolvingView": "Fruit and its calyx or stone, full leaf margins, inflorescence architecture, trunk base and hydrologic setting, and verified locality."
+            }
+          ],
+          "silvicsCapsule": {
+            "shadeTolerance": "Tolerant; seedlings can persist under closed hardwood cover, although near-full light is needed for optimum growth and released intermediates vary in response.",
+            "moistureDrainageSoils": "Extremely broad site amplitude, from dry acidic ridges to moist loams and stream bottoms; best growth occurs on deep moist well-drained lower slopes and terraces, while northern populations also occupy swamps and pond margins.",
+            "geographicClimaticAffinity": "A broad eastern warm-temperate species reaching its northern limits in southern Ontario, the Great Lakes fringe, New York, and New England, where it is often local and site distinctive.",
+            "forestAssociations": "A minor component of many oak, pitch-pine, Atlantic white-cedar, red-maple wetland, northern-hardwood, yellow-poplar, and mixed mesophytic types, with oaks, red maple, white pine, black cherry, and sassafras common associates.",
+            "regeneration": "Birds and mammals disperse the fleshy drupes; seed overwinters on cool moist soil and germinates in spring. Seedlings can establish beneath canopy and increase after cutting.",
+            "vegetativeReproduction": "Small stumps sprout readily, larger stumps sometimes sprout, and root suckering can produce multiple stems around established trees; layering is possible but not a principal wild-stand mechanism.",
+            "seedMastBehavior": "Fruit production is highly variable among trees and years; animal dispersal can move seed well beyond the crown, and viable seed does not function as a long-term persistent bank.",
+            "establishmentRequirements": "Cold moist conditioning, a moist seedbed, and at least partial light support establishment. Seedlings tolerate shade but need canopy release to achieve rapid height growth and useful crown position.",
+            "successionalRole": "A flexible mid- to late-seral associate able to persist in shade, recruit in gaps, and remain for centuries; on harsh sites it may remain subordinate and crooked rather than becoming dominant.",
+            "disturbanceResponse": "Cutting can release advance seedlings and stimulate sprouts and new seedlings. Fire readily scars younger bark, top-kills small stems, and opens entry for heart rot; repeated burning can reduce abundance even when some roots resprout.",
+            "longevityGrowthStrategy": "Long lived, commonly several centuries, with slow to moderate growth, strong persistence under suppression, and poor form on dry or fire-damaged sites; old trees are valuable cavity producers.",
+            "browseSusceptibility": "Deer readily browse young sprouts and seedlings but palatability declines with shoot age; birds and mammals heavily use the high-energy fruit.",
+            "insectsDiseases": "Tupelo leafminer, forest tent caterpillar, cankers, and numerous heart-rotting fungi affect foliage and boles; fire scars and other wounds strongly increase decay and cavity formation.",
+            "managementImplications": "Retain selected mature trees for wildlife fruit, cavities, and diversity, distinguish sound crop trees from fire-scarred cull, and avoid treating presence as proof of either a dry or wet site because ecological amplitude is broad.",
+            "silviculturalSystemResponse": "Selection and group openings can release advance regeneration, while clearcuts produce both seedlings and sprouts. Response of long-suppressed intermediates is variable, so favor vigorous crowns and do not assume every retained stem will accelerate."
+          },
+          "references": [
+            {
+              "title": "Black Tupelo — Silvics of North America",
+              "url": "https://research.fs.usda.gov/silvics/black-tupelo",
+              "scope": "USDA Forest Service distribution, broad site amplitude, reproduction, shade tolerance, growth, disturbance, wildlife value, and management."
+            },
+            {
+              "title": "Nyssa sylvatica — black-gum, black tupelo",
+              "url": "https://gobotany.nativeplanttrust.org/species/nyssa/sylvatica/",
+              "scope": "Regional leaves, buds, bark, fruit, habitat, taxonomy, and field morphology."
+            },
+            {
+              "title": "Nyssa sylvatica and N. biflora — Fire Effects Information System",
+              "url": "https://research.fs.usda.gov/feis/species-reviews/nysspp",
+              "scope": "Taxonomy, communities, regeneration, succession, fire effects, wildlife relations, and management."
+            }
+          ]
+        },
+        {
+          "taxonId": "CORNUS_FLORIDA",
+          "preferredCommonName": "Flowering dogwood",
+          "canonicalScientificName": "Cornus florida",
+          "acceptedAlternatives": [
+            "Benthamidia florida (segregate-genus treatment)"
+          ],
+          "family": "Cornaceae",
+          "distributionInCourseRegion": "PA/NJ, southern NY/New England, southern Great Lakes, and southern ON",
+          "ecologicalImportance": "Small oak/mixed-hardwood understory tree; wildlife fruit; anthracnose-sensitive",
+          "coursePriority": "2 - regional",
+          "tier": "B",
+          "fieldIdentification": {
+            "foliage": "Leaves and twigs are opposite. Simple oval to ovate blades have entire or slightly wavy margins and three to five pairs of strongly arcuate secondary veins that curve toward the tip; lower surfaces are paler and may be hairy. Leaves can tear along veins and remain connected by fine strands, but destructive tests are unnecessary. Opposite arrangement must be demonstrated across multiple nodes because crowded twig tips can create false impressions.",
+            "barkAgeSeries": "Young stems are smooth gray to gray-brown. As stems mature, bark breaks into many small, nearly square or polygonal gray-brown plates separated by narrow fissures, producing a fine alligator-skin pattern. Old understory boles remain relatively small and blocky. Blackgum can also be blocky but is alternate; kousa dogwood can exfoliate in larger mottled patches.",
+            "dormant": "Opposite slender twigs end either in a narrow pointed vegetative bud or a conspicuous rounded, flattened, clove- or onion-shaped flower bud enclosed by two pairs of scales. Lateral buds and leaf scars are opposite, and branches often form a candelabra-like pattern. A flower bud is high-value only after opposite arrangement is confirmed, because bud silhouettes distort in distant images.",
+            "reproductive": "The true flowers are tiny and crowded in a central head surrounded by four large white to pink petal-like bracts, each typically truncate or distinctly notched at the tip. Clusters of separate glossy red ovoid drupes ripen in autumn. Kousa dogwood has pointed bracts and its individual fruits fuse into one raspberry-like multiple fruit.",
+            "wholeTreeContext": "A small, low-branching understory tree with a broad flat-topped or layered crown and opposite horizontal limbs, most common in oak–hickory, pine–oak, and mixed hardwood stands, edges, and openings. Near its northern limit it may remain shrubby. Ornamental plantings are frequent and expand occurrence beyond natural forest settings.",
+            "variationAndCondition": "Bracts vary from white to pink and cultivars can have unusual foliage or form. Dogwood anthracnose caused by Discula destructiva can produce tan leaf lesions with purple margins, twig and branch dieback, epicormic shoots, and cankers, especially on cool moist shaded sites; powdery mildew, drought, borers, and mechanical injury can mimic portions of that syndrome. Identify the host independently and do not diagnose anthracnose from one ambiguous lesion.",
+            "defensibilityLimits": "Opposite entire leaves with strong arcuate veins plus a clove-shaped flower bud, notched bracts, red clustered drupes, or fine blocky bark normally supports species. Arcuate venation alone, white bracts without their tips, blocky bark, an anthracnose-like crown, or layered form alone is insufficient. Sterile opposite-leaved shrubs may remain Cornus or Viburnum until buds and fruit resolve them."
+          },
+          "confuserControl": [
+            {
+              "confuser": "Cornus alternifolia",
+              "visibleSeparators": "Pagoda dogwood has alternate leaves and branching, blue-black drupes on red stalks, and no four large showy bracts. Flowering dogwood is opposite and has separate red drupes plus four notched bracts around each flower head.",
+              "resolvingView": "At least three consecutive twig nodes, terminal buds, and attached ripe fruit or an entire inflorescence."
+            },
+            {
+              "confuser": "Nyssa sylvatica and Viburnum species",
+              "visibleSeparators": "Blackgum shares arcuate-looking veins, layered branching, and blocky bark but has alternate leaves and blue-black long-stalked fruit. Viburnums are opposite but usually have different bud architecture, toothed or differently veined leaves, and fruits in broader cymes rather than tight clusters beneath classic dogwood buds.",
+              "resolvingView": "Several nodes establishing arrangement, terminal and lateral buds, leaf margins, and complete fruit attachment."
+            },
+            {
+              "confuser": "Cornus kousa and ornamental flowering-dogwood cultivars",
+              "visibleSeparators": "Kousa dogwood generally has four bracts pointed rather than notched at the apex and a single globose raspberry-like multiple fruit; native flowering dogwood has notched bracts and several separate red drupes. Cultivars can alter bract color but not the fundamental fruit architecture.",
+              "resolvingView": "Sharp bract-tip view, mature fruit showing whether units are separate or fused, bark, and planting context."
+            }
+          ],
+          "silvicsCapsule": {
+            "shadeTolerance": "Tolerant of understory shade, though flowering, fruiting, and crown vigor improve with filtered light; deep shade and cool moist conditions can increase disease risk.",
+            "moistureDrainageSoils": "Occurs from dry uplands to moist stream-adjacent soils but is most frequent on well-drained, moderately fertile, slightly acid to near-neutral sites; shallow roots make prolonged drought and flooding damaging.",
+            "geographicClimaticAffinity": "A broad eastern warm-temperate understory species reaching southern Ontario, Michigan, southern New England, and southwestern Maine at its northern edge.",
+            "forestAssociations": "Common in oak–hickory, oak–pine, mixed mesophytic, beech–maple, and some pine forests with oaks, hickories, sassafras, tuliptree, blackgum, red maple, and eastern white pine.",
+            "regeneration": "Birds and mammals disperse the red drupes; cleaned seeds require seasonal stratification and can establish under forest cover or in gaps. Seedlings are often scattered around perches and fruiting adults.",
+            "vegetativeReproduction": "Stems sprout vigorously after cutting or top-kill, and propagation by root cuttings or layering is possible; sprouting helps maintain understory presence after moderate disturbance.",
+            "seedMastBehavior": "Fruit crops are recurrent but vary with light, weather, pollination, and crown health; wildlife removes fruit rapidly, so crop size should not be inferred from one late-season visit.",
+            "establishmentRequirements": "Stratified seed, a moist but aerated seedbed, filtered to moderate light, and relief from severe browse and drought favor establishment; shallow roots benefit from stable forest-floor moisture.",
+            "successionalRole": "A persistent understory and small-tree component across early to mature oak and mixed-hardwood stages, often increasing under light partial cutting but rarely entering the upper canopy.",
+            "disturbanceResponse": "Cutting and low- to moderate-severity fire top-kill stems and stimulate sprouts, while repeated severe fire reduces abundance. Partial canopy opening may increase vigor; drought, bark injury, and cool wet exposure increase disease and borer problems.",
+            "longevityGrowthStrategy": "Relatively short lived and slow to moderate growing, usually remaining below the canopy; older stems can approach a century on favorable sites but disease and drought commonly shorten life.",
+            "browseSusceptibility": "Deer and rabbits browse twigs and sprouts, and many birds and mammals consume fruit; repeated browse can hold stems in shrub form and suppress flowering.",
+            "insectsDiseases": "Dogwood anthracnose, powdery mildew, basal and target cankers, dogwood borer, twig borers, scales, club gall, root rots, and drought-related decline can affect crown and survival. Symptoms must not substitute for host morphology or laboratory diagnosis where stakes are high.",
+            "managementImplications": "Retain healthy individuals for wildlife fruit and structural diversity, reduce avoidable bark and root injury, maintain suitable filtered light and moisture, and monitor anthracnose without assuming all dieback is causal proof.",
+            "silviculturalSystemResponse": "Light partial cutting, shelterwood, and group edges can maintain or increase flowering dogwood, while clearcutting reduces mature stems but may stimulate sprouts. Timber treatments should balance understory wildlife value against competition and disease-prone dense shade."
+          },
+          "references": [
+            {
+              "title": "Flowering Dogwood — Silvics of North America",
+              "url": "https://research.fs.usda.gov/silvics/flowering-dogwood",
+              "scope": "USDA Forest Service range, sites, shade relations, reproduction, growth, damaging agents, wildlife value, and management."
+            },
+            {
+              "title": "Virginia Tech Dendrology — Flowering dogwood",
+              "url": "https://dendro.cnre.vt.edu/dendrology/syllabus/factsheet.cfm?ID=44",
+              "scope": "University dendrology characters for leaves, bracts, fruit, twigs, flower buds, bark, crown form, range, and direct confusers."
+            },
+            {
+              "title": "Cornus florida — Fire Effects Information System",
+              "url": "https://research.fs.usda.gov/feis/species-reviews/corflo",
+              "scope": "Taxonomy, communities, regeneration, succession, fire effects, browse, wildlife use, disease, and management."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sessionId": "W07-D",
+      "letter": "D",
+      "title": "Allegheny multi-organ laboratory",
+      "kind": "multi_organ_laboratory",
+      "taxonScope": "all_module_taxa_plus_transition_oaks",
+      "modalities": [
+        "foliage",
+        "bark",
+        "reproductive",
+        "dormant",
+        "whole_tree_context",
+        "condition"
+      ],
+      "delivery": "compound leaves nuts pith buds bark and site stations",
+      "feedbackRelease": "after_station_batch_submission",
+      "runtimeBoundary": "runtime_retrieval_from_admitted_practice_media",
+      "introducedTaxonIds": [],
+      "teachingProfiles": []
+    },
+    {
+      "sessionId": "W07-E",
+      "letter": "E",
+      "title": "Southern-transition cumulative retrieval",
+      "kind": "cumulative_adaptive_retrieval",
+      "taxonScope": "cr_01_eligible_taxa_prioritized_by_mastery",
+      "modalities": [
+        "foliage",
+        "bark",
+        "reproductive",
+        "dormant",
+        "whole_tree_context"
+      ],
+      "delivery": "adaptive retrieval with increased scientific-name demand",
+      "feedbackRelease": "after_batch_submission",
+      "runtimeBoundary": "runtime_retrieval_from_admitted_practice_media",
+      "introducedTaxonIds": [],
+      "teachingProfiles": []
+    }
+  ],
+  "assessmentSummaries": [
+    {
+      "assessmentId": "W07-PRACTICAL",
+      "type": "weekly_identification_practical",
+      "categoryId": "weekly_identification_practicals",
+      "cumulative": true,
+      "scope": "taxa_introduced_through_week_7_with_allegheny_emphasis",
+      "modalities": [
+        "foliage",
+        "bark",
+        "reproductive",
+        "dormant",
+        "whole_tree_context"
+      ]
+    }
+  ],
+  "remediationGate": {
+    "policy_id": "REM-01",
+    "evaluate_after_assessment_ids": [
+      "W07-PRACTICAL"
+    ],
+    "broader_course_progression": "continues",
+    "insertion_sessions": [
+      "W08-B",
+      "W08-E"
+    ]
+  },
+  "teachingBoundary": "This package contains labeled instruction and public module structure only. Retrieval stations are assembled separately from admitted practice media, and formal forms, examination media, answer keys, and learner records remain private."
+}

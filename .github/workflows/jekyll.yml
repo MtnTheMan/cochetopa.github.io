@@ -38,6 +38,15 @@ jobs:
         with:
           bundler-cache: true # runs 'bundle install' and caches installed gems automatically
           cache-version: 0 # Increment this number if you need to re-download cached gems
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Validate forestry course public boundary
+        run: |
+          python3 .github/scripts/validate_course_public.py
+          node --check assets/course/app.js
+          node --check assets/course/auth.js
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v3

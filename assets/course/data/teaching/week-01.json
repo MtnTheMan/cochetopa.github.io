@@ -1,0 +1,733 @@
+{
+  "$schema": "cochetopa-public-teaching-package/1.0",
+  "schemaVersion": "1.0.0",
+  "courseId": "northern-hardwoods-mixedwoods-dendrology-silvics-intensive",
+  "courseVersion": "2026.1-draft",
+  "moduleId": "week-01",
+  "sequence": 1,
+  "title": "Foundations + Northern Hardwood Anchors",
+  "deliveryStatus": "interactive_public_development_preview",
+  "objectives": [
+    "Apply dendrological vocabulary and the maximum-defensible-rank decision rule.",
+    "Identify the northern-hardwood anchor taxa from unfamiliar foliage, bark, reproductive, dormant, and whole-tree evidence where defensible.",
+    "State a nearest plausible alternative, visible separator, confidence code, and resolving view.",
+    "Retrieve canonical common and scientific names and introductory field silvics for every new taxon.",
+    "Separate American beech host identity from clean or normal bark condition."
+  ],
+  "cumulativeReview": {
+    "policy_id": "CR-01",
+    "eligible_taxon_rule": "introduction_week_lte_module_sequence",
+    "through_introduction_week": 1,
+    "eligible_taxon_count": 9,
+    "selection_priorities": [
+      "delayed_new_taxa",
+      "confuser_contrasts",
+      "modality_balance",
+      "confidence_calibration"
+    ]
+  },
+  "confuserSets": [
+    {
+      "confusionSetId": "CS21",
+      "name": "Yellow birch / black cherry bark",
+      "memberTaxa": [
+        "BETULA_ALLEGHANIENSIS",
+        "PRUNUS_SEROTINA"
+      ],
+      "keySeparators": "Golden horizontal curls and wintergreen twig versus burnt-chip plates, petiole glands, and almond twig odor",
+      "resolvingViews": "Young and old bark; scratched twig; leaf petiole and underside; fruit"
+    }
+  ],
+  "expectedSilvicsRetrieval": {
+    "taxon_scope": "all_new_taxon_ids",
+    "dimensions": [
+      "shade_tolerance",
+      "moisture_drainage_soils",
+      "forest_associations",
+      "regeneration"
+    ],
+    "response_standard": "Give concise, field-usable relationships rather than isolated adjectives."
+  },
+  "sessions": [
+    {
+      "sessionId": "W01-A",
+      "letter": "A",
+      "title": "Six northern-hardwood anchors",
+      "kind": "species_introduction",
+      "taxonScope": "listed_new_taxa",
+      "modalities": [
+        "foliage",
+        "bark",
+        "whole_tree_context"
+      ],
+      "delivery": "diagnostic teaching examples plus field-decision modeling",
+      "feedbackRelease": "during_instruction",
+      "runtimeBoundary": "labeled_teaching_content",
+      "introducedTaxonIds": [
+        "ACER_SACCHARUM",
+        "FAGUS_GRANDIFOLIA",
+        "BETULA_ALLEGHANIENSIS",
+        "TSUGA_CANADENSIS",
+        "ACER_RUBRUM",
+        "TILIA_AMERICANA"
+      ],
+      "teachingProfiles": [
+        {
+          "taxonId": "ACER_SACCHARUM",
+          "preferredCommonName": "Sugar maple",
+          "canonicalScientificName": "Acer saccharum",
+          "acceptedAlternatives": [],
+          "family": "Sapindaceae; Aceraceae in older texts",
+          "distributionInCourseRegion": "Widespread from MN and the Great Lakes through southern ON/QC, NY, New England, NB, and the Allegheny region",
+          "ecologicalImportance": "Major shade-tolerant northern-hardwood canopy dominant; valuable timber and sap tree",
+          "coursePriority": "1 - core",
+          "tier": "A",
+          "fieldIdentification": {
+            "foliage": "Opposite, simple blades are palmately veined and usually five-lobed, with pointed lobes, broad rounded U-shaped sinuses, and relatively few coarse teeth. A fresh broken petiole has clear rather than milky sap; arrangement and margin pattern matter more than fall color.",
+            "barkAgeSeries": "Seedlings and saplings have smooth light-gray bark; pole trees develop long shallow furrows; mature and old boles form irregular vertical plates whose edges lift outward. Old trees can be dark and deeply fissured, so the classic plated surface is an age-series character rather than a universal texture.",
+            "dormant": "Opposite brown twigs carry a narrow, sharply pointed terminal bud with many tightly overlapping brown scales and smaller paired lateral buds. Leaf scars are opposite and usually V-shaped; the narrow conical terminal bud is a high-value separator from red and Norway maples.",
+            "reproductive": "Small yellow-green apetalous flowers hang on long stalks before or during leaf expansion. Paired samaras mature in autumn and commonly meet at an acute angle; timing and wing angle support the identification but overlap black maple.",
+            "wholeTreeContext": "A large, long-lived canopy tree with a dense rounded crown in cool, fertile, well-drained northern hardwoods, commonly with beech, yellow birch, basswood, and hemlock. Site is corroboration, not a substitute for morphology.",
+            "variationAndCondition": "Shade leaves may be thin and shallowly lobed; vigorous shoots can carry larger or more toothed leaves. Black-maple intergradation, crown damage, old bark, lichens, wetness, and logging scars can weaken textbook characters.",
+            "defensibilityLimits": "Opposite arrangement plus several representative leaves and pointed brown buds normally supports species. One detached atypical leaf, distant crown color, or old plated bark alone does not securely separate sugar maple from black maple, red maple, or planted Norway maple."
+          },
+          "confuserControl": [
+            {
+              "confuser": "Acer rubrum",
+              "visibleSeparators": "Red maple usually has regular fine teeth around the lobes and into sharper sinuses, red blunt-ovoid buds, and spring-maturing samaras; sugar maple has fewer coarse teeth, rounded sinuses, narrow brown pointed buds, and autumn fruit.",
+              "resolvingView": "An intact opposite shoot with terminal and lateral buds, the full leaf margin, and mature samaras if present."
+            },
+            {
+              "confuser": "Acer nigrum and Acer platanoides",
+              "visibleSeparators": "Black maple tends toward three broad drooping lobes, a deeply cordate base, and lower-surface hair but commonly intergrades. Norway maple has milky petiole latex, large blunt buds, and samara wings spread nearly straight across.",
+              "resolvingView": "Several mature leaf undersides and petiole bases, a fresh petiole break, buds, samaras, and site context."
+            }
+          ],
+          "silvicsCapsule": {
+            "shadeTolerance": "Very shade tolerant; seedlings and saplings can persist for years as advance regeneration and accelerate after a gradual increase in light.",
+            "moistureDrainageSoils": "Best on cool, fertile, moist but well-drained loams with adequate calcium and magnesium; performs poorly on droughty shallow soils and is intolerant of prolonged growing-season flooding.",
+            "geographicClimaticAffinity": "A cool-temperate Great Lakes, southern Canadian, northeastern, and Appalachian species whose strongest dominance is in humid continental northern hardwood climates.",
+            "forestAssociations": "A principal canopy component of sugar maple-basswood and sugar maple-beech-yellow birch forests, with hemlock, white ash, black cherry, and other mesic associates.",
+            "regeneration": "Wind-dispersed autumn samaras germinate after cold moist stratification; abundant seedlings establish beneath canopy and form advance regeneration before release.",
+            "vegetativeReproduction": "Young and small stumps can sprout, and damaged seedlings readily replace shoots; root suckering is rare and seed is the principal stand-regeneration pathway.",
+            "seedMastBehavior": "Good crops recur irregularly, often every few years; seed usually does not remain viable in the forest floor beyond the following growing season.",
+            "establishmentRequirements": "Seedlings can penetrate litter and establish under shade on moist forest floors, but need sustained soil moisture, controlled competition, and eventual crown release for height growth.",
+            "successionalRole": "Late-successional canopy dominant that can replace less-tolerant pioneers and maintain uneven-aged structures through advance regeneration and gap recruitment.",
+            "disturbanceResponse": "Small gaps and partial cutting release established regeneration; fire, severe drought, soil compaction, root damage, and careless bole wounding are damaging.",
+            "longevityGrowthStrategy": "Long-lived, commonly several centuries on good sites; slow while suppressed, then moderate and persistent in diameter growth after release.",
+            "browseSusceptibility": "Deer readily browse seedlings and saplings, and repeated browsing can prevent advance regeneration from reaching recruitment height.",
+            "insectsDiseases": "Maple decline, sugar maple borer, defoliators, cankers, and decay following wounds are important; stress interactions often matter more than a single agent.",
+            "managementImplications": "Protect roots and boles during harvest, match retention to fertile mesic sites, and evaluate browse and competing understory before relying on abundant small seedlings.",
+            "silviculturalSystemResponse": "Selection, group selection, and shelterwood approaches can work where healthy advance regeneration is distributed and released gradually; excessive high grading and abrupt exposure reduce quality and vigor."
+          },
+          "references": [
+            {
+              "title": "Sugar Maple — Silvics of North America",
+              "url": "https://research.fs.usda.gov/silvics/sugar-maple",
+              "scope": "Distribution, sites, associates, seed biology, shade tolerance, growth, damaging agents, and management response."
+            },
+            {
+              "title": "Acer saccharum — sugar maple",
+              "url": "https://gobotany.nativeplanttrust.org/species/acer/saccharum/",
+              "scope": "Regional morphology, reproductive structures, habitat, taxonomy, and comparison characters."
+            }
+          ]
+        },
+        {
+          "taxonId": "FAGUS_GRANDIFOLIA",
+          "preferredCommonName": "American beech",
+          "canonicalScientificName": "Fagus grandifolia",
+          "acceptedAlternatives": [],
+          "family": "Fagaceae",
+          "distributionInCourseRegion": "Widespread from the Great Lakes through southern Canada, New England, NB, and the Allegheny region",
+          "ecologicalImportance": "Major shade-tolerant mast tree; root sprouting and disease strongly affect stand structure",
+          "coursePriority": "1 - core",
+          "tier": "A",
+          "fieldIdentification": {
+            "foliage": "Alternate, simple leaves are elliptic to ovate with a short petiole, straight parallel lateral veins, and one distinct marginal tooth at or near each vein ending. The surface is papery rather than corrugated, and saplings often retain tan dead leaves in winter.",
+            "barkAgeSeries": "Saplings and healthy mature trees have thin, smooth, pale bluish-gray bark, often compared with elephant hide. Scale insects, beech bark disease, cankers, callus, wounds, lichen, wetness, and old aftermath roughening can partly or almost completely obscure that anchor pattern.",
+            "dormant": "Alternate twigs carry exceptionally long, slender, sharply pointed cigar-shaped buds with many overlapping scales; the buds project away from the twig. This is one of the most reliable winter characters in the regional flora.",
+            "reproductive": "Male flowers occur in drooping spherical clusters; paired sharply three-angled nuts mature inside a four-part prickly husk. Detached triangular nuts or open husks strongly support beech when provenance is secure.",
+            "wholeTreeContext": "A large tree with a broad crown, smooth-looking boles, shallow spreading roots, and frequent root-sucker thickets in mesic northern hardwoods. Dense shade and beech saplings may persist below diseased overstory trees.",
+            "variationAndCondition": "Host identification must be separated from diagnosis. Clean juvenile bark, normal smooth bark, scale patches, cankers, rough aftermath bark, callus, scars, wet bark, lichen, and foliage affected by beech leaf disease can all occur on Fagus grandifolia; a photograph cannot establish genetic resistance.",
+            "defensibilityLimits": "Cigar buds, vein-tooth foliage, nuts, or multiple host characters can identify beech even when bark is altered. Smooth gray bark alone is not enough, and rough bark alone cannot diagnose beech bark disease, disease stage, cause, resistance, or tolerance."
+          },
+          "confuserControl": [
+            {
+              "confuser": "Ostrya virginiana",
+              "visibleSeparators": "Hophornbeam has shorter ovoid buds, doubly serrate corrugated leaves, narrow shreddy bark strips, and hoplike fruit; beech has very long cigar buds, a simpler vein-tooth margin, smooth host bark, and prickly nut husks.",
+              "resolvingView": "Dormant buds, close leaf venation and margin, representative bark away from wounds, and fruit."
+            },
+            {
+              "confuser": "Carpinus caroliniana",
+              "visibleSeparators": "American hornbeam has smooth muscle-like fluted bark but much shorter buds, doubly serrate leaves, and nutlets on three-lobed leafy bracts rather than beechnuts in prickly husks.",
+              "resolvingView": "A full twig with buds, leaf margin, bole form, and reproductive structures."
+            }
+          ],
+          "silvicsCapsule": {
+            "shadeTolerance": "Exceptionally shade tolerant; seedlings, saplings, and root suckers can persist under dense canopy and respond when gaps form.",
+            "moistureDrainageSoils": "Most competitive on moist, well-drained, often fertile loams and slopes; absent from persistently flooded sites and less vigorous on droughty shallow soils.",
+            "geographicClimaticAffinity": "A broad eastern cool- and warm-temperate species, central to Great Lakes, Acadian, northeastern, and Allegheny northern hardwoods.",
+            "forestAssociations": "Major component of beech-sugar maple and sugar maple-beech-yellow birch forests, also associated with hemlock, red spruce, white pine, oaks, and Allegheny hardwoods.",
+            "regeneration": "Heavy nuts establish seedlings after autumn dispersal, while existing advance regeneration and root sprouts often contribute more consistently to local replacement.",
+            "vegetativeReproduction": "Root suckering is important and may intensify after root injury, overstory mortality, or cutting, producing dense genetically connected thickets.",
+            "seedMastBehavior": "Beechnut production is episodic, with irregular mast years that strongly affect wildlife food and seedling pulses; rodents and birds consume and disperse nuts.",
+            "establishmentRequirements": "Seedlings tolerate litter and deep shade on mesic sites, but recruitment above browse height and into canopy positions generally depends on protection and gap release.",
+            "successionalRole": "Late-successional, long-persistent canopy species that can dominate regeneration layers even where overstory quality is reduced by disease.",
+            "disturbanceResponse": "Canopy gaps release suppressed stems; root damage and cutting stimulate suckers, while fire and bole injury readily damage thin bark and create decay entry points.",
+            "longevityGrowthStrategy": "Long-lived and slow-growing under suppression, capable of large size but often limited in current forests by disease, defects, and repeated mortality.",
+            "browseSusceptibility": "Deer browse seedlings and suckers; intense browsing can simplify regeneration while beech's persistent clonal shoots remain abundant at low height.",
+            "insectsDiseases": "Beech scale and fungi associated with beech bark disease, beech leaf disease, cankers, decay, and defoliators are regionally important; symptoms and host identity require separate evidence.",
+            "managementImplications": "Inventory both overstory condition and regeneration origin, avoid assuming every rough-barked beech is in the same disease stage, retain valuable mast and healthy phenotypes where objectives permit, and manage dense sucker competition deliberately.",
+            "silviculturalSystemResponse": "Selection and shelterwood openings release advance beech and suckers strongly; without regeneration control they may outcompete desired associates, while sanitation decisions must consider mast, diversity, disease, and residual damage."
+          },
+          "references": [
+            {
+              "title": "American Beech — Silvics of North America",
+              "url": "https://research.fs.usda.gov/silvics/american-beech",
+              "scope": "Range, site, shade tolerance, seed and root-sucker reproduction, succession, growth, disease, and management."
+            },
+            {
+              "title": "Fagus grandifolia — American beech",
+              "url": "https://gobotany.nativeplanttrust.org/species/fagus/grandifolia/",
+              "scope": "Regional foliage, buds, bark, fruit, habitat, and comparative identification."
+            }
+          ]
+        },
+        {
+          "taxonId": "BETULA_ALLEGHANIENSIS",
+          "preferredCommonName": "Yellow birch",
+          "canonicalScientificName": "Betula alleghaniensis",
+          "acceptedAlternatives": [],
+          "family": "Betulaceae",
+          "distributionInCourseRegion": "Cool mesic forests from MN/WI/MI through ON/QC, NY, New England, NB, and Allegheny highlands",
+          "ecologicalImportance": "Long-lived northern-hardwood dominant; establishes on decayed wood and disturbed mineral soil",
+          "coursePriority": "1 - core",
+          "tier": "A",
+          "fieldIdentification": {
+            "foliage": "Alternate ovate leaves have a rounded to weakly heart-shaped base, many straight lateral veins, and sharply doubly serrate margins; lower vein axils may be hairy. Foliage alone overlaps sweet birch and needs bark, twig odor, or reproductive support.",
+            "barkAgeSeries": "Seedlings are gray-brown and unremarkable; intermediate stems develop bronze to yellow-gold bark with horizontal lenticels and fine curling papery strips; old trunks become dark reddish-brown to gray and break into rough irregular plates with much less visible curl.",
+            "dormant": "Slender alternate twigs bear pointed reddish-brown buds, small spur shoots, and no true terminal bud; scratched young twig or inner bark has a wintergreen odor. Odor should be wafted rather than tasted and does not separate yellow from sweet birch.",
+            "reproductive": "Male catkins form in advance and persist through winter; erect female strobiles mature and disintegrate into tiny winged nutlets and three-lobed scales. Complete fruit scales can help separate birches when clearly imaged.",
+            "wholeTreeContext": "A large long-lived canopy tree of cool moist northern hardwood and mixedwood sites, often rooted on old logs, stumps, tip-up mounds, or boulders with stilted bases after the nurse substrate decays.",
+            "variationAndCondition": "Classic golden curl is strongest at intermediate age. Shade, wet bark, lichens, scars, and very old plated bark change color and texture; sprouts and saplings may lack the feature learners expect.",
+            "defensibilityLimits": "Golden curling bark plus horizontal lenticels is strong evidence, and wintergreen odor corroborates the birch group. A dark old bole, a sterile leaf, or odor alone cannot securely exclude sweet birch, black cherry, or other Betula."
+          },
+          "confuserControl": [
+            {
+              "confuser": "Betula lenta",
+              "visibleSeparators": "Both can smell of wintergreen and have similar leaves, but sweet birch develops dark nonpapery bark with horizontal lenticels and later heavy plates, whereas yellow birch shows characteristic bronze-gold fine curling at intermediate age.",
+              "resolvingView": "Intermediate-age bark, several mature leaves including lower surfaces, buds, and intact fruiting scales."
+            },
+            {
+              "confuser": "Prunus serotina",
+              "visibleSeparators": "Young black cherry can show horizontal lenticels and old bark becomes cornflake-like, but cherry leaves have petiole glands and rusty hair along the lower midrib and fruit in fleshy racemes; yellow birch has catkins and papery curl.",
+              "resolvingView": "Current twigs, petiole and lower midrib, intermediate bark, and fruit or catkins."
+            }
+          ],
+          "silvicsCapsule": {
+            "shadeTolerance": "Intermediate in shade tolerance: more tolerant than paper birch and aspen, but less able than sugar maple, beech, or hemlock to persist and recruit under deep shade.",
+            "moistureDrainageSoils": "Best on cool, moist, well-drained, fertile loams and coves; common on north and east slopes, seepage areas, ravines, and decayed woody microsites but intolerant of stagnant flooding.",
+            "geographicClimaticAffinity": "A cool-humid northern and montane species spanning the Great Lakes, southern Canada, Acadian region, Northeast, and Allegheny/Appalachian highlands.",
+            "forestAssociations": "Characteristic with sugar maple and beech, and with hemlock, red spruce, balsam fir, paper birch, white pine, and northern hardwood associates.",
+            "regeneration": "Very small wind-dispersed seed supplies new cohorts; seedlings commonly establish on rotten wood, exposed mineral soil, tip-up mounds, and lightly scarified moist surfaces.",
+            "vegetativeReproduction": "Young stumps can sprout and low branches may layer, but vegetative reproduction is less reliable than seed for maintaining canopy populations.",
+            "seedMastBehavior": "Seed production is variable with periodic good crops; much seed falls near the parent, and viability and first-year survival depend strongly on moisture and seedbed quality.",
+            "establishmentRequirements": "Tiny seedlings are easily smothered by intact litter and drought; moist decayed wood or mineral soil, partial light, and limited competition provide receptive seedbeds.",
+            "successionalRole": "A long-lived mid- to late-seral gap species that can enter after disturbance yet persist with northern-hardwood climax associates.",
+            "disturbanceResponse": "Windthrow, partial harvest, soil exposure, and group gaps create seedbeds and light; severe opening can dry seedbeds, while fire and bole injury damage thin bark.",
+            "longevityGrowthStrategy": "Long-lived for a birch and capable of large canopy size; juvenile growth is moderate and improves with overhead and side light.",
+            "browseSusceptibility": "Deer and moose browse seedlings and saplings; repeated browsing can prevent otherwise suitable regeneration from reaching gap height.",
+            "insectsDiseases": "Bronze birch borer, birch leafminers and defoliators, cankers, decay, and root or bole injuries affect vigor; stressed exposed trees are more vulnerable.",
+            "managementImplications": "Coordinate seed source, receptive seedbed creation, moisture retention, and timely light; protect residual boles and roots and do not rely on advance regeneration alone where seedlings are scarce.",
+            "silviculturalSystemResponse": "Group selection, irregular shelterwood, and shelterwood with controlled scarification can recruit yellow birch; single-tree openings may be too small for growth, while clear exposure can make seedbeds too dry."
+          },
+          "references": [
+            {
+              "title": "Yellow Birch — Silvics of North America",
+              "url": "https://research.fs.usda.gov/silvics/yellow-birch",
+              "scope": "Range, sites, seedbed ecology, tolerance, associations, growth, damaging agents, and silvicultural response."
+            },
+            {
+              "title": "Betula alleghaniensis — yellow birch",
+              "url": "https://gobotany.nativeplanttrust.org/species/betula/alleghaniensis/",
+              "scope": "Regional foliage, bark, buds, catkins, habitat, and comparison with related birches."
+            }
+          ]
+        },
+        {
+          "taxonId": "TSUGA_CANADENSIS",
+          "preferredCommonName": "Eastern hemlock",
+          "canonicalScientificName": "Tsuga canadensis",
+          "acceptedAlternatives": [],
+          "family": "Pinaceae",
+          "distributionInCourseRegion": "Great Lakes through southern ON/QC, NY, New England, NB, and the Allegheny region",
+          "ecologicalImportance": "Extremely shade-tolerant long-lived foundation conifer creating cool moist microclimates",
+          "coursePriority": "1 - core",
+          "tier": "A",
+          "fieldIdentification": {
+            "foliage": "Short, flat, mostly blunt single needles vary in length along delicate twigs, show two pale stomatal bands beneath, and narrow abruptly to tiny petiole-like bases. Needles often appear two-ranked but small upper-side needles interrupt a perfectly flat spray.",
+            "barkAgeSeries": "Young bark is smooth gray-brown; intermediate stems develop narrow scaly ridges; mature bark becomes dark gray-brown and deeply furrowed with broad ridges, while cuts expose cinnamon to reddish inner bark. Bark alone overlaps other conifers.",
+            "dormant": "Fine flexible yellow-brown twigs carry minute rounded buds, tiny petiolate needles, and often a drooping terminal shoot. Hemlock lacks the woody sterigmata of spruce and the suction-cup-like needle bases of fir.",
+            "reproductive": "Small ovoid pendent cones, usually only about 1.5 to 2.5 cm long, hang from short stalks and open at maturity; they persist beneath branches. Their size and position sharply contrast with upright fir cones.",
+            "wholeTreeContext": "A graceful conifer with fine feathery sprays, slender horizontal branches, and a drooping leader, often forming dense, deeply shaded groves on cool ravines, slopes, stream terraces, and lake-influenced sites.",
+            "variationAndCondition": "Shade and vigor change shoot density and needle length. Hemlock woolly adelgid, elongate hemlock scale, drought, browsing, and other stress can thin crowns or discolor and shed needles; decline symptoms do not erase attachment characters.",
+            "defensibilityLimits": "Needle attachment, lower stomatal bands, twig texture, and a small pendent cone together are decisive. A distant dark crown, deeply furrowed bark, or one cropped needle surface cannot securely separate hemlock from fir, spruce, yew, or planted conifers."
+          },
+          "confuserControl": [
+            {
+              "confuser": "Abies balsamea",
+              "visibleSeparators": "Balsam fir needles attach on broad round bases that leave smooth circular scars, terminal twigs are stouter, resin blisters occur on young bark, and mature cones stand upright and disintegrate; hemlock needles have tiny petioles and cones hang intact.",
+              "resolvingView": "Needle bases after removal, lower needle surfaces, terminal buds, young bark, and cone orientation."
+            },
+            {
+              "confuser": "Picea species",
+              "visibleSeparators": "Spruce needles are usually stiff and four-angled or keeled and sit on persistent woody pegs that make twigs rough; hemlock needles are flat, petiolate, and leave smoother twigs.",
+              "resolvingView": "A needle cross-section, bare twig after needle removal, underside stomatal bands, and complete cone."
+            }
+          ],
+          "silvicsCapsule": {
+            "shadeTolerance": "Extremely shade tolerant, among the most tolerant North American trees; seedlings and saplings can remain suppressed for many decades and still respond to release.",
+            "moistureDrainageSoils": "Favors cool, humid, sheltered sites with reliable moisture and generally well-drained acidic to neutral soils; ravines, north slopes, stream benches, and lake-moderated sites are common.",
+            "geographicClimaticAffinity": "A cool-temperate eastern species central to Great Lakes, Acadian, northeastern, and Allegheny mixedwoods, with southern occurrences concentrated in cool refugia.",
+            "forestAssociations": "Forms pure groves and mixtures with white pine, yellow birch, sugar maple, beech, red spruce, balsam fir, and northern red oak.",
+            "regeneration": "Tiny wind-dispersed seed establishes on continuously moist rotten wood, moss, humus, or mineral soil; abundant advance regeneration can persist under parent stands.",
+            "vegetativeReproduction": "Natural sprouting is negligible; layering may occur from low branches in far northern or harsh settings, but seed is the normal regeneration pathway.",
+            "seedMastBehavior": "Cones are produced periodically, with good crops recurring every few years; seed disperses in autumn and winter but loses viability relatively quickly on the forest floor.",
+            "establishmentRequirements": "Moist, cool microsites protected from drying are essential for germination and early survival; decayed logs and shaded mineral soil often function as nurse substrates.",
+            "successionalRole": "Very late-successional and self-replacing where disturbance remains small, creating deep shade, cool microclimates, and slowly cycling forest-floor conditions.",
+            "disturbanceResponse": "Small gaps and careful partial cutting release advance regeneration, but abrupt exposure, drought, fire, windthrow, and root or bole injury can cause severe mortality.",
+            "longevityGrowthStrategy": "Very long-lived, often several centuries; exceptionally slow while suppressed and capable of sustained growth after release if roots and crown remain healthy.",
+            "browseSusceptibility": "Highly preferred winter browse for white-tailed deer; heavy browsing can eliminate regeneration and alter stand structure even where seed is abundant.",
+            "insectsDiseases": "Hemlock woolly adelgid is the principal invasive threat in much of the region; elongate hemlock scale, hemlock looper, root rots, drought, and secondary agents also matter.",
+            "managementImplications": "Protect cool moist microclimates, roots, and residual crowns; monitor invasive insects; evaluate deer pressure; and retain structural and riparian functions even where timber objectives are secondary.",
+            "silviculturalSystemResponse": "Single-tree or small-group selection and gradual shelterwood release can favor established hemlock on suitable sites, while heavy uniform opening risks desiccation, windthrow, competing vegetation, and loss of advance regeneration."
+          },
+          "references": [
+            {
+              "title": "Eastern Hemlock — Silvics of North America",
+              "url": "https://research.fs.usda.gov/silvics/eastern-hemlock",
+              "scope": "Distribution, sites, tolerance, seedbeds, associations, longevity, disturbance, damaging agents, and management."
+            },
+            {
+              "title": "Tsuga canadensis — eastern hemlock",
+              "url": "https://gobotany.nativeplanttrust.org/species/tsuga/canadensis/",
+              "scope": "Regional needle, twig, cone, bark, habit, habitat, and comparative identification."
+            }
+          ]
+        },
+        {
+          "taxonId": "ACER_RUBRUM",
+          "preferredCommonName": "Red maple",
+          "canonicalScientificName": "Acer rubrum",
+          "acceptedAlternatives": [],
+          "family": "Sapindaceae",
+          "distributionInCourseRegion": "Nearly throughout the region from swamps to dry uplands",
+          "ecologicalImportance": "Ubiquitous generalist; prolific seeder and sprouter after disturbance",
+          "coursePriority": "1 - core",
+          "tier": "A",
+          "fieldIdentification": {
+            "foliage": "Opposite, simple blades usually have three to five lobes, angular or V-shaped sinuses, and regular serration continuing around the lobes and into the sinuses; the lower surface is often pale. Red petioles or fall color are supportive but not diagnostic.",
+            "barkAgeSeries": "Young stems are smooth and light gray; intermediate bark develops narrow vertical cracks and small scaly plates; old boles become dark, furrowed, and broken into long narrow plates that may lift at the ends. Age and site produce substantial variation.",
+            "dormant": "Opposite reddish twigs bear blunt-ovoid red buds with several pairs of scales; flower buds are often clustered and plumper than vegetative buds. The terminal bud is much shorter and blunter than sugar maple's narrow brown point.",
+            "reproductive": "Red to yellowish flowers open well before leaf-out, and paired samaras mature and fall in spring or early summer. Early fruit timing is a strong separator from sugar and Norway maples.",
+            "wholeTreeContext": "A medium to large tree with a variable crown occurring from forested wetlands and riparian flats to mesic and dry uplands. Broad ecological amplitude raises plausibility but contributes little species-level proof.",
+            "variationAndCondition": "Lobe number, depth, pubescence, color, and bark vary widely among sites and individuals. Suppressed shoots, stump sprouts, drought, flooding, lichens, and injury can make leaves or bark atypical.",
+            "defensibilityLimits": "A secure call combines opposite arrangement with the serrated lobe pattern, red blunt buds, spring fruit, or a second independent organ. A red-colored twig, one ambiguous maple leaf, or rough old bark alone warrants Acer or insufficient evidence."
+          },
+          "confuserControl": [
+            {
+              "confuser": "Acer saccharum",
+              "visibleSeparators": "Sugar maple has fewer large teeth, usually broader rounded sinuses, narrow sharply pointed brown buds, and autumn-maturing samaras; red maple is more continuously serrate with blunt red buds and spring fruit.",
+              "resolvingView": "The complete margin and sinuses, intact terminal buds, and fruit with season information."
+            },
+            {
+              "confuser": "Acer saccharinum",
+              "visibleSeparators": "Silver maple generally has much deeper sinuses, narrower lobes, a strongly silvery-white lower surface, more conspicuously shaggy mature bark, and larger spring samaras.",
+              "resolvingView": "Both leaf surfaces with scale, mature bark, and measured fruit."
+            }
+          ],
+          "silvicsCapsule": {
+            "shadeTolerance": "Moderately shade tolerant when young and able to persist beneath partial canopy, but faster growth and canopy recruitment follow disturbance and increased light.",
+            "moistureDrainageSoils": "Occupies an exceptionally broad range from saturated swamps and floodplains to dry ridges; local seed sources are often adapted to contrasting hydrologic regimes.",
+            "geographicClimaticAffinity": "One of the most geographically and climatically widespread eastern trees, common across the entire course envelope.",
+            "forestAssociations": "Occurs in red maple wetlands, northern hardwoods, oak-hardwood, pine-hardwood, aspen-birch, and many disturbed or transitional stands.",
+            "regeneration": "Produces abundant wind-dispersed spring seed that germinates promptly on moist substrates; advance seedlings and post-disturbance cohorts are both common.",
+            "vegetativeReproduction": "Stumps sprout vigorously, especially when cut young, and sprouts can dominate early stand development after harvest or top-kill.",
+            "seedMastBehavior": "Seed crops begin at relatively young ages and are frequent, often annual; short-lived seed germinates soon after spring dispersal rather than forming a persistent bank.",
+            "establishmentRequirements": "Moist seedbeds and early-season light favor germination, while broad physiological tolerance and sprouting permit establishment across many disturbed settings.",
+            "successionalRole": "A flexible early- to mid-seral generalist that can persist into later stands as a subordinate canopy tree, especially where repeated disturbance limits more demanding species.",
+            "disturbanceResponse": "Logging, fire top-kill, agricultural abandonment, drainage change, and canopy gaps often increase red maple through seed and sprouts; severe drought or prolonged flooding response varies by ecotype.",
+            "longevityGrowthStrategy": "Moderately fast when released and usually shorter-lived than sugar maple, beech, or hemlock; poor form and internal defects are common on stressed sites.",
+            "browseSusceptibility": "Young shoots are browsed by deer and moose, though prolific seedling and sprout production can maintain abundance under moderate pressure.",
+            "insectsDiseases": "Defoliators, leafhoppers, borers, cankers, decay, and fire or logging wounds affect quality; no single agent generally controls its regional abundance.",
+            "managementImplications": "Do not infer site quality from presence alone; decide whether red maple is an objective species, protect selected crop trees from injury, and account for vigorous sprouting in regeneration treatments.",
+            "silviculturalSystemResponse": "Responds to clearcut, shelterwood, group, and selection openings; outcomes depend on advance regeneration, stump size, seed source, competing vegetation, and the desired species mixture."
+          },
+          "references": [
+            {
+              "title": "Red Maple — Silvics of North America",
+              "url": "https://research.fs.usda.gov/silvics/red-maple",
+              "scope": "Range, ecological breadth, seed and sprout reproduction, succession, growth, damaging agents, and management."
+            },
+            {
+              "title": "Acer rubrum — red maple",
+              "url": "https://gobotany.nativeplanttrust.org/species/acer/rubrum/",
+              "scope": "Regional foliage, buds, flowers, fruit, bark, habitat, and comparative morphology."
+            }
+          ]
+        },
+        {
+          "taxonId": "TILIA_AMERICANA",
+          "preferredCommonName": "American basswood",
+          "canonicalScientificName": "Tilia americana",
+          "acceptedAlternatives": [],
+          "family": "Malvaceae; Tiliaceae in older texts",
+          "distributionInCourseRegion": "Fertile mesic sites from MN/WI/MI and southern Canada through the Northeast and PA/NJ",
+          "ecologicalImportance": "Shade-tolerant nutrient-rich northern-hardwood associate; vigorous stump sprouter",
+          "coursePriority": "1 - core",
+          "tier": "A",
+          "fieldIdentification": {
+            "foliage": "Alternate, broadly ovate to heart-shaped leaves have an abruptly pointed tip, serrate margin, palmate basal veins, and a conspicuously uneven cordate base. Size varies greatly, especially on stump sprouts, so asymmetry and structure outweigh dimensions.",
+            "barkAgeSeries": "Young bark is smooth gray to gray-brown; intermediate bark develops narrow vertical fissures; old boles are dark gray-brown with long interlacing ridges and deep furrows. Multi-stemmed sprout clumps are common after cutting.",
+            "dormant": "Alternate zigzag twigs carry plump red to reddish-brown ovoid buds with only two or three visible, unequal scales; there is no true terminal bud. Bud scale count and asymmetrical leaf scars are useful winter evidence.",
+            "reproductive": "Clusters of fragrant pale flowers and later round nutlets hang from a stalk fused partway to a narrow leaf-like bract. The bract-and-fruit construction is one of the most decisive regional reproductive characters.",
+            "wholeTreeContext": "A medium to large, often straight-boled tree of fertile mesic northern hardwoods and rich lower slopes; basal sprouts or multiple trunks commonly reveal vegetative origin.",
+            "variationAndCondition": "Vigorous sprouts bear extremely large leaves; shade leaves are thinner. Decay, fire scars, browse, and old furrowed bark may mask typical form, while planted European and hybrid lindens complicate settled-site identification.",
+            "defensibilityLimits": "An asymmetrical cordate leaf plus two-scaled buds or a fruiting bract supports American basswood in forest context. Foliage alone may justify only Tilia where planted lindens occur, and large leaf size alone is not diagnostic."
+          },
+          "confuserControl": [
+            {
+              "confuser": "Morus alba",
+              "visibleSeparators": "White mulberry leaves are variably lobed, often glossy, and have different buds and fleshy multiple fruits; basswood has plump few-scaled red buds and flowers or nutlets attached to a distinctive narrow bract.",
+              "resolvingView": "Buds and twig, several leaves from one shoot, reproductive structures, and whether the tree is planted or in forest."
+            },
+            {
+              "confuser": "Planted Tilia species and hybrids",
+              "visibleSeparators": "Other lindens share the bracted fruit and cordate foliage; lower-surface hair, fruit ribbing, leaf dimensions, buds, provenance, and horticultural context may be needed, and photographs often support only genus.",
+              "resolvingView": "Lower leaf surface with vein axils, mature fruit with scale, buds, bark, crown form, and planting context."
+            }
+          ],
+          "silvicsCapsule": {
+            "shadeTolerance": "Shade tolerant, though generally less persistent in deep shade than beech or sugar maple; advance stems and sprouts respond strongly to release.",
+            "moistureDrainageSoils": "Best on deep, fertile, moist, well-drained loams with high base status, especially calcium-rich tills, lower slopes, and protected coves; poor on droughty or saturated sites.",
+            "geographicClimaticAffinity": "A broad eastern species especially important in the western Great Lakes sugar maple-basswood region and rich northeastern and Allegheny sites.",
+            "forestAssociations": "Common with sugar and black maples, white ash, elms, bitternut hickory, yellow birch, beech, and other rich-site hardwoods.",
+            "regeneration": "Seedlings occur after successful dormancy break and favorable seedbeds, but many post-harvest cohorts arise from vigorous stump sprouts.",
+            "vegetativeReproduction": "Stump sprouting is exceptionally vigorous, particularly from young and intermediate stems; multiple sprouts can rapidly recapture growing space after cutting.",
+            "seedMastBehavior": "Nutlets are produced periodically and dispersed mainly near the parent; deep dormancy and frequent low soundness make natural seedling establishment less dependable than sprouting.",
+            "establishmentRequirements": "Seed requires prolonged stratification and suitable moist forest soil; advance seedlings tolerate shade, while released sprouts need adequate growing space and browse protection.",
+            "successionalRole": "A shade-tolerant mid- to late-seral rich-site associate that persists by both seedlings and vegetative replacement rather than acting as a broad pioneer.",
+            "disturbanceResponse": "Cutting strongly stimulates stump sprouts; fire and mechanical wounds readily injure thin bark and soft wood, leading to decay, while partial release can improve crown growth.",
+            "longevityGrowthStrategy": "Moderately long-lived and capable of rapid diameter growth on rich sites; soft wood and decay following injury often limit quality before physiological lifespan.",
+            "browseSusceptibility": "Seedlings and sprouts are highly palatable to deer and other browsers; repeated browsing can suppress the otherwise vigorous vegetative response.",
+            "insectsDiseases": "Basswood borer, defoliators, leaf spots, cankers, and several decay fungi occur; injury and poor vigor often determine severity.",
+            "managementImplications": "Use basswood as an indicator and component of fertile sites, protect high-quality residual stems from damage, and account for dense stump sprouting and browse in regeneration plans.",
+            "silviculturalSystemResponse": "Selection and shelterwood systems can release advance trees, while coppice and even-aged harvests produce vigorous sprout clumps; thinning sprout clumps may improve form where basswood is a crop objective."
+          },
+          "references": [
+            {
+              "title": "American Basswood — Silvics of North America",
+              "url": "https://research.fs.usda.gov/silvics/american-basswood",
+              "scope": "Range, rich-site relationships, reproduction, sprouting, tolerance, growth, damaging agents, and silvicultural response."
+            },
+            {
+              "title": "Tilia americana — American linden",
+              "url": "https://gobotany.nativeplanttrust.org/species/tilia/americana/",
+              "scope": "Regional foliage, buds, bark, bracted fruit, habitat, taxonomy, and comparison characters."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sessionId": "W01-B",
+      "letter": "B",
+      "title": "Anchor retrieval",
+      "kind": "delayed_retrieval",
+      "taxonScope": "session_a_taxa",
+      "modalities": [
+        "foliage",
+        "bark",
+        "whole_tree_context"
+      ],
+      "delivery": "closed-response batches of five to ten unfamiliar practice items",
+      "feedbackRelease": "after_batch_submission",
+      "runtimeBoundary": "runtime_retrieval_from_admitted_practice_media",
+      "introducedTaxonIds": [],
+      "teachingProfiles": []
+    },
+    {
+      "sessionId": "W01-C",
+      "letter": "C",
+      "title": "Birch, cherry, and hophornbeam contrasts",
+      "kind": "new_species_and_confusers",
+      "taxonScope": "listed_new_taxa_plus_week_confusers",
+      "modalities": [
+        "foliage",
+        "bark",
+        "reproductive",
+        "dormant"
+      ],
+      "delivery": "direct comparison and isolated unfamiliar specimens",
+      "feedbackRelease": "after_response",
+      "runtimeBoundary": "labeled_teaching_content",
+      "introducedTaxonIds": [
+        "BETULA_PAPYRIFERA",
+        "PRUNUS_SEROTINA",
+        "OSTRYA_VIRGINIANA"
+      ],
+      "teachingProfiles": [
+        {
+          "taxonId": "BETULA_PAPYRIFERA",
+          "preferredCommonName": "Paper birch",
+          "canonicalScientificName": "Betula papyrifera",
+          "acceptedAlternatives": [],
+          "family": "Betulaceae",
+          "distributionInCourseRegion": "Boreal and northern-transition forests across the Great Lakes, ON/QC, northern NY/New England, and NB",
+          "ecologicalImportance": "Short-lived shade-intolerant pioneer after fire, logging, and severe disturbance",
+          "coursePriority": "1 - core",
+          "tier": "A",
+          "fieldIdentification": {
+            "foliage": "Alternate ovate to triangular leaves have a rounded or wedge-shaped base, pointed tip, and doubly serrate margin; lower vein axils may bear hair. Mature heart-shaped blades can overlap heart-leaved paper birch, so foliage must be sampled across the crown.",
+            "barkAgeSeries": "Young stems are reddish-brown with pale horizontal lenticels and do not look white; pole and mature bark becomes creamy to chalky white with dark lenticels and peels in thin papery sheets; old basal bark becomes dark, thick, and deeply fissured.",
+            "dormant": "Slender reddish-brown alternate twigs have pointed appressed buds, conspicuous resin glands or wartlike dots on many current shoots, no true terminal bud, and persistent paired or clustered male catkins.",
+            "reproductive": "Pendulous male catkins expand in spring; erect cylindrical female strobiles mature then disintegrate into tiny winged nutlets and three-lobed scales. Scale proportions can be diagnostic but require close, complete material.",
+            "wholeTreeContext": "A small to medium, often multi-stemmed, narrow-crowned pioneer forming bright stands after fire or harvest in cool boreal and northern-transition landscapes.",
+            "variationAndCondition": "White bark develops with age and varies from bright white to cream or pinkish. Wetness, lichens, fire scars, old basal furrows, and hybrid or varietal variation can obscure the familiar surface.",
+            "defensibilityLimits": "White peeling bark plus appropriate twigs, foliage, or fruit usually supports paper birch, but bark alone does not reliably separate heart-leaved paper birch and can be confused with gray birch. Juvenile brown bark requires other organs."
+          },
+          "confuserControl": [
+            {
+              "confuser": "Betula cordifolia",
+              "visibleSeparators": "Heart-leaved paper birch tends to have cordate mature leaf bases, more resinous or glandular shoots, and montane or cool northeastern settings, but bark is nearly indistinguishable and character overlap is substantial.",
+              "resolvingView": "Multiple fully expanded crown leaves, both current and one-year twigs, buds, complete fruiting scales, elevation, substrate, and geography."
+            },
+            {
+              "confuser": "Betula populifolia",
+              "visibleSeparators": "Gray birch usually has triangular long-pointed leaves, white chalky bark that peels little, and dark triangular marks beneath branch attachments; paper birch more freely exfoliates in sheets.",
+              "resolvingView": "A representative mature leaf, bark around several branch bases, peeling-layer detail, and fruit scales."
+            }
+          ],
+          "silvicsCapsule": {
+            "shadeTolerance": "Very shade intolerant; seedlings require abundant light and are rapidly overtopped in closed stands.",
+            "moistureDrainageSoils": "Occupies cool sites across a broad moisture range, from well-drained glacial tills and sandy soils to moist margins, but grows best where rooting moisture is adequate without prolonged stagnation.",
+            "geographicClimaticAffinity": "Strongly boreal and northern-temperate, widespread through the Great Lakes, Canada, Acadian forests, and cool northeastern uplands.",
+            "forestAssociations": "Common with aspen, balsam fir, white and black spruce, jack and white pine, tamarack, northern hardwoods, and early-seral mixedwoods.",
+            "regeneration": "Produces abundant tiny wind-dispersed seed that colonizes exposed mineral soil, burns, road edges, and disturbed substrates after canopy removal.",
+            "vegetativeReproduction": "Young stumps can sprout, especially after cutting, but sprout vigor declines with age and seed is the main landscape-scale colonization mechanism.",
+            "seedMastBehavior": "Seed production is frequent and can be heavy; small seeds disperse widely over snow or open ground, though most seedlings die unless a moist exposed seedbed and light coincide.",
+            "establishmentRequirements": "Open light, exposed mineral or lightly covered soil, reliable near-surface moisture, and limited early competition are critical; thick litter and deep shade prevent recruitment.",
+            "successionalRole": "Classic short-lived pioneer following stand-replacing fire, logging, windthrow, or land clearing, later yielding to more shade-tolerant conifers and hardwoods.",
+            "disturbanceResponse": "Fire and severe harvesting create establishment opportunities when seed survives nearby or disperses in; surviving young stems may sprout, but mature thin-barked trees are easily killed or injured.",
+            "longevityGrowthStrategy": "Fast juvenile height growth and early reproduction, commonly declining after several decades and rarely persisting as a dominant for the lifespan of late-seral associates.",
+            "browseSusceptibility": "Moose, deer, and snowshoe hare heavily use shoots and seedlings; repeated browse deforms saplings and can alter early-seral mixtures.",
+            "insectsDiseases": "Bronze birch borer, birch leafminers, defoliators, cankers, decay, and drought or heat stress can accelerate decline, especially outside cool favorable sites.",
+            "managementImplications": "Maintain seed sources and deliberately create adequately large, moist, exposed seedbeds where paper birch is an objective; expect shade-tolerant competitors to replace it without repeated disturbance.",
+            "silviculturalSystemResponse": "Clearcutting, seed-tree, and large shelterwood or group openings can regenerate it when mineral soil and seed are available; small selection gaps generally provide too little sustained light."
+          },
+          "references": [
+            {
+              "title": "Paper Birch — Silvics of North America",
+              "url": "https://research.fs.usda.gov/silvics/paper-birch",
+              "scope": "Distribution, sites, seed production, establishment, disturbance response, growth, damaging agents, and management."
+            },
+            {
+              "title": "Betula papyrifera — paper birch",
+              "url": "https://gobotany.nativeplanttrust.org/species/betula/papyrifera/",
+              "scope": "Regional leaves, twigs, bark, catkins, fruit scales, habitat, variation, and birch comparisons."
+            }
+          ]
+        },
+        {
+          "taxonId": "PRUNUS_SEROTINA",
+          "preferredCommonName": "Black cherry",
+          "canonicalScientificName": "Prunus serotina",
+          "acceptedAlternatives": [],
+          "family": "Rosaceae",
+          "distributionInCourseRegion": "Throughout much of the region; especially important on the Allegheny Plateau",
+          "ecologicalImportance": "Valuable gap- and disturbance-responsive timber tree; bird-dispersed fruit",
+          "coursePriority": "1 - core",
+          "tier": "A",
+          "fieldIdentification": {
+            "foliage": "Alternate, simple, elliptic leaves have fine rounded or incurved teeth, one or more small glands near the top of the petiole, and characteristic rusty to pale hairs along the lower midrib near its base. Several characters should be visible before making a foliage-only call.",
+            "barkAgeSeries": "Young stems are smooth reddish-brown to dark gray with prominent horizontal lenticels; intermediate bark breaks into small dark scaly plates with lifted edges; mature bark forms rough irregular burnt-cornflake plates. Old bases may become deeply furrowed.",
+            "dormant": "Slender alternate reddish-brown twigs carry small ovoid scaled buds and semicircular leaf scars; scratched twigs have a bitter-almond odor from cyanogenic compounds. Waft odor only and never taste or ingest plant material.",
+            "reproductive": "Many small white flowers occur in elongated cylindrical racemes after leaves expand; round drupes mature from red to purple-black on the same raceme. The raceme architecture separates black cherry from clustered chokecherry look-alikes when fully visible.",
+            "wholeTreeContext": "A medium to large canopy tree with a relatively narrow crown, prominent dark scaly bole, and seedlings common in gaps, edges, and Allegheny hardwood stands.",
+            "variationAndCondition": "Shade leaves, stump sprouts, leaf spot, black knot, tent caterpillar defoliation, wet bark, and old furrowed bases alter appearance. Juvenile smooth bark looks unlike the classic mature cornflake surface.",
+            "defensibilityLimits": "Mature plated bark is highly suggestive but should be corroborated with leaves, twigs, or fruit. A single generic Prunus leaf, distant black fruits, almond odor, or young lenticeled bark alone may support only genus."
+          },
+          "confuserControl": [
+            {
+              "confuser": "Prunus pensylvanica and Prunus virginiana",
+              "visibleSeparators": "Pin cherry has smaller narrow leaves, bright reddish bark, and fruits in short umbel-like clusters; chokecherry is usually shrub or small tree with broader leaves and shorter dense racemes. Black cherry's mature cornflake bark, petiole glands, lower-midrib hair, and long racemes are decisive in combination.",
+              "resolvingView": "Whole fruit-cluster attachment, petiole glands, lower midrib, buds, representative bark age, and whole-tree stature."
+            },
+            {
+              "confuser": "Betula alleghaniensis and Betula lenta",
+              "visibleSeparators": "Birches can have dark lenticeled or plated bark and wintergreen odor, but bear catkins, lack fleshy racemes and cherry petiole glands, and have different buds; yellow birch usually shows bronze papery curl at intermediate age.",
+              "resolvingView": "Intermediate bark, reproductive structures, current twig buds, petiole and lower leaf surface."
+            }
+          ],
+          "silvicsCapsule": {
+            "shadeTolerance": "Shade intolerant; seedlings may survive briefly under partial canopy, but successful height growth and timber form require substantial light.",
+            "moistureDrainageSoils": "Best on deep, fertile, moist but well-drained loams, especially Allegheny uplands and protected slopes; poor on saturated, severely droughty, or compacted sites.",
+            "geographicClimaticAffinity": "Broadly eastern, with exceptional commercial and ecological importance on the Allegheny Plateau and good northern Appalachian sites.",
+            "forestAssociations": "Occurs with red and sugar maples, yellow-poplar, white ash, northern red oak, beech, birches, and other Allegheny or northern-hardwood species.",
+            "regeneration": "Birds and mammals disperse drupes; dormant seeds accumulate in the forest floor and germinate after canopy disturbance creates light and favorable temperatures.",
+            "vegetativeReproduction": "Young stumps sprout readily and damaged seedlings can replace shoots, though high-quality stand recruitment often depends on seed-bank seedlings.",
+            "seedMastBehavior": "Fruit crops are frequent but variable; animal dispersal is important, and seeds can remain dormant in soil for multiple years until gap conditions trigger germination.",
+            "establishmentRequirements": "Mineral soil or thin litter, adequate moisture, and strong overhead light favor establishment; seedlings fail under prolonged deep shade or severe herbaceous and fern competition.",
+            "successionalRole": "Early- to mid-seral gap and disturbance species that can become a valuable canopy component, then declines in recruitment as shade-tolerant species close the stand.",
+            "disturbanceResponse": "Windthrow, harvesting, fire-created openings, and soil disturbance can activate the seed bank and release seedlings; poorly timed or undersized gaps may not provide enough light.",
+            "longevityGrowthStrategy": "Rapid juvenile growth and potentially large size on good sites, with moderate lifespan and strong early allocation to height in competition.",
+            "browseSusceptibility": "Deer browse seedlings and sprouts heavily; abundant cohorts can still fail to recruit where browse, ferns, or competing vegetation remain intense.",
+            "insectsDiseases": "Eastern tent caterpillar, black knot, cherry scallop shell moth, borers, leaf spots, cankers, and decay affect form and vigor; damaged foliage and bark should not be mistaken for species characters.",
+            "managementImplications": "On productive Allegheny sites, coordinate seed-bank potential, competing vegetation control, deer pressure, and sufficiently large openings; retain quality seed sources and avoid residual bole damage.",
+            "silviculturalSystemResponse": "Shelterwood and even-aged regeneration methods with preparatory vegetation control can produce cohorts; group openings must be large enough for sustained light, while single-tree selection generally favors more tolerant competitors."
+          },
+          "references": [
+            {
+              "title": "Black Cherry — Silvics of North America",
+              "url": "https://research.fs.usda.gov/silvics/black-cherry",
+              "scope": "Range, productive sites, seed-bank ecology, light requirements, growth, associates, damaging agents, and management."
+            },
+            {
+              "title": "Prunus serotina — black cherry",
+              "url": "https://gobotany.nativeplanttrust.org/species/prunus/serotina/",
+              "scope": "Regional leaves, glands, hairs, bark, flowers, fruit, habitat, and Prunus comparisons."
+            }
+          ]
+        },
+        {
+          "taxonId": "OSTRYA_VIRGINIANA",
+          "preferredCommonName": "Eastern hophornbeam",
+          "canonicalScientificName": "Ostrya virginiana",
+          "acceptedAlternatives": [],
+          "family": "Betulaceae",
+          "distributionInCourseRegion": "Dry-mesic and rocky understories throughout most of the region",
+          "ecologicalImportance": "Shade-tolerant small tree with very hard wood; common understory associate",
+          "coursePriority": "1 - core",
+          "tier": "A",
+          "fieldIdentification": {
+            "foliage": "Alternate ovate leaves have many straight lateral veins, a sharply pointed tip, and a doubly serrate margin; the surface often looks slightly corrugated between veins. Foliage overlaps American hornbeam, birches, and even beech without bark or fruit.",
+            "barkAgeSeries": "Young stems are smooth gray-brown with lenticels; older small trunks break into narrow, loose, vertical gray-brown strips that shred at the ends, producing the characteristic cat-scratch or shredded appearance. It does not develop hornbeam's smooth muscular fluting.",
+            "dormant": "Slender alternate twigs bear short pointed ovoid buds with many visible scales; several cylindrical male catkins persist through winter near twig tips. Buds are far shorter than beech's cigar buds.",
+            "reproductive": "Female clusters mature into dangling hoplike structures made of overlapping inflated papery sacs, each enclosing a small nutlet. The complete hoplike cluster is decisive within the regional understory flora.",
+            "wholeTreeContext": "A slow-growing small understory tree, often with a narrow crown and slightly leaning bole, common on rocky dry-mesic slopes, ridges, rich woods, and forest edges.",
+            "variationAndCondition": "Saplings lack shredded bark, while very old stems may be rougher and less neatly striped. Lichens, wetness, browse, suppressed form, and mechanical scars can obscure the narrow-strip pattern.",
+            "defensibilityLimits": "Hoplike fruit or shredded bark combined with short scaled buds supports species. A detached doubly serrate leaf, smooth sapling bark, or distant small understory bole alone cannot securely separate Ostrya from Carpinus, Betula, or Fagus."
+          },
+          "confuserControl": [
+            {
+              "confuser": "Carpinus caroliniana",
+              "visibleSeparators": "American hornbeam has smooth gray bark molded into muscle-like flutes and nutlets attached to flat three-lobed leafy bracts; hophornbeam develops narrow shreddy strips and inflated hoplike fruit sacs.",
+              "resolvingView": "Representative mature bark, dormant buds and catkins, and the entire fruiting cluster."
+            },
+            {
+              "confuser": "Fagus grandifolia",
+              "visibleSeparators": "Beech has exceptionally long cigar buds, a simpler tooth-per-vein leaf margin, generally smooth host bark, and nuts in prickly husks; hophornbeam has short buds, doubly serrate leaves, shredded bark, and hoplike fruit.",
+              "resolvingView": "Full twig with buds, leaf margin and venation, bark away from injuries, and fruit."
+            }
+          ],
+          "silvicsCapsule": {
+            "shadeTolerance": "Shade tolerant and able to persist as a slow-growing understory tree beneath hardwood and mixedwood canopies.",
+            "moistureDrainageSoils": "Common on dry-mesic to mesic, well-drained, often rocky or calcareous soils; avoids prolonged flooding and is not restricted to the richest sites.",
+            "geographicClimaticAffinity": "Widespread across eastern North America and nearly the full course region, from Great Lakes forests through New England and the Allegheny transition.",
+            "forestAssociations": "Occurs beneath sugar maple, basswood, oaks, hickories, beech, yellow birch, hemlock, and mixed upland hardwoods.",
+            "regeneration": "Nutlets disperse mainly near parent trees and establish beneath partial canopy; persistent seedlings and saplings maintain the local understory population.",
+            "vegetativeReproduction": "Cut or damaged young stems can sprout from the stump or root collar, but the species is not normally a strongly clonal stand former.",
+            "seedMastBehavior": "Hoplike clusters mature in late summer or autumn; crops vary, and gravity plus animals provide mostly short-distance dispersal.",
+            "establishmentRequirements": "Well-drained forest soil, some shade, and freedom from severe browse allow establishment; very low growth permits persistence until small gaps provide release.",
+            "successionalRole": "Persistent mid- to late-seral understory associate rather than a canopy pioneer or major overstory dominant.",
+            "disturbanceResponse": "Small gaps release established stems and top-killed young trees may sprout; severe fire damages the thin bark, while heavy overstory removal may expose suppressed crowns abruptly.",
+            "longevityGrowthStrategy": "Slow-growing, relatively long-lived for a small tree, and structurally limited to understory or subcanopy stature; wood is exceptionally dense and hard.",
+            "browseSusceptibility": "Deer and other mammals browse twigs and foliage, but the species is generally less central to browse management than hemlock, maple, or birch regeneration.",
+            "insectsDiseases": "Usually not controlled by a single major pest; leaf spots, cankers, borers, and decay occur, especially after injury or stress.",
+            "managementImplications": "Retain for structural and taxonomic diversity, wildlife value, and dry-mesic understory function unless it directly conflicts with regeneration objectives; do not mistake small size for a juvenile canopy species.",
+            "silviculturalSystemResponse": "Selection and small-group openings tend to retain and modestly release hophornbeam; broad even-aged treatments may stimulate sprouts but rarely make it a primary crop-tree objective."
+          },
+          "references": [
+            {
+              "title": "Eastern Hophornbeam — Silvics of North America",
+              "url": "https://research.fs.usda.gov/silvics/eastern-hophornbeam",
+              "scope": "Distribution, sites, associates, tolerance, regeneration, growth, damaging agents, and management relevance."
+            },
+            {
+              "title": "Ostrya virginiana — hop-hornbeam",
+              "url": "https://gobotany.nativeplanttrust.org/species/ostrya/virginiana/",
+              "scope": "Regional leaves, buds, bark, catkins, fruit, habitat, and comparison with hornbeam and birches."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sessionId": "W01-D",
+      "letter": "D",
+      "title": "Anchor multi-organ laboratory",
+      "kind": "multi_organ_laboratory",
+      "taxonScope": "all_module_taxa",
+      "modalities": [
+        "foliage",
+        "bark",
+        "reproductive",
+        "dormant",
+        "whole_tree_context"
+      ],
+      "delivery": "single-organ and partial-evidence practice stations",
+      "feedbackRelease": "after_station_batch_submission",
+      "runtimeBoundary": "runtime_retrieval_from_admitted_practice_media",
+      "introducedTaxonIds": [],
+      "teachingProfiles": []
+    },
+    {
+      "sessionId": "W01-E",
+      "letter": "E",
+      "title": "Week 1 cumulative retrieval",
+      "kind": "cumulative_adaptive_retrieval",
+      "taxonScope": "cr_01_eligible_taxa_prioritized_by_mastery",
+      "modalities": [
+        "foliage",
+        "bark",
+        "reproductive",
+        "dormant",
+        "whole_tree_context"
+      ],
+      "delivery": "adaptive retrieval and remediation insertion",
+      "feedbackRelease": "after_batch_submission",
+      "runtimeBoundary": "runtime_retrieval_from_admitted_practice_media",
+      "introducedTaxonIds": [],
+      "teachingProfiles": []
+    }
+  ],
+  "assessmentSummaries": [
+    {
+      "assessmentId": "W01-PRACTICAL",
+      "type": "weekly_identification_practical",
+      "categoryId": "weekly_identification_practicals",
+      "cumulative": true,
+      "scope": "all_week_1_taxa_with_field_decision_reasoning",
+      "modalities": [
+        "foliage",
+        "bark",
+        "reproductive",
+        "dormant",
+        "whole_tree_context"
+      ]
+    }
+  ],
+  "remediationGate": {
+    "policy_id": "REM-01",
+    "evaluate_after_assessment_ids": [
+      "W01-PRACTICAL"
+    ],
+    "broader_course_progression": "continues",
+    "insertion_sessions": [
+      "W02-B",
+      "W02-E"
+    ]
+  },
+  "teachingBoundary": "This package contains labeled instruction and public module structure only. Retrieval stations are assembled separately from admitted practice media, and formal forms, examination media, answer keys, and learner records remain private."
+}

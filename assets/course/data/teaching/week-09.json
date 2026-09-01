@@ -1,0 +1,663 @@
+{
+  "$schema": "cochetopa-public-teaching-package/1.0",
+  "schemaVersion": "1.0.0",
+  "courseId": "northern-hardwoods-mixedwoods-dendrology-silvics-intensive",
+  "courseVersion": "2026.1-draft",
+  "moduleId": "week-09",
+  "sequence": 9,
+  "title": "Pathology, Variation, Winter Dendrology, and Adversarial Identification",
+  "deliveryStatus": "teaching_text_complete_visual_media_pending_admission",
+  "objectives": [
+    "Discriminate black locust, tree-of-heaven, and white mulberry from native compound-leaved and variable-leaved trees.",
+    "Identify taxa under disease, insect, age, injury, weather, lichen, browse, and poor-view variation.",
+    "Identify American beech across the required bark and foliage-condition sequence while scoring host and condition separately.",
+    "Make calibrated winter identifications from twigs, buds, scars, pith, thorns, persistent structures, and site.",
+    "Choose genus, group, or insufficient evidence when adversarial material cannot defend species."
+  ],
+  "cumulativeReview": {
+    "policy_id": "CR-01",
+    "eligible_taxon_rule": "introduction_week_lte_module_sequence",
+    "through_introduction_week": 9,
+    "eligible_taxon_count": 80,
+    "selection_priorities": [
+      "unresolved_weak_taxa",
+      "confidently_wrong",
+      "winter_modality_deficits",
+      "condition_host_separation",
+      "planted_invasive_confusers",
+      "insufficient_evidence_calibration"
+    ]
+  },
+  "confuserSets": [
+    {
+      "confusionSetId": "CS01",
+      "name": "Sugar / black / Norway maple",
+      "memberTaxa": [
+        "ACER_SACCHARUM",
+        "ACER_NIGRUM",
+        "ACER_PLATANOIDES"
+      ],
+      "keySeparators": "Petiole latex; leaf underside hair and stipules; bud size/shape; samara angle",
+      "resolvingViews": "Fresh-broken petiole; lower surface; terminal bud; ripe samara"
+    },
+    {
+      "confusionSetId": "CS02",
+      "name": "Red / silver maple",
+      "memberTaxa": [
+        "ACER_RUBRUM",
+        "ACER_SACCHARINUM"
+      ],
+      "keySeparators": "Sinus depth; lower-surface whiteness; spring samara size; twig odor; bark strips",
+      "resolvingViews": "Complete leaf underside; samara with scale; crushed twig; mature bark"
+    },
+    {
+      "confusionSetId": "CS03",
+      "name": "Striped / mountain maple",
+      "memberTaxa": [
+        "ACER_PENSYLVANICUM",
+        "ACER_SPICATUM"
+      ],
+      "keySeparators": "Green-white striped bark versus unstriped; leaf size/base; fruit cluster posture; growth form",
+      "resolvingViews": "Young stem; intact leaf; fruit cluster; whole plant"
+    },
+    {
+      "confusionSetId": "CS04",
+      "name": "White / green / black ash",
+      "memberTaxa": [
+        "FRAXINUS_AMERICANA",
+        "FRAXINUS_PENNSYLVANICA",
+        "FRAXINUS_NIGRA"
+      ],
+      "keySeparators": "Leaf-scar shape and bud position; leaflet stalks; samara wing extent; black-ash corky bark",
+      "resolvingViews": "Twig node and leaf scar; whole rachis; samara; bark; hydrologic setting"
+    },
+    {
+      "confusionSetId": "CS05",
+      "name": "Paper / heart-leaved / gray birch",
+      "memberTaxa": [
+        "BETULA_PAPYRIFERA",
+        "BETULA_CORDIFOLIA",
+        "BETULA_POPULIFOLIA"
+      ],
+      "keySeparators": "Leaf base and vein count; twig resin glands; peeling versus tight bark; black branch marks; elevation",
+      "resolvingViews": "Several mature leaves; resin-warty twig; bark sheet; whole growth form; location"
+    },
+    {
+      "confusionSetId": "CS06",
+      "name": "Yellow / sweet birch",
+      "memberTaxa": [
+        "BETULA_ALLEGHANIENSIS",
+        "BETULA_LENTA"
+      ],
+      "keySeparators": "Both wintergreen; yellow birch golden curling bark and spur shoots versus sweet birch dark blocky bark",
+      "resolvingViews": "Scratched twig; young and mature bark; fruiting strobile; lower leaf surface"
+    },
+    {
+      "confusionSetId": "CS07",
+      "name": "White / black / red / Norway spruce",
+      "memberTaxa": [
+        "PICEA_GLAUCA",
+        "PICEA_MARIANA",
+        "PICEA_RUBENS",
+        "PICEA_ABIES"
+      ],
+      "keySeparators": "Cone size and scale margin; twig hairs; bud resin; foliage color/odor; pendulous branchlets",
+      "resolvingViews": "Full cone; twig macro; bud; whole crown; regional site"
+    },
+    {
+      "confusionSetId": "CS08",
+      "name": "Spruce / fir / hemlock",
+      "memberTaxa": [
+        "PICEA_GLAUCA",
+        "PICEA_MARIANA",
+        "PICEA_RUBENS",
+        "ABIES_BALSAMEA",
+        "TSUGA_CANADENSIS"
+      ],
+      "keySeparators": "Woody pegs versus pad base versus petiole; needle cross-section; cone orientation and persistence",
+      "resolvingViews": "Needle attachment macro; underside; terminal shoot; intact or attached cone"
+    },
+    {
+      "confusionSetId": "CS09",
+      "name": "Red / jack / Scots / pitch pine",
+      "memberTaxa": [
+        "PINUS_RESINOSA",
+        "PINUS_BANKSIANA",
+        "PINUS_SYLVESTRIS",
+        "PINUS_RIGIDA"
+      ],
+      "keySeparators": "Fascicle count/length; bend test; cone curvature/prickles; upper-bole orange bark; epicormic shoots",
+      "resolvingViews": "Several complete fascicles; cone and umbo; upper and lower bark; whole crown"
+    },
+    {
+      "confusionSetId": "CS10",
+      "name": "Tamarack / European larch",
+      "memberTaxa": [
+        "LARIX_LARICINA",
+        "LARIX_DECIDUA"
+      ],
+      "keySeparators": "Cone size and scale count/edge; needle cluster density; native peatland versus planting",
+      "resolvingViews": "Full cone; spur shoot; cluster count; site/planting context"
+    },
+    {
+      "confusionSetId": "CS11",
+      "name": "Red-oak group",
+      "memberTaxa": [
+        "QUERCUS_RUBRA",
+        "QUERCUS_VELUTINA",
+        "QUERCUS_COCCINEA",
+        "QUERCUS_ELLIPSOIDALIS",
+        "QUERCUS_PALUSTRIS"
+      ],
+      "keySeparators": "Bud hair/size; lower-leaf hair; sinus architecture; acorn cup depth/rings; bark; site and branch angle",
+      "resolvingViews": "Several sun leaves; terminal buds; complete acorn/cup; mature bark; whole crown"
+    },
+    {
+      "confusionSetId": "CS12",
+      "name": "White-oak group",
+      "memberTaxa": [
+        "QUERCUS_ALBA",
+        "QUERCUS_BICOLOR",
+        "QUERCUS_MACROCARPA",
+        "QUERCUS_MONTANA"
+      ],
+      "keySeparators": "Lower-leaf felt; fruit stalk; fringed cup; chestnut teeth; bark architecture; site",
+      "resolvingViews": "Lower surface; acorn/cup/stalk; terminal bud; upper and lower bole; site"
+    },
+    {
+      "confusionSetId": "CS13",
+      "name": "Aspens / balsam poplar / cottonwood",
+      "memberTaxa": [
+        "POPULUS_TREMULOIDES",
+        "POPULUS_GRANDIDENTATA",
+        "POPULUS_BALSAMIFERA",
+        "POPULUS_DELTOIDES"
+      ],
+      "keySeparators": "Petiole flattening; tooth size; leaf base; bud size/stickiness/odor; bark and floodplain/upland context",
+      "resolvingViews": "Complete leaf and petiole; bud; young and old bark; clonal form; site"
+    },
+    {
+      "confusionSetId": "CS14",
+      "name": "American / slippery / rock / Siberian elm",
+      "memberTaxa": [
+        "ULMUS_AMERICANA",
+        "ULMUS_RUBRA",
+        "ULMUS_THOMASII",
+        "ULMUS_PUMILA"
+      ],
+      "keySeparators": "Leaf roughness/base; bud hair; corky wings; samara hair/notch; bark layering; crown",
+      "resolvingViews": "Leaf surfaces; buds; samara; corky twigs; existing bark section; crown"
+    },
+    {
+      "confusionSetId": "CS15",
+      "name": "Black / pin / chokecherry",
+      "memberTaxa": [
+        "PRUNUS_SEROTINA",
+        "PRUNUS_PENSYLVANICA",
+        "PRUNUS_VIRGINIANA"
+      ],
+      "keySeparators": "Fruit cluster architecture; petiole glands; lower-midvein hair; bark age; whole pioneer/clonal form",
+      "resolvingViews": "Raceme or cluster; petiole macro; lower leaf; mature bark; whole plant"
+    },
+    {
+      "confusionSetId": "CS16",
+      "name": "American hornbeam / eastern hophornbeam",
+      "memberTaxa": [
+        "CARPINUS_CAROLINIANA",
+        "OSTRYA_VIRGINIANA"
+      ],
+      "keySeparators": "Muscular smooth bole and three-lobed fruit bracts versus shreddy bark and hoplike sacs",
+      "resolvingViews": "Bole; fruit; bud; wet versus dry site"
+    },
+    {
+      "confusionSetId": "CS17",
+      "name": "Black walnut / butternut",
+      "memberTaxa": [
+        "JUGLANS_NIGRA",
+        "JUGLANS_CINEREA"
+      ],
+      "keySeparators": "Terminal leaflet; rachis/twig hair; light versus dark pith; round versus elongated nut; bark",
+      "resolvingViews": "Whole leaf; pith section; nut/husk; twig hair; mature bark"
+    },
+    {
+      "confusionSetId": "CS18",
+      "name": "Bitternut / shagbark / pignut / mockernut hickory",
+      "memberTaxa": [
+        "CARYA_CORDIFORMIS",
+        "CARYA_OVATA",
+        "CARYA_GLABRA",
+        "CARYA_TOMENTOSA"
+      ],
+      "keySeparators": "Terminal bud color/size/hair; leaflet count; rachis hair; husk thickness/dehiscence; bark",
+      "resolvingViews": "Terminal bud; entire leaf; husk/nut; mature bark; twig hair"
+    },
+    {
+      "confusionSetId": "CS19",
+      "name": "Northern white-cedar / Atlantic white-cedar / eastern redcedar",
+      "memberTaxa": [
+        "THUJA_OCCIDENTALIS",
+        "CHAMAECYPARIS_THYOIDES",
+        "JUNIPERUS_VIRGINIANA"
+      ],
+      "keySeparators": "Flattened fans versus fine false-cypress sprays versus rounded juniper twigs; cone type; fruit color; wetland chemistry",
+      "resolvingViews": "Full spray; seed cone or berry-like cone; bark; site"
+    },
+    {
+      "confusionSetId": "CS20",
+      "name": "Native compound leaves / invasive confusers",
+      "memberTaxa": [
+        "FRAXINUS_AMERICANA",
+        "FRAXINUS_PENNSYLVANICA",
+        "FRAXINUS_NIGRA",
+        "JUGLANS_NIGRA",
+        "JUGLANS_CINEREA",
+        "ACER_NEGUNDO",
+        "ROBINIA_PSEUDOACACIA",
+        "AILANTHUS_ALTISSIMA"
+      ],
+      "keySeparators": "Opposite/alternate; bud position; leaflet glands; thorns; pith; leaf scar; odor; fruit type",
+      "resolvingViews": "Intact leaf plus node; bud/leaf scar; pith; samara/pod/nut; leaflet base"
+    },
+    {
+      "confusionSetId": "CS21",
+      "name": "Yellow birch / black cherry bark",
+      "memberTaxa": [
+        "BETULA_ALLEGHANIENSIS",
+        "PRUNUS_SEROTINA"
+      ],
+      "keySeparators": "Golden horizontal curls and wintergreen twig versus burnt-chip plates, petiole glands, and almond twig odor",
+      "resolvingViews": "Young and old bark; scratched twig; leaf petiole and underside; fruit"
+    },
+    {
+      "confusionSetId": "CS22",
+      "name": "Serviceberry / mountain-ashes / chokecherry",
+      "memberTaxa": [
+        "AMELANCHIER_LAEVIS",
+        "SORBUS_AMERICANA",
+        "SORBUS_DECORA",
+        "PRUNUS_VIRGINIANA"
+      ],
+      "keySeparators": "Simple versus compound leaves; pome calyx versus drupe; leaflet proportions; buds; fruit architecture",
+      "resolvingViews": "Whole leaf; fruit close-up; bud; flowers; multiple leaves"
+    },
+    {
+      "confusionSetId": "CS23",
+      "name": "Flowering / pagoda dogwood",
+      "memberTaxa": [
+        "CORNUS_FLORIDA",
+        "CORNUS_ALTERNIFOLIA"
+      ],
+      "keySeparators": "Opposite versus alternate branching; red versus blue-black fruit; flower bud; crown tiers",
+      "resolvingViews": "Intact twig nodes; fruit; bud; whole crown"
+    },
+    {
+      "confusionSetId": "CS24",
+      "name": "White mulberry / sassafras / basswood",
+      "memberTaxa": [
+        "MORUS_ALBA",
+        "SASSAFRAS_ALBIDUM",
+        "TILIA_AMERICANA"
+      ],
+      "keySeparators": "Latex and variable coarse leaves; sassafras aroma/mixed shapes; basswood asymmetric heart base and bracted fruit",
+      "resolvingViews": "Fresh twig/petiole; multiple leaves; fruit; buds; bark"
+    }
+  ],
+  "expectedSilvicsRetrieval": {
+    "taxon_scope": "all_80_taxa_prioritized_by_weakness_and_condition_relevance",
+    "dimensions": [
+      "regeneration",
+      "vegetative_reproduction",
+      "disturbance_response",
+      "browse_susceptibility",
+      "insects_diseases",
+      "management_implications"
+    ],
+    "response_standard": "State host silvics separately from observed condition, causal diagnosis, and management implication."
+  },
+  "sessions": [
+    {
+      "sessionId": "W09-A",
+      "letter": "A",
+      "title": "Planted and invasive confusers",
+      "kind": "species_introduction",
+      "taxonScope": "listed_new_taxa_plus_cs20_and_cs24_members",
+      "modalities": [
+        "foliage",
+        "bark",
+        "reproductive",
+        "dormant",
+        "whole_tree_context"
+      ],
+      "delivery": "native-versus-invasive character combinations",
+      "feedbackRelease": "during_instruction",
+      "runtimeBoundary": "labeled_teaching_content",
+      "introducedTaxonIds": [
+        "ROBINIA_PSEUDOACACIA",
+        "AILANTHUS_ALTISSIMA",
+        "MORUS_ALBA"
+      ],
+      "teachingProfiles": [
+        {
+          "taxonId": "ROBINIA_PSEUDOACACIA",
+          "preferredCommonName": "Black locust",
+          "canonicalScientificName": "Robinia pseudoacacia",
+          "acceptedAlternatives": [],
+          "family": "Fabaceae",
+          "distributionInCourseRegion": "Introduced and naturalized in settled portions of the region",
+          "ecologicalImportance": "Nitrogen-fixing clonal invader and compound-leaved confuser",
+          "coursePriority": "3 - recognition/confuser",
+          "tier": "C",
+          "fieldIdentification": {
+            "foliage": "Alternate pinnately compound leaves usually carry 7 to 19 oval, thin, entire leaflets with a terminal leaflet. Paired stipular spines occur at many nodes, though vigorous, old, or cultivated shoots may be weakly armed or thornless.",
+            "barkAgeSeries": "Young stems are smooth greenish to reddish-brown with lenticels; older bark becomes dark gray-brown and deeply furrowed into thick interlacing rope-like ridges. Old clonal stems often lean, fork, or decay.",
+            "dormant": "Zigzag alternate twigs have small buds recessed beneath the leaf scar and often a pair of short stout stipular spines at each node; the pith is continuous rather than chambered. Spine absence on one twig does not exclude cultivated or mature black locust.",
+            "reproductive": "Fragrant white pea-shaped flowers hang in showy drooping racemes; flat smooth brown legumes contain several beanlike seeds and often persist into winter. Flowers or pods combined with pinnate foliage are decisive.",
+            "wholeTreeContext": "A medium, often crooked tree forming dense root-sucker colonies on old fields, roadsides, disturbed slopes, mine lands, rail corridors, and forest edges. Clone form is strong context but not an independent species character.",
+            "variationAndCondition": "Cultivars may be thornless or differently crowned; locust leafminer browns foliage, locust borer and heart rot deform boles, and repeated cutting produces dense juvenile sprouts with more prominent spines.",
+            "defensibilityLimits": "Alternate pinnate leaves, paired stipular spines, recessed buds, and flat pods support species. Compound foliage alone may overlap native trees and tree-of-heaven, while ropey bark alone overlaps other mature hardwoods."
+          },
+          "confuserControl": [
+            {
+              "confuser": "Ailanthus altissima",
+              "visibleSeparators": "Tree-of-heaven has far larger leaves with many mostly entire leaflets bearing gland-tipped basal teeth, stout twigs with large heart-shaped scars, and twisted samaras; black locust has smaller oval leaflets, paired node spines, pea flowers, and flat pods.",
+              "resolvingView": "Leaflet bases and margins, a complete node with bud and spines, twig pith, and attached fruit."
+            },
+            {
+              "confuser": "Fraxinus and Juglans species",
+              "visibleSeparators": "Ash has opposite compound leaves and opposite buds; walnuts have serrate leaflets, prominent bundle scars, chambered pith, and nuts. Black locust is alternate with entire leaflets, stipular spines, recessed buds, and legumes.",
+              "resolvingView": "Two consecutive nodes showing arrangement, leaflet margins, pith in cross-section, buds and leaf scars, and fruit."
+            }
+          ],
+          "silvicsCapsule": {
+            "shadeTolerance": "Very shade intolerant; rapid juvenile growth occurs in full light, while shaded stems decline and fail to recruit beneath closed canopy.",
+            "moistureDrainageSoils": "Adaptable to many well-drained soils, including droughty, eroded, compacted, and nutrient-poor disturbed ground; performs poorly under prolonged flooding and on deeply shaded sites.",
+            "geographicClimaticAffinity": "Native farther south and west of much of the course region but widely planted and naturalized across the Great Lakes, Northeast, southern Canada, and Allegheny landscapes.",
+            "forestAssociations": "Most common in old fields, roadsides, forest edges, mine reclamation, utility corridors, and disturbed oak or mixed-hardwood sites rather than intact northern-hardwood interiors.",
+            "regeneration": "Hard-coated seed can remain viable and germinate after scarification, but local stand expansion is usually driven by root suckers and sprouts following disturbance.",
+            "vegetativeReproduction": "Root suckering and stump sprouting are extremely vigorous; cutting a clone without follow-up commonly multiplies stems and expands the patch.",
+            "seedMastBehavior": "Flat pods are produced regularly by trees in full light; hard seed coats impose dormancy and permit a persistent seed reserve until abrasion, heat, or other scarification.",
+            "establishmentRequirements": "Open light and exposed or disturbed soil favor seedlings, while vegetative shoots emerge from established root systems across grassland and edge competition.",
+            "successionalRole": "Aggressive early-seral colonizer and clonal edge invader that enriches soil nitrogen but is usually overtopped by taller shade-tolerant trees if disturbance ceases.",
+            "disturbanceResponse": "Cutting, fire top-kill, mowing, and soil disturbance stimulate sprouts and suckers; repeated integrated treatment is required where removal is the objective.",
+            "longevityGrowthStrategy": "Very rapid early growth, early reproduction, and relatively short useful lifespan; locust borer, decay, and poor form commonly limit mature timber quality.",
+            "browseSusceptibility": "Young foliage and sprouts are browsed by deer and livestock, while stipular spines provide incomplete protection; all plant parts require toxicity caution for livestock and people.",
+            "insectsDiseases": "Locust borer and locust leafminer are conspicuous regional agents; heart rot, witches'-broom, cankers, and storm breakage further reduce vigor and form.",
+            "managementImplications": "Recognize clones before disturbance, avoid one-time cutting as control, and weigh erosion control, wildlife, durable wood, nitrogen enrichment, and invasive spread against site objectives.",
+            "silviculturalSystemResponse": "Heavy opening releases seedlings and clones, while closed-canopy systems suppress it; timber coppice can exploit sprouting, but invasive control requires repeated cutting or treatment of both stems and roots."
+          },
+          "references": [
+            {
+              "title": "Black Locust — Silvics of North America",
+              "url": "https://research.fs.usda.gov/silvics/black-locust",
+              "scope": "Range, sites, nitrogen fixation, seed and clonal reproduction, intolerance, growth, damaging agents, uses, and management."
+            },
+            {
+              "title": "Robinia pseudoacacia — black locust",
+              "url": "https://gobotany.nativeplanttrust.org/species/robinia/pseudoacacia/",
+              "scope": "Regional compound leaves, stipular spines, buds, bark, flowers, pods, habitat, and comparison characters."
+            }
+          ]
+        },
+        {
+          "taxonId": "AILANTHUS_ALTISSIMA",
+          "preferredCommonName": "Tree-of-heaven",
+          "canonicalScientificName": "Ailanthus altissima",
+          "acceptedAlternatives": [],
+          "family": "Simaroubaceae",
+          "distributionInCourseRegion": "Urban/disturbed PA/NJ, NY, southern New England, and Great Lakes; expanding northward",
+          "ecologicalImportance": "Rapid clonal invasive with allelopathic effects; major compound-leaved confuser",
+          "coursePriority": "3 - recognition/confuser",
+          "tier": "C",
+          "fieldIdentification": {
+            "foliage": "Very large alternate pinnately compound leaves carry many long leaflets that are otherwise nearly entire but have one to several coarse basal teeth or lobes, each ending in a gland. Crushed foliage has a strong rancid odor; use odor only as safe wafted corroboration.",
+            "barkAgeSeries": "Sapling bark is smooth greenish-gray to pale gray with conspicuous lenticels; older bark remains relatively smooth for years, then develops pale shallow fissures and a striped or cantaloupe-rind pattern rather than deep ropey ridges.",
+            "dormant": "Stout tan to reddish twigs have very large heart- or shield-shaped leaf scars with many bundle scars, small dome-like buds partly hidden above the scar, and a broad continuous spongy brown pith. Twigs are unarmed.",
+            "reproductive": "Large terminal panicles bear small greenish flowers; female trees develop masses of narrow twisted papery samaras with a seed near the center, ripening yellow, orange, pink, or brown and often persisting.",
+            "wholeTreeContext": "A fast-growing tree with coarse open branches and frequent dense root-sucker colonies along city lots, roads, railways, quarries, cliffs, and disturbed forest edges. Suckers may arise far from the parent stem.",
+            "variationAndCondition": "Seedlings, stump sprouts, and root suckers carry especially huge leaves and stout twigs; male and female trees differ in fruit, cold injury alters crowns, and repeated cutting creates shrubby colonies. Spotted lanternfly presence is not host-identification proof.",
+            "defensibilityLimits": "Basal gland-tipped leaflet teeth plus enormous alternate leaves, large heart-shaped scars, brown pith, or central-seeded samaras support species. A cropped compound leaf lacking its base or a distant sucker patch cannot exclude walnut, sumac, or other compound-leaved trees."
+          },
+          "confuserControl": [
+            {
+              "confuser": "Juglans nigra and Juglans cinerea",
+              "visibleSeparators": "Walnut leaflets are serrate along most of the margin, twigs have chambered pith and different leaf scars, and fruit is a large husked nut; tree-of-heaven leaflets are mostly entire with glandular basal teeth, pith is continuous, and fruit is a samara.",
+              "resolvingView": "Leaflet bases and full margins, twig pith in longitudinal section, leaf scars and buds, and attached fruit."
+            },
+            {
+              "confuser": "Rhus and Robinia species",
+              "visibleSeparators": "Sumacs commonly have serrate leaflets, hairy or glaucous twigs, and dense red drupe clusters; black locust has smaller entire oval leaflets, paired stipular spines, recessed buds, and pods. Tree-of-heaven has basal glandular teeth, huge scars, and twisted samaras.",
+              "resolvingView": "Complete leaf and terminal leaflet, twig surface and node, basal leaflet glands, pith, and fruit cluster."
+            }
+          ],
+          "silvicsCapsule": {
+            "shadeTolerance": "Seedlings tolerate some partial shade briefly, but the species is fundamentally light-demanding; rapid height growth and clonal expansion are strongest in openings.",
+            "moistureDrainageSoils": "Extremely adaptable to dry, compacted, polluted, rocky, calcareous, and disturbed soils, though growth improves with moisture and fertility; intolerant of prolonged deep flooding.",
+            "geographicClimaticAffinity": "Introduced from Asia and widespread in urban and disturbed eastern North America, with northern expansion limited mainly by cold and growing-season length.",
+            "forestAssociations": "Occurs in urban lots, transport corridors, cliffs, mines, riparian disturbances, forest edges, and canopy gaps with other invasive or early-seral hardwoods.",
+            "regeneration": "Female trees produce abundant wind-dispersed samaras that germinate readily on disturbed soil; established plants expand more aggressively through roots and sprouts.",
+            "vegetativeReproduction": "Root suckers, stump sprouts, and shoot replacement are vigorous; cutting or girdling without effective follow-up can provoke dense clonal regeneration.",
+            "seedMastBehavior": "Large samara crops occur on mature female trees and disperse over substantial distances; seed is generally short-lived compared with a persistent hard-seed bank.",
+            "establishmentRequirements": "Bare or disturbed soil and canopy openings favor seedlings, while root-connected suckers can emerge through existing vegetation and rapidly occupy new light.",
+            "successionalRole": "Aggressive early-seral invader of disturbances and gaps; clones may persist and suppress competitors through rapid growth, dense sprouting, and chemical effects.",
+            "disturbanceResponse": "Logging, soil disturbance, road work, fire top-kill, and single cutting events often stimulate spread; effective control must address both seed sources and the root system over multiple years.",
+            "longevityGrowthStrategy": "Exceptionally rapid juvenile growth and early reproduction, with moderate individual stem longevity but long clonal persistence through replacement shoots.",
+            "browseSusceptibility": "Strong odor and secondary compounds reduce palatability to many herbivores, so deer pressure can indirectly favor it over more palatable native regeneration.",
+            "insectsDiseases": "Tree-of-heaven is a favored host of spotted lanternfly; Verticillium wilt and other pathogens can cause decline, but insects or disease presence must not substitute for morphology.",
+            "managementImplications": "Map female seed sources and clone extent, prevent harvest and road work from spreading it, and use repeated integrated control rather than cutting alone; monitor treated sites for several growing seasons.",
+            "silviculturalSystemResponse": "Large gaps and even-aged harvests favor establishment and sucker release; maintaining competitive native cover can reduce invasion risk, while infested stands require preharvest control and follow-up."
+          },
+          "references": [
+            {
+              "title": "Ailanthus altissima, tree-of-heaven — Fire Effects Information System",
+              "url": "https://research.fs.usda.gov/feis/species-reviews/ailalt",
+              "scope": "Distribution, sites, seed and clonal reproduction, succession, disturbance and fire response, allelopathy, control, and wildlife interactions."
+            },
+            {
+              "title": "Ailanthus altissima — tree-of-heaven",
+              "url": "https://gobotany.nativeplanttrust.org/species/ailanthus/altissima/",
+              "scope": "Regional foliage, glandular leaflet teeth, twigs, pith, leaf scars, samaras, habitat, and compound-leaved confusers."
+            }
+          ]
+        },
+        {
+          "taxonId": "MORUS_ALBA",
+          "preferredCommonName": "White mulberry",
+          "canonicalScientificName": "Morus alba",
+          "acceptedAlternatives": [],
+          "family": "Moraceae",
+          "distributionInCourseRegion": "Planted and naturalized in settled Great Lakes, southern ON, NY, PA/NJ, and southern New England",
+          "ecologicalImportance": "Variable-leaved invasive/naturalized tree that hybridizes with red mulberry",
+          "coursePriority": "3 - recognition/confuser",
+          "tier": "C",
+          "fieldIdentification": {
+            "foliage": "Alternate simple leaves on one shoot may be unlobed, mitten-shaped, or deeply multi-lobed; margins are serrate, bases rounded to heart-shaped, and upper surfaces usually smooth to slightly glossy rather than strongly sandpapery. Broken petioles or twigs exude milky latex.",
+            "barkAgeSeries": "Young bark is smooth yellowish- to orange-brown with lenticels; mature bark becomes gray-brown to orange-brown and develops irregular interlacing ridges and furrows. Bark is supportive but not reliable against other planted or naturalized trees.",
+            "dormant": "Slender alternate zigzag twigs end in a false terminal bud and carry small appressed ovoid buds with several scales; leaf scars are small and rounded. Milky latex from a fresh break supports Morus but should not be contacted unnecessarily.",
+            "reproductive": "Separate tiny flowers occur in short catkin-like clusters; many flowers fuse into a blackberry-like multiple fruit that may ripen white, pink, red, purple, or nearly black. Fruit color does not reliably separate white from red mulberry.",
+            "wholeTreeContext": "A small to medium, broad-crowned tree of farmsteads, fencerows, urban ground, roadsides, old fields, and forest edges, often planted or bird-dispersed near settlement.",
+            "variationAndCondition": "Leaf lobing changes dramatically with shoot vigor and age; cultivars vary in fruit and form, and introgression with native red mulberry creates intermediates. One photograph cannot establish a genetically pure individual.",
+            "defensibilityLimits": "Variable serrate foliage, milky latex, buds, and multiple fruit support Morus. Species-level separation from red mulberry can be unreliable from one leaf or fruit color, especially where hybrids occur; record Morus or a hybrid complex when characters conflict."
+          },
+          "confuserControl": [
+            {
+              "confuser": "Morus rubra",
+              "visibleSeparators": "Red mulberry typically has a rough sandpapery upper surface and denser soft pubescence beneath, especially along veins, while white mulberry is often smoother and glossier; fruit color overlaps and hybridization makes intermediates common.",
+              "resolvingView": "Several mature sun leaves from reproductive shoots, upper-surface texture, lower-surface pubescence, buds, fruiting material, and planting or population context."
+            },
+            {
+              "confuser": "Tilia americana and Sassafras albidum",
+              "visibleSeparators": "Basswood leaves are consistently unlobed with a strongly uneven cordate base and fruits attached to a leafy bract; sassafras has smooth entire margins, aromatic twigs, and blue drupes. Mulberry combines serration, extreme lobe variation, latex, and multiple fruits.",
+              "resolvingView": "Full shoot showing leaf variation and arrangement, fresh petiole latex, buds, and complete reproductive structures."
+            }
+          ],
+          "silvicsCapsule": {
+            "shadeTolerance": "Best in full sun and tolerant of partial shade, but generally unable to recruit or maintain rapid growth beneath a closed forest canopy.",
+            "moistureDrainageSoils": "Adaptable to moist or dry well-drained soils, urban compaction, varied pH, and disturbed ground; prolonged flooding and severe shade reduce performance.",
+            "geographicClimaticAffinity": "Introduced from Asia, planted widely for silk production and ornament, and now naturalized across settled temperate parts of the course region.",
+            "forestAssociations": "Most frequent in fencerows, farm woods, roadsides, riparian edges, old fields, vacant lots, and disturbed hardwood margins rather than closed northern hardwood interiors.",
+            "regeneration": "Birds and mammals disperse the many small seeds in fleshy multiple fruits; seedlings establish readily in open disturbed microsites and beneath perches.",
+            "vegetativeReproduction": "Cut or damaged trees can stump-sprout and produce basal shoots, but bird-dispersed seed is the principal landscape-scale spread mechanism.",
+            "seedMastBehavior": "Fruit can be abundant and is produced regularly by mature trees; wildlife rapidly consumes and disperses seed, creating scattered recruits around settlement.",
+            "establishmentRequirements": "Light, exposed or lightly vegetated soil, and nearby perches or seed sources favor recruitment; seedlings tolerate urban stress once established.",
+            "successionalRole": "Early-seral and edge species that invades disturbed ground but is usually overtopped in long-undisturbed closed forest.",
+            "disturbanceResponse": "Cutting stimulates sprouts and soil disturbance creates seedbeds; repeated removal is needed where control is desired, and disturbed edges remain vulnerable to reinvasion by birds.",
+            "longevityGrowthStrategy": "Fast to moderate early growth, small- to medium-tree stature, broad crown, and moderate lifespan; older stems often become irregular or decay-prone.",
+            "browseSusceptibility": "Leaves and shoots are palatable to livestock and wildlife, but abundant bird-dispersed seed and sprouting allow persistence in settled landscapes.",
+            "insectsDiseases": "Popcorn disease of fruit, bacterial blight, cankers, leaf spots, borers, scale insects, and storm damage occur; no single agent normally prevents naturalization.",
+            "managementImplications": "Avoid forcing white-versus-red identification on ambiguous or hybrid material, retain native red mulberry where confirmed, and remove fruiting white mulberry plus sprouts when genetic or invasive impacts are objectives.",
+            "silviculturalSystemResponse": "Forest openings and edge disturbance favor establishment; maintaining closed native canopy suppresses recruitment, while removal requires stump follow-up and monitoring for bird-dispersed seedlings."
+          },
+          "references": [
+            {
+              "title": "Morus alba — white mulberry",
+              "url": "https://gobotany.nativeplanttrust.org/species/morus/alba/",
+              "scope": "Regional leaves, latex, buds, bark, flowers, multiple fruit, habitat, variation, hybridization, and red-mulberry comparison."
+            },
+            {
+              "title": "Morus alba — White Mulberry",
+              "url": "https://plants.ces.ncsu.edu/plants/morus-alba/",
+              "scope": "Habit, site tolerance, growth, reproduction, bark, leaf variation, fruit, wildlife use, pests, and landscape behavior."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sessionId": "W09-B",
+      "letter": "B",
+      "title": "Winter and invasive-confuser retrieval",
+      "kind": "delayed_retrieval",
+      "taxonScope": "session_a_taxa_plus_due_dormant_remediation",
+      "modalities": [
+        "bark",
+        "reproductive",
+        "dormant",
+        "whole_tree_context"
+      ],
+      "delivery": "unfamiliar partial winter specimens",
+      "feedbackRelease": "after_batch_submission",
+      "runtimeBoundary": "runtime_retrieval_from_admitted_practice_media",
+      "introducedTaxonIds": [],
+      "teachingProfiles": []
+    },
+    {
+      "sessionId": "W09-C",
+      "letter": "C",
+      "title": "American beech condition laboratory",
+      "kind": "condition_and_confuser_integration",
+      "taxonScope": "fagus_grandifolia_full_condition_sequence_plus_bark_confusers",
+      "modalities": [
+        "foliage",
+        "bark",
+        "whole_tree_context",
+        "condition"
+      ],
+      "delivery": "host-identification and condition-diagnosis stations scored separately",
+      "feedbackRelease": "after_response",
+      "runtimeBoundary": "runtime_retrieval_from_admitted_practice_media",
+      "introducedTaxonIds": [],
+      "teachingProfiles": []
+    },
+    {
+      "sessionId": "W09-D",
+      "letter": "D",
+      "title": "Adversarial winter and damage laboratory",
+      "kind": "multi_organ_laboratory",
+      "taxonScope": "all_taxa_with_required_condition_and_winter_emphasis",
+      "modalities": [
+        "foliage",
+        "bark",
+        "reproductive",
+        "dormant",
+        "whole_tree_context",
+        "condition"
+      ],
+      "delivery": "poor views damaged material disease effects and insufficient-evidence stations",
+      "feedbackRelease": "after_station_batch_submission",
+      "runtimeBoundary": "runtime_retrieval_from_admitted_practice_media",
+      "introducedTaxonIds": [],
+      "teachingProfiles": []
+    },
+    {
+      "sessionId": "W09-E",
+      "letter": "E",
+      "title": "No weak species disappears",
+      "kind": "cumulative_adaptive_retrieval",
+      "taxonScope": "all_80_taxa_prioritized_by_error_ledger_and_certification_deficits",
+      "modalities": [
+        "foliage",
+        "bark",
+        "reproductive",
+        "dormant",
+        "whole_tree_context",
+        "condition"
+      ],
+      "delivery": "adversarial adaptive retrieval and targeted remediation",
+      "feedbackRelease": "after_batch_submission",
+      "runtimeBoundary": "runtime_retrieval_from_admitted_practice_media",
+      "introducedTaxonIds": [],
+      "teachingProfiles": []
+    }
+  ],
+  "assessmentSummaries": [
+    {
+      "assessmentId": "W09-PRACTICAL",
+      "type": "weekly_identification_practical",
+      "categoryId": "weekly_identification_practicals",
+      "cumulative": true,
+      "scope": "all_80_taxa_with_adversarial_variation",
+      "modalities": [
+        "foliage",
+        "bark",
+        "reproductive",
+        "dormant",
+        "whole_tree_context",
+        "condition"
+      ]
+    },
+    {
+      "assessmentId": "W09-BEECH-CONDITION",
+      "type": "american_beech_condition_laboratory",
+      "categoryId": "field_condition_identification",
+      "cumulative": true,
+      "scope": "host_identity_and_condition_diagnosis_scored_separately",
+      "modalities": [
+        "foliage",
+        "bark",
+        "whole_tree_context",
+        "condition"
+      ]
+    },
+    {
+      "assessmentId": "W09-ADVERSARIAL-WINTER",
+      "type": "adversarial_winter_damage_practical",
+      "categoryId": "field_condition_identification",
+      "cumulative": true,
+      "scope": "winter_damage_poor_view_and_insufficient_evidence_decisions",
+      "modalities": [
+        "bark",
+        "reproductive",
+        "dormant",
+        "whole_tree_context",
+        "condition"
+      ]
+    }
+  ],
+  "remediationGate": {
+    "policy_id": "REM-01",
+    "evaluate_after_assessment_ids": [
+      "W09-PRACTICAL",
+      "W09-BEECH-CONDITION",
+      "W09-ADVERSARIAL-WINTER"
+    ],
+    "broader_course_progression": "continues_into_certification_with_targeted_review",
+    "insertion_sessions": [
+      "W10-A",
+      "W10-B",
+      "W10-C",
+      "W10-D",
+      "W10-E"
+    ]
+  },
+  "teachingBoundary": "This package contains labeled instruction and public module structure only. Retrieval stations are assembled separately from admitted practice media, and formal forms, examination media, answer keys, and learner records remain private."
+}
