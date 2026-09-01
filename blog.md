@@ -3,7 +3,6 @@ layout: blog
 title: Blog
 nav: true
 footer: true
-description: This is the Awesome Jekyll Theme blog section.
+description: Notes on games, forestry experiments, courses, and other side projects that found a home on Cochetopa.
 ---
-
 

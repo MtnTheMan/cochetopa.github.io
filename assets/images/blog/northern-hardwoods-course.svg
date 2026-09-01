@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Northern Hardwoods dendrology and silvics course</title>
+  <desc id="desc">A field identification table showing a leaf, winter twig, cone, bark, and distant tree crown.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#e9e1ca"/><stop offset="1" stop-color="#c7d5ba"/></linearGradient>
+    <filter id="s"><feDropShadow dx="0" dy="7" stdDeviation="8" flood-opacity=".2"/></filter>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <path d="M0 485 Q230 395 450 465 T850 430 T1200 455 V630 H0Z" fill="#31513a"/>
+  <g filter="url(#s)">
+    <rect x="55" y="55" width="1090" height="390" rx="28" fill="#f8f4e8" stroke="#9aa889" stroke-width="3"/>
+  </g>
+  <text x="92" y="120" fill="#1f3d2e" font-family="system-ui,sans-serif" font-size="44" font-weight="780">NORTHERN HARDWOODS &amp; MIXEDWOODS</text>
+  <text x="94" y="160" fill="#58705e" font-family="system-ui,sans-serif" font-size="24">DENDROLOGY + SILVICS INTENSIVE</text>
+  <g transform="translate(120 210)">
+    <path d="M88 164 C20 115 18 50 94 15 C169 53 169 119 88 164Z" fill="#5a8b4f" stroke="#335e38" stroke-width="5"/>
+    <path d="M88 26V194M88 81L45 59M88 103l52-27M88 129l-45 25M88 144l46 29" stroke="#e8efcf" stroke-width="5" fill="none"/>
+    <text x="88" y="226" text-anchor="middle" fill="#294235" font-family="system-ui,sans-serif" font-size="18" font-weight="650">FOLIAGE</text>
+  </g>
+  <g transform="translate(355 206)" stroke="#684a31" stroke-linecap="round">
+    <path d="M90 184V30M90 78l-54-42M90 112l55-54M90 145l-46 32" stroke-width="10"/>
+    <path d="M34 36l8-18 11 17M145 58l9-20 11 19M44 177l7-18 11 16M90 30l9-22 12 21" fill="#8e623c" stroke-width="4"/>
+    <text x="90" y="230" text-anchor="middle" fill="#294235" stroke="none" font-family="system-ui,sans-serif" font-size="18" font-weight="650">TWIG + BUD</text>
+  </g>
+  <g transform="translate(590 205)">
+    <path d="M92 22 C27 62 35 157 91 190 C150 157 154 65 92 22Z" fill="#8a6542" stroke="#593e2a" stroke-width="5"/>
+    <g fill="none" stroke="#d0ae75" stroke-width="4"><path d="M92 37l-32 24 32 22 34-22zM92 83l-39 26 39 24 40-24zM92 133l-31 26 31 21 33-21z"/></g>
+    <text x="92" y="230" text-anchor="middle" fill="#294235" font-family="system-ui,sans-serif" font-size="18" font-weight="650">CONE + FRUIT</text>
+  </g>
+  <g transform="translate(825 204)">
+    <rect x="50" y="10" width="82" height="188" rx="31" fill="#7a6651" stroke="#554636" stroke-width="5"/>
+    <path d="M62 22l25 33-18 36 30 32-24 62M113 20L96 60l22 43-24 39 18 46" fill="none" stroke="#b19a7f" stroke-width="6"/>
+    <text x="91" y="230" text-anchor="middle" fill="#294235" font-family="system-ui,sans-serif" font-size="18" font-weight="650">BARK</text>
+  </g>
+  <g transform="translate(1032 214)">
+    <path d="M44 192V76" stroke="#5b412d" stroke-width="13"/>
+    <circle cx="44" cy="58" r="50" fill="#496f43"/><circle cx="13" cy="85" r="31" fill="#5e8250"/><circle cx="74" cy="84" r="34" fill="#3e633c"/>
+    <text x="44" y="220" text-anchor="middle" fill="#294235" font-family="system-ui,sans-serif" font-size="16" font-weight="650">FORM + SITE</text>
+  </g>
+  <text x="70" y="548" fill="#f0ead7" font-family="system-ui,sans-serif" font-size="29" font-weight="700">80 taxa · 10 modules · field-first identification</text>
+  <text x="70" y="588" fill="#bcd0bc" font-family="system-ui,sans-serif" font-size="20">COCHETOPA.CO / COURSE</text>
+</svg>
+

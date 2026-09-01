@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Four browser games on Cochetopa</title>
+  <desc id="desc">A divided illustration showing a card table, sailboat, pine beetle landscape map, and bouncing ball game.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#071927"/><stop offset="1" stop-color="#173c3b"/></linearGradient>
+    <filter id="shadow"><feDropShadow dx="0" dy="8" stdDeviation="12" flood-opacity=".25"/></filter>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <text x="70" y="88" fill="#f8f4e8" font-family="system-ui,sans-serif" font-size="48" font-weight="750">Small games, strange experiments.</text>
+  <text x="72" y="126" fill="#b9d4cb" font-family="system-ui,sans-serif" font-size="22">Four browser projects from Cochetopa</text>
+  <g filter="url(#shadow)">
+    <rect x="70" y="170" width="245" height="340" rx="24" fill="#143c34" stroke="#4d8a76"/>
+    <rect x="355" y="170" width="245" height="340" rx="24" fill="#0d344c" stroke="#5794b3"/>
+    <rect x="640" y="170" width="245" height="340" rx="24" fill="#e8efe0" stroke="#89a66e"/>
+    <rect x="925" y="170" width="205" height="340" rx="24" fill="#17172d" stroke="#6868a5"/>
+  </g>
+  <g font-family="system-ui,sans-serif" fill="#fff" text-anchor="middle">
+    <text x="192" y="474" font-size="24" font-weight="700">EUCHRE</text>
+    <text x="477" y="474" font-size="24" font-weight="700">SAILTUTOR</text>
+    <text x="762" y="474" font-size="21" font-weight="700" fill="#243326">PINE BEETLE LAB</text>
+    <text x="1027" y="474" font-size="22" font-weight="700">BALL CRUSHER</text>
+  </g>
+  <g transform="translate(112 218) rotate(-8)"><rect width="76" height="116" rx="10" fill="#fff"/><text x="38" y="46" text-anchor="middle" font-size="34" fill="#c52e3c" font-family="serif">J♥</text></g>
+  <g transform="translate(189 220) rotate(7)"><rect width="76" height="116" rx="10" fill="#fff"/><text x="38" y="46" text-anchor="middle" font-size="34" fill="#111827" font-family="serif">A♣</text></g>
+  <path d="M380 380 Q478 330 575 380 L575 420 L380 420Z" fill="#0b6580" opacity=".8"/>
+  <path d="M475 234 L475 374 L552 374Z" fill="#f7e7b4"/><path d="M469 252 L469 374 L412 374Z" fill="#e5f3f8"/>
+  <path d="M420 377 Q478 399 538 377 L522 417 L442 417Z" fill="#c87535"/>
+  <g stroke="#b7c5a7" stroke-width="2"><path d="M665 250H860M665 300H860M665 350H860M700 205V420M750 205V420M800 205V420M850 205V420"/></g>
+  <path d="M675 400 C710 345 728 367 748 310 S802 265 852 225" fill="none" stroke="#c94834" stroke-width="9" stroke-linecap="round"/>
+  <g fill="#2d3327"><ellipse cx="715" cy="335" rx="12" ry="18"/><path d="M715 317v-18M703 328l-18-11M727 328l18-11M704 343l-19 13M726 343l19 13" stroke="#2d3327" stroke-width="5"/></g>
+  <g fill="#8c63ff"><rect x="949" y="220" width="58" height="46" rx="8"/><rect x="1017" y="220" width="58" height="46" rx="8"/><rect x="1085" y="220" width="24" height="46" rx="8"/></g>
+  <g fill="#f06383"><rect x="966" y="280" width="58" height="46" rx="8"/><rect x="1034" y="280" width="58" height="46" rx="8"/></g>
+  <circle cx="1010" cy="390" r="17" fill="#f6d05f"/><path d="M1010 373 Q1095 326 1100 250" fill="none" stroke="#f6d05f" stroke-width="5" stroke-dasharray="9 12"/>
+  <text x="70" y="580" fill="#8fb9aa" font-family="system-ui,sans-serif" font-size="20">COCHETOPA.CO / GAMES</text>
+</svg>
+
