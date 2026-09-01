@@ -9,7 +9,7 @@ Deno.serve(async (request) => {
   try {
     const authHeader = request.headers.get("Authorization") || "";
     const url = Deno.env.get("SUPABASE_URL")!;
-    const publishable = Deno.env.get("SUPABASE_PUBLISHABLE_KEY")!;
+    const publishable = Deno.env.get("SUPABASE_PUBLISHABLE_KEY") || Deno.env.get("SUPABASE_ANON_KEY")!;
     const serviceRole = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
     const userClient = createClient(url, publishable, { global: { headers: { Authorization: authHeader } } });
     const { data: userData, error: userError } = await userClient.auth.getUser();
