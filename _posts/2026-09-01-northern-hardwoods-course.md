@@ -8,7 +8,7 @@ author: Parker Hopkins
 description: "Introducing a rigorous, self-paced course in identifying and understanding northern hardwood and mixedwood tree species."
 ---
 
-I have spent a lot of time lately moving through northern hardwood forests and talking with people who manage them. One recurring reminder from that work is that good forestry depends on being able to look at the trees in front of you and know what they are—not only when the leaves are perfect and conveniently held at eye level, but when it is February, the bark is wet, the crown is forty feet away, and the tree has been doing something strange for the last 80 years.
+I have spent a lot of time lately moving through northern hardwood forests and talking with people who manage them. One recurring reminder from that work is that good forestry depends on being able to look at the trees in front of you and know what they are: not only when the leaves are perfect and conveniently held at eye level, but when it is February, the bark is wet, the crown is forty feet away, and the tree has been doing something strange for the last 80 years.
 
 That idea grew into a course.
 
@@ -39,15 +39,15 @@ The course spends a lot of time on confusion sets: sugar, black, and Norway mapl
 
 The recurring questions are not only “What is it?” They are also: What is the nearest plausible alternative? What visible character separates them? What additional view would you request? And is the photograph actually good enough to support a species-level answer?
 
-That last question matters. A reliable field forester should know when the evidence is insufficient instead of turning every partial twig or distant crown into a confident guess.
+Knowing when the evidence is insufficient is part of reliable field forestry. Otherwise, every partial twig or distant crown becomes a confident guess.
 
 ## Silvics stays attached to the tree
 
-Identification is the largest part of the course, but every principal species also carries a concise silvics capsule: shade tolerance, moisture and site tendencies, geographic affinity, regeneration, succession, disturbance response, longevity, browse, important insects and diseases, and the management implications worth carrying into the woods.
+Identification is the largest part of the course, but every principal species also carries a concise silvics capsule: shade tolerance, moisture and site tendencies, geographic affinity, regeneration, succession, disturbance response, longevity, browse, important insects and diseases, and management implications for field work.
 
 Scientific names are cumulative from the beginning. So are previous mistakes.
 
-The course keeps a mastery record by species and evidence type, schedules weak material more frequently, and maintains an Error Ledger that distinguishes not knowing a tree from confusing two known trees, missing the scientific name, getting the ecology wrong, or being much more confident than the evidence justified. Weekly practicals, a midterm, nomenclature and silvics work, condition identification, and a comprehensive final all contribute to a running grade.
+The course keeps a mastery record by species and evidence type, schedules weak material more frequently, and maintains an Error Ledger that distinguishes not knowing a tree from confusing two known trees, missing the scientific name, getting the ecology wrong, or being much more confident than the evidence justified. Weekly practicals, a midterm, nomenclature and silvics work, condition identification, and a final examination all contribute to a running grade.
 
 ## Taking the course
 
@@ -55,7 +55,7 @@ You can [open the course here](/course/) and look through the syllabus and first
 
 This is the first public release, and it is intentionally more demanding than a casual tree-identification quiz. It is meant to reward durable recognition, careful discrimination, and the ability to make a defensible call from whatever evidence a tree happens to give you.
 
-In other words, the goal is not to get every question to feel easy. The goal is to become very hard to fool in the woods.
+The goal is to become very hard to fool in the woods, even if the individual questions never start to feel easy.
 
 **[Begin the Northern Hardwoods & Mixedwoods course →](/course/)**
 

@@ -40,7 +40,7 @@ The fun part is that you can move the boat nearly anywhere. The simulator can us
 
 The [Mountain Pine Beetle Landscape Lab v0.9](/games/MPB-v0.9/) is the project that most directly overlaps with my forestry interests. You choose an outbreak origin on a map, load mapped pine-host information and climate context, and then step or run a simple spread simulation through time.
 
-It is not a calibrated outbreak forecast—and the simulator is deliberately labeled as a landscape lab rather than one—but it is a useful way to play with the relationships among host presence, climate, dispersal, mortality, and the arbitrary decisions that have to be made when turning ecological ideas into a working model. You can change generation rate, climate weight, dispersal, reproduction, and mortality, then watch the same starting point produce a very different landscape pattern.
+I deliberately call it a landscape lab because it is not a calibrated outbreak forecast. It is still useful for playing with the relationships among host presence, climate, dispersal, mortality, and the arbitrary decisions that have to be made when turning ecological ideas into a working model. You can change generation rate, climate weight, dispersal, reproduction, and mortality, then watch the same starting point produce a very different landscape pattern.
 
 **[Open the Mountain Pine Beetle Landscape Lab →](/games/MPB-v0.9/)**
 
