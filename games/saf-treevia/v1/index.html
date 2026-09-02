@@ -13,7 +13,7 @@
       name="description"
       content="Password-protected SAF Quiz Bowl and Tree'via practice for Michigan State forestry students."
     />
-    <title>SAF Tree’via — Quiz Bowl Practice</title>
+    <title>SAF Tree’via | Quiz Bowl Practice</title>
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
@@ -25,7 +25,7 @@
           <span class="wordmark-mark" aria-hidden="true">C</span>
           <span>
             <strong>Cochetopa</strong>
-            <small>Learning Lab</small>
+            <small>Forestry games</small>
           </span>
         </a>
         <div class="header-title">
@@ -40,10 +40,10 @@
       <main id="main-content" tabindex="-1">
         <section id="gate-view" class="gate-layout" aria-labelledby="gate-title">
           <div class="gate-card">
-            <p class="eyebrow">SAF Quiz Bowl study tool</p>
-            <h1 id="gate-title">Know the forest.<br />Own the buzzer.</h1>
+            <p class="eyebrow">SAF Tree’via</p>
+            <h1 id="gate-title">Quiz Bowl practice<br />for MSU Forestry</h1>
             <p class="lede">
-              Practice verified, supplemental, and locally adapted forestry questions—one shuffled round at a time.
+              The main bank uses confirmed forestry questions. You can also work from supplemental material or the separate Washington and Tacoma set. Every round is shuffled.
             </p>
 
             <form id="unlock-form" class="unlock-form">
@@ -63,19 +63,19 @@
             </form>
 
             <p id="gate-note" class="gate-note">
-              No account or sign-in. Your unlocked session lasts only while this tab is open.
+              You do not need an account. The game stays unlocked until you close this tab.
             </p>
           </div>
 
-          <aside class="gate-aside" aria-label="Game features">
-            <p class="aside-kicker">Built for field-minded study</p>
+          <aside class="gate-aside" aria-label="Study notes">
+            <p class="aside-kicker">A few notes before you start</p>
             <ul class="feature-list">
-              <li><span>01</span> Short answer with typo-tolerant feedback</li>
-              <li><span>02</span> Shuffled multiple-choice rounds</li>
-              <li><span>03</span> Washington + Tacoma local context</li>
-              <li><span>04</span> Source links for answer review</li>
+              <li><span>01</span> Short answers allow a minor typo without marking the whole response wrong.</li>
+              <li><span>02</span> Multiple-choice options are shuffled with each round.</li>
+              <li><span>03</span> The local question set focuses on Washington and Tacoma.</li>
+              <li><span>04</span> Source information is shown after each answer.</li>
             </ul>
-            <p class="aside-footnote">Independent study compilation. Not produced or endorsed by SAF.</p>
+            <p class="aside-footnote">This is an independent study set and is not produced or endorsed by SAF.</p>
           </aside>
         </section>
 
@@ -84,12 +84,12 @@
             <div class="setup-heading">
               <div>
                 <p class="eyebrow">Round setup</p>
-                <h1 id="setup-title">Build your practice round</h1>
-                <p>Pick a question bank, narrow the subject if you want, then start. Every round is reshuffled.</p>
+                <h1 id="setup-title">Set up a practice round</h1>
+                <p>Choose a question set, subject, length, and answer format. The game reshuffles the questions when you start.</p>
               </div>
               <div class="bank-pill" aria-live="polite">
-                <strong id="bank-total">—</strong>
-                <span>playable questions</span>
+                <strong id="bank-total">…</strong>
+                <span>questions in the bank</span>
               </div>
             </div>
 
@@ -98,13 +98,13 @@
                 <div class="control-block">
                   <label for="set-select">Question set</label>
                   <select id="set-select" name="question-set" aria-describedby="set-help">
-                    <option value="A" selected>A tier — confirmed / high quality</option>
+                    <option value="A" selected>A tier: confirmed</option>
                     <option value="local">Washington + Tacoma 2026</option>
-                    <option value="B">B tier — supplemental</option>
-                    <option value="C">C tier — generated / older</option>
-                    <option value="Other">Other — archive review</option>
+                    <option value="B">B tier: supplemental</option>
+                    <option value="C">C tier: generated or older</option>
+                    <option value="Other">Other: archive review</option>
                   </select>
-                  <p id="set-help" class="control-help">Published, confirmed, or high-confidence material.</p>
+                  <p id="set-help" class="control-help">Published or otherwise high-confidence material.</p>
                 </div>
 
                 <div class="control-row">
@@ -148,13 +148,13 @@
               </form>
 
               <aside class="tier-guide" aria-labelledby="tier-guide-title">
-                <p class="eyebrow">Know your source</p>
+                <p class="eyebrow">Question sets</p>
                 <h2 id="tier-guide-title">What the tiers mean</h2>
                 <dl>
-                  <div><dt><span class="tier-dot tier-a">A</span> Confirmed</dt><dd>Published or high-confidence material.</dd></div>
-                  <div><dt><span class="tier-dot tier-b">B</span> Supplemental</dt><dd>Useful questions from other reputable sources.</dd></div>
-                  <div><dt><span class="tier-dot tier-c">C</span> Practice</dt><dd>Generated, older, or less-germane Tree’via items.</dd></div>
-                  <div><dt><span class="tier-dot tier-o">O</span> Other</dt><dd>Archive material that benefits from extra review.</dd></div>
+                  <div><dt><span class="tier-dot tier-a">A</span> Confirmed</dt><dd>Published or otherwise high-confidence material.</dd></div>
+                  <div><dt><span class="tier-dot tier-b">B</span> Supplemental</dt><dd>Questions from other reputable sources.</dd></div>
+                  <div><dt><span class="tier-dot tier-c">C</span> Practice</dt><dd>Generated, older, or less directly relevant Tree’via items.</dd></div>
+                  <div><dt><span class="tier-dot tier-o">O</span> Other</dt><dd>Archived questions that may need another review.</dd></div>
                 </dl>
                 <div class="scoring-note">
                   <strong>Scoring</strong>
@@ -237,13 +237,13 @@
 
           <section id="results-panel" class="view-panel results-panel" aria-labelledby="results-title" hidden>
             <p class="eyebrow">Round complete</p>
-            <h1 id="results-title">Nice work in the woods.</h1>
+            <h1 id="results-title">Round results</h1>
             <p id="results-summary" class="results-summary"></p>
 
             <div class="result-score" aria-label="Final score">
               <div class="score-ring">
                 <strong id="result-percent">0%</strong>
-                <span>knowledge score</span>
+                <span>round score</span>
               </div>
               <dl>
                 <div><dt id="result-correct">0</dt><dd>Correct</dd></div>
@@ -253,12 +253,12 @@
             </div>
 
             <div id="review-list-wrap" class="review-wrap" hidden>
-              <h2>Review these</h2>
+              <h2>Questions to review</h2>
               <ol id="review-list" class="review-list"></ol>
             </div>
 
             <div class="results-actions">
-              <button id="retry-button" class="button button-primary" type="button">Retry missed + close</button>
+              <button id="retry-button" class="button button-primary" type="button">Retry missed and close answers</button>
               <button id="new-round-button" class="button button-secondary" type="button">Build a new round</button>
             </div>
           </section>
@@ -270,11 +270,11 @@
       </main>
 
       <footer class="site-footer">
-        <span>SAF Tree’via study archive</span>
-        <span>Questions retain their source tier and citation</span>
+        <span>SAF Tree’via</span>
+        <span>Sources and tiers are shown with each answer</span>
       </footer>
     </div>
 
-    <script type="module" src="./app.mjs?v=20260901b"></script>
+    <script type="module" src="./app.mjs?v=20260902a"></script>
   </body>
 </html>

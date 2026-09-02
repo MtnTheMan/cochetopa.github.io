@@ -348,6 +348,6 @@ export function evaluateShortAnswer(given, expected) {
 
 export function statusLabel(status) {
   if (status === "correct") return "Correct";
-  if (status === "close") return "Close — review it";
+  if (status === "close") return "Close. Review the answer.";
   return "Not quite";
 }

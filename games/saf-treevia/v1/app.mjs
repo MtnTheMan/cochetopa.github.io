@@ -1,4 +1,4 @@
-import { evaluateShortAnswer, statusLabel } from "./answer-utils.mjs";
+import { evaluateShortAnswer, statusLabel } from "./answer-utils.mjs?v=20260902a";
 import { pickShuffledRound } from "./round-utils.mjs";
 
 const ENVELOPE_FORMAT = "saf-treevia-encrypted-v1";
@@ -216,7 +216,7 @@ function lockGame() {
   elements.lockButton.hidden = true;
   elements.gateStatus.textContent = "The game is locked.";
   elements.passwordInput.value = "";
-  elements.bankTotal.textContent = "—";
+  elements.bankTotal.textContent = "…";
   elements.questionPrompt.textContent = "";
   elements.choiceList.replaceChildren();
   elements.shortAnswerInput.value = "";
@@ -287,11 +287,11 @@ function selectedSetIncludesLowerConfidence() {
 
 function setDescription() {
   const descriptions = {
-    A: "Published, confirmed, or high-confidence material.",
-    local: "Washington and Tacoma questions for this year’s host-region context.",
-    B: "Useful supplemental questions from other reputable sources.",
-    C: "Generated, older, or less-germane practice material.",
-    Other: "Archive material retained for provenance and extra review.",
+    A: "Published or otherwise high-confidence material.",
+    local: "Washington and Tacoma questions for the 2026 host-region set.",
+    B: "Supplemental questions from other reputable sources.",
+    C: "Generated, older, or less directly relevant practice questions.",
+    Other: "Archived questions kept with their original source information for review.",
   };
   elements.setHelp.textContent = descriptions[elements.setSelect.value];
 }
@@ -311,7 +311,7 @@ function refreshSetup({ rebuildCategories: shouldRebuildCategories = false } = {
   const lowerConfidence = selectedSetIncludesLowerConfidence();
   elements.qualityWarning.hidden = !lowerConfidence;
   if (lowerConfidence) {
-    elements.qualityWarning.textContent = "This selection includes generated, older, or less-reviewed archive material. Use the displayed source and expected answer when something deserves a closer look.";
+    elements.qualityWarning.textContent = "This set includes generated, older, or less-reviewed archive questions. Check the source and expected answer if anything seems unclear or outdated.";
   }
 }
 
@@ -479,17 +479,17 @@ function answerShort(event) {
 
 function feedbackCopy(status) {
   if (status === "correct") {
-    return { icon: "✓", message: "That matches the answer key." };
+    return { icon: "✓", message: "Your answer matches the key." };
   }
   if (status === "close") {
-    return { icon: "≈", message: "You have part of it. Compare your wording with the expected answer." };
+    return { icon: "≈", message: "You got part of the answer. Compare it with the expected answer below." };
   }
-  return { icon: "×", message: "Not this time. Read the expected answer, then try it again later." };
+  return { icon: "×", message: "Check the expected answer below and try this question again later." };
 }
 
 function sourceText(source) {
   const pieces = [source?.title, source?.year, source?.locator].filter(Boolean);
-  return pieces.join(" · ") || "Source retained in the master question bank";
+  return pieces.join(" · ") || "Source listed in the master question bank";
 }
 
 function recordAnswer({ status, submitted, points }) {
@@ -566,10 +566,10 @@ function finishRound() {
   elements.resultClose.textContent = score.close;
   elements.resultMissed.textContent = score.missed;
   elements.resultsTitle.textContent = percent >= 90
-    ? "Strong canopy coverage."
+    ? "You know this set well."
     : percent >= 70
-      ? "You’re growing a solid stand."
-      : "Good reconnaissance. Keep going.";
+      ? "You have a good start."
+      : "This set needs more review.";
   elements.resultsSummary.textContent = unfinished > 0
     ? `You answered ${answered} of ${state.round.length} questions and earned ${formatPoints(score.points)} points. ${unfinished} unanswered question${unfinished === 1 ? " was" : "s were"} not scored.`
     : `You earned ${formatPoints(score.points)} of ${answered} possible points. Close answers receive half credit.`;
@@ -587,7 +587,7 @@ function finishRound() {
   }
   elements.reviewListWrap.hidden = reviewItems.length === 0;
   elements.retryButton.hidden = reviewItems.length === 0;
-  elements.retryButton.textContent = `Retry missed + close${reviewItems.length ? ` (${reviewItems.length})` : ""}`;
+  elements.retryButton.textContent = `Retry missed and close answers${reviewItems.length ? ` (${reviewItems.length})` : ""}`;
   showPanel("results");
   elements.resultsTitle.tabIndex = -1;
   elements.resultsTitle.focus();
@@ -602,7 +602,7 @@ function retryMissed() {
   state.currentIndex = 0;
   state.results = [];
   state.answered = false;
-  state.roundName = "Retry · missed + close";
+  state.roundName = "Review round";
   showPanel("question");
   renderQuestion();
 }
