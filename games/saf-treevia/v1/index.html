@@ -98,22 +98,14 @@
                 <div class="control-block">
                   <label for="set-select">Question set</label>
                   <select id="set-select" name="question-set" aria-describedby="set-help">
+                    <option value="A" selected>A tier — confirmed / high quality</option>
                     <option value="local">Washington + Tacoma 2026</option>
-                    <option value="A">A tier — confirmed / high quality</option>
-                    <option value="AB">A + B tiers</option>
-                    <option value="all">All tiers</option>
-                    <option value="custom">Choose tiers…</option>
+                    <option value="B">B tier — supplemental</option>
+                    <option value="C">C tier — generated / older</option>
+                    <option value="Other">Other — archive review</option>
                   </select>
-                  <p id="set-help" class="control-help">Locally adapted, source-checked questions for this year’s host region.</p>
+                  <p id="set-help" class="control-help">Published, confirmed, or high-confidence material.</p>
                 </div>
-
-                <fieldset id="custom-tier-fields" class="control-block tier-choices" hidden>
-                  <legend>Include tiers</legend>
-                  <label><input type="checkbox" name="tier" value="A" checked /> <span>A</span> Confirmed</label>
-                  <label><input type="checkbox" name="tier" value="B" /> <span>B</span> Supplemental</label>
-                  <label><input type="checkbox" name="tier" value="C" /> <span>C</span> Generated / older</label>
-                  <label><input type="checkbox" name="tier" value="Other" /> <span>O</span> Other archive</label>
-                </fieldset>
 
                 <div class="control-row">
                   <div class="control-block">
@@ -283,6 +275,6 @@
       </footer>
     </div>
 
-    <script type="module" src="./app.mjs"></script>
+    <script type="module" src="./app.mjs?v=20260901b"></script>
   </body>
 </html>

@@ -1,4 +1,5 @@
 import { evaluateShortAnswer, statusLabel } from "./answer-utils.mjs";
+import { pickShuffledRound } from "./round-utils.mjs";
 
 const ENVELOPE_FORMAT = "saf-treevia-encrypted-v1";
 const PAYLOAD_SCHEMA_VERSION = 1;
@@ -21,7 +22,6 @@ const elements = {
   roundForm: byId("round-form"),
   setSelect: byId("set-select"),
   setHelp: byId("set-help"),
-  customTierFields: byId("custom-tier-fields"),
   categorySelect: byId("category-select"),
   roundSize: byId("round-size"),
   qualityWarning: byId("quality-warning"),
@@ -189,6 +189,7 @@ async function unlock(event) {
     elements.gameView.hidden = false;
     elements.lockButton.hidden = false;
     elements.bankTotal.textContent = state.bank.questionCount.toLocaleString();
+    elements.setSelect.value = "A";
     refreshSetup({ rebuildCategories: true });
     showPanel("setup");
     elements.setSelect.focus();
@@ -233,18 +234,13 @@ function checkedMode() {
   return elements.roundForm.querySelector('input[name="mode"]:checked')?.value ?? "mixed";
 }
 
-function selectedCustomTiers() {
-  return [...elements.customTierFields.querySelectorAll('input[name="tier"]:checked')]
-    .map((input) => input.value);
-}
-
 function selectedTiers() {
   switch (elements.setSelect.value) {
     case "A": return ["A"];
-    case "AB": return ["A", "B"];
-    case "all": return ["A", "B", "C", "Other"];
-    case "custom": return selectedCustomTiers();
-    default: return ["A", "B", "C", "Other"];
+    case "B": return ["B"];
+    case "C": return ["C"];
+    case "Other": return ["Other"];
+    default: return ["A"];
   }
 }
 
@@ -286,26 +282,22 @@ function rebuildCategories() {
 }
 
 function selectedSetIncludesLowerConfidence() {
-  if (elements.setSelect.value === "all") return true;
-  if (elements.setSelect.value !== "custom") return false;
-  const tiers = selectedCustomTiers();
-  return tiers.includes("C") || tiers.includes("Other");
+  return elements.setSelect.value === "C" || elements.setSelect.value === "Other";
 }
 
 function setDescription() {
   const descriptions = {
-    local: "Washington and Tacoma questions for this year’s host-region context.",
     A: "Published, confirmed, or high-confidence material.",
-    AB: "High-quality questions plus reputable supplemental sources.",
-    all: "The full playable archive, including practice and review material.",
-    custom: "Build your own combination of source-quality tiers.",
+    local: "Washington and Tacoma questions for this year’s host-region context.",
+    B: "Useful supplemental questions from other reputable sources.",
+    C: "Generated, older, or less-germane practice material.",
+    Other: "Archive material retained for provenance and extra review.",
   };
   elements.setHelp.textContent = descriptions[elements.setSelect.value];
 }
 
 function refreshSetup({ rebuildCategories: shouldRebuildCategories = false } = {}) {
   if (!state.bank) return;
-  elements.customTierFields.hidden = elements.setSelect.value !== "custom";
   setDescription();
   if (shouldRebuildCategories) rebuildCategories();
 
@@ -360,7 +352,7 @@ function startRound(event) {
     multiple_choice: "Multiple choice",
     short_answer: "Short answer",
   }[checkedMode()];
-  state.round = shuffled(pool).slice(0, Math.min(requestedSize, pool.length));
+  state.round = pickShuffledRound(pool, requestedSize, shuffled);
   state.currentIndex = 0;
   state.results = [];
   state.answered = false;
@@ -646,7 +638,6 @@ elements.unlockForm.addEventListener("submit", unlock);
 elements.lockButton.addEventListener("click", lockGame);
 elements.roundForm.addEventListener("submit", startRound);
 elements.setSelect.addEventListener("change", () => refreshSetup({ rebuildCategories: true }));
-elements.customTierFields.addEventListener("change", () => refreshSetup({ rebuildCategories: true }));
 elements.categorySelect.addEventListener("change", () => refreshSetup());
 elements.roundForm.addEventListener("change", (event) => {
   if (event.target.matches('input[name="mode"]')) refreshSetup({ rebuildCategories: true });

@@ -48,6 +48,8 @@ questions[]: id, tier, category, prompt, answer, localContext,
 
 `localContext` is set when question/source metadata mentions Washington, Tacoma, or Point Defiance. The UI combines that flag with tier A for the “Washington + Tacoma 2026” set, keeping the host-region round source-checked.
 
+The setup selector defaults to A tier and is ordered A tier, Washington + Tacoma, B tier, C tier, then Other. For every new round, the game shuffles the full eligible question pool before applying the requested round length; it never takes the first rows from the workbook. Multiple-choice options are shuffled separately. The retry action then reshuffles only the questions marked missed or close.
+
 ## Short-answer grading
 
 The client deliberately favors false negatives over false positives:
