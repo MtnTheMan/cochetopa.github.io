@@ -1,5 +1,5 @@
 import { evaluateShortAnswer, statusLabel } from "./answer-utils.mjs?v=20260902a";
-import { pickShuffledRound, questionMatchesSet } from "./round-utils.mjs?v=20260903quizletset";
+import { pickShuffledRound, questionPoolForSet } from "./round-utils.mjs?v=20260903hardmode";
 
 const ENVELOPE_FORMAT = "saf-treevia-encrypted-v1";
 const PAYLOAD_SCHEMA_VERSION = 1;
@@ -241,11 +241,8 @@ function baseQuestionPool({ includeCategory = true } = {}) {
   const mode = checkedMode();
   const category = elements.categorySelect.value;
 
-  return state.bank.questions.filter((question) => {
-    if (!questionMatchesSet(question, set)) return false;
-    if (mode !== "mixed" && question.format !== mode) return false;
-    if (includeCategory && category !== "all" && question.category !== category) return false;
-    return true;
+  return questionPoolForSet(state.bank.questions, {
+    set, mode, category: includeCategory ? category : "all",
   });
 }
 
@@ -275,7 +272,8 @@ function setDescription() {
   const descriptions = {
     A: "Confirmed/high-quality material plus the team's attached Quizlet PDF cards.",
     local: "Washington and Tacoma questions for the 2026 host-region set.",
-    quizlet: "238 unique cards from the three attached Quizlet PDFs, also included in A tier. All are short-answer or definition prompts.",
+    quizlet: "The attached Quizlet cards with multiple choice where useful and short answer where recall fits better. Added answer choices are practice adaptations, not original PDF choices.",
+    quizlet_hard: "The exact same Quizlet questions and answers, all in short-answer form with no choices. Includes every question from the mixed set.",
     B: "Supplemental questions from other reputable sources.",
     C: "Generated, older, or less directly relevant practice questions.",
     Other: "Archived questions kept with their original source information for review.",
@@ -285,10 +283,11 @@ function setDescription() {
 
 function refreshSetup({ rebuildCategories: shouldRebuildCategories = false } = {}) {
   if (!state.bank) return;
-  const quizletOnly = elements.setSelect.value === "quizlet";
-  const multipleChoiceMode = elements.roundForm.querySelector('input[name="mode"][value="multiple_choice"]');
-  multipleChoiceMode.disabled = quizletOnly;
-  if (quizletOnly && checkedMode() === "multiple_choice") {
+  const hardMode = elements.setSelect.value === "quizlet_hard";
+  for (const radio of elements.roundForm.querySelectorAll('input[name="mode"]')) {
+    radio.disabled = hardMode && radio.value !== "short_answer";
+  }
+  if (hardMode) {
     elements.roundForm.querySelector('input[name="mode"][value="short_answer"]').checked = true;
   }
   setDescription();
@@ -632,7 +631,12 @@ function handleChoiceShortcut(event) {
 elements.unlockForm.addEventListener("submit", unlock);
 elements.lockButton.addEventListener("click", lockGame);
 elements.roundForm.addEventListener("submit", startRound);
-elements.setSelect.addEventListener("change", () => refreshSetup({ rebuildCategories: true }));
+elements.setSelect.addEventListener("change", () => {
+  if (elements.setSelect.value === "quizlet") {
+    elements.roundForm.querySelector('input[name="mode"][value="mixed"]').checked = true;
+  }
+  refreshSetup({ rebuildCategories: true });
+});
 elements.categorySelect.addEventListener("change", () => refreshSetup());
 elements.roundForm.addEventListener("change", (event) => {
   if (event.target.matches('input[name="mode"]')) refreshSetup({ rebuildCategories: true });

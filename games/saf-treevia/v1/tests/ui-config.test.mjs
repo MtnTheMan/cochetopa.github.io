@@ -11,7 +11,7 @@ const app = fs.readFileSync(path.resolve(testDir, "..", "app.mjs"), "utf8");
 test("question sets default to A tier and follow the requested sequence", () => {
   const select = html.match(/<select id="set-select"[\s\S]*?<\/select>/)?.[0] ?? "";
   const values = [...select.matchAll(/<option value="([^"]+)"/g)].map((match) => match[1]);
-  assert.deepEqual(values, ["A", "local", "quizlet", "B", "C", "Other"]);
+  assert.deepEqual(values, ["A", "local", "quizlet", "quizlet_hard", "B", "C", "Other"]);
   assert.match(select, /<option value="A" selected>/);
   assert.doesNotMatch(html, /id="custom-tier-fields"/);
 });

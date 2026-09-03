@@ -41,14 +41,16 @@ The encrypted plaintext schema is:
 
 ```text
 schemaVersion, generatedAt, questionCount, counts, skipped,
-questions[]: id, tier, category, prompt, answer, localContext,
+questions[]: id, tier, category, prompt, answer, localContext, quizletPdf,
              reviewFlag, source, format,
              choices + correctChoiceIndex (MC only)
 ```
 
 `localContext` is set when question/source metadata mentions Washington, Tacoma, or Point Defiance. The UI combines that flag with tier A for the “Washington + Tacoma 2026” set, keeping the host-region round source-checked.
 
-The setup selector defaults to A tier and is ordered A tier, Washington + Tacoma, Quizlet PDF cards, B tier, C tier, then Other. The Quizlet option filters the 238 unique attached PDF cards using the payload's source-derived `quizletPdf` flag; those questions also remain in A tier. All currently use short-answer/definition prompts. Selecting the set disables multiple-choice-only mode and switches an existing multiple-choice selection to short answer. For every new round, the game shuffles the full eligible question pool before applying the requested round length; it never takes the first rows from the workbook. Multiple-choice options are shuffled separately. The retry action then reshuffles only the questions marked missed or close.
+The setup selector defaults to A tier and is ordered A tier, Washington + Tacoma, Quizlet cards: mixed, Quizlet cards: hard mode (all short answer), B tier, C tier, then Other. Both Quizlet options select the same 238 unique attached PDF cards using the payload's source-derived `quizletPdf` flag; those questions also remain in A tier. The mixed set contains 166 multiple-choice and 72 short-answer questions. Distractors are newly authored practice options, not historical PDF choices. Lists, calculations, core recall, and stems without clean distractors remain short answer.
+
+Hard mode presents all 238 original prompts and answer keys as short answer, removing choices only from the in-memory practice copies. It locks the response mode to short answer without filtering out cards that were multiple choice in the mixed set. Categories and round length still apply. Selecting the mixed set restores mixed response mode. For every new round, the game shuffles the full eligible question pool before applying the requested round length; it never takes the first rows from the workbook. Multiple-choice options are shuffled separately. The retry action then reshuffles only the questions marked missed or close, retaining their practice format.
 
 The September 3, 2026 bank includes all 243 cards from the user's three attached Quizlet PDFs as 238 unique A-tier questions (five duplicates resolve to those questions). This is user-designated tier placement, not a claim that every card is official SAF or independently fact-checked. PDF title and page/card locator appear with each answer; review cautions are displayed after grading. Online-only catalog decks remain separate.
 
