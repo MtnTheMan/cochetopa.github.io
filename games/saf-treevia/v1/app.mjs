@@ -1,5 +1,5 @@
 import { evaluateShortAnswer, statusLabel } from "./answer-utils.mjs?v=20260902a";
-import { pickShuffledRound } from "./round-utils.mjs";
+import { pickShuffledRound, questionMatchesSet } from "./round-utils.mjs?v=20260903quizletset";
 
 const ENVELOPE_FORMAT = "saf-treevia-encrypted-v1";
 const PAYLOAD_SCHEMA_VERSION = 1;
@@ -235,29 +235,14 @@ function checkedMode() {
   return elements.roundForm.querySelector('input[name="mode"]:checked')?.value ?? "mixed";
 }
 
-function selectedTiers() {
-  switch (elements.setSelect.value) {
-    case "A": return ["A"];
-    case "B": return ["B"];
-    case "C": return ["C"];
-    case "Other": return ["Other"];
-    default: return ["A"];
-  }
-}
-
 function baseQuestionPool({ includeCategory = true } = {}) {
   if (!state.bank) return [];
   const set = elements.setSelect.value;
-  const tiers = new Set(selectedTiers());
   const mode = checkedMode();
   const category = elements.categorySelect.value;
 
   return state.bank.questions.filter((question) => {
-    if (set === "local") {
-      if (!question.localContext || question.tier !== "A") return false;
-    } else if (!tiers.has(question.tier)) {
-      return false;
-    }
+    if (!questionMatchesSet(question, set)) return false;
     if (mode !== "mixed" && question.format !== mode) return false;
     if (includeCategory && category !== "all" && question.category !== category) return false;
     return true;
@@ -290,6 +275,7 @@ function setDescription() {
   const descriptions = {
     A: "Confirmed/high-quality material plus the team's attached Quizlet PDF cards.",
     local: "Washington and Tacoma questions for the 2026 host-region set.",
+    quizlet: "238 unique cards from the three attached Quizlet PDFs, also included in A tier. All are short-answer or definition prompts.",
     B: "Supplemental questions from other reputable sources.",
     C: "Generated, older, or less directly relevant practice questions.",
     Other: "Archived questions kept with their original source information for review.",
@@ -299,6 +285,12 @@ function setDescription() {
 
 function refreshSetup({ rebuildCategories: shouldRebuildCategories = false } = {}) {
   if (!state.bank) return;
+  const quizletOnly = elements.setSelect.value === "quizlet";
+  const multipleChoiceMode = elements.roundForm.querySelector('input[name="mode"][value="multiple_choice"]');
+  multipleChoiceMode.disabled = quizletOnly;
+  if (quizletOnly && checkedMode() === "multiple_choice") {
+    elements.roundForm.querySelector('input[name="mode"][value="short_answer"]').checked = true;
+  }
   setDescription();
   if (shouldRebuildCategories) rebuildCategories();
 

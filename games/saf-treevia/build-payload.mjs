@@ -221,6 +221,7 @@ function buildQuestion(row, seenPrompts, skipped) {
     prompt,
     answer,
     localContext: isWashingtonLocal(row),
+    quizletPdf: /SAF Quiz Bowl [123]\.pdf$/.test(clean(row.Source_File)),
     reviewFlag: clean(row.Review_Flag),
     source: sourceForRow(row),
   };

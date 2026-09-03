@@ -74,3 +74,14 @@ test("AES-GCM envelope round-trips without exposing question plaintext", () => {
   assert.deepEqual(decryptEncryptedEnvelope(envelope, password), payload);
   assert.throws(() => decryptEncryptedEnvelope(envelope, "wrong-password"));
 });
+
+test("builder marks attached PDF membership from source file, not prompt or title", () => {
+  for (const deck of [1, 2, 3]) {
+    const row = `SAF-A-9999,A - Confirmed,Dendrology,Name the structure,Leaf,,definition_prompt,User collection,07_USER_CONTRIBUTED_TREEVIA_2025/SAF Quiz Bowl ${deck}.pdf,page 1,2025,,,,`;
+    const payload = buildPayloadFromCsvText(`${header}\n${row}\n`);
+    assert.equal(payload.questions[0].quizletPdf, true);
+    assert.equal(payload.questions[0].format, "short_answer");
+  }
+  const existing = buildPayloadFromCsvText(fixtureCsv);
+  assert.ok(existing.questions.every((question) => question.quizletPdf === false));
+});
