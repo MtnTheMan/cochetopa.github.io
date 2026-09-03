@@ -50,6 +50,8 @@ questions[]: id, tier, category, prompt, answer, localContext,
 
 The setup selector defaults to A tier and is ordered A tier, Washington + Tacoma, B tier, C tier, then Other. For every new round, the game shuffles the full eligible question pool before applying the requested round length; it never takes the first rows from the workbook. Multiple-choice options are shuffled separately. The retry action then reshuffles only the questions marked missed or close.
 
+The September 3, 2026 bank includes all 243 cards from the user's three attached Quizlet PDFs as 238 unique A-tier questions (five duplicates resolve to those questions). This is user-designated tier placement, not a claim that every card is official SAF or independently fact-checked. PDF title and page/card locator appear with each answer; review cautions are displayed after grading. Online-only catalog decks remain separate.
+
 ## Short-answer grading
 
 The client deliberately favors false negatives over false positives:

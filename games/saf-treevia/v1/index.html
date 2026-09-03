@@ -43,7 +43,7 @@
             <p class="eyebrow">SAF Tree’via</p>
             <h1 id="gate-title">Quiz Bowl practice<br />for MSU Forestry</h1>
             <p class="lede">
-              The main bank uses confirmed forestry questions. You can also work from supplemental material or the separate Washington and Tacoma set. Every round is shuffled.
+              The main bank combines confirmed forestry questions with the team's attached Quizlet cards. You can also work from supplemental material or the separate Washington and Tacoma set. Every round is shuffled.
             </p>
 
             <form id="unlock-form" class="unlock-form">
@@ -98,13 +98,13 @@
                 <div class="control-block">
                   <label for="set-select">Question set</label>
                   <select id="set-select" name="question-set" aria-describedby="set-help">
-                    <option value="A" selected>A tier: confirmed</option>
+                    <option value="A" selected>A tier: core study</option>
                     <option value="local">Washington + Tacoma 2026</option>
                     <option value="B">B tier: supplemental</option>
                     <option value="C">C tier: generated or older</option>
                     <option value="Other">Other: archive review</option>
                   </select>
-                  <p id="set-help" class="control-help">Published or otherwise high-confidence material.</p>
+                  <p id="set-help" class="control-help">Confirmed/high-quality material plus the team's attached Quizlet PDF cards.</p>
                 </div>
 
                 <div class="control-row">
@@ -151,7 +151,7 @@
                 <p class="eyebrow">Question sets</p>
                 <h2 id="tier-guide-title">What the tiers mean</h2>
                 <dl>
-                  <div><dt><span class="tier-dot tier-a">A</span> Confirmed</dt><dd>Published or otherwise high-confidence material.</dd></div>
+                  <div><dt><span class="tier-dot tier-a">A</span> Core study</dt><dd>Confirmed/high-quality material plus the team's attached Quizlet PDF cards. Source cautions appear with answers.</dd></div>
                   <div><dt><span class="tier-dot tier-b">B</span> Supplemental</dt><dd>Questions from other reputable sources.</dd></div>
                   <div><dt><span class="tier-dot tier-c">C</span> Practice</dt><dd>Generated, older, or less directly relevant Tree’via items.</dd></div>
                   <div><dt><span class="tier-dot tier-o">O</span> Other</dt><dd>Archived questions that may need another review.</dd></div>
@@ -222,6 +222,7 @@
                     <span id="source-label"></span>
                     <a id="source-link" href="#" target="_blank" rel="noopener noreferrer">Review source <span class="visually-hidden">(opens in a new tab)</span> <span aria-hidden="true">↗</span></a>
                   </div>
+                  <p id="review-caution" class="control-help" hidden></p>
                 </div>
                 <button id="next-button" class="button button-dark" type="button">Next question</button>
               </section>
@@ -275,6 +276,6 @@
       </footer>
     </div>
 
-    <script type="module" src="./app.mjs?v=20260902a"></script>
+    <script type="module" src="./app.mjs?v=20260903quizlet"></script>
   </body>
 </html>

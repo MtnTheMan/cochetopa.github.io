@@ -182,8 +182,9 @@ function safeSourceUrl(value) {
 }
 
 function sourceForRow(row) {
+  const attachedQuizletPdf = clean(row.Source_File).match(/SAF Quiz Bowl [123]\.pdf$/)?.[0];
   return {
-    title: clean(row.Source_Organization) || clean(row.Source_File) || "Source listed in master bank",
+    title: attachedQuizletPdf ? `${attachedQuizletPdf} (attached Quizlet cards)` : clean(row.Source_Organization) || clean(row.Source_File) || "Source listed in master bank",
     year: clean(row.Source_Year),
     locator: clean(row.Source_Locator),
     url: safeSourceUrl(row.Source_URL),

@@ -21,3 +21,10 @@ test("every app DOM reference exists in the page", () => {
   const references = [...app.matchAll(/byId\("([^"]+)"\)/g)].map((match) => match[1]);
   assert.deepEqual(references.filter((id) => !ids.has(id)), []);
 });
+
+test("source cautions are shown safely with immediate answer feedback", () => {
+  assert.match(html, /id="review-caution"[^>]*hidden/);
+  assert.match(app, /elements\.reviewCaution\.textContent = question\.reviewFlag/);
+  assert.match(app, /elements\.reviewCaution\.hidden = !question\.reviewFlag/);
+  assert.doesNotMatch(app, /reviewCaution\.innerHTML/);
+});

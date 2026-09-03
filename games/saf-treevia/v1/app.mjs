@@ -48,6 +48,7 @@ const elements = {
   feedbackMessage: byId("feedback-message"),
   submittedAnswer: byId("submitted-answer"),
   expectedAnswer: byId("expected-answer"),
+  reviewCaution: byId("review-caution"),
   sourceLabel: byId("source-label"),
   sourceLink: byId("source-link"),
   nextButton: byId("next-button"),
@@ -287,7 +288,7 @@ function selectedSetIncludesLowerConfidence() {
 
 function setDescription() {
   const descriptions = {
-    A: "Published or otherwise high-confidence material.",
+    A: "Confirmed/high-quality material plus the team's attached Quizlet PDF cards.",
     local: "Washington and Tacoma questions for the 2026 host-region set.",
     B: "Supplemental questions from other reputable sources.",
     C: "Generated, older, or less directly relevant practice questions.",
@@ -504,6 +505,8 @@ function recordAnswer({ status, submitted, points }) {
   elements.feedbackMessage.textContent = copy.message;
   elements.submittedAnswer.textContent = submitted;
   elements.expectedAnswer.textContent = question.answer;
+  elements.reviewCaution.textContent = question.reviewFlag ? `Source note: ${question.reviewFlag}` : "";
+  elements.reviewCaution.hidden = !question.reviewFlag;
   elements.sourceLabel.textContent = sourceText(question.source);
   if (question.source?.url && /^https?:\/\//i.test(question.source.url)) {
     elements.sourceLink.href = question.source.url;
