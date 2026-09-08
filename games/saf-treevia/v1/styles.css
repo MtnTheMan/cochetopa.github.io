@@ -619,6 +619,21 @@ input[type="radio"] {
   color: var(--muted);
 }
 
+.history-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.history-controls .control-help {
+  max-width: 42rem;
+}
+
+.history-controls .button {
+  flex: 0 0 auto;
+}
+
 .tier-guide {
   padding: 1.6rem;
   border-radius: var(--radius);
@@ -1235,7 +1250,8 @@ input[type="radio"] {
   .password-row,
   .short-answer-row,
   .setup-heading,
-  .start-row {
+  .start-row,
+  .history-controls {
     align-items: stretch;
     flex-direction: column;
   }

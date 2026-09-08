@@ -1,7 +1,14 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-import { pickShuffledRound, questionMatchesSet, questionPoolForSet } from "../round-utils.mjs";
+import {
+  pickShuffledRound,
+  questionFingerprint,
+  questionMatchesSet,
+  questionPoolForSet,
+  selectionSignature,
+  unseenQuestions,
+} from "../round-utils.mjs";
 
 test("Quizlet subset includes only attached A-tier cards and remains inside A tier", () => {
   const pdf = { tier: "A", quizletPdf: true };
@@ -74,4 +81,33 @@ test("round selection shuffles the full eligible pool before taking the requeste
 test("round selection caps the request at the available pool", () => {
   const selected = pickShuffledRound(["Q1", "Q2"], 20, (values) => values);
   assert.deepEqual(selected, ["Q1", "Q2"]);
+});
+
+test("seen fingerprints prevent repeats across rounds until the pool is exhausted", () => {
+  const pool = [
+    { id: "Q1", prompt: "One", answer: "A", format: "short_answer" },
+    { id: "Q2", prompt: "Two", answer: "B", format: "short_answer" },
+    { id: "Q3", prompt: "Three", answer: "C", format: "short_answer" },
+  ];
+  const firstRound = pickShuffledRound(unseenQuestions(pool, {}), 2, (values) => values);
+  const seen = Object.fromEntries(firstRound.map((question) => [question.id, questionFingerprint(question)]));
+  const secondRound = pickShuffledRound(unseenQuestions(pool, seen), 2, (values) => values);
+  assert.deepEqual(firstRound.map((question) => question.id), ["Q1", "Q2"]);
+  assert.deepEqual(secondRound.map((question) => question.id), ["Q3"]);
+});
+
+test("edited questions become unseen again while unchanged questions remain seen", () => {
+  const original = { id: "Q1", prompt: "Original wording", answer: "Answer", format: "short_answer" };
+  const edited = { ...original, prompt: "Improved wording" };
+  const seen = { Q1: questionFingerprint(original) };
+  assert.deepEqual(unseenQuestions([original], seen), []);
+  assert.deepEqual(unseenQuestions([edited], seen), [edited]);
+});
+
+test("selection history is separated by set, category, and answer mode", () => {
+  const base = selectionSignature({ set: "A", category: "all", mode: "mixed" });
+  assert.equal(base, selectionSignature({ set: "A", category: "all", mode: "mixed" }));
+  assert.notEqual(base, selectionSignature({ set: "B", category: "all", mode: "mixed" }));
+  assert.notEqual(base, selectionSignature({ set: "A", category: "Soils", mode: "mixed" }));
+  assert.notEqual(base, selectionSignature({ set: "A", category: "all", mode: "short_answer" }));
 });

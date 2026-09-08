@@ -28,3 +28,33 @@ export function pickShuffledRound(values, requestedSize, shuffleFn) {
   const randomizedPool = shuffleFn([...values]);
   return randomizedPool.slice(0, Math.min(size, randomizedPool.length));
 }
+
+function fnv1a(value) {
+  let hash = 0x811c9dc5;
+  for (let index = 0; index < value.length; index += 1) {
+    hash ^= value.charCodeAt(index);
+    hash = Math.imul(hash, 0x01000193);
+  }
+  return (hash >>> 0).toString(16).padStart(8, "0");
+}
+
+export function questionFingerprint(question) {
+  return fnv1a(JSON.stringify([
+    question?.id ?? "",
+    question?.prompt ?? "",
+    question?.answer ?? "",
+    question?.format ?? "",
+    question?.choices ?? [],
+    question?.correctChoiceIndex ?? null,
+  ]));
+}
+
+export function selectionSignature({ set = "A", category = "all", mode = "mixed" } = {}) {
+  return [set, category, mode].map((value) => encodeURIComponent(String(value))).join("|");
+}
+
+export function unseenQuestions(values, seenFingerprints = {}) {
+  if (!Array.isArray(values)) throw new TypeError("Question pool must be an array.");
+  const seen = seenFingerprints && typeof seenFingerprints === "object" ? seenFingerprints : {};
+  return values.filter((question) => seen[question.id] !== questionFingerprint(question));
+}

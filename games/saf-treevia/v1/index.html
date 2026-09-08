@@ -14,7 +14,7 @@
       content="Password-protected SAF Quiz Bowl and Tree'via practice for Michigan State forestry students."
     />
     <title>SAF Tree’via | Quiz Bowl Practice</title>
-    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./styles.css?v=20260908fresh" />
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to game</a>
@@ -148,6 +148,10 @@
                   </div>
                   <button id="start-button" class="button button-primary button-large" type="submit">Start round</button>
                 </div>
+                <div class="history-controls">
+                  <p id="history-note" class="control-help" aria-live="polite"></p>
+                  <button id="reset-history-button" class="button button-quiet button-small" type="button">Reset seen-question history</button>
+                </div>
               </form>
 
               <aside class="tier-guide" aria-labelledby="tier-guide-title">
@@ -279,6 +283,6 @@
       </footer>
     </div>
 
-    <script type="module" src="./app.mjs?v=20260908bmc"></script>
+    <script type="module" src="./app.mjs?v=20260908fresh"></script>
   </body>
 </html>

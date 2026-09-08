@@ -1,9 +1,17 @@
 import { evaluateShortAnswer, statusLabel } from "./answer-utils.mjs?v=20260902a";
-import { pickShuffledRound, questionPoolForSet } from "./round-utils.mjs?v=20260907neo";
+import {
+  pickShuffledRound,
+  questionFingerprint,
+  questionPoolForSet,
+  selectionSignature,
+  unseenQuestions,
+} from "./round-utils.mjs?v=20260908fresh";
 
 const ENVELOPE_FORMAT = "saf-treevia-encrypted-v1";
 const PAYLOAD_SCHEMA_VERSION = 1;
 const PAYLOAD_URL = "./questions.enc.json";
+const HISTORY_SCHEMA_VERSION = 1;
+const HISTORY_STORAGE_KEY = "saf-treevia-question-history-v1";
 
 const byId = (id) => document.getElementById(id);
 
@@ -27,6 +35,8 @@ const elements = {
   qualityWarning: byId("quality-warning"),
   availableCount: byId("available-count"),
   availableDetail: byId("available-detail"),
+  historyNote: byId("history-note"),
+  resetHistoryButton: byId("reset-history-button"),
   startButton: byId("start-button"),
   progressLabel: byId("progress-label"),
   roundLabel: byId("round-label"),
@@ -75,9 +85,75 @@ const state = {
   results: [],
   answered: false,
   roundName: "Practice round",
+  activeSelectionSignature: "",
+  seenHistory: { schemaVersion: HISTORY_SCHEMA_VERSION, selections: {} },
+  historyStorageAvailable: true,
 };
 
 class BankLoadError extends Error {}
+
+function emptySeenHistory() {
+  return { schemaVersion: HISTORY_SCHEMA_VERSION, selections: {} };
+}
+
+function sanitizeSeenHistory(value) {
+  if (value?.schemaVersion !== HISTORY_SCHEMA_VERSION || !value.selections || typeof value.selections !== "object") {
+    return emptySeenHistory();
+  }
+  const selections = {};
+  for (const [signature, rawSeen] of Object.entries(value.selections)) {
+    if (!signature || !rawSeen || typeof rawSeen !== "object" || Array.isArray(rawSeen)) continue;
+    const seen = {};
+    for (const [questionId, fingerprint] of Object.entries(rawSeen)) {
+      if (questionId && typeof fingerprint === "string" && /^[0-9a-f]{8}$/.test(fingerprint)) {
+        seen[questionId] = fingerprint;
+      }
+    }
+    if (Object.keys(seen).length) selections[signature] = seen;
+  }
+  return { schemaVersion: HISTORY_SCHEMA_VERSION, selections };
+}
+
+function loadSeenHistory() {
+  state.historyStorageAvailable = true;
+  try {
+    const saved = localStorage.getItem(HISTORY_STORAGE_KEY);
+    state.seenHistory = saved ? sanitizeSeenHistory(JSON.parse(saved)) : emptySeenHistory();
+  } catch {
+    state.seenHistory = emptySeenHistory();
+    state.historyStorageAvailable = false;
+  }
+}
+
+function saveSeenHistory() {
+  if (!state.historyStorageAvailable) return;
+  try {
+    localStorage.setItem(HISTORY_STORAGE_KEY, JSON.stringify(state.seenHistory));
+  } catch {
+    state.historyStorageAvailable = false;
+  }
+}
+
+function currentSelectionSignature() {
+  return selectionSignature({
+    set: elements.setSelect.value,
+    category: elements.categorySelect.value,
+    mode: checkedMode(),
+  });
+}
+
+function seenForSelection(signature = currentSelectionSignature()) {
+  return state.seenHistory.selections[signature] ?? {};
+}
+
+function markQuestionSeen(question) {
+  if (!state.activeSelectionSignature || !question?.id) return;
+  const fingerprint = questionFingerprint(question);
+  const seen = seenForSelection(state.activeSelectionSignature);
+  if (seen[question.id] === fingerprint) return;
+  state.seenHistory.selections[state.activeSelectionSignature] = { ...seen, [question.id]: fingerprint };
+  saveSeenHistory();
+}
 
 function base64Bytes(value) {
   const binary = atob(value);
@@ -184,6 +260,7 @@ async function unlock(event) {
   elements.gateStatus.textContent = "Opening the question bank…";
   try {
     state.bank = await decryptBank(password);
+    loadSeenHistory();
     elements.passwordInput.value = "";
     elements.gateStatus.textContent = "";
     elements.gateView.hidden = true;
@@ -212,6 +289,7 @@ function lockGame() {
   state.results = [];
   state.currentIndex = 0;
   state.answered = false;
+  state.activeSelectionSignature = "";
   elements.gameView.hidden = true;
   elements.gateView.hidden = false;
   elements.lockButton.hidden = true;
@@ -297,8 +375,16 @@ function refreshSetup({ rebuildCategories: shouldRebuildCategories = false } = {
   const pool = baseQuestionPool();
   const multipleChoice = pool.filter((question) => question.format === "multiple_choice").length;
   const shortAnswer = pool.length - multipleChoice;
+  const unseen = unseenQuestions(pool, seenForSelection());
+  const seenCount = pool.length - unseen.length;
   elements.availableCount.textContent = `${pool.length.toLocaleString()} question${pool.length === 1 ? "" : "s"} available`;
-  elements.availableDetail.textContent = `${multipleChoice.toLocaleString()} multiple choice · ${shortAnswer.toLocaleString()} short answer`;
+  elements.availableDetail.textContent = `${multipleChoice.toLocaleString()} multiple choice · ${shortAnswer.toLocaleString()} short answer · ${unseen.length.toLocaleString()} unseen on this browser`;
+  elements.historyNote.textContent = state.historyStorageAvailable
+    ? unseen.length === 0 && pool.length
+      ? "You’ve seen every question in this selection. Your next round will begin a fresh pass."
+      : "New rounds draw only from unseen questions until this selection is exhausted. Retry rounds still focus on answers you missed."
+    : "Saved history is unavailable in this browser. Repeats are still avoided during this open game session.";
+  elements.resetHistoryButton.disabled = seenCount === 0;
   elements.startButton.disabled = pool.length === 0;
 
   const lowerConfidence = selectedSetIncludesLowerConfidence();
@@ -334,8 +420,17 @@ function currentSetLabel() {
 
 function startRound(event) {
   event?.preventDefault();
-  const pool = baseQuestionPool();
-  if (!pool.length) return;
+  const fullPool = baseQuestionPool();
+  if (!fullPool.length) return;
+  const signature = currentSelectionSignature();
+  let pool = unseenQuestions(fullPool, seenForSelection(signature));
+  let freshPass = false;
+  if (!pool.length) {
+    delete state.seenHistory.selections[signature];
+    saveSeenHistory();
+    pool = fullPool;
+    freshPass = true;
+  }
   const requestedSize = elements.roundSize.value === "all"
     ? pool.length
     : Number.parseInt(elements.roundSize.value, 10);
@@ -349,7 +444,8 @@ function startRound(event) {
   state.currentIndex = 0;
   state.results = [];
   state.answered = false;
-  state.roundName = `${currentSetLabel()} · ${categoryLabel} · ${modeLabel}`;
+  state.activeSelectionSignature = signature;
+  state.roundName = `${currentSetLabel()} · ${categoryLabel} · ${modeLabel}${freshPass ? " · Fresh pass" : ""}`;
   showPanel("question");
   renderQuestion();
 }
@@ -374,6 +470,7 @@ function renderQuestion() {
     finishRound();
     return;
   }
+  markQuestionSeen(question);
   state.answered = false;
   elements.progressLabel.textContent = `Question ${state.currentIndex + 1} of ${state.round.length}`;
   elements.roundLabel.textContent = state.roundName;
@@ -607,9 +704,18 @@ function newRound() {
   state.results = [];
   state.currentIndex = 0;
   state.answered = false;
+  state.activeSelectionSignature = "";
   showPanel("setup");
   refreshSetup({ rebuildCategories: true });
   elements.setSelect.focus();
+}
+
+function resetSeenHistoryForSelection() {
+  delete state.seenHistory.selections[currentSelectionSignature()];
+  saveSeenHistory();
+  refreshSetup();
+  elements.historyNote.textContent = "Seen-question history reset for this selection. Every matching question is available again.";
+  elements.startButton.focus();
 }
 
 function handleChoiceShortcut(event) {
@@ -647,6 +753,7 @@ elements.nextButton.addEventListener("click", nextQuestion);
 elements.endRoundButton.addEventListener("click", finishRound);
 elements.retryButton.addEventListener("click", retryMissed);
 elements.newRoundButton.addEventListener("click", newRound);
+elements.resetHistoryButton.addEventListener("click", resetSeenHistoryForSelection);
 document.addEventListener("keydown", handleChoiceShortcut);
 
 elements.passwordInput.focus();
