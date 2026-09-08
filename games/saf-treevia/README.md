@@ -55,6 +55,8 @@ Hard mode presents all 238 original prompts and answer keys as short answer, rem
 
 The separate Neo-generated option selects 250 advanced, source-checked B-tier practice questions: 166 multiple choice and 84 short answer. These prompts and distractors are newly authored rather than official SAF material, and their item-level source metadata remains in the master bank.
 
+The full B-tier option contains 813 questions: 499 multiple choice and 314 written answer. Among the 563 pre-existing B-tier source questions, 333 concise single-best-answer prompts now have four newly authored practice choices and 230 calculations, lists, multipart or identification activities, context-dependent prompts, questionable or outdated source keys, and open responses remain written answer. The source questions and keyed answers are unchanged, and each converted row identifies its distractors as practice adaptations rather than historical source options.
+
 For every new round, the game shuffles the full eligible question pool before applying the requested round length; it never takes the first rows from the workbook. Multiple-choice options are shuffled separately. The retry action then reshuffles only the questions marked missed or close, retaining their practice format.
 
 The September 3, 2026 bank includes all 243 cards from the user's three attached Quizlet PDFs as 238 unique A-tier questions (five duplicates resolve to those questions). This is user-designated tier placement, not a claim that every card is official SAF or independently fact-checked. PDF title and page/card locator appear with each answer; review cautions are displayed after grading. Online-only catalog decks remain separate.

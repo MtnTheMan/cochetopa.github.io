@@ -275,7 +275,7 @@ function setDescription() {
     quizlet: "The attached Quizlet cards with multiple choice where useful and short answer where recall fits better. Added answer choices are practice adaptations, not original PDF choices.",
     quizlet_hard: "The exact same Quizlet questions and answers, all in short-answer form with no choices. Includes every question from the mixed set.",
     neo: "250 newly authored, source-checked B-tier questions designed for advanced Quiz Bowl practice.",
-    B: "Supplemental questions from other reputable sources.",
+    B: "Supplemental questions from other reputable sources, with multiple choice where one best answer supports credible distractors and written answer for calculations, lists, and open responses.",
     C: "Legacy generated, older, or less directly relevant practice questions.",
     Other: "Archived questions kept with their original source information for review.",
   };
