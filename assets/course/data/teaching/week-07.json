@@ -2,11 +2,11 @@
   "$schema": "cochetopa-public-teaching-package/1.0",
   "schemaVersion": "1.0.0",
   "courseId": "northern-hardwoods-mixedwoods-dendrology-silvics-intensive",
-  "courseVersion": "2026.1-draft",
+  "courseVersion": "2026.1",
   "moduleId": "week-07",
   "sequence": 7,
   "title": "Hickories, Walnuts, and Allegheny/Southern Associates",
-  "deliveryStatus": "teaching_text_complete_visual_media_pending_admission",
+  "deliveryStatus": "published",
   "objectives": [
     "Discriminate regional hickories and walnuts using leaf, bud, pith, nut, husk, and bark combinations.",
     "Identify Allegheny and southern-transition associates from unfamiliar organs and whole-tree context.",

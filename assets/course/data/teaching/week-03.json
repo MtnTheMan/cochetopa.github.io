@@ -2,11 +2,11 @@
   "$schema": "cochetopa-public-teaching-package/1.0",
   "schemaVersion": "1.0.0",
   "courseId": "northern-hardwoods-mixedwoods-dendrology-silvics-intensive",
-  "courseVersion": "2026.1-draft",
+  "courseVersion": "2026.1",
   "moduleId": "week-03",
   "sequence": 3,
   "title": "Coniferous Mixedwoods",
-  "deliveryStatus": "teaching_text_complete_visual_media_pending_admission",
+  "deliveryStatus": "published",
   "objectives": [
     "Separate spruce, fir, hemlock, pine, larch, cedar, and juniper from needle attachment and arrangement.",
     "Discriminate four spruces and the red, jack, Scots, and pitch-pine comparison framework using cones, buds, foliage, bark, and form.",

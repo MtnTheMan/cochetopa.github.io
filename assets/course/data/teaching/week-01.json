@@ -2,11 +2,11 @@
   "$schema": "cochetopa-public-teaching-package/1.0",
   "schemaVersion": "1.0.0",
   "courseId": "northern-hardwoods-mixedwoods-dendrology-silvics-intensive",
-  "courseVersion": "2026.1-draft",
+  "courseVersion": "2026.1",
   "moduleId": "week-01",
   "sequence": 1,
   "title": "Foundations + Northern Hardwood Anchors",
-  "deliveryStatus": "interactive_public_development_preview",
+  "deliveryStatus": "published",
   "objectives": [
     "Apply dendrological vocabulary and the maximum-defensible-rank decision rule.",
     "Identify the northern-hardwood anchor taxa from unfamiliar foliage, bark, reproductive, dormant, and whole-tree evidence where defensible.",

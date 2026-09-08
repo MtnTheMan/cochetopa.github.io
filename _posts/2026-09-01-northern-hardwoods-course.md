@@ -51,7 +51,7 @@ The course keeps a mastery record by species and evidence type, schedules weak m
 
 ## Taking the course
 
-You can [open the course here](/course/) and look through the syllabus and first module. An email address is enough to create an account; sign-in uses an emailed link rather than a password. Progress, grades, mastery, and remediation follow the learner between devices. Encouragement emails are optional and remain off unless the learner turns them on.
+You can [open the complete course here](/course/). All ten modules, the cumulative practicals, the midterm, and the final examination are available now. An email address is enough to create an account; sign-in uses an emailed link rather than a password. Progress, grades, mastery, and remediation follow the learner between devices. Encouragement emails are optional and remain off unless the learner turns them on.
 
 This is the first public release, and it is intentionally more demanding than a casual tree-identification quiz. It is meant to reward durable recognition, careful discrimination, and the ability to make a defensible call from whatever evidence a tree happens to give you.
 

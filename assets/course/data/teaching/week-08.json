@@ -2,11 +2,11 @@
   "$schema": "cochetopa-public-teaching-package/1.0",
   "schemaVersion": "1.0.0",
   "courseId": "northern-hardwoods-mixedwoods-dendrology-silvics-intensive",
-  "courseVersion": "2026.1-draft",
+  "courseVersion": "2026.1",
   "moduleId": "week-08",
   "sequence": 8,
   "title": "Acadian and Eastern Regional Integration",
-  "deliveryStatus": "teaching_text_complete_visual_media_pending_admission",
+  "deliveryStatus": "published",
   "objectives": [
     "Identify Atlantic white-cedar and pitch pine and place them against their closest regional confusers.",
     "Transfer identification of learned taxa across Acadian, New England, New York, eastern Canadian, and Great Lakes appearances.",

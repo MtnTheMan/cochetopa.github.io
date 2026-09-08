@@ -104,6 +104,113 @@
   text-transform: uppercase;
 }
 
+.course-nav__week {
+  margin-top: 0.45rem;
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.course-nav__week > summary {
+  min-height: 3.25rem;
+  padding: 0.7rem 0.75rem;
+  color: #edf5ef;
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.65rem;
+}
+
+.course-nav__week > summary::-webkit-details-marker {
+  display: none;
+}
+
+.course-nav__week > summary::before {
+  content: "›";
+  flex: 0 0 auto;
+  color: #bcd8c5;
+  font-size: 1.15rem;
+  line-height: 1;
+  transform: rotate(0);
+  transition: transform 150ms ease;
+}
+
+.course-nav__week[open] > summary::before {
+  transform: rotate(90deg);
+}
+
+.course-nav__week[open] > summary {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.course-nav__week > summary > span:first-of-type {
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.course-nav__week summary strong,
+.course-nav__week summary small {
+  display: block;
+  font-family: Mulish, sans-serif;
+}
+
+.course-nav__week summary strong {
+  font-size: 0.82rem;
+}
+
+.course-nav__week summary small {
+  margin-top: 0.15rem;
+  color: #bcd8c5;
+  font-size: 0.67rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.course-nav__week-progress {
+  flex: 0 0 auto;
+  padding: 0.2rem 0.4rem;
+  color: #eff8f1;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  font-family: Mulish, sans-serif;
+  font-size: 0.66rem;
+  font-weight: 800;
+}
+
+.course-nav__week-links {
+  padding: 0.25rem 0.35rem 0.45rem;
+}
+
+.course-nav__week-links .course-nav__link {
+  padding-left: 0.8rem;
+  font-size: 0.79rem;
+}
+
+.course-nav__label {
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.course-nav__status {
+  flex: 0 0 1rem;
+  min-width: 1rem;
+  color: #c5dcad;
+  font-size: 0;
+  text-align: center;
+}
+
+.course-nav__status:not(:empty)::before {
+  content: "✓";
+  font-size: 0.78rem;
+  font-weight: 900;
+}
+
+.course-nav__home {
+  margin-bottom: 0.35rem;
+}
+
 .course-nav__link {
   width: 100%;
   padding: 0.72rem 0.75rem;
@@ -115,6 +222,10 @@
   font-size: 0.9rem;
   text-align: left;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem;
 }
 
 .course-nav__link:hover,
@@ -177,7 +288,7 @@
 }
 
 .course-progress {
-  width: min(360px, 100%);
+  width: min(430px, 100%);
 }
 
 .course-progress__labels {
@@ -1192,6 +1303,10 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .course-nav__week > summary::before {
+    transition: none;
+  }
+
   .course-progress__meter::-webkit-progress-value,
   .course-progress__meter::-moz-progress-bar {
     transition: none;

@@ -16,7 +16,7 @@ layout: default
     <div class="course-sidebar__brand">
       <p class="course-sidebar__eyebrow">Self-paced field course</p>
       <p class="course-sidebar__title">Northern Hardwoods &amp; Mixedwoods</p>
-      <p class="course-sidebar__note">Local progress works now; email sign-in and cloud sync are the final deployment step.</p>
+      <p class="course-sidebar__note">Your work saves on this device; email sign-in adds cross-device progress, grades, and optional reminders.</p>
     </div>
 
     <nav class="course-nav" id="course-nav" aria-label="Course activities">
@@ -27,12 +27,12 @@ layout: default
   <div class="course-workspace">
     <header class="course-topbar">
       <button class="course-menu-button" id="course-menu-button" type="button" aria-expanded="false" aria-controls="course-mobile-nav">Menu</button>
-      <div class="course-progress" aria-label="Week 1 preview progress">
+      <div class="course-progress" aria-label="Complete course progress">
         <div class="course-progress__labels">
-          <span>Preview progress</span>
-          <strong id="course-progress-label">0 of 7 activities</strong>
+          <span>Course progress</span>
+          <strong id="course-progress-label">0 course activities</strong>
         </div>
-        <progress class="course-progress__meter" id="course-progress-bar" max="7" value="0">0 of 7 activities</progress>
+        <progress class="course-progress__meter" id="course-progress-bar" max="1" value="0">0 course activities</progress>
       </div>
       <section class="course-account" id="course-account" data-config-url="{{ '/assets/course/data/runtime-config.json' | relative_url }}" aria-label="Course account">
         <p id="course-account-status" role="status">Checking cloud sign-in…</p>
@@ -57,7 +57,7 @@ layout: default
     <p class="course-storage-status" id="course-storage-status" role="status" hidden></p>
 
     <main class="course-view" id="course-view" tabindex="-1" aria-live="polite">
-      <div class="course-loading" role="status">Loading the Week 1 preview…</div>
+      <div class="course-loading" role="status">Loading the complete course…</div>
     </main>
   </div>
 
@@ -70,7 +70,7 @@ layout: default
   </dialog>
 
   <noscript>
-    <p class="course-noscript">This interactive preview requires JavaScript. The public course description remains available on the Course page.</p>
+    <p class="course-noscript">This interactive course requires JavaScript. The course description remains available from the main site.</p>
   </noscript>
 </div>
 

@@ -2,11 +2,11 @@
   "$schema": "cochetopa-public-teaching-package/1.0",
   "schemaVersion": "1.0.0",
   "courseId": "northern-hardwoods-mixedwoods-dendrology-silvics-intensive",
-  "courseVersion": "2026.1-draft",
+  "courseVersion": "2026.1",
   "moduleId": "week-04",
   "sequence": 4,
   "title": "Boreal and Great Lakes Transition",
-  "deliveryStatus": "teaching_text_complete_visual_media_pending_admission",
+  "deliveryStatus": "published",
   "objectives": [
     "Identify boreal-transition Populus, alder, and mountain-ash taxa from organs and whole-tree form.",
     "Transfer earlier hardwood and conifer identifications into western Great Lakes and southern boreal contexts.",

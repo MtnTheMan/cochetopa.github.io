@@ -27,6 +27,7 @@ def main() -> int:
         ROOT / "assets" / "course" / "data" / "runtime-config.json",
         ROOT / "supabase" / "migrations" / "202608310001_course_schema.sql",
         ROOT / "supabase" / "migrations" / "202609010002_nonvisual_grading.sql",
+        ROOT / "supabase" / "migrations" / "202609070002_publish_course_progress.sql",
     ]
     missing = [str(path.relative_to(ROOT)) for path in required if not path.is_file()]
     require(not missing, f"missing files: {', '.join(missing)}")
@@ -34,9 +35,19 @@ def main() -> int:
     catalog = json.loads((ROOT / "assets" / "course" / "data" / "course-catalog.json").read_text(encoding="utf-8"))
     media = json.loads((ROOT / "assets" / "course" / "data" / "public-media.json").read_text(encoding="utf-8"))
     config = json.loads((ROOT / "assets" / "course" / "data" / "runtime-config.json").read_text(encoding="utf-8"))
+    require(catalog.get("status") == "published", "catalog is not marked published")
     require(catalog.get("moduleCount") == 10, "catalog does not contain ten modules")
     require(catalog.get("taxonCount") == 80, "catalog does not contain 80 taxa")
     require(catalog.get("gradedAssessmentCount") == 32, "catalog does not contain 32 graded assessments")
+    require(
+        all(module.get("deliveryStatus") == "published" for module in catalog.get("modules", [])),
+        "one or more course modules are not marked published",
+    )
+    activity_count = 7 + len(catalog["modules"][0].get("assessments", [])) + sum(
+        1 + len(module.get("sessions", [])) + len(module.get("assessments", []))
+        for module in catalog["modules"][1:]
+    )
+    require(activity_count == 93, "course activity tracker does not cover all 93 activities")
     summary = media.get("summary", {})
     require(summary.get("mediaCount") == 1083, "public teaching/practice media count changed")
     require(summary.get("taxaCount") == 80, "public media does not cover all 80 taxa")
@@ -54,10 +65,21 @@ def main() -> int:
 
     app = (ROOT / "assets" / "course" / "app.js").read_text(encoding="utf-8")
     auth = (ROOT / "assets" / "course" / "auth.js").read_text(encoding="utf-8")
-    for token in ("pendingNonvisual", "renderReviewerQueue", 'data-part="visual"', 'data-part="nonvisual"'):
+    for token in (
+        "pendingNonvisual",
+        "renderReviewerQueue",
+        'data-part="visual"',
+        'data-part="nonvisual"',
+        "courseActivityRecords",
+        "course-nav__week",
+        "refreshFormalTracking",
+    ):
         require(token in app, f"course application missing {token}")
     for token in ("signInWithOtp", "submitFormalItem", "getReviewQueue", "getGradeSummary"):
         require(token in auth, f"authentication client missing {token}")
+    progress_sql = (ROOT / "supabase" / "migrations" / "202609070002_publish_course_progress.sql").read_text(encoding="utf-8")
+    for token in ("course_grade_summary", "assessmentId", "submittedItems"):
+        require(token in progress_sql, f"course progress migration missing {token}")
 
     if config.get("cloudFeaturesEnabled"):
         require(str(config.get("supabaseUrl", "")).startswith("https://"), "enabled cloud config lacks Supabase URL")
@@ -70,6 +92,7 @@ def main() -> int:
     print("assessments=32")
     print("public_media=1083")
     print("private_exam_assets_exposed=0")
+    print("course_activity_tracker=93")
     print(f"cloud_features_enabled={str(bool(config.get('cloudFeaturesEnabled'))).lower()}")
     return 0
 

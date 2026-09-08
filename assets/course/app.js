@@ -7,7 +7,8 @@ const menuButton = document.querySelector("#course-menu-button");
 const imageDialog = document.querySelector("#course-image-dialog");
 const storageStatus = document.querySelector("#course-storage-status");
 const storageSchemaVersion = 2;
-const storageKey = "cochetopa-northern-hardwoods-preview-v2";
+const storageKey = "cochetopa-northern-hardwoods-course-v2";
+const legacyStorageKey = "cochetopa-northern-hardwoods-preview-v2";
 
 let course;
 let courseCatalog;
@@ -16,6 +17,8 @@ let mediaById = new Map();
 const teachingPackages = new Map();
 const formalForms = new Map();
 let storageAvailable = true;
+let pendingCloudState = window.cochetopaCloudSnapshot || null;
+let formalTrackingRefresh = null;
 let state = loadState();
 
 function blankAssessment() {
@@ -29,6 +32,8 @@ function defaultState(courseVersion = null) {
     completed: [],
     completedRoutes: [],
     practiceSessions: {},
+    formalAssessments: {},
+    gradeSummary: null,
     assessments: {
       visualLab: blankAssessment(),
       confuserLab: blankAssessment(),
@@ -43,13 +48,16 @@ function defaultState(courseVersion = null) {
 
 function loadState() {
   try {
-    const parsed = JSON.parse(localStorage.getItem(storageKey));
+    const serialized = localStorage.getItem(storageKey) || localStorage.getItem(legacyStorageKey);
+    const parsed = JSON.parse(serialized);
     if (!parsed || parsed.storageSchemaVersion !== storageSchemaVersion || !Array.isArray(parsed.completed)) {
       return defaultState();
     }
     parsed.assessments ||= {};
     parsed.completedRoutes ||= [];
     parsed.practiceSessions ||= {};
+    parsed.formalAssessments ||= {};
+    parsed.gradeSummary ||= null;
     ["visualLab", "confuserLab", "multiOrganLab", "checkpoint", "nomenclatureDrill", "silvicsDrill", "weeklyPractical"].forEach((key) => {
       parsed.assessments[key] ||= blankAssessment();
       parsed.assessments[key].itemOrder ||= [];
@@ -64,12 +72,13 @@ function loadState() {
 function saveState() {
   try {
     localStorage.setItem(storageKey, JSON.stringify(state));
+    localStorage.removeItem(legacyStorageKey);
     storageAvailable = true;
     if (storageStatus) storageStatus.hidden = true;
   } catch {
     storageAvailable = false;
     if (storageStatus) {
-      storageStatus.textContent = "This browser blocked local preview storage. Your responses will remain only until this page is closed or reloaded.";
+      storageStatus.textContent = "This browser blocked local course storage. Your responses will remain only until this page is closed or reloaded.";
       storageStatus.hidden = false;
     }
   }
@@ -79,7 +88,7 @@ function saveState() {
 
 function prepareStateForCourse() {
   if (state.courseVersion !== course.courseVersion) {
-    state = defaultState(course.courseVersion);
+    state.courseVersion = course.courseVersion;
     saveState();
   }
 }
@@ -115,15 +124,232 @@ function markComplete(activityId) {
   }
 }
 
+function markRouteComplete(route) {
+  if (!state.completedRoutes.includes(route)) {
+    state.completedRoutes.push(route);
+    saveState();
+  }
+}
+
+function formalAssessmentComplete(record) {
+  if (!record) return false;
+  if (Number(record.totalItems) > 0 && Number(record.submittedItems) >= Number(record.totalItems)) return true;
+  return ["awaiting_review", "completed", "submitted", "locked"].includes(record.status);
+}
+
+function weekOneActivityRoute(activityId) {
+  const routes = {
+    briefing: "week-01",
+    "session-a": "week-01/session-a",
+    "visual-lab": "week-01/visual-lab",
+    "confuser-lab": "week-01/confuser-lab",
+    "multi-organ-lab": "week-01/multi-organ-lab",
+    checkpoint: "week-01/checkpoint",
+    "weekly-practical": "week-01/weekly-practical",
+  };
+  return routes[activityId];
+}
+
+function moduleActivityRecords(module) {
+  if (!course || !courseCatalog) return [];
+  const learningActivities = module.sequence === 1
+    ? course.week.activities.map((activity) => ({
+        key: `week-01:${activity.id}`,
+        label: activity.title,
+        route: weekOneActivityRoute(activity.id),
+        complete: state.completed.includes(activity.id),
+      }))
+    : [
+        {
+          key: `route:${module.moduleId}`,
+          label: "Week briefing",
+          route: module.moduleId,
+          complete: state.completedRoutes.includes(module.moduleId),
+        },
+        ...module.sessions.map((session) => {
+          const route = `${module.moduleId}/session-${session.letter.toLowerCase()}`;
+          return {
+            key: `route:${route}`,
+            label: `Session ${session.letter} · ${session.title}`,
+            route,
+            complete: state.completedRoutes.includes(route),
+          };
+        }),
+      ];
+  const assessments = module.assessments.map((assessment) => ({
+    key: `formal:${assessment.assessmentId}`,
+    label: `Assessment · ${assessment.assessmentId}`,
+    route: `formal/${encodeURIComponent(assessment.assessmentId)}`,
+    complete: formalAssessmentComplete(state.formalAssessments[assessment.assessmentId]),
+  }));
+  return [...learningActivities, ...assessments];
+}
+
+function courseActivityRecords() {
+  if (!courseCatalog) return [];
+  return courseCatalog.modules.flatMap(moduleActivityRecords);
+}
+
+function moduleProgress(module) {
+  const activities = moduleActivityRecords(module);
+  return {
+    completed: activities.filter((activity) => activity.complete).length,
+    total: activities.length,
+  };
+}
+
+function courseProgressTotals() {
+  const activities = courseActivityRecords();
+  return {
+    completed: activities.filter((activity) => activity.complete).length,
+    total: activities.length,
+  };
+}
+
+function nextCourseActivity() {
+  return courseActivityRecords().find((activity) => !activity.complete) || null;
+}
+
+function rememberFormalForm(form) {
+  if (!form?.assessmentId) return;
+  const visualItems = form.stations || [];
+  const nonvisualItems = form.items || [];
+  const next = {
+    status: form.status || "assembled",
+    totalItems: visualItems.length + nonvisualItems.length,
+    submittedItems: visualItems.filter((item) => item.submitted).length + nonvisualItems.filter((item) => item.submitted).length,
+  };
+  const previous = state.formalAssessments[form.assessmentId];
+  if (JSON.stringify(previous) !== JSON.stringify(next)) {
+    state.formalAssessments[form.assessmentId] = next;
+    saveState();
+  }
+}
+
+async function refreshFormalTracking({ rerender = false } = {}) {
+  const auth = window.cochetopaAuth;
+  if (!course || !auth?.enabled || !auth.signedIn()) return null;
+  if (formalTrackingRefresh) return formalTrackingRefresh;
+  formalTrackingRefresh = (async () => {
+    const summary = await auth.getGradeSummary();
+    state.gradeSummary = {
+      runningGrade: summary.runningGrade ?? null,
+      earnedWeight: Number(summary.earnedWeight || 0),
+      categories: summary.categories || [],
+    };
+    for (const assessment of summary.assessments || []) {
+      state.formalAssessments[assessment.assessmentId] = {
+        status: assessment.status,
+        totalItems: Number(assessment.totalItems || 0),
+        submittedItems: Number(assessment.submittedItems || 0),
+      };
+    }
+    saveState();
+    return summary;
+  })();
+  try {
+    const summary = await formalTrackingRefresh;
+    if (rerender && ["dashboard", ...courseCatalog.modules.map((module) => module.moduleId)].includes(currentRoute())) {
+      await renderRoute();
+    }
+    return summary;
+  } catch (error) {
+    console.warn("Course grade summary refresh failed.", error);
+    return null;
+  } finally {
+    formalTrackingRefresh = null;
+  }
+}
+
+function mergeAssessmentState(local = blankAssessment(), remote = blankAssessment()) {
+  const remotePreferred = remote.submitted && !local.submitted;
+  if (remotePreferred) {
+    return {
+      ...local,
+      ...remote,
+      responses: { ...(remote.responses || {}) },
+      itemOrder: remote.itemOrder?.length ? remote.itemOrder : (local.itemOrder || []),
+    };
+  }
+  const merged = { ...remote, ...local };
+  merged.responses = { ...(remote.responses || {}), ...(local.responses || {}) };
+  merged.itemOrder = local.itemOrder?.length ? local.itemOrder : (remote.itemOrder || []);
+  return merged;
+}
+
+function mergePracticeState(local, remote) {
+  if (!local) return remote;
+  if (!remote) return local;
+  if (remote.submitted && !local.submitted) return remote;
+  return {
+    ...remote,
+    ...local,
+    responses: { ...(remote.responses || {}), ...(local.responses || {}) },
+    itemOrder: local.itemOrder?.length ? local.itemOrder : (remote.itemOrder || []),
+  };
+}
+
+function applyCloudState(cloud, { rerender = true } = {}) {
+  if (!cloud || cloud.storageSchemaVersion !== storageSchemaVersion) return false;
+  state.completed = [...new Set([...(cloud.completed || []), ...state.completed])];
+  state.completedRoutes = [...new Set([...(cloud.completedRoutes || []), ...(state.completedRoutes || [])])];
+
+  const practiceRoutes = new Set([
+    ...Object.keys(cloud.practiceSessions || {}),
+    ...Object.keys(state.practiceSessions || {}),
+  ]);
+  state.practiceSessions = Object.fromEntries(
+    [...practiceRoutes].map((route) => [
+      route,
+      mergePracticeState(state.practiceSessions?.[route], cloud.practiceSessions?.[route]),
+    ])
+  );
+
+  for (const key of Object.keys(state.assessments)) {
+    state.assessments[key] = mergeAssessmentState(state.assessments[key], cloud.assessments?.[key]);
+  }
+
+  for (const [assessmentId, remote] of Object.entries(cloud.formalAssessments || {})) {
+    const local = state.formalAssessments[assessmentId];
+    if (!local || Number(remote.submittedItems || 0) > Number(local.submittedItems || 0)) {
+      state.formalAssessments[assessmentId] = remote;
+    }
+  }
+  if (!state.gradeSummary && cloud.gradeSummary) state.gradeSummary = cloud.gradeSummary;
+  state.courseVersion = course?.courseVersion || state.courseVersion;
+  saveState();
+  if (rerender) renderRoute();
+  return true;
+}
+
+function refreshNavigationState() {
+  if (!courseCatalog) return;
+  const activities = new Map(courseActivityRecords().map((activity) => [activity.key, activity]));
+  document.querySelectorAll(".course-nav__link[data-track-key]").forEach((button) => {
+    const complete = Boolean(activities.get(button.dataset.trackKey)?.complete);
+    button.classList.toggle("course-nav__link--complete", complete);
+    const status = button.querySelector(".course-nav__status");
+    if (status) status.textContent = complete ? "Complete" : "";
+  });
+  document.querySelectorAll(".course-nav__week[data-module-id]").forEach((group) => {
+    const module = courseCatalog.modules.find((candidate) => candidate.moduleId === group.dataset.moduleId);
+    if (!module) return;
+    const progress = moduleProgress(module);
+    const badge = group.querySelector(".course-nav__week-progress");
+    if (badge) badge.textContent = `${progress.completed}/${progress.total}`;
+  });
+}
+
 function updateProgress() {
-  const total = course?.week.activities.length || 7;
-  const completed = course
-    ? course.week.activities.filter((activity) => state.completed.includes(activity.id)).length
-    : 0;
-  progressLabel.textContent = `${completed} of ${total} activities`;
-  progressBar.max = total;
-  progressBar.value = completed;
-  progressBar.textContent = `${completed} of ${total} activities`;
+  const progress = courseProgressTotals();
+  const total = progress.total || 1;
+  if (progressLabel) progressLabel.textContent = `${progress.completed} of ${progress.total} course activities`;
+  if (progressBar) {
+    progressBar.max = total;
+    progressBar.value = progress.completed;
+    progressBar.textContent = `${progress.completed} of ${progress.total} course activities`;
+  }
+  refreshNavigationState();
 }
 
 function sessionEIsComplete() {
@@ -153,18 +379,22 @@ function go(route) {
 }
 
 function setActiveNavigation(route) {
-  const laterWeekSession = route.match(/^(week-(?:0[2-9]|10))\/session-[a-e]$/);
-  const activeRoute = laterWeekSession
-    ? laterWeekSession[1]
-    : route.startsWith("week-01/session-e/")
-      ? "week-01/checkpoint"
-      : route;
+  const activeRoute = route.startsWith("week-01/session-e/")
+    ? "week-01/checkpoint"
+    : route;
+  const formalMatch = route.match(/^formal\/(.+)$/);
+  const formalRecord = formalMatch ? assessmentCatalogRecord(decodeURIComponent(formalMatch[1])) : null;
+  const moduleId = formalRecord?.module.moduleId || route.match(/^(week-(?:0[1-9]|10))/)?.[1] || null;
+
   document.querySelectorAll(".course-nav__link").forEach((button) => {
     if (button.dataset.route === activeRoute) {
       button.setAttribute("aria-current", "page");
     } else {
       button.removeAttribute("aria-current");
     }
+  });
+  document.querySelectorAll(".course-nav__week").forEach((group) => {
+    group.open = Boolean(moduleId && group.dataset.moduleId === moduleId);
   });
 }
 
@@ -294,34 +524,28 @@ function completionButton(activityId, nextRoute, label = "Mark complete and cont
 }
 
 function renderDashboard() {
-  const completed = course.week.activities.filter((activity) => state.completed.includes(activity.id)).length;
-  const firstIncomplete = course.week.activities.find((activity) => !state.completed.includes(activity.id));
-  const routeByActivity = {
-    briefing: "week-01",
-    "session-a": "week-01/session-a",
-    "visual-lab": "week-01/visual-lab",
-    "confuser-lab": "week-01/confuser-lab",
-    "multi-organ-lab": "week-01/multi-organ-lab",
-    checkpoint: "week-01/checkpoint",
-    "weekly-practical": "week-01/weekly-practical",
-  };
-  let resumeRoute = firstIncomplete ? routeByActivity[firstIncomplete.id] : "week-01/weekly-practical";
-  if (firstIncomplete?.id === "checkpoint") resumeRoute = firstMissingSessionERoute();
+  const progress = courseProgressTotals();
+  const nextActivity = nextCourseActivity();
+  const resumeRoute = nextActivity?.route || "week-10";
+  const completedFormal = courseCatalog.modules
+    .flatMap((module) => module.assessments)
+    .filter((assessment) => formalAssessmentComplete(state.formalAssessments[assessment.assessmentId]))
+    .length;
+  const grade = state.gradeSummary?.runningGrade;
+  const gradeText = grade == null ? "Sign in to show a running grade." : `Current running grade: ${grade}%.`;
 
   const moduleCards = courseCatalog.modules.map((module) => {
-    const status = module.sequence === 1
-      ? "Interactive public preview"
-      : "Visual lessons and practice active";
+    const moduleStatus = moduleProgress(module);
     const taxonLine = module.newTaxa.length
       ? `${module.newTaxa.length} new taxa · ${module.cumulativeEligibleTaxa} cumulative`
       : `${module.cumulativeEligibleTaxa} cumulative taxa · no new taxa`;
     return `
       <article class="course-module-card">
-        <div class="course-module-card__topline"><span>Week ${module.sequence}</span><span>${escapeHtml(status)}</span></div>
+        <div class="course-module-card__topline"><span>Week ${module.sequence}</span><span>${moduleStatus.completed}/${moduleStatus.total} complete</span></div>
         <h3>${escapeHtml(module.title)}</h3>
         <p>${escapeHtml(taxonLine)}</p>
         <p>${module.sessions.length} sessions · ${module.assessments.length} graded assessment${module.assessments.length === 1 ? "" : "s"}</p>
-        <button class="course-link-button js-route" type="button" data-route="${escapeHtml(module.moduleId)}">View week plan</button>
+        <button class="course-link-button js-route" type="button" data-route="${escapeHtml(module.moduleId)}">Open Week ${module.sequence}</button>
       </article>
     `;
   }).join("");
@@ -330,17 +554,17 @@ function renderDashboard() {
     ${pageHeader(
       "Course home",
       "Field identification starts with evidence",
-      "Work through a complete ten-week curriculum built around independent teaching specimens, unfamiliar retrieval, confuser control, and calibrated evidence limits."
+      "Work through the complete ten-week course using independent teaching specimens, unfamiliar retrieval, confuser control, cumulative testing, and calibrated evidence limits."
     )}
-    <p class="course-notice"><strong>Deployment boundary:</strong> all ten weeks, 80 profiles, and public teaching/practice media are active. Formal grades, the private examination bank, cloud mastery records, cross-device resume, and opt-in email reminders activate after the staged passwordless backend receives production credentials.</p>
-    <section class="course-dashboard-grid" aria-label="Preview status">
-      <article class="course-dashboard-card"><span class="course-dashboard-card__value">${completed}/${course.week.activities.length}</span><h2>Activities completed</h2><p>Briefing, five instructional sessions, and a practical rehearsal.</p></article>
+    <p class="course-notice"><strong>Your progress:</strong> work is saved immediately on this device. Sign in with an email link to synchronize course progress, secure assessments, grades, and reminder preferences across devices.</p>
+    <section class="course-dashboard-grid" aria-label="Course status">
+      <article class="course-dashboard-card"><span class="course-dashboard-card__value">${progress.completed}/${progress.total}</span><h2>Course activities</h2><p>Briefings, instructional sessions, practice laboratories, and formal assessments.</p></article>
       <article class="course-dashboard-card"><span class="course-dashboard-card__value">${courseCatalog.taxonCount}</span><h2>Principal taxa</h2><p>Tiered across northern hardwood, mixedwood, boreal-transition, Acadian, lowland, and Allegheny systems.</p></article>
-      <article class="course-dashboard-card"><span class="course-dashboard-card__value">${courseCatalog.gradedAssessmentCount}</span><h2>Graded assessments</h2><p>Specifications are published; preview work never enters the production gradebook.</p></article>
+      <article class="course-dashboard-card"><span class="course-dashboard-card__value">${completedFormal}/${courseCatalog.gradedAssessmentCount}</span><h2>Graded assessments</h2><p>${escapeHtml(gradeText)}</p></article>
     </section>
     <div class="course-actions">
-      <button class="course-button js-route" type="button" data-route="${resumeRoute}">${firstIncomplete ? "Begin or resume Week 1" : "Review completed preview"}</button>
-      <button class="course-link-button" id="reset-preview" type="button">Reset this-device preview data</button>
+      <button class="course-button js-route" type="button" data-route="${escapeHtml(resumeRoute)}">${nextActivity ? "Begin or resume course" : "Review the completed course"}</button>
+      <button class="course-link-button" id="reset-course" type="button">Reset this-device study data</button>
     </div>
     <section class="course-module-catalog" aria-labelledby="course-module-catalog-title">
       <div class="course-section-heading">
@@ -366,18 +590,25 @@ function routeForCatalogSession(module, session) {
 }
 
 function renderModuleOverview(module) {
+  const progress = moduleProgress(module);
+  const briefingComplete = state.completedRoutes.includes(module.moduleId);
+  const firstSessionRoute = routeForCatalogSession(module, module.sessions[0]);
   const taxaMarkup = module.newTaxa.length
     ? `<ul class="course-taxon-list">${module.newTaxa.map((taxon) => `<li><strong>${escapeHtml(taxon.preferredCommonName)}</strong><span><i>${escapeHtml(taxon.canonicalScientificName)}</i> · ${escapeHtml(taxon.family)} · Tier ${escapeHtml(taxon.tier)}</span></li>`).join("")}</ul>`
     : "<p>No new taxa. All 80 species remain eligible for cumulative certification work.</p>";
-  const sessionsMarkup = module.sessions.map((session) => `
-    <article class="course-sequence-card">
-      <span>Session ${escapeHtml(session.letter)}</span>
-      <h3>${escapeHtml(session.title)}</h3>
-      <p>${escapeHtml(session.delivery)}</p>
-      <p class="course-meta-line">${session.modalities.map(formatToken).map(escapeHtml).join(" · ")}</p>
-      <button class="course-link-button js-route" type="button" data-route="${escapeHtml(routeForCatalogSession(module, session))}">Open Session ${escapeHtml(session.letter)}</button>
-    </article>
-  `).join("");
+  const sessionsMarkup = module.sessions.map((session) => {
+    const route = routeForCatalogSession(module, session);
+    const complete = state.completedRoutes.includes(route);
+    return `
+      <article class="course-sequence-card">
+        <span>Session ${escapeHtml(session.letter)} · ${complete ? "complete" : "not complete"}</span>
+        <h3>${escapeHtml(session.title)}</h3>
+        <p>${escapeHtml(session.delivery)}</p>
+        <p class="course-meta-line">${session.modalities.map(formatToken).map(escapeHtml).join(" · ")}</p>
+        <button class="course-link-button js-route" type="button" data-route="${escapeHtml(route)}">Open Session ${escapeHtml(session.letter)}</button>
+      </article>
+    `;
+  }).join("");
   const assessmentMarkup = module.assessments.map((assessment) => {
     const modalitySummary = Object.entries(assessment.primaryModalityCounts)
       .map(([modality, count]) => `${formatToken(modality)} ${count}`)
@@ -391,8 +622,14 @@ function renderModuleOverview(module) {
       : visualCount > 0
         ? "mixed"
         : "nonvisual";
+    const formal = state.formalAssessments[assessment.assessmentId];
+    const status = formalAssessmentComplete(formal)
+      ? "complete"
+      : Number(formal?.submittedItems || 0) > 0
+        ? `${formal.submittedItems}/${formal.totalItems} submitted`
+        : "not started";
     const launch = `<button class="course-link-button js-route" type="button" data-route="formal/${escapeHtml(assessment.assessmentId)}">Open secure ${formLabel} form</button>`;
-    return `<li><strong>${escapeHtml(assessment.assessmentId)}</strong><span>${escapeHtml(formatToken(assessment.type))} · ${assessment.stationCount} prompts · ${assessment.timeGuidanceMinutes} minutes${modalitySummary ? ` · ${escapeHtml(modalitySummary)}` : ""}${escapeHtml(evidenceMinimums)}</span>${launch}</li>`;
+    return `<li><strong>${escapeHtml(assessment.assessmentId)}<small class="course-assessment-status">${escapeHtml(status)}</small></strong><span>${escapeHtml(formatToken(assessment.type))} · ${assessment.stationCount} prompts · ${assessment.timeGuidanceMinutes} minutes${modalitySummary ? ` · ${escapeHtml(modalitySummary)}` : ""}${escapeHtml(evidenceMinimums)}</span>${launch}</li>`;
   }).join("");
   const confuserMarkup = module.confuserSets.map((confuser) => `
     <details class="course-confuser-card">
@@ -404,11 +641,11 @@ function renderModuleOverview(module) {
 
   view.innerHTML = `
     ${pageHeader(
-      `Week ${module.sequence} briefing`,
+      `Week ${module.sequence} briefing · ${progress.completed}/${progress.total} complete`,
       module.title,
       `${module.newTaxa.length} new taxa; ${module.cumulativeEligibleTaxa} taxa remain eligible for retrieval. Pace may vary, but the field-identification standard does not.`
     )}
-    <p class="course-notice"><strong>Publication status:</strong> this week’s diagnostic, confuser, silvics, labeled teaching-image, and unfamiliar practice-image sessions are active. Formal graded media remain isolated in the private 558-specimen examination bank and will be delivered only after sign-in is enabled.</p>
+    <p class="course-notice"><strong>How this week works:</strong> complete the five instructional sessions, then open each secure assessment. Study and practice progress saves on this device and synchronizes after email sign-in; formal results enter the persistent gradebook.</p>
     <div class="course-brief-grid">
       <section class="course-panel"><h2>Learning objectives</h2><ol>${module.objectives.map((objective) => `<li>${escapeHtml(objective)}</li>`).join("")}</ol></section>
       <section class="course-panel"><h2>Expected silvics retrieval</h2><p>${escapeHtml(module.silvics.responseStandard)}</p><ul>${module.silvics.dimensions.map((dimension) => `<li>${escapeHtml(formatToken(dimension))}</li>`).join("")}</ul></section>
@@ -416,8 +653,11 @@ function renderModuleOverview(module) {
     <section class="course-module-section"><div class="course-section-heading"><p class="course-kicker">Roster</p><h2>Species introduced</h2></div>${taxaMarkup}</section>
     <section class="course-module-section"><div class="course-section-heading"><p class="course-kicker">Instruction</p><h2>Five-session sequence</h2></div><div class="course-sequence-grid">${sessionsMarkup}</div></section>
     <section class="course-module-section"><div class="course-section-heading"><p class="course-kicker">Discrimination</p><h2>Cumulative confuser sets</h2></div><div class="course-confuser-grid">${confuserMarkup}</div></section>
-    <section class="course-module-section"><div class="course-section-heading"><p class="course-kicker">Graded work</p><h2>Scheduled assessment specifications</h2></div><ul class="course-assessment-list">${assessmentMarkup}</ul></section>
-    <div class="course-actions"><button class="course-link-button js-route" type="button" data-route="dashboard">Return to curriculum map</button><button class="course-button js-route" type="button" data-route="${escapeHtml(routeForCatalogSession(module, module.sessions[0]))}">Open Session A</button></div>
+    <section class="course-module-section"><div class="course-section-heading"><p class="course-kicker">Graded work</p><h2>Scheduled assessments</h2></div><ul class="course-assessment-list">${assessmentMarkup}</ul></section>
+    <div class="course-actions">
+      <button class="course-link-button js-route" type="button" data-route="dashboard">Return to curriculum map</button>
+      <button class="course-button ${briefingComplete ? "js-route" : "js-complete-route"}" type="button" ${briefingComplete ? "" : `data-completion-route="${escapeHtml(module.moduleId)}"`} data-route="${escapeHtml(firstSessionRoute)}">${briefingComplete ? "Briefing complete · open Session A" : "Complete briefing and open Session A"}</button>
+    </div>
   `;
 }
 
@@ -566,12 +806,16 @@ function publicPracticeLab(module, session) {
 function renderTeachingSession(module, session) {
   const profiles = session.teachingProfiles || [];
   const sessionIndex = module.sessions.findIndex((candidate) => candidate.sessionId === session.sessionId);
+  const route = `${module.moduleId}/session-${session.letter.toLowerCase()}`;
   const previousRoute = sessionIndex > 0
     ? `${module.moduleId}/session-${module.sessions[sessionIndex - 1].letter.toLowerCase()}`
     : module.moduleId;
   const nextRoute = sessionIndex < module.sessions.length - 1
     ? `${module.moduleId}/session-${module.sessions[sessionIndex + 1].letter.toLowerCase()}`
-    : module.moduleId;
+    : module.assessments.length
+      ? `formal/${encodeURIComponent(module.assessments[0].assessmentId)}`
+      : module.moduleId;
+  const routeComplete = state.completedRoutes.includes(route);
   const profileMarkup = profiles.length
     ? `<section class="course-species-grid" aria-label="Session ${escapeHtml(session.letter)} teaching profiles">${profiles.map(teachingProfileCard).join("")}</section>`
     : publicPracticeLab(module, session);
@@ -585,7 +829,7 @@ function renderTeachingSession(module, session) {
 
   view.innerHTML = `
     ${pageHeader(
-      `Week ${module.sequence} · Session ${session.letter}`,
+      `Week ${module.sequence} · Session ${session.letter}${routeComplete ? " · complete" : ""}`,
       session.title,
       `${session.delivery}. Primary evidence: ${session.modalities.map(formatToken).join(", ")}.`
     )}
@@ -595,7 +839,7 @@ function renderTeachingSession(module, session) {
     <section class="course-module-section"><div class="course-section-heading"><p class="course-kicker">Cumulative discrimination</p><h2>Confuser controls still in force</h2></div><div class="course-confuser-grid">${confuserMarkup}</div></section>
     <div class="course-actions">
       <button class="course-link-button js-route" type="button" data-route="${escapeHtml(previousRoute)}">${sessionIndex > 0 ? "Previous session" : "Week briefing"}</button>
-      <button class="course-button js-route" type="button" data-route="${escapeHtml(nextRoute)}">${sessionIndex < module.sessions.length - 1 ? "Next session" : "Return to week plan"}</button>
+      <button class="course-button ${routeComplete ? "js-route" : "js-complete-route"}" type="button" ${routeComplete ? "" : `data-completion-route="${escapeHtml(route)}"`} data-route="${escapeHtml(nextRoute)}">${routeComplete ? (sessionIndex < module.sessions.length - 1 ? "Next session" : "Open weekly assessment") : `Complete Session ${session.letter} and continue`}</button>
     </div>
   `;
 }
@@ -620,7 +864,7 @@ async function renderFormalAssessment(assessmentId) {
     return;
   }
   if (!auth.enabled) {
-    view.innerHTML = `${pageHeader(`Week ${record.module.sequence} · secure assessment`, assessmentId, `${record.assessment.stationCount} prompts · ${record.assessment.timeGuidanceMinutes} minutes.`)}<p class="course-notice"><strong>Staged, not exposed:</strong> this form is reserved against the private 558-specimen bank, but cloud credentials are deliberately absent. Enable Supabase, Turnstile, and the private seed before learner delivery.</p><div class="course-actions"><button class="course-link-button js-route" type="button" data-route="${escapeHtml(record.module.moduleId)}">Return to week plan</button></div>`;
+    view.innerHTML = `${pageHeader(`Week ${record.module.sequence} · secure assessment`, assessmentId, `${record.assessment.stationCount} prompts · ${record.assessment.timeGuidanceMinutes} minutes.`)}<p class="course-notice"><strong>Account service unavailable:</strong> secure assessments require the passwordless course account. Your instructional progress remains saved on this device; please try the assessment again shortly.</p><div class="course-actions"><button class="course-link-button js-route" type="button" data-route="${escapeHtml(record.module.moduleId)}">Return to week plan</button></div>`;
     return;
   }
   if (!auth.signedIn()) {
@@ -634,6 +878,7 @@ async function renderFormalAssessment(assessmentId) {
       form = await auth.createOrResumeFormal(assessmentId);
       formalForms.set(assessmentId, form);
     }
+    rememberFormalForm(form);
     const visualItems = form.stations || [];
     const nonvisualItems = form.items || [];
     const pendingVisual = visualItems.find((station) => !station.submitted);
@@ -947,7 +1192,7 @@ function assessmentPage(assessmentKey, kicker, title, instructions, items, inclu
     : "";
   return `
     ${pageHeader(kicker, title, instructions)}
-    <p class="course-notice">For identification items, enter either the preferred common name or the scientific name; one is enough to submit and receive identity credit. Confidence, visible evidence, and confuser reasoning are optional. Item order is shuffled once for this attempt and stays fixed through navigation or reloading. Answers remain hidden until the full batch is submitted. This formative preview cannot promote mastery or enter the course grade.</p>
+    <p class="course-notice">For identification items, enter either the preferred common name or the scientific name; one is enough to submit and receive identity credit. Confidence, visible evidence, and confuser reasoning are optional. Item order is shuffled once for this attempt and stays fixed through navigation or reloading. Answers remain hidden until the full batch is submitted. This practice batch supports retrieval and remediation; secure assessments determine the formal course grade.</p>
     <form class="course-form js-assessment" data-assessment="${assessmentKey}" data-activity="${activityId}">
       ${displayedItems.map((item, index) => fieldMarkup(assessmentKey, item, index, includeImages)).join("")}
       ${scoreMarkup}
@@ -1052,7 +1297,7 @@ function renderWeeklyPractical() {
 }
 
 function renderNotFound() {
-  view.innerHTML = `<div class="course-error"><h1>Preview page not found</h1><p>Return to the course dashboard.</p><button class="course-button js-route" type="button" data-route="dashboard">Course home</button></div>`;
+  view.innerHTML = `<div class="course-error"><h1>Course page not found</h1><p>Return to the course dashboard.</p><button class="course-button js-route" type="button" data-route="dashboard">Course home</button></div>`;
 }
 
 async function renderReviewerQueue() {
@@ -1290,6 +1535,8 @@ async function submitFormalStation(form) {
     );
     if (item) item.submitted = true;
     if (stored && result.formStatus) stored.status = result.formStatus;
+    if (stored) rememberFormalForm(stored);
+    await refreshFormalTracking();
     await renderFormalAssessment(form.dataset.assessmentId);
     bindInteractiveElements();
   } catch (error) {
@@ -1328,6 +1575,10 @@ function bindInteractiveElements() {
     markComplete(button.dataset.activity);
     go(button.dataset.nextRoute);
   }));
+  view.querySelectorAll(".js-complete-route").forEach((button) => button.addEventListener("click", () => {
+    markRouteComplete(button.dataset.completionRoute);
+    go(button.dataset.route);
+  }));
   view.querySelectorAll(".js-zoom").forEach((button) => button.addEventListener("click", () => openImage(button)));
   view.querySelectorAll(".js-assessment").forEach((form) => {
     form.addEventListener("input", (event) => saveResponse(event.target));
@@ -1365,13 +1616,14 @@ function bindInteractiveElements() {
       renderRoute();
     });
   });
-  const resetButton = view.querySelector("#reset-preview");
+  const resetButton = view.querySelector("#reset-course");
   if (resetButton) {
     resetButton.addEventListener("click", () => {
-      if (window.confirm("Reset all Week 1 preview responses and completion stored in this browser?")) {
+      if (window.confirm("Reset all study progress stored on this device? Secure assessment submissions remain in your signed-in course gradebook.")) {
         state = defaultState(course.courseVersion);
         saveState();
         renderRoute();
+        void refreshFormalTracking({ rerender: true });
       }
     });
   }
@@ -1379,24 +1631,33 @@ function bindInteractiveElements() {
 
 function bindNavigation() {
   const desktopNavigation = document.querySelector("#course-nav");
+  const moduleGroups = courseCatalog.modules.map((module) => {
+    const links = moduleActivityRecords(module).map((activity) => `
+      <button type="button" class="course-nav__link" data-route="${escapeHtml(activity.route)}" data-track-key="${escapeHtml(activity.key)}">
+        <span class="course-nav__label">${escapeHtml(activity.label)}</span>
+        <span class="course-nav__status" aria-hidden="true">${activity.complete ? "Complete" : ""}</span>
+      </button>
+    `).join("");
+    const progress = moduleProgress(module);
+    return `
+      <details class="course-nav__week" data-module-id="${escapeHtml(module.moduleId)}">
+        <summary>
+          <span><strong>Week ${module.sequence}</strong><small>${escapeHtml(module.title)}</small></span>
+          <span class="course-nav__week-progress">${progress.completed}/${progress.total}</span>
+        </summary>
+        <div class="course-nav__week-links">${links}</div>
+      </details>
+    `;
+  }).join("");
+
   desktopNavigation.innerHTML = `
-    <button type="button" class="course-nav__link" data-route="dashboard">Course home</button>
+    <button type="button" class="course-nav__link course-nav__home" data-route="dashboard">Course home</button>
     <div class="course-nav__group">
-      <p>Week 1 · interactive preview</p>
-      <button type="button" class="course-nav__link" data-route="week-01">Briefing</button>
-      <button type="button" class="course-nav__link" data-route="week-01/session-a">Session A</button>
-      <button type="button" class="course-nav__link" data-route="week-01/visual-lab">Session B · Retrieval</button>
-      <button type="button" class="course-nav__link" data-route="week-01/confuser-lab">Session C · Confusers</button>
-      <button type="button" class="course-nav__link" data-route="week-01/multi-organ-lab">Session D · Multi-organ</button>
-      <button type="button" class="course-nav__link" data-route="week-01/checkpoint">Session E · Cumulative</button>
-      <button type="button" class="course-nav__link" data-route="week-01/weekly-practical">Weekly practical</button>
-    </div>
-    <div class="course-nav__group">
-      <p>Weeks 2–10 · curriculum</p>
-      ${courseCatalog.modules.slice(1).map((module) => `<button type="button" class="course-nav__link" data-route="${escapeHtml(module.moduleId)}">Week ${module.sequence} · ${escapeHtml(module.title)}</button>`).join("")}
+      <p>Ten-week course</p>
+      ${moduleGroups}
     </div>
   `;
-  mobileMenu.innerHTML = document.querySelector(".course-nav").innerHTML;
+  mobileMenu.innerHTML = desktopNavigation.innerHTML;
   document.querySelectorAll(".course-nav__link").forEach((button) => {
     button.addEventListener("click", () => {
       go(button.dataset.route);
@@ -1409,6 +1670,8 @@ function bindNavigation() {
     mobileMenu.hidden = !willOpen;
     menuButton.setAttribute("aria-expanded", String(willOpen));
   });
+  setActiveNavigation(currentRoute());
+  refreshNavigationState();
 }
 
 async function initialize() {
@@ -1431,32 +1694,36 @@ async function initialize() {
     }
     mediaById = new Map(publicMedia.media.map((item) => [item.mediaId, item]));
     prepareStateForCourse();
+    pendingCloudState ||= window.cochetopaCloudSnapshot || null;
+    if (pendingCloudState) {
+      applyCloudState(pendingCloudState, { rerender: false });
+      pendingCloudState = null;
+    }
     bindNavigation();
     updateProgress();
     renderRoute();
+    void refreshFormalTracking({ rerender: true });
   } catch (error) {
-    view.innerHTML = `<div class="course-error"><h1>The preview could not load</h1><p>${escapeHtml(error.message)}</p></div>`;
+    view.innerHTML = `<div class="course-error"><h1>The course could not load</h1><p>${escapeHtml(error.message)}</p></div>`;
   }
 }
 
 window.addEventListener("hashchange", () => course && renderRoute());
 window.addEventListener("cochetopa-auth-ready", () => {
-  if (course && currentRoute().startsWith("formal/")) renderRoute();
+  if (!course) return;
+  if (window.cochetopaCloudSnapshot) {
+    applyCloudState(window.cochetopaCloudSnapshot, { rerender: false });
+  }
+  void refreshFormalTracking({ rerender: true });
+  if (currentRoute().startsWith("formal/")) renderRoute();
 });
 window.addEventListener("cochetopa-cloud-state", (event) => {
-  const cloud = event.detail;
-  if (!course || !cloud || cloud.storageSchemaVersion !== storageSchemaVersion) return;
-  state.completed = [...new Set([...(cloud.completed || []), ...state.completed])];
-  state.completedRoutes = [...new Set([...(cloud.completedRoutes || []), ...(state.completedRoutes || [])])];
-  state.practiceSessions = { ...(cloud.practiceSessions || {}), ...(state.practiceSessions || {}) };
-  for (const key of Object.keys(state.assessments)) {
-    const remote = cloud.assessments?.[key];
-    const local = state.assessments[key];
-    if (remote?.submitted && !local?.submitted) state.assessments[key] = remote;
-  }
-  saveState();
-  renderRoute();
+  pendingCloudState = event.detail;
+  if (!course) return;
+  applyCloudState(pendingCloudState);
+  pendingCloudState = null;
 });
+
 imageDialog.querySelector(".course-dialog-close").addEventListener("click", () => imageDialog.close());
 imageDialog.addEventListener("click", (event) => {
   if (event.target === imageDialog) imageDialog.close();

@@ -1,6 +1,6 @@
 {
   "schemaVersion": "0.2.0",
-  "courseVersion": "development-preview-2026-08-31",
+  "courseVersion": "2026.1",
   "title": "Northern Hardwoods & Mixedwoods Dendrology and Silvics Intensive",
   "week": {
     "id": "week-01",
@@ -403,7 +403,7 @@
   ],
   "visualLab": {
     "title": "Unfamiliar-image retrieval lab",
-    "instructions": "These nine photographs were not used in Session A. For each, provide the common and scientific name, confidence, strongest visible evidence, and nearest alternative or resolving view. Identity fields are auto-checked; evidence and calibration remain a reference-rubric comparison in this preview.",
+    "instructions": "These nine photographs were not used in Session A. For each, provide the common and scientific name, confidence, strongest visible evidence, and nearest alternative or resolving view. Identity fields are auto-checked; evidence and calibration remain a reference-rubric comparison after submission.",
     "items": [
       {
         "id": "visual-01",

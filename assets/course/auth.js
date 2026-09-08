@@ -15,6 +15,7 @@ let captchaToken = null;
 let captchaWidgetId = null;
 let pendingSnapshot = null;
 let syncTimer = null;
+let syncRetryCount = 0;
 
 function setStatus(message, kind = "neutral") {
   status.textContent = message;
@@ -74,6 +75,7 @@ async function loadSnapshot() {
     .eq("course_id", config.courseId)
     .maybeSingle();
   if (error) throw error;
+  window.cochetopaCloudSnapshot = data?.state || null;
   if (data?.state) dispatchCloudState(data.state);
   return data?.state || null;
 }
@@ -91,9 +93,13 @@ async function flushSnapshot() {
   }, { onConflict: "user_id,course_id" });
   if (error) {
     pendingSnapshot = snapshot;
-    setStatus("Signed in, but the latest progress sync failed. It remains saved on this device.", "warning");
+    syncRetryCount += 1;
+    window.clearTimeout(syncTimer);
+    syncTimer = window.setTimeout(flushSnapshot, Math.min(60000, 4000 * (2 ** Math.min(syncRetryCount - 1, 4))));
+    setStatus("Signed in, but the latest progress sync failed. It remains saved on this device and will retry automatically.", "warning");
     return;
   }
+  syncRetryCount = 0;
   setStatus(`Signed in as ${session.user.email}. Progress is synced.`, "success");
 }
 
@@ -165,7 +171,7 @@ async function initialize() {
     if (!config.cloudFeaturesEnabled) {
       form.hidden = true;
       signOutButton.hidden = true;
-      setStatus("Cloud sign-in is staged but not connected. Course progress is currently stored on this device.");
+      setStatus("Course account services are temporarily unavailable. Progress is still stored on this device.");
       window.cochetopaAuth = { enabled: false, signedIn: () => false };
       window.dispatchEvent(new CustomEvent("cochetopa-auth-ready"));
       return;
@@ -219,7 +225,10 @@ async function initialize() {
     window.dispatchEvent(new CustomEvent("cochetopa-auth-ready"));
   } catch (error) {
     form.hidden = true;
+    signOutButton.hidden = true;
+    window.cochetopaAuth = { enabled: false, signedIn: () => false };
     setStatus(`Cloud sign-in is unavailable; local course progress still works. (${error.message})`, "warning");
+    window.dispatchEvent(new CustomEvent("cochetopa-auth-ready"));
   }
 }
 
@@ -229,10 +238,14 @@ signOutButton.addEventListener("click", async () => {
   await flushSnapshot();
   await client?.auth.signOut();
   session = null;
+  window.cochetopaCloudSnapshot = null;
   renderAccount();
   setStatus("Signed out. Local progress remains on this device.");
 });
 window.addEventListener("cochetopa-local-state", (event) => queueSnapshot(event.detail));
+document.addEventListener("visibilitychange", () => {
+  if (document.visibilityState === "hidden") void flushSnapshot();
+});
 window.addEventListener("pagehide", () => { void flushSnapshot(); });
 
 initialize();

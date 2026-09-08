@@ -2,8 +2,8 @@
   "$schema": "cochetopa-public-course-catalog/1.0",
   "schemaVersion": "1.0.0",
   "courseId": "northern-hardwoods-mixedwoods-dendrology-silvics-intensive",
-  "courseVersion": "2026.1-draft",
-  "status": "development_preview",
+  "courseVersion": "2026.1",
+  "status": "published",
   "title": "Northern Hardwoods & Mixedwoods Dendrology and Silvics Intensive",
   "moduleCount": 10,
   "taxonCount": 80,
@@ -207,7 +207,7 @@
           "minimumSpeciesSupportedStations": 14
         }
       ],
-      "deliveryStatus": "interactive_public_development_preview"
+      "deliveryStatus": "published"
     },
     {
       "moduleId": "week-02",
@@ -487,7 +487,7 @@
           "minimumSpeciesSupportedStations": 0
         }
       ],
-      "deliveryStatus": "curriculum_complete_visual_media_pending_admission"
+      "deliveryStatus": "published"
     },
     {
       "moduleId": "week-03",
@@ -775,7 +775,7 @@
           "minimumSpeciesSupportedStations": 18
         }
       ],
-      "deliveryStatus": "curriculum_complete_visual_media_pending_admission"
+      "deliveryStatus": "published"
     },
     {
       "moduleId": "week-04",
@@ -1051,7 +1051,7 @@
           "minimumSpeciesSupportedStations": 13
         }
       ],
-      "deliveryStatus": "curriculum_complete_visual_media_pending_admission"
+      "deliveryStatus": "published"
     },
     {
       "moduleId": "week-05",
@@ -1411,7 +1411,7 @@
           "minimumSpeciesSupportedStations": 14
         }
       ],
-      "deliveryStatus": "curriculum_complete_visual_media_pending_admission"
+      "deliveryStatus": "published"
     },
     {
       "moduleId": "week-06",
@@ -1746,7 +1746,7 @@
           "minimumSpeciesSupportedStations": 0
         }
       ],
-      "deliveryStatus": "curriculum_complete_visual_media_pending_admission"
+      "deliveryStatus": "published"
     },
     {
       "moduleId": "week-07",
@@ -2091,7 +2091,7 @@
           "minimumSpeciesSupportedStations": 18
         }
       ],
-      "deliveryStatus": "curriculum_complete_visual_media_pending_admission"
+      "deliveryStatus": "published"
     },
     {
       "moduleId": "week-08",
@@ -2403,7 +2403,7 @@
           "minimumSpeciesSupportedStations": 15
         }
       ],
-      "deliveryStatus": "curriculum_complete_visual_media_pending_admission"
+      "deliveryStatus": "published"
     },
     {
       "moduleId": "week-09",
@@ -2728,7 +2728,7 @@
           "minimumSpeciesSupportedStations": 17
         }
       ],
-      "deliveryStatus": "curriculum_complete_visual_media_pending_admission"
+      "deliveryStatus": "published"
     },
     {
       "moduleId": "week-10",
@@ -3108,8 +3108,8 @@
           "minimumSpeciesSupportedStations": 37
         }
       ],
-      "deliveryStatus": "curriculum_complete_visual_media_pending_admission"
+      "deliveryStatus": "published"
     }
   ],
-  "developmentBoundary": "This public catalog contains curriculum structure only. It contains no private examination assets, answer keys, learner records, credentials, or production assessment forms."
+  "publicationBoundary": "This public catalog contains curriculum structure only. It contains no private examination assets, answer keys, learner records, account credentials, or individualized assessment forms."
 }
