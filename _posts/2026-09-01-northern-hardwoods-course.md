@@ -198,3 +198,5 @@ The goal is not to make every quiz feel easy. The goal is to make the trees incr
 **[Begin the free Northern Hardwoods & Mixedwoods course →](/course/)**
 
 **[Download the complete course syllabus (PDF) →](/assets/docs/Northern-Hardwoods-Mixedwoods-Course-Syllabus.pdf)**
+
+**[Use the printable and fillable weekly learner packets →](/course/print/)**

@@ -564,6 +564,7 @@ function renderDashboard() {
     </section>
     <div class="course-actions">
       <button class="course-button js-route" type="button" data-route="${escapeHtml(resumeRoute)}">${nextActivity ? "Begin or resume course" : "Review the completed course"}</button>
+      <a class="course-link-button" href="/course/print/">Printable / PDF learner packets</a>
       <button class="course-link-button" id="reset-course" type="button">Reset this-device study data</button>
     </div>
     <section class="course-module-catalog" aria-labelledby="course-module-catalog-title">
