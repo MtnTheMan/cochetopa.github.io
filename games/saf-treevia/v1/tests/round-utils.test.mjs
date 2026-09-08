@@ -58,6 +58,12 @@ test("tier and Washington subsets preserve their existing boundaries", () => {
   }
 });
 
+test("Neo-generated set selects only its B-tier source-marked questions", () => {
+  assert.equal(questionMatchesSet({ tier: "B", neoGenerated: true }, "neo"), true);
+  assert.equal(questionMatchesSet({ tier: "B", neoGenerated: false }, "neo"), false);
+  assert.equal(questionMatchesSet({ tier: "A", neoGenerated: true }, "neo"), false);
+});
+
 test("round selection shuffles the full eligible pool before taking the requested size", () => {
   const pool = ["Q1", "Q2", "Q3", "Q4", "Q5"];
   const selected = pickShuffledRound(pool, 2, (values) => values.reverse());

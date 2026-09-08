@@ -222,6 +222,7 @@ function buildQuestion(row, seenPrompts, skipped) {
     answer,
     localContext: isWashingtonLocal(row),
     quizletPdf: /SAF Quiz Bowl [123]\.pdf$/.test(clean(row.Source_File)),
+    neoGenerated: /09_NEO_GENERATED_2026\//.test(clean(row.Source_File)),
     reviewFlag: clean(row.Review_Flag),
     source: sourceForRow(row),
   };

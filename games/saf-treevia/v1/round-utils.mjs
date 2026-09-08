@@ -1,6 +1,7 @@
 export function questionMatchesSet(question, set) {
   if (set === "local") return question.tier === "A" && question.localContext === true;
   if (set === "quizlet" || set === "quizlet_hard") return question.tier === "A" && question.quizletPdf === true;
+  if (set === "neo") return question.tier === "B" && question.neoGenerated === true;
   const tier = ["A", "B", "C", "Other"].includes(set) ? set : "A";
   return question.tier === tier;
 }

@@ -1,5 +1,5 @@
 import { evaluateShortAnswer, statusLabel } from "./answer-utils.mjs?v=20260902a";
-import { pickShuffledRound, questionPoolForSet } from "./round-utils.mjs?v=20260903hardmode";
+import { pickShuffledRound, questionPoolForSet } from "./round-utils.mjs?v=20260907neo";
 
 const ENVELOPE_FORMAT = "saf-treevia-encrypted-v1";
 const PAYLOAD_SCHEMA_VERSION = 1;
@@ -274,8 +274,9 @@ function setDescription() {
     local: "Washington and Tacoma questions for the 2026 host-region set.",
     quizlet: "The attached Quizlet cards with multiple choice where useful and short answer where recall fits better. Added answer choices are practice adaptations, not original PDF choices.",
     quizlet_hard: "The exact same Quizlet questions and answers, all in short-answer form with no choices. Includes every question from the mixed set.",
+    neo: "250 newly authored, source-checked B-tier questions designed for advanced Quiz Bowl practice.",
     B: "Supplemental questions from other reputable sources.",
-    C: "Generated, older, or less directly relevant practice questions.",
+    C: "Legacy generated, older, or less directly relevant practice questions.",
     Other: "Archived questions kept with their original source information for review.",
   };
   elements.setHelp.textContent = descriptions[elements.setSelect.value];
