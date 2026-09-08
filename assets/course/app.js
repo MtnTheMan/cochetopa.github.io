@@ -6,9 +6,9 @@ const mobileMenu = document.querySelector("#course-mobile-nav");
 const menuButton = document.querySelector("#course-menu-button");
 const imageDialog = document.querySelector("#course-image-dialog");
 const storageStatus = document.querySelector("#course-storage-status");
-const storageSchemaVersion = 2;
-const storageKey = "cochetopa-northern-hardwoods-course-v2";
-const legacyStorageKey = "cochetopa-northern-hardwoods-preview-v2";
+const storageSchemaVersion = 3;
+const storageKey = "cochetopa-northern-hardwoods-course-v3";
+const supersededStorageKeys = ["cochetopa-northern-hardwoods-course-v2", "cochetopa-northern-hardwoods-preview-v2"];
 
 let course;
 let courseCatalog;
@@ -48,7 +48,7 @@ function defaultState(courseVersion = null) {
 
 function loadState() {
   try {
-    const serialized = localStorage.getItem(storageKey) || localStorage.getItem(legacyStorageKey);
+    const serialized = localStorage.getItem(storageKey);
     const parsed = JSON.parse(serialized);
     if (!parsed || parsed.storageSchemaVersion !== storageSchemaVersion || !Array.isArray(parsed.completed)) {
       return defaultState();
@@ -72,7 +72,7 @@ function loadState() {
 function saveState() {
   try {
     localStorage.setItem(storageKey, JSON.stringify(state));
-    localStorage.removeItem(legacyStorageKey);
+    supersededStorageKeys.forEach((key) => localStorage.removeItem(key));
     storageAvailable = true;
     if (storageStatus) storageStatus.hidden = true;
   } catch {
