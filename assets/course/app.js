@@ -19,7 +19,7 @@ let storageAvailable = true;
 let state = loadState();
 
 function blankAssessment() {
-  return { submitted: false, responses: {}, identityScore: null, maximumScore: null };
+  return { submitted: false, responses: {}, identityScore: null, maximumScore: null, itemOrder: [] };
 }
 
 function defaultState(courseVersion = null) {
@@ -52,6 +52,7 @@ function loadState() {
     parsed.practiceSessions ||= {};
     ["visualLab", "confuserLab", "multiOrganLab", "checkpoint", "nomenclatureDrill", "silvicsDrill", "weeklyPractical"].forEach((key) => {
       parsed.assessments[key] ||= blankAssessment();
+      parsed.assessments[key].itemOrder ||= [];
     });
     return parsed;
   } catch {
@@ -194,6 +195,41 @@ function stableNumber(value = "") {
     hash = Math.imul(hash, 16777619);
   }
   return hash >>> 0;
+}
+
+function randomIndex(maxExclusive) {
+  if (maxExclusive <= 1) return 0;
+  if (window.crypto?.getRandomValues) {
+    const upperBound = 0x100000000 - (0x100000000 % maxExclusive);
+    const value = new Uint32Array(1);
+    do window.crypto.getRandomValues(value); while (value[0] >= upperBound);
+    return value[0] % maxExclusive;
+  }
+  return Math.floor(Math.random() * maxExclusive);
+}
+
+function shuffledIds(items, keyForItem) {
+  const ids = items.map(keyForItem);
+  for (let index = ids.length - 1; index > 0; index -= 1) {
+    const swapIndex = randomIndex(index + 1);
+    [ids[index], ids[swapIndex]] = [ids[swapIndex], ids[index]];
+  }
+  return ids;
+}
+
+function itemsInAttemptOrder(items, record, keyForItem) {
+  const sourceIds = items.map(keyForItem);
+  const sourceIdSet = new Set(sourceIds);
+  const storedOrderIsValid = Array.isArray(record.itemOrder)
+    && record.itemOrder.length === sourceIds.length
+    && new Set(record.itemOrder).size === sourceIds.length
+    && record.itemOrder.every((id) => sourceIdSet.has(id));
+  if (!storedOrderIsValid) {
+    record.itemOrder = shuffledIds(items, keyForItem);
+    saveState();
+  }
+  const byId = new Map(items.map((item) => [keyForItem(item), item]));
+  return record.itemOrder.map((id) => byId.get(id));
 }
 
 function mediaForTaxon(taxonId, pool, count = 3, salt = "") {
@@ -498,8 +534,10 @@ function practiceFeedback(item, response) {
 
 function publicPracticeLab(module, session) {
   const route = `${module.moduleId}/session-${session.letter.toLowerCase()}`;
-  const items = practiceItems(module, session);
-  const record = state.practiceSessions[route] || { submitted: false, responses: {}, score: null };
+  const sourceItems = practiceItems(module, session);
+  const record = state.practiceSessions[route] || { submitted: false, responses: {}, score: null, itemOrder: [] };
+  state.practiceSessions[route] = record;
+  const items = itemsInAttemptOrder(sourceItems, record, (item) => item.mediaId);
   const stations = items.map((item, index) => {
     const response = record.responses[item.mediaId] || {};
     return `
@@ -518,9 +556,9 @@ function publicPracticeLab(module, session) {
   return `
     <section class="course-module-section course-practice-lab">
       <div class="course-section-heading"><p class="course-kicker">Unfamiliar retrieval</p><h2>Field-decision practice</h2></div>
-      <p class="course-notice">Enter either a common name or scientific name for each specimen. That is enough to submit and grade the identification. Confidence and field-reasoning fields are optional; use them when you want deeper calibration. These specimens do not occur in the 558-station formal examination bank.</p>
+      <p class="course-notice">Enter either a common name or scientific name for each specimen. That is enough to submit and grade the identification. Confidence and field-reasoning fields are optional; use them when you want deeper calibration. Item order is shuffled for each new attempt and remains fixed while that attempt is in progress. These specimens do not occur in the 558-station formal examination bank.</p>
       ${record.submitted ? `<p class="course-score-banner"><strong>Identity decisions: ${record.score}/${items.length} accepted.</strong> Diagnostic reasoning remains part of the field standard even when the name is correct.</p>` : ""}
-      <form class="course-form js-public-practice" data-route="${escapeHtml(route)}">${stations}<div class="course-actions">${record.submitted ? '<button class="course-link-button js-reset-practice" type="button">Retry with cleared responses</button>' : '<button class="course-button" type="submit">Submit field decisions</button>'}</div></form>
+      <form class="course-form js-public-practice" data-route="${escapeHtml(route)}">${stations}<div class="course-actions">${record.submitted ? '<button class="course-link-button js-reset-practice" type="button">Retry with a new shuffle</button>' : '<button class="course-button" type="submit">Submit field decisions</button>'}</div></form>
     </section>
   `;
 }
@@ -623,7 +661,7 @@ async function renderFormalAssessment(assessmentId) {
             <label>Nearest plausible alternative <span class="course-optional">(optional)</span><input name="nearestAlternative"></label>
             <label>Best additional view if uncertain <span class="course-optional">(optional)</span><input name="requestedView"></label>
           </fieldset>
-          <p class="course-notice">A common or scientific name is enough to submit and grade this station. The optional fields support reflection but do not change the identification score. Submission locks the station; feedback and answer keys remain withheld until the complete form is finalized.</p>
+          <p class="course-notice">A common or scientific name is enough to submit and grade this station. The optional fields support reflection but do not change the identification score. The secure form was shuffled when it was assembled and keeps that order when resumed. Submission locks the station; feedback and answer keys remain withheld until the complete form is finalized.</p>
           <div class="course-actions"><button class="course-button" type="submit">Submit and lock item</button></div>
         </form>`;
     } else {
@@ -903,14 +941,15 @@ function assessmentScore(assessmentKey, items) {
 
 function assessmentPage(assessmentKey, kicker, title, instructions, items, includeImages, activityId, nextRoute) {
   const assessment = state.assessments[assessmentKey];
+  const displayedItems = itemsInAttemptOrder(items, assessment, (item) => item.id);
   const scoreMarkup = assessment.submitted
     ? `<p class="course-score">${assessment.maximumScore > 0 ? `Identifications: ${assessment.identityScore} of ${assessment.maximumScore} accepted. ` : ""}Optional evidence, alternatives, and confidence remain available for comparison with the revealed field rubric.</p>`
     : "";
   return `
     ${pageHeader(kicker, title, instructions)}
-    <p class="course-notice">For identification items, enter either the preferred common name or the scientific name; one is enough to submit and receive identity credit. Confidence, visible evidence, and confuser reasoning are optional. Answers remain hidden until the full batch is submitted. This formative preview cannot promote mastery or enter the course grade.</p>
+    <p class="course-notice">For identification items, enter either the preferred common name or the scientific name; one is enough to submit and receive identity credit. Confidence, visible evidence, and confuser reasoning are optional. Item order is shuffled once for this attempt and stays fixed through navigation or reloading. Answers remain hidden until the full batch is submitted. This formative preview cannot promote mastery or enter the course grade.</p>
     <form class="course-form js-assessment" data-assessment="${assessmentKey}" data-activity="${activityId}">
-      ${items.map((item, index) => fieldMarkup(assessmentKey, item, index, includeImages)).join("")}
+      ${displayedItems.map((item, index) => fieldMarkup(assessmentKey, item, index, includeImages)).join("")}
       ${scoreMarkup}
       <div class="course-actions">
         ${assessment.submitted
@@ -1202,7 +1241,13 @@ function submitAssessment(form) {
 function submitPublicPractice(form) {
   if (!form.reportValidity()) return;
   const route = form.dataset.route;
-  const record = { submitted: true, responses: {}, score: 0 };
+  const previous = state.practiceSessions[route] || {};
+  const record = {
+    submitted: true,
+    responses: {},
+    score: 0,
+    itemOrder: Array.isArray(previous.itemOrder) ? [...previous.itemOrder] : [],
+  };
   for (const [name, value] of new FormData(form).entries()) {
     const separator = name.indexOf(":");
     if (separator < 1) continue;
