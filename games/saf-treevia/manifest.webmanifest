@@ -1,0 +1,32 @@
+{
+  "id": "/games/saf-treevia/",
+  "name": "SAF Tree’via Quiz Bowl Practice",
+  "short_name": "SAF Tree’via",
+  "description": "Password-protected SAF Quiz Bowl and Tree’via practice for Michigan State forestry students.",
+  "start_url": "./?source=pwa",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f4f1e8",
+  "theme_color": "#18453b",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "./icons/treevia-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/treevia-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./icons/treevia-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

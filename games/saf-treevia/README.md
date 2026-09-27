@@ -10,6 +10,8 @@ Static, dependency-free Quiz Bowl practice for `cochetopa.co`. The browser recei
 - `v1/app.mjs` — Web Crypto unlock, round setup, shuffling, immediate feedback, scoring, and retry flow.
 - `v1/answer-utils.mjs` — conservative short-answer grading (`correct`, `close`, or `incorrect`).
 - `v1/questions.enc.json` — generated encrypted bank. This is safe to publish but should never be replaced with plaintext.
+- `service-worker.js` — versioned offline cache for the public wrapper, game runtime, icons, and encrypted question bank.
+- `manifest.webmanifest` and `icons/` — installable-web-app metadata and Tree’via app icons.
 - `v1/tests/` — Node tests for answer grading, CSV import, MC answer mapping, and encryption round-trips.
 
 ## Build the encrypted bank
@@ -63,6 +65,14 @@ The September 8 content cleanup removes 139 leaked document artifacts across 129
 
 The September 3, 2026 bank includes all 243 cards from the user's three attached Quizlet PDFs as 238 unique A-tier questions (five duplicates resolve to those questions). This is user-designated tier placement, not a claim that every card is official SAF or independently fact-checked. PDF title and page/card locator appear with each answer; review cautions are displayed after grading. Online-only catalog decks remain separate.
 
+## Offline use
+
+The game is an installable offline web app. On a supported browser, the first successful online visit prepares a device-local copy of the public wrapper, game interface, runtime modules, icons, and encrypted question bank. The password gate remains active offline because the saved bank is still AES-GCM encrypted; the password itself is never written to Cache Storage, local storage, the manifest, or the service worker.
+
+Before travel, open the live game while online and wait for “Offline copy ready,” or select **Update offline copy** to refresh it explicitly. Bookmark or install the page, then reopen that same saved page while offline and enter the normal team password. External source links naturally require a connection, but questions, answers, scoring, retries, and device-local seen-question history remain available.
+
+Browser storage can be cleared or evicted, so students should confirm the ready message shortly before a trip. Whenever runtime assets or the encrypted bank change, bump the shared offline release token in `service-worker.js`, `v1/index.html`, `v1/app.mjs`, and `_games/saf-treevia.html` so an updated cache is installed atomically.
+
 ## Short-answer grading
 
 The client deliberately favors false negatives over false positives:
@@ -80,6 +90,7 @@ From the repository root:
 ```powershell
 node --test games/saf-treevia/v1/tests/run.mjs
 node --check games/saf-treevia/v1/app.mjs
+node --check games/saf-treevia/service-worker.js
 node --check games/saf-treevia/build-payload.mjs
 ```
 

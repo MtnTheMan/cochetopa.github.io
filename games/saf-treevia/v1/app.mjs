@@ -1,17 +1,19 @@
-import { evaluateShortAnswer, statusLabel } from "./answer-utils.mjs?v=20260902a";
+import { evaluateShortAnswer, statusLabel } from "./answer-utils.mjs?v=20260927offline";
 import {
   pickShuffledRound,
   questionFingerprint,
   questionPoolForSet,
   selectionSignature,
   unseenQuestions,
-} from "./round-utils.mjs?v=20260908fresh";
+} from "./round-utils.mjs?v=20260927offline";
 
 const ENVELOPE_FORMAT = "saf-treevia-encrypted-v1";
 const PAYLOAD_SCHEMA_VERSION = 1;
 const PAYLOAD_URL = "./questions.enc.json";
 const HISTORY_SCHEMA_VERSION = 1;
 const HISTORY_STORAGE_KEY = "saf-treevia-question-history-v1";
+const OFFLINE_RELEASE = "20260927offline";
+const SERVICE_WORKER_URL = `../service-worker.js?v=${OFFLINE_RELEASE}`;
 
 const byId = (id) => document.getElementById(id);
 
@@ -21,6 +23,8 @@ const elements = {
   passwordInput: byId("password-input"),
   unlockButton: byId("unlock-button"),
   gateStatus: byId("gate-status"),
+  offlineSaveButton: byId("offline-save-button"),
+  offlineStatus: byId("offline-status"),
   gameView: byId("game-view"),
   lockButton: byId("lock-button"),
   setupPanel: byId("setup-panel"),
@@ -88,9 +92,118 @@ const state = {
   activeSelectionSignature: "",
   seenHistory: { schemaVersion: HISTORY_SCHEMA_VERSION, selections: {} },
   historyStorageAvailable: true,
+  offlineReady: false,
+  offlineRegistration: null,
 };
 
 class BankLoadError extends Error {}
+
+function setOfflineStatus(message, status = "") {
+  elements.offlineStatus.textContent = message;
+  if (status) {
+    elements.offlineStatus.dataset.status = status;
+  } else {
+    elements.offlineStatus.removeAttribute("data-status");
+  }
+}
+
+async function sendServiceWorkerMessage(type, timeoutMs = 60_000) {
+  const registration = state.offlineRegistration ?? await navigator.serviceWorker.ready;
+  const worker = registration.active ?? registration.waiting ?? registration.installing;
+  if (!worker) throw new Error("Offline worker is not active.");
+
+  return new Promise((resolve, reject) => {
+    const channel = new MessageChannel();
+    const timeout = window.setTimeout(() => reject(new Error("Offline save timed out.")), timeoutMs);
+    channel.port1.onmessage = (event) => {
+      window.clearTimeout(timeout);
+      if (event.data?.ok) {
+        resolve(event.data);
+      } else {
+        reject(new Error(event.data?.error || "Offline save failed."));
+      }
+    };
+    worker.postMessage({ type }, [channel.port2]);
+  });
+}
+
+async function refreshOfflineStatus() {
+  if (!("serviceWorker" in navigator)) return;
+  try {
+    const result = await sendServiceWorkerMessage("GET_OFFLINE_STATUS", 15_000);
+    state.offlineReady = result.ready === true;
+    elements.offlineSaveButton.textContent = state.offlineReady ? "Update offline copy" : "Save for offline use";
+    elements.offlineSaveButton.disabled = !navigator.onLine;
+
+    if (!navigator.onLine) {
+      setOfflineStatus(
+        state.offlineReady
+          ? "You’re offline now. The cached game and encrypted question bank are ready."
+          : "You’re offline, but a complete saved copy could not be confirmed on this device.",
+        state.offlineReady ? "ready" : "warning",
+      );
+    } else if (state.offlineReady) {
+      setOfflineStatus("Offline copy ready on this device. Reopen this page normally in airplane mode and enter the team password.", "ready");
+    } else {
+      setOfflineStatus("Online, but the complete offline copy has not finished saving yet.", "warning");
+    }
+  } catch {
+    state.offlineReady = false;
+    elements.offlineSaveButton.disabled = !navigator.onLine;
+    elements.offlineSaveButton.textContent = "Save for offline use";
+    setOfflineStatus(
+      navigator.onLine
+        ? "Offline saving is available, but readiness could not be confirmed. Try Save for offline use."
+        : "Offline readiness could not be confirmed on this device.",
+      "warning",
+    );
+  }
+}
+
+async function registerOfflineSupport() {
+  if (!("serviceWorker" in navigator)) {
+    elements.offlineSaveButton.disabled = true;
+    setOfflineStatus("This browser does not support saving web apps for offline use.", "warning");
+    return;
+  }
+
+  setOfflineStatus("Preparing the encrypted offline copy…");
+  try {
+    state.offlineRegistration = await navigator.serviceWorker.register(SERVICE_WORKER_URL, { scope: "../" });
+    state.offlineRegistration = await navigator.serviceWorker.ready;
+    elements.offlineSaveButton.disabled = !navigator.onLine;
+    await refreshOfflineStatus();
+  } catch {
+    elements.offlineSaveButton.disabled = true;
+    setOfflineStatus("Offline saving could not be prepared in this browser. The online game still works normally.", "warning");
+  }
+}
+
+async function saveOfflineCopy() {
+  if (!navigator.onLine) {
+    await refreshOfflineStatus();
+    return;
+  }
+
+  elements.offlineSaveButton.disabled = true;
+  elements.offlineSaveButton.textContent = "Saving…";
+  setOfflineStatus("Saving the encrypted question bank and game files on this device…");
+  try {
+    const result = await sendServiceWorkerMessage("CACHE_OFFLINE");
+    if (result.ready !== true) {
+      throw new Error("Offline cache incomplete.");
+    }
+    state.offlineReady = result.ready === true;
+    elements.offlineSaveButton.textContent = "Update offline copy";
+    setOfflineStatus("Offline copy ready. Bookmark or install this page, then open it normally in airplane mode and enter the team password.", "ready");
+  } catch {
+    state.offlineReady = false;
+    elements.offlineSaveButton.textContent = "Try saving again";
+    setOfflineStatus("The offline copy did not finish saving. Stay online and try again.", "warning");
+  } finally {
+    elements.offlineSaveButton.disabled = !navigator.onLine;
+  }
+}
 
 function emptySeenHistory() {
   return { schemaVersion: HISTORY_SCHEMA_VERSION, selections: {} };
@@ -736,6 +849,7 @@ function handleChoiceShortcut(event) {
 }
 
 elements.unlockForm.addEventListener("submit", unlock);
+elements.offlineSaveButton.addEventListener("click", saveOfflineCopy);
 elements.lockButton.addEventListener("click", lockGame);
 elements.roundForm.addEventListener("submit", startRound);
 elements.setSelect.addEventListener("change", () => {
@@ -755,5 +869,8 @@ elements.retryButton.addEventListener("click", retryMissed);
 elements.newRoundButton.addEventListener("click", newRound);
 elements.resetHistoryButton.addEventListener("click", resetSeenHistoryForSelection);
 document.addEventListener("keydown", handleChoiceShortcut);
+window.addEventListener("online", () => void refreshOfflineStatus());
+window.addEventListener("offline", () => void refreshOfflineStatus());
 
 elements.passwordInput.focus();
+void registerOfflineSupport();

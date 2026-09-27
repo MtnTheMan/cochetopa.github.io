@@ -52,6 +52,7 @@ jobs:
           node games/saf-treevia/v1/tests/run.mjs
           node --check games/saf-treevia/v1/app.mjs
           node --check games/saf-treevia/v1/answer-utils.mjs
+          node --check games/saf-treevia/service-worker.js
           node --check games/saf-treevia/build-payload.mjs
           if grep -Fq "SAF-A-" games/saf-treevia/v1/questions.enc.json; then
             echo "Plaintext question IDs found in encrypted payload"

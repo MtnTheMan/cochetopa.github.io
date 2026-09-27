@@ -300,6 +300,43 @@ select:focus {
   font-size: 0.82rem;
 }
 
+.offline-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 1rem;
+  align-items: center;
+  margin-top: 1.25rem;
+  padding: 1rem;
+  border: 1px solid rgb(24 69 59 / 20%);
+  border-radius: var(--radius-sm);
+  background: rgb(229 243 234 / 62%);
+}
+
+.offline-panel strong {
+  display: block;
+  color: var(--forest-deep);
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+}
+
+.offline-panel p {
+  margin: 0.25rem 0 0;
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+
+.offline-panel .offline-status {
+  font-weight: 750;
+}
+
+.offline-status[data-status="ready"] {
+  color: var(--correct);
+}
+
+.offline-status[data-status="warning"] {
+  color: var(--close);
+}
+
 .gate-aside {
   display: flex;
   flex-direction: column;
@@ -1251,9 +1288,14 @@ input[type="radio"] {
   .short-answer-row,
   .setup-heading,
   .start-row,
-  .history-controls {
+  .history-controls,
+  .offline-panel {
     align-items: stretch;
     flex-direction: column;
+  }
+
+  .offline-panel {
+    display: flex;
   }
 
   .bank-pill {

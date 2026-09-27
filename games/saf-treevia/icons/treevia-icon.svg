@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">SAF Tree’via</title>
+  <desc id="desc">A cream evergreen tree and quiz mark on a Michigan State green square.</desc>
+  <rect width="512" height="512" rx="96" fill="#18453b"/>
+  <circle cx="256" cy="254" r="190" fill="#0f382f" stroke="#d8c480" stroke-width="12"/>
+  <path d="M256 92 145 244h62l-83 113h104v66h56v-66h104l-83-113h62L256 92Z" fill="#f4f1e8"/>
+  <circle cx="355" cy="360" r="54" fill="#d8c480" stroke="#18453b" stroke-width="10"/>
+  <path d="M337 346c0-14 9-24 24-24 14 0 24 8 24 21 0 11-6 17-17 23-9 5-12 10-12 19" fill="none" stroke="#18453b" stroke-width="14" stroke-linecap="round"/>
+  <circle cx="356" cy="404" r="8" fill="#18453b"/>
+</svg>

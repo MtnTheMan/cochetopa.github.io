@@ -40,8 +40,10 @@ test("setup explains and controls device-local no-repeat history", () => {
 });
 
 test("page and module imports share the fresh release cache version", () => {
-  assert.match(html, /styles\.css\?v=20260908fresh/);
-  assert.match(html, /app\.mjs\?v=20260908fresh/);
-  assert.match(app, /round-utils\.mjs\?v=20260908fresh/);
-  assert.match(wrapper, /\/games\/saf-treevia\/v1\/.*20260908fresh/);
+  assert.match(html, /styles\.css\?v=20260927offline/);
+  assert.match(html, /app\.mjs\?v=20260927offline/);
+  assert.match(app, /answer-utils\.mjs\?v=20260927offline/);
+  assert.match(app, /round-utils\.mjs\?v=20260927offline/);
+  assert.match(wrapper, /\/games\/saf-treevia\/v1\/.*20260927offline/);
+  assert.match(wrapper, /rel="manifest"/);
 });
